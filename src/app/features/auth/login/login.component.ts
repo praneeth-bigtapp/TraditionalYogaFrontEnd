@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit {
       let encryptedPassword = btoa(this.LoginForm.value.password);
       const loginJsonData = {
         "userName": this.LoginForm.value.email,
-        "password": encryptedPassword
+        "passWord": encryptedPassword
       }
       this.loginService.getLoginDetails(loginJsonData).subscribe({
         next: (response) => {
