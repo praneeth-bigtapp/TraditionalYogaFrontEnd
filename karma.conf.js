@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/DMApplication'),
+      dir: require('path').join(__dirname, './coverage/yoga_frontend_2'),
       subdir: '.',
       reporters: [
         { type: 'html' },

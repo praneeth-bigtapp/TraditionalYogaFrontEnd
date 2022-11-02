@@ -19,8 +19,8 @@
             <div id="upload">
                 <h4 class="text-center dropZoneTitle">Select data template excel file to upload</h4>
                 <div class="drag-riles" appDnd (fileDropped)="onFileChange($event)">
-                    <input type="file" #fileDropRef id="fileDropRef" (click)="$event.target.value=null"
-                        (change)="onFileChange($event)"
+                    <!-- <input type="file" #fileDropRef id="fileDropRef" (click)="$event.target.value=null" -->
+                    <input type="file" #fileDropRef id="fileDropRef" (change)="onFileChange($event)"
                         accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
                     <img src="assets/images/UploadImg.jpeg" alt="Upload Image" width="80" height="64">
                     <h3>Drag and drop file here</h3>
@@ -53,7 +53,7 @@
                         <div class="info">
                             <h3 class="name"><strong>Selected File: {{ file?.name }}</strong></h3>
                             <p class="size">
-                                {{ formatBytes(file?.size) }}
+                                <!-- {{ formatBytes(file?.size) }} -->
                             </p>
                         </div>
                     </div>

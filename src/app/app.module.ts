@@ -29,7 +29,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ViewDataComponent } from './features/view-data/view-data.component';
 import { UserIdleModule } from 'angular-user-idle';
-import { NglrxPipesModule } from '@nglrx/pipes';
+// import { NglrxPipesModule } from '@nglrx/pipes';
 
 @NgModule({
   declarations: [
@@ -57,7 +57,7 @@ import { NglrxPipesModule } from '@nglrx/pipes';
     SecurityMasterModule,
     StaticDataUploadModule,
     MatPaginatorModule,
-    NglrxPipesModule,
+    // NglrxPipesModule,
     ToastrModule.forRoot(),
     MatButtonModule,
     MatSnackBarModule,

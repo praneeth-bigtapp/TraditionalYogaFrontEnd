@@ -66,9 +66,9 @@
                                 <mat-label>Email Id</mat-label>
                                 <input type="email" autocomplete="off" matInput formControlName="email" required>
                                 <mat-error *ngFor="let validation of validation_messages.email_id">
-                                    <span *ngIf="AddUserForm.get('email').hasError(validation.type)">
+                                    <!-- <span *ngIf="AddUserForm.get('email').hasError(validation.type)">
                                         {{ validation.message}}
-                                    </span>
+                                    </span> -->
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -105,9 +105,9 @@
                                     </a>
                                 </span>
                                 <mat-error *ngFor="let validation of validation_messages.password">
-                                    <span *ngIf="AddUserForm.get('password').hasError(validation.type)">
+                                    <!-- <span *ngIf="AddUserForm.get('password').hasError(validation.type)">
                                         {{ validation.message}}
-                                    </span>
+                                    </span> -->
                                 </mat-error>
                             </mat-form-field>
                         </div>

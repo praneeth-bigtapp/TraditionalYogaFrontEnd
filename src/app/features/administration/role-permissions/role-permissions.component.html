@@ -100,7 +100,7 @@
             </th>
             <td mat-cell *matCellDef="let element">
                 <section *ngIf="!element.editMode">{{element.permissionName | uppercase}}</section>
-                <mat-select [formControl]="RolePermissionForm.controls['permission']" *ngIf="element.editMode">
+                <mat-select formControlName="RolePermissionForm.controls['permission']" *ngIf="element.editMode">
                     <mat-option *ngFor="let permission of AccessPermissionsList;let i = index;"
                         [value]="permission.permissionId">
                         {{ permission.permissionName }}

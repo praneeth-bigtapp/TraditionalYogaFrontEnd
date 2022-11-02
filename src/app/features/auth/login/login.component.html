@@ -23,24 +23,24 @@
                     <div class="form-group inrne-addon ">
                         <mat-form-field>
                             <input matInput type="text" autocomplete="off" name="email" id="email"
-                                placeholder=" Login ID" [formControl]="LoginForm.controls['email']">
+                                placeholder=" Login ID" formControlName="LoginForm.controls['email']">
                             <span matPrefix> <i class="far fa-user" aria-hidden="true"></i> </span>
                             <mat-error *ngFor="let validation of validation_messages.email_id">
-                                <span *ngIf="LoginForm.get('email').hasError(validation.type)">
+                                <!-- <span *ngIf="LoginForm.get('email').hasError(validation.type)">
                                     {{ validation.message}}
-                                </span>
+                                </span> -->
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="form-group inner-addon">
                         <mat-form-field>
                             <input matInput type="password" name="password" id="password" placeholder="Password"
-                                [formControl]="LoginForm.controls['password']" />
+                                formControlName="LoginForm.controls['password']" />
                             <span matPrefix> <i class="fas fa-key" aria-hidden="true"></i> </span>
                             <mat-error *ngFor="let validation of validation_messages.password">
-                                <span *ngIf="LoginForm.get('password').hasError(validation.type)">
+                                <!-- <span *ngIf="LoginForm.get('password').hasError(validation.type)">
                                     {{ validation.message}}
-                                </span>
+                                </span> -->
                             </mat-error>
                         </mat-form-field>
                     </div>

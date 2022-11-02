@@ -1,3 +1,4 @@
+import { NgStyle } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,7 +13,8 @@ import { ChangePasswordService } from './Service/change-password.service';
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.css']
+  styleUrls: ['./change-password.component.css'],
+  // directives: [NgStyle]
 })
 export class ChangePasswordComponent implements OnInit {
 
@@ -61,9 +63,9 @@ export class ChangePasswordComponent implements OnInit {
     }
     this.dataStorageService.isUserLoggedIn = true;
     this.ChangePasswordForm = this.formBuilder.group({
-      oldpassword: [null, Validators.compose([Validators.required, Validators.maxLength(20)])],
-      newpassword: [null, Validators.compose([Validators.required, Validators.minLength(12), Validators.pattern(MyAppHttp.validation.password)])],
-      confirmpassword: [null, Validators.compose([Validators.required, Validators.maxLength(20)])],
+      oldpassword: ['', Validators.compose([Validators.required, Validators.maxLength(20)])],
+      newpassword: ['', Validators.compose([Validators.required, Validators.minLength(12), Validators.pattern(MyAppHttp.validation.password)])],
+      confirmpassword: ['', Validators.compose([Validators.required, Validators.maxLength(20)])],
     }
       , { validator: MustMatch('newpassword', 'confirmpassword') }
     );

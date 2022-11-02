@@ -8,7 +8,8 @@
                 </span>
                 <span class="ml-1" *ngIf="!sidebar"> {{menu.moduleName}}</span>
             </a>
-            <ng-container *ngIf="selectedIndex === i" [ngbCollapse]="isCollapsed">
+            <!-- <ng-container *ngIf="selectedIndex === i" [ngbCollapse]="isCollapsed"> -->
+            <ng-container *ngIf="selectedIndex === i">
                 <ul class="collapse list-unstyled" [ngClass]="{'collapse': this.className === true}"
                     id="homeSubmenu{{i}}">
                     <!-- <li class="list-unstyled active" style="cursor: pointer;" *ngFor="let m of menu.submodules;"

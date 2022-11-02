@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LengthPipe } from '@nglrx/pipes';
+// import { LengthPipe } from '@nglrx/pipes';
 import { browserRefresh } from 'src/app/app.component';
 import { DataStorageService } from 'src/app/shared/services/data-storage.service';
 import { SendReceiveService } from 'src/app/shared/services/sendReceive.service';
@@ -9,7 +9,7 @@ import { SendReceiveService } from 'src/app/shared/services/sendReceive.service'
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.css'],
-  providers: [ LengthPipe ]
+  // providers: [ LengthPipe ]
 })
 export class SideNavComponent implements OnInit {
   menuList: any = [];
@@ -29,8 +29,9 @@ export class SideNavComponent implements OnInit {
   constructor(private dataStorageService: DataStorageService,
     public router: Router,
     public sendReceiveService: SendReceiveService,
-    private lengthPipe: LengthPipe) { 
-      this.lengthPipe.transform('Yet-another-string');
+    // private lengthPipe: LengthPipe
+    ) { 
+      // this.lengthPipe.transform('Yet-another-string');
     }
 
   ngOnInit(): void {

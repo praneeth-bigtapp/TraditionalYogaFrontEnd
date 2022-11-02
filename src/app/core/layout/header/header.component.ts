@@ -25,9 +25,9 @@ export class HeaderComponent implements OnInit {
   }
 
   onMobileNavClick() {
-    $('#sidebarCollapse').on('click', function () {
-      $('#sidebar').toggleClass('active');
-    });
+    // $('#sidebarCollapse').on('click', function () {
+    //   $('#sidebar').toggleClass('active');
+    // });
   }
 
   status: boolean = false;
