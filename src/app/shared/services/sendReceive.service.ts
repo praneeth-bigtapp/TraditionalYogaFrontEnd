@@ -71,6 +71,9 @@ export class SendReceiveService {
   }
 
   navigateToMenu(subMenuId: any) {
+    if (subMenuId == 25) {
+      this.router.navigateByUrl("dashboard");
+    }
     if (subMenuId == 1) {
       this.router.navigateByUrl("administration/roles");
     }

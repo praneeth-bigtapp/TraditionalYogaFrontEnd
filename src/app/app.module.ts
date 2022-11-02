@@ -29,6 +29,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ViewDataComponent } from './features/view-data/view-data.component';
 import { UserIdleModule } from 'angular-user-idle';
+import { DashboardModule } from './features/dashboard/dashboard.module';
 // import { NglrxPipesModule } from '@nglrx/pipes';
 
 @NgModule({
@@ -51,6 +52,7 @@ import { UserIdleModule } from 'angular-user-idle';
     MatInputModule,
     MatSelectModule,
     AdministrationModule,
+    DashboardModule,
     SharedModule,
     CoreModule,
     HttpClientModule,

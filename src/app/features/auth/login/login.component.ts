@@ -168,7 +168,8 @@ export class LoginComponent implements OnInit {
           }
         }
       }
-      let subMenuName = tempSubMenuName[0];
+      // let subMenuName = tempSubMenuName[0];
+      let subMenuName = 25;
       this.sendReceiveService.navigateToMenu(subMenuName);
     }
   }
@@ -187,7 +188,8 @@ export class LoginComponent implements OnInit {
         }
       }
     }
-    let subMenuName = tempSubMenuName[0];
+    // let subMenuName = tempSubMenuName[0];
+    let subMenuName = 25;
     this.sendReceiveService.navigateToMenu(subMenuName);
   }
 
@@ -209,7 +211,7 @@ export class LoginComponent implements OnInit {
         this.headerService.UserLogout(this.loginData.userId).subscribe((resp: any) => {
           localStorage.clear();
           this.dataStorageService.isUserLoggedIn = false;
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/dashboard');
         });
         console.log(count)
         this.stopWatching();
