@@ -1,0 +1,245 @@
+<div class="ConfigurationTypes_textpadding">
+  <h4> Table Configurator
+    <div style="height:10px">
+      <div *ngIf="errorMessage" [ngStyle]="{'color': errorType == 'Error' ? 'red':'green'}" class="notificationMessage">
+        {{Message}}</div>
+    </div>
+  </h4>
+
+  <form [formGroup]="tableConfigForm" (ngSubmit)="onTableConfigFormSubmit()">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="mb-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Select Sub Module</mat-label>
+            <mat-select placeholder="Select Sub Module" formControlName="subModuleName"
+              (selectionChange)="onSelectModule($event)" disableOptionCentering required>
+              <mat-option>Select Sub Module </mat-option>
+              <mat-option *ngFor="let subModule of submodulesList" [value]="subModule.subModuleId"
+                disableOptionCentering>
+                {{subModule.subModuleName}} </mat-option>
+            </mat-select>
+            <mat-error *ngIf="tableConfigForm.controls['subModuleName'].hasError('required')">Sub Module is
+              required</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="mb-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Select Table</mat-label>
+            <mat-select placeholder="Select Table" formControlName="tableId" disableOptionCentering required>
+              <mat-option>Select Table</mat-option>
+              <mat-option *ngFor="let table of tablesList" [value]="table.tableId"
+                (click)="onSelectTable(table.tableId,table.tableName)">
+                {{table.tableName}} </mat-option>
+            </mat-select>
+            <mat-error *ngIf="tableConfigForm.controls['tableId'].hasError('required')">Table is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="mb-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Select Template</mat-label>
+            <mat-select placeholder="Select Template" formControlName="templateId" disableOptionCentering required>
+              <mat-option>Select Template</mat-option>
+              <mat-option *ngFor="let template of templateList" [value]="template.templateId"
+                (click)="onSelectTemplate(template.templateId)">
+                {{template.templateName}} </mat-option>
+            </mat-select>
+            <mat-error *ngIf="tableConfigForm.controls['tableId'].hasError('required')">Template is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="mb-3">
+          <div class="mb-3 mt-1 pt-1">
+            <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block"> Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+  <div class="clearfix"></div>
+  <div class="table-config-grid-new w-100" *ngIf="!!dataSource">
+    <form [formGroup]="tableFieldForm" autocomplete="off" (ngSubmit)="ontableFieldFormSubmit()">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-datagrid w-100" aria-label="Configuration table">
+
+        <ng-container matColumnDef="tableFieldName" style="width: 220px; display: block;">
+          <th mat-header-cell *matHeaderCellDef scope="col"> TABLE FIELD NAME </th>
+          <td mat-cell *matCellDef="let element">
+            <section *ngIf="!element.editMode"> {{element.tableFieldName}}</section>
+            <mat-form-field appearance="fill" *ngIf="element.editMode">
+              <mat-label>SELECT TABLE FIELD</mat-label>
+              <mat-select formControlName="tableFieldName" disableOptionCentering required>
+                <mat-option *ngFor="let column of columns" [value]="column.columnName">{{column.columnName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="templateAttribute">
+          <th mat-header-cell *matHeaderCellDef scope="col"> TEMPLATE ATTRIBUTE </th>
+          <td mat-cell *matCellDef="let element">
+            <section *ngIf="!element.editMode">{{element.templateAttribute}}</section>
+            <mat-form-field appearance="fill" *ngIf="element.editMode">
+              <mat-label>TEMPLATE ATTRIBUTE</mat-label>
+              <input matInput formControlName="templateAttribute" required>
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dataType">
+          <th mat-header-cell *matHeaderCellDef scope="col"> DATA TYPE </th>
+          <td mat-cell *matCellDef="let element">
+            <section *ngIf="!element.editMode">{{element.dataType}}</section>
+            <mat-form-field appearance="fill" *ngIf="element.editMode">
+              <mat-label>SELECT DATA TYPE</mat-label>
+              <mat-select formControlName="dataType" disableOptionCentering required>
+                <mat-option>Select DATA TYPE</mat-option>
+                <mat-option *ngFor="let dataType of dataTypes" [value]="dataType.dataTypeName">
+                  {{dataType.dataTypeName}} </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fieldLength">
+          <th mat-header-cell *matHeaderCellDef scope="col"> FIELD LENGTH </th>
+          <td mat-cell *matCellDef="let element">
+            <section *ngIf="!element.editMode">{{element.fieldLength}}</section>
+            <mat-form-field appearance="fill" *ngIf="element.editMode">
+              <mat-label>FIELD LENGTH </mat-label>
+              <input matInput type="number" (keypress)="onKeyPress($event)" formControlName="fieldLength" required>
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="mandatoryOptional">
+          <th mat-header-cell *matHeaderCellDef scope="col"> MANDATORY OPTIONAL </th>
+          <td mat-cell *matCellDef="let element">
+            <section *ngIf="!element.editMode">{{element.mandatoryOptional}}</section>
+            <mat-form-field appearance="fill" *ngIf="element.editMode">
+              <mat-label>MANDATORY OPTIONAL</mat-label>
+              <mat-select formControlName="mandatoryOptional" disableOptionCentering required>
+                <mat-option value="Mandatory">Mandatory</mat-option>
+                <mat-option value="Optional">Optional</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="defaultValue">
+          <th mat-header-cell *matHeaderCellDef scope="col"> DEFAULT VALUE </th>
+          <td mat-cell *matCellDef="let element">
+            <section *ngIf="!element.editMode"> {{element.defaultValue}}</section>
+            <mat-form-field appearance="fill" *ngIf="element.editMode">
+              <mat-label>DEFAULT VALUE</mat-label>
+              <input matInput type="number" (keypress)="onKeyPress($event)" formControlName="defaultValue">
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isPrimaryKey">
+          <th mat-header-cell *matHeaderCellDef scope="col"> IS PRIMARY KEY </th>
+          <td mat-cell *matCellDef="let element">
+            <section *ngIf="!element.editMode">{{element.isPrimaryKey}}</section>
+            <mat-form-field appearance="fill" *ngIf="element.editMode">
+              <mat-label>IS PRIMARY KEY</mat-label>
+              <mat-select formControlName="isPrimaryKey" disableOptionCentering required>
+                <mat-option value="Y">Yes</mat-option>
+                <mat-option value="N">No</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isForeignKey">
+          <th mat-header-cell *matHeaderCellDef scope="col"> IS FOREIGN KEY </th>
+          <td mat-cell *matCellDef="let element">
+            <section *ngIf="!element.editMode">{{element.isFk}}</section>
+            <mat-form-field appearance="fill" *ngIf="element.editMode">
+              <mat-label>IS FOREIGN KEY</mat-label>
+              <mat-select formControlName="isForeignKey" (selectionChange)="onSelectIsForeignKey($event)"
+                disableOptionCentering required>
+                <mat-option value="Y">Yes</mat-option>
+                <mat-option value="N">No</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="FKTableName">
+          <th mat-header-cell *matHeaderCellDef scope="col"> FK TABLE NAME </th>
+          <td mat-cell *matCellDef="let element">
+            <section *ngIf="!element.editMode">{{element.fkTableName}}</section>
+            <mat-form-field appearance="fill" *ngIf="element.editMode">
+              <mat-label>FK TABLE NAME</mat-label>
+              <mat-select formControlName="fKTableName" disableOptionCentering required>
+                <mat-option>Select Table</mat-option>
+                <mat-option *ngFor="let table of AlltablesList" [value]="table.tableId" (click)="onFKTableField(table)">
+                  {{table.tableName}} </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="FKTableFieldName">
+          <th mat-header-cell *matHeaderCellDef scope="col"> FK TABLE COLUMN NAME </th>
+          <td mat-cell *matCellDef="let element">
+            <section *ngIf="!element.editMode">{{element.fkTableFieldName}}</section>
+            <mat-form-field appearance="fill" *ngIf="element.editMode">
+              <mat-label>FK TABLE COLUMN NAME</mat-label>
+              <mat-select (selectionChange)="onSelectFKTableFieldName($event)" formControlName="fKTableFieldName"
+                disableOptionCentering required>
+                <mat-option>Select Column Name</mat-option>
+                <mat-option *ngFor="let FKTableField of FKTableFieldNamesList" [value]="FKTableField.columnName">
+                  {{FKTableField.columnName}} </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="errorDesc">
+          <th mat-header-cell *matHeaderCellDef scope="col"> ERROR DESCRIPTION </th>
+          <td mat-cell *matCellDef="let element">
+            <section *ngIf="!element.editMode">{{element.errorDesc}}</section>
+            <mat-form-field appearance="fill" *ngIf="element.editMode">
+              <mat-label>ERROR DESCRIPTION</mat-label>
+              <input matInput formControlName="errorDesc">
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef style="width: 100px; display: block;" scope="col"> Actions </th>
+          <td mat-cell *matCellDef="let element;let i = index">
+            <a mat-icon-button (click)="editTableField(element)" *ngIf="!element.editMode">
+              <span matTooltip="Edit"><i class="fas fa-pencil-alt" aria-hidden="true"></i></span>
+            </a>
+            <a mat-icon-button (click)="ontableFieldFormSubmit(element)" *ngIf="element.editMode">
+              <span matTooltip="Save" style="color: #09cac7; padding: 3px 7px;cursor: pointer;"><i
+                  class="fas fa-save" aria-hidden="true"></i></span>
+            </a>
+
+            <a mat-icon-button (click)="onAddTableField()" *ngIf="element.isLastRow" matTooltip="Add">
+              <span><i class="fas fa-user-plus text-primary" aria-hidden="true"></i></span>
+
+            </a>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </form>
+  </div>
+</div>

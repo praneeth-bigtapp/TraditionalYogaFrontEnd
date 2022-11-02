@@ -1,0 +1,44 @@
+
+@import '~ngx-toastr/toastr';
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'muliregular', "Noto Sans SC", sans-serif;
+    font-size: 1rem;
+}
+.Error.mat-snack-bar-container{
+    background: white;
+    color: red;
+    padding: 0px;
+}
+
+.Success.mat-snack-bar-container{
+    background: white;
+    color: #00cc00;
+    padding: 0px;
+}
+.Warning.mat-snack-bar-container{
+    background: white;
+    color: #ffe135;
+    padding: 0px;
+}
+.Error{
+  margin: 0 !important;
+  position: relative;
+  top: 60px;
+}
+.Success{
+  margin: 0 !important;
+  position: relative;
+  top: 60px;
+  white-space: pre-wrap;
+}
+.Warning{
+  margin: 0 !important;
+  position: relative;
+  top: 60px;
+}

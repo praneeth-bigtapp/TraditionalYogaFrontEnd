@@ -1,0 +1,73 @@
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { AdministrationModule } from './features/administration/administration.module';
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
+import { DataStorageService } from './shared/services/data-storage.service';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSelectModule } from '@angular/material/select';
+import { SecurityMasterModule } from './features/security-master/security-master.module';
+import { StaticDataUploadModule } from './features/static-data-upload/static-data-upload.module';
+import { DndDirective } from './dnd.directive';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { SendReceiveService } from './shared/services/sendReceive.service';
+import { ToastrModule } from 'ngx-toastr';
+import { AuthGuard } from './core/services/auth/auth.service';
+import { ViewDataService } from './features/view-data/service/view-data.service';
+import { DatePipe, APP_BASE_HREF, HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { BnNgIdleService } from 'bn-ng-idle';
+import { DialogComponent } from './dialog/dialog.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ViewDataComponent } from './features/view-data/view-data.component';
+import { UserIdleModule } from 'angular-user-idle';
+import { NglrxPipesModule } from '@nglrx/pipes';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    ViewDataComponent,
+    DndDirective,
+    DialogComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    AdministrationModule,
+    SharedModule,
+    CoreModule,
+    HttpClientModule,
+    SecurityMasterModule,
+    StaticDataUploadModule,
+    MatPaginatorModule,
+    NglrxPipesModule,
+    ToastrModule.forRoot(),
+    MatButtonModule,
+    MatSnackBarModule,
+    UserIdleModule.forRoot({ idle: 600, timeout: 300, ping: 120 })
+  ],
+  providers: [DataStorageService, SendReceiveService, AuthGuard, ViewDataService, DatePipe, BnNgIdleService],
+  // providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, DataStorageService, SendReceiveService, AuthGuard, ViewDataService, DatePipe, BnNgIdleService],
+  // providers: [{ provide: APP_BASE_HREF, useValue: 'dm' }, { provide: LocationStrategy, useClass: HashLocationStrategy }, DataStorageService, SendReceiveService, AuthGuard, ViewDataService, DatePipe, BnNgIdleService],
+  // providers: [{ provide: APP_BASE_HREF, useValue: '/inv/dm' }, DataStorageService, SendReceiveService, AuthGuard, ViewDataService, DatePipe, BnNgIdleService],
+  // providers: [{ provide: APP_BASE_HREF, useValue: 'dm' }, DataStorageService, SendReceiveService, AuthGuard, ViewDataService, DatePipe, BnNgIdleService],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

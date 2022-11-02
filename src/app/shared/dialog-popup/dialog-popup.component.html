@@ -1,0 +1,23 @@
+<mat-card class="p-0">
+    <a class="f-right close-icon" (click)="dialogRef.close(false)">
+        <span><i class="fas fa-times text-danger" aria-hidden="true"></i></span>
+    </a>
+    <mat-card-title class="">
+        <div class="card-title-text">
+            <h3>{{data}}</h3>
+        </div>
+    </mat-card-title>
+    <mat-card-content style="width: 85%;">
+        <div class="pb-1">
+            {{message }}
+        </div>
+    </mat-card-content>
+    <mat-card-footer>
+        <div style="text-align: center">
+            <button mat-button class="btn btn-outline-secondary btn-rounded d-inline-block m-2 btn-s" type="button" ng-transclude=""
+                (click)="dialogRef.close(true)"><span class="ng-scope">Yes</span></button> &nbsp;
+            <button mat-button class="btn btn-outline-secondary btn-rounded d-inline-block m-2 btn-d" type="button" ng-transclude=""
+                (click)="dialogRef.close(false)"><span class="ng-scope">No</span></button>
+        </div>
+    </mat-card-footer>
+</mat-card>

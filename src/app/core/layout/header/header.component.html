@@ -1,0 +1,35 @@
+<div class="header">
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <div class="container-fluid">
+            <div class="row w-100">
+                <div class="col-md-4 mobile-text-center">
+                    <!-- <a [routerLink]="['/masterDataCreation']" class=""> 
+                        <img src="assets/images/logo-income.svg" class="logo-img" alt="logo" /> 
+                    </a> -->
+                </div>
+                <div class="col-md-5 text-center">
+                    <div class="text-center d-inline-block pt-2">
+                        <h4 class="pb-0 mb-0"> Traditional yoga </h4>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="float-right user-profile">
+                        <div class="btn-group">
+                            <div type="button" class="btn dropdown-toggle text-warning pt-2" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <img src="assets/images/icon-login-orange.svg" alt="user icon" />
+                                {{loginData.firstName}}
+                                {{loginData.lastName}} ({{loginData.userRole}})
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="dropdown-item" type="button" [routerLink]="['/changepassword']">Change
+                                    Password</button>
+                                <button class="dropdown-item" type="button" (click)="onSignOut()">Sign out</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

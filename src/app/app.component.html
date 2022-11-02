@@ -1,0 +1,15 @@
+<app-header *ngIf="!!this.dataStorage.isUserLoggedIn"></app-header>
+<!-- <app-header></app-header> -->
+
+<div class="">
+    <div class="wrapper">
+        <app-side-nav *ngIf="!!this.dataStorage.isUserLoggedIn"></app-side-nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+            <router-outlet></router-outlet>
+        </div>
+
+    </div>
+</div>
+<app-footer> </app-footer>

@@ -1,0 +1,63 @@
+/* .btn {
+    background: #666666;
+    border: 0;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: #fff;
+} */
+
+
+/* h3 {
+    margin: -24px;
+    background: #921760;
+    padding: 20px;
+    margin-bottom: 10px;
+    color: #ffffff;
+    font-size: 1rem;
+} */
+
+.btn-s:hover {
+    color: #fff;
+    background-color: darkgreen !important;
+}
+.btn-d:hover {
+    color: #fff;
+    background-color: crimson !important;
+}
+a.close-icon {
+    cursor: pointer !important;
+}
+
+a.close-icon .close-icon {
+    color: black;
+    padding: 7px 0;
+    margin: 0 -20px 0 0;
+}
+
+.mat-card-footer {
+    margin: 0px;
+    padding: 0px;
+}
+
+.mat-dialog-container {
+    padding: 0px 24px !important;
+}
+
+.mat-card {
+    box-shadow: none !important;
+    margin-bottom: 0px !important;
+}
+
+.btn-info {
+    background: #1a646c !important;
+}
+
+.btn-danger {
+    background: #d75498 !important;
+}
+
+.close-icon {
+    position: absolute;
+    top: -15px;
+    right: 0px;
+}

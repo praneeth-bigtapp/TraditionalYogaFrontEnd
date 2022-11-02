@@ -1,0 +1,15 @@
+<div class="popup">
+   <div class="card">
+      <div class="card-header">
+         <h3 class="">{{data.type | titlecase}} <span class="float-right" (click)="snackBarRef.dismiss()"> <i
+                  class="far fa-times-circle" aria-hidden="true"></i> </span></h3>
+      </div>
+      <div class="content-style">
+         <p>{{data.message}}</p>
+      </div>
+      <div style="text-align: right;">
+         <button class="btn btn-sm btn-outline-secondary btn-rounded d-inline-block m-2"
+            (click)="snackBarRef.dismiss()"><strong>Ok</strong></button>
+      </div>
+   </div>
+</div>
