@@ -16,13 +16,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 
 @NgModule({
   declarations: [
-
     DashboardComponent
   ],
   imports: [
+    DashboardRoutingModule,
     CommonModule,
     MatSortModule,
     MatTableModule,

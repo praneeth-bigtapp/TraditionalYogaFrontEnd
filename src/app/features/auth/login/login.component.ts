@@ -162,14 +162,16 @@ export class LoginComponent implements OnInit {
       let tempSubMenuName = [];
       let totalMenus = this.loginData.permissions;
       for (let menu of totalMenus) {
-        for (let subModule of menu.submodules) {
-          if (menu.submodules.permissionId !== 6) {
+        console.log(menu);
+        for (let subModule of menu.subModules) {
+          console.log(subModule.subModuleId);
+          // if (menu.subModules.permissionId !== 6) {
             tempSubMenuName.push(subModule.subModuleId);
-          }
+          // }
         }
       }
-      // let subMenuName = tempSubMenuName[0];
-      let subMenuName = 25;
+      let subMenuName = tempSubMenuName[0];
+      // let subMenuName = 25;
       this.sendReceiveService.navigateToMenu(subMenuName);
     }
   }
@@ -181,15 +183,18 @@ export class LoginComponent implements OnInit {
   getAllPermittedModules() {
     let tempSubMenuName = [];
     let totalMenus = this.loginData.permissions;
+    // console.log(totalMenus);
     for (let menu of totalMenus) {
-      for (let subModule of menu.submodules) {
-        if (menu.submodules.permissionId !== 6) {
+      for (let subModule of menu.subModules) {
+
+        console.log(subModule.subModuleId);
+        // if (menu.subModules.permissionId !== 6) {
           tempSubMenuName.push(subModule.subModuleId);
-        }
+        // }
       }
     }
-    // let subMenuName = tempSubMenuName[0];
-    let subMenuName = 25;
+    let subMenuName = tempSubMenuName[0];
+    // let subMenuName = 25;
     this.sendReceiveService.navigateToMenu(subMenuName);
   }
 
@@ -211,7 +216,7 @@ export class LoginComponent implements OnInit {
         this.headerService.UserLogout(this.loginData.userId).subscribe((resp: any) => {
           localStorage.clear();
           this.dataStorageService.isUserLoggedIn = false;
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/');
         });
         console.log(count)
         this.stopWatching();

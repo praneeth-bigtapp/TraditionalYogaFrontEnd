@@ -5,11 +5,11 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
     providedIn: 'root',
 })
 export class UserService extends BaseHttp {
-    getUsersUrl: string = 'um/getAll?operation=users';
-    addUserUrl: string = 'um/user?operation=add';
-    saveUserUrl: string = 'um/user?operation=save';
-    deleteUserUrl: string = 'um/user?operation=delete';
-    getRolesUrl: string = 'um/getAll?operation=roles';
+    getUsersUrl: string = 'getAll?operation=users';
+    addUserUrl: string = 'user?operation=add';
+    saveUserUrl: string = 'user?operation=save';
+    deleteUserUrl: string = 'user?operation=delete';
+    getRolesUrl: string = 'getAll?operation=roles';
 
     getUsersList() {
         return this.get<any>(this.getUsersUrl);

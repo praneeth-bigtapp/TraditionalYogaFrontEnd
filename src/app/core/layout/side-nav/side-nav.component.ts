@@ -52,6 +52,7 @@ export class SideNavComponent implements OnInit {
   }
 
   refresh() {
+    debugger
     if (!this.isRefresh) {
       return;
     }
@@ -62,7 +63,7 @@ export class SideNavComponent implements OnInit {
     this.selectedSubModuleId = localStorage.getItem('selectedSubModuleId');
     const selectedSubMenuId = Number(this.selectedSubModuleId);
     this.menuList.forEach((module: any) => {
-      (module.submodules).forEach((subModule: any) => {
+      (module.subModules).forEach((subModule: any) => {
         if (subModule.subModuleId === selectedSubMenuId) {
           this.menuId = subModule.subModuleId;
         }
@@ -71,6 +72,7 @@ export class SideNavComponent implements OnInit {
   }
 
   onModule(index: any) {
+    // alert(index);
     this.selectedIndex = index;
     localStorage.setItem("menuIndex", index);
   }

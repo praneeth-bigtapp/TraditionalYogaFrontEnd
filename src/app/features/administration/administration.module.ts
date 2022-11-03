@@ -24,6 +24,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { TableConfiguratorService } from './table-configurator/service/table-configurator.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CsvGeneratorComponent } from './csv-generator/csv-generator.component';
+import { ModuleComponent } from './module/module.component';
+import { SubModuleComponent } from './sub-module/sub-module.component';
+import { RolePermissionComponent } from './role-permission/role-permission.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import { CsvGeneratorComponent } from './csv-generator/csv-generator.component';
     RolesComponent,
     RolePermissionsComponent,
     TableConfiguratorComponent,
-    CsvGeneratorComponent
+    CsvGeneratorComponent,
+    ModuleComponent,
+    SubModuleComponent,
+    RolePermissionComponent
   ],
   imports: [
     CommonModule,

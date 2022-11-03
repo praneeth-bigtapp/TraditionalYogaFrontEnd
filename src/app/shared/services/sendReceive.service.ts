@@ -71,51 +71,50 @@ export class SendReceiveService {
   }
 
   navigateToMenu(subMenuId: any) {
-    if (subMenuId == 25) {
+    if (subMenuId == 6) {
       this.router.navigateByUrl("dashboard");
-    }
-    if (subMenuId == 1) {
+    } else if (subMenuId == 1) {
       this.router.navigateByUrl("administration/roles");
     }
     else if (subMenuId == 2) {
       this.router.navigateByUrl("administration/users");
     }
     else if (subMenuId == 3) {
-      this.router.navigateByUrl("administration/rolePermissions");
+      this.router.navigateByUrl("administration/module");
     }
-    else if (subMenuId == 15) {
-      this.router.navigateByUrl("administration/tableConfigurator");
+    else if (subMenuId == 4) {
+      this.router.navigateByUrl("administration/subModule");
     }
-    else if (subMenuId == 6) {
-      this.router.navigateByUrl("staticDataUpload/entityRelated");
+    else if (subMenuId == 5) {
+      this.router.navigateByUrl("administration/rolePermission");
     }
-    else if (subMenuId == 7) {
-      this.router.navigateByUrl("staticDataUpload/staticReference");
-    }
-    else if (subMenuId == 8) {
-      this.router.navigateByUrl("staticDataUpload/reportStaticData");
-    }
-    else if (subMenuId == 9) {
-      this.router.navigateByUrl("securityMaster/masterDataCreation");
-    }
-    else if (subMenuId == 10) {
-      this.router.navigateByUrl("securityMaster/staticMaster");
-    }
-    else if (subMenuId == 12) {
-      this.router.navigateByUrl("securityMaster/AdhocBloombergRequest");
-    }
-    else if (subMenuId == 13) {
-      this.router.navigateByUrl("securityMaster/alternatePE");
-    }
-    else if (subMenuId == 14) {
-      this.router.navigateByUrl("viewData");
-    }
-    else if (subMenuId == 16) {
-      this.router.navigateByUrl("staticDataUpload/assetMixReport");
-    }
-    else if (subMenuId == 17) {
-      this.router.navigateByUrl("administration/csvGenerator");
-    }
+    // else if (subMenuId == 7) {
+    //   this.router.navigateByUrl("staticDataUpload/staticReference");
+    // }
+    // else if (subMenuId == 8) {
+    //   this.router.navigateByUrl("staticDataUpload/reportStaticData");
+    // }
+    // else if (subMenuId == 9) {
+    //   this.router.navigateByUrl("securityMaster/masterDataCreation");
+    // }
+    // else if (subMenuId == 10) {
+    //   this.router.navigateByUrl("securityMaster/staticMaster");
+    // }
+    // else if (subMenuId == 12) {
+    //   this.router.navigateByUrl("securityMaster/AdhocBloombergRequest");
+    // }
+    // else if (subMenuId == 13) {
+    //   this.router.navigateByUrl("securityMaster/alternatePE");
+    // }
+    // else if (subMenuId == 14) {
+    //   this.router.navigateByUrl("viewData");
+    // }
+    // else if (subMenuId == 16) {
+    //   this.router.navigateByUrl("staticDataUpload/assetMixReport");
+    // }
+    // else if (subMenuId == 17) {
+    //   this.router.navigateByUrl("administration/csvGenerator");
+    // }
   }
 
   getTemplatePermissions(actionId: any) {

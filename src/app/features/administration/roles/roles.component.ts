@@ -155,7 +155,7 @@ export class RolesComponent implements OnInit {
       }
       this.menuList = this.loginData.permissions;
       for (let menu of  this.menuList) {
-        for (let submodule of menu.submodules) {
+        for (let submodule of menu.subModules) {
           if (submodule.subModuleName == "Roles") {
             this.permissionName = submodule.permissionName;
             this.pagePermissions = this.sendReceiveService.getPageLevelPermissions(this.permissionName);

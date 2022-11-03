@@ -12,13 +12,13 @@
             <ng-container *ngIf="selectedIndex === i">
                 <ul class="collapse list-unstyled" [ngClass]="{'collapse': this.className === true}"
                     id="homeSubmenu{{i}}">
-                    <!-- <li class="list-unstyled active" style="cursor: pointer;" *ngFor="let m of menu.submodules;"
-                        [ngClass]="{'active': m.subModuleId == menuId }"> -->
-                    <li class="list-unstyled active" style="cursor: pointer;" *ngFor="let m of menu.submodules;"
+                    <li class="list-unstyled active" style="cursor: pointer;" *ngFor="let m of menu.subModules;"
                         [ngClass]="{'active': m.subModuleId == menuId }">
-                        <!-- <a (click)="navigateToSubMenu(m)">{{m.subModuleName}}</a> -->
-                        <a
-                            [routerLink]="[menu.moduleName | casetile] + '/' + [m.subModuleName | casetile]">{{m.subModuleName}}</a>
+                    <li class="list-unstyled active" style="cursor: pointer;" *ngFor="let m of menu.subModules;"
+                        [ngClass]="{'active': m.subModuleId == menuId }">
+                        <a (click)="navigateToSubMenu(m)">{{m.subModuleName}}</a>
+                        <!-- <a
+                            [routerLink]="[menu.moduleName | casetile] + '/' + [m.subModuleName | casetile]">{{m.subModuleName}}</a> -->
                     </li>
                 </ul>
             </ng-container>

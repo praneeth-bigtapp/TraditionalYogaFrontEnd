@@ -212,7 +212,7 @@ export class UserComponent implements OnInit {
       }
       this.menuList = this.loginData.permissions;
       for (let menu of this.menuList) {
-        for (let subModule of menu.submodules) {
+        for (let subModule of menu.subModules) {
           if (subModule.subModuleName == "Users") {
             this.permissionName = subModule.permissionName;
             console.log(this.permissionName);

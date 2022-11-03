@@ -131,8 +131,11 @@
     </div>
     <h4 cl> User List
         <span class="float-end mb-2">
-            <button type="button" class="btn btn-outline-secondary btn-rounded"
+            <!-- <button type="button" class="btn btn-outline-secondary btn-rounded"
                 *ngIf="!isAddUserForm && pagePermissions.Add" (click)="onAddUser()"> Add
+                User </button> -->
+                <button type="button" class="btn btn-outline-secondary btn-rounded"
+                *ngIf="!isAddUserForm" (click)="onAddUser()"> Add
                 User </button>
         </span>
         <div style="height:10px">
@@ -218,9 +221,13 @@
             <td mat-cell *matCellDef="let element">
                 <mat-slide-toggle [checked]="element.status == 'Y'? true : false"
                     (change)="onActivateUser(element,$event)"></mat-slide-toggle>
-                <span matTooltip="Edit" style="cursor: pointer;" *ngIf="!!pagePermissions.Edit"
+                <!-- <span matTooltip="Edit" style="cursor: pointer;" *ngIf="!!pagePermissions.Edit"
                     (click)="onUserEdit(element)"><i class="fas fa-pencil-alt" aria-hidden="true"></i></span>
                 <span matTooltip="Delete" style="cursor: pointer;" *ngIf="!!pagePermissions.Delete"
+                    (click)="onUserDelete(element)"><i class="far fa-trash-alt" aria-hidden="true"></i></span> -->
+                    <span matTooltip="Edit" style="cursor: pointer;" 
+                    (click)="onUserEdit(element)"><i class="fas fa-pencil-alt" aria-hidden="true"></i></span>
+                <span matTooltip="Delete" style="cursor: pointer;" 
                     (click)="onUserDelete(element)"><i class="far fa-trash-alt" aria-hidden="true"></i></span>
             </td>
         </ng-container>

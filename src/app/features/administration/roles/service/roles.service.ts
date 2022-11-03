@@ -5,10 +5,10 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
     providedIn: 'root',
 })
 export class RolesService extends BaseHttp {
-    getRoles: string = 'um/getAll?operation=roles';
-    addRoleUrl: string = 'um/role?operation=add';
-    saveRoleUrl: string = 'um/role?operation=save';
-    deleteRoleUrl: string = 'um/role?operation=delete';
+    getRoles: string = 'getAll?operation=roles';
+    addRoleUrl: string = 'role?operation=add';
+    saveRoleUrl: string = 'role?operation=save';
+    deleteRoleUrl: string = 'role?operation=delete';
 
     getRolesList() {
         return this.get<any>(this.getRoles);
