@@ -16,11 +16,14 @@
                 <div class="col-md-3">
                     <div class="float-right user-profile pt-3">
                         <div class="btn-group">
-                            <div type="button" class="btn dropdown-toggle text-warning pt-2" data-toggle="dropdown"
+                            <div type="button" class="btn dropdown-toggle text-warning pt-2 text-white" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                <img src="assets/images/icon-login-orange.svg" alt="user icon" />
-                                {{loginData.firstName}}
+                                <!-- <img src="assets/images/icon-login-orange.svg" alt="user icon" /> -->
+
+                                <span class="text-white"> <i class="fa fa-user"></i>
+                                    {{loginData.firstName}}
                                 {{loginData.lastName}} ({{loginData.userRole}})
+                                </span>
                             </div>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <button class="dropdown-item" type="button" [routerLink]="['/changepassword']">Change
