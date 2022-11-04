@@ -26,7 +26,7 @@ a:focus {
 
 .navbar {
     padding: 5px 10px;
-    background: rgba(0, 0, 0, .8);
+    background: #212121;
     border: none;
     border-radius: 0;
     box-shadow: 1px 1px 2px #ddd;
@@ -60,13 +60,15 @@ span {
 .wrapper {
     display: flex;
     align-items: stretch;
-     padding-top: 55px; 
+     padding-top: 80px; 
      overflow-x: hidden;
+     height: 100vh;
 }
 
 #sidebar {
     min-width: 250px;
-    background: #fff;
+    background-image: url("../images/admin-bg.jpg");
+    
     color: #424242;
     transition: all 0.3s;
     height: 100%;
@@ -144,11 +146,12 @@ span {
 }
 
 #sidebar ul li a {
-    padding: 15px 10px;
-    font-size: 16px;
+    padding: 10px 10px;
+    font-size: 14px;
     display: block;
-    border-bottom: 1px #ddd solid;
+    /* border-bottom: 1px #ddd solid; */
     text-align: left;
+    color: #fff;
 }
 
 #sidebar ul li a svg {
@@ -157,7 +160,7 @@ span {
 
 #sidebar ul li a:hover {
     color: #ec7b05;
-    background: #ebebeb;
+    background: transparent;
 }
 
 #sidebar ul li a i {
@@ -167,11 +170,11 @@ span {
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #ec7b05;
-    background: #ebebeb;
+    background: transparent;
 }
 
 #sidebar ul ul li.active>a {
-    background: #f3f3f3;
+    background: transparent;
 }
 
 a[data-toggle="collapse"] {
@@ -189,7 +192,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     /* font-size: 16px !important; */
     padding-left: 30px !important;
-    background: #ebebeb;
+    background: transparent;
 }
 
 ul.CTAs {

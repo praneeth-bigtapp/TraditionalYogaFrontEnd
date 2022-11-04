@@ -1,6 +1,7 @@
 @charset "utf-8";
 body {
-    font-family: 'muliregular', "Noto Sans SC", sans-serif;
+    /* font-family: 'muliregular', "Noto Sans SC", sans-serif; */
+    font-family: "Times New Roman", Times, serif;
 }
 
 hr {
@@ -41,7 +42,7 @@ div.dataTables_wrapper div.dataTables_length select {
 }
 
 nav img.logo-img {
-    width: 120px;
+    width: 100px;
     height: 100%;
     position: relative;
     left: -10px;
