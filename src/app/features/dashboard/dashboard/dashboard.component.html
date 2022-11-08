@@ -4,32 +4,177 @@
 <div class="ConfigurationTypes_textpadding">
     <div class="card border-light">
         <div class="card-header ">
-            Dashboard
+            <h3> Dashboard </h3>
         </div>
 
+        <div class="dashboard-reports" style="background:#f5f5f5;">
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">First Panel</a>
+                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Overall Report</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Second Panel</a>
+                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Courses Report</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Third Panel</a>
-            </li>
+           
         </ul><!-- Tab panes -->
-        <div class="tab-content">
+        <div class="tab-content" style="background:#f5f5f5;">
             <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                <p>First Panel</p>
+                
+                
+                <div class=" p-3">
+
+                    <div class="row p-5 dashboard-tails">
+                        <div class="col-sm-3">
+                            <div class="tile bg-light">
+                                <h6 class="title mb-1">Financial </h6>
+                                <p>
+                                    <small> Positive : <span> 60% </span></small><br>
+                                    <small> Negative : <span class="text-grey"> 30% </span></small>
+                                </p>
+                                <div class="icon-place bg-white p-2 rounded-circle">
+                                    <span class="float-right"> <i class="fa fa-usd"> </i> </span>
+                                    </div>
+                            </div>
+                        </div>
+    
+                        <div class="col-sm-3">
+                            <div class="tile bg-white">
+                                <h6 class="title mb-1">Market Position </h6>
+                                <p>
+                                    <small> Positive : <span> 60% </span></small><br>
+                                    <small> Negative : <span class="text-grey"> 30% </span></small>
+                                </p>
+                                <div class="icon-place bg-light p-2 rounded-circle">
+                                    <span class="float-right"> <i class="fa fa-signal"> </i></span>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="col-sm-3">
+                            <div class="tile bg-light">
+                                <h6 class="title mb-1">Legal & Regulatory </h6>
+                                <p>
+                                    <small> Positive : <span> 60% </span></small><br>
+                                    <small> Negative : <span class="text-grey"> 30% </span></small>
+                                </p>
+                                <div class="icon-place bg-white p-2 rounded-circle">
+                                    <span class="float-right"> <i class="fa fa-gavel"> </i></span>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="col-sm-3">
+                            <div class="tile bg-white">
+                                <h6 class="title mb-1">Headwinds Tailwinds </h6>
+                                <p>
+                                    <small> Positive : <span> 60% </span></small><br>
+                                    <small> Negative : <span class="text-grey"> 30% </span></small>
+                                </p>
+                                <div class="icon-place bg-light p-2 rounded-circle">
+                                    <span class="float-right"> <i class="fa fa-arrows-alt"> </i></span>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+
+
+
             </div>
             <div class="tab-pane" id="tabs-2" role="tabpanel">
-                <p>Second Panel</p>
-            </div>
-            <div class="tab-pane" id="tabs-3" role="tabpanel">
-                <p>Third Panel</p>
-            </div>
-        </div>
+                
+                <div class="row p-5">
+                    
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Select Course</mat-label>
+                                <mat-select formControlName="roleId" required>
+                                    <mat-option>Select Course</mat-option>
+                                    
+                                </mat-select>
+                                
+                            </mat-form-field>
+                        </div>
+                    </div>
 
+                    <div class="col-md-6">
+                        <div class="mb-3 mt-1 pt-1 float-end">
+                            <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
+                                Submit
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block m-2"> Cancel
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="clearfix"></div>
+
+
+                <div class=" p-3">
+
+                    <div class="row dashboard-tails">
+                        <div class="col-sm-3">
+                            <div class="tile bg-light">
+                                <h6 class="title mb-1">Financial </h6>
+                                <p>
+                                    <small> Positive : <span> 60% </span></small><br>
+                                    <small> Negative : <span class="text-grey"> 30% </span></small>
+                                </p>
+                                <div class="icon-place bg-white p-2 rounded-circle">
+                                    <span class="float-right"> <i class="fa fa-usd"> </i> </span>
+                                    </div>
+                            </div>
+                        </div>
+    
+                        <div class="col-sm-3">
+                            <div class="tile bg-white">
+                                <h6 class="title mb-1">Market Position </h6>
+                                <p>
+                                    <small> Positive : <span> 60% </span></small><br>
+                                    <small> Negative : <span class="text-grey"> 30% </span></small>
+                                </p>
+                                <div class="icon-place bg-light p-2 rounded-circle">
+                                    <span class="float-right"> <i class="fa fa-signal"> </i></span>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="col-sm-3">
+                            <div class="tile bg-light">
+                                <h6 class="title mb-1">Legal & Regulatory </h6>
+                                <p>
+                                    <small> Positive : <span> 60% </span></small><br>
+                                    <small> Negative : <span class="text-grey"> 30% </span></small>
+                                </p>
+                                <div class="icon-place bg-white p-2 rounded-circle">
+                                    <span class="float-right"> <i class="fa fa-gavel"> </i></span>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="col-sm-3">
+                            <div class="tile bg-white">
+                                <h6 class="title mb-1">Headwinds Tailwinds </h6>
+                                <p>
+                                    <small> Positive : <span> 60% </span></small><br>
+                                    <small> Negative : <span class="text-grey"> 30% </span></small>
+                                </p>
+                                <div class="icon-place bg-light p-2 rounded-circle">
+                                    <span class="float-right"> <i class="fa fa-arrows-alt"> </i></span>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+        </div>
     </div>
 </div>
 

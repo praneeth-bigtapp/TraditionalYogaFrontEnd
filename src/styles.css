@@ -9,6 +9,7 @@ body {
     margin: 0;
     font-family: 'muliregular', "Noto Sans SC", sans-serif;
     font-size: 1rem;
+    color: #222020;
 }
 .Error.mat-snack-bar-container{
     background: white;
@@ -42,5 +43,43 @@ body {
   position: relative;
   top: 60px;
 }
-html, body { height: 100%; }
+/* html, body { height: 100%; } */
 
+.tile {
+  width: 100%;
+  display: inline-block;
+  box-sizing: border-box;
+  background: #fff;
+  padding: 20px 20px;
+  margin-bottom: 10px;
+}
+.tile .title {
+  margin-top: 0px;
+}
+.dashboard-tails .icon-place { 
+  position: absolute;
+  top: 40px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
+}
+.dashboard-tails .tile { position: relative;}
+.dashboard-tails .icon-place svg { 
+  font-size: 28px;
+    padding: 5px;
+    position: relative;
+    left: 10px;
+}
+.text-slate-400 {
+  color: #94a3b8;
+}
+.text-slate-600 {
+  color: #475569;
+}
+.font-medium {
+  font-weight: 500;
+}
+
+.bg-light{
+  background-color:#eaeaea !important;
+} 

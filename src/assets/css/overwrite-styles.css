@@ -16,7 +16,7 @@ hr {
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
     border: none;
-    border-bottom: 3px solid #ed7500;
+    border-bottom: 3px solid #c05857;
 }
 
 .form-check-input[type=radio] {
@@ -73,7 +73,7 @@ nav img.logo-img {
     margin-left: 0;
     background: #fafafa;
     margin-right: 0;
-    padding: 15px 15px 60px 5%;
+    padding: 15px 15px 60px 2%;
     margin-bottom: 30px;
     min-height: 450px;
 }
