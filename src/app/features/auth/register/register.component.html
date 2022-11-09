@@ -1,0 +1,160 @@
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light ">
+    <div class="container-fluid">
+        <div class="row w-100">
+            <div class="col-4">
+                <!-- <a> <img src="assets/images/logo-income.svg" class="logo-img" alt="logo" /> </a> -->
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Masthead-->
+<div class="container-fluid">
+    <div class="container-padding">
+        <div class="signup-content row">
+            <div class="signup-form col-md-5 pt-5">
+                <h2 class="form-title">Traditional yoga </h2>
+                <!-- Need to add this -->
+                <form [formGroup]="RegisterForm" (ngSubmit)="onUserSubmit()">
+                    <h6> Register Form </h6>
+                    <div *ngIf="errorFlag">
+                        <mat-error>{{authorizationMessage}}</mat-error>
+                    </div><br>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>User Id</mat-label>
+                                        <input matInput autocomplete="off" formControlName="userName" required>
+                                        <mat-error *ngIf="RegisterForm.controls['userName'].hasError('required')">
+                                            user name is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Select Role</mat-label>
+                                        <mat-select formControlName="roleId" required>
+                                            <mat-option>Select Role</mat-option>
+                                            <mat-option *ngFor="let role of RolesList" [value]="role.roleId">
+                                                {{role.roleName}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="RegisterForm.controls['roleId'].hasError('required')">roleId
+                                            is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>First name</mat-label>
+                                        <input matInput autocomplete="off" formControlName="firstName" required>
+                                        <mat-error *ngIf="RegisterForm.controls['firstName'].hasError('required')">First
+                                            name is
+                                            required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Last name</mat-label>
+                                        <input matInput autocomplete="off" formControlName="lastName" required>
+                                        <mat-error *ngIf="RegisterForm.controls['lastName'].hasError('required')">Last
+                                            name is
+                                            required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Email Id</mat-label>
+                                        <input type="email" autocomplete="off" matInput formControlName="email"
+                                            required>
+                                        <mat-error *ngFor="let validation of validation_messages.email_id">
+                                            <span *ngIf="RegisterForm.get('email')?.hasError(validation.type)">
+                                                {{ validation.message}}
+                                            </span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Mobile</mat-label>
+                                        <input matInput formControlName="mobileNumber" onCopy="return false"
+                                            onDrag="return false" onDrop="return false" onPaste="return false"
+                                            autocomplete=off (keypress)="onKeyPress($event)"
+                                            cmsRestrictInput="onlyNumbers" type="text" required minlength="10"
+                                            maxlength="10">
+                                        <mat-error *ngIf="RegisterForm.controls['mobileNumber'].hasError('required')">
+                                            mobile
+                                            number is required
+                                        </mat-error>
+                                        <mat-error
+                                            *ngIf="RegisterForm.controls['mobileNumber'].hasError('minlength') || RegisterForm.controls['mobileNumber'].hasError('maxlength')">
+                                            Mobile number should be 10 digits
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Password</mat-label>
+                                        <input [type]="showPassword ? 'text' : 'password'" matInput autocomplete="off"
+                                            formControlName="password">
+                                        <mat-icon matSuffix (click)="togglePassword()">
+                                            {{showPassword?'visibility_off':'visibility'}}</mat-icon>
+                                        <mat-error *ngFor="let validation of validation_messages.password">
+                                            <span *ngIf="RegisterForm.get('password')?.hasError(validation.type)">
+                                                {{ validation.message}}
+                                            </span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block m-2"
+                                    (click)="onClear()"> Clear
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- <div class="mb-3 mt-1 pt-1 float-end"> -->
+                                    <button type="submit"
+                                        class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
+                                        Submit
+                                    </button>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="signup-image col-md-5 mt-5">
+                <figure>
+                    <img src="assets/images/financial-image.jpg " alt="sing up image " width="75% ">
+                </figure>
+            </div>
+        </div>
+    </div>
+</div>

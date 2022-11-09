@@ -54,6 +54,15 @@ export abstract class BaseHttp {
         catchError(this.handleError)
       );
   }
+  getRole<T>(url: string): Observable<T> {
+    const header = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http.get<T>(environment.url + url, { headers: header }).pipe(
+      map((response) => response),
+      catchError(this.handleError)
+    );
+  }
 
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';

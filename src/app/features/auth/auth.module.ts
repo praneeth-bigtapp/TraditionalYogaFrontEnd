@@ -15,11 +15,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoginService } from './login/services/login.service';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ChangePasswordService } from './change-password/Service/change-password.service';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,

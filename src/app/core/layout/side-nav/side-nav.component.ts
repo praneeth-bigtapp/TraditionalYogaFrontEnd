@@ -52,7 +52,6 @@ export class SideNavComponent implements OnInit {
   }
 
   refresh() {
-    debugger
     if (!this.isRefresh) {
       return;
     }

@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   loginData: any;
   errorFlag: boolean = false;
   authorizationMessage: any;
-
   validation_messages = MyAppHttp.loginErrorMessages;
 
   constructor(
@@ -224,6 +223,10 @@ export class LoginComponent implements OnInit {
 
     });
     this.userIdle.onTimeout().subscribe(() => console.log('Time is up!'));
+  }
+
+  onRegister(){
+    this.router.navigateByUrl("register");
   }
 
 }

@@ -26,9 +26,9 @@
                                 placeholder=" Login ID" formControlName="email">
                             <span matPrefix> <i class="far fa-user" aria-hidden="true"></i> </span>
                             <mat-error *ngFor="let validation of validation_messages.email_id">
-                                <!-- <span *ngIf="LoginForm.get('email').hasError(validation.type)">
+                                <span *ngIf="LoginForm.get('email')?.hasError(validation.type)">
                                     {{ validation.message}}
-                                </span> -->
+                                </span>
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -38,9 +38,9 @@
                                 formControlName="password" />
                             <span matPrefix> <i class="fas fa-key" aria-hidden="true"></i> </span>
                             <mat-error *ngFor="let validation of validation_messages.password">
-                                <!-- <span *ngIf="LoginForm.get('password').hasError(validation.type)">
+                                <span *ngIf="LoginForm.get('password')?.hasError(validation.type)">
                                     {{ validation.message}}
-                                </span> -->
+                                </span>
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -48,6 +48,12 @@
                         <button type="submit" name="signup" id="signup" class="btn login-button btn-rounded ">
                             <i class="fa fa-sign-in-alt " aria-hidden="true"></i>
                             <span>Login</span>
+                        </button>
+                    </div>
+                    <div class="form-group form-button float-left">
+                        <button type="button" name="register" id="register" class="btn login-button btn-rounded" (click)="onRegister()">
+                            <i class="fa fa-user-plus" aria-hidden="true"></i>
+                            <span>Member Register</span>
                         </button>
                     </div>
                 </form>

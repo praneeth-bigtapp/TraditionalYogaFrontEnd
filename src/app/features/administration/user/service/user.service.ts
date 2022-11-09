@@ -10,6 +10,8 @@ export class UserService extends BaseHttp {
     saveUserUrl: string = 'user?operation=save';
     deleteUserUrl: string = 'user?operation=delete';
     getRolesUrl: string = 'getAll?operation=roles';
+    getRegRolesUrl: string = 'getRegRole';
+    
 
     getUsersList() {
         return this.get<any>(this.getUsersUrl);
@@ -21,6 +23,10 @@ export class UserService extends BaseHttp {
 
     getRoles() {
         return this.get<any>(this.getRolesUrl);
+    }
+
+    getRolesReg() {
+        return this.getRole<any>(this.getRegRolesUrl);
     }
 
     saveUser(User: any) {

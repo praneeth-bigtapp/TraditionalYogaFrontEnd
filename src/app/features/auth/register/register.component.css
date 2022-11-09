@@ -1,0 +1,12 @@
+.login-button {
+    background-color:#c95757;
+    background-image: linear-gradient(to right, #424242, #c95757);
+    color: rgb(255, 255, 255);
+    font-size: 0.9rem;
+    height: 47px;
+    margin-right: 0px;
+}
+
+.navbar {
+    margin-top: -80px;
+}
