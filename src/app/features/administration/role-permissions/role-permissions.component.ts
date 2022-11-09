@@ -7,16 +7,20 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SendReceiveService } from 'src/app/shared/services/sendReceive.service';
+import { ModuleService } from '../module/service/module.service';
+import { SubModuleService } from '../sub-module/service/sub-module.service';
+import { RolesService } from '../roles/service/roles.service';
 
 @Component({
   selector: 'app-role-permissions',
   templateUrl: './role-permissions.component.html'
 })
 export class RolePermissionsComponent implements OnInit {
-  displayedColumns: string[] = ['sno', 'moduleName', 'subModuleName', 'tableName', 'permissionName', 'actions'];
-  RolesList: any;
-  ModulesList: any;
-  SubModulesList: any;
+  // displayedColumns: string[] = ['sno', 'moduleName', 'subModuleName', 'tableName', 'permissionName', 'actions'];
+  displayedColumns: string[] = ['sno', 'moduleName', 'subModuleName', 'actions'];
+  RolesList: any = [];
+  ModulesList: any = [];
+  SubModulesList: any = [];
   RolePermissionsIdList: any;
   RolePermissionsList: any;
   AccessPermissionsList: any;
@@ -30,10 +34,16 @@ export class RolePermissionsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   pageSize = 50;
+  roleSelect: Boolean = false;
 
-  constructor(private rolePermissionsService: RolePermissionsService,
+  constructor(
     private formBuilder: FormBuilder,
-    private loginService: LoginService,public sendReceiveService: SendReceiveService) { }
+    private rolesService: RolesService,
+    private moduleService: ModuleService,
+    private subModuleService: SubModuleService,
+    private rolePermissionsService: RolePermissionsService,
+    public sendReceiveService: SendReceiveService
+  ) { }
 
   ngOnInit(): void {
     this.filterData = {
@@ -41,8 +51,7 @@ export class RolePermissionsComponent implements OnInit {
         { "Key": 'sno', "Value": "" },
         { "Key": 'moduleName', "Value": "" },
         { "Key": 'subModuleName', "Value": "" },
-        { "Key": 'tableName', "Value": "" },
-        { "Key": 'permissionName', "Value": "" },
+        // { "Key": 'permissionName', "Value": "" },
 
       ],
       gridData: this.gridData,
@@ -51,7 +60,7 @@ export class RolePermissionsComponent implements OnInit {
       sort: this.sort
     };
     this.AddRolePermissionForm = this.formBuilder.group({
-      roleName: ['', Validators.required],
+      roleName: [null, Validators.required],
     });
     this.RolePermissionForm = this.formBuilder.group({
       'permission': ['', Validators.required]
@@ -64,50 +73,63 @@ export class RolePermissionsComponent implements OnInit {
   }
 
   getRoles() {
-    this.rolePermissionsService.getRoles().subscribe((response) => {
-      this.RolesList = [];
-      for (let resp of response) {
-        if (resp.isActive == 'Y') {
-          this.RolesList.push(resp);
-        }
+    console.log("Entering Roles");
+    this.rolesService.getRolesList().subscribe({
+      next: (data) => {
+        this.RolesList = data;
+        console.log(this.RolesList);
+        this.getModules();
       }
-      this.getModules();
     });
   }
 
   getModules() {
-    this.rolePermissionsService.getAllModules().subscribe((response) => {
-      this.ModulesList = response;
-      this.getSubModules();
+    console.log("Entering Modules");
+    this.moduleService.getMenuList().subscribe({
+      next: (data) => {
+        this.ModulesList = data;
+        console.log(this.ModulesList);
+        this.getSubModules();
+      }
     });
   }
 
   getSubModules() {
-    this.rolePermissionsService.getAllSubModules().subscribe((response) => {
-      this.SubModulesList = response;
-      this.getAllTableNames();
+    this.subModuleService.getSubMenuList().subscribe({
+      next: (data) => {
+        this.SubModulesList = data;
+        // this.getAllTableNames();
+      }
     });
   }
 
-  getAllTableNames() {
-    this.rolePermissionsService.getAllTableNames().subscribe((response) => {
-      this.AllTableNamesList = response;
-      this.getAccessPermissions();
-    });
-  }
+  // getAllTableNames() {
+  //   this.rolePermissionsService.getAllTableNames().subscribe((response) => {
+  //     this.AllTableNamesList = response;
+  //     this.getAccessPermissions();
+  //   });
+  // }
 
-  getAccessPermissions() {
-    this.rolePermissionsService.getAccessPermissions().subscribe((response) => {
-      this.AccessPermissionsList = response;
-      this.AddRolePermissionForm.controls['roleName'].setValue(this.RolesList[0].roleId);
-      this.getSelectedRole(this.RolesList[0].roleId);
-    });
-  }
+  // getAccessPermissions() {
+  //   this.rolePermissionsService.getAccessPermissions().subscribe((response) => {
+  //     this.AccessPermissionsList = response;
+  //     this.AddRolePermissionForm.controls['roleName'].setValue(this.RolesList[0].roleId);
+  //     this.getSelectedRole(this.RolesList[0].roleId);
+  //   });
+  // }
 
   onSelectRoleSubmit() {
-    this.rolePermissionsService.getRolePermissionsByRoleId(this.AddRolePermissionForm.value.roleName).subscribe((response) => {
-      if (response) {
-        this.getRolePermissionsListWithName(response);
+    const data = this.AddRolePermissionForm.value.roleName;
+    this.rolePermissionsService.getRolePermissionsByRoleId(data).subscribe({
+      next: (response) => {
+        if (response) {
+          this.getRolePermissionsListWithName(response);
+        }
+        this.roleSelect = true;
+      },
+      error: (error) => {
+        
+        this.roleSelect = true;
       }
     });
   }
@@ -159,22 +181,16 @@ export class RolePermissionsComponent implements OnInit {
         rolePermission.subModuleName = subModule.subModuleName;
       }
     }
-    for (let accessPermission of this.AccessPermissionsList) {
-      if (rolePermission.permissionId == accessPermission.permissionId) {
-        rolePermission.permissionName = accessPermission.permissionName;
-      }
-    }
-    for (let tableName of this.AllTableNamesList) {
-      if (rolePermission.tableId == tableName.tableId) {
-        rolePermission.tableName = tableName.tableName;
-      }
-    }
+    // for (let accessPermission of this.AccessPermissionsList) {
+    //   if (rolePermission.permissionId == accessPermission.permissionId) {
+    //     rolePermission.permissionName = accessPermission.permissionName;
+    //   }
+    // }
   }
 
   onCancel() {
-    this.AddRolePermissionForm = this.formBuilder.group({
-      roleName: ['', Validators.required],
-    });
+    this.AddRolePermissionForm.reset();
+    this.roleSelect = false;
   }
 
   editPermission(row: any) {

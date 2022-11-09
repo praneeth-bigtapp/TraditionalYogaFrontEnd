@@ -5,29 +5,26 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
     providedIn: 'root',
 })
 export class RolePermissionsService extends BaseHttp {
-    getRolePermissionsByRoleIdUrl: string = 'um/rolePermissions';
-    getModulesUrl: string = 'um/getAll?operation=modules';
-    getSubModulesUrl: string = 'um/getAll?operation=submodules';
-    getRolesUrl: string = 'um/getAll?operation=roles';
-    getAccessPermissionsUrl: string = 'um/getAll?operation=accessPemissions';
-    SavePermissionsUrl: string = 'um/saveRolePermission';
-    getTableNamesUrl: string = 'um/getAll?operation=tables';
+    getRolePermissionsByRoleIdUrl: string = 'rolePermissions?roleId=';
+    getAccessPermissionsUrl: string = 'getAll?operation=accessPemissions';
+    SavePermissionsUrl: string = 'saveRolePermission';
+    getTableNamesUrl: string = 'getAll?operation=tables';
 
     getRolePermissionsByRoleId(roleId: any) {
-        return this.get<any>(this.getRolePermissionsByRoleIdUrl + "?roleId=" + roleId);
+        return this.get<any>(this.getRolePermissionsByRoleIdUrl + roleId);
     }
 
-    getAllModules() {
-        return this.get<any>(this.getModulesUrl);
-    }
+    // getAllModules() {
+    //     return this.get<any>(this.getModulesUrl);
+    // }
 
-    getAllSubModules() {
-        return this.get<any>(this.getSubModulesUrl);
-    }
+    // getAllSubModules() {
+    //     return this.get<any>(this.getSubModulesUrl);
+    // }
 
-    getRoles() {
-        return this.get<any>(this.getRolesUrl);
-    }
+    // getRoles() {
+    //     return this.get<any>(this.getRolesUrl);
+    // }
 
     getAccessPermissions() {
         return this.get<any>(this.getAccessPermissionsUrl);

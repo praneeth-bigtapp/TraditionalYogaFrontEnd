@@ -35,8 +35,13 @@ export class RolesComponent implements OnInit {
   errorType: any;
   validt: any;
 
-  constructor(private rolesService: RolesService, public dialog: MatDialog,
-    private formBuilder: FormBuilder, public sendReceiveService: SendReceiveService, private notifierService: NotifierService) { }
+  constructor(
+    private rolesService: RolesService,
+    public dialog: MatDialog,
+    private formBuilder: FormBuilder,
+    public sendReceiveService: SendReceiveService,
+    private notifierService: NotifierService
+  ) { }
 
   ngOnInit(): void {
     this.filterData = {
@@ -104,7 +109,7 @@ export class RolesComponent implements OnInit {
     }
   }
 
-  onEditMode(){
+  onEditMode() {
     this.validt = 0;
     let role = {
       "id": this.editedRole.id,
@@ -154,7 +159,7 @@ export class RolesComponent implements OnInit {
         this.loginData = JSON.parse(data);
       }
       this.menuList = this.loginData.permissions;
-      for (let menu of  this.menuList) {
+      for (let menu of this.menuList) {
         for (let submodule of menu.subModules) {
           if (submodule.subModuleName == "Roles") {
             this.permissionName = submodule.permissionName;

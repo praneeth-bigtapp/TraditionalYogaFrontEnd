@@ -19,25 +19,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { TableConfiguratorComponent } from './table-configurator/table-configurator.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { TableConfiguratorService } from './table-configurator/service/table-configurator.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CsvGeneratorComponent } from './csv-generator/csv-generator.component';
 import { ModuleComponent } from './module/module.component';
 import { SubModuleComponent } from './sub-module/sub-module.component';
-import { RolePermissionComponent } from './role-permission/role-permission.component';
 
 @NgModule({
   declarations: [
     UserComponent,
     RolesComponent,
     RolePermissionsComponent,
-    TableConfiguratorComponent,
-    CsvGeneratorComponent,
     ModuleComponent,
     SubModuleComponent,
-    RolePermissionComponent
   ],
   imports: [
     CommonModule,
@@ -57,6 +50,6 @@ import { RolePermissionComponent } from './role-permission/role-permission.compo
     SharedModule,
     MatTooltipModule
   ],
-  providers: [UserService, RolesService, RolePermissionsService, TableConfiguratorService]
+  providers: [UserService, RolesService, RolePermissionsService]
 })
 export class AdministrationModule { }
