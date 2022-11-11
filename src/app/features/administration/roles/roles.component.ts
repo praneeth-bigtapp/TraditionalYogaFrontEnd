@@ -89,8 +89,7 @@ export class RolesComponent implements OnInit {
     if (this.AddRoleForm.valid) {
       if (this.editMode) {
         this.onEditMode();
-      }
-      else {
+      } else {
         this.rolesService.addRoles(this.AddRoleForm.value).subscribe((response) => {
           if (response.statusCode == 200) {
             this.isAddRoleForm = false;
@@ -192,20 +191,27 @@ export class RolesComponent implements OnInit {
 
   onRoleDelete(role: any) {
     var message = 'Are you sure you want to delete?';
-    this.sendReceiveService.confirmationDialog(message).subscribe((result) => {
-      if (!!result) {
-        this.rolesService.deleteRole(role).subscribe((response) => {
-          if (response.statusCode == 200) {
-            this.getRoles();
-            this.notifierService.showNotification('Success', response.message);
-          } else {
-            this.notifierService.showNotification('Error', response.message);
-          }
-        }, error => {
-          console.log(error);
-        });
+    this.sendReceiveService.confirmationDialog(message).subscribe({
+      next: (result) => {
+        if (!!result) {
+          console.log("Enternig Delete");
+          console.log(role);
+          this.rolesService.deleteRole(role).subscribe({
+            next: (response) => {
+              if (response.statusCode == 200) {
+                this.getRoles();
+                this.notifierService.showNotification('Success', response.message);
+              } else {
+                this.notifierService.showNotification('Error', response.message);
+              }
+            },
+            error: (error) => {
+              this.notifierService.showNotification('Error', error.message);
+            }
+          });
+        }
       }
-    })
+    });
   }
 
   setMessage(type: any, message: any) {

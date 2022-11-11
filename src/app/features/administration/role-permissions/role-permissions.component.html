@@ -15,7 +15,7 @@
                                 <mat-select placeholder="Select Role" formControlName="roleName" disableOptionCentering
                                     required>
                                     <mat-option>Select Role</mat-option>
-                                    <mat-option *ngFor="let role of RolesList" [value]="role.id"> {{role.roleName}}
+                                    <mat-option *ngFor="let role of RolesList" [value]="role.roleId"> {{role.roleName}}
                                     </mat-option>
                                 </mat-select>
                                 <mat-error *ngIf="AddRolePermissionForm.controls['roleName'].hasError('required')">
