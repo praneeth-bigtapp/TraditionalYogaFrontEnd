@@ -37,8 +37,8 @@
         <span class="float-end mb-2">
             <!-- <button type="button" class="btn btn-outline-secondary btn-rounded"
                 *ngIf="!isAddRoleForm && pagePermissions.Add" (click)="onAddRole()"> Add Role </button> -->
-                <button type="button" class="btn btn-outline-secondary btn-rounded"
-                *ngIf="!isAddModuleForm" (click)="onAddMenu()"> Add Menu </button>
+            <button type="button" class="btn btn-outline-secondary btn-rounded" *ngIf="!isAddModuleForm"
+                (click)="onAddMenu()"> Add Menu </button>
         </span>
         <div style="height:10px">
             <div *ngIf="errorMessage" [ngStyle]="{'color': errorType == 'Error' ? 'red':'green'}"
@@ -58,7 +58,7 @@
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value"
                     [filter]="filterData" />
             </th>
-            <td mat-cell *matCellDef="let element"> {{element.moduleId}} </td>
+            <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
         </ng-container>
 
         <ng-container matColumnDef="menuName">

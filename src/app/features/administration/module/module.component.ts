@@ -62,11 +62,23 @@ export class ModuleComponent implements OnInit {
   }
 
   updateMenu() {
-    console.log(this.AddModuleForm.value);
-    let menu ={
-      
+    let editCheck = true;
+    console.log(this.AddModuleForm.value.menuName);
+    console.log(this.editedMenu);
+    console.log(this.MenuList);
+
+    for (let menu of this.MenuList) {
+      if (menu.moduleName == this.AddModuleForm.value.menuName) {
+        editCheck = false;
+        this.notifierService.showNotification('Error', "Menu Already Exist");
+        break;
+      }
     }
 
+    if(editCheck){
+      alert("updating");
+
+    }
   }
 
   addMenu() {
@@ -85,6 +97,7 @@ export class ModuleComponent implements OnInit {
   onCancel() {
     this.AddModuleForm.reset();
     this.isAddModuleForm = false;
+    this.editedMenu = null;
   }
 
   onAddMenu() {
@@ -146,7 +159,7 @@ export class ModuleComponent implements OnInit {
               this.notifierService.showNotification('Success', response.message);
             },
             error: (error) => {
-              this.notifierService.showNotification('Error', error.message);
+              this.notifierService.showNotification('Error', error.error.message);
             }
           });
         }

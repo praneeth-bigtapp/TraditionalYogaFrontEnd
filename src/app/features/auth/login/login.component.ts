@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
       let encryptedPassword = btoa(this.LoginForm.value.password);
       const loginJsonData = {
         "userName": this.LoginForm.value.email,
-        "passWord": encryptedPassword
+        "password": encryptedPassword
       }
       this.loginService.getLoginDetails(loginJsonData).subscribe({
         next: (response) => {
@@ -164,9 +164,9 @@ export class LoginComponent implements OnInit {
         console.log(menu);
         for (let subModule of menu.subModules) {
           console.log(subModule.subModuleId);
-          // if (menu.subModules.permissionId !== 6) {
+          if (menu.subModules.permissionId !== 6) {
             tempSubMenuName.push(subModule.subModuleId);
-          // }
+          }
         }
       }
       let subMenuName = tempSubMenuName[0];
@@ -187,9 +187,9 @@ export class LoginComponent implements OnInit {
       for (let subModule of menu.subModules) {
 
         console.log(subModule.subModuleId);
-        // if (menu.subModules.permissionId !== 6) {
+        if (menu.subModules.permissionId !== 6) {
           tempSubMenuName.push(subModule.subModuleId);
-        // }
+        }
       }
     }
     let subMenuName = tempSubMenuName[0];
@@ -225,7 +225,7 @@ export class LoginComponent implements OnInit {
     this.userIdle.onTimeout().subscribe(() => console.log('Time is up!'));
   }
 
-  onRegister(){
+  onRegister() {
     this.router.navigateByUrl("register");
   }
 
