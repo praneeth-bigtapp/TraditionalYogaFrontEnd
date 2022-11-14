@@ -17,7 +17,7 @@ import { RolesService } from '../roles/service/roles.service';
 })
 export class RolePermissionsComponent implements OnInit {
   // displayedColumns: string[] = ['sno', 'moduleName', 'subModuleName', 'tableName', 'permissionName', 'actions'];
-  displayedColumns: string[] = ['sno', 'moduleName', 'subModuleName', 'actions'];
+  displayedColumns: string[] = ['sno', 'MenuName', 'subMenuName','permission', 'actions'];
   RolesList: any = [];
   ModulesList: any = [];
   SubModulesList: any = [];

@@ -56,26 +56,37 @@
                 <td mat-cell *matCellDef="let element"> {{element.sno}} </td>
             </ng-container>
     
-            <ng-container matColumnDef="moduleName">
+            <ng-container matColumnDef="MenuName">
                 <th mat-header-cell *matHeaderCellDef id="">
                     <label mat-sort-header>
-                        Module Name
+                        Menu Name
                     </label>
                     <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
                         [filter]="filterData" />
                 </th>
-                <td mat-cell *matCellDef="let element"> {{element.moduleName}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.MenuName}} </td>
             </ng-container>
     
-            <ng-container matColumnDef="subModuleName">
+            <ng-container matColumnDef="subMenuName">
                 <th mat-header-cell *matHeaderCellDef id="">
                     <label mat-sort-header>
-                        Sub Module Name
+                        Sub Menu Name
                     </label>
                     <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
                         [filter]="filterData" />
                 </th>
-                <td mat-cell *matCellDef="let element"> {{element.subModuleName}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.subMenuName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="permission">
+                <th mat-header-cell *matHeaderCellDef id="">
+                    <label mat-sort-header>
+                        permission
+                    </label>
+                    <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
+                        [filter]="filterData" />
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.permission}} </td>
             </ng-container>
     
             <ng-container matColumnDef="actions">
