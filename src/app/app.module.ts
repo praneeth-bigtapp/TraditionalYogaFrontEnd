@@ -30,7 +30,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ViewDataComponent } from './features/view-data/view-data.component';
 import { UserIdleModule } from 'angular-user-idle';
 import { DashboardModule } from './features/dashboard/dashboard.module';
-// import { NglrxPipesModule } from '@nglrx/pipes';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
+import {MatRadioModule} from '@angular/material/radio';
+import { MatDialogModule } from '@angular/material/dialog';
+import { StudentMasterModule } from './features/student-master/student-master.module';
 
 @NgModule({
   declarations: [
@@ -38,6 +43,7 @@ import { DashboardModule } from './features/dashboard/dashboard.module';
     ViewDataComponent,
     DndDirective,
     DialogComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -52,6 +58,7 @@ import { DashboardModule } from './features/dashboard/dashboard.module';
     MatInputModule,
     MatSelectModule,
     AdministrationModule,
+    // StudentMasterModule,
     DashboardModule,
     SharedModule,
     CoreModule,
@@ -59,6 +66,13 @@ import { DashboardModule } from './features/dashboard/dashboard.module';
     SecurityMasterModule,
     StaticDataUploadModule,
     MatPaginatorModule,
+    MatCardModule,
+    MatCardModule,
+    MatDividerModule,
+    MatListModule,
+    MatRadioModule,
+    MatTableModule,
+    MatDialogModule,
     // NglrxPipesModule,
     ToastrModule.forRoot(),
     MatButtonModule,

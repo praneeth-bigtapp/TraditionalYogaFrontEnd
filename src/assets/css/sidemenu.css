@@ -10,7 +10,7 @@ body {
 
 p {
     font-family: 'muliregular', "Noto Sans SC", sans-serif;
-    font-size: 1.1em;
+    font-size: 1.0em;
     font-weight: 300;
     line-height: 1.7em;
     color: #999;
@@ -26,7 +26,7 @@ a:focus {
 
 .navbar {
     padding: 5px 10px;
-    background: #fe6730;
+    background: #242424;
     border: none;
     border-radius: 0;
     box-shadow: 1px 1px 2px #ddd;

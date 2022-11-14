@@ -16,6 +16,12 @@ const routes: Routes = [
       import('./features/dashboard/dashboard.module').then((m) => m.DashboardModule)
   },
   {
+    path: 'studentMaster',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./features/student-master/student-master.module').then((m) => m.StudentMasterModule)
+  },
+  {
     path: 'administration',
     canActivate: [AuthGuard],
     loadChildren: () =>
@@ -27,6 +33,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/security-master/security-master.module').then((m) => m.SecurityMasterModule)
   },
+
   {
     path: 'dataUpload',
     canActivate: [AuthGuard],
