@@ -4,7 +4,7 @@
         <div class="card-header text-white bg-secondary">
             Add Menu
         </div>
-        <form [formGroup]="AddModuleForm" (ngSubmit)="onAddModuleSubmit()">
+        <form [formGroup]="AddModuleForm" (ngSubmit)="onModuleSubmit()">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
@@ -85,10 +85,10 @@
                         class="fas fa-pencil-alt" aria-hidden="true"></i> </span> -->
                 <!-- <span matTooltip="Delete" style="cursor: pointer;" *ngIf="!!pagePermissions.Delete"
                     (click)="onRoleDelete(element)"> <i class="far fa-trash-alt" aria-hidden="true"></i> </span> -->
-                <span matTooltip="Edit" (click)="onEditRole(element)"> <i class="fas fa-pencil-alt"
+                <span matTooltip="Edit" (click)="onEditModule(element)"> <i class="fas fa-pencil-alt"
                         aria-hidden="true"></i>
                 </span>
-                <span matTooltip="Delete" style="cursor: pointer;" (click)="onRoleDelete(element)"> <i
+                <span matTooltip="Delete" style="cursor: pointer;" (click)="onModuleDelete(element)"> <i
                         class="far fa-trash-alt" aria-hidden="true"></i>
                 </span>
             </td>

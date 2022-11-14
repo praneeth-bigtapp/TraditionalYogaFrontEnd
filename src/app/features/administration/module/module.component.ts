@@ -4,6 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatTableDataSource } from '@angular/material/table';
 import { data } from 'jquery';
+import { NotifierService } from 'src/app/notifier.service';
+import { SendReceiveService } from 'src/app/shared/services/sendReceive.service';
 import { ModuleService } from './service/module.service';
 
 @Component({
@@ -19,7 +21,7 @@ export class ModuleComponent implements OnInit {
   MenuList: any = [];
   filterData: any;
   editMode: any;
-  editedRole: any;
+  editedMenu: any;
   errorMessage: any;
   Message: any;
   errorType: any;
@@ -30,6 +32,8 @@ export class ModuleComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public moduleService: ModuleService,
+    public sendReceiveService: SendReceiveService,
+    private notifierService: NotifierService,
   ) { }
 
   ngOnInit(): void {
@@ -46,8 +50,36 @@ export class ModuleComponent implements OnInit {
     this.getMenus();
   }
 
-  onAddModuleSubmit() {
+  onModuleSubmit() {
+    if (this.AddModuleForm.valid) {
+      console.log(this.editMode);
+      if (this.editMode) {
+        this.updateMenu();
+      } else {
+        this.addMenu();
+      }
+    }
+  }
 
+  updateMenu() {
+    console.log(this.AddModuleForm.value);
+    let menu ={
+      
+    }
+
+  }
+
+  addMenu() {
+    console.log(this.AddModuleForm.value);
+    this.moduleService.addMenu(this.AddModuleForm.value).subscribe({
+      next: (response) => {
+        this.onCancel();
+        this.getMenus();
+        this.notifierService.showNotification('Success', response.message);
+      }, error: (error) => {
+        this.notifierService.showNotification('Error', error.error.message);
+      }
+    });
   }
 
   onCancel() {
@@ -93,31 +125,34 @@ export class ModuleComponent implements OnInit {
     // })
   }
 
-  onEditRole(role: any) {
+  onEditModule(menu: any) {
     this.editMode = true;
-    this.editedRole = role;
+    this.editedMenu = menu;
+    console.log(this.editedMenu);
     this.AddModuleForm.patchValue({
-      roleName: role.roleName
+      menuName: menu.moduleName
     });
     this.isAddModuleForm = true;
   }
 
-  onRoleDelete(role: any) {
+  onModuleDelete(menu: any) {
     var message = 'Are you sure you want to delete?';
-    // this.sendReceiveService.confirmationDialog(message).subscribe((result) => {
-    //   if (!!result) {
-    //     this.rolesService.deleteRole(role).subscribe((response) => {
-    //       if (response.statusCode == 200) {
-    //         this.getRoles();
-    //         this.notifierService.showNotification('Success', response.message);
-    //       } else {
-    //         this.notifierService.showNotification('Error', response.message);
-    //       }
-    //     }, error => {
-    //       console.log(error);
-    //     });
-    //   }
-    // });
+    this.sendReceiveService.confirmationDialog(message).subscribe({
+      next: (result) => {
+        if (!!result) {
+          this.moduleService.deleteMenu(menu).subscribe({
+            next: (response) => {
+              this.getMenus();
+              this.notifierService.showNotification('Success', response.message);
+            },
+            error: (error) => {
+              this.notifierService.showNotification('Error', error.message);
+            }
+          });
+        }
+      }
+    });
+
   }
 
 }
