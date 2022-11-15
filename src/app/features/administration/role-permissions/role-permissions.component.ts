@@ -17,7 +17,7 @@ import { RolesService } from '../roles/service/roles.service';
 })
 export class RolePermissionsComponent implements OnInit {
   // displayedColumns: string[] = ['sno', 'moduleName', 'subModuleName', 'tableName', 'permissionName', 'actions'];
-  displayedColumns: string[] = ['sno', 'MenuName', 'subMenuName','permission', 'actions'];
+  displayedColumns: string[] = ['sno', 'MenuName', 'subMenuName', 'permissionName', 'actions'];
   RolesList: any = [];
   ModulesList: any = [];
   SubModulesList: any = [];
@@ -35,6 +35,10 @@ export class RolePermissionsComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   pageSize = 50;
   roleSelect: Boolean = false;
+  RolePermissionValue: any;
+  errorMessage: any;
+  Message: any;
+  errorType: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,7 +55,7 @@ export class RolePermissionsComponent implements OnInit {
         { "Key": 'sno', "Value": "" },
         { "Key": 'moduleName', "Value": "" },
         { "Key": 'subModuleName', "Value": "" },
-        // { "Key": 'permissionName', "Value": "" },
+        { "Key": 'permissionName', "Value": "" },
 
       ],
       gridData: this.gridData,
@@ -63,7 +67,7 @@ export class RolePermissionsComponent implements OnInit {
       roleName: [null, Validators.required],
     });
     this.RolePermissionForm = this.formBuilder.group({
-      'permission': ['', Validators.required]
+      permission: ['', Validators.required]
     });
     this.getRoles();
   }
@@ -98,6 +102,7 @@ export class RolePermissionsComponent implements OnInit {
     this.subModuleService.getSubMenuList().subscribe({
       next: (data) => {
         this.SubModulesList = data;
+        this.getAccessPermissions();
         // this.getAllTableNames();
       }
     });
@@ -110,26 +115,37 @@ export class RolePermissionsComponent implements OnInit {
   //   });
   // }
 
-  // getAccessPermissions() {
-  //   this.rolePermissionsService.getAccessPermissions().subscribe((response) => {
-  //     this.AccessPermissionsList = response;
-  //     this.AddRolePermissionForm.controls['roleName'].setValue(this.RolesList[0].roleId);
-  //     this.getSelectedRole(this.RolesList[0].roleId);
-  //   });
-  // }
+  getAccessPermissions() {
+    this.rolePermissionsService.getAccessPermissions().subscribe((response) => {
+      this.AccessPermissionsList = response;
+      this.AddRolePermissionForm.controls['roleName'].setValue(this.RolesList[0].roleId);
+      this.getSelectedRole(this.RolesList[0].roleId);
+    });
+  }
 
   onSelectRoleSubmit() {
     const data = this.AddRolePermissionForm.value.roleName;
     this.rolePermissionsService.getRolePermissionsByRoleId(data).subscribe({
       next: (response) => {
-        if (response) {
+        if (response.length != 0) {
           this.getRolePermissionsListWithName(response);
+          this.roleSelect = true;
+
+          this.errorMessage = false;
+          this.Message = "";
+          this.errorType = "";
+        } else {
+          this.roleSelect = false;
+          this.errorMessage = true;
+          this.Message = "No data Found";
+          this.errorType = "Error";
         }
-        this.roleSelect = true;
       },
       error: (error) => {
-        
         this.roleSelect = true;
+        this.errorMessage = true;
+        this.Message = error.error.message;
+        this.errorType = "Error";
       }
     });
   }
@@ -157,6 +173,7 @@ export class RolePermissionsComponent implements OnInit {
     this.filterData.gridData = RolePermissionsData;
     this.dataSource = new MatTableDataSource(RolePermissionsData);
     this.filterData.dataSource = this.dataSource;
+    console.log(this.filterData.dataSource);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     for (let col of this.filterData.filterColumnNames) {
@@ -181,11 +198,11 @@ export class RolePermissionsComponent implements OnInit {
         rolePermission.subModuleName = subModule.subModuleName;
       }
     }
-    // for (let accessPermission of this.AccessPermissionsList) {
-    //   if (rolePermission.permissionId == accessPermission.permissionId) {
-    //     rolePermission.permissionName = accessPermission.permissionName;
-    //   }
-    // }
+    for (let accessPermission of this.AccessPermissionsList) {
+      if (rolePermission.permissionId == accessPermission.permissionId) {
+        rolePermission.permissionName = accessPermission.permissionName;
+      }
+    }
   }
 
   onCancel() {
@@ -193,7 +210,23 @@ export class RolePermissionsComponent implements OnInit {
     this.roleSelect = false;
   }
 
-  editPermission(row: any) {
+  assign() {
+    const data = {
+      "roleId": this.AddRolePermissionForm.value.roleName
+    };
+    this.rolePermissionsService.setDefaultPermissions(data).subscribe({
+      next: (response) => {
+        this.onSelectRoleSubmit();
+      }, error: (error) => {
+        this.errorMessage = true;
+        this.Message = error.error.message;
+        this.errorType = "Error";
+      }
+    });
+  }
+
+  editRolePermission(row: any) {
+    console.log(row);
     this.selectedRoleId = row.id;
     this.RolePermissionsList.forEach((element: any) => {
       if (element.sno == row.sno)
@@ -210,18 +243,22 @@ export class RolePermissionsComponent implements OnInit {
       return false;
     }
     let requestData = {
-      "id": row.id,
+      "rolePermissionId": row.rolePermissionId,
       "roleId": row.roleId,
       "moduleId": row.moduleId,
       "subModuleId": row.subModuleId,
-      "permissionId": this.RolePermissionForm.value.permission,
-      "tableId": row.tableId
+      "permissionId": this.RolePermissionValue,
     };
-    this.rolePermissionsService.SaveRolepermission(requestData).subscribe((response) => {
-      this.AddRolePermissionForm.controls['roleName'].setValue(row.roleId);
-      this.getSelectedRole(row.roleId);
-    }, error => {
-      console.log(error);
+    this.rolePermissionsService.saveRolepermission(requestData).subscribe({
+      next: (response) => {
+        this.AddRolePermissionForm.controls['roleName'].setValue(row.roleId);
+        this.getSelectedRole(row.roleId);
+      },
+      error: (error) => {
+        this.errorMessage = true;
+        this.Message = error.error.message;
+        this.errorType = "Error";
+      }
     });
     return true;
   }
