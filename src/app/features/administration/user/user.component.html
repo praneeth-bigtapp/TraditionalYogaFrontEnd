@@ -167,27 +167,27 @@
             <td mat-cell *matCellDef="let element2"> {{element2.userName}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="firstName">
+        <ng-container matColumnDef="Name">
 
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
-                    First Name
+                    Name
                 </label>
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
                     [filter]="filterData" />
             </th>
-            <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="lastName">
+        <ng-container matColumnDef="mobile">
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
-                    Last Name
+                    mobile
                 </label>
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
                     [filter]="filterData" />
             </th>
-            <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.mobile}} </td>
         </ng-container>
 
         <ng-container matColumnDef="email">
@@ -209,7 +209,7 @@
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[5].Value"
                     [filter]="filterData" />
             </th>
-            <td mat-cell *matCellDef="let element"> {{element.roleName}} </td>
+            <td mat-cell *matCellDef="let element "> {{element.roleId}} </td>
         </ng-container>
 
         <ng-container matColumnDef="actions">
