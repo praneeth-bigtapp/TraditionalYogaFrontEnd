@@ -3,23 +3,49 @@ import { MatDialog } from '@angular/material/dialog';
 
 
 export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  SNo: number;
+  Date: string;
+  AmountDonated: number;
+  Description: string;
+  ModeofPayment:string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+export interface PurcheseDataEle {
+  SNo: number;
+  Date: string;
+  PurchesedAmount: number;
+  ProductName: string;
+
+}
+
+export interface Volunteer {
+  SNo: number;
+  Category: string;
+  Courses: string;
+  StartDate: string;
+  EndDate: string;
+  SeervedAs:string;
+  noMembers:number;
+
+}
+
+let ELEMENT_DATA: PeriodicElement[] = [
+  {SNo: 1, Date: '21-08-2022', AmountDonated: 1.0079, Description: 'H', ModeofPayment:'online'},
+  {SNo: 2, Date: '21-08-2022', AmountDonated: 4.0026, Description: 'He', ModeofPayment:'online'},
+  {SNo: 3, Date: '21-08-2022', AmountDonated: 6.941, Description: 'Li',  ModeofPayment:'UPI'},  
+];
+
+
+let PURCHESD_DATA: PurcheseDataEle[] = [
+  {SNo: 1, Date: '21-08-2022', PurchesedAmount: 1.0079, ProductName: 'H'},
+  {SNo: 2, Date: '21-08-2022', PurchesedAmount: 4.0026, ProductName: 'He'},
+  {SNo: 3, Date: '21-08-2022', PurchesedAmount: 6.941, ProductName: 'Li'},  
+];
+
+let VOLUNTEER_DATA: Volunteer[] = [
+  {SNo: 1, Category: 'abc', Courses: '1.0079', StartDate: '21-08-2018', EndDate:'21-08-2018', SeervedAs: 'xxx', noMembers:1},
+  {SNo: 1, Category: 'abc', Courses: '1.0079', StartDate: '21-08-2018', EndDate:'21-08-2018', SeervedAs: 'xxx', noMembers:1},
+  {SNo: 1, Category: 'abc', Courses: '1.0079', StartDate: '21-08-2018', EndDate:'21-08-2018', SeervedAs: 'xxx', noMembers:1},
 ];
 
 @Component({
@@ -31,8 +57,15 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 export class StudentProfileComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['SNo', 'Date', 'AmountDonated', 'Description', 'ModeofPayment'];
+  dataSource  = ELEMENT_DATA;
+
+  displayedColumnsE: string[] = ['SNo', 'Date', 'PurchesedAmount', 'ProductName'];
+  dataSource1 = PURCHESD_DATA;
+
+  displayedColumnsV: string[] = ['SNo', 'Category', 'Courses', 'StartDate', 'EndDate', 'SeervedAs', 'noMembers'];
+  dataSource2 = VOLUNTEER_DATA;
+
 
   constructor( public dialog: MatDialog ) { }
 
