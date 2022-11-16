@@ -15,7 +15,7 @@ import { NotifierService } from 'src/app/notifier.service';
 })
 
 export class UserComponent implements OnInit {
-  displayedColumns: string[] = ['sno', 'userName', 'firstName', 'lastName', 'email', 'roleName', 'actions'];
+  displayedColumns: string[] = ['sno', 'userName', 'Name', 'mobile', 'email', 'roleName', 'actions'];
   UserList: any;
   AddUserForm!: FormGroup;
   isAddUserForm: boolean = false;
@@ -118,6 +118,7 @@ export class UserComponent implements OnInit {
       this.filterData.gridData = userData;
       this.dataSource = new MatTableDataSource(userData);
       this.filterData.dataSource = this.dataSource;
+      console.log(this.filterData.dataSource.filteredData);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.filterData.sort = this.sort;

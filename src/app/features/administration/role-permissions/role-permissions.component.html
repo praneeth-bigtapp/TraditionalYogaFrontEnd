@@ -43,8 +43,20 @@
 
     <div class="clearfix"></div> <br>
 
-    <div class="" *ngIf="roleSelect">
-        <table mat-table [dataSource]="this.filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100" aria-label="role permissions">
+    <div style="height:10px">
+        <div *ngIf="errorMessage" [ngStyle]="{'color': errorType == 'Error' ? 'red':'green'}"
+            class="notificationMessage">
+            <span>{{Message}}</span>
+        </div><br>
+        <div class="notificationMessage" *ngIf="errorMessage">
+            <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block" (click)="assign()">
+                Assign default Permissions </button>
+        </div>
+    </div>
+
+    <div *ngIf="roleSelect">
+        <table mat-table [dataSource]="this.filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
+            aria-label="role permissions">
             <ng-container matColumnDef="sno">
                 <th mat-header-cell *matHeaderCellDef style="width: 30px;" id="">
                     <label mat-sort-header>
@@ -53,9 +65,9 @@
                     <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value"
                         [filter]="filterData" />
                 </th>
-                <td mat-cell *matCellDef="let element"> {{element.sno}} </td>
+                <td mat-cell *matCellDef="let i = index"> {{i+1}} </td>
             </ng-container>
-    
+
             <ng-container matColumnDef="MenuName">
                 <th mat-header-cell *matHeaderCellDef id="">
                     <label mat-sort-header>
@@ -64,9 +76,9 @@
                     <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
                         [filter]="filterData" />
                 </th>
-                <td mat-cell *matCellDef="let element"> {{element.MenuName}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.moduleName}} </td>
             </ng-container>
-    
+
             <ng-container matColumnDef="subMenuName">
                 <th mat-header-cell *matHeaderCellDef id="">
                     <label mat-sort-header>
@@ -75,42 +87,65 @@
                     <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
                         [filter]="filterData" />
                 </th>
-                <td mat-cell *matCellDef="let element"> {{element.subMenuName}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.subModuleName}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="permission">
+            <!-- <ng-container matColumnDef="permissionName">
                 <th mat-header-cell *matHeaderCellDef id="">
                     <label mat-sort-header>
                         permission
                     </label>
-                    <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
+                    <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
                         [filter]="filterData" />
                 </th>
-                <td mat-cell *matCellDef="let element"> {{element.permission}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.permissionId}} </td>
+            </ng-container> -->
+
+            <!--  -->
+            <ng-container matColumnDef="permissionName">
+                <th mat-header-cell *matHeaderCellDef id="">
+                    <label mat-sort-header>
+                        Permissions
+                    </label>
+                    <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
+                        [filter]="filterData" />
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <section *ngIf="!element.editMode">{{element.permissionName | uppercase}}</section>
+                    <!-- <mat-select formControlName="RolePermissionForm.controls['permission']" *ngIf="element.editMode"> -->
+                    <mat-select [(ngModel)]="RolePermissionValue" *ngIf="element.editMode">
+                        <!-- <mat-select *ngIf="element.editMode"> -->
+                        <mat-option *ngFor="let permission of AccessPermissionsList" [value]="permission.permissionId">
+                            {{ permission.permissionName }}
+                        </mat-option>
+                    </mat-select>
+                </td>
             </ng-container>
-    
+
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef id="">
                     <label mat-sort-header>
                         Actions
                     </label>
                 </th>
-                <td mat-cell *matCellDef="let row;let i=index">
-                    <a mat-icon-button (click)="editPermission(row)">
-                        <span matTooltip="Edit" style="color: #2571b5; padding: 3px 7px;cursor: pointer;"> <i
-                                class="fas fa-pencil-alt" aria-hidden="true"></i> </span>
+                <td mat-cell *matCellDef="let row">
+                    <a mat-icon-button (click)="editRolePermission(row)">
+                        <span matTooltip="Edit" style="color: #2571b5; padding: 3px 7px;cursor: pointer;">
+                            <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                        </span>
                     </a>
                     <a mat-icon-button *ngIf="row.editMode" (click)="saveRolePermission(row)">
-                        <span matTooltip="Save" style="color: #09cac7; padding: 3px 7px;cursor: pointer;"> <i
-                                class="fas fa-save" aria-hidden="true"></i></span>
+                        <span matTooltip="Save" style="color: #09cac7; padding: 3px 7px;cursor: pointer;">
+                            <i class="fas fa-save" aria-hidden="true"></i>
+                        </span>
                     </a>
                 </td>
             </ng-container>
-    
+
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-    
+
         <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[25, 50, 100]" aria-label="Select page">
         </mat-paginator>
     </div>

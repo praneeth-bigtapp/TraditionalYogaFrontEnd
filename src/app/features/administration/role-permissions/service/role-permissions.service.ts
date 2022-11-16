@@ -6,35 +6,28 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 })
 export class RolePermissionsService extends BaseHttp {
     getRolePermissionsByRoleIdUrl: string = 'rolePermissions?roleId=';
-    getAccessPermissionsUrl: string = 'getAll?operation=accessPemissions';
-    SavePermissionsUrl: string = 'saveRolePermission';
+    getAccessPermissionsUrl: string = 'getAll?operation=pemissions';
+    saveRolePermissionsUrl: string = 'saveRolePermission';
     getTableNamesUrl: string = 'getAll?operation=tables';
-
-    getRolePermissionsByRoleId(roleId: any) {
-        return this.get<any>(this.getRolePermissionsByRoleIdUrl + roleId);
-    }
-
-    // getAllModules() {
-    //     return this.get<any>(this.getModulesUrl);
-    // }
-
-    // getAllSubModules() {
-    //     return this.get<any>(this.getSubModulesUrl);
-    // }
-
-    // getRoles() {
-    //     return this.get<any>(this.getRolesUrl);
-    // }
+    setDefaultPermissionsUrl: string = 'saveDefaultRolePermission';
 
     getAccessPermissions() {
         return this.get<any>(this.getAccessPermissionsUrl);
     }
 
-    SaveRolepermission(RolePermissions: any) {
-        return this.post<any>(this.SavePermissionsUrl, RolePermissions);
-    }
-
     getAllTableNames() {
         return this.get<any>(this.getTableNamesUrl);
+    }
+
+    getRolePermissionsByRoleId(roleId: any) {
+        return this.get<any>(this.getRolePermissionsByRoleIdUrl + roleId);
+    }
+
+    saveRolepermission(RolePermissions: any) {
+        return this.post<any>(this.saveRolePermissionsUrl, RolePermissions);
+    }
+
+    setDefaultPermissions(RolePermissions: any) {
+        return this.post<any>(this.setDefaultPermissionsUrl, RolePermissions);
     }
 }
