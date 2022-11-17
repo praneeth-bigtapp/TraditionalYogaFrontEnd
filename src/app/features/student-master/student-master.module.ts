@@ -33,9 +33,11 @@ import {MatRadioModule} from '@angular/material/radio';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 
 
+
 @NgModule({
   declarations: [
-    StudentProfileComponent
+    StudentProfileComponent,
+
   ],
   imports: [
     CommonModule,

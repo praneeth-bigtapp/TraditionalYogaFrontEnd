@@ -4,7 +4,17 @@
 <div class="ConfigurationTypes_textpadding">
     <div class="card border-light">
         <div class="card-header border-0">
-            <h3> View Student </h3>
+            <h3 class="d-inline-block"> View Student  </h3>
+            <div class=" d-inline-block float-end">
+                <mat-form-field appearance="fill">
+                    <mat-label>Select Student</mat-label>
+                    <mat-select formControlName="roleId" required>
+                        <mat-option>Select Student</mat-option>
+                        
+                    </mat-select>
+                    
+                </mat-form-field>
+            </div>
         </div>
 
         <div class="student-profile ty-tabs" style="background:#f5f5f5;">
@@ -397,6 +407,7 @@
 
                             <div class="bg-white">
                                 <h5 class="pt-3 pl-4"> Category of Volunteering  <span class="float-right"> <div class=" btn btn-secondary"> Add Volunteer</div>  </span> </h5> 
+                                
                                 <div class="row pt-4 pl-4 pb-1">
                                     
                                     <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8 mat-datagrid w-100">
@@ -471,6 +482,99 @@
                     </div>
                 </div>
 
+            </div>
+
+
+            <div class="tab-pane " id="tabs-6" role="tabpanel">
+                
+                
+                <div class=" p-3">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <mat-card class="example-card" >
+                                <p class="text-center">Student images</p>
+                                <div class="profile-pic text-center rounded-circle bg-ty-profile">
+                                    <img src="../../../../assets/images/user-profile.png" width="100" alt="user pic" />
+                                </div>
+                            </mat-card>
+                    
+                        </div>
+                        <div class="col-md-9" >
+                            
+                            <div class="row pt-4 pl-3 pb-1 bg-white">
+                            <h5 class="pb-3"> Courses Profile </h5> 
+                            <hr>
+                            <table class="table table-hover  table-borderless">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">S.No</th>
+                                    <th scope="col">Course Name</th>
+                                    <th scope="col">Admissions Status</th>
+                                    <th scope="col">Completion Status</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <th scope="row">1</th>
+                                    <td>(RYIT 200) Free Online Traditional Meditation Teacher Training Based on Darashanas or sanathana Dharma For Yoga Teachers and Students to become a Yogi <br>
+                                    <b> June 15 2022 - Sep 16 2022</b>
+                                    </td>
+                                    <td>Admitted</td>
+                                    <td> Completed & Certified</td>
+                                  </tr>
+                                  
+                                  <tr>
+                                    <th scope="row">2</th>
+                                    <td>(RYIT 200) Free Online Traditional Meditation Teacher Training Based on Darashanas or sanathana Dharma For Yoga Teachers and Students to become a Yogi</td>
+                                    <td>Admitted</td>
+                                    <td> Completed & Certified</td>
+                                  </tr>
+
+                                  <tr>
+                                    <th scope="row">3</th>
+                                    <td>(RYIT 200) Free Online Traditional Meditation Teacher Training Based on Darashanas or sanathana Dharma For Yoga Teachers and Students to become a Yogi</td>
+                                    <td>Admitted</td>
+                                    <td> Completed & Certified</td>
+                                  </tr>
+
+                                  <tr>
+                                    <th scope="row">4</th>
+                                    <td>(RYIT 200) Free Online Traditional Meditation Teacher Training Based on Darashanas or sanathana Dharma For Yoga Teachers and Students to become a Yogi</td>
+                                    <td>Admitted</td>
+                                    <td> Completed & Certified</td>
+                                  </tr>
+
+                                  <tr>
+                                    <th scope="row">5</th>
+                                    <td>(RYIT 200) Free Online Traditional Meditation Teacher Training Based on Darashanas or sanathana Dharma For Yoga Teachers and Students to become a Yogi</td>
+                                    <td>Admitted</td>
+                                    <td> Completed & Certified</td>
+                                  </tr>
+
+                                  <tr>
+                                    <th scope="row">6</th>
+                                    <td>(RYIT 200) Free Online Traditional Meditation Teacher Training Based on Darashanas or sanathana Dharma For Yoga Teachers and Students to become a Yogi</td>
+                                    <td>Admitted</td>
+                                    <td> Completed & Certified</td>
+                                  </tr>
+
+                                  <tr>
+                                    <th scope="row">7</th>
+                                    <td>(RYIT 200) Free Online Traditional Meditation Teacher Training Based on Darashanas or sanathana Dharma For Yoga Teachers and Students to become a Yogi</td>
+                                    <td>Admitted</td>
+                                    <td> Completed & Certified</td>
+                                  </tr>
+
+                                </tbody>
+                              </table>
+
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
             
         </div>
