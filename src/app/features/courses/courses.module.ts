@@ -16,12 +16,16 @@ import { MatSortModule } from '@angular/material/sort';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CourseMediaPraticeComponent } from './course-media-pratice/course-media-pratice.component';
+import { MatSelectModule } from '@angular/material/select';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 
 @NgModule({
   declarations: [
-    CourseMainComponent
+    CourseMainComponent,
+    CourseMediaPraticeComponent
   ],
   imports: [
     CommonModule,
@@ -41,6 +45,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     SharedModule,
     MatTooltipModule,
     MatSlideToggleModule,
+    MatSelectModule,
+    AngularEditorModule,
 
 
   ]
