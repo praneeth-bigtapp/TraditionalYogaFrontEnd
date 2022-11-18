@@ -32,10 +32,14 @@ import { UserIdleModule } from 'angular-user-idle';
 import { DashboardModule } from './features/dashboard/dashboard.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-import {MatListModule} from '@angular/material/list';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatListModule } from '@angular/material/list';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentMasterModule } from './features/student-master/student-master.module';
+import { BannerModule } from './features/banner/banner.module';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { CoursesModule } from './features/courses/courses.module';
 
 @NgModule({
   declarations: [
@@ -43,23 +47,30 @@ import { StudentMasterModule } from './features/student-master/student-master.mo
     ViewDataComponent,
     DndDirective,
     DialogComponent,
-    
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+
     ReactiveFormsModule,
     MatFormFieldModule,
     MatTableModule,
+    MatDatepickerModule,
     MatSortModule,
-    MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatPaginatorModule,
+    MatNativeDateModule,
+
     AdministrationModule,
+
     // StudentMasterModule,
     DashboardModule,
+    BannerModule,
+    CoursesModule,
     SharedModule,
     CoreModule,
     HttpClientModule,

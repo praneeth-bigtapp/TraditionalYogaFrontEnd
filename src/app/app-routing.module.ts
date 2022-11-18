@@ -10,6 +10,16 @@ const routes: Routes = [
       import('./features/auth/auth.module').then((m) => m.AuthModule)
   },
   {
+    path: '',
+    loadChildren: () =>
+      import('./features/banner/banner.module').then((m) => m.BannerModule)
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/courses/courses.module').then((m) => m.CoursesModule)
+  },
+  {
     path: 'dashboard',
     canActivate: [AuthGuard],
     loadChildren: () =>
@@ -45,6 +55,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     component: ViewDataComponent
   },
+
   {
     path: '**',
     redirectTo: '',
