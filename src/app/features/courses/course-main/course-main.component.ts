@@ -21,26 +21,24 @@ export interface CourseData {
 }
 
 const coursedata: CourseData[] = [
-  { no: "1", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "2", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "3", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "4", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "5", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "6", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "7", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "8", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "9", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" }, { no: "1", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "10", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "11", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "12", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "13", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "14", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" }, { no: "1", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "15", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "16", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "17", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "18", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-
-
+  { no: "1", category: "web", coursename: "Web Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
+  { no: "2", category: "Android", coursename: "React Native Development", duration: "3 month", startdate: "20 Nov 2022", enddate: "22 Dec 2022", currentstatus: "completed" },
+  { no: "3", category: "AWS", coursename: "AWS Basic", duration: "2 month", startdate: "17 Nov 2022", enddate: "17 Mar 2022", currentstatus: "ongoing" },
+  { no: "4", category: "Azure", coursename: "Azure Basic", duration: "1 month", startdate: "17 Nov 2022", enddate: "17 Apr 2022", currentstatus: "ongoing" },
+  { no: "5", category: "GCP", coursename: "GCP Basic", duration: "5 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
+  { no: "6", category: "Angular", coursename: "Angular Development", duration: "12 month", startdate: "17 Apr 2022", enddate: "17 May 2022", currentstatus: "ongoing" },
+  { no: "7", category: "BigData", coursename: "BigData Development", duration: "24 month", startdate: "17 May 2022", enddate: "17 June 2022", currentstatus: "ongoing" },
+  { no: "8", category: "Data Scientist", coursename: "Data Scientist Basic", duration: "15 days", startdate: "17 June 2022", enddate: "17 July 2022", currentstatus: "ongoing" },
+  // { no: "9", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" }, 
+  // { no: "10", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
+  // { no: "11", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
+  // { no: "12", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
+  // { no: "13", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
+  // { no: "14", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" }, 
+  // { no: "15", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
+  // { no: "16", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
+  // { no: "17", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
+  // { no: "18", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
 ];
 
 @Component({
@@ -52,6 +50,10 @@ export class CourseMainComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
+  filterData: any;
+  gridData = [];
+  dataSource: any
+
   length = 50;
   pageSize = 10;
   pageIndex = 0;
@@ -61,8 +63,9 @@ export class CourseMainComponent implements OnInit {
   showPageSizeOptions = true;
   showFirstLastButtons = false;
   disabled = false;
-  dataSource: any
-  search!: any
+
+
+
 
   // pageEvent!: PageEvent;
 
@@ -76,25 +79,42 @@ export class CourseMainComponent implements OnInit {
     private headerService: HeaderService
 
   ) {
+    this.filterData = {
+      filterColumnNames: [
+        { "Key": 'no', "Value": "" },
+        { "Key": 'category', "Value": "" },
+        { "Key": 'coursename', "Value": "" },
+        { "Key": 'duration', "Value": "" },
+        { "Key": 'startdate', "Value": "" },
+        { "Key": 'enddate', "Value": "" },
+        { "Key": 'currentstatus', "Value": "" },
+      ],
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
+    };
+
     this.dataSource = new MatTableDataSource<any>(coursedata)
+    this.filterData.gridData = coursedata;
+    this.filterData.dataSource = this.dataSource;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.filterData.sort = this.sort;
+    for (let col of this.filterData.filterColumnNames) {
+      col.Value = '';
+    }
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    // this.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.paginator = this.paginator;
   }
 
 
   ngOnInit(): void {
 
   }
-  // searchinput(value: any) {
-  //   this.search = value
-  //   console.log(value);
-
-  // }
-
-
-
 
   columns = [
     {
@@ -141,4 +161,10 @@ export class CourseMainComponent implements OnInit {
     console.log("add/view course");
 
   }
+  updatePagination(col: any) {
+
+    this.dataSource.paginator = this.paginator;
+  }
+
+
 }
