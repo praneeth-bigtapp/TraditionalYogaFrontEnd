@@ -88,6 +88,15 @@ export class SendReceiveService {
     else if (subMenuId == 5) {
       this.router.navigateByUrl("administration/rolePermission");
     }
+    else if (subMenuId == 10) {
+      this.router.navigateByUrl("studentMaster/studentProfile");
+    }
+    else if (subMenuId == 8) {
+      this.router.navigateByUrl("addbanner");
+    }
+    else if (subMenuId == 9) {
+      this.router.navigateByUrl("courses");
+    }
     // else if (subMenuId == 7) {
     //   this.router.navigateByUrl("staticDataUpload/staticReference");
     // }

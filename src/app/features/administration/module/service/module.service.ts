@@ -8,6 +8,7 @@ export class ModuleService extends BaseHttp {
   getMenus: string = 'getAll?operation=menus';
   addMenuUrl: string = 'menu?operation=add';
   updateMenuUrl: string = 'menu?operation=save';
+  activateMenuUrl: string = 'menu?operation=active';
   deleteMenuUrl: string = 'menu?operation=delete';
 
   getMenuList() {
@@ -20,6 +21,10 @@ export class ModuleService extends BaseHttp {
 
   updateMenu(menu: any) {
     return this.post<any>(this.updateMenuUrl, menu);
+  }
+
+  activateMenu(menu: any) {
+    return this.post<any>(this.activateMenuUrl, menu);
   }
 
   deleteMenu(menu: any) {

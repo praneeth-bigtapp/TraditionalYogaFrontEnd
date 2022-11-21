@@ -8,6 +8,7 @@ export class RolesService extends BaseHttp {
     getRoles: string = 'getAll?operation=roles';
     addRoleUrl: string = 'role?operation=add';
     saveRoleUrl: string = 'role?operation=save';
+    activateRoleUrl: string = 'role?operation=active';
     deleteRoleUrl: string = 'role?operation=delete';
 
     getRolesList() {
@@ -20,6 +21,10 @@ export class RolesService extends BaseHttp {
 
     saveRole(Role: any) {
         return this.post<any>(this.saveRoleUrl, Role);
+    }
+
+    activateRole(Role: any) {
+        return this.post<any>(this.activateRoleUrl, Role);
     }
 
     deleteRole(role: any) {
