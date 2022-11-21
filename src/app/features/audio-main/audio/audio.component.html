@@ -1,0 +1,153 @@
+<div class="container-fluid" style="margin-top: 30px;">
+    <h4>Audio Management- Audio dharanas</h4>
+    <mat-card>
+        <div class="row">
+
+
+            <div class="row">
+                <div class="col-2" style="display: flex;">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Choose an option</mat-label>
+                        <select matNativeControl [disabled]="disableSelect.value">
+                      <option value="" selected></option>
+                      <option value="volvo">Volvo</option>
+                      <option value="saab" disabled>Saab</option>
+                      <option value="mercedes">Mercedes</option>
+                      <option value="audi">Audi</option>
+                    </select>
+
+                    </mat-form-field>
+                </div>
+                <div class="col pt-4" style="width: 10px;">
+                    <!-- <button mat-stroked-button style="height:40px; background-color: grey;">Go</button> -->
+                    <button style="background-color: grey; width: 10px; height: 40px;" mat-raised-button class="pb-4">Go</button>
+
+                </div>
+
+
+
+
+                <div class="col text-end ">
+
+                    <!-- <button mat-raised-button style="margin-left: 700px;"></button> -->
+                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
+                    <i class="fa-solid fa-circle-plus"></i>create a category for audio
+                </button>
+
+                </div>
+
+
+
+
+
+            </div><br>&nbsp;
+            <hr>
+            <form>
+                <div class="row ">
+
+
+
+                </div>
+                <div class="row mb-1">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label  pt-4 fw-semibold">Select Category</label>
+                    <div class="col-sm-3">
+                        <mat-form-field>
+
+                            <mat-label>Audio daranas</mat-label>
+                            <select matNativeControl [disabled]="disableSelect.value">
+                      <option value="" selected></option>
+                      <option value="volvo">Volvo</option>
+                      <option value="saab" disabled>Saab</option>
+                      <option value="mercedes">Mercedes</option>
+                      <option value="audi">Audi</option>
+                    </select>
+                        </mat-form-field>
+
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label  pt-4 fw-semibold">Upload Audio</label>
+                    <div class="col-sm-3">
+                        <mat-form-field>
+
+                            <mat-label>Audio file</mat-label>
+                            <select matNativeControl [disabled]="disableSelect.value">
+                      <option value="" selected></option>
+                      <option value="volvo">Volvo</option>
+                      <option value="saab" disabled>Saab</option>
+                      <option value="mercedes">Mercedes</option>
+                      <option value="audi">Audi</option>
+                    </select>
+                        </mat-form-field>
+
+                    </div>
+                </div>
+
+                <div class="row mb-1">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label  pt-4 fw-semibold">Select Audio File</label>
+                    <div class="col-sm-8">
+                        <input type="file" id="file" formControlName="" accept=" image/*" required="true" />
+
+
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label  pt-4 fw-semibold">Title</label>
+                    <div class="col-sm-8">
+                        <mat-form-field class="example-full-width" appearance="fill" id="field">
+                            <mat-label>title here</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label  pt-4 fw-semibold ">Description</label>
+                    <div class="col-sm-8">
+                        <mat-form-field class="example-full-width" appearance="fill" id="field">
+                            <mat-label>Health is wealth</mat-label>
+                            <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+                        </mat-form-field>
+
+
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label  pt-4 fw-semibold ">Duration Of the File</label>
+                    <div class="col-sm-8">
+                        <mat-form-field class="example-full-width" appearance="fill" id="field">
+                            <mat-label>30:12</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label  pt-4 fw-semibold ">Meta Keyword</label>
+                    <div class="col-sm-8">
+                        <mat-form-field class="example-full-width" appearance="fill" id="field">
+                            <mat-label>meta keyword</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+
+                    </div>
+                </div>
+                <div class="col text-end  pl-4">
+                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
+                        upload
+                    </button>
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+    </mat-card>
+
+
+</div>

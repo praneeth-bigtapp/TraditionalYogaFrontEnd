@@ -1,0 +1,102 @@
+<h5>Add Course/ View Course Details</h5><br>
+<mat-card>
+    <div class="row">
+        <div class="col-md-3 pt-3">
+            <mat-form-field>
+
+                <mat-label>Select Course Category</mat-label>
+                <select matNativeControl [disabled]="disableSelect.value">
+          <option value="" selected></option>
+          <option value="volvo">Volvo</option>
+          <option value="saab" disabled>Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3 pt-1">
+            <mat-form-field class="example-full-width" appearance="fill" id="field">
+                <mat-label>Title</mat-label>
+                <input matInput>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="w-100 ">
+        <angular-editor formControlName="paragraph" [placeholder]="'Enter text here...'" [config]="editorConfig" required>
+        </angular-editor>
+
+
+    </div><br><br>
+    <div class="col-9">
+        <label for="inputAddress" class="form-label">Course Banner:</label>
+        <input type="file" id="file" formControlName="" accept=" image/*" required="true" />
+    </div><br>
+    <div class="col-md-3">
+        <mat-form-field class="example-full-width" appearance="fill" id="field">
+            <mat-label>Instructor name</mat-label>
+            <input matInput>
+        </mat-form-field>
+    </div><br>
+    <div class="col-9">
+        <label for="inputAddress" class="form-label">Instructor image:</label>
+        <input type="file" id="file" formControlName="" accept=" image/*" required="true" />
+    </div><br>
+    <div class="row">
+        <div class="col-md-3">
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Start date</mat-label>
+                <input matInput placeholder="Ex. Pizza" value="Sushi" type="date">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>End date</mat-label>
+                <input matInput placeholder="Ex. Pizza" value="Sushi" type="date">
+            </mat-form-field>
+        </div>
+
+
+
+
+    </div><br>
+    <div class="row">
+        <div class="col-md-3">
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Application closure date</mat-label>
+                <input matInput placeholder="Ex. Pizza" value="Sushi" type="date">
+            </mat-form-field>
+        </div>
+        <div class="col-md-6 pt-4" style="display: flex;">
+
+
+            <label for="inputEmail3" class="col-sm-5 col-form-label">Manual verification Required?</label>
+            <div class="col pt-2">
+                <mat-radio-group aria-label="Select an option">
+                    <mat-radio-button value="1">Option 1</mat-radio-button>
+                    <mat-radio-button value="2">Option 2</mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
+           Add Course
+        </button>
+
+    </div>
+
+
+
+</mat-card>

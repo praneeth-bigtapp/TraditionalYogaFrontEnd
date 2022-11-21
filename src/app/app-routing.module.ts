@@ -14,6 +14,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/blacklist-user/blacklist-user.module').then((m) => m.BlacklistUserModule)
   },
+  
   {
     path: '',
     loadChildren: () =>
@@ -29,6 +30,39 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/pratice-library/pratice-library.module').then((m) => m.PraticeLibraryModule)
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/banner-main/banner-main.module').then((m) => m.BannerMainModule)
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/audio-main/audio-main.module').then((m) => m.AudioMainModule)
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/class-media/class-media.module').then((m) => m.ClassMediaModule)
+  },
+  
+
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/alert-main/alert-main.module').then((m) => m.AlertMainModule)
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/media-live/media-live.module').then((m) => m.MediaLiveModule)
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/add-course-main/add-course-main.module').then((m) => m.AddCourseMainModule)
+  },
+  
   {
     path: '',
     loadChildren: () =>
