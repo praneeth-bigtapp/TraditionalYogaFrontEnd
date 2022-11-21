@@ -72,6 +72,7 @@ export class RolesComponent implements OnInit {
         response[i].sno = i + 1;
         rolesData.push(response[i]);
       }
+      console.log(rolesData);
       this.RolesList = rolesData;
       this.filterData.gridData = rolesData;
       this.dataSource = new MatTableDataSource(rolesData);
@@ -162,6 +163,7 @@ export class RolesComponent implements OnInit {
         for (let submodule of menu.subModules) {
           if (submodule.subModuleName == "Roles") {
             this.permissionName = submodule.permissionName;
+            console.log(this.permissionName);
             this.pagePermissions = this.sendReceiveService.getPageLevelPermissions(this.permissionName);
           }
         }
@@ -179,14 +181,15 @@ export class RolesComponent implements OnInit {
   }
 
   onActivateRole(role: any, event: MatSlideToggleChange) {
+    console.log(role);
     if (event.checked) {
-      role.isActive = 'Y';
+      role.active = 'Y';
     } else {
-      role.isActive = 'N';
+      role.active = 'N';
     }
-    this.rolesService.saveRole(role).subscribe((response) => {
+    this.rolesService.activateRole(role).subscribe((response) => {
       this.getRoles();
-    })
+    });
   }
 
   onRoleDelete(role: any) {

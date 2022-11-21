@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatTableDataSource } from '@angular/material/table';
+import { NotifierService } from 'src/app/notifier.service';
+import { SendReceiveService } from 'src/app/shared/services/sendReceive.service';
 import { ModuleService } from '../module/service/module.service';
 import { SubModuleService } from './service/sub-module.service';
 
@@ -16,28 +18,36 @@ export class SubModuleComponent implements OnInit {
   AddSubModuleForm!: FormGroup;
   dataSource!: MatTableDataSource<any>;
 
+  loginData: any;
+  navList: any = [];
+  permissionName: any;
+  pagePermissions: any;
+
   MenuList: any = [];
   SubMenuList: any = [];
   filterData: any;
   editMode: any;
-  editedRole: any;
+  editedSubMenu: any;
   errorMessage: any;
   Message: any;
   errorType: any;
 
-  displayedColumns: string[] = ['sno', 'subMenuName', 'actions'];
+  displayedColumns: string[] = ['sno', 'menuName' ,'subMenuName', 'actions'];
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
 
   constructor(
     private formBuilder: FormBuilder,
     public moduleService: ModuleService,
     public subModuleService: SubModuleService,
+    public sendReceiveService: SendReceiveService,
+    private notifierService: NotifierService,
   ) { }
 
   ngOnInit(): void {
     this.filterData = {
       filterColumnNames: [
         { "Key": 'sno', "Value": "" },
+        { "Key": 'menuName', "Value": "" },
         { "Key": 'subMenuName', "Value": "" },
       ],
       dataSource: this.dataSource,
@@ -48,19 +58,88 @@ export class SubModuleComponent implements OnInit {
       subMenuName: [null, Validators.required]
     });
     this.getSubMenus();
+    this.setPageLevelPermissions();
   }
 
-  onAddSubModuleSubmit() {
+  onSubModuleSubmit() {
+    if (this.AddSubModuleForm.valid) {
+      console.log(this.editMode);
+      if (this.editMode) {
+        this.updateSubMenu();
+      } else {
+        this.addSubMenu();
+      }
+    }
+  }
 
+  updateSubMenu() {
+    let editCheck = true;
+    console.log(this.AddSubModuleForm.value.menuName);
+    console.log(this.editedSubMenu);
+    console.log(this.MenuList);
+
+    for (let subMenu of this.SubMenuList) {
+      if (subMenu.moduleName == this.AddSubModuleForm.value.subMenuName) {
+        editCheck = false;
+        this.notifierService.showNotification('Error', "Sub Menu Already Exist");
+        break;
+      }
+    }
+
+    const data = {
+      "subModuleId": this.editedSubMenu.subModuleId,
+      "moduleId": this.editedSubMenu.moduleId,
+      "subModuleName": this.AddSubModuleForm.value.subMenuName,
+      "status": this.editedSubMenu.status
+    }
+
+    if (editCheck) {
+      this.subModuleService.updateSubMenu(data).subscribe({
+        next: (response) => {
+          this.onCancel();
+          this.getSubMenus();
+          this.notifierService.showNotification('Success', response.message);
+        },
+        error: (error) => {
+          console.log(error);
+          this.notifierService.showNotification('Error', error.error.message);
+        }
+      });
+    }
+  }
+
+  addSubMenu() {
+    console.log(  );
+    const data = {
+      "menuId": this.AddSubModuleForm.value.menuName,
+      "subMenuName": this.AddSubModuleForm.value.subMenuName
+    }
+    this.subModuleService.addSubMenu(data).subscribe({
+      next: (response) => {
+        this.onCancel();
+        this.getSubMenus();
+        this.notifierService.showNotification('Success', response.message);
+      },
+      error: (error) => {
+        this.notifierService.showNotification('Error', error.error.message);
+      }
+    });
   }
 
   onCancel() {
     this.AddSubModuleForm.reset();
     this.isAddSubModuleForm = false;
+    this.editMode = false;
+    this.editedSubMenu = null;
   }
 
-  onAddMenu() {
+  onAddSubMenu() {
+    this.editMode = false;
     this.isAddSubModuleForm = true;
+    this.getMenus();
+  }
+
+  getMenus() {
     this.moduleService.getMenuList().subscribe({
       next: (data) => {
         this.MenuList = data;
@@ -90,31 +169,57 @@ export class SubModuleComponent implements OnInit {
     });
   }
 
+  setPageLevelPermissions() {
+    let data = localStorage.getItem("LoginData");
+    if (data) {
+      this.loginData = JSON.parse(data);
+      this.navList = this.loginData.permissions;
+      for (let permission of this.navList) {
+        for (let submodule of permission.subModules) {
+          if (submodule.subModuleName == "Sub Menus") {
+            this.permissionName = submodule.permissionName;
+            console.log(this.permissionName);
+            this.pagePermissions = this.sendReceiveService.getPageLevelPermissions(this.permissionName);
+          }
+        }
+      }
+    }
+  }
+
   updatePagination() {
     this.filterData.dataSource.paginator = this.paginator;
   }
 
-  onActivateRole(role: any, event: MatSlideToggleChange) {
+  onActivateSubMenu(subMenu: any, event: MatSlideToggleChange) {
+    console.log(subMenu);
     if (event.checked) {
-      role.active = 'Y';
+      subMenu.active = 'Y';
     } else {
-      role.active = 'N';
+      subMenu.active = 'N';
     }
-    // this.rolesService.saveRole(role).subscribe((response) => {
-    //   this.getRoles();
-    // })
+    this.subModuleService.activateSubMenu(subMenu).subscribe({
+      next: (response) => {
+        this.getSubMenus();
+      },
+      error: (error) => {
+
+      }
+    });
   }
 
-  onEditRole(role: any) {
+  onEditSubMenu(subMenu: any) {
+    console.log(subMenu);
     this.editMode = true;
-    this.editedRole = role;
+    this.editedSubMenu = subMenu;
+    this.getMenus();
     this.AddSubModuleForm.patchValue({
-      roleName: role.roleName
+      menuName: this.editedSubMenu.moduleId,
+      subMenuName: this.editedSubMenu.subModuleName
     });
     this.isAddSubModuleForm = true;
   }
 
-  onRoleDelete(role: any) {
+  onsubMenuDelete(subMenu: any) {
 
   }
 }

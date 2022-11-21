@@ -4,8 +4,8 @@ import { StudentProfileComponent } from './student-profile/student-profile.compo
 
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'studentProfile' },
   { path: 'studentProfile', component: StudentProfileComponent },
- 
 ];
 
 @NgModule({
