@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { BlacklistUserRoutingModule } from './blacklist-user-routing.module';
-import { BlacklistUsersComponent } from './blacklist-users/blacklist-users.component';
+import { ListOfPracticeLibraryRoutingModule } from './list-of-practice-library-routing.module';
+import { ListOfPracticeLibrarysComponent } from './list-of-practice-librarys/list-of-practice-librarys.component';
+
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -22,12 +23,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
-    BlacklistUsersComponent
+    ListOfPracticeLibrarysComponent
   ],
   imports: [
     CommonModule,
-    BlacklistUserRoutingModule,
-  
+    ListOfPracticeLibraryRoutingModule,
+   
     MatSortModule,
     MatTableModule,
     MatSelectModule,
@@ -44,4 +45,4 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule
   ]
 })
-export class BlacklistUserModule { }
+export class ListOfPracticeLibraryModule { }

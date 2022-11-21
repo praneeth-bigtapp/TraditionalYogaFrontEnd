@@ -1,0 +1,48 @@
+<div class="ConfigurationTypes_textpadding p-5">
+    <h3 class="mb-4 pl-2 text-secondary"> List of practice library </h3>
+
+   
+    <div  class=" mt-5 rounded mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-striped  " >
+
+         
+            <ng-container matColumnDef="s_no" >
+              <th mat-header-cell *matHeaderCellDef class="col-1 bg-danger text-white" > S.No </th>
+              <td mat-cell *matCellDef="let element" class="col-1"> {{element.s_no}} </td>
+            </ng-container>
+          
+          
+            <ng-container matColumnDef="videolink">
+              <th mat-header-cell *matHeaderCellDef class="col-3 bg-danger text-white"> Video Link</th>
+              <td mat-cell *matCellDef="let element" class="col-3"> {{element.videolink}} </td>
+            </ng-container>
+          
+           
+            <ng-container matColumnDef="Duration_of_video">
+              <th mat-header-cell *matHeaderCellDef class="col-2 bg-danger text-white"> Duration of video </th>
+              <td mat-cell *matCellDef="let element" class="col-2"> {{element.Duration_of_video}} </td>
+            </ng-container>
+          
+           
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef class="col-1 bg-danger text-white"> Title </th>
+              <td mat-cell *matCellDef="let element" class="col-1"> {{element.title}} </td>
+            </ng-container>
+
+            <ng-container  matColumnDef="Message" >
+              <th mat-header-cell *matHeaderCellDef class="col-3  bg-danger text-white">Message</th>
+              <td mat-cell *matCellDef="let element" class="col-3  pt-5 pb-3 ps-4"> {{element.Message}} </td>
+            </ng-container>
+
+            <ng-container  matColumnDef="Meta_Keywords" >
+              <th mat-header-cell *matHeaderCellDef class="col-3 pl-4 bg-danger text-white">Meta keywords</th>
+              <td mat-cell *matCellDef="let element" class="col-3 pl-4"> {{element.Meta_Keywords}} </td>
+            </ng-container>
+            
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+
+</div>
