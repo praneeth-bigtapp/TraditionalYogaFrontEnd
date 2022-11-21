@@ -18,6 +18,11 @@ export class ModuleComponent implements OnInit {
   AddModuleForm!: FormGroup;
   dataSource!: MatTableDataSource<any>;
 
+  loginData: any;
+  navList: any = [];
+  permissionName: any;
+  pagePermissions: any;
+
   MenuList: any = [];
   filterData: any;
   editMode: any;
@@ -48,6 +53,7 @@ export class ModuleComponent implements OnInit {
       menuName: [null, Validators.required]
     });
     this.getMenus();
+    this.setPageLevelPermissions();
   }
 
   onModuleSubmit() {
@@ -75,9 +81,24 @@ export class ModuleComponent implements OnInit {
       }
     }
 
-    if(editCheck){
-      alert("updating");
+    const data = {
+      "moduleId": this.editedMenu.moduleId,
+      "moduleName": this.AddModuleForm.value.menuName,
+      "status": this.editedMenu.status
+    }
 
+    if (editCheck) {
+      this.moduleService.updateMenu(data).subscribe({
+        next: (response) => {
+          this.onCancel();
+          this.getMenus();
+          this.notifierService.showNotification('Success', response.message);
+        },
+        error: (error) => {
+          console.log(error);
+          this.notifierService.showNotification('Error', error.error.message);
+        }
+      });
     }
   }
 
@@ -127,15 +148,16 @@ export class ModuleComponent implements OnInit {
     this.filterData.dataSource.paginator = this.paginator;
   }
 
-  onActivateRole(role: any, event: MatSlideToggleChange) {
+  onActivateMenu(menu: any, event: MatSlideToggleChange) {
+    console.log(menu);
     if (event.checked) {
-      role.active = 'Y';
+      menu.status = 'Y';
     } else {
-      role.active = 'N';
+      menu.status = 'N';
     }
-    // this.rolesService.saveRole(role).subscribe((response) => {
-    //   this.getRoles();
-    // })
+    this.moduleService.activateMenu(menu).subscribe((response) => {
+      this.getMenus();
+    });
   }
 
   onEditModule(menu: any) {
@@ -165,7 +187,23 @@ export class ModuleComponent implements OnInit {
         }
       }
     });
+  }
 
+  setPageLevelPermissions() {
+    let data = localStorage.getItem("LoginData");
+    if (data) {
+      this.loginData = JSON.parse(data);
+      this.navList = this.loginData.permissions;
+      for (let permission of this.navList) {
+        for (let submodule of permission.subModules) {
+          if (submodule.subModuleName == "Menus") {
+            this.permissionName = submodule.permissionName;
+            console.log(this.permissionName);
+            this.pagePermissions = this.sendReceiveService.getPageLevelPermissions(this.permissionName);
+          }
+        }
+      }
+    }
   }
 
 }
