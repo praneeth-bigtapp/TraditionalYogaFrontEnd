@@ -12,7 +12,22 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
+      import('./features/blacklist-user/blacklist-user.module').then((m) => m.BlacklistUserModule)
+  },
+  {
+    path: '',
+    loadChildren: () =>
       import('./features/banner/banner.module').then((m) => m.BannerModule)
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/list-of-practice-library/list-of-practice-library.module').then((m) => m.ListOfPracticeLibraryModule)
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/pratice-library/pratice-library.module').then((m) => m.PraticeLibraryModule)
   },
   {
     path: '',

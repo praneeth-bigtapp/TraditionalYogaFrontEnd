@@ -1,0 +1,151 @@
+<div class="ConfigurationTypes_textpadding p-5 bg-light">
+    <h3 class="mb-3 pl-2"> Course Media Pratice Sessions </h3>
+
+    <div class="card border-light pt-3 ">
+        <div class="pl-3   d-flex flex-row flex-wrap  ">
+            <div class="w-25 me-5">
+                <mat-form-field appearance="fill">
+                    <mat-label>Select Category</mat-label>
+                    <mat-select [(ngModel)]="category">
+                        <mat-option value="live">Live</mat-option>
+                        <mat-option value="recording">Recording</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <button type="button" (click)="gobutton()"
+                    class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
+                    Go
+                </button>
+
+            </div>
+
+        </div>
+        <hr />
+
+        <div class="card-body">
+
+
+            <form [formGroup]="addmediaform" class="" (ngSubmit)="addmedia()">
+
+
+                <!-- Video SubForm/Table -->
+                <table class="w-100 ">
+                    <thead>
+                        <th colspan="2">
+                            <h4 class="ml-5"> Add Media</h4>
+                        </th>
+
+                    </thead>
+                    <tbody>
+
+                        <!-- Video URL -->
+                        <tr class="">
+                            <td class="col-2">
+                                <h6 class="text-right">Video Link : </h6>
+                            </td>
+                            <td>
+                                <mat-form-field appearance="fill" class="ms-3">
+                                    <mat-label>Video Link</mat-label>
+                                    <input matInput autocomplete="off" formControlName="videolink" required>
+                                    <mat-error [hidden]="!addmediaform.get('videolink')?.hasError('required')">
+                                        Please Add URL
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+
+                        </tr>
+
+                        <!-- Title -->
+                        <tr class="">
+                            <td class="col-2">
+                                <h6 class="text-right">Title : </h6>
+                            </td>
+                            <td>
+                                <mat-form-field appearance="fill" class="ms-3">
+                                    <mat-label>Title</mat-label>
+                                    <input matInput autocomplete="off" formControlName="videotitle" required>
+                                    <mat-error [hidden]="!addmediaform.get('videotitle')?.hasError('required')">
+                                        Please Type Few Words
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- Duration of Video -->
+                        <tr class="">
+                            <td class="col-2">
+                                <h6 class="text-right">Duration of Video : </h6>
+                                <p class="text-right">(Hours:Minues)</p>
+                            </td>
+                            <td>
+
+                                <input type="time" formControlName="videoduration" class="ms-3"
+                                    (change)="ontimechange()">
+                                <mat-error *ngIf="timerror">
+                                    Please Add Duration
+                                </mat-error>
+
+                            </td>
+
+                        </tr>
+                        <!-- Description -->
+                        <tr class="">
+                            <td class="col-2">
+                                <h6 class="text-right">Message : </h6>
+                            </td>
+                            <td>
+                                <mat-form-field appearance="fill" class="ms-3">
+                                    <mat-label>Message</mat-label>
+                                    <textarea matInput class="p-2" formControlName="videodescription" rows="5"
+                                        placeholder="Description"></textarea>
+                                    <mat-error [hidden]="!addmediaform.get('videodescription')?.hasError('required')">
+                                        Please Type Few Words
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+
+                        </tr>
+
+                        <!-- Video Meta Keyword-->
+                        <tr class="">
+                            <td class="col-2">
+                                <h6 class="text-right">Meta Keyword : </h6>
+                            </td>
+                            <td>
+                                <mat-form-field appearance="fill" class="ms-3">
+                                    <mat-label>Meta Keyword</mat-label>
+                                    <input matInput autocomplete="off" formControlName="vidoemetakeywords" required>
+                                    <mat-error [hidden]="!addmediaform.get('vidoemetakeywords')?.hasError('required')">
+                                        Please Type Few Words
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+
+                        </tr>
+
+
+
+
+                    </tbody>
+
+                </table>
+
+
+                <button type="submit" class=" float-md-right btn btn-outline-secondary btn-rounded d-inline-block m-2">
+                    Upload
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+    <br />
+
+    <div class="card border-light pt-3 ">
+    </div>
+
+</div>
