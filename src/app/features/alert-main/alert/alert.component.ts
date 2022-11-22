@@ -1,6 +1,6 @@
-import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { AlertService } from '../service/alertservoce.service';
 
@@ -14,6 +14,8 @@ export class AlertComponent implements OnInit {
   alertform !: FormGroup
   category!: any
   filerror!: boolean
+  durationInSeconds: number = 6
+  // snackBarRef = inject(MatSnackBarRef);
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -61,15 +63,16 @@ export class AlertComponent implements OnInit {
 
   constructor(
     private formbuilder: FormBuilder,
-    private alertservice: AlertService
+    private alertservice: AlertService,
+    private _snackBar: MatSnackBar
   ) {
     this.alertform = this.formbuilder.group({
-      category: [null, Validators.compose([Validators.required])],
+      alertid: [null, Validators.compose([Validators.required])],
       paragraph: [null, Validators.compose([Validators.required])],
       startdate: [null, Validators.compose([Validators.required])],
       enddate: [null, Validators.compose([Validators.required])],
-      file: [null, Validators.compose([Validators.required])],
-
+      // file: [null, Validators.compose([Validators.required])],
+      // categoryid: [null]
 
     })
   }
@@ -85,10 +88,11 @@ export class AlertComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this.alertservice.getAllAlerts()
+    this.alertservice.getRoles()
       .subscribe({
         next: (response) => {
           this.category = response
+
 
         },
         error: (error) => {
@@ -96,6 +100,17 @@ export class AlertComponent implements OnInit {
 
         }
       })
+  }
+
+  openSnackBar(message: any) {
+    // this._snackBar.openFromComponent(AlertComponent, {
+    //   duration: this.durationInSeconds * 1000,
+
+    // });
+    this._snackBar.open(message, 'Close', {
+      // horizontalPosition: this.horizontalPosition,
+      // verticalPosition: this.verticalPosition,
+    });
   }
 
 
@@ -106,8 +121,21 @@ export class AlertComponent implements OnInit {
 
     if (this.alertform.valid) {
       // only if formvalid
-      console.log(this.alertform.value);
 
+      // this.alertform.value.categoryid = this.category.filter((ele: any) => ele.alertId == this.alertform.value.alertid)[0].categoryId
+
+
+      this.alertservice.setalert(this.alertform.value).subscribe({
+        next: (response) => {
+          this.alertform.reset()
+          this.openSnackBar(response.message)
+
+        },
+        error: (error) => {
+          console.error(error.message);
+
+        }
+      })
     }
     else {
       this.alertform.markAllAsTouched()
