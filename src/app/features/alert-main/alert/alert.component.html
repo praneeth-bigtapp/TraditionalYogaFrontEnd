@@ -4,80 +4,86 @@
     <mat-card>
         <div class="row">
 
-
-
-
-            <div class="form-group ">
-
+            <form [formGroup]="alertform" (ngSubmit)="onalertsubmit()">
 
                 <div class="row mb-1">
                     <label for="inputEmail3" class="col-sm-2 col-form-label fw-semibold pt-4">Select Category:</label>
                     <div class="col-sm-3">
                         <mat-form-field appearance="fill">
                             <mat-label>Select category</mat-label>
-                            <select matNativeControl [disabled]="disableSelect.value">
-                              <option value="" selected></option>
-                              <option value="volvo">Volvo</option>
-                              <option value="saab" disabled>Saab</option>
-                              <option value="mercedes">Mercedes</option>
-                              <option value="audi">Audi</option>
+                            <select matNativeControl formControlName="category" [disabled]="disableSelect.value">
+                                <option value="" selected></option>
+                                <option *ngFor="let item of category" value="item.alertId">{{item.categoryId}}
+                                </option>
                             </select>
                         </mat-form-field>
                     </div>
                 </div>
 
+                <div class="w-100 ">
+                    <angular-editor formControlName="paragraph" [placeholder]="'Enter text here...'" required>
+                    </angular-editor>
 
-            </div>
+                    <div
+                        *ngIf="alertform.controls['paragraph'].invalid && (alertform.controls['paragraph'].dirty || alertform.controls['paragraph'].touched)">
+                        <mat-error [hidden]=" !alertform.get('paragraph')?.hasError('required')  ">
+                            Please Type Few Words
+                        </mat-error>
+                    </div>
+                </div><br><br>
 
-        </div>
-        <div class="w-100 ">
-            <angular-editor formControlName="paragraph" [placeholder]="'Enter text here...'" required>
-            </angular-editor>
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Start date</mat-label>
+                            <input matInput formControlName="startdate" placeholder="Ex. Pizza" value="Sushi"
+                                type="date">
+                            <div
+                                *ngIf="alertform.controls['startdate'].invalid && (alertform.controls['startdate'].dirty || alertform.controls['startdate'].touched)">
+                                <mat-error [hidden]=" !alertform.get('startdate')?.hasError('required')  ">
+                                    Please Type Few Words
+                                </mat-error>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>End date</mat-label>
+                            <input matInput formControlName="enddate" placeholder="Ex. Pizza" value="Sushi" type="date">
+                            <div
+                                *ngIf="alertform.controls['enddate'].invalid && (alertform.controls['enddate'].dirty || alertform.controls['enddate'].touched)">
+                                <mat-error [hidden]=" !alertform.get('enddate')?.hasError('required')  ">
+                                    Please Type Few Words
+                                </mat-error>
+                            </div>
+                        </mat-form-field>
+                    </div>
 
-
-        </div><br><br>
-        <div class="row">
-            <div class="col-md-3">
-                <mat-form-field class="example-full-width" appearance="fill">
-                    <mat-label>Start date</mat-label>
-                    <input matInput placeholder="Ex. Pizza" value="Sushi" type="date">
-                </mat-form-field>
-            </div>
-            <div class="col-md-3">
-                <mat-form-field class="example-full-width" appearance="fill">
-                    <mat-label>End date</mat-label>
-                    <input matInput placeholder="Ex. Pizza" value="Sushi" type="date">
-                </mat-form-field>
-            </div>
-
-        </div>
-
-        <div class="row">
-
-
-            <div class="row mb-1">
-                <label for="inputEmail3" class="col-sm-2 col-form-label pt-4">Upload File:</label>
-                <div class="col-sm-8">
-                    <input type="file" id="file" formControlName="" accept=" image/*" required="true" />
                 </div>
-            </div>
 
-        </div><br>
-        <div class="row">
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
-                    upload
-                </button>
+                <div class="row mb-1">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label pt-4">Upload File:</label>
+                    <div class="col-sm-8">
+                        <input type="file" id="file" (change)="onfilechange()" formControlName="file" accept=" image/*"
+                            required="true" />
+                    </div>
+                    <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
 
-            </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
+                            upload
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </form>
         </div>
-
-
-
-
-
-
 
     </mat-card>
 

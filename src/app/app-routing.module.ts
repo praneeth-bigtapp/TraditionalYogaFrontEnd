@@ -14,7 +14,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/blacklist-user/blacklist-user.module').then((m) => m.BlacklistUserModule)
   },
-  
+
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/scripctures/scripctures.module').then((m) => m.ScripcturesModule)
+  },
+
   {
     path: '',
     loadChildren: () =>
@@ -45,7 +51,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/class-media/class-media.module').then((m) => m.ClassMediaModule)
   },
-  
+
 
   {
     path: '',
@@ -62,7 +68,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/add-course-main/add-course-main.module').then((m) => m.AddCourseMainModule)
   },
-  
+
   {
     path: '',
     loadChildren: () =>
