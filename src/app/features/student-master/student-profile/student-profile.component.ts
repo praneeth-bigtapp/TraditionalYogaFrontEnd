@@ -15,7 +15,21 @@ export interface PeriodicElement {
   CompletionStatus: string;
 }
 
+export interface coursesLiveClass {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
 
+const COURSES_LIVE_DATA: coursesLiveClass[] = [
+  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
+  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
+
+];
 let ELEMENT_DATA: PeriodicElement[] = [
   { SNo: 1, CourseName: 'RYIT 200', CourseDiscription: 'Free Online Traditional Meditation Teacher Training Based on Darashanas or sanathana Dharma For Yoga Teachers and Students to become a Yogi',CourseStartDate: '10-20-2022', CourseEndDate: '10-20-2022',AdmissionsStatus: "Admitted", CompletionStatus: 'Completed & Certified' },
   { SNo: 2, CourseName: 'RYIT 200', CourseDiscription: 'Free Online Traditional Meditation Teacher Training Based on Darashanas or sanathana Dharma For Yoga Teachers and Students to become a Yogi',CourseStartDate: '10-20-2022', CourseEndDate: '10-20-2022',AdmissionsStatus: "Admitted", CompletionStatus: 'Certified' },
@@ -47,6 +61,9 @@ export class StudentProfileComponent implements OnInit {
   coursesProfileColumns: string[] = ['SNo', 'CourseName', 'AdmissionsStatus', 'CompletionStatus'];
 
   coursesProfileData = ELEMENT_DATA;
+
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource2 = COURSES_LIVE_DATA;
 
   constructor(
     public dialog: MatDialog,
