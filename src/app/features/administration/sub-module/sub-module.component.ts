@@ -87,9 +87,9 @@ export class SubModuleComponent implements OnInit {
     }
 
     const data = {
-      "subModuleId": this.editedSubMenu.subModuleId,
-      "moduleId": this.editedSubMenu.moduleId,
-      "subModuleName": this.AddSubModuleForm.value.subMenuName,
+      "subMenuId": this.editedSubMenu.subModuleId,
+      "menuId": this.editedSubMenu.moduleId,
+      "subMenuName": this.AddSubModuleForm.value.subMenuName,
       "status": this.editedSubMenu.status
     }
 
@@ -220,6 +220,29 @@ export class SubModuleComponent implements OnInit {
   }
 
   onsubMenuDelete(subMenu: any) {
-
+    console.log(subMenu);
+    var message = 'Are you sure you want to delete?';
+    this.sendReceiveService.confirmationDialog(message).subscribe({
+      next: (result) => {
+        if (!!result) {
+          const data = {
+            "subMenuId": subMenu.subModuleId,
+            "menuId": subMenu.moduleId,
+            "subMenuName": subMenu.subModuleName,
+            "status": subMenu.status
+          }
+          this.subModuleService.deleteSubMenu(data).subscribe({
+            next: (response) => {
+              this.getSubMenus();
+              this.notifierService.showNotification('Success', response.message);
+            },
+            error: (error) => {
+              this.getSubMenus();
+              this.notifierService.showNotification('Error', error.error.message);
+            }
+          });
+        }
+      }
+    });
   }
 }

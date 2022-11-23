@@ -631,6 +631,13 @@ width: calc(100% - 150px) !important;
      height: 200px;
     padding: 40px 20px;
 }
+.table thead th {
+    vertical-align: text-top;
+	}
+
+
+    /* Popup code */
+
 .modal {
     position: fixed;
     top: 15%;
