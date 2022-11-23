@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { AlertService } from '../service/alertservoce.service';
 
@@ -103,7 +103,6 @@ export class AlertComponent implements OnInit {
   }
 
   openSnackBar(message: any) {
-
     this._snackBar.open(message, 'Close');
   }
 
@@ -116,6 +115,9 @@ export class AlertComponent implements OnInit {
     if (this.alertform.valid) {
       // only if formvalid
 
+      // this.alertform.value.categoryid = this.category.filter((ele: any) => ele.alertId == this.alertform.value.alertid)[0].categoryId
+
+
       const body = {
         // "alertId": data.alertid,
         "categoryId": this.alertform.value.alertid,
@@ -123,11 +125,11 @@ export class AlertComponent implements OnInit {
         "startDate": this.alertform.value.startdate,
         "endDate": this.alertform.value.enddate
       }
-
-      this.alertservice.setalert(body).subscribe({
+      this.alertservice.setalert(this.alertform.value).subscribe({
         next: (response) => {
           this.alertform.reset()
           this.openSnackBar(response.message)
+
         },
         error: (error) => {
           console.error(error.message);

@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { BannermainService } from '../bannermainservice/bannermain.service';
+import { BannerviewService } from '../service/bannerview.service';
 
 @Component({
   selector: 'app-banners',
@@ -13,50 +13,36 @@ import { BannermainService } from '../bannermainservice/bannermain.service';
 export class BannersComponent implements OnInit {
 
 
-
   displayedColumns: string[] = ['bannerId', 'bannerName', 'categoryId', "date"];
-
   dataSource: any;
+
+
   data!: any
+
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  searchvalue!: any
-
   constructor(
-    private bannerservice: BannermainService
+    private banner: BannerviewService
   ) {
-
-    this.bannerservice.getbanners().subscribe({
+  }
+  ngAfterViewInit() {
+    this.banner.getbanner().subscribe({
       next: (response) => {
         this.data = response
         this.dataSource = new MatTableDataSource<any>(this.data)
-      
-      },
-      error: (error) => {
-
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }
     })
-    console.log(this.data);
-    
-   
 
-  }
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
 
   ngOnInit(): void {
-  }
-
-  getsearch() {
-    console.log(this.searchvalue);
-
   }
 
 }
