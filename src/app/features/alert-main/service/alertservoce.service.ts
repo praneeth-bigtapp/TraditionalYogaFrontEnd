@@ -21,17 +21,7 @@ export class AlertService extends BaseHttp {
   }
 
 
-  setalert(data: any) {
-    const body = {
-      // "alertId": data.alertid,
-      "categoryId": data.alertid,
-      "alertDescription": data.paragraph,
-      "startDate": data.startdate,
-      "endDate": data.enddate
-    }
-
-    console.log(body);
-
+  setalert(body: any) {
     return this.post<any>(this.alertpostURL, body)
   }
 

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserIdleConfig, UserIdleService } from 'angular-user-idle';
-import { HeaderService } from 'src/app/core/layout/header/service/header.service';
-import { DataStorageService } from 'src/app/shared/services/data-storage.service';
-import { SendReceiveService } from 'src/app/shared/services/sendReceive.service';
-import { LoginService } from '../../auth/login/services/login.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { AddbannerService } from '../service/addbanner.service';
 @Component({
   selector: 'app-banner-add',
   templateUrl: './banner-add.component.html',
@@ -23,11 +21,10 @@ export class BannerAddComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private loginService: LoginService,
-    private dataStorageService: DataStorageService,
-    public sendReceiveService: SendReceiveService,
-    private userIdle: UserIdleService,
-    private headerService: HeaderService
+    private bannerservice: AddbannerService,
+    private _snackBar: MatSnackBar
+
+
   ) {
 
   }
@@ -70,6 +67,17 @@ export class BannerAddComponent implements OnInit {
     })
   }
 
+  openSnackBar(message: any) {
+    // this._snackBar.openFromComponent(AlertComponent, {
+    //   duration: this.durationInSeconds * 1000,
+
+    // });
+    this._snackBar.open(message, 'Close', {
+      // horizontalPosition: this.horizontalPosition,
+      // verticalPosition: this.verticalPosition,
+    });
+  }
+
   onfilechange(formname: string) {
 
     if (formname === 'headerform')
@@ -89,7 +97,22 @@ export class BannerAddComponent implements OnInit {
       this.filerror = false
 
       const formvalue = this.headerbannerform.value
-      console.log(formvalue);
+      // console.log(formvalue);
+
+      this.bannerservice.postheaderbanner(formvalue).subscribe({
+        next: (response) => {
+          console.log(response);
+
+          // this.openSnackBar(response.message)
+
+        },
+        error: (error) => {
+          console.error(error.message);
+
+        }
+      })
+
+
 
       // this.headerbannerform.reset()
     }
@@ -106,12 +129,24 @@ export class BannerAddComponent implements OnInit {
     this.filerror2 = this.coursebanner.value.coursebannerimage === null ? true : false
 
     if (this.coursebanner.valid) {
-      console.log("valid");
+      // console.log("valid");
 
       const formvalue = this.coursebanner.value
-      console.log(formvalue);
+      // console.log(formvalue);
+      this.bannerservice.postcoursebanner(formvalue).subscribe({
+        next: (response) => {
+          console.log(response);
 
-      // this.coursebanner.reset()
+          // this.openSnackBar(response.message)
+
+        },
+        error: (error) => {
+          console.error(error.message);
+
+        }
+      })
+
+      this.coursebanner.reset()
 
 
     }
