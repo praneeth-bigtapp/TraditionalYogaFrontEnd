@@ -74,9 +74,9 @@ export class SubModuleComponent implements OnInit {
 
   updateSubMenu() {
     let editCheck = true;
-    console.log(this.AddSubModuleForm.value.menuName);
-    console.log(this.editedSubMenu);
-    console.log(this.MenuList);
+    // console.log(this.AddSubModuleForm);
+    // console.log(this.editedSubMenu);
+    // console.log(this.MenuList);
 
     for (let subMenu of this.SubMenuList) {
       if (subMenu.moduleName == this.AddSubModuleForm.value.subMenuName) {
@@ -88,7 +88,7 @@ export class SubModuleComponent implements OnInit {
 
     const data = {
       "subMenuId": this.editedSubMenu.subModuleId,
-      "menuId": this.editedSubMenu.moduleId,
+      "menuId": this.AddSubModuleForm.value.menuName,
       "subMenuName": this.AddSubModuleForm.value.subMenuName,
       "status": this.editedSubMenu.status
     }
@@ -197,7 +197,16 @@ export class SubModuleComponent implements OnInit {
     } else {
       subMenu.active = 'N';
     }
-    this.subModuleService.activateSubMenu(subMenu).subscribe({
+
+    const data = {
+      "subMenuId": subMenu.subModuleId,
+      "menuId": subMenu.moduleId,
+      "subMenuName": subMenu.subModuleName,
+      "status": subMenu.active
+    }
+
+
+    this.subModuleService.activateSubMenu(data).subscribe({
       next: (response) => {
         this.getSubMenus();
       },
