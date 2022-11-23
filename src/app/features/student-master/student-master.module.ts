@@ -31,6 +31,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {MatRadioModule} from '@angular/material/radio';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 
@@ -61,7 +62,9 @@ import { StudentProfileComponent } from './student-profile/student-profile.compo
     MatListModule,
     MatRadioModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+
   ],
   providers: [UserService, RolesService, RolePermissionsService]
 })

@@ -64,7 +64,7 @@ nav img.logo-img {
 .header {
     width: 100%;
     background: rgba(0, 0, 0, .8);
-    z-index: 99999;
+    z-index: 9;
     position: fixed;
     left: 0;
 }
@@ -217,7 +217,7 @@ nav img.logo-img {
 
 .btn-rounded {
     border-radius: 25px;
-    padding: 0 30px;
+
     height: 45px;
     min-width: 180px;
     margin-right: 15px;
@@ -631,7 +631,15 @@ width: calc(100% - 150px) !important;
      height: 200px;
     padding: 40px 20px;
 }
-
+.modal {
+    position: fixed;
+    top: 15%;
+}
+.modal-header  {
+    background: #c05857;
+}
+.modal-header .modal-title { color: #fff; font-weight: normal;}
+.modal-header .close span { color: #fff;;}
 /* Shake animation */
 
 @keyframes shake {
@@ -689,6 +697,13 @@ width: calc(100% - 150px) !important;
 }
 .desktop-view {
     display: none;
+}
+}
+
+@media (min-width: 576px){
+.modal-dialog {
+    max-width: 60%;
+    margin: 1.75rem auto;
 }
 }
 
