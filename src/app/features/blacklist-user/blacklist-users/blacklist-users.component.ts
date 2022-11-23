@@ -47,7 +47,7 @@ export class BlacklistUsersComponent implements OnInit{
   
   
   onblock(){
-    console.log("email"+this.adddetails.value.emailId+"remarks:"+this.adddetails.value.remarks)
+  
     
     const date = new Date();
 
@@ -64,7 +64,6 @@ this.addData(this.values)
     this.service.getBlacklist().subscribe({
 
       next: (response) => {
-        // console.log(response)
         this.data = response
         
         this.dataSource=new MatTableDataSource<any>(this.data)
@@ -78,7 +77,7 @@ this.addData(this.values)
     })
   }
   addData(data:any){
-    console.log(data)
+  
     if(data.blacklistUserEmail!=null&& data.comments&&data.date){
       this.service.addBlacklist(data).subscribe({
 
@@ -89,7 +88,7 @@ this.addData(this.values)
         },
   
         error: (error) => {
-          console.error("not works");
+          console.error(error.message);
         }
   
       })
@@ -111,7 +110,7 @@ this.addData(this.values)
         },
   
         error: (error) => {
-          console.log("not works");
+          console.log(error.message);
         }
   
       })
