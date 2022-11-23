@@ -8,6 +8,7 @@
 
 
         </div>
+
         <div class="col-md-3 pt-2 ">
 
             <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
@@ -48,18 +49,21 @@
 
         <!-- Name Column -->
         <ng-container matColumnDef="banner_name">
-            <th mat-header-cell class="col-md-5" *matHeaderCellDef mat-sort-header> Date of Blacklist</th>
-            <td class="row col-md-5" *matCellDef="let element">
+            <th mat-header-cell class="col-md-6" *matHeaderCellDef mat-sort-header> Date of Blacklist</th>
+            <td class="row col-md-6" *matCellDef="let element">
                 <div style="display: flex ;">
-                    {{element.banner_name}}
-                    <a class="nav-link active text-success" aria-current="page" href="#">-Published</a>
+                    <div class="col-sm-2 pt-2"> {{element.banner_name}}</div>
+                    <div class="col">
+                        <a class="nav-link active text-success  " aria-current="page" href="#">-Published</a>
+                    </div>
+
 
                 </div>
-                <div style="display: flex ;" class="fs-10">
-                    <a class="nav-link active text-blue" aria-current="page" href="#">Edit </a>|
-                    <a class="nav-link active text-danger" aria-current="page" href="#">Delete</a>|
-                    <a class="nav-link active text-primary" aria-current="page" href="#">View </a>|
-                    <a class="nav-link active " aria-current="page" href="#">Draft</a>
+                <div style="display: flex ; ">
+                    <a class="nav-link active text-blue" aria-current="page" href="#"><i class="fa-solid fa-pen-to-square"></i> </a>
+                    <a class="nav-link active text-danger " aria-current="page" href="#"><i class="fa-solid fa-trash"></i></a>
+                    <a class="nav-link active text-primary" aria-current="page" href="#"><i class="fa-solid fa-eye"></i></a>
+                    <a class="nav-link active " aria-current="page" href="#"><i class="fa-sharp fa-solid fa-floppy-disk"></i></a>
 
                 </div>
 
@@ -87,12 +91,14 @@
 
 
     </table><br>
+
     <div class="row">
         <div class="col">
             <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons="" aria-label="Select page"></mat-paginator>
 
         </div>
     </div>
+
 
 
     <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page "></mat-paginator> -->
