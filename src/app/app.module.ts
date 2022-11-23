@@ -40,6 +40,7 @@ import { BannerModule } from './features/banner/banner.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CoursesModule } from './features/courses/courses.module';
+import { BlacklistUserModule } from './features/blacklist-user/blacklist-user.module';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { CoursesModule } from './features/courses/courses.module';
 
     // StudentMasterModule,
     DashboardModule,
+    BlacklistUserModule,
     BannerModule,
     CoursesModule,
     SharedModule,

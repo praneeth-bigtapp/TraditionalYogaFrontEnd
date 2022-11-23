@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,AfterViewChecked } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource, } from '@angular/material/table';
+import { BlacklistUsersService } from '../blacklist-users.service';
 
 
 @Component({
@@ -7,18 +9,112 @@ import { MatTableDataSource, } from '@angular/material/table';
   templateUrl: './blacklist-users.component.html',
   styleUrls: ['./blacklist-users.component.css']
 })
-export class BlacklistUsersComponent implements OnInit {
-  data=[{"s_no":"1","blacklist_date":"19-08-2022","Emailid":"test@gmail.com","comments":"t is a long established fact that a reader will be distracted by the readable conetent of a page when looking at its layout. The point of using Loem ipsum is that it has a more-or-less normal distribution of letters"},
-  {"s_no":"1","blacklist_date":"19-08-2022","Emailid":"test@gmail.com","comments":"t is a long established fact that a reader will be distracted by the readable conetent of a page when looking at its layout. The point of using Loem ipsum is that it has a more-or-less normal distribution of letters"},
-  {"s_no":"1","blacklist_date":"19-08-2022","Emailid":"test@gmail.com","comments":"t is a long established fact that a reader will be distracted by the readable conetent of a page when looking at its layout. The point of using Loem ipsum is that it has a more-or-less normal distribution of letters"}]
-  displayedColumns: string[] = ['s.no', 'blacklist_date', 'Emailid',"comments","action"];
-  dataSource :any;
-  constructor() {
-    this.dataSource=new MatTableDataSource<any>(this.data)
-   
-   }
+export class BlacklistUsersComponent implements OnInit{
 
-  ngOnInit(): void {
+  adddetails!:FormGroup
+  filerror!:boolean;
+  displayedColumns: string[] = ['blacklistuserId', 'date', 'blacklistUserEmail',"comments","action"];
+  data:any;
+  dataSource :any;
+  values= 
+  {
+     
+     "blacklistUserEmail": "",
+     "date": "",
+     "comments": ""
+ }
+  constructor(private service:BlacklistUsersService,private inputs: FormBuilder ) {
+   
+    
+   }
+  ngAfterViewChecked(): void {
+    this. getdata()
   }
 
+  ngOnInit(): void {
+    this.adddetails = this.inputs.group({
+      
+      emailId: [null, Validators.compose([Validators.required])],
+   
+      remarks: [null, Validators.compose([Validators.required])],
+     
+
+    })
+   
+    this. getdata()
+
+  }
+  
+  
+  onblock(){
+    console.log("email"+this.adddetails.value.emailId+"remarks:"+this.adddetails.value.remarks)
+    
+    const date = new Date();
+
+let day = date.getDate();
+let month = date.getMonth() + 1;
+let year = date.getFullYear();
+  this.values.blacklistUserEmail=this.adddetails.value.emailId
+  this.values.comments=this.adddetails.value.remarks
+  this.values.date=(year.toString()+'-'+month.toString()+'-'+day.toString())
+this.addData(this.values)
+  }
+
+  getdata(){
+    this.service.getBlacklist().subscribe({
+
+      next: (response) => {
+        // console.log(response)
+        this.data = response
+        
+        this.dataSource=new MatTableDataSource<any>(this.data)
+   
+      },
+
+      error: (error) => {
+        console.error(error.message);
+      }
+
+    })
+  }
+  addData(data:any){
+    console.log(data)
+    if(data.blacklistUserEmail!=null&& data.comments&&data.date){
+      this.service.addBlacklist(data).subscribe({
+
+        next: (response) => {
+          console.log(response)
+         
+     
+        },
+  
+        error: (error) => {
+          console.error("not works");
+        }
+  
+      })
+    }
+    //error msg
+  }
+  deleterow(value:any){
+    
+    let values={
+      "blacklistuserId": value
+       
+   }
+      this.service.removeBlacklist(values).subscribe({
+
+        next: (response) => {
+          console.log("deleted")
+         
+     
+        },
+  
+        error: (error) => {
+          console.log("not works");
+        }
+  
+      })
+    
+  }
 }
