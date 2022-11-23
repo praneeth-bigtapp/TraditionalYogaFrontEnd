@@ -1,5 +1,6 @@
 import { Component, OnInit,AfterViewChecked } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource, } from '@angular/material/table';
 import { BlacklistUsersService } from '../blacklist-users.service';
 
@@ -23,13 +24,13 @@ export class BlacklistUsersComponent implements OnInit{
      "date": "",
      "comments": ""
  }
-  constructor(private service:BlacklistUsersService,private inputs: FormBuilder ) {
+  constructor(private service:BlacklistUsersService,private inputs: FormBuilder,private _snackBar: MatSnackBar ) {
    
     
    }
-  ngAfterViewChecked(): void {
-    this. getdata()
-  }
+  // ngAfterViewChecked(): void {
+  //   this. getdata()
+  // }
 
   ngOnInit(): void {
     this.adddetails = this.inputs.group({
@@ -46,6 +47,10 @@ export class BlacklistUsersComponent implements OnInit{
   }
   
   
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+    this.getdata()
+  }
   onblock(){
   
     
@@ -82,9 +87,9 @@ this.addData(this.values)
       this.service.addBlacklist(data).subscribe({
 
         next: (response) => {
-          console.log(response)
+          // console.log(response)
          
-     
+     this.openSnackBar("Blocked user Sucessfully","ok")
         },
   
         error: (error) => {
@@ -104,8 +109,8 @@ this.addData(this.values)
       this.service.removeBlacklist(values).subscribe({
 
         next: (response) => {
-          console.log("deleted")
-         
+          // console.log("deleted")
+          this.openSnackBar("Unblocked user Sucessfully","ok")
      
         },
   
