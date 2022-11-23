@@ -185,8 +185,6 @@ export class LoginComponent implements OnInit {
     // console.log(totalMenus);
     for (let menu of totalMenus) {
       for (let subModule of menu.subModules) {
-
-        console.log(subModule.subModuleId);
         if (menu.subModules.permissionId !== 6) {
           tempSubMenuName.push(subModule.subModuleId);
         }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BlankComponent } from './blank/blank.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -10,6 +11,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'logout', component: LoginComponent },
   { path: 'changepassword', component: ChangePasswordComponent }, 
+  { path: 'blank', component: BlankComponent }, 
 ];
 
 @NgModule({

@@ -71,9 +71,7 @@ export class SendReceiveService {
   }
 
   navigateToMenu(subMenuId: any) {
-    if (subMenuId == 6) {
-      this.router.navigateByUrl("dashboard");
-    } else if (subMenuId == 1) {
+    if (subMenuId == 1) {
       this.router.navigateByUrl("administration/roles");
     }
     else if (subMenuId == 2) {
@@ -87,43 +85,86 @@ export class SendReceiveService {
     }
     else if (subMenuId == 5) {
       this.router.navigateByUrl("administration/rolePermission");
-    }
-    else if (subMenuId == 10) {
-      this.router.navigateByUrl("studentMaster/studentProfile");
-    }
-    else if (subMenuId == 8) {
-      this.router.navigateByUrl("addbanner");
+    } 
+    else if (subMenuId == 6) {
+      this.router.navigateByUrl("dashboard");
     }
     else if (subMenuId == 9) {
       this.router.navigateByUrl("courses");
     }
-    // else if (subMenuId == 7) {
-    //   this.router.navigateByUrl("staticDataUpload/staticReference");
-    // }
-    // else if (subMenuId == 8) {
-    //   this.router.navigateByUrl("staticDataUpload/reportStaticData");
-    // }
-    // else if (subMenuId == 9) {
-    //   this.router.navigateByUrl("securityMaster/masterDataCreation");
-    // }
-    // else if (subMenuId == 10) {
-    //   this.router.navigateByUrl("securityMaster/staticMaster");
-    // }
-    // else if (subMenuId == 12) {
-    //   this.router.navigateByUrl("securityMaster/AdhocBloombergRequest");
-    // }
-    // else if (subMenuId == 13) {
-    //   this.router.navigateByUrl("securityMaster/alternatePE");
-    // }
-    // else if (subMenuId == 14) {
-    //   this.router.navigateByUrl("viewData");
-    // }
-    // else if (subMenuId == 16) {
-    //   this.router.navigateByUrl("staticDataUpload/assetMixReport");
-    // }
-    // else if (subMenuId == 17) {
-    //   this.router.navigateByUrl("administration/csvGenerator");
-    // }
+    else if (subMenuId == 10) {
+      this.router.navigateByUrl("studentMaster/studentProfile");
+    } 
+    else if (subMenuId == 11) {
+      this.router.navigateByUrl("blank");
+    }
+    else if (subMenuId == 12) {
+      this.router.navigateByUrl("blank");
+    }
+    else if (subMenuId == 13) {
+      this.router.navigateByUrl("blank");
+    }
+    else if (subMenuId == 14) {
+      this.router.navigateByUrl("blank");
+    }
+    else if (subMenuId == 15) {
+      this.router.navigateByUrl("banners");
+    }
+    else if (subMenuId == 16) {
+      this.router.navigateByUrl("blacklistuser");
+    }
+    else if (subMenuId == 17) {
+      this.router.navigateByUrl("blank");
+    }
+    else if (subMenuId == 18) {
+      this.router.navigateByUrl("blank");
+    }
+    else if (subMenuId == 19) {
+      this.router.navigateByUrl("blank");
+    }
+    else if (subMenuId == 20) {
+      this.router.navigateByUrl("media");
+    }
+    else if (subMenuId == 21) {
+      this.router.navigateByUrl("blank");
+    }
+    else if (subMenuId == 22) {
+      this.router.navigateByUrl("audio");
+    }
+    else if (subMenuId == 23) {
+      this.router.navigateByUrl("blank");
+    }
+    else if (subMenuId == 24) {
+      this.router.navigateByUrl("blank");
+    }
+    else if (subMenuId == 25) {
+      this.router.navigateByUrl("blank");
+    }
+    else if (subMenuId == 26) {
+      this.router.navigateByUrl("blank");
+    }
+    else if (subMenuId == 27) {
+      this.router.navigateByUrl("blank");
+    }
+    else if (subMenuId == 28) {
+      this.router.navigateByUrl("alert");
+    }
+    else if (subMenuId == 29) {
+      this.router.navigateByUrl("createpraticelibrary");
+    }
+    else if (subMenuId == 30) {
+      this.router.navigateByUrl("practiceLibrary");
+    }
+    else if (subMenuId == 31) {
+      this.router.navigateByUrl("donationManagement");
+    }
+    else if (subMenuId == 32) {
+      this.router.navigateByUrl("createscriptures");
+    }
+    else {
+      console.log(" Sub Menu is not Mapped ")
+      this.router.navigateByUrl("blank")
+    }
   }
 
   getTemplatePermissions(actionId: any) {

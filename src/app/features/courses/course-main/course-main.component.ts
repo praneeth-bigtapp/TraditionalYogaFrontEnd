@@ -158,7 +158,8 @@ export class CourseMainComponent implements OnInit {
 
 
   addviewcourses() {
-    console.log("add/view course");
+    // console.log("add/view course");
+    this.router.navigateByUrl("addCourse");
 
   }
   updatePagination(col: any) {

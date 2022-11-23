@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { BannerviewService } from '../service/bannerview.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-banners',
@@ -11,14 +12,10 @@ import { BannerviewService } from '../service/bannerview.service';
   styleUrls: ['./banners.component.css']
 })
 export class BannersComponent implements OnInit {
-
-
   displayedColumns: string[] = ['bannerId', 'bannerName', 'categoryId', "date"];
   dataSource: any;
 
-
   data!: any
-
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -26,10 +23,15 @@ export class BannersComponent implements OnInit {
   sort!: MatSort;
 
   constructor(
-    private banner: BannerviewService
-  ) {
+    private banner: BannerviewService,
+    private router: Router,
+  ) { }
+
+  ngOnInit(): void {
+    this.getBanner();
   }
-  ngAfterViewInit() {
+
+  getBanner() {
     this.banner.getbanner().subscribe({
       next: (response) => {
         this.data = response
@@ -37,12 +39,11 @@ export class BannersComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }
-    })
-
+    });
   }
 
-
-  ngOnInit(): void {
+  onAddBanner() {
+    this.router.navigateByUrl("addbanner");
   }
 
 }

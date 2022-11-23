@@ -2,7 +2,7 @@
     <h3 class="mb-5 pl-2"> Create Pratice Library </h3>
 
     <div class="card border-light pt-3 ">
-        <div class="pl-3   d-flex flex-row flex-wrap  ">
+        <div class="pl-3 d-flex flex-row flex-wrap  ">
             <div class="w-25 me-5">
                 <mat-form-field appearance="fill">
                     <mat-label>Select Category</mat-label>
@@ -17,23 +17,14 @@
                     class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
                     Go
                 </button>
-
             </div>
-
         </div>
-        <hr />
+        <hr/>
 
         <div class="card-body">
-
-
             <form [formGroup]="addmediaform" class="" (ngSubmit)="addmedia()">
-
-
-                <!-- Video SubForm/Table -->
                 <table class="me-5 ">
-
                     <tbody>
-
                         <!-- Video URL -->
                         <tr class="">
                             <td class="col-2">
@@ -48,29 +39,22 @@
                                     </mat-error>
                                 </mat-form-field>
                             </td>
-
                         </tr>
 
-
-                        <!-- Duration of Video -->
                         <tr class="">
                             <td class="col-2">
                                 <h6 class="text-right">Duration of Video : </h6>
                                 <p class="text-right">(Hours:Minues)</p>
                             </td>
                             <td>
-
                                 <input type="time" formControlName="videoduration" class="ms-3"
                                     (change)="ontimechange()">
                                 <mat-error *ngIf="timerror">
                                     Please Add Duration
                                 </mat-error>
-
                             </td>
-
                         </tr>
 
-                        <!-- Title -->
                         <tr class="">
                             <td class="col-2">
                                 <h6 class="text-right">Title : </h6>
@@ -84,11 +68,7 @@
                                     </mat-error>
                                 </mat-form-field>
                             </td>
-
                         </tr>
-
-
-
 
                         <!-- Description -->
                         <tr class="">
@@ -105,7 +85,6 @@
                                     </mat-error>
                                 </mat-form-field>
                             </td>
-
                         </tr>
 
                         <!-- Video Meta Keyword-->
@@ -122,28 +101,16 @@
                                     </mat-error>
                                 </mat-form-field>
                             </td>
-
                         </tr>
-
-
-
-
                     </tbody>
-
                 </table>
-
 
                 <button type="submit" class=" float-md-right btn btn-outline-secondary btn-rounded d-inline-block m-2">
                     Upload
                 </button>
             </form>
         </div>
-
     </div>
-
-    <br />
-
-    <div class="card border-light pt-3  ">
-    </div>
-
+    <br/>
+    <div class="card border-light pt-3"></div>
 </div>
