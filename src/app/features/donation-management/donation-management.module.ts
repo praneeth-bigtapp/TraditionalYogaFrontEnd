@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { BlacklistUserRoutingModule } from './blacklist-user-routing.module';
-import { BlacklistUsersComponent } from './blacklist-users/blacklist-users.component';
+import { DonationManagementRoutingModule } from './donation-management-routing.module';
+import { DonationManagementComponent } from './donation-management/donation-management.component';
 
-import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
@@ -22,12 +21,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
-    BlacklistUsersComponent
+    DonationManagementComponent
   ],
   imports: [
     CommonModule,
-    BlacklistUserRoutingModule,
-  
+    DonationManagementRoutingModule,
+
     MatSortModule,
     MatTableModule,
     MatSelectModule,
@@ -41,8 +40,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatDialogModule,
     MatSlideToggleModule,
     SharedModule,
-    MatTooltipModule,
-    
+    MatTooltipModule
   ]
 })
-export class BlacklistUserModule { }
+export class DonationManagementModule { }

@@ -5,7 +5,8 @@ export const environment = {
   // url: "/dmapp/"
 
   //AWS-BigTapp
-  url: 'http://54.255.153.46:8081/dmapp/'
+  // url: 'http://54.255.153.46:8081/dmapp/'
+  url:'http://54.255.153.46:8081/yoga/'
 
 
 };

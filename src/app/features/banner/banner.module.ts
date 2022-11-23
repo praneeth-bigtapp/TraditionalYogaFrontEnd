@@ -43,6 +43,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatCheckboxModule,
     MatCardModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
   ]
 })
 export class BannerModule { }

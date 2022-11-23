@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { UserIdleConfig, UserIdleService } from 'angular-user-idle';
-import { HeaderService } from 'src/app/core/layout/header/service/header.service';
-import { DataStorageService } from 'src/app/shared/services/data-storage.service';
-import { SendReceiveService } from 'src/app/shared/services/sendReceive.service';
-import { LoginService } from '../../auth/login/services/login.service';
+import { BanneraddService } from '../service/banneradd.service';
 @Component({
   selector: 'app-banner-add',
   templateUrl: './banner-add.component.html',
@@ -23,11 +20,9 @@ export class BannerAddComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private loginService: LoginService,
-    private dataStorageService: DataStorageService,
-    public sendReceiveService: SendReceiveService,
-    private userIdle: UserIdleService,
-    private headerService: HeaderService
+    private banner: BanneraddService,
+    private _snackBar: MatSnackBar
+
   ) {
 
   }
@@ -70,6 +65,10 @@ export class BannerAddComponent implements OnInit {
     })
   }
 
+
+  openSnackBar(message: any) {
+    this._snackBar.open(message, 'Close');
+  }
   onfilechange(formname: string) {
 
     if (formname === 'headerform')
@@ -91,6 +90,18 @@ export class BannerAddComponent implements OnInit {
       const formvalue = this.headerbannerform.value
       console.log(formvalue);
 
+      this.banner.postheaderbanner(formvalue).subscribe({
+        next: (response) => {
+          this.headerbannerform.reset()
+          // this.openSnackBar(response.message)
+
+        },
+        error: (error) => {
+          console.error(error.message);
+
+        }
+      })
+
       // this.headerbannerform.reset()
     }
     else {
@@ -111,7 +122,18 @@ export class BannerAddComponent implements OnInit {
       const formvalue = this.coursebanner.value
       console.log(formvalue);
 
-      // this.coursebanner.reset()
+
+      this.banner.postheaderbanner(formvalue).subscribe({
+        next: (response) => {
+          this.coursebanner.reset()
+          // this.openSnackBar(response.message)
+
+        },
+        error: (error) => {
+          console.error(error.message);
+
+        }
+      })
 
 
     }

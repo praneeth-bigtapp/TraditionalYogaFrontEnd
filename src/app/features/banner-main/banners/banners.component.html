@@ -40,30 +40,35 @@
               The actual rendered columns are set as a property on the row definition" -->
 
         <!-- Position Column -->
-        <ng-container matColumnDef="s.no">
-            <th mat-header-cell class="col-md-2 pt-4" *matHeaderCellDef> <input type="checkbox" style="width: 20px; margin-left: 88px;"></th>
+        <ng-container matColumnDef="bannerId">
+            <th mat-header-cell class="col-md-2 pt-4" *matHeaderCellDef> <input type="checkbox" style="width: 20px"
+                    class="mx-auto"></th>
             <td class="col-md-2" *matCellDef="let element">
                 <input type="checkbox">
             </td>
         </ng-container>
 
         <!-- Name Column -->
-        <ng-container matColumnDef="banner_name">
+        <ng-container matColumnDef="bannerName">
             <th mat-header-cell class="col-md-6" *matHeaderCellDef mat-sort-header> Date of Blacklist</th>
             <td class="row col-md-6" *matCellDef="let element">
                 <div style="display: flex ;">
-                    <div class="col-sm-2 pt-2"> {{element.banner_name}}</div>
+                    <!-- <div class="col-sm-2 pt-2"> {{element.bannerName}}</div>
                     <div class="col">
                         <a class="nav-link active text-success  " aria-current="page" href="#">-Published</a>
-                    </div>
-
+                    </div> -->
+                    <div>{{element.bannerName}} - <span class="text-success"> Published </span></div>
 
                 </div>
                 <div style="display: flex ; ">
-                    <a class="nav-link active text-blue" aria-current="page" href="#"><i class="fa-solid fa-pen-to-square"></i> </a>
-                    <a class="nav-link active text-danger " aria-current="page" href="#"><i class="fa-solid fa-trash"></i></a>
-                    <a class="nav-link active text-primary" aria-current="page" href="#"><i class="fa-solid fa-eye"></i></a>
-                    <a class="nav-link active " aria-current="page" href="#"><i class="fa-sharp fa-solid fa-floppy-disk"></i></a>
+                    <a class="nav-link active text-blue" aria-current="page" href="#"><i
+                            class="fa-solid fa-pen-to-square"></i> </a>
+                    <a class="nav-link active text-danger " aria-current="page" href="#"><i
+                            class="fa-solid fa-trash"></i></a>
+                    <a class="nav-link active text-primary" aria-current="page" href="#"><i
+                            class="fa-solid fa-eye"></i></a>
+                    <a class="nav-link active " aria-current="page" href="#"><i
+                            class="fa-sharp fa-solid fa-floppy-disk"></i></a>
 
                 </div>
 
@@ -73,16 +78,18 @@
         </ng-container>
 
         <!-- Weight Column -->
-        <ng-container matColumnDef="GivenBy">
+        <ng-container matColumnDef="categoryId">
             <th mat-header-cell class="col-md-3 pl-1" *matHeaderCellDef mat-sort-header>Given By</th>
-            <td mat-cell class="col-md-3 " *matCellDef="let element" style="margin-left: 40px;"> {{element.GivenBy}} </td>
+            <td mat-cell class="col-md-3 " *matCellDef="let element" style="margin-left: 40px;"> {{element.GivenBy ||
+                "admin"}}
+            </td>
         </ng-container>
 
         <!-- Symbol Column -->
-        <ng-container matColumnDef="date_of_add">
+        <ng-container matColumnDef="date">
             <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header> Comments</th>
             <td mat-cell class="col" *matCellDef="let element">
-                Last Modified<br> {{element.date_of_add}} </td>
+                Last Modified<br> {{element.Comments || "at Wed 2 2017"}} </td>
 
         </ng-container>
 
@@ -94,7 +101,8 @@
 
     <div class="row">
         <div class="col">
-            <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons="" aria-label="Select page"></mat-paginator>
+            <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons="" aria-label="Select page">
+            </mat-paginator>
 
         </div>
     </div>

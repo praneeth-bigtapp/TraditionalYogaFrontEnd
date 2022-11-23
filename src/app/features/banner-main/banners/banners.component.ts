@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 
-import {MatSort} from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { BannerviewService } from '../service/bannerview.service';
 
 @Component({
   selector: 'app-banners',
@@ -10,15 +11,13 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./banners.component.css']
 })
 export class BannersComponent implements OnInit {
-   
-  data=[{"banner_name":"banner1","GivenBy":"admin","date_of_add":" 02,aug,2022 12:30:37"},
-  {"banner_name":"banner1","GivenBy":"admin","date_of_add":" 02,aug,2022 12:30:37"},
-  {"banner_name":"banner1","GivenBy":"admin","date_of_add":" 02,aug,2022 12:30:37"},]
-  displayedColumns: string[] = ['s.no', 'banner_name', 'GivenBy',"date_of_add"];
-  dataSource :any;
 
 
-  
+  displayedColumns: string[] = ['bannerId', 'bannerName', 'categoryId', "date"];
+  dataSource: any;
+
+
+  data!: any
 
 
   @ViewChild(MatPaginator)
@@ -26,12 +25,20 @@ export class BannersComponent implements OnInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  constructor() { 
-    this.dataSource=new MatTableDataSource<any>(this.data)
+  constructor(
+    private banner: BannerviewService
+  ) {
   }
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.banner.getbanner().subscribe({
+      next: (response) => {
+        this.data = response
+        this.dataSource = new MatTableDataSource<any>(this.data)
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    })
+
   }
 
 

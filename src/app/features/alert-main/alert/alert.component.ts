@@ -103,14 +103,7 @@ export class AlertComponent implements OnInit {
   }
 
   openSnackBar(message: any) {
-    // this._snackBar.openFromComponent(AlertComponent, {
-    //   duration: this.durationInSeconds * 1000,
-
-    // });
-    this._snackBar.open(message, 'Close', {
-      // horizontalPosition: this.horizontalPosition,
-      // verticalPosition: this.verticalPosition,
-    });
+    this._snackBar.open(message, 'Close');
   }
 
 
@@ -125,6 +118,13 @@ export class AlertComponent implements OnInit {
       // this.alertform.value.categoryid = this.category.filter((ele: any) => ele.alertId == this.alertform.value.alertid)[0].categoryId
 
 
+      const body = {
+        // "alertId": data.alertid,
+        "categoryId": this.alertform.value.alertid,
+        "alertDescription": this.alertform.value.paragraph,
+        "startDate": this.alertform.value.startdate,
+        "endDate": this.alertform.value.enddate
+      }
       this.alertservice.setalert(this.alertform.value).subscribe({
         next: (response) => {
           this.alertform.reset()
