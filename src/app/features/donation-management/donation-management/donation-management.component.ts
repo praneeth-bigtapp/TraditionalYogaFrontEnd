@@ -26,7 +26,7 @@ total="1,20,52,365"
       
       fromdate: [null, Validators.compose([Validators.required])],
       todate: [null, Validators.compose([Validators.required])],
-      
+      checkbox:[null, Validators.compose([Validators.required])],
       
     })
     this.dataSource=new MatTableDataSource<any>(this.category)
@@ -34,4 +34,8 @@ total="1,20,52,365"
   viewDetails(name:any){
 
   }
+  filterDate(){
+    
+  }
+
 }
