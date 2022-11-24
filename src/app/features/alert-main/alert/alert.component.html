@@ -41,7 +41,7 @@
                             <div
                                 *ngIf="alertform.controls['startdate'].invalid && (alertform.controls['startdate'].dirty || alertform.controls['startdate'].touched)">
                                 <mat-error [hidden]=" !alertform.get('startdate')?.hasError('required')  ">
-                                    Please Type Few Words
+                                    Please Select the date
                                 </mat-error>
                             </div>
                         </mat-form-field>
@@ -53,7 +53,7 @@
                             <div
                                 *ngIf="alertform.controls['enddate'].invalid && (alertform.controls['enddate'].dirty || alertform.controls['enddate'].touched)">
                                 <mat-error [hidden]=" !alertform.get('enddate')?.hasError('required')  ">
-                                    Please Type Few Words
+                                    Please Select the date
                                 </mat-error>
                             </div>
                         </mat-form-field>
