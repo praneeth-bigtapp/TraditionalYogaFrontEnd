@@ -18,10 +18,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DonationviewdetailsComponent } from './donationviewdetails/donationviewdetails.component';
 
 @NgModule({
   declarations: [
-    DonationManagementComponent
+    DonationManagementComponent,
+    DonationviewdetailsComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +42,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatDialogModule,
     MatSlideToggleModule,
     SharedModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatIconModule,
   ]
 })
 export class DonationManagementModule { }

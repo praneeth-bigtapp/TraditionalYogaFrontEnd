@@ -1,0 +1,173 @@
+<div class="ConfigurationTypes_textpadding p-5 bg-light">
+    <h3 class="mb-4 pl-2 text-secondary "> View Details</h3>
+    <div class="d-flex  flex-column  ">
+
+        <!--one row  -->
+        <div class="row   w-100 bg-white ">
+
+            <div class="col-md-4 border-top border-left border-bottom  py-4  text-center">
+                <!-- add icon -->
+                <h1 class="text-muted  "><i class="fa-solid fa-dollar-sign"></i></h1>
+            </div>
+            <div class="col-md-8  border-top border-right border-bottom py-4 ps-4 my-auto">
+                <h1> ₹ {{ details.amount }}</h1>
+                <p class="fw-lighter">Amount Donated</p>
+            </div>
+
+        </div>
+
+        <!--one row  -->
+        <div class="row  w-100 bg-white">
+
+            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
+                <!-- add icon -->
+
+                <div class="d-flex flex-row  align-items-center px-4  ">
+                    <div>
+                        <p> <i class=" fa-solid fa-user me-4 "></i></p>
+                    </div>
+                    <div>
+                        <p class=""> Donor Name : </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-8  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
+                <h4>{{ details.donorname }}</h4>
+
+            </div>
+
+        </div>
+
+
+        <!--one row  -->
+        <div class="row  w-100 bg-white">
+
+            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
+                <!-- add icon -->
+
+                <div class="d-flex flex-row  align-items-center  px-4 ">
+                    <div>
+                        <p> <i class=" fa-solid fa-envelope-open-text me-4 "></i></p>
+                    </div>
+                    <div>
+                        <p class=""> Email : </p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="col-md-8 text-truncate  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
+                <h4>{{ details.email }}</h4>
+
+            </div>
+
+        </div>
+
+
+        <!--one row  -->
+        <div class="row  w-100 bg-white">
+
+            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
+                <!-- add icon -->
+
+                <div class="d-flex flex-row  align-items-center  px-4 ">
+                    <div>
+                        <p> <i class="fa-solid fa-mobile me-4"></i> </p>
+                    </div>
+                    <div>
+                        <p class=""> Mobile Number : </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
+                <h4>{{ details.mobile }}</h4>
+
+            </div>
+        </div>
+
+        <!--one row  -->
+        <div class="row  w-100 bg-white">
+
+            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
+                <!-- add icon -->
+
+                <div class="d-flex flex-row  align-items-center  px-4 ">
+                    <div>
+                        <p> <i class="fa-brands fa-wpforms me-4"></i> </p>
+                    </div>
+                    <div>
+                        <p class=""> Is a registered member : </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
+                <h4>{{ details.isregisteredmember }}</h4>
+
+            </div>
+        </div>
+
+        <!--one row  -->
+        <div class="row  w-100 bg-white">
+
+            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
+                <!-- add icon -->
+
+                <div class="d-flex flex-row  align-items-center  px-4 ">
+                    <div>
+                        <p> <i class="fa-sharp fa-solid fa-flag me-4"></i> </p>
+                    </div>
+                    <div>
+                        <p class=""> Country : </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
+                <h4>{{ details.country }}</h4>
+
+            </div>
+        </div>
+
+        <!--one row  -->
+        <div class="row  w-100 bg-white">
+
+            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
+                <!-- add icon -->
+
+                <div class="d-flex flex-row  align-items-center  px-4 ">
+                    <div>
+                        <p> <i class="fa-sharp fa-solid fa-comment-dots me-4"></i> </p>
+                    </div>
+                    <div>
+                        <p class=""> Message : </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
+                <p>{{ details.message }}</p>
+
+            </div>
+        </div>
+
+
+        <!--one row  -->
+        <div class="row  w-100 bg-white">
+
+            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
+                <!-- add icon -->
+
+                <div class="d-flex flex-row  align-items-center  px-4 ">
+                    <div>
+                        <p> <i class="fa-sharp fa-solid fa-wallet me-4"></i> </p>
+                    </div>
+                    <div>
+                        <p class=""> Mode of Payment : </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
+                <h4>{{ details.modeofpayment }}</h4>
+
+            </div>
+        </div>
+    </div>
+</div>

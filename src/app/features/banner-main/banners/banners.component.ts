@@ -28,7 +28,11 @@ export class BannersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit() {
     this.getBanner();
+
   }
 
   getBanner() {
