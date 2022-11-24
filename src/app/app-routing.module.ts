@@ -14,7 +14,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/blacklist-user/blacklist-user.module').then((m) => m.BlacklistUserModule)
   },
-
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/websitemanagement/websitemanagement.module').then((m) => m.WebsitemanagementModule)
+  },
   {
     path: '',
     loadChildren: () =>
