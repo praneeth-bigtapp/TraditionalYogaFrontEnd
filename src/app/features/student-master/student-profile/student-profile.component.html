@@ -296,30 +296,112 @@
 
                     <div class="courses-live-class">
                         <h5 class="pt-3 pl-2 mb-2"> Courses Live Class & Courses suggested practice session </h5>
-                        <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8 mat-datagrid w-100">
+                        <table mat-table [dataSource]="coureseLiveData" class="mat-elevation-z8 mat-datagrid w-100">
 
-                            <ng-container matColumnDef="position">
+                            <ng-container matColumnDef="SNo">
                                 <th mat-header-cell *matHeaderCellDef> No. </th>
-                                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                                <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
                             </ng-container>
 
-                            <ng-container matColumnDef="name">
-                                <th mat-header-cell *matHeaderCellDef> Name </th>
-                                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                            <ng-container matColumnDef="date">
+                                <th mat-header-cell *matHeaderCellDef> Date of Class </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date}} </td>
                             </ng-container>
 
-                            <ng-container matColumnDef="weight">
-                                <th mat-header-cell *matHeaderCellDef> Weight </th>
-                                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                            <ng-container matColumnDef="type">
+                                <th mat-header-cell *matHeaderCellDef> Type </th>
+                                <td mat-cell *matCellDef="let element"> {{element.type}} </td>
                             </ng-container>
 
-                            <ng-container matColumnDef="symbol">
-                                <th mat-header-cell *matHeaderCellDef> Symbol </th>
-                                <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                            <ng-container matColumnDef="totalScreen">
+                                <th mat-header-cell *matHeaderCellDef> Total Screen Time </th>
+                                <td mat-cell *matCellDef="let element"> {{element.totalScreen}} </td>
                             </ng-container>
 
-                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            <ng-container matColumnDef="attendedScreen">
+                                <th mat-header-cell *matHeaderCellDef> Attended Screen Time </th>
+                                <td mat-cell *matCellDef="let element"> {{element.attendedScreen}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="percentage">
+                                <th mat-header-cell *matHeaderCellDef> Percentage% </th>
+                                <td mat-cell *matCellDef="let element"> {{element.percentage}}% </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="courseLiveColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: courseLiveColumns;"></tr>
+                        </table>
+                    </div>
+                    <div class="course-short-videos">
+                        <h5 class="pt-3 pl-2 mb-2"> Course short videos </h5>
+                        <table mat-table [dataSource]="coureseShortData" class="mat-elevation-z8 mat-datagrid w-100">
+
+                            <ng-container matColumnDef="SNo">
+                                <th mat-header-cell *matHeaderCellDef> No. </th>
+                                <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="date">
+                                <th mat-header-cell *matHeaderCellDef> Date of Class </th>
+                                <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="type">
+                                <th mat-header-cell *matHeaderCellDef> Type </th>
+                                <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="totalScreen">
+                                <th mat-header-cell *matHeaderCellDef> Total Screen Time </th>
+                                <td mat-cell *matCellDef="let element"> {{element.totalScreen}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="attendedScreen">
+                                <th mat-header-cell *matHeaderCellDef> Attended Screen Time </th>
+                                <td mat-cell *matCellDef="let element"> {{element.attendedScreen}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="percentage">
+                                <th mat-header-cell *matHeaderCellDef> Percentage% </th>
+                                <td mat-cell *matCellDef="let element"> {{element.percentage}}% </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="courseLiveColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: courseLiveColumns;"></tr>
+                        </table>
+                    </div>
+
+                    <div class="practiceLibrary">
+                        <h5 class="pt-3 pl-2 mb-2"> Practice Library </h5>
+                        <table mat-table [dataSource]="practiceLibData" class="mat-elevation-z8 mat-datagrid w-100">
+
+                            <ng-container matColumnDef="SNo">
+                                <th mat-header-cell *matHeaderCellDef> No. </th>
+                                <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="dateTime">
+                                <th mat-header-cell *matHeaderCellDef> Date & Time </th>
+                                <td mat-cell *matCellDef="let element"> {{element.dateTime}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="description">
+                                <th mat-header-cell *matHeaderCellDef> Description of Practice</th>
+                                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="section">
+                                <th mat-header-cell *matHeaderCellDef> Section </th>
+                                <td mat-cell *matCellDef="let element"> {{element.section}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="attendedTime">
+                                <th mat-header-cell *matHeaderCellDef> Attended Screen Time </th>
+                                <td mat-cell *matCellDef="let element"> {{element.attendedTime}} </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="practiceLibColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: practiceLibColumns;"></tr>
                         </table>
                     </div>
                 </div>
@@ -583,61 +665,47 @@
         </div>
     </div>
 
-
-
-
     <!-- Modal -->
     <div class="modal fade" id="purchases" tabindex="-1" aria-labelledby="purchasesLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Purchese</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-
-                            <input type="date" class="mt-3" placeholder="select Date">
-                            <!--   <mat-form-field color="primary" appearance="fill">
-               <mat-label>Select Date</mat-label>
-                <input matInput formControlName="fromdate" [matDatepicker]="picker" [disabled]="true">
-                <mat-hint>MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker color="primary" [disabled]="false"></mat-datepicker>
-                <div
-                    *ngIf="coursebanner.controls['fromdate'].invalid && (coursebanner.controls['fromdate'].dirty || coursebanner.controls['fromdate'].touched)">
-                    <mat-error [hidden]=" !coursebanner.get('fromdate')?.hasError('required')  ">
-                        Please Add Date
-                    </mat-error>
-                </div> 
-               
-                </mat-form-field>-->
+                <form [formGroup]="AddPurchaseForm" (ngSubmit)="onPurchaseSubmit()">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Purchese</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            (click)="onPurchaseClose()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="date" class="mt-3" formControlName="date" placeholder="select Date">
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width" appearance="fill" id="field">
+                                    <mat-label>Purchese Amount</mat-label>
+                                    <input matInput type="number" autocomplete="off" formControlName="purcheseAmount"
+                                        required>
+                                </mat-form-field>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <mat-form-field class="example-full-width" appearance="fill" id="field">
-                                <mat-label>Purchese Amount</mat-label>
-                                <input matInput>
-                            </mat-form-field>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>List of Products </mat-label>
+                                    <textarea matInput formControlName="purcheseList" required></textarea>
+                                </mat-form-field>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <mat-form-field appearance="fill">
-                                <mat-label>List of Products </mat-label>
-                                <textarea matInput></textarea>
-                            </mat-form-field>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary btn-rounded" data-dismiss="modal"
+                            (click)="onPurchaseClose()">Close</button>
+                        <button type="submit" class="btn btn-outline-secondary btn-rounded">Save changes</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-primary btn-rounded"
-                        data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-outline-secondary btn-rounded">Save changes</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -647,78 +715,64 @@
     <div class="modal fade" id="Volunteer" tabindex="-1" aria-labelledby="VolunteerLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Volunteer</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Select Courses</mat-label>
-                                <mat-select formControlName="course" required>
-                                    <mat-option value="one">First option</mat-option>
-                                    <mat-option value="two">Second option</mat-option>
-                                </mat-select>
-
-                            </mat-form-field>
+                <form [formGroup]="AddVolunteerForm" (ngSubmit)="onVolunteerSubmit()">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Volunteer</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            (click)="onVolunteerClose()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Select Courses</mat-label>
+                                    <mat-select formControlName="category" required>
+                                        <mat-option *ngFor="let course of CourseList" [value]="course.courseId">
+                                            {{course.courseName}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Courses</mat-label>
+                                    <input matInput autocomplete="off" formControlName="Courses" required>
+                                </mat-form-field>
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Courses</mat-label>
-                                <input matInput autocomplete="off" formControlName="Courses" required>
-                            </mat-form-field>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="date" formControlName="startDate" class="mt-3" placeholder="StartDate ">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="date" formControlName="endDate" class="mt-3" placeholder="EndDate ">
+                            </div>
+
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width" appearance="fill" id="field">
+                                    <mat-label>No of Members Managed</mat-label>
+                                    <input type="number" matInput formControlName="members">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <mat-form-field appearance="fill">
+                                    <mat-label> Served as </mat-label>
+                                    <textarea matInput formControlName="servedAs"></textarea>
+                                </mat-form-field>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4">
-
-                            <input type="date" class="mt-3" placeholder="StartDate ">
-                            <!--   <mat-form-field color="primary" appearance="fill">
-               <mat-label>Select Date</mat-label>
-                <input matInput formControlName="fromdate" [matDatepicker]="picker" [disabled]="true">
-                <mat-hint>MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker color="primary" [disabled]="false"></mat-datepicker>
-                <div
-                    *ngIf="coursebanner.controls['fromdate'].invalid && (coursebanner.controls['fromdate'].dirty || coursebanner.controls['fromdate'].touched)">
-                    <mat-error [hidden]=" !coursebanner.get('fromdate')?.hasError('required')  ">
-                        Please Add Date
-                    </mat-error>
-                </div> 
-               
-                </mat-form-field>-->
-                        </div>
-                        <div class="col-md-4">
-
-                            <input type="date" class="mt-3" placeholder="EndDate ">
-                        </div>
-
-                        <div class="col-md-4">
-                            <mat-form-field class="example-full-width" appearance="fill" id="field">
-                                <mat-label>No of Members Managed</mat-label>
-                                <input matInput>
-                            </mat-form-field>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary btn-rounded"
+                            data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-secondary btn-rounded">Save changes</button>
                     </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <mat-form-field appearance="fill">
-                                <mat-label> Served as </mat-label>
-                                <textarea matInput></textarea>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-primary btn-rounded"
-                        data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-outline-secondary btn-rounded">Save changes</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>

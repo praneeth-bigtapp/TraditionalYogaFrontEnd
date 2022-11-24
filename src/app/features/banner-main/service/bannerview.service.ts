@@ -6,7 +6,7 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 })
 export class BannerviewService extends BaseHttp {
 
-  getbannerURL = "banner/getAll?operation=bannerview"
+  getbannerURL = "webSite/getAll?operation=banner"
 
 
   getbanner() {

@@ -10,7 +10,9 @@ export class StudentService extends BaseHttp {
   getStudentByIdUrl = "student/profile";
   getDonationByIdUrl = "student/donation";
   getPurchaseByIdUrl = "student/purchase";
+  addPurchaseByIdUrl = "student/purchase/add";
   getVolunteerByIdUrl = "student/volunteer";
+  addVolunteerByIdUrl = "student/volunteer/add";
   getCourseProfileByIdUrl = "";
 
   getStudent() {
@@ -33,8 +35,16 @@ export class StudentService extends BaseHttp {
     return this.post<any>(this.getPurchaseByIdUrl, data);
   }
 
+  addPurchaseById(data: any) {
+    return this.post<any>(this.addPurchaseByIdUrl, data);
+  }
+
   getVolunteerById(data: any) {
     return this.post<any>(this.getVolunteerByIdUrl, data);
+  }
+
+  addVolunteerById(data: any) {
+    return this.post<any>(this.addVolunteerByIdUrl, data);
   }
 
   getCourseProfileById(data: any) {

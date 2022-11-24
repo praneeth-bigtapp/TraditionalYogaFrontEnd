@@ -1,4 +1,4 @@
-import { Component, OnInit,AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource, } from '@angular/material/table';
@@ -10,115 +10,80 @@ import { BlacklistUsersService } from '../blacklist-users.service';
   templateUrl: './blacklist-users.component.html',
   styleUrls: ['./blacklist-users.component.css']
 })
-export class BlacklistUsersComponent implements OnInit{
+export class BlacklistUsersComponent implements OnInit {
+  blacklistForm!: FormGroup
+  displayedColumns: string[] = ['SNo', 'date', 'blacklistUserEmail', "comments", "action"];
+  dataSource: any;
+  blacklistData: any;
 
-  adddetails!:FormGroup
-  filerror!:boolean;
-  displayedColumns: string[] = ['blacklistuserId', 'date', 'blacklistUserEmail',"comments","action"];
-  data:any;
-  dataSource :any;
-  values= 
-  {
-     
-     "blacklistUserEmail": "",
-     "date": "",
-     "comments": ""
- }
-  constructor(private service:BlacklistUsersService,private inputs: FormBuilder,private _snackBar: MatSnackBar ) {
-   
-    
-   }
-  // ngAfterViewChecked(): void {
-  //   this. getdata()
-  // }
+  constructor(
+    private blacklistUsersService: BlacklistUsersService,
+    private formBuilder: FormBuilder,
+    private _snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
-    this.adddetails = this.inputs.group({
-      
+    this.blacklistForm = this.formBuilder.group({
       emailId: [null, Validators.compose([Validators.required])],
-   
-      remarks: [null, Validators.compose([Validators.required])],
-     
+      comments: [null, Validators.compose([Validators.required])],
+    });
 
-    })
-   
-    this. getdata()
-
-  }
-  
-  
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
-    this.getdata()
-  }
-  onblock(){
-  
-    
-    const date = new Date();
-
-let day = date.getDate();
-let month = date.getMonth() + 1;
-let year = date.getFullYear();
-  this.values.blacklistUserEmail=this.adddetails.value.emailId
-  this.values.comments=this.adddetails.value.remarks
-  this.values.date=(year.toString()+'-'+month.toString()+'-'+day.toString())
-this.addData(this.values)
+    this.getBlackListUser();
   }
 
-  getdata(){
-    this.service.getBlacklist().subscribe({
-
+  getBlackListUser() {
+    this.blacklistUsersService.getBlacklist().subscribe({
       next: (response) => {
-        this.data = response
-        
-        this.dataSource=new MatTableDataSource<any>(this.data)
-   
+        this.blacklistData = response;
+        this.dataSource = new MatTableDataSource<any>(this.blacklistData);
       },
-
       error: (error) => {
         console.error(error.message);
       }
-
-    })
+    });
   }
-  addData(data:any){
-  
-    if(data.blacklistUserEmail!=null&& data.comments&&data.date){
-      this.service.addBlacklist(data).subscribe({
 
-        next: (response) => {
-          // console.log(response)
-         
-     this.openSnackBar("Blocked user Sucessfully","ok")
-        },
-  
-        error: (error) => {
-          console.error(error.message);
-        }
-  
-      })
+  unBlockUser(blacklist: any) {
+    const data = {
+      "blacklistuserId": blacklist.blacklistuserId,
+      "blacklistUserEmail": blacklist.blacklistUserEmail,
+      "date": blacklist.date,
+      "comments": blacklist.comments
     }
-    //error msg
+    this.blacklistUsersService.removeBlacklist(data).subscribe({
+      next: (response) => {
+        this.openSnackBar("Unblocked user Sucessfully");
+        this.getBlackListUser();
+        this.blacklistForm.reset();
+      },
+      error: (error) => {
+        this.openSnackBar(error.error.message);
+      }
+    });
   }
-  deleterow(value:any){
-    
-    let values={
-      "blacklistuserId": value
-       
-   }
-      this.service.removeBlacklist(values).subscribe({
 
+  onBlockUser() {
+    if (this.blacklistForm.valid) {
+      const data = {
+        "blacklistUserEmail": this.blacklistForm.value.emailId,
+        "comments": this.blacklistForm.value.comments
+      }
+      this.blacklistUsersService.addBlacklist(data).subscribe({
         next: (response) => {
-          // console.log("deleted")
-          this.openSnackBar("Unblocked user Sucessfully","ok")
-     
+          this.openSnackBar("Blocked user Sucessfully");
+          this.getBlackListUser();
+          this.blacklistForm.reset();
         },
-  
         error: (error) => {
-          console.log(error.message);
+          this.openSnackBar(error.error.message);
         }
-  
-      })
-    
+      });
+    }
   }
+
+  openSnackBar(message: string) {
+    this._snackBar.open(message);
+    setTimeout(() => {this._snackBar.dismiss()},3000);
+  }
+
 }

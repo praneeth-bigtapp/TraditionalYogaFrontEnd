@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 
@@ -7,22 +6,19 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 })
 export class BlacklistUsersService extends BaseHttp {
 
-  getURL='blacklistuser/getAll?operation=blacklistuser';
-  postURL='blacklistuser/?operation=add';
-  deleteURL='blacklistuser/?operation=delete';
+  getBlacklistURL = 'student/getAll?operation=blackListUser';
+  addBlacklistURL = 'student/blockListUsers?operation=add';
+  removeBlacklistURL = 'student/blockListUsers?operation=delete';
 
-
-  getBlacklist(){
-
-   return this.get<any>(this.getURL);
-
+  getBlacklist() {
+    return this.get<any>(this.getBlacklistURL);
   }
-  addBlacklist(data:any){
-  
-    return this.post<any>(this.postURL,data);
+
+  addBlacklist(data: any) {
+    return this.post<any>(this.addBlacklistURL, data);
   }
-  removeBlacklist(data:any){
-    
-   return this.post<any>(this.deleteURL,data);
+
+  removeBlacklist(data: any) {
+    return this.post<any>(this.removeBlacklistURL, data);
   }
 }

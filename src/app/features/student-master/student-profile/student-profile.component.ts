@@ -4,36 +4,26 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { StudentService } from '../student.service';
 
-
-export interface PeriodicElement {
-  SNo: number;
-  CourseName: string;
-  CourseDiscription: string;
-  CourseStartDate: string;
-  CourseEndDate: string;
-  AdmissionsStatus: string;
-  CompletionStatus: string;
-}
-
-export interface coursesLiveClass {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const COURSES_LIVE_DATA: coursesLiveClass[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-
+let COURSES_LIVE_DATA: any[] = [
+  { SNo: 1, date: '2022-12-10', type: 'type', totalScreen: '1 hours', attendedScreen: '2 hours', percentage: '20' },
+  { SNo: 2, date: '2022-10-10', type: 'type', totalScreen: '3 hours', attendedScreen: '2 hours', percentage: '20' },
+  { SNo: 3, date: '2022-11-11', type: 'type', totalScreen: '4 hours', attendedScreen: '2 hours', percentage: '20' },
+  { SNo: 4, date: '2022-11-12', type: 'type', totalScreen: '5 hours', attendedScreen: '2 hours', percentage: '20' },
+  { SNo: 5, date: '2022-11-13', type: 'type', totalScreen: '6 hours', attendedScreen: '2 hours', percentage: '20' },
 ];
-let ELEMENT_DATA: PeriodicElement[] = [
-  { SNo: 1, CourseName: 'RYIT 200', CourseDiscription: 'Free Online Traditional Meditation Teacher Training Based on Darashanas or sanathana Dharma For Yoga Teachers and Students to become a Yogi',CourseStartDate: '10-20-2022', CourseEndDate: '10-20-2022',AdmissionsStatus: "Admitted", CompletionStatus: 'Completed & Certified' },
-  { SNo: 2, CourseName: 'RYIT 200', CourseDiscription: 'Free Online Traditional Meditation Teacher Training Based on Darashanas or sanathana Dharma For Yoga Teachers and Students to become a Yogi',CourseStartDate: '10-20-2022', CourseEndDate: '10-20-2022',AdmissionsStatus: "Admitted", CompletionStatus: 'Certified' },
-  { SNo: 3, CourseName: 'RYIT 200', CourseDiscription: 'Free Online Traditional Meditation Teacher Training Based on Darashanas or sanathana Dharma For Yoga Teachers and Students to become a Yogi',CourseStartDate: '10-20-2022', CourseEndDate: '10-20-2022',AdmissionsStatus: "Admitted", CompletionStatus: 'Completed' },
+
+let PARTICES_LIBARY: any[] = [
+  { SNo: 1, dateTime: '2022-12-10', description: 'description', section: '1 section', attendedTime: '2 hours' },
+  { SNo: 2, dateTime: '2022-10-10', description: 'description', section: '3 section', attendedTime: '2 hours' },
+  { SNo: 3, dateTime: '2022-11-11', description: 'description', section: '4 section', attendedTime: '2 hours' },
+  { SNo: 4, dateTime: '2022-11-12', description: 'description', section: '5 section', attendedTime: '2 hours' },
+  { SNo: 5, dateTime: '2022-11-13', description: 'description', section: '6 section', attendedTime: '2 hours' },
+];
+
+let ELEMENT_DATA: any[] = [
+  { SNo: 1, CourseName: 'RYIT 200', CourseDiscription: 'Free Online Traditional Meditation Teacher Training Based on Darashanas or sanathana Dharma For Yoga Teachers and Students to become a Yogi', CourseStartDate: '10-20-2022', CourseEndDate: '10-20-2022', AdmissionsStatus: "Admitted", CompletionStatus: 'Completed & Certified' },
+  { SNo: 2, CourseName: 'RYIT 200', CourseDiscription: 'Free Online Traditional Meditation Teacher Training Based on Darashanas or sanathana Dharma For Yoga Teachers and Students to become a Yogi', CourseStartDate: '10-20-2022', CourseEndDate: '10-20-2022', AdmissionsStatus: "Admitted", CompletionStatus: 'Certified' },
+  { SNo: 3, CourseName: 'RYIT 200', CourseDiscription: 'Free Online Traditional Meditation Teacher Training Based on Darashanas or sanathana Dharma For Yoga Teachers and Students to become a Yogi', CourseStartDate: '10-20-2022', CourseEndDate: '10-20-2022', AdmissionsStatus: "Admitted", CompletionStatus: 'Completed' },
 ];
 
 @Component({
@@ -44,6 +34,8 @@ let ELEMENT_DATA: PeriodicElement[] = [
 export class StudentProfileComponent implements OnInit {
   searchStudentForm!: FormGroup;
   courseForm!: FormGroup;
+  AddPurchaseForm!: FormGroup;
+  AddVolunteerForm!: FormGroup;
   StudentList: any = [];
   CourseList: any = [];
 
@@ -59,11 +51,13 @@ export class StudentProfileComponent implements OnInit {
   ePurchasesColumns: string[] = ['SNo', 'Date', 'PurchesedAmount', 'ProductName'];
   volunterColumns: string[] = ['SNo', 'Category', 'Courses', 'StartDate', 'EndDate', 'SeervedAs', 'noMembers'];
   coursesProfileColumns: string[] = ['SNo', 'CourseName', 'AdmissionsStatus', 'CompletionStatus'];
+  courseLiveColumns: string[] = ['SNo', 'date', 'type', 'totalScreen', 'attendedScreen', 'percentage'];
+  practiceLibColumns: string[] = ['SNo', 'dateTime', 'description', 'section', 'attendedTime'];
 
   coursesProfileData = ELEMENT_DATA;
-
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource2 = COURSES_LIVE_DATA;
+  coureseLiveData = COURSES_LIVE_DATA;
+  coureseShortData = COURSES_LIVE_DATA;
+  practiceLibData = PARTICES_LIBARY;
 
   constructor(
     public dialog: MatDialog,
@@ -81,6 +75,22 @@ export class StudentProfileComponent implements OnInit {
     this.courseForm = this.formBuilder.group({
       course: [null, Validators.required]
     });
+
+    this.AddPurchaseForm = this.formBuilder.group({
+      date: [null, Validators.required],
+      purcheseAmount: [null, Validators.required],
+      purcheseList: [null, Validators.required]
+    });
+
+    this.AddVolunteerForm = this.formBuilder.group({
+      category: [null, Validators.required],
+      Courses: [null, Validators.required],
+      startDate: [null, Validators.required],
+      endDate: [null, Validators.required],
+      members: [null, Validators.required],
+      servedAs: [null, Validators.required]
+    });
+
     this.getStudentList();
   }
 
@@ -136,6 +146,11 @@ export class StudentProfileComponent implements OnInit {
       }
     });
 
+    this.getPurchase(data);
+    this.getVolunteer(data);
+  }
+
+  getPurchase(data: any) {
     console.log("Enterning Select e-Purchases List");
     this.studentService.getPurchaseById(data).subscribe({
       next: (response) => {
@@ -147,7 +162,9 @@ export class StudentProfileComponent implements OnInit {
 
       }
     });
+  }
 
+  getVolunteer(data: any) {
     console.log("Enterning Select Volunteer List");
     this.studentService.getVolunteerById(data).subscribe({
       next: (response) => {
@@ -159,6 +176,63 @@ export class StudentProfileComponent implements OnInit {
 
       }
     });
+  }
+
+  onPurchaseSubmit() {
+   
+    const data = {
+      "studentId": this.studentProfile.studentId,
+      "date": this.AddPurchaseForm.value.date,
+      "purchaseAmount": this.AddPurchaseForm.value.purcheseAmount,
+      "productPurchase": this.AddPurchaseForm.value.purcheseList
+    }
+    this.studentService.addPurchaseById(data).subscribe({
+      next: (response) => {
+        this.onPurchaseClose();
+        const studentData = {
+          "studentId": this.studentProfile.studentId,
+          "name": this.studentProfile.name
+        }
+        this.getPurchase(studentData);
+        
+      },
+      error: (error) => {
+
+      }
+    });
+  }
+
+  onPurchaseClose() {
+    this.AddPurchaseForm.reset();
+  }
+
+  onVolunteerSubmit() {
+    const data = {
+      "studentId": this.studentProfile.studentId,
+      "categoryName": this.AddVolunteerForm.value.category,
+      "courseId": this.AddVolunteerForm.value.Courses,
+      "startDate": this.AddVolunteerForm.value.startDate,
+      "endDate": this.AddVolunteerForm.value.endDate,
+      "servedAs": this.AddVolunteerForm.value.servedAs,
+      "noOfMembers": this.AddVolunteerForm.value.members
+    }
+    this.studentService.addVolunteerById(data).subscribe({
+      next: (response) => {
+        this.onVolunteerClose();
+        const studentData = {
+          "studentId": this.studentProfile.studentId,
+          "name": this.studentProfile.name
+        }
+        this.getVolunteer(studentData);
+      },
+      error: (error) => {
+
+      }
+    });
+  }
+
+  onVolunteerClose() {
+    this.AddVolunteerForm.reset();
   }
 
   onStudentSearch() {
