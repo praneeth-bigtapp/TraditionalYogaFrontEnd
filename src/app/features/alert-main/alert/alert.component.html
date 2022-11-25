@@ -61,15 +61,15 @@
 
                 </div>
 
-                <!-- <div class="row mb-1">
+                <div class="row mb-1">
                     <label for="inputEmail3" class="col-sm-2 col-form-label pt-4">Upload File:</label>
                     <div class="col-sm-8">
-                        <input type="file" id="file" (change)="onfilechange()" formControlName="file" accept=" image/*"
+                        <input type="file" id="file" (change)="onfilechange($event)" formControlName="file" accept=" image/*"
                             required="true" />
                     </div>
                     <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
 
-                </div> -->
+                </div>
 
                 <div class="row">
                     <div class="col-md-2">
