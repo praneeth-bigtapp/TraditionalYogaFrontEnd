@@ -8,13 +8,13 @@ export class DonationserviceService extends BaseHttp {
 
 
   getAllURL = "student/getAll?operation=donation";
-  postURL='/student/donationView'
+  postURL = 'student/donationView'
 
 
   getdonationdetails() {
     return this.get(this.getAllURL)
   }
-  postdonationdetails(data:any) {
-    return this.post(this.postURL,data)
+  postdonationdetails(data: any) {
+    return this.post(this.postURL, data)
   }
 }

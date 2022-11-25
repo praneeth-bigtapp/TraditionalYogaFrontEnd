@@ -10,7 +10,7 @@
                 <h1 class="text-muted  "><i class="fa-solid fa-dollar-sign"></i></h1>
             </div>
             <div class="col-md-8  border-top border-right border-bottom py-4 ps-4 my-auto">
-                <h1> ₹ {{ details.amount }}</h1>
+                <h1> {{ details.amount | currency:"INR" }}</h1>
                 <p class="fw-lighter">Amount Donated</p>
             </div>
 
@@ -141,7 +141,7 @@
                 </div>
             </div>
             <div class="col-md-8  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
-                <p>{{ details.message }}</p>
+                <p>{{ details.message | titlecase }}</p>
 
             </div>
         </div>
