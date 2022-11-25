@@ -1,6 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
+import { MatSnackBar, } from '@angular/material/snack-bar';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { AlertService } from '../service/alertservoce.service';
 
@@ -14,8 +14,6 @@ export class AlertComponent implements OnInit {
   alertform !: FormGroup
   category!: any
   filerror!: boolean
-  durationInSeconds: number = 6
-  // snackBarRef = inject(MatSnackBarRef);
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -53,7 +51,7 @@ export class AlertComponent implements OnInit {
         tag: 'h1',
       },
     ],
-    // uploadUrl: 'v1/image',
+
 
     toolbarHiddenButtons: [
       ['bold', 'italic'],
@@ -72,17 +70,15 @@ export class AlertComponent implements OnInit {
       startdate: [null, Validators.compose([Validators.required])],
       enddate: [null, Validators.compose([Validators.required])],
       // file: [null, Validators.compose([Validators.required])],
-      // categoryid: [null]
-
+      file: [null, Validators.compose([])],
     })
   }
 
 
-  onfilechange() {
+  onfilechange(event: any) {
 
     this.filerror = this.alertform.value.file === null ? true : false
-
-
+    this.alertform.value.file = event.target.files[0]
   }
 
   ngOnInit(): void {
@@ -110,10 +106,10 @@ export class AlertComponent implements OnInit {
   onalertsubmit() {
 
 
-    this.onfilechange()
+    this.filerror = this.alertform.value.file === null ? true : false
+
 
     if (this.alertform.valid) {
-
 
       const body = {
 

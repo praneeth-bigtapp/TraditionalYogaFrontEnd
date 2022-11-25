@@ -9,37 +9,9 @@ import { HeaderService } from 'src/app/core/layout/header/service/header.service
 import { DataStorageService } from 'src/app/shared/services/data-storage.service';
 import { SendReceiveService } from 'src/app/shared/services/sendReceive.service';
 import { LoginService } from '../../auth/login/services/login.service';
+import { CoursesService } from '../courses.service';
 
-export interface CourseData {
-  no: string,
-  category: string,
-  coursename: string,
-  duration: string,
-  startdate: string,
-  enddate: string,
-  currentstatus: string
-}
 
-const coursedata: CourseData[] = [
-  { no: "1", category: "web", coursename: "Web Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "2", category: "Android", coursename: "React Native Development", duration: "3 month", startdate: "20 Nov 2022", enddate: "22 Dec 2022", currentstatus: "completed" },
-  { no: "3", category: "AWS", coursename: "AWS Basic", duration: "2 month", startdate: "17 Nov 2022", enddate: "17 Mar 2022", currentstatus: "ongoing" },
-  { no: "4", category: "Azure", coursename: "Azure Basic", duration: "1 month", startdate: "17 Nov 2022", enddate: "17 Apr 2022", currentstatus: "ongoing" },
-  { no: "5", category: "GCP", coursename: "GCP Basic", duration: "5 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  { no: "6", category: "Angular", coursename: "Angular Development", duration: "12 month", startdate: "17 Apr 2022", enddate: "17 May 2022", currentstatus: "ongoing" },
-  { no: "7", category: "BigData", coursename: "BigData Development", duration: "24 month", startdate: "17 May 2022", enddate: "17 June 2022", currentstatus: "ongoing" },
-  { no: "8", category: "Data Scientist", coursename: "Data Scientist Basic", duration: "15 days", startdate: "17 June 2022", enddate: "17 July 2022", currentstatus: "ongoing" },
-  // { no: "9", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" }, 
-  // { no: "10", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  // { no: "11", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  // { no: "12", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  // { no: "13", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  // { no: "14", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" }, 
-  // { no: "15", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  // { no: "16", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  // { no: "17", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-  // { no: "18", category: "web", coursename: "Angular Development", duration: "6 month", startdate: "17 Nov 2022", enddate: "17 Dec 2022", currentstatus: "ongoing" },
-];
 
 @Component({
   selector: 'app-course-main',
@@ -52,7 +24,20 @@ export class CourseMainComponent implements OnInit {
 
   filterData: any;
   gridData = [];
-  dataSource: any
+  dataSource: any;
+  displayedColumns: string[] = ['courseId', 'category','courseName',"courseDuration","startDate","endDate","currentStatus"];
+  data:any;
+  values= 
+  {
+     
+     "courseId": "",
+     "category": "",
+     "courseName": "",
+     "courseDuration": "",
+     "startDate": "",
+     "endDate": "",
+     "currentStatus": ""
+ }
 
   length = 50;
   pageSize = 10;
@@ -76,18 +61,19 @@ export class CourseMainComponent implements OnInit {
     private dataStorageService: DataStorageService,
     public sendReceiveService: SendReceiveService,
     private userIdle: UserIdleService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private service:CoursesService
 
   ) {
     this.filterData = {
       filterColumnNames: [
-        { "Key": 'no', "Value": "" },
+        { "Key": 'courseId', "Value": "" },
         { "Key": 'category', "Value": "" },
-        { "Key": 'coursename', "Value": "" },
-        { "Key": 'duration', "Value": "" },
-        { "Key": 'startdate', "Value": "" },
-        { "Key": 'enddate', "Value": "" },
-        { "Key": 'currentstatus', "Value": "" },
+        { "Key": 'courseName', "Value": "" },
+        { "Key": 'courseDuration', "Value": "" },
+        { "Key": 'startDate', "Value": "" },
+        { "Key": 'endDate', "Value": "" },
+        { "Key": 'currentStatus', "Value": "" },
       ],
       gridData: this.gridData,
       dataSource: this.dataSource,
@@ -95,15 +81,7 @@ export class CourseMainComponent implements OnInit {
       sort: this.sort
     };
 
-    this.dataSource = new MatTableDataSource<any>(coursedata)
-    this.filterData.gridData = coursedata;
-    this.filterData.dataSource = this.dataSource;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.filterData.sort = this.sort;
-    for (let col of this.filterData.filterColumnNames) {
-      col.Value = '';
-    }
+  
   }
 
   ngAfterViewInit() {
@@ -113,48 +91,44 @@ export class CourseMainComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this. getdata()
 
   }
+  getdata(){
+    this.service.getCourse().subscribe({
 
-  columns = [
-    {
-      columnDef: 'SNO',
-      header: 'SNO.',
-      cell: (element: CourseData) => `${element.no}`,
-    },
-    {
-      columnDef: 'Category',
-      header: 'Category',
-      cell: (element: CourseData) => `${element.category}`,
-    },
-    {
-      columnDef: 'Course Name',
-      header: 'Course Name',
-      cell: (element: CourseData) => `${element.coursename}`,
-    },
-    {
-      columnDef: 'Duration',
-      header: 'Duration',
-      cell: (element: CourseData) => `${element.duration}`,
-    },
-    {
-      columnDef: 'Start Date',
-      header: 'Start Date',
-      cell: (element: CourseData) => `${element.startdate}`,
-    },
-    {
-      columnDef: 'End Date',
-      header: 'End Date',
-      cell: (element: CourseData) => `${element.enddate}`,
-    },
-    {
-      columnDef: 'Current Status',
-      header: 'Current Status',
-      cell: (element: CourseData) => `${element.category}`,
-    },
-  ];
+    
 
-  displayedColumns = this.columns.map(c => c.columnDef);
+      next: (response) => {
+        
+        this.data = response
+        console.log(this.data)
+        
+       
+        this.dataSource = new MatTableDataSource<any>(this.data)
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+   
+      },
+
+      error: (error) => {
+        console.error(error.message);
+      }
+
+
+    })
+  }
+  
+
+ 
+
+
 
 
   addviewcourses() {
