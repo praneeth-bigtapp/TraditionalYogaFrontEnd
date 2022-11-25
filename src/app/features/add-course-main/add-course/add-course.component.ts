@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { AddCourseService } from './../add-course.service';
+
+
 
 @Component({
   selector: 'app-add-course',
@@ -8,6 +11,8 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
   styleUrls: ['./add-course.component.css']
 })
 export class AddCourseComponent implements OnInit {
+
+  categorySelect!: any
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -54,9 +59,24 @@ export class AddCourseComponent implements OnInit {
 
   disableSelect = new FormControl(false);
 
-  constructor() { }
+  constructor(private AddCourseService: AddCourseService, ) {}
 
   ngOnInit(): void {
+    this.AddCourseService. getCategory()
+      .subscribe({
+        next: (response) => {
+          this.categorySelect = response
+
+
+        },
+        error: (error) => {
+          console.error(error.message);
+
+        }
+      })
+    
   }
+
+  
 
 }
