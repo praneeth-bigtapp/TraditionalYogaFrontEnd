@@ -22,7 +22,6 @@ export class AlertService extends BaseHttp {
 
 
   setalert(body: any) {
- 
     return this.post<any>(this.alertpostURL, body)
   }
 
