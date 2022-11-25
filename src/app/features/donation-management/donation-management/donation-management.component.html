@@ -76,7 +76,7 @@
 
             <ng-container  matColumnDef="ViewDetails">
               <th mat-header-cell *matHeaderCellDef class=" text-center col-2"> ViewDetails</th>
-              <td mat-cell *matCellDef="let element" class="d-flex justify-content-center col-2 my-4 ml-3"> <i class="fa fa-eye" (click)="viewDetails(element.blacklistuserId)" style="color:purple"></i> </td>
+              <td mat-cell *matCellDef="let element" class="d-flex justify-content-center col-2 my-4 ml-3" (click)="viewDetails('sad')"> <i class="fa fa-eye" style="color:purple"></i> </td>
             </ng-container>
           
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -126,7 +126,7 @@ export class SendReceiveService {
       this.router.navigateByUrl("media");
     }
     else if (subMenuId == 21) {
-      this.router.navigateByUrl("blank");
+      this.router.navigateByUrl("coursesaddmedia");
     }
     else if (subMenuId == 22) {
       this.router.navigateByUrl("audio");
@@ -160,6 +160,9 @@ export class SendReceiveService {
     }
     else if (subMenuId == 32) {
       this.router.navigateByUrl("createscriptures");
+    }
+    else if (subMenuId == 33) {
+      this.router.navigateByUrl("hidemenuoption");
     }
     else {
       console.log(" Sub Menu is not Mapped ")

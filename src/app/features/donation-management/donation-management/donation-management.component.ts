@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-donation-management',
@@ -19,7 +20,7 @@ export class DonationManagementComponent implements OnInit {
 total="1,20,52,365"
  
   dataSource :any;
-  constructor(private formbuilder:FormBuilder) { }
+  constructor(private formbuilder:FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.dateForm = this.formbuilder.group({
@@ -32,7 +33,8 @@ total="1,20,52,365"
     this.dataSource=new MatTableDataSource<any>(this.category)
   }
   viewDetails(name:any){
-
+    alert("click");
+    this.router.navigateByUrl("viewdonation");
   }
   filterDate(){
     

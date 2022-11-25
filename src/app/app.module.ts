@@ -92,8 +92,8 @@ import { BlacklistUserModule } from './features/blacklist-user/blacklist-user.mo
     MatSnackBarModule,
     UserIdleModule.forRoot({ idle: 600, timeout: 300, ping: 120 })
   ],
-  providers: [DataStorageService, SendReceiveService, AuthGuard, ViewDataService, DatePipe, BnNgIdleService],
-  // providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, DataStorageService, SendReceiveService, AuthGuard, ViewDataService, DatePipe, BnNgIdleService],
+  // providers: [DataStorageService, SendReceiveService, AuthGuard, ViewDataService, DatePipe, BnNgIdleService],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, DataStorageService, SendReceiveService, AuthGuard, ViewDataService, DatePipe, BnNgIdleService],
   // providers: [{ provide: APP_BASE_HREF, useValue: 'dm' }, { provide: LocationStrategy, useClass: HashLocationStrategy }, DataStorageService, SendReceiveService, AuthGuard, ViewDataService, DatePipe, BnNgIdleService],
   // providers: [{ provide: APP_BASE_HREF, useValue: '/inv/dm' }, DataStorageService, SendReceiveService, AuthGuard, ViewDataService, DatePipe, BnNgIdleService],
   // providers: [{ provide: APP_BASE_HREF, useValue: 'dm' }, DataStorageService, SendReceiveService, AuthGuard, ViewDataService, DatePipe, BnNgIdleService],

@@ -24,6 +24,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/donation-management/donation-management.module').then((m) => m.DonationManagementModule)
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/scripctures/scripctures.module').then((m) => m.ScripcturesModule)
+  },
 
   {
     path: '',
