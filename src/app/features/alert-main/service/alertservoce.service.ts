@@ -6,12 +6,12 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 })
 export class AlertService extends BaseHttp {
 
-  alertgetURL = "alert/getAll?operation=alert"
+  alertgetURL = "webSite/getAll?operation=alert"
 
   getrolebyID = "rolePermissions?roleId="
   getroles = "getAll?operation=roles"
 
-  alertpostURL = 'alert/?operation=add'
+  alertpostURL = 'webSite/alerts?operation=add'
 
   getAllAlerts() {
     return this.get<any>(this.alertgetURL)
