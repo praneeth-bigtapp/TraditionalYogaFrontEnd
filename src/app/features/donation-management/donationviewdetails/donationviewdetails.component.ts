@@ -9,7 +9,18 @@ import { DonationserviceService } from '../service/donationservice.service';
 export class DonationviewdetailsComponent implements OnInit {
 
 
-  details!: any
+  details = {
+    amount: "",
+    donorname: "",
+    email: "",
+    mobile: "",
+    isregisteredmember: "",
+    country: "",
+    message: "",
+    modeofpayment: ""
+
+  }
+  apidata!: any
 
 
 
@@ -21,33 +32,24 @@ export class DonationviewdetailsComponent implements OnInit {
     this.getData()
   }
 
-  ngAfterViewInit() {
-
-    // this.getData()
-  }
 
   getData() {
 
-    this.donationservice.getdonationdetails().subscribe({
+    const body = {
+      "donationId": "3"
+    }
+
+    this.donationservice.postdonationdetails(body).subscribe({
       next: (response) => {
         console.log(response);
+        this.apidata = response
+        this.details.amount = this.apidata.amountDonated
+        this.details.modeofpayment = this.apidata.modeOfPayment
+        this.details.message = this.apidata.description
 
       },
       error: (error) => {
         console.error(error.message);
-        
-        // static values
-        this.details = {
-          amount: "1,4,157.00",
-          donorname: "Elizabeth",
-          email: "elizabeth@gmail.com",
-          mobile: "+91 9985575669",
-          isregisteredmember: "Yes",
-          country: "India",
-          message: " when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-          modeofpayment: "Online Payment"
-
-        }
 
       }
     })

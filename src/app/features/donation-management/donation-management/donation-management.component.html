@@ -22,7 +22,7 @@
                 <mat-label>Select category</mat-label>
                 <select matNativeControl  formControlName="checkbox">
                     <option value="" selected></option>
-                    <option *ngFor="let item of category" [value]="item.roleId">{{item.roleName}}
+                    <option *ngFor="let item of data" [value]="item.roleId">{{item.roleName}}
                     </option>
                 </select>
             </mat-form-field>
@@ -33,10 +33,10 @@
 
       <div class="col-md-4 border-top border-left border-bottom  py-4  text-center">
           <!-- add icon -->
-          <h1 class="text-muted  pt-4"><i class="fa-solid fa-dollar-sign "></i></h1>
+          <h1 class="text-muted  pt-4"><i class="fas fa-rupee-sign"></i></h1>
       </div>
       <div class="col-md-8  border-top border-right border-bottom py-5 ps-4  my-auto">
-          <h3> ₹ {{ total }}</h3>
+          <h3> {{ total | currency:"INR"}}</h3>
           <p class="fw-lighter">Total Amount of Donated Recived</p>
       </div>
 
@@ -48,13 +48,13 @@
          
             <ng-container matColumnDef="S_No" >
               <th mat-header-cell *matHeaderCellDef class="col-1"> S.No </th>
-              <td mat-cell *matCellDef="let element" class="col-1"> {{element.S_No}} </td>
+              <td mat-cell *matCellDef="let element" class="col-1"> {{element.donationId}} </td>
             </ng-container>
           
           
             <ng-container matColumnDef="Date">
               <th mat-header-cell *matHeaderCellDef class="col-2"> Date</th>
-              <td mat-cell *matCellDef="let element" class="col-2"> {{element.Date}} </td>
+              <td mat-cell *matCellDef="let element" class="col-2"> {{element.date}} </td>
             </ng-container>
           
            
@@ -71,7 +71,7 @@
 
             <ng-container matColumnDef="Amountdonated">
               <th mat-header-cell *matHeaderCellDef class="col"> Amountdonated</th>
-              <td mat-cell *matCellDef="let element" class="col"> {{element.Amountdonated}} </td>
+              <td mat-cell *matCellDef="let element" class="col"> {{element.amountDonated}} </td>
             </ng-container>
 
             <ng-container  matColumnDef="ViewDetails">

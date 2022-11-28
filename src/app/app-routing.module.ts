@@ -22,6 +22,11 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
+      import('./features/map-users/map-users.module').then((m) => m.MapUsersModule)
+  },
+  {
+    path: '',
+    loadChildren: () =>
       import('./features/donation-management/donation-management.module').then((m) => m.DonationManagementModule)
   },
   {

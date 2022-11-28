@@ -8,10 +8,8 @@
                     <mat-label>Select Course Category</mat-label>
                     <select matNativeControl [disabled]="disableSelect.value">
           <option value="" selected></option>
-          <option value="volvo">Volvo</option>
-          <option value="saab" disabled>Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
+          <option value="volvo" *ngFor="let item of categorySelect" [value]="item.courseId">{{item.category}}</option>
+          
         </select>
                 </mat-form-field>
             </div>
