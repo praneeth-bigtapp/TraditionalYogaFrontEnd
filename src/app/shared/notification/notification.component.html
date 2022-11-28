@@ -1,0 +1,89 @@
+<div class="ConfigurationTypes_textpadding p-5 bg-light">
+    <h3 class="mb-5 pl-2"> Notifications </h3>
+
+    <div class="card border-light pt-3 ">
+
+        <div class="card-body">
+
+
+            <form [formGroup]="notificationform" class=" me-5" (ngSubmit)="addmedia()">
+
+                <!-- Back Cover -->
+                <div class=" row align-items-center  ">
+                    <h6 class="text-right col-4 ">Select Category</h6>
+                    <div class="col ">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Select Category</mat-label>
+                            <mat-select formControlName="category">
+                                <mat-option *ngFor="let notification of notificationtypes" [value]="notification">
+                                    {{notification}}</mat-option>
+                            </mat-select>
+                            <mat-error [hidden]="!notificationform.get('category')?.hasError('required')">
+                                Please Select Category
+                            </mat-error>
+                        </mat-form-field>
+
+                    </div>
+                </div>
+                <!-- Title -->
+                <div class="row align-items-center ">
+                    <h6 class="text-right col-4">Title </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="">
+                            <mat-label>Title</mat-label>
+                            <input matInput autocomplete="off" formControlName="title" required>
+                            <mat-error [hidden]="!notificationform.get('title')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+
+                <!-- Image -->
+                <div class="row align-items-center align-items-center ">
+                    <h6 class="text-right col-md-4">Upload File </h6>
+
+                    <div class="col-md ">
+                        <input type="file" class="border" id="file" formControlName="file"
+                            (change)="onfilechange($event)" accept="image/*" required="true" /> <br />
+
+                        <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
+                    </div>
+
+                </div>
+
+
+
+
+                <!-- Descriptions  -->
+                <div class="row align-items-center">
+                    <h6 class="text-right col-4">Message </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="">
+                            <mat-label>Message</mat-label>
+                            <textarea matInput class="p-2" formControlName="description" rows="3"
+                                placeholder="Description"></textarea>
+                            <mat-error [hidden]="!notificationform.get('description')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+
+                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block float-right"> Upload
+                </button>
+
+            </form>
+        </div>
+
+    </div>
+
+
+
+</div>

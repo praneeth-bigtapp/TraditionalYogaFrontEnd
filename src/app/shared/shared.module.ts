@@ -16,13 +16,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   declarations: [
     DialogPopupComponent,
     FilterDirective,
     InvalidRecordsComponent,
-    UploadFileComponent
+    UploadFileComponent,
+    NotificationComponent
   ],
   imports: [
     CommonModule,
