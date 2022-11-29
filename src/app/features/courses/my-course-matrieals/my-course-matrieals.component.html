@@ -141,45 +141,63 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <button mat-button class="bg-light border-light border border  px-5 me-3">Add</button>
+                <button mat-button class="bg-light border-light border border  px-5 me-3">Upload</button>
         
             </div>
             </form>
     </div>
    </div>
    <div  class=" rounded mt-3 mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-striped table-striped table-bordered" >
+    <table mat-table mat-sort [dataSource]="filterData.dataSource" class="mat-elevation-z8 table-striped table-striped table-bordered" >
 
 
      
         <ng-container matColumnDef="S_No" >
-          <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> S.No </th>
-          <td mat-cell *matCellDef="let element" class="col-2 mx-2"> {{element.S_No}} </td>
+            <th mat-header-cell *matHeaderCellDef class="col-2 text-center " > <label>S_No</label>
+                <input matInput type="text" (keyup)="updatePagination()" 
+                [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;width: 90%;"  /></th>
+          <!-- <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
+            <label mat-sort-header>
+                S.No
+            </label>
+            <input type="text" (keyup)="updatePagination('courseId')"
+                [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
+        </th> -->
+          <td mat-cell *matCellDef="let element" class="col-2 mx-2 text-center"> {{element.S_No}} </td>
         </ng-container>
       
       
-        <ng-container matColumnDef="Title">
-          <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> Title</th>
-          <td mat-cell *matCellDef="let element" class="col-2 px-2"> {{element.title}} </td>
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef class="col-2 text-center"><label>Title</label>
+            <input matInput type="text" (keyup)="updatePagination()" 
+            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;width: 90%;" class="mx-2"  /></th>
+          <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center"> {{element.title}} </td>
         </ng-container>
       
        
-        <ng-container matColumnDef="Description">
-          <th mat-header-cell *matHeaderCellDef class="col-4 text-center"> Description </th>
-          <td mat-cell *matCellDef="let element" class="col-4 px-2"> {{element.description}} </td>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef class="col-4 text-center">  <label>Description</label>
+            <input matInput type="text" (keyup)="updatePagination()" 
+            [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2"   /></th>
+          <td mat-cell *matCellDef="let element" class="col-4 px-2 text-center"> {{element.description}} </td>
         </ng-container>
       
        
-        <ng-container matColumnDef="Media type">
-          <th mat-header-cell *matHeaderCellDef class=" text-center col-2"> Media type</th>
+        <ng-container matColumnDef="mtype">
+          <th mat-header-cell *matHeaderCellDef class=" text-center col-2">  <label> Media type</label>
+            <input matInput type="text" (keyup)="updatePagination()" 
+            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;width: 90%;" class="mx-2"   /></th>
           <td mat-cell *matCellDef="let element" class="text-center col-2 px-2"> {{element.mtype}} </td>
         </ng-container>
 
       
 
         <ng-container  matColumnDef="Details">
-          <th mat-header-cell *matHeaderCellDef class=" text-center col-2"> Details</th>
-          <td mat-cell *matCellDef="let element" class="d-flex justify-content-center col-2 my-4 ml-3 px-2 "> <i class="fa fa-eye ms-5" (click)="viewDetails(element.blacklistuserId)" style="color:purple"></i> </td>
+          <th mat-header-cell *matHeaderCellDef class=" text-center col-2"> <label> Details</label>
+            <!-- <input matInput type="text" (keyup)="updatePagination()" 
+            [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;"   /></th> -->
+          
+          <td mat-cell *matCellDef="let element" class="text-center col-2 my-4  "> <i class="fa fa-eye " (click)="viewDetails(element.blacklistuserId)" style="color:purple"></i> </td>
         </ng-container>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

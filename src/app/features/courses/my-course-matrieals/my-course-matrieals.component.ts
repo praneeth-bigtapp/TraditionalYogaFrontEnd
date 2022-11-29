@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -8,9 +10,13 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./my-course-matrieals.component.css']
 })
 export class MyCourseMatriealsComponent implements OnInit {
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort!: MatSort;
 courses!:FormGroup;
 coursesDescription!:FormGroup
 FormDeatils!:FormGroup
+filterData:any
+gridData = [];
 // data:any;
 datas:any
 data=[{'S_No':'1', 'title':'Traditional Yoga', 'description':"All the scriptures which need to the shared with the students will be avaliable in this section.", "mtype":"images"},
@@ -19,7 +25,7 @@ data=[{'S_No':'1', 'title':'Traditional Yoga', 'description':"All the scriptures
 {'S_No':'1', 'title':'Traditional Yoga', 'description':"All the scriptures which need to the shared with the students will be avaliable in this section.", "mtype":"images"},
 {'S_No':'1', 'title':'Traditional Yoga', 'description':"All the scriptures which need to the shared with the students will be avaliable in this section.", "mtype":"images"}]
 dataSource: any;
-displayedColumns: string[] = ['S_No', 'Title', 'Description', "Media type", "Details"];
+displayedColumns: string[] = ['S_No', 'title', 'description', "mtype", "Details"];
 
   constructor(private formbuilder:FormBuilder) { }
 
@@ -46,10 +52,31 @@ displayedColumns: string[] = ['S_No', 'Title', 'Description', "Media type", "Det
     
 
    })
-   this.dataSource = new MatTableDataSource<any>(this.data);
+   this.filterData = {
+    filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
+    gridData: this.gridData,
+    dataSource: this.dataSource,
+    paginator: this.paginator,
+    sort: this.sort
+  }
+
+  this.dataSource = new MatTableDataSource<any>(this.data)
+  this.filterData.gridData = this.data;
+  this.filterData.dataSource = this.dataSource;
+  this.dataSource.paginator = this.paginator;
+  this.dataSource.sort = this.sort;
+  this.filterData.sort = this.sort;
+  for (let col of this.filterData.filterColumnNames) {
+    col.Value = '';
+  }
   }
   viewDetails(element:any){
 
   }
+  updatePagination() {
+
+    this.dataSource.paginator = this.paginator;
+  }
+
 
 }
