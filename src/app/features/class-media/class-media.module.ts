@@ -10,6 +10,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSortModule } from '@angular/material/sort';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -26,7 +34,22 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatFormFieldModule,
     MatButtonModule,
     MatTableModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSortModule,
+   
+   
+    FormsModule,
+    
+  
+    ReactiveFormsModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatSlideToggleModule,
+    SharedModule,
+   
+    
   ]
 })
 export class ClassMediaModule { }
