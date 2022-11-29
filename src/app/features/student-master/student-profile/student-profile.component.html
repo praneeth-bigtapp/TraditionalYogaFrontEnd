@@ -1,21 +1,33 @@
 <div class="ConfigurationTypes_textpadding">
     <div class="card border-light">
         <div class="card-header border-0">
-            <h3 class="d-inline-block"> View Student </h3>
-            <form class=" d-inline-block float-end" [formGroup]="searchStudentForm" (ngSubmit)="onStudentSearch()">
-                <mat-form-field appearance="fill">
-                    <mat-label>Select Student</mat-label>
-                    <mat-select placeholder="Select Student" formControlName="studentId" disableOptionCentering
-                        required>
-                        <mat-option *ngFor="let student of StudentList" [value]="student.studentId"
-                            (click)="onSelectStudent(student) ">
-                            {{student.name}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="searchStudentForm.controls['studentId'].hasError('required')">
-                        Student is to be selected
-                    </mat-error>
-                </mat-form-field>
+            <form class="row" [formGroup]="searchStudentForm">
+                <h3 class="d-inline-block col-md-6"> View Student </h3>
+                <div class="col-md-3 float-end">
+                    <mat-form-field appearance="fill" *ngIf="studentSelectStatus">
+                        <mat-label>Select Course</mat-label>
+                        <mat-select formControlName="course" required>
+                            <mat-option *ngFor="let course of CourseList" [value]="course.courseId">
+                                {{course.courseName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3 float-end">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Select Student</mat-label>
+                        <mat-select placeholder="Select Student" formControlName="studentId" disableOptionCentering
+                            required>
+                            <mat-option *ngFor="let student of StudentList" [value]="student.studentId"
+                                (click)="onSelectStudent(student) ">
+                                {{student.name}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="searchStudentForm.controls['studentId'].hasError('required')">
+                            Student is to be selected
+                        </mat-error>
+                    </mat-form-field>
+                </div>
             </form>
         </div>
 
@@ -50,7 +62,7 @@
                                 <mat-card class="example-card">
                                     <p class="text-center">Student images</p>
                                     <div class="profile-pic text-center rounded-circle bg-ty-profile">
-                                        <img src="../../../../assets/images/user-profile.png" width="100"
+                                        <img src="assets/images/user-profile.png" width="100"
                                             alt="user pic" />
                                     </div>
                                 </mat-card>
@@ -71,7 +83,7 @@
                                     <div class="row  pl-4 pb-1">
                                         <div class="col-md-4">
                                             <div class="icon-place d-inline-block align-top pr-3">
-                                                <img src="../../../../assets/images/profile-usericon.png"
+                                                <img src="assets/images/profile-usericon.png"
                                                     width="30px" />
                                             </div>
                                             <div class="d-inline-block align-top">
@@ -92,7 +104,7 @@
                                     <div class="row  pl-4 pb-1">
                                         <div class="col-md-4">
                                             <div class="icon-place d-inline-block align-top pr-3">
-                                                <img src="../../../../assets/images/profile-information.png"
+                                                <img src="assets/images/profile-information.png"
                                                     width="30px" />
                                             </div>
                                             <div class="d-inline-block align-top">
@@ -113,7 +125,7 @@
                                     <div class="row  pl-4 pb-1">
                                         <div class="col-md-12">
                                             <div class="icon-place d-inline-block align-top pr-3">
-                                                <img src="../../../../assets/images/profile-location.png"
+                                                <img src="assets/images/profile-location.png"
                                                     width="30px" />
                                             </div>
                                             <div class="d-inline-block align-top">
@@ -126,7 +138,7 @@
                                     <div class="row  pl-4 pb-1">
                                         <div class="col-md-8">
                                             <div class="icon-place d-inline-block align-top pr-3">
-                                                <img src="../../../../assets/images/profile-mail.png" width="30px" />
+                                                <img src="assets/images/profile-mail.png" width="30px" />
                                             </div>
                                             <div class="d-inline-block align-top">
                                                 <h6>{{studentProfile.emailId}}</h6>
@@ -142,7 +154,7 @@
                                     <div class="row  pl-4 pb-1">
                                         <div class="col-md-12">
                                             <div class="icon-place d-inline-block align-top pr-3">
-                                                <img src="../../../../assets/images/profile-ip.png" width="30px" />
+                                                <img src="assets/images/profile-ip.png" width="30px" />
                                             </div>
                                             <div class="d-inline-block align-top">
                                                 <h6>{{studentProfile.registedIpAddress}}</h6>
@@ -155,7 +167,7 @@
                                         <div class="col-md-12">
                                             <div class="icon-place d-inline-block align-top pr-3"
                                                 style="width:50px; display:inline-block">
-                                                <img src="../../../../assets/images/profile-ip.png" width="30px" />
+                                                <img src="assets/images/profile-ip.png" width="30px" />
                                             </div>
                                             <div class="d-inline-block align-top">
                                                 <mat-radio-group aria-label="Select an option" class="d-inline-block">
@@ -178,7 +190,7 @@
                                     <div class="row pl-4 pb-1">
                                         <div class="col-md-12">
                                             <div class="icon-place d-inline-block align-top pr-3">
-                                                <img src="../../../../assets/images/profile-note.png" width="30px" />
+                                                <img src="assets/images/profile-note.png" width="30px" />
                                             </div>
                                             <div class="d-inline-block align-top">
                                                 <h6>{{studentProfile.courseName}}</h6>
@@ -194,19 +206,8 @@
                 </div>
 
                 <div class="tab-pane" id="tabs-2" role="tabpanel">
-                    <form class="row p-5" [formGroup]="courseForm" (ngSubmit)="onCourseSubmit()">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Select Course</mat-label>
-                                    <mat-select formControlName="course" required>
-                                        <mat-option *ngFor="let course of CourseList" [value]="course.courseId">
-                                            {{course.courseName}}
-                                        </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-                        </div>
+                    <!-- <form class="row p-5" [formGroup]="courseForm" (ngSubmit)="onCourseSubmit()">
+
 
                         <div class="col-md-6">
                             <div class="mb-3 mt-1 pt-1 float-end">
@@ -218,7 +219,7 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </form> -->
                     <div class="clearfix"></div>
 
                     <table class="table table-bordered" style="vertical-align:text-top">
@@ -413,12 +414,11 @@
                                 <mat-card class="example-card">
                                     <p class="text-center">Student images</p>
                                     <div class="profile-pic text-center rounded-circle bg-ty-profile">
-                                        <img src="../../../../assets/images/user-profile.png" width="100"
+                                        <img src="assets/images/user-profile.png" width="100"
                                             alt="user pic" />
                                     </div>
                                 </mat-card>
                             </div>
-                            <div class="clearfix"></div>
                             <div class="col-md-9">
                                 <div class="bg-white">
                                     <h5 class="pt-3 pl-4"> Donations </h5>
@@ -475,7 +475,7 @@
                                 <mat-card class="example-card">
                                     <p class="text-center">Student images</p>
                                     <div class="profile-pic text-center rounded-circle bg-ty-profile">
-                                        <img src="../../../../assets/images/user-profile.png" width="100"
+                                        <img src="assets/images/user-profile.png" width="100"
                                             alt="user pic" />
                                     </div>
                                 </mat-card>
@@ -536,7 +536,7 @@
                                 <mat-card class="example-card">
                                     <p class="text-center">Student images</p>
                                     <div class="profile-pic text-center rounded-circle bg-ty-profile">
-                                        <img src="../../../../assets/images/user-profile.png" width="100"
+                                        <img src="assets/images/user-profile.png" width="100"
                                             alt="user pic" />
                                     </div>
                                 </mat-card>
@@ -612,7 +612,7 @@
                                 <mat-card class="example-card">
                                     <p class="text-center">Student images</p>
                                     <div class="profile-pic text-center rounded-circle bg-ty-profile">
-                                        <img src="../../../../assets/images/user-profile.png" width="100"
+                                        <img src="assets/images/user-profile.png" width="100"
                                             alt="user pic" />
                                     </div>
                                 </mat-card>
@@ -728,7 +728,7 @@
                             <div class="col-md-4">
                                 <mat-form-field appearance="fill">
                                     <mat-label>Select Courses</mat-label>
-                                    <mat-select formControlName="category" required>
+                                    <mat-select formControlName="category">
                                         <mat-option *ngFor="let course of CourseList" [value]="course.courseId">
                                             {{course.courseName}}
                                         </mat-option>
@@ -738,15 +738,17 @@
                             <div class="col-md-4">
                                 <mat-form-field appearance="fill">
                                     <mat-label>Courses</mat-label>
-                                    <input matInput autocomplete="off" formControlName="Courses" required>
+                                    <input matInput autocomplete="off" formControlName="Courses">
                                 </mat-form-field>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
+                                <mat-label>Start Date</mat-label>
                                 <input type="date" formControlName="startDate" class="mt-3" placeholder="StartDate ">
                             </div>
                             <div class="col-md-4">
+                                <mat-label>End Date</mat-label>
                                 <input type="date" formControlName="endDate" class="mt-3" placeholder="EndDate ">
                             </div>
 

@@ -6,7 +6,7 @@
 
         <div class="col-md-3 pt-2 ">
             <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 " (click)="onAddBanner()">
-                <i class="fa-solid fa-folder"></i> Add banner
+                <i class="fa-solid fa-archive"></i> Add banner
             </button>
         </div>
         <div class="col-md-3 pt-4">
@@ -18,15 +18,15 @@
 
         <ng-container matColumnDef="bannerId">
             <th mat-header-cell class="col-md-2 pt-4" *matHeaderCellDef> 
-                <input type="checkbox" style="width: 20px" class="mx-auto">
+                <input type="checkbox" style="width: 20px" class="mx-auto" (click)="checkAll($event)">
             </th>
             <td class="col-md-2" *matCellDef="let element">
-                <input type="checkbox">
+                <input [checked]="element.check == 'false'" type="checkbox">
             </td>
         </ng-container>
 
         <ng-container matColumnDef="bannerName">
-            <th mat-header-cell class="col-md-6" *matHeaderCellDef mat-sort-header> Date of Blacklist</th>
+            <th mat-header-cell class="col-md-6" *matHeaderCellDef mat-sort-header> Banner Name </th>
             <td class="row col-md-6" *matCellDef="let element">
                 <div style="display: flex ;">
                     <div> {{element.bannerName}} - <span class="text-success"> Published </span></div>
@@ -56,7 +56,7 @@
         </ng-container>
 
         <ng-container matColumnDef="date">
-            <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header> Comments</th>
+            <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header> Date of add </th>
             <td mat-cell class="col" *matCellDef="let element">
                 Last Modified<br> {{element.Comments || "at Wed 2 2017"}} 
             </td>
