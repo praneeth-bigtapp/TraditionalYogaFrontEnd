@@ -2,12 +2,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/services/auth/auth.service';
 import { ViewDataComponent } from './features/view-data/view-data.component';
+import { NotificationComponent } from './shared/notification/notification.component';
 
 const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
       import('./features/auth/auth.module').then((m) => m.AuthModule)
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/member/member.module').then((m) => m.MemberModule)
   },
   {
     path: '',
@@ -124,7 +130,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     component: ViewDataComponent
   },
-
+  {
+    path: 'notification',
+    canActivate: [AuthGuard],
+    component: NotificationComponent
+  },
   {
     path: '**',
     redirectTo: '',
