@@ -42,10 +42,20 @@ export class DonationviewdetailsComponent implements OnInit {
     this.donationservice.postdonationdetails(body).subscribe({
       next: (response) => {
         console.log(response);
+
+
         this.apidata = response
-        this.details.amount = this.apidata.amountDonated
-        this.details.modeofpayment = this.apidata.modeOfPayment
-        this.details.message = this.apidata.description
+
+        const { amountDonated, modeOfPayment, description } = this.apidata
+        const { registedIpAddress, name, mobile, address, emailId } = this.apidata.student
+        this.details.amount = amountDonated
+        this.details.modeofpayment = modeOfPayment
+        this.details.message = description
+        this.details.donorname = name
+        this.details.email = emailId
+        this.details.mobile = mobile
+        this.details.isregisteredmember = registedIpAddress == "" ? "N/A" : registedIpAddress
+        this.details.country = address
 
       },
       error: (error) => {
