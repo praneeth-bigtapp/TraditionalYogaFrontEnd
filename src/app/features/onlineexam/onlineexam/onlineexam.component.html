@@ -1,0 +1,80 @@
+<div class="ConfigurationTypes_textpadding p-5 bg-light">
+    <h3 class="mb-4 pl-2 text-secondary ">Online Exams</h3>
+    <div class="bg-white  border p-4">
+        <form class="" [formGroup]="onlineexamform" (ngSubmit)="onlineexamsubmit()">
+            <div class="row">
+
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Select Course</mat-label>
+                        <mat-select formControlName="course">
+                            <mat-option *ngFor="let course of courselist" [value]="course.courseId">
+                                {{course.courseName}}</mat-option>
+                        </mat-select>
+                        <mat-error [hidden]="!onlineexamform.get('course')?.hasError('required')">
+                            Please Select Course
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Test Type</mat-label>
+                        <mat-select formControlName="testtype">
+                            <mat-option *ngFor="let type of typetestlist" [value]="type">
+                                {{type}}</mat-option>
+                        </mat-select>
+                        <mat-error [hidden]="!onlineexamform.get('testtype')?.hasError('required')">
+                            Please Select Type
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Test Name</mat-label>
+                        <input matInput autocomplete="off" formControlName="testname" required>
+                        <mat-error [hidden]="!onlineexamform.get('testname')?.hasError('required')">
+                            Please Type Few Words
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Level of Test</mat-label>
+                        <mat-select formControlName="leveltest">
+                            <mat-option *ngFor="let type of testlevel" [value]="type">
+                                {{type}}</mat-option>
+                        </mat-select>
+                        <mat-error [hidden]="!onlineexamform.get('leveltest')?.hasError('required')">
+                            Please Select Test level
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <div class="">
+                <label class="" for="file">Upload Excel File</label>
+                <input type="file" id="file" formControlName="file" class="border" accept=" application/*"
+                    (change)="onfilechange($event)" required="true" />
+                <br />
+                <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
+
+            </div>
+            <div class="">
+                <mat-form-field appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput class="p-2" formControlName="description" rows="3"
+                        placeholder="Description"></textarea>
+                    <mat-error [hidden]="!onlineexamform.get('description')?.hasError('required')">
+                        Please Type Few Words
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block"> Submit
+            </button>
+        </form>
+
+    </div>
+</div>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CourseMainComponent } from './course-main/course-main.component';
 import { CourseMediaPraticeComponent } from './course-media-pratice/course-media-pratice.component';
+import { MyCourseMatriealsComponent } from './my-course-matrieals/my-course-matrieals.component';
 
 const routes: Routes = [
   {
@@ -10,6 +11,10 @@ const routes: Routes = [
   },
   {
     path: "coursesaddmedia", component: CourseMediaPraticeComponent
+
+  },
+  {
+    path: "MycourseMatrieals", component: MyCourseMatriealsComponent
 
   }
 ];

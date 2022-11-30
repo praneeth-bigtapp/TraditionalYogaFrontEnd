@@ -35,11 +35,27 @@ export class BannersComponent implements OnInit {
     this.banner.getbanner().subscribe({
       next: (response) => {
         this.data = response
+        for (let data of this.data) {
+          data.check = false;
+        }
+        console.log(this.data);
+
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }
     });
+  }
+
+  checkAll(status: any) {
+    console.log(status.value);
+    for (let data of this.data) {
+      data.check = true;
+    }
+    console.log(this.data);
+    this.dataSource = new MatTableDataSource<any>(this.data)
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   onAddBanner() {

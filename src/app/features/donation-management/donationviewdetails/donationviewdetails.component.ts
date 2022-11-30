@@ -17,7 +17,8 @@ export class DonationviewdetailsComponent implements OnInit {
     isregisteredmember: "",
     country: "",
     message: "",
-    modeofpayment: ""
+    modeofpayment: "",
+    identityproof: ""
 
   }
   apidata!: any
@@ -42,10 +43,21 @@ export class DonationviewdetailsComponent implements OnInit {
     this.donationservice.postdonationdetails(body).subscribe({
       next: (response) => {
         console.log(response);
+
+
         this.apidata = response
-        this.details.amount = this.apidata.amountDonated
-        this.details.modeofpayment = this.apidata.modeOfPayment
-        this.details.message = this.apidata.description
+
+        const { amountDonated, modeOfPayment, description, identityproof } = this.apidata
+        const { registedIpAddress, name, mobile, address, emailId } = this.apidata.student
+        this.details.amount = amountDonated || "NIL"
+        this.details.modeofpayment = modeOfPayment || "NIL"
+        this.details.message = description || "NIL"
+        this.details.donorname = name || "NIL"
+        this.details.email = emailId || "NIL"
+        this.details.mobile = mobile || "NIL"
+        this.details.isregisteredmember = registedIpAddress || "NIL"
+        this.details.country = address || "NIL"
+        this.details.identityproof = identityproof || "NIL"
 
       },
       error: (error) => {

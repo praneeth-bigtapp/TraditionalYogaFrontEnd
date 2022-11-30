@@ -1,5 +1,10 @@
 <nav id="sidebar" [ngClass]="sidebar? 'active':''">
     <ul class="list-unstyled components">
+        <li class="list-unstyled" [ngClass]="{'active': dashboardStatus}">
+            <a [routerLink]="['/dashboard']" (click)="dashboardStatus =true">
+                <span class="ml-1"> Dash Board</span>
+            </a>
+        </li>
         <li class="" *ngFor="let menu of menuList; let i=index">
             <a href="#homeSubmenu{{i}}" data-toggle="collapse" [attr.aria-expanded]="selectedIndex === i"
                 aria-expanded="false" class="dropdown-toggle " (click)="onModule(i)">

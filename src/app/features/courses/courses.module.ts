@@ -19,13 +19,15 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CourseMediaPraticeComponent } from './course-media-pratice/course-media-pratice.component';
 import { MatSelectModule } from '@angular/material/select';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { MyCourseMatriealsComponent } from './my-course-matrieals/my-course-matrieals.component';
 
 
 
 @NgModule({
   declarations: [
     CourseMainComponent,
-    CourseMediaPraticeComponent
+    CourseMediaPraticeComponent,
+    MyCourseMatriealsComponent
   ],
   imports: [
     CommonModule,

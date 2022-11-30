@@ -10,10 +10,10 @@
 
                 <!-- Back Cover -->
                 <div class=" row align-items-center  ">
-                    <h6 class="text-right col-md-4 ">Upload Book Cover Image</h6>
+                    <h6 class="text-md-right col-md-4 ">Upload Book Cover Image</h6>
                     <div class="col-md ">
-                        <input type="file" id="file" formControlName="coverimage" (change)="onfilechange('backcover')"
-                            accept="image/*" required="true" /> <br />
+                        <input type="file" id="file" class="border" formControlName="coverimage"
+                            (change)="onfilechange('backcover')" accept="image/*" required="true" /> <br />
 
                         <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
                     </div>
@@ -22,11 +22,11 @@
 
                 <!-- Image -->
                 <div class="row align-items-center align-items-center">
-                    <h6 class="text-right col-md-4">Upload File </h6>
+                    <h6 class="text-md-right col-md-4">Upload File </h6>
 
                     <div class="col-md">
-                        <input type="file" id="file" formControlName="coverfile" (change)="onfilechange('backcover')"
-                            accept="image/*" required="true" /> <br />
+                        <input type="file" id="file" class="border" formControlName="coverfile"
+                            (change)="onfilechange('backcover')" accept="image/*" required="true" /> <br />
 
                         <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
                     </div>
@@ -36,7 +36,7 @@
 
                 <!-- Title -->
                 <div class="row align-items-center ">
-                    <h6 class="text-right col-4">Title </h6>
+                    <h6 class="text-md-right col-md-4">Title </h6>
 
                     <div class="col">
                         <mat-form-field appearance="outline" class="ms-3">
@@ -52,7 +52,7 @@
 
                 <!-- Descriptions  -->
                 <div class="row align-items-center">
-                    <h6 class="text-right col-4">Description </h6>
+                    <h6 class="text-md-right col-md-4">Description </h6>
 
                     <div class="col">
                         <mat-form-field appearance="outline" class="ms-3">
@@ -69,7 +69,7 @@
 
                 <!-- Meta Keyword  -->
                 <div class="row align-items-center ">
-                    <h6 class="text-right col-4">Meta Keywords </h6>
+                    <h6 class="text-md-right col-md-4">Meta Keywords </h6>
 
                     <div class="col">
                         <mat-form-field appearance="outline" class="ms-3">
@@ -84,17 +84,13 @@
                 </div>
 
 
-                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block float-right"> Submit
+                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block float-md-right">
+                    Submit
                 </button>
 
             </form>
         </div>
 
-    </div>
-
-    <br />
-
-    <div class="card border-light pt-3  ">
     </div>
 
 </div>

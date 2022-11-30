@@ -19,7 +19,8 @@ export class SideNavComponent implements OnInit {
   isRefresh!: boolean;
   selectedSubModuleId: any;
   className: any;
-
+  
+  dashboardStatus: boolean = false;
   status: boolean = false;
   clickEvent() {
     this.status = !this.status;
@@ -80,7 +81,7 @@ export class SideNavComponent implements OnInit {
   }
 
   navigateToSubMenu(menu: any) {
-    console.log(menu);
+    this.dashboardStatus = false;
     this.menuId = menu.subModuleId;
     localStorage.setItem("selectedSubModuleId", this.menuId)
     this.sendReceiveService.navigateToMenu(this.menuId);

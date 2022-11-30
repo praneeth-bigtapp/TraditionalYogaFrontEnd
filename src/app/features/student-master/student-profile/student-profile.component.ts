@@ -68,12 +68,13 @@ export class StudentProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchStudentForm = this.formBuilder.group({
-      studentId: [null, Validators.required]
+      course: [null],
+      studentId: [null]
     });
     this.searchStudentForm.controls['studentId'].disable();
 
     this.courseForm = this.formBuilder.group({
-      course: [null, Validators.required]
+      
     });
 
     this.AddPurchaseForm = this.formBuilder.group({
@@ -85,10 +86,10 @@ export class StudentProfileComponent implements OnInit {
     this.AddVolunteerForm = this.formBuilder.group({
       category: [null, Validators.required],
       Courses: [null, Validators.required],
-      startDate: [null, Validators.required],
-      endDate: [null, Validators.required],
-      members: [null, Validators.required],
-      servedAs: [null, Validators.required]
+      startDate: [null],
+      endDate: [null],
+      members: [null],
+      servedAs: [null]
     });
 
     this.getStudentList();

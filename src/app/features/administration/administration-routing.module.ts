@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ModuleComponent } from './module/module.component';
+import { ParametersComponent } from './parameters/parameters.component';
 import { RolePermissionsComponent } from './role-permissions/role-permissions.component';
 import { RolesComponent } from './roles/roles.component';
 import { SubModuleComponent } from './sub-module/sub-module.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'module', component: ModuleComponent },
   { path: 'subModule', component: SubModuleComponent },
   { path: 'rolePermission', component: RolePermissionsComponent },
+  { path: 'parameters', component: ParametersComponent },
 ];
 
 @NgModule({
