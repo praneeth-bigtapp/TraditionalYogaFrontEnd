@@ -27,6 +27,7 @@ export class LiveComponent implements OnInit {
   shortvideoform!: FormGroup
 
   typecategory!: any
+  displaycontent: boolean = false
 
 
   constructor(
@@ -97,7 +98,7 @@ export class LiveComponent implements OnInit {
 
   coursechange() {
 
-
+    this.displaycontent = false
     this.categoryerror = false
     if (this.coursename == undefined || this.coursename == null) {
       this.categoryerror = true
@@ -108,7 +109,7 @@ export class LiveComponent implements OnInit {
 
   typechange() {
 
-
+    this.displaycontent = false
     this.categoryerror2 = false
     if (this.categoryname == undefined || this.categoryname == null) {
       this.categoryerror2 = true
@@ -119,9 +120,8 @@ export class LiveComponent implements OnInit {
   gobutton() {
     this.typechange()
     this.coursechange()
-    console.log(this.categoryname);
-    console.log(this.coursename);
-
+    if (this.categoryname && this.coursename)
+      this.displaycontent = true
 
   }
 

@@ -25,14 +25,14 @@
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col" *ngIf="displaycontent">
                 <h4 class="text-center mt-4">Performance Rating</h4>
             </div>
 
         </div>
 
         <br />
-        <table class="w-100 p-5 ">
+        <table class="w-100 p-5 " *ngIf="displaycontent">
             <thead class="border-bottom">
                 <tr class="">
                     <th class="">&nbsp;</th>

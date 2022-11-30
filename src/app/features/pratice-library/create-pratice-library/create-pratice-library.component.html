@@ -6,7 +6,7 @@
             <div class="w-25 me-5">
                 <mat-form-field appearance="fill">
                     <mat-label>Select Category</mat-label>
-                    <mat-select [(ngModel)]="category">
+                    <mat-select [(ngModel)]="category" (ngModelChange)="coursechange()">
                         <mat-option value="live">Live</mat-option>
                         <mat-option value="recording">Recording</mat-option>
                     </mat-select>
@@ -19,98 +19,105 @@
                 </button>
             </div>
         </div>
-        <hr/>
 
-        <div class="card-body">
-            <form [formGroup]="addmediaform" class="" (ngSubmit)="addmedia()">
-                <table class="me-5 ">
-                    <tbody>
-                        <!-- Video URL -->
-                        <tr class="">
-                            <td class="col-2">
-                                <h6 class="text-right">Video Link : </h6>
-                            </td>
-                            <td>
-                                <mat-form-field appearance="fill" class="ms-3">
-                                    <mat-label>Video Link</mat-label>
-                                    <input matInput autocomplete="off" formControlName="videolink" required>
-                                    <mat-error [hidden]="!addmediaform.get('videolink')?.hasError('required')">
-                                        Please Add URL
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-                        </tr>
 
-                        <tr class="">
-                            <td class="col-2">
-                                <h6 class="text-right">Duration of Video : </h6>
-                                <p class="text-right">(Hours:Minues)</p>
-                            </td>
-                            <td>
-                                <input type="time" formControlName="videoduration" class="ms-3"
-                                    (change)="ontimechange()">
-                                <mat-error *ngIf="timerror">
-                                    Please Add Duration
-                                </mat-error>
-                            </td>
-                        </tr>
+        <div class="card-body" *ngIf="displaycontent">
+            <hr />
+            <form [formGroup]="addmediaform" class="me-5" (ngSubmit)="addmedia()">
 
-                        <tr class="">
-                            <td class="col-2">
-                                <h6 class="text-right">Title : </h6>
-                            </td>
-                            <td>
-                                <mat-form-field appearance="fill" class="ms-3">
-                                    <mat-label>Title</mat-label>
-                                    <input matInput autocomplete="off" formControlName="videotitle" required>
-                                    <mat-error [hidden]="!addmediaform.get('videotitle')?.hasError('required')">
-                                        Please Type Few Words
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-                        </tr>
 
-                        <!-- Description -->
-                        <tr class="">
-                            <td class="col-2">
-                                <h6 class="text-right">Message : </h6>
-                            </td>
-                            <td>
-                                <mat-form-field appearance="fill" class="ms-3">
-                                    <mat-label>Message</mat-label>
-                                    <textarea matInput class="p-2" formControlName="videodescription" rows="5"
-                                        placeholder="Description"></textarea>
-                                    <mat-error [hidden]="!addmediaform.get('videodescription')?.hasError('required')">
-                                        Please Type Few Words
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-                        </tr>
+                <!-- Title -->
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Video Link </h6>
 
-                        <!-- Video Meta Keyword-->
-                        <tr class="">
-                            <td class="col-2">
-                                <h6 class="text-right">Meta Keyword : </h6>
-                            </td>
-                            <td>
-                                <mat-form-field appearance="fill" class="ms-3">
-                                    <mat-label>Meta Keyword</mat-label>
-                                    <input matInput autocomplete="off" formControlName="vidoemetakeywords" required>
-                                    <mat-error [hidden]="!addmediaform.get('vidoemetakeywords')?.hasError('required')">
-                                        Please Type Few Words
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="">
+                            <mat-label>Video Link</mat-label>
+                            <input matInput autocomplete="off" formControlName="videolink" required>
+                            <mat-error [hidden]="!addmediaform.get('videolink')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
 
-                <button type="submit" class=" float-md-right btn btn-outline-secondary btn-rounded d-inline-block m-2">
+                </div>
+
+
+
+                <!-- Title -->
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Duration of Video <br /> (Hours : Minutes) </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="">
+                            <mat-label>Duration</mat-label>
+                            <input matInput autocomplete="off" formControlName="videoduration" required>
+                            <mat-error [hidden]="!addmediaform.get('videoduration')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <!-- Title -->
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Title </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="">
+                            <mat-label>Title</mat-label>
+                            <input matInput autocomplete="off" formControlName="videotitle" required>
+                            <mat-error [hidden]="!addmediaform.get('videotitle')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+
+                <!-- Descriptions  -->
+                <div class="row align-items-center">
+                    <h6 class="text-md-right col-md-4">Message </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="">
+                            <mat-label>Message</mat-label>
+                            <textarea matInput class="p-2" formControlName="videodescription" rows="3"
+                                placeholder="Description"></textarea>
+                            <mat-error [hidden]="!addmediaform.get('videodescription')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <!-- Title -->
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Meta Keywords </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="">
+                            <mat-label>Duration</mat-label>
+                            <input matInput autocomplete="off" formControlName="vidoemetakeywords" required>
+                            <mat-error [hidden]="!addmediaform.get('vidoemetakeywords')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+
+                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block float-md-right">
                     Upload
                 </button>
+
             </form>
         </div>
     </div>
-    <br/>
-    <div class="card border-light pt-3"></div>
+
+
 </div>

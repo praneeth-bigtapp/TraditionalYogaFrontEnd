@@ -12,6 +12,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
   category!: string
   addmediaform!: any
   timerror!: boolean
+  displaycontent: boolean = false
   constructor(
     private Router: Router,
     private formbuilder: FormBuilder
@@ -27,10 +28,15 @@ export class CreatePraticeLibraryComponent implements OnInit {
     })
   }
 
+  coursechange() {
 
+
+    this.displaycontent = false
+  }
   gobutton() {
-    const classtype = this.category
-    console.log(classtype);
+    if (this.category)
+      this.displaycontent = true
+    console.log(this.category);
 
   }
 

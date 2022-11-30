@@ -11,6 +11,7 @@ export class ParametersComponent implements OnInit {
   courselist!: any
   coursename!: any
   courserror: boolean = false
+  displaycontent: boolean = false
 
 
   parameters: any = {
@@ -86,7 +87,7 @@ export class ParametersComponent implements OnInit {
   }
   coursechange() {
 
-
+    this.displaycontent = false
     this.courserror = false
     if (this.coursename == undefined || this.coursename == null) {
       this.courserror = true
@@ -97,6 +98,8 @@ export class ParametersComponent implements OnInit {
   gobutton() {
     this.coursechange()
     console.log(this.coursename);
+    if (this.coursename)
+      this.displaycontent = true
 
 
   }
