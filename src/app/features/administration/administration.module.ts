@@ -23,6 +23,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ModuleComponent } from './module/module.component';
 import { SubModuleComponent } from './sub-module/sub-module.component';
+import { ParametersComponent } from './parameters/parameters.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { SubModuleComponent } from './sub-module/sub-module.component';
     RolePermissionsComponent,
     ModuleComponent,
     SubModuleComponent,
+    ParametersComponent,
   ],
   imports: [
     CommonModule,
@@ -48,7 +51,8 @@ import { SubModuleComponent } from './sub-module/sub-module.component';
     MatDialogModule,
     MatSlideToggleModule,
     SharedModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSnackBarModule,
   ],
   providers: [UserService, RolesService, RolePermissionsService]
 })
