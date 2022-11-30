@@ -38,6 +38,11 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
+      import('./features/onlineexam/onlineexam.module').then((m) => m.OnlineexamModule)
+  },
+  {
+    path: '',
+    loadChildren: () =>
       import('./features/scripctures/scripctures.module').then((m) => m.ScripcturesModule)
   },
 

@@ -17,6 +17,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NotificationComponent } from './notification/notification.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { NotificationComponent } from './notification/notification.component';
     StaticDataUploadRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   exports: [DialogPopupComponent, FilterDirective, InvalidRecordsComponent, UploadFileComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

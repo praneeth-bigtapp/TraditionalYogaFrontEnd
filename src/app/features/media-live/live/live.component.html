@@ -22,21 +22,23 @@
                     </mat-form-field>
                 </div>
                 <div class="col-md-3">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Choose an option</mat-label>
-                        <select matNativeControl>
-                            <option value="" selected></option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab" disabled>Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
-                        </select>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Select Type : Live videolink</mat-label>
+                        <mat-select [(ngModel)]="categoryname" (ngModelChange)="typechange()">
+                            <mat-option *ngFor="let course of typecategory" [value]="course">
+                                {{course}}</mat-option>
+                        </mat-select>
+                        <span class="text-danger" *ngIf="categoryerror2">
+                            Please Select Category
+                        </span>
                     </mat-form-field>
 
                 </div>
                 <div class="col-md-1 pt-3">
-                    <button style="background-color: rgb(196, 193, 193); width: 10px; height: 40px;" mat-raised-button
-                        class="pb-4">Go</button>
+                    <button type="button" class="mb-5" (click)="gobutton()"
+                        class="btn btn-outline-secondary btn-rounded d-inline-block   ">
+                        Go
+                    </button>
                 </div>
 
             </div>
@@ -45,7 +47,7 @@
                 <div class="row mb-1">
                     <label for="inputEmail3" class="col-sm-2 col-form-label pt-4 fw-semibold">Class Link</label>
                     <div class="col-sm-10">
-                        <mat-form-field class="example-full-width" appearance="fill" id="field">
+                        <mat-form-field class="example-full-width" appearance="outline" id="field">
                             <mat-label>Paste Video Link</mat-label>
                             <input matInput formControlName="videolink">
                             <mat-error [hidden]="!videoform.get('videolink')?.hasError('required')">
@@ -58,7 +60,7 @@
                     <label for="inputEmail3" class="col-sm-2 col-form-label fw-semibold pt-4">Select date</label>
                     <div class="col-sm-5">
 
-                        <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-form-field class="example-full-width" appearance="outline">
                             <mat-label>Select date</mat-label>
                             <input matInput formControlName="date" placeholder="Ex. Pizza" value="Sushi" type="date">
                             <mat-error [hidden]="!videoform.get('date')?.hasError('required')">
@@ -71,7 +73,7 @@
                 <div class="row mb-1">
                     <label for="inputEmail3" class="col-sm-2 fw-semibold col-form-label  pt-4">Title</label>
                     <div class="col-sm-10">
-                        <mat-form-field class="example-full-width" appearance="fill" id="field">
+                        <mat-form-field class="example-full-width" appearance="outline" id="field">
                             <mat-label>Title here</mat-label>
                             <input matInput formControlName="title">
                             <mat-error [hidden]="!videoform.get('title')?.hasError('required')">
@@ -83,7 +85,7 @@
                 <div class="row mb-1">
                     <label for="inputEmail3" class="col-sm-2 fw-semibold col-form-label  pt-4">Description</label>
                     <div class="col-sm-10">
-                        <mat-form-field class="example-full-width" appearance="fill" id="field">
+                        <mat-form-field class="example-full-width" appearance="outline" id="field">
                             <mat-label>Description here</mat-label>
                             <textarea matInput formControlName="description"
                                 placeholder="Ex. It makes me feel..."></textarea>
@@ -118,7 +120,7 @@
                     <label for="inputEmail3" class="col-sm-2 fw-semibold col-form-label  pt-4">Select</label>
                     <div class="col-sm-5">
 
-                        <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-form-field class="example-full-width" appearance="outline">
                             <mat-label>Select date</mat-label>
                             <input matInput formControlName="date" placeholder="Ex. Pizza" value="Sushi" type="date">
                             <mat-error [hidden]="!shortvideoform.get('date')?.hasError('required')">
@@ -131,7 +133,7 @@
                 <div class="row mb-1">
                     <label for="inputEmail3" class="col-sm-2 fw-semibold col-form-label pt-4">Video Link</label>
                     <div class="col-sm-10">
-                        <mat-form-field class="example-full-width" appearance="fill" id="field">
+                        <mat-form-field class="example-full-width" appearance="outline" id="field">
                             <mat-label>Paste Link</mat-label>
                             <input matInput formControlName="videolink">
                             <mat-error [hidden]="!shortvideoform.get('videolink')?.hasError('required')">
@@ -143,7 +145,7 @@
                 <div class="row mb-1">
                     <label for="inputEmail3" class="col-sm-2 fw-semibold col-form-label pt-4">Duration of video</label>
                     <div class="col-sm-10">
-                        <mat-form-field class="example-full-width" appearance="fill" id="field">
+                        <mat-form-field class="example-full-width" appearance="outline" id="field">
                             <mat-label>30:20</mat-label>
                             <input matInput formControlName="duration">
                             <mat-error [hidden]="!shortvideoform.get('duration')?.hasError('required')">
@@ -155,7 +157,7 @@
                 <div class="row mb-1">
                     <label for="inputEmail3" class="col-sm-2 fw-semibold col-form-label pt-4">Title</label>
                     <div class="col-sm-10">
-                        <mat-form-field class="example-full-width" appearance="fill" id="field">
+                        <mat-form-field class="example-full-width" appearance="outline" id="field">
                             <mat-label>Title</mat-label>
                             <input matInput formControlName="title">
                             <mat-error [hidden]="!shortvideoform.get('title')?.hasError('required')">
@@ -167,7 +169,7 @@
                 <div class="row mb-1">
                     <label for="inputEmail3" class="col-sm-2 fw-semibold col-form-label pt-4">select category</label>
                     <div class="col-sm-5">
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="outline">
                             <mat-label>Choose an option</mat-label>
                             <mat-select formControlName="category">
                                 <mat-option *ngFor="let category of categorylist"
@@ -183,7 +185,7 @@
                 <div class="row mb-1">
                     <label for="inputEmail3" class="col-sm-2 fw-semibold col-form-label  pt-4">Description</label>
                     <div class="col-sm-10">
-                        <mat-form-field class="example-full-width" appearance="fill" id="field">
+                        <mat-form-field class="example-full-width" appearance="outline" id="field">
                             <mat-label>Description here</mat-label>
                             <textarea matInput formControlName="description"
                                 placeholder="Ex. It makes me feel..."></textarea>
@@ -213,7 +215,7 @@
                     <label for="inputEmail3" class="col-sm-2 fw-semibold col-form-label  pt-4">Select date</label>
                     <div class="col-sm-5">
 
-                        <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-form-field class="example-full-width" appearance="outline">
                             <mat-label>Select date</mat-label>
                             <input matInput formControlName="date" placeholder="Ex. Pizza" value="Sushi" type="date">
                             <mat-error [hidden]="!shortvideoform.get('date')?.hasError('required')">
@@ -227,7 +229,7 @@
                     <label for="inputEmail3" class="col-sm-2 fw-semibold col-form-label  pt-4">Choose file</label>
                     <div class="col-sm-5">
 
-                        <input type="file" id="file" (change)="filechange($event)" formControlName="file"
+                        <input type="file" class="border" id="file" (change)="filechange($event)" formControlName="file"
                             accept=" image/*" required="true" />
                         <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
 

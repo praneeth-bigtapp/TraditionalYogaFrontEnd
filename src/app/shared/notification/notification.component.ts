@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-notification',
@@ -13,10 +15,12 @@ export class NotificationComponent implements OnInit {
   filerror!: boolean
   filerror2!: boolean
   datafile!: any
+  filedata!: any
   constructor(
-    private formbuilder: FormBuilder
-  ) { }
-  ngOnInit(): void {
+    private formbuilder: FormBuilder,
+    private service: NotificationService,
+    private _snackBar: MatSnackBar
+  ) {
     this.notificationform = this.formbuilder.group({
       category: [null, Validators.compose([Validators.required])],
       title: [null, Validators.compose([Validators.required])],
@@ -24,15 +28,18 @@ export class NotificationComponent implements OnInit {
       file: [null, Validators.compose([Validators.required])],
     })
   }
+  ngOnInit(): void {
+
+  }
+
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close');
+  }
 
   notificationtypes = ["Guidance Related to Courses", "Wishes from Guruji", "General Notifications"]
 
   onfilechange(event: any) {
-
-
-    console.log(event.target.files[0]);
-
-    this.notificationform.value.file = event.target.files[0]
+    this.filedata = event.target.files[0].name
   }
 
   addmedia() {
@@ -42,15 +49,27 @@ export class NotificationComponent implements OnInit {
 
     if (this.notificationform.valid) {
 
-      const result = this.notificationform.value
+      this.notificationform.value.file = this.filedata
 
-      console.log(result);
+      const { category, title, description, file } = this.notificationform.value
 
+      console.log({ category, title, description, file });
 
+      const body = {
+
+      }
+
+      this.service.postnotification(body).subscribe({
+        next: (response) => {
+          this.openSnackBar(response)
+        },
+        error: (error) => {
+          console.error(error.message);
+
+        }
+      })
     }
     else {
-      console.log("invalid");
-
       this.notificationform.markAllAsTouched()
     }
 

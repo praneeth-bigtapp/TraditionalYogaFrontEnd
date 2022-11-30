@@ -15,12 +15,18 @@ export class LiveComponent implements OnInit {
   courselist!: any
   categorylist!: any
   coursename!: any
+  categoryname!: any
   categoryerror: boolean = false
+  categoryerror2: boolean = false
   filerror!: boolean
+
+  glimpsefile!: any
 
   glimpseform !: FormGroup
   videoform!: FormGroup
   shortvideoform!: FormGroup
+
+  typecategory!: any
 
 
   constructor(
@@ -29,6 +35,8 @@ export class LiveComponent implements OnInit {
     private _snackBar: MatSnackBar
 
   ) {
+
+    this.typecategory = ['Live Class', 'Recording Session', 'Short Video', 'Glimpse']
 
     service.getallcourse().subscribe({
       next: (response) => {
@@ -79,6 +87,10 @@ export class LiveComponent implements OnInit {
     })
 
   }
+  ngOnInit(): void {
+
+  }
+
   openSnackBar(data: any) {
     this._snackBar.open(data.message, 'Close');
   }
@@ -92,17 +104,31 @@ export class LiveComponent implements OnInit {
     }
 
   }
-  ngOnInit(): void {
+
+
+  typechange() {
+
+
+    this.categoryerror2 = false
+    if (this.categoryname == undefined || this.categoryname == null) {
+      this.categoryerror2 = true
+    }
+
+  }
+
+  gobutton() {
+    this.typechange()
+    this.coursechange()
+    console.log(this.categoryname);
+    console.log(this.coursename);
+
 
   }
 
   filechange(event: any) {
     this.filerror = this.glimpseform.value.file === null ? true : false
 
-    const file = event.target.files[0]
-    this.glimpseform.value.file = file.name
-
-
+    this.glimpsefile = event.target.files[0].name
 
   }
 
@@ -181,6 +207,8 @@ export class LiveComponent implements OnInit {
       return this.glimpseform.markAllAsTouched()
 
 
+    this.glimpseform.value.file = this.glimpsefile
+
     const { date, file } = this.glimpseform.value
 
     const body = {
@@ -188,6 +216,7 @@ export class LiveComponent implements OnInit {
       "fileName": file
     }
 
+    console.log(body);
 
 
     this.service.postglimpsevideo(body).subscribe({
