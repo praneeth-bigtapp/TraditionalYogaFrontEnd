@@ -55,12 +55,14 @@ export class CourseMediaPraticeComponent implements OnInit {
   filterData: any;
   gridData = [];
   dataSource: any
+  categoryerror: boolean = false
 
   addmediaform!: FormGroup
 
   classtype!: string
   filerror!: boolean
   timerror!: boolean
+  displaycontent: boolean = false
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -177,10 +179,28 @@ export class CourseMediaPraticeComponent implements OnInit {
 
     this.dataSource.paginator = this.paginator;
   }
+  typechange() {
 
+    this.displaycontent = false
+    this.categoryerror = false
+    if (!this.classtype) {
+      this.categoryerror = true
+      return
+    }
+  }
   gobutton() {
+    if (!this.classtype) {
+      this.displaycontent = false
+      this.categoryerror = true
+      return
+    }
+
+    this.displaycontent = true
+    this.categoryerror = false
+
     const classtype = this.classtype
     console.log(classtype);
+
 
   }
 

@@ -10,6 +10,9 @@
                         <mat-option value="live">Live</mat-option>
                         <mat-option value="recording">Recording</mat-option>
                     </mat-select>
+                    <span class="text-danger" *ngIf="categoryerror">
+                        Please Select Category
+                    </span>
                 </mat-form-field>
             </div>
             <div>

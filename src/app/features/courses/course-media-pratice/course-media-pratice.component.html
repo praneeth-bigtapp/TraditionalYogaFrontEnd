@@ -6,10 +6,13 @@
             <div class="w-25 me-5">
                 <mat-form-field appearance="fill">
                     <mat-label>Select type: live class</mat-label>
-                    <mat-select [(ngModel)]="classtype">
+                    <mat-select [(ngModel)]="classtype" (ngModelChange)="typechange()">
                         <mat-option value="live">Live</mat-option>
                         <mat-option value="recording">Recording</mat-option>
                     </mat-select>
+                    <span class="text-danger" *ngIf="categoryerror">
+                        Please Select Category
+                    </span>
                 </mat-form-field>
             </div>
             <div>
@@ -23,7 +26,7 @@
         </div>
         <hr />
 
-        <div class="card-body">
+        <div class="card-body" *ngIf="displaycontent">
 
 
             <form [formGroup]="addmediaform" class="" (ngSubmit)="addmedia()">
@@ -306,8 +309,8 @@
 
     <br />
 
-    <table mat-table [dataSource]="this.filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
-        aria-label="users">
+    <table mat-table [dataSource]="this.filterData.dataSource" *ngIf="displaycontent" matSort
+        class="mat-elevation-z8 mat-datagrid w-100" aria-label="users">
         <ng-container matColumnDef="SNO">
             <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
                 <label mat-sort-header>

@@ -25,6 +25,7 @@ export class MemberspageComponent implements OnInit {
   selectedmember!: any
   formtype: string = "Members"
   // data: any;
+  displaycontent: boolean = false
 
   data: any = [
     {
@@ -121,21 +122,25 @@ export class MemberspageComponent implements OnInit {
   gobutton(): void {
     this.coursechange()
 
+    if (this.category) {
+      this.displaycontent = true
+
+    }
+
   }
 
   formswich(name: string) {
-    console.log(name);
     this.formtype = name
-
+    console.log(this.selection.selected);
 
   }
 
   coursechange() {
-
-    console.log(this.category);
+    this.displaycontent = false
     this.categoryerror = false
     if (this.category == undefined || this.category == null) {
       this.categoryerror = true
+
     }
 
   }
@@ -202,10 +207,10 @@ export class MemberspageComponent implements OnInit {
     }
 
 
-    if (this.formtype == "Senior Mentor Mapping") {
-      console.log("senior mentor mapping form");
+    if (this.formtype == "Chief Mentor Mapping") {
+      console.log("Chief mentor mapping form");
 
-      // senior mapping form
+      // Chief mapping form
       return
     }
 
