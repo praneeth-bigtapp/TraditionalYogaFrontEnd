@@ -19,6 +19,8 @@ data=[{"Pagename":"About US","Author":'admin','Dateofpublish':'02,Aug,2022, 12:3
 {"Pagename":"About US","Author":'admin','Dateofpublish':'02,Aug,2022, 12:30:37',"link":"https://tradiationalyoga.co.in/about"},
 {"Pagename":"About US","Author":'admin','Dateofpublish':'02,Aug,2022, 12:30:37',"link":"https://tradiationalyoga.co.in/about"},
 {"Pagename":"About US","Author":'admin','Dateofpublish':'02,Aug,2022, 12:30:37',"link":"https://tradiationalyoga.co.in/about"},
+{"Pagename":"About US","Author":'admin','Dateofpublish':'02,Aug,2022, 12:30:37',"link":"https://tradiationalyoga.co.in/about"},
+{"Pagename":"About US","Author":'admin','Dateofpublish':'02,Aug,2022, 12:30:37',"link":"https://tradiationalyoga.co.in/about"},
 {"Pagename":"About US","Author":'admin','Dateofpublish':'02,Aug,2022, 12:30:37',"link":"https://tradiationalyoga.co.in/about"}]
 filterData:any
 gridData :any;
@@ -37,6 +39,7 @@ displayedColumns: string[] = ["Checkbox","Pagename","Author",'Dateofpublish'];
       paginator: this.paginator,
       sort: this.sort
     }
+
     this.dataSource = new MatTableDataSource<any>(this.data)
     this.filterData.gridData = this.data;
     this.filterData.dataSource = this.dataSource;
@@ -46,6 +49,7 @@ displayedColumns: string[] = ["Checkbox","Pagename","Author",'Dateofpublish'];
     for (let col of this.filterData.filterColumnNames) {
       col.Value = '';
     }
+
     }
     viewDetails(element:any){
   
