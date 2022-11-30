@@ -20,6 +20,7 @@ export class UserComponent implements OnInit {
   AddUserForm!: FormGroup;
   isAddUserForm: boolean = false;
   RolesList: any = [];
+  
   validation_messages = {
     email_id: [
       { type: 'required', message: 'Please Enter Email' },
