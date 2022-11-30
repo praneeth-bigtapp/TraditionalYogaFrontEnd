@@ -1,12 +1,15 @@
 <div class="container-fluid bg-light">
     <h5>Add Course/ View Course Details</h5><br>
     <mat-card>
+        <form  [formGroup]="addCourseForm" (ngSubmit)="onAddCourse()" >
         <div class="row">
             <div class="col-md-3 pt-3">
+               
+                
                 <mat-form-field>
 
                     <mat-label>Select Course Category</mat-label>
-                    <select matNativeControl [disabled]="disableSelect.value">
+                    <select matNativeControl formControlName="category" [disabled]="disableSelect.value">
           <option value="" selected></option>
           <option value="volvo" *ngFor="let item of categorySelect" [value]="item.courseId">{{item.category}}</option>
           
@@ -15,44 +18,44 @@
             </div>
             <div class="col-md-3 pt-1">
                 <mat-form-field class="example-full-width" appearance="fill" id="field">
-                    <mat-label>Title</mat-label>
-                    <input matInput>
+                    <mat-label>Course name</mat-label>
+                    <input matInput formControlName="courseName">
                 </mat-form-field>
             </div>
         </div>
         <div class="w-100 ">
-            <angular-editor formControlName="paragraph" [placeholder]="'Enter text here...'" [config]="editorConfig" required>
+            <angular-editor  [placeholder]="'Enter text here...'" [config]="editorConfig" required formControlName="paragraph" >
             </angular-editor>
 
 
         </div><br><br>
         <div class="col-9">
             <label for="inputAddress" class="form-label">Course Banner:</label>
-            <input type="file" id="file" formControlName="" accept=" image/*" required="true" />
+            <input  formControlName="banner" type="file" id="file"  accept=" image/*" required="true" />
         </div><br>
         <div class="col-md-3">
             <mat-form-field class="example-full-width" appearance="fill" id="field">
                 <mat-label>Instructor name</mat-label>
-                <input matInput>
+                <input matInput formControlName="Instructorname">
             </mat-form-field>
         </div><br>
         <div class="col-9">
             <label for="inputAddress" class="form-label">Instructor image:</label>
-            <input type="file" id="file" formControlName="" accept=" image/*" required="true" />
+            <input type="file" id="file"  accept=" image/*" required="true" formControlName="Image" />
         </div><br>
         <div class="row">
             <div class="col-md-3">
 
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Start date</mat-label>
-                    <input matInput placeholder="Ex. Pizza" value="Sushi" type="date">
+                    <input matInput FormControlName="startDate"  type="date">
                 </mat-form-field>
             </div>
             <div class="col-md-3">
 
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>End date</mat-label>
-                    <input matInput placeholder="Ex. Pizza" value="Sushi" type="date">
+                    <input matInput FormControlName="endDate"  type="date">
                 </mat-form-field>
             </div>
 
@@ -65,7 +68,7 @@
 
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Application closure date</mat-label>
-                    <input matInput placeholder="Ex. Pizza" value="Sushi" type="date">
+                    <input matInput  type="date" formControlName="Application">
                 </mat-form-field>
             </div>
             <div class="col-md-6 pt-4" style="display: flex;">
@@ -73,9 +76,9 @@
 
                 <label for="inputEmail3" class="col-sm-5 col-form-label">Manual verification Required?</label>
                 <div class="col pt-2">
-                    <mat-radio-group aria-label="Select an option">
-                        <mat-radio-button value="1">Option 1</mat-radio-button>
-                        <mat-radio-button value="2">Option 2</mat-radio-button>
+                    <mat-radio-group aria-label="Select an option" FormControlName="verficationRequired">
+                        <mat-radio-button value="y">Option 1</mat-radio-button>
+                        <mat-radio-button value="n">Option 2</mat-radio-button>
                     </mat-radio-group>
                 </div>
 
@@ -96,7 +99,7 @@
 
         </div>
 
-
+    </form>
 
     </mat-card>
 </div>

@@ -12,15 +12,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./banners.component.css']
 })
 export class BannersComponent implements OnInit {
-  displayedColumns: string[] = ['bannerId', 'bannerName', 'categoryId', "date"];
+  displayedColumns: string[] = ['bannerId', 'bannerName', 'categoryId', "date", "Action"];
   dataSource: any;
 
-  data!: any
+  data!: any;
+  checks=false;
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
   sort!: MatSort;
+
+  
+  
+    applyFilter(event: Event) {
+      const filterValue = (event.target as HTMLInputElement).value;
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+  
 
   constructor(
     private banner: BannerviewService,
@@ -47,15 +56,22 @@ export class BannersComponent implements OnInit {
     });
   }
 
-  checkAll(status: any) {
-    console.log(status.value);
-    for (let data of this.data) {
-      data.check = true;
-    }
-    console.log(this.data);
-    this.dataSource = new MatTableDataSource<any>(this.data)
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  checkAll(e:any) {
+    // console.log(status.value);
+    // for (let data of this.data) {
+    //   data.check = true;
+    // }
+    // console.log(this.data);
+    // this.dataSource = new MatTableDataSource<any>(this.data)
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+    if(e.target.checked==true){
+      this.checks=true;
+        }
+        else{
+          this.checks=false;
+        }
+
   }
 
   onAddBanner() {

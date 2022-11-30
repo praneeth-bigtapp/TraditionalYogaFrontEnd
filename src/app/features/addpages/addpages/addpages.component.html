@@ -1,0 +1,109 @@
+<div class="ConfigurationTypes_textpadding bg-light">
+
+    <div class="row d-flex flex-row">
+        <div class="col-md-8">
+            <h5>Pages</h5>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
+                <i class="fa-solid fa-file-circle-plus"></i>&nbsp; Add Pages
+             </button>
+
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
+                <i class="fa-solid fa-page"></i>&nbsp;  Manage Pages
+             </button>
+        </div>
+    </div>
+    <form class="bg-white">
+        <div class="mb-3  col-md-10">
+            <mat-form-field class="example-full-width" appearance="fill" id="field">
+                <mat-label>Page Name</mat-label>
+                <input  [formControl]="pageName" matInput >
+                <mat-error *ngIf="pageName.hasError('required')">
+                    Page Name <strong>required</strong>
+                  </mat-error>
+                
+            </mat-form-field>
+        </div>
+          <div class="mb-3 col-md-10">
+            <mat-form-field class="example-full-width" appearance="fill" id="field">
+                <mat-label>Page Title</mat-label>
+                <input matInput [formControl]="Title" >
+                <mat-error *ngIf="Title.hasError('required')">
+                    Page Name <strong>required</strong>
+                  </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="mb-3 col-md-10">
+          
+            <angular-editor  [placeholder]="'Enter text here...'" [config]="editorConfig" required  >
+               
+            </angular-editor>
+            
+      
+          </div>
+          <div class="mb-3 col-md-10">
+            <mat-form-field class="example-full-width" appearance="fill" id="field">
+                <mat-label>Hover Title:</mat-label>
+                <input matInput [formControl]="hover">
+                <mat-error *ngIf="hover.hasError('required')">
+                   Hover title <strong>required</strong>
+                  </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="mb-3 col-md-10 ">
+            <mat-form-field class="example-full-width" appearance="fill" id="field">
+                <mat-label>Related Tags: <br> <span><p>Seperated By Space</p></span></mat-label><br>
+                <input matInput [formControl]="Tags" placeholder="Related tags">
+                <mat-error *ngIf="Tags.hasError('required')">
+                   tags <strong>required</strong>
+                  </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="mb-3 col-md-10">
+            <mat-form-field class="example-full-width">
+                <mat-label>Description</mat-label>
+                <textarea matInput placeholder="Enter Page related Description Here"  [formControl]="description"></textarea>
+                <mat-error *ngIf="description.hasError('required')">
+                    tags <strong>required</strong>
+                   </mat-error>
+                
+              </mat-form-field>
+          </div>
+          <div class="mb-3 col-md-10">
+            <mat-form-field class="example-full-width">
+                <mat-label>Subject</mat-label>
+                <textarea matInput placeholder="Enter Page related Subject Here"[formControl]="subject"></textarea>
+                <mat-error *ngIf="subject.hasError('required')">
+                    tags <strong>required</strong>
+                   </mat-error>
+                
+              </mat-form-field>
+          </div>
+
+          <div class="mb-3 text-center">
+           <p> Cant Read the Image? Click <a href="">here</a>To Refresh</p>
+          </div>
+
+          <div class="mb-3 col-md-10">
+            <mat-form-field class="example-full-width">
+                <mat-label>Enter Capcha</mat-label>
+                <textarea matInput placeholder="Enter Page related Subject Here"></textarea>
+              </mat-form-field>
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
+               Publish Pages
+             </button>
+        </div>
+
+
+
+
+
+    </form>
+
+
+</div>

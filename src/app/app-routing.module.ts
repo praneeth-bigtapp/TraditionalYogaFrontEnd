@@ -76,6 +76,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/class-media/class-media.module').then((m) => m.ClassMediaModule)
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/addpages/addpages.module').then((m) => m.AddpagesModule)
+  },
 
 
   {

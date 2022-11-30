@@ -11,6 +11,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 
@@ -29,7 +32,11 @@ import {MatRadioModule} from '@angular/material/radio';
     MatButtonModule,
     AngularEditorModule,
     HttpClientModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSnackBarModule,
+    FormsModule,
+    ReactiveFormsModule ,
+    MatDatepickerModule
   ]
 })
 export class AddCourseMainModule { }

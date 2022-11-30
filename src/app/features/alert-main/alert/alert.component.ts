@@ -118,6 +118,7 @@ export class AlertComponent implements OnInit {
         "startDate": this.alertform.value.startdate,
         "endDate": this.alertform.value.enddate
       }
+      console.log(body)
       this.alertservice.setalert(body).subscribe({
         next: (response) => {
           this.alertform.reset()

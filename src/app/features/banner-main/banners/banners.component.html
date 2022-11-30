@@ -10,46 +10,33 @@
             </button>
         </div>
         <div class="col-md-3 pt-4">
-            <input type="search" id="search" formControlName="" required="true" placeholder="search" />
+            <input type="search" id="search" (keyup)="applyFilter($event)" formControlName="" required="true" placeholder="search" />
         </div>
     </div><br>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-datagrid w-100" matSort>
 
         <ng-container matColumnDef="bannerId">
-            <th mat-header-cell class="col-md-2 pt-4" *matHeaderCellDef> 
-                <input type="checkbox" style="width: 20px" class="mx-auto" (click)="checkAll($event)">
+            <th mat-header-cell class="col-md-2 pb-1" *matHeaderCellDef> 
+                <input type="checkbox" style="width: 20px" class="mx-auto" (change)="checkAll($event)">
             </th>
             <td class="col-md-2" *matCellDef="let element">
-                <input [checked]="element.check == 'false'" type="checkbox">
+                <input [checked]="checks" type="checkbox">
             </td>
         </ng-container>
 
         <ng-container matColumnDef="bannerName">
-            <th mat-header-cell class="col-md-6" *matHeaderCellDef mat-sort-header> Banner Name </th>
+            <th mat-header-cell class="col-md-4" *matHeaderCellDef mat-sort-header> Banner Name </th>
             <td class="row col-md-6" *matCellDef="let element">
                 <div style="display: flex ;">
                     <div> {{element.bannerName}} - <span class="text-success"> Published </span></div>
                 </div>
-                <div style="display: flex ; ">
-                    <a class="nav-link active text-blue" aria-current="page" href="#">
-                        <i class="fa-solid fa-pen-to-square"></i> 
-                    </a>
-                    <a class="nav-link active text-danger " aria-current="page" href="#">
-                        <i class="fa-solid fa-trash"></i>
-                    </a>
-                    <a class="nav-link active text-primary" aria-current="page" href="#">
-                        <i class="fa-solid fa-eye"></i>
-                    </a>
-                    <a class="nav-link active " aria-current="page" href="#">
-                        <i class="fa-sharp fa-solid fa-floppy-disk"></i>
-                    </a>
-                </div>
+               
             </td>
         </ng-container>
 
         <ng-container matColumnDef="categoryId">
-            <th mat-header-cell class="col-md-3 pl-1" *matHeaderCellDef mat-sort-header>Given By</th>
+            <th mat-header-cell class=" col-md-1 pl-1" *matHeaderCellDef mat-sort-header>Given By</th>
             <td mat-cell class="col-md-3 " *matCellDef="let element" style="margin-left: 40px;"> 
                 {{element.GivenBy || "admin"}}
             </td>
@@ -59,6 +46,30 @@
             <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header> Date of add </th>
             <td mat-cell class="col" *matCellDef="let element">
                 Last Modified<br> {{element.Comments || "at Wed 2 2017"}} 
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="Action">
+            <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header>Action </th>
+            <td mat-cell class="col" *matCellDef="let element">
+                <div style="display: flex ; ">
+                    <a class="nav-link active text-blue" aria-current="page" href="#">
+                        <i class="fa-solid fa-pen-to-square" matTooltip="Edit"
+                        aria-label="Button that displays a tooltip when focused or hovered over"></i> 
+                    </a>
+                    <a class="nav-link active text-danger " aria-current="page" href="#">
+                        <i class="fa-solid fa-trash"  matTooltip="Delete"
+                        aria-label="Button that displays a tooltip when focused or hovered over"></i>
+                    </a>
+                    <a class="nav-link active text-primary" aria-current="page" href="#">
+                        <i class="fa-solid fa-eye  "  matTooltip="View"
+                        aria-label="Button that displays a tooltip when focused or hovered over"></i>
+                    </a>
+                    <a class="nav-link active " aria-current="page" href="#">
+                        <i class="fa-sharp fa-solid fa-floppy-disk"  matTooltip="Draft"
+                        aria-label="Button that displays a tooltip when focused or hovered over"></i>
+                    </a>
+                </div>
+           
             </td>
         </ng-container>
 
