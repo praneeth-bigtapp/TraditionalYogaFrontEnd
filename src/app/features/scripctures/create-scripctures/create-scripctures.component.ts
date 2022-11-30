@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { ScripcturesService } from '../service/scripctures.service';
 
 @Component({
   selector: 'app-create-scripctures',
@@ -16,7 +18,9 @@ export class CreateScripcturesComponent implements OnInit {
   filerror2!: boolean
   constructor(
     private router: Router,
-    private formbuilder: FormBuilder
+    private formbuilder: FormBuilder,
+    private service: ScripcturesService,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -34,7 +38,9 @@ export class CreateScripcturesComponent implements OnInit {
     console.log(classtype);
 
   }
-
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close');
+  }
   onfilechange(formname: string) {
 
     if (formname === 'backcover')
@@ -55,9 +61,23 @@ export class CreateScripcturesComponent implements OnInit {
 
     if (this.addmediaform.valid) {
 
-      const result = this.addmediaform.value
+      const { coverimage, covertitle, coverdescription, coverfile, coverkeywords } = this.addmediaform.value
 
-      console.log(result);
+
+      const body = {
+
+      }
+
+      this.service.postscripctures(body).subscribe({
+        next: (response) => {
+          console.log(response);
+          this.openSnackBar(response)
+        },
+        error: (error) => {
+          console.error(error.message);
+
+        }
+      })
 
 
     }

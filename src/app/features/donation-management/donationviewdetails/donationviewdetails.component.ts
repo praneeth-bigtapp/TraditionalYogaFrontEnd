@@ -17,7 +17,8 @@ export class DonationviewdetailsComponent implements OnInit {
     isregisteredmember: "",
     country: "",
     message: "",
-    modeofpayment: ""
+    modeofpayment: "",
+    identityproof: ""
 
   }
   apidata!: any
@@ -46,16 +47,17 @@ export class DonationviewdetailsComponent implements OnInit {
 
         this.apidata = response
 
-        const { amountDonated, modeOfPayment, description } = this.apidata
+        const { amountDonated, modeOfPayment, description, identityproof } = this.apidata
         const { registedIpAddress, name, mobile, address, emailId } = this.apidata.student
-        this.details.amount = amountDonated
-        this.details.modeofpayment = modeOfPayment
-        this.details.message = description
-        this.details.donorname = name
-        this.details.email = emailId
-        this.details.mobile = mobile
-        this.details.isregisteredmember = registedIpAddress == "" ? "N/A" : registedIpAddress
-        this.details.country = address
+        this.details.amount = amountDonated || "NIL"
+        this.details.modeofpayment = modeOfPayment || "NIL"
+        this.details.message = description || "NIL"
+        this.details.donorname = name || "NIL"
+        this.details.email = emailId || "NIL"
+        this.details.mobile = mobile || "NIL"
+        this.details.isregisteredmember = registedIpAddress || "NIL"
+        this.details.country = address || "NIL"
+        this.details.identityproof = identityproof || "NIL"
 
       },
       error: (error) => {
