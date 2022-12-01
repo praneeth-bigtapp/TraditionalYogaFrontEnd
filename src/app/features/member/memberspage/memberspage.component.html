@@ -85,7 +85,7 @@
                                     </mat-form-field>
                                 </div>
 
-
+                                <!-- 
                                 <div class="col-md-4">
                                     <mat-form-field appearance="outline">
                                         <mat-label>Select Country</mat-label>
@@ -97,8 +97,20 @@
                                             Please Select Country
                                         </mat-error>
                                     </mat-form-field>
-                                </div>
+                                </div> -->
 
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Country</mat-label>
+                                        <input type="text" placeholder="Pick one" aria-label="Country" matInput
+                                            formControlName="country" [matAutocomplete]="auto">
+                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                            <mat-option *ngFor="let country of countryfilter |async " [value]="country">
+                                                {{country}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                </div>
 
                                 <div class="col-md-4">
                                     <mat-form-field appearance="outline">
@@ -111,7 +123,7 @@
                                 </div>
 
 
-                                <div class="col-md-4">
+                                <!-- <div class="col-md-4">
                                     <mat-form-field appearance="outline">
                                         <mat-label>Select Region</mat-label>
                                         <mat-select formControlName="region">
@@ -121,6 +133,19 @@
                                         <mat-error [hidden]="!memberform.get('region')?.hasError('required')">
                                             Please Select Country
                                         </mat-error>
+                                    </mat-form-field>
+                                </div> -->
+
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Region</mat-label>
+                                        <input type="text" placeholder="Pick one" aria-label="Country" matInput
+                                            formControlName="region" [matAutocomplete]="regionauto">
+                                        <mat-autocomplete autoActiveFirstOption #regionauto="matAutocomplete">
+                                            <mat-option *ngFor="let country of regionfilter |async " [value]="country">
+                                                {{country}}
+                                            </mat-option>
+                                        </mat-autocomplete>
                                     </mat-form-field>
                                 </div>
 

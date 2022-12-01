@@ -41,6 +41,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CoursesModule } from './features/courses/courses.module';
 import { BlacklistUserModule } from './features/blacklist-user/blacklist-user.module';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,7 @@ import { BlacklistUserModule } from './features/blacklist-user/blacklist-user.mo
     MatNativeDateModule,
 
     AdministrationModule,
-    
+
 
     // StudentMasterModule,
     DashboardModule,
@@ -91,6 +92,7 @@ import { BlacklistUserModule } from './features/blacklist-user/blacklist-user.mo
     ToastrModule.forRoot(),
     MatButtonModule,
     MatSnackBarModule,
+    MatAutocompleteModule,
     UserIdleModule.forRoot({ idle: 600, timeout: 300, ping: 120 })
   ],
   // providers: [DataStorageService, SendReceiveService, AuthGuard, ViewDataService, DatePipe, BnNgIdleService],
