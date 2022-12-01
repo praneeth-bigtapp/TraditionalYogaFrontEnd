@@ -18,6 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     MatSlideToggleModule,
     MatSelectModule,
     AngularEditorModule,
+    MatSnackBarModule,
   ]
 })
 export class PraticeLibraryModule { }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { CreatepraticelibraryService } from '../service/createpraticelibrary.service';
 
 @Component({
   selector: 'app-create-pratice-library',
@@ -14,10 +16,27 @@ export class CreatePraticeLibraryComponent implements OnInit {
   timerror!: boolean
   categoryerror: boolean = false
   displaycontent: boolean = false
+
+
+  categoryList!: any
   constructor(
-    private Router: Router,
-    private formbuilder: FormBuilder
-  ) { }
+    private formbuilder: FormBuilder,
+    private service: CreatepraticelibraryService,
+    private _snackBar: MatSnackBar
+  ) {
+
+    this.service.getcategory().subscribe({
+      next: (response) => {
+        this.categoryList = response
+
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
+
+  }
 
   ngOnInit(): void {
     this.addmediaform = this.formbuilder.group({
@@ -27,6 +46,10 @@ export class CreatePraticeLibraryComponent implements OnInit {
       videoduration: [null, Validators.compose([Validators.required])],
       vidoemetakeywords: [null, Validators.compose([Validators.required])]
     })
+  }
+
+  opensnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close')
   }
 
   coursechange() {
@@ -41,29 +64,42 @@ export class CreatePraticeLibraryComponent implements OnInit {
       this.displaycontent = true
     else
       this.categoryerror = true
-    console.log(this.category);
-
   }
 
-  ontimechange() {
-    this.timerror = this.addmediaform.value.videoduration === null ? true : false
 
-  }
   addmedia() {
 
-    this.ontimechange()
 
     if (this.addmediaform.valid) {
 
-      const result = this.addmediaform.value
+      const { videolink, videotitle, videodescription, videoduration, vidoemetakeywords } = this.addmediaform.value
 
-      console.log(result);
 
+      const body = {
+        "videoLink": videolink,
+        "duration": videoduration,
+        "title": videotitle,
+        "message": videodescription,
+        "metaKeyword": vidoemetakeywords
+      }
+
+      console.log(body);
+
+      this.service.postpraticelibrary(body, this.category).subscribe({
+        next: (response) => {
+
+          this.addmediaform.reset()
+          this.opensnackBar(response)
+
+        },
+        error: (error) => {
+          console.error(error.message);
+
+        }
+      })
 
     }
     else {
-      console.log("invalid");
-
       this.addmediaform.markAllAsTouched()
     }
 

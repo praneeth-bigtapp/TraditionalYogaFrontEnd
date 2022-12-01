@@ -7,8 +7,8 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Select Category</mat-label>
                     <mat-select [(ngModel)]="category" (ngModelChange)="coursechange()">
-                        <mat-option value="live">Live</mat-option>
-                        <mat-option value="recording">Recording</mat-option>
+                        <mat-option *ngFor="let category of categoryList" [value]="category.categoryId">
+                            {{category.categoryName}}</mat-option>
                     </mat-select>
                     <span class="text-danger" *ngIf="categoryerror">
                         Please Select Category
