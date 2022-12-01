@@ -99,7 +99,7 @@ export class SendReceiveService {
       this.router.navigateByUrl("pages");
     }
     else if (subMenuId == 12) {
-      this.router.navigateByUrl("blank");
+      this.router.navigateByUrl("gallery");
     }
     else if (subMenuId == 13) {
       this.router.navigateByUrl("blank");
