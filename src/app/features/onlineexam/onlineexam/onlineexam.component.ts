@@ -16,8 +16,8 @@ export class OnlineexamComponent implements OnInit {
 
   filedata !: any
 
-  typetestlist: any = ['Online', 'Offline']
-  testlevel: any = ['Easy', "Normal", "Intermediate", "Difficult"]
+  typetestlist: any = ['Audio Dharana', 'Scotram','Text']
+  testlevel: any = ['Beginner', "Intermediate", "Final", "Certified"]
   constructor(
     private formbuilder: FormBuilder,
     private service: OnlineexamService,

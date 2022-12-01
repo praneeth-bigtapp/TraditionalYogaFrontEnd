@@ -25,19 +25,19 @@ export class CourseMainComponent implements OnInit {
   filterData: any;
   gridData = [];
   dataSource: any;
-  displayedColumns: string[] = ['courseId', 'category','courseName',"courseDuration","startDate","endDate","currentStatus"];
-  data:any;
-  values= 
-  {
-     
-     "courseId": "",
-     "category": "",
-     "courseName": "",
-     "courseDuration": "",
-     "startDate": "",
-     "endDate": "",
-     "currentStatus": ""
- }
+  displayedColumns: string[] = ['courseId', 'category', 'courseName', "courseDuration", "startDate", "endDate", "currentStatus"];
+  data: any;
+  values =
+    {
+
+      "courseId": "",
+      "category": "",
+      "courseName": "",
+      "courseDuration": "",
+      "startDate": "",
+      "endDate": "",
+      "currentStatus": ""
+    }
 
   length = 50;
   pageSize = 10;
@@ -62,7 +62,7 @@ export class CourseMainComponent implements OnInit {
     public sendReceiveService: SendReceiveService,
     private userIdle: UserIdleService,
     private headerService: HeaderService,
-    private service:CoursesService
+    private service: CoursesService
 
   ) {
     this.filterData = {
@@ -81,30 +81,31 @@ export class CourseMainComponent implements OnInit {
       sort: this.sort
     };
 
-  
+
   }
 
   ngAfterViewInit() {
     // this.dataSource.paginator = this.paginator;
     this.filterData.dataSource.paginator = this.paginator;
+
   }
 
 
   ngOnInit(): void {
-    this. getdata()
+    this.getdata()
 
   }
-  getdata(){
+  getdata() {
     this.service.getCourse().subscribe({
 
-    
+
 
       next: (response) => {
-        
+
         this.data = response
         console.log(this.data)
-        
-       
+
+
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
@@ -114,7 +115,7 @@ export class CourseMainComponent implements OnInit {
         for (let col of this.filterData.filterColumnNames) {
           col.Value = '';
         }
-   
+
       },
 
       error: (error) => {
@@ -124,9 +125,9 @@ export class CourseMainComponent implements OnInit {
 
     })
   }
-  
 
- 
+
+
 
 
 
@@ -137,6 +138,7 @@ export class CourseMainComponent implements OnInit {
 
   }
   updatePagination(col: any) {
+    this.filterData.dataSource.paginator = this.paginator;
 
     this.dataSource.paginator = this.paginator;
   }
