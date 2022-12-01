@@ -21,7 +21,7 @@ data=[{"Pagename":"About US","Author":'admin','Dateofpublish':'02,Aug,2022, 12:3
 {"Pagename":"About US","Author":'admin','Dateofpublish':'02,Aug,2022, 12:30:37',"link":"https://tradiationalyoga.co.in/about"},
 {"Pagename":"About US","Author":'admin','Dateofpublish':'02,Aug,2022, 12:30:37',"link":"https://tradiationalyoga.co.in/about"},
 {"Pagename":"About US","Author":'admin','Dateofpublish':'02,Aug,2022, 12:30:37',"link":"https://tradiationalyoga.co.in/about"},
-{"Pagename":"About US","Author":'admin','Dateofpublish':'02,Aug,2022, 12:30:37',"link":"https://tradiationalyoga.co.in/about"}]
+{"Pagename":"About US","Author":'bdmin','Dateofpublish':'02,Aug,2022, 12:30:37',"link":"https://tradiationalyoga.co.in/about"}]
 filterData:any
 gridData :any;
 

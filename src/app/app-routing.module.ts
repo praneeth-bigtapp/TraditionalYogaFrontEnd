@@ -81,7 +81,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/addpages/addpages.module').then((m) => m.AddpagesModule)
   },
-
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/pages/pages.module').then((m) => m.PagesModule)
+  },
 
   {
     path: '',

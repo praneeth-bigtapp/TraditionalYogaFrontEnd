@@ -96,7 +96,7 @@ export class SendReceiveService {
       this.router.navigateByUrl("studentMaster/studentProfile");
     } 
     else if (subMenuId == 11) {
-      this.router.navigateByUrl("blank");
+      this.router.navigateByUrl("pages");
     }
     else if (subMenuId == 12) {
       this.router.navigateByUrl("blank");
