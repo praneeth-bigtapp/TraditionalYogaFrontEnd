@@ -22,6 +22,10 @@ export class DonationManagementComponent implements OnInit {
   category: any = [{ 'S_No': '1', 'Date': '12-11-2022', 'DonorName': "ajith", "Country": "India", "Amountdonated": "10,500.00" },
   { 'S_No': '1', 'Date': '12-11-2022', 'DonorName': "ajith", "Country": "India", "Amountdonated": "10,500.00" },
   { 'S_No': '1', 'Date': '12-11-2022', 'DonorName': "ajith", "Country": "USA", "Amountdonated": "10,500.00" },
+  { 'S_No': '1', 'Date': '12-11-2022', 'DonorName': "ajith", "Country": "Australia", "Amountdonated": "10,500.00" },
+  { 'S_No': '1', 'Date': '12-11-2022', 'DonorName': "ajith", "Country": "India", "Amountdonated": "10,500.00" },
+  { 'S_No': '1', 'Date': '12-11-2022', 'DonorName': "ajith", "Country": "India", "Amountdonated": "10,500.00" },
+  { 'S_No': '1', 'Date': '12-11-2022', 'DonorName': "ajith", "Country": "USA", "Amountdonated": "10,500.00" },
   { 'S_No': '1', 'Date': '12-11-2022', 'DonorName': "ajith", "Country": "Australia", "Amountdonated": "10,500.00" }]
   displayedColumns: string[] = ['S_No', 'Date', 'DonorName', "Country","currency", "Amountdonated","inrupees", "ViewDetails"];
   total = 135564564;
@@ -39,7 +43,14 @@ export class DonationManagementComponent implements OnInit {
 
     })
     this.filterData = {
-      filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
+      filterColumnNames : [{ "Key":'S_No', "Value": ""},
+       { "Key":'Date', "Value": ""},
+        { "Key":'DonorName', "Value": ""}, 
+        { "Key":"Country", "Value": ""},
+        { "Key":"currency", "Value": ""},
+        { "Key": "Amountdonated", "Value": ""},
+        { "Key":"inrupees", "Value": ""},
+         { "Key":"ViewDetails", "Value": ""}],
       gridData: this.gridData,
       dataSource: this.dataSource,
       paginator: this.paginator,
@@ -47,7 +58,7 @@ export class DonationManagementComponent implements OnInit {
     }
 
     this.dataSource = new MatTableDataSource<any>(this.category)
-    this.filterData.gridData = this.data;
+    this.filterData.gridData = this.category;
     this.filterData.dataSource = this.dataSource;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -55,10 +66,15 @@ export class DonationManagementComponent implements OnInit {
     for (let col of this.filterData.filterColumnNames) {
       col.Value = '';
     }
+   
+  }
+  ngAfterViewInit() {
+    this.filterData.dataSource.paginator = this.paginator;
+
   }
   updatePagination(col: any) {
 
-    this.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.paginator = this.paginator;
   }
 
 

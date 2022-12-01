@@ -66,7 +66,7 @@ export class ListOfPracticeLibrarysComponent implements OnInit {
   updatePagination(col: any) {
     this.filterData.dataSource.paginator = this.paginator;
 
-    this.dataSource.paginator = this.paginator;
+    // this.dataSource.paginator = this.paginator;
   }
 
 }

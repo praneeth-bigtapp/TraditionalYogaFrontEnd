@@ -12,7 +12,7 @@
         <input matInput formControlName="todate" placeholder="To date" type="date">
 
       </mat-form-field>
-      <button class="bg-light border-secondary col-1 rounded">Go</button>
+      <button class="bg-light border-secondary col-1 p-2 rounded">Go</button>
     </form>
     <div class="col-4 mt-3">
       <form [formGroup]="dateForm">
@@ -42,7 +42,7 @@
   </div>
 
   <div class=" rounded mt-3 mat-elevation-z8">
-    <table mat-table [dataSource]="filterData.dataSource" class="mat-elevation-z8 table-striped ">
+    <table mat-table mat-sort [dataSource]="filterData.dataSource"class="mat-elevation-z8 table-striped ">
 
 
       <ng-container matColumnDef="S_No">
@@ -92,7 +92,7 @@
     </table>
   </div>
   <div class="bg-white d-flex  flex-row justify-content-end ">
-    <mat-paginator class="" [pageSizeOptions]="[1, 5,10,25, 50, 100]" aria-label="Select page">
+    <mat-paginator class="" [pageSizeOptions]="[5,10,25, 50, 100]" aria-label="Select page">
     </mat-paginator>
 </div>
 </div>

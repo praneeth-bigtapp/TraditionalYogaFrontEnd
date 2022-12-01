@@ -56,9 +56,12 @@ displayedColumns: string[] = ["Checkbox","Pagename","Author",'Dateofpublish'];
     }
     updatePagination() {
   
-      this.dataSource.paginator = this.paginator;
+      this.filterData.dataSource.paginator = this.paginator;
     }
-    
+    ngAfterViewInit() {
+      this.filterData.dataSource.paginator = this.paginator;
+  
+    }
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.filterData.dataSource.data.length;
