@@ -40,6 +40,32 @@
 
         </div>
 
+        <!--one row  -->
+        <div class="row  w-100 bg-white">
+
+            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
+                <!-- add icon -->
+
+                <div class="d-flex flex-row  align-items-center  px-4 ">
+                    <div>
+                        <p> <i class=" fa-solid fa-address-card me-4 "></i></p>
+                    </div>
+                    <div>
+                        <p class=""> Address : </p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="col-md-8 text-truncate  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
+                <h4>{{ details.address }}</h4>
+
+            </div>
+
+        </div>
+
+        <!--one row  -->
+
+
 
         <!--one row  -->
         <div class="row  w-100 bg-white">
@@ -91,10 +117,55 @@
 
                 <div class="d-flex flex-row  align-items-center  px-4 ">
                     <div>
+                        <p> <i class=" fa-solid fa-passport me-4 "></i></p>
+                    </div>
+                    <div>
+                        <p class=""> Are you Indian Citizen : </p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="col-md-8 text-truncate  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
+                <h4>{{ details.isIndian | titlecase }}</h4>
+
+            </div>
+
+        </div>
+
+        <!-- one row -->
+        <div class="row  w-100 bg-white">
+
+            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
+                <!-- add icon -->
+
+                <div class="d-flex flex-row  align-items-center  px-4 ">
+                    <div>
+                        <p> <i class=" fa-sharp fa-solid fa-indian-rupee-sign me-4 "></i></p>
+                    </div>
+                    <div>
+                        <p class=""> Do you want 80G tax benefits ? : </p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="col-md-8 text-truncate  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
+                <h4>{{ details.taxbenefits | titlecase }}</h4>
+
+            </div>
+
+        </div>
+
+        <div class="row  w-100 bg-white">
+
+            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
+                <!-- add icon -->
+
+                <div class="d-flex flex-row  align-items-center  px-4 ">
+                    <div>
                         <p> <i class="fa-solid fa-id-card me-4"></i> </p>
                     </div>
                     <div>
-                        <p class=""> Identity Proof : </p>
+                        <p class=""> Identity Type : </p>
                     </div>
                 </div>
             </div>
@@ -103,6 +174,30 @@
 
             </div>
         </div>
+
+        <div class="row  w-100 bg-white">
+
+            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
+                <!-- add icon -->
+
+                <div class="d-flex flex-row  align-items-center  px-4 ">
+                    <div>
+                        <p> <i class="fa-solid fa-id-card  me-4 "></i></p>
+                    </div>
+                    <div>
+                        <p class=""> Identity ID : </p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="col-md-8 text-truncate  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
+                <h4>{{ details.identitynumber }}</h4>
+
+            </div>
+
+        </div>
+
+
 
         <!--one row  -->
         <div class="row  w-100 bg-white">
@@ -127,7 +222,7 @@
 
 
 
-        
+
         <!--one row  -->
         <div class="row  w-100 bg-white">
 
@@ -157,19 +252,42 @@
 
                 <div class="d-flex flex-row  align-items-center  px-4 ">
                     <div>
-                        <p> <i class="fa-sharp fa-solid fa-comment-dots me-4"></i> </p>
+                        <p> <i class="fa-sharp fa-solid fa-wallet me-4"></i> </p>
                     </div>
                     <div>
-                        <p class=""> Message : </p>
+                        <p class=""> Mode of Payment : </p>
                     </div>
                 </div>
             </div>
             <div class="col-md-8  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
-                <p>{{ details.message  }}</p>
+                <h4>{{ details.modeofpayment }}</h4>
 
             </div>
         </div>
 
+
+        <!-- one row -->
+        <div class="row  w-100 bg-white">
+
+            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
+                <!-- add icon -->
+
+                <div class="d-flex flex-row  align-items-center  px-4 ">
+                    <div>
+                        <p> <i class="fa-sharp fa-solid fa-wallet me-4 "></i></p>
+                    </div>
+                    <div>
+                        <p class=""> Card Name : </p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="col-md-8 text-truncate  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
+                <h4>{{ details.cardname | titlecase }}</h4>
+
+            </div>
+
+        </div>
 
         <!--one row  -->
         <div class="row  w-100 bg-white">
@@ -179,15 +297,15 @@
 
                 <div class="d-flex flex-row  align-items-center  px-4 ">
                     <div>
-                        <p> <i class="fa-sharp fa-solid fa-wallet me-4"></i> </p>
+                        <p> <i class="fa-sharp fa-solid fa-comment-dots me-4"></i> </p>
                     </div>
                     <div>
-                        <p class=""> Mode of Payment : </p>
+                        <p class=""> Message : </p>
                     </div>
                 </div>
             </div>
             <div class="col-md-8  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
-                <h4>{{ details.modeofpayment  }}</h4>
+                <p>{{ details.message }}</p>
 
             </div>
         </div>
