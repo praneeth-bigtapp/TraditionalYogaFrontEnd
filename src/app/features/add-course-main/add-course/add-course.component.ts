@@ -113,6 +113,10 @@ console.log(response)
         // 'Image':new FormControl(''),
         // 'Application':new FormControl(''),
         // 'paragraph':new FormControl('')
+        'courseType':new FormControl(''),
+        'section':new FormControl(''),
+        'courseDuration':new FormControl(''),
+        'currentStatus':new FormControl(''),
 
 
 

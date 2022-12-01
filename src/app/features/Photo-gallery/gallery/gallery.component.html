@@ -1,0 +1,65 @@
+<div class="ConfigurationTypes_textpadding p-5 bg-light ">
+    <div class="row">
+        <div class="col-6">
+           <h3 class="mb-4 pl-2 text-secondary"> Photo galleries</h3>
+          </div>
+          <div class="col-5 d-flex ">
+             <button class="bg-light  border-mutted border-2  mx-2 py-1 rounded  fs-6"><i class="fa-solid fa-file-circle-plus mx-2"></i>Create Gallery</button>
+             <button class="bg-light border-mutted border-2 ml-3 py-1 rounded"><i class="fas fa-file-alt ml-1"></i>Manage Galleries</button>
+          </div>
+      </div>
+      <div  class=" rounded mt-3 mat-elevation-z8">
+        <table mat-table mat-sort [dataSource]="dataSource" class="mat-elevation-z8  table-bordered bg-white "   >
+
+            <ng-container matColumnDef="image" class="my-3">
+               <th mat-header-cell *matHeaderCellDef  class="col-1">
+                <!-- <input matInput type="text" (keyup)="updatePagination()" 
+                [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData"   />
+      
+               </th> -->
+               <td mat-cell class="text-center  " *matCellDef="let element ">
+                  <p>image</p>
+               </td>
+      
+           </ng-container>
+          
+             <ng-container matColumnDef="Galleryname" >
+                 <th mat-header-cell *matHeaderCellDef class="col-6 text-center " > </th>
+                   
+               <td mat-cell *matCellDef="let element" class="col-6 mx-2 "><br> {{element.Galleryname}} 
+               
+             </td>
+             </ng-container>
+           
+           
+             <ng-container matColumnDef="DateOfCreation">
+               <th mat-header-cell *matHeaderCellDef class="col-2 text-center"></th>
+               <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted"> {{element.DateOfCreation}} </td>
+             </ng-container>
+           
+            
+             <ng-container matColumnDef="numOfPhotos">
+               <th mat-header-cell *matHeaderCellDef class="col-4 text-center">  </th>
+               <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted"> {{element.numOfPhotos}} </td>
+             </ng-container>
+             <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef class="col-4 text-center">  </th>
+                <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted"> </td>
+              </ng-container>
+              <ng-container matColumnDef="view">
+                <th mat-header-cell *matHeaderCellDef class="col-4 text-center">  </th>
+                <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted">  </td>
+              </ng-container>
+           
+            
+          
+           
+             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+         </table>
+
+
+      </div>
+
+    
+</div>
