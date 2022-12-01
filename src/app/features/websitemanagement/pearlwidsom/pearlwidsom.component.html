@@ -1,0 +1,29 @@
+<div class="ConfigurationTypes_textpadding p-5 bg-light">
+    <h3 class="mb-4 pl-2 text-secondary "> Pearls of wisdom</h3>
+    <div class="bg-white  border  p-2">
+        <form class="p-5" [formGroup]="wisdomform" (ngSubmit)="wisdomsubmit()">
+            <div class="">
+                <label class="" for="file">Upload Image</label>
+                <input type="file" id="file" class="border" formControlName="imagefile"
+                    (change)="onfilechange($event,'imagefile')" accept="image/*" required="true" /> <br />
+
+                <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
+            </div>
+
+            <div class="">
+                <label class="" for="file">Upload audion file</label>
+                <input type="file" id="file" class="border" formControlName="auctionfile"
+                    (change)="onfilechange($event,'auctionfile')" accept="image/*" required="true" /> <br />
+
+                <mat-error *ngIf="filerror2">Please Upload Valid File</mat-error>
+            </div>
+
+            <div class="d-flex flex-row justify-content-end">
+                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2  ">
+                    Upload
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
