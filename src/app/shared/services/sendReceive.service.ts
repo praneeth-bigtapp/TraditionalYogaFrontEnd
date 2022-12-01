@@ -114,7 +114,7 @@ export class SendReceiveService {
       this.router.navigateByUrl("blacklistuser");
     }
     else if (subMenuId == 17) {
-      this.router.navigateByUrl("blank");
+      this.router.navigateByUrl("mapuCourse");
     }
     else if (subMenuId == 18) {
       this.router.navigateByUrl("blank");
