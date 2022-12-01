@@ -18,7 +18,7 @@
       <form [formGroup]="dateForm">
         <mat-form-field appearance="outline">
           <mat-label>Select Country</mat-label>
-          <mat-select formControlName="checkbox" (keyup)="updatePagination('currentStatus')"
+          <mat-select formControlName="checkbox" (valueChange)="updatePagination('currentStatus')"
           [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData">
             <mat-option *ngFor="let course of countryList" [value]="course">
               {{course}}</mat-option>

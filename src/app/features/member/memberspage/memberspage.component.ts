@@ -49,6 +49,50 @@ export class MemberspageComponent implements OnInit {
       "Senior_Mentor": "Ramesh",
 
     },
+    {
+      'SNo': "2",
+      'Image': "Image",
+      "Name": "Ajay",
+      "Email_id": "ajay@gmail.com",
+      "Country": "India",
+      "Gender": "Male",
+      "Mentor": "Suresh",
+      "Senior_Mentor": "Ramesh",
+
+    },
+    {
+      'SNo': "2",
+      'Image': "Image",
+      "Name": "Ajay",
+      "Email_id": "ajay@gmail.com",
+      "Country": "India",
+      "Gender": "Male",
+      "Mentor": "Suresh",
+      "Senior_Mentor": "Ramesh",
+
+    },
+    {
+      'SNo': "2",
+      'Image': "Image",
+      "Name": "Ajay",
+      "Email_id": "ajay@gmail.com",
+      "Country": "India",
+      "Gender": "Male",
+      "Mentor": "Suresh",
+      "Senior_Mentor": "Ramesh",
+
+    }, {
+      'SNo': "2",
+      'Image': "Image",
+      "Name": "Ajay",
+      "Email_id": "ajay@gmail.com",
+      "Country": "India",
+      "Gender": "Male",
+      "Mentor": "Suresh",
+      "Senior_Mentor": "Ramesh",
+
+    }
+
   ]
 
 
