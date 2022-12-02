@@ -106,7 +106,7 @@ export class CourseMediaPraticeComponent implements OnInit {
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
-        this.filterData.paginator = this.paginator
+        // this.filterData.paginator = this.paginator
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.filterData.sort = this.sort;

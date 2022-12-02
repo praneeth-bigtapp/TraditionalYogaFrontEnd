@@ -6,6 +6,7 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 })
 export class ServicesService extends BaseHttp{
   getAllMediaURL = "course/getAll?operation=classMedia";
+
   getAllcategoryURL = 'course/getAll?operation=courseMediaCategory'
 
 
