@@ -37,6 +37,7 @@ export class CourseMediaPraticeComponent implements OnInit {
   title = ''
   keyword = ''
   description = ''
+  filedata!: any
 
   filterData: any;
   gridData = [];
@@ -112,7 +113,6 @@ export class CourseMediaPraticeComponent implements OnInit {
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
-        // this.filterData.paginator = this.paginator
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.filterData.sort = this.sort;
@@ -198,8 +198,10 @@ export class CourseMediaPraticeComponent implements OnInit {
     console.log(classtype);
   }
 
-  onfilechange() {
+  onfilechange(event: any) {
     this.filerror = this.addmediaform.value.mediafile === null ? true : false
+
+    this.filedata = event.target.files[0].name
   }
 
   viewmanage(data: any) {
@@ -214,10 +216,11 @@ export class CourseMediaPraticeComponent implements OnInit {
   }
   addmedia() {
 
-    this.onfilechange()
+    this.filerror = this.addmediaform.value.mediafile === null ? true : false
 
     if (this.addmediaform.valid) {
 
+      this.addmediaform.value.mediafile = this.filedata
 
       const body = {
 

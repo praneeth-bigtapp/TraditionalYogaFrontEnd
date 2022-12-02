@@ -227,7 +227,7 @@
                                 <div class="ms-3">
 
                                     <input type="file" id="file" class="border" formControlName="mediafile"
-                                        accept=" */*" (change)="onfilechange()" required="true" />
+                                        accept=" */*" (change)="onfilechange($event)" required="true" />
                                     <br />
                                     <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
 

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { PhotoGalleryRoutingModule } from './photo-gallery-routing.module';
 import { GalleryComponent } from './gallery/gallery.component';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { UploadgalleryComponent } from './uploadgallery/uploadgallery.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -12,6 +12,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -20,7 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     UploadgalleryComponent,
     CreateGalleryComponent
   ],
-  entryComponents:[CreateGalleryComponent],
+  entryComponents: [CreateGalleryComponent],
   imports: [
     CommonModule,
     PhotoGalleryRoutingModule,
@@ -32,6 +34,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
+    MatCardModule,
+    MatSnackBarModule,
   ]
 })
 export class PhotoGalleryModule { }
