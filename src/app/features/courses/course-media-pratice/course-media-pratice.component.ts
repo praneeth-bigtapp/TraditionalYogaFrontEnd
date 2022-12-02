@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -33,6 +34,10 @@ export class CourseMediaPraticeComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
+  title=''
+  keyword=''
+  description=''
+
   filterData: any;
   gridData = [];
   dataSource: any
@@ -43,8 +48,8 @@ export class CourseMediaPraticeComponent implements OnInit {
 
   classtype!: string
   filerror!: boolean
-  timerror!: boolean
-  displaycontent: boolean = true
+  
+  displaycontent: boolean = false
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -94,7 +99,8 @@ export class CourseMediaPraticeComponent implements OnInit {
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
-    private service: CoursesService
+    private service: CoursesService,
+    private _snackBar: MatSnackBar
   ) {
 
 
@@ -139,6 +145,8 @@ export class CourseMediaPraticeComponent implements OnInit {
 
   ngOnInit(): void {
     this.addmediaform = this.formbuilder.group({
+
+      
       videolink: [null, Validators.compose([Validators.required])],
       videotitle: [null, Validators.compose([Validators.required])],
       videodescription: [null, Validators.compose([Validators.required])],
@@ -186,10 +194,6 @@ export class CourseMediaPraticeComponent implements OnInit {
 
   }
 
-  ontimechange() {
-    this.timerror = this.addmediaform.value.videoduration === null ? true : false
-
-  }
   onfilechange() {
     this.filerror = this.addmediaform.value.mediafile === null ? true : false
   }
@@ -201,7 +205,7 @@ export class CourseMediaPraticeComponent implements OnInit {
   addmedia() {
 
     this.onfilechange()
-    this.ontimechange()
+   
 
 
     if (this.addmediaform.valid) {
@@ -210,14 +214,53 @@ export class CourseMediaPraticeComponent implements OnInit {
 
       console.log(result);
 
+      const body= { 
+
+        "id":2,
+    
+         "uploadMediaFile": this.addmediaform.value.mediafile,
+    
+         "videoLink":this.addmediaform.value.videoLink,
+    
+         "title":this.addmediaform.value.videotitle,
+    
+         "description":this.addmediaform.value.videodescription,
+    
+         "duration":this.addmediaform.value.videoduration,
+    
+         "metaKeyword":this.addmediaform.value.vidoemetakeywords,
+    
+      }
+    
+    
+
+      this.service.postcoursemedia(body).subscribe({
+        next: (response) => {
+          console.log(response);
+        this.addmediaform.reset()
+          this.openSnackBar("Data added Sucessfully","close")
+
+        },
+        error: (error) => {
+          console.error(error.message);
+          // this.addmediaform.reset()
+        }
+      })
+
 
     }
     else {
-      console.log("invalid");
+     
 
       this.addmediaform.markAllAsTouched()
     }
 
   }
+  openSnackBar(message: string, action: string) {
+
+    this._snackBar.open(message, action);
+
+  }
+
 
 }

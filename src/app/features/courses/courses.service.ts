@@ -12,6 +12,8 @@ export class CoursesService extends BaseHttp {
 
   postcoursemediaURL = "course/addCourseMediaPractice"
 
+ 
+
   getCourse() {
 
     return this.get<any>(this.getURL);
