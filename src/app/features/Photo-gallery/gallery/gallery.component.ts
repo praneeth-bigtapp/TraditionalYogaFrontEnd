@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-
+import { CreateGalleryComponent } from '../create-gallery/create-gallery.component';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
@@ -48,12 +49,16 @@ data = [
   displayedColumns: string[] = ["courseName", "date","role","count","isvisible"];
 
 dataSource: any;
+ 
 // displayedColumns: string[] = ["image","Galleryname","DateOfCreation",'numOfPhotos','status', 'view'];
 
-  constructor() { }
+  constructor( public dialog : MatDialog) { }
 
   ngOnInit(): void {
     // this.dataSource = new MatTableDataSource<any>(this.data)
+  }
+  CreateGallery(){
+    this.dialog.open(CreateGalleryComponent);
   }
 
 
