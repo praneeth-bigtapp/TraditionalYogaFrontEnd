@@ -19,6 +19,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DonationviewdetailsComponent } from './donationviewdetails/donationviewdetails.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { DonationviewdetailsComponent } from './donationviewdetails/donationview
     SharedModule,
     MatTooltipModule,
     MatIconModule,
+    MatAutocompleteModule
   ]
 })
 export class DonationManagementModule { }
