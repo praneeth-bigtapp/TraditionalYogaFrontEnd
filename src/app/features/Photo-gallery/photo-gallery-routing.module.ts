@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GalleryComponent } from './gallery/gallery.component';
+import { UploadgalleryComponent } from './uploadgallery/uploadgallery.component';
 
 const routes: Routes = [
-  {path:'gallery', component:GalleryComponent}
+  { path: 'gallery', component: GalleryComponent },
+  { path: "uploadgallery", component: UploadgalleryComponent }
 ];
 
 @NgModule({

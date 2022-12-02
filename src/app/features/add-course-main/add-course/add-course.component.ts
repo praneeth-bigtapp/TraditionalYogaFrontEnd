@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { AddCourseService } from './../add-course.service';
-import { MatSnackBar, } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -12,11 +12,11 @@ import { MatSnackBar, } from '@angular/material/snack-bar';
   styleUrls: ['./add-course.component.css']
 })
 export class AddCourseComponent implements OnInit {
- 
+
   disableSelect = new FormControl(false);
   filerror!: boolean
   categorySelect!: any
-  addCourseForm: FormGroup = new FormGroup({});
+  addCourseForm!: FormGroup
 
 
   editorConfig: AngularEditorConfig = {
@@ -64,113 +64,54 @@ export class AddCourseComponent implements OnInit {
   };
 
 
-
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close');
+  }
 
   constructor(private AddCourseService: AddCourseService, private formbuilder: FormBuilder, private _snackBar: MatSnackBar) {
-    // this.addCourseForm = this.formbuilder.group({
-    //   categorys: [null, Validators.compose([Validators.required])],
-    //   coursename: [null, Validators.compose([Validators.required])],
-    //   paragraph: [null, Validators.compose([Validators.required])],
-    //   banner: [null, Validators.compose([Validators.required])],
-    //   Instructorname: [null, Validators.compose([Validators.required])],
-    //   Application: [null, Validators.compose([Validators.required])],
-    //   Image: [null, Validators.compose([Validators.required])],
-    //   startdate: [null, Validators.compose([Validators.required])],
-    //   endDate: [null, Validators.compose([Validators.required])],
-    //   verfication: [null, Validators.compose([Validators.required])],
-    // });
-  
+    this.addCourseForm = this.formbuilder.group({
+      courseName: [null, Validators.compose([Validators.required])],
+      description: [null, Validators.compose([Validators.required])],
+      startDate: [null, Validators.compose([Validators.required])],
+      endDate: [null, Validators.compose([Validators.required])],
+    });
+
   }
 
   ngOnInit(): void {
-   
-   
-    
 
-
-
-    this.AddCourseService. getCategory()
-      .subscribe({
-        next: (response) => {
-          this.categorySelect = response
-
-console.log(response)
-        },
-        error: (error) => {
-          console.error(error.message);
-
-        }
-      })
-
-      this.addCourseForm=this.formbuilder.group({
-        'category':new FormControl(''),
-        'courseName': new FormControl(''),
-        'startDate':new FormControl(''),
-        'endDate':new FormControl(''),
-        'verficationRequired':new FormControl(''),
-        // 'banner':new FormControl(''),
-        // 'Instructorname':new FormControl(''),
-        // 'Image':new FormControl(''),
-        // 'Application':new FormControl(''),
-        // 'paragraph':new FormControl('')
-        'courseType':new FormControl(''),
-        'section':new FormControl(''),
-        'courseDuration':new FormControl(''),
-        'currentStatus':new FormControl(''),
-
-
-
-
-      })
-    
   }
 
-  onAddCourse(){
-    this.AddCourseService. postadcourse(this.addCourseForm.value).subscribe((data:any)=>{
-      console.log(data);
-      console.log("course added")
-    },(err:any)=>{
-      console.log(err);
+  onAddCourse() {
+
+    if (this.addCourseForm.invalid)
+      return this.addCourseForm.markAllAsTouched()
+
+
+
+    const body = {
+
+      "courseName": this.addCourseForm.value.coursename,
+      "startDate": this.addCourseForm.value.startdate,
+      "endDate": this.addCourseForm.value.enddate,
+      "category": null,
+      "paragraph": null,
+      "Instructorname": null,
+      "verficationRequired": null,
+      "courseType": null,
+      "section": null,
+      "courseDuration": null,
+      "currentStatus": null,
+    }
+
+    this.AddCourseService.postadcourse(body).subscribe({
+      next: (response) => {
+        this.openSnackBar(response)
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
     })
   }
 }
-  // openSnackBar(message: any) {
-  //   this._snackBar.open(message, 'Close');
-  // }
- 
-  // onAddCourse() {
-    
-  //   // console.log(this.addCourseForm.value)
-    
-  //   this.filerror = this.addCourseForm.value.file === null ? true : false
-
-
-  //   if (this.addCourseForm.valid) {
-
-  //     const body = {
-
-  //       "category": this.addCourseForm.value.categorys,
-  //       "courseName": this.addCourseForm.value.coursename,
-  //       "startDate": this.addCourseForm.value.startdate,
-  //       "endDate": this.addCourseForm.value.enddate
-  //     }
-  //     console.log(body)
-  //     this.AddCourseService.postadcourse(body).subscribe({
-  //       next: (response) => {
-  //         this.addCourseForm.reset()
-  //         this.openSnackBar(response.message)
-
-  //       },
-  //       error: (error) => {
-  //         console.error(error.message);
-
-  //       }
-  //     })
-  //   }
-  //   else {
-  //     this.addCourseForm.markAllAsTouched()
-  //   }
-  // }
-  // }
-
-
