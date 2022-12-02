@@ -5,14 +5,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { Router } from '@angular/router';
-import { UserIdleService } from 'angular-user-idle';
-import { HeaderService } from 'src/app/core/layout/header/service/header.service';
-import { DataStorageService } from 'src/app/shared/services/data-storage.service';
-import { SendReceiveService } from 'src/app/shared/services/sendReceive.service';
-import { LoginService } from '../../auth/login/services/login.service';
-import { HttpClientModule } from '@angular/common/http';
-import { AngularEditorModule } from '@kolkov/angular-editor';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { CoursesService } from '../courses.service';
 
 
 export interface CourseData {
@@ -25,20 +19,7 @@ export interface CourseData {
 
 }
 
-const coursedata: CourseData[] = [
-  { no: "1", title: "Traditionals Yoga", description: "Descriptions", mediatype: "Images", timeadded: "-", keywords: "key", },
-  { no: "2", title: "Traditionals Yoga", description: "Descriptions", mediatype: "Images", timeadded: "-", keywords: "key", },
-  { no: "3", title: "Traditionals Yoga", description: "Descriptions", mediatype: "Images", timeadded: "-", keywords: "key", },
-  { no: "4", title: "Traditionals Yoga", description: "Descriptions", mediatype: "Images", timeadded: "-", keywords: "key", },
-  { no: "5", title: "Traditionals Yoga", description: "Descriptions", mediatype: "Images", timeadded: "-", keywords: "key", },
-  { no: "6", title: "Traditionals Yoga", description: "Descriptions", mediatype: "Images", timeadded: "-", keywords: "key", },
-  { no: "7", title: "Traditionals Yoga", description: "Descriptions", mediatype: "Images", timeadded: "-", keywords: "key", },
-  { no: "8", title: "Traditionals Yoga", description: "Descriptions", mediatype: "Images", timeadded: "-", keywords: "key", },
-  { no: "9", title: "Traditionals Yoga", description: "Descriptions", mediatype: "Images", timeadded: "-", keywords: "key", },
-  { no: "10", title: "Traditionals Yoga", description: "Descriptions", mediatype: "Images", timeadded: "-", keywords: "key", },
-  { no: "11", title: "Traditionals Yoga", description: "Descriptions", mediatype: "Images", timeadded: "-", keywords: "key", },
 
-]
 @Component({
   selector: 'app-course-media-pratice',
   templateUrl: './course-media-pratice.component.html',
@@ -58,11 +39,12 @@ export class CourseMediaPraticeComponent implements OnInit {
   categoryerror: boolean = false
 
   addmediaform!: FormGroup
+  data!: any
 
   classtype!: string
   filerror!: boolean
   timerror!: boolean
-  displaycontent: boolean = false
+  displaycontent: boolean = true
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -108,42 +90,50 @@ export class CourseMediaPraticeComponent implements OnInit {
     ]
   };
 
-
+  displayedColumns = ['id', 'title', 'description', 'duration', 'metaKeyword', 'buttons']
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
-    private loginService: LoginService,
-    private dataStorageService: DataStorageService,
-    public sendReceiveService: SendReceiveService,
-    private userIdle: UserIdleService,
-    private headerService: HeaderService
+    private service: CoursesService
   ) {
 
-    this.filterData = {
-      filterColumnNames: [
-        { "Key": 'no', "Value": "" },
-        { "Key": 'title', "Value": "" },
-        { "Key": 'description', "Value": "" },
-        { "Key": 'mediatype', "Value": "" },
-        { "Key": 'timeadded', "Value": "" },
-        { "Key": 'keywords', "Value": "" },
 
-      ],
+    this.service.getcoursemedia().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.data = response
+
+        this.dataSource = new MatTableDataSource<any>(this.data)
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
+        this.filterData.paginator = this.paginator
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
+
+    this.filterData = {
+      filterColumnNames: this.displayedColumns.map((ele: any) => ({ "Key": ele, "Value": "" })),
       gridData: this.gridData,
       dataSource: this.dataSource,
       paginator: this.paginator,
       sort: this.sort
     };
 
-    this.dataSource = new MatTableDataSource<any>(coursedata)
-    this.filterData.gridData = coursedata;
-    this.filterData.dataSource = this.dataSource;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.filterData.sort = this.sort;
-    for (let col of this.filterData.filterColumnNames) {
-      col.Value = '';
-    }
+
+    console.log(this.filterData);
+
+
+
 
   }
 
@@ -165,19 +155,11 @@ export class CourseMediaPraticeComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-
     this.filterData.dataSource.paginator = this.paginator;
-
   }
 
-
-
-
-  displayedColumns = ['SNO', 'Title', 'Description', 'Media Type', 'Time added', 'Keywords', 'View/Manage']
-
   updatePagination() {
-
-    this.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.paginator = this.paginator;
   }
   typechange() {
 
