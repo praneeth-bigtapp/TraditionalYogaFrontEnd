@@ -26,75 +26,9 @@ export class MemberspageComponent implements OnInit {
   selectedmember!: any
   formtype: string = "Members"
   // data: any;
-  displaycontent: boolean = true
+  displaycontent: boolean = false
 
-  data: any = [
-    {
-      'SNo': "1",
-      'Image': "Image",
-      "Name": "Karthik",
-      "Email_id": "karthik@gmail.com",
-      "Country": "India",
-      "Gender": "Male",
-      "Mentor": "Suresh",
-      "Senior_Mentor": "Ramesh",
-
-    }, {
-      'SNo': "2",
-      'Image': "Image",
-      "Name": "Ajay",
-      "Email_id": "ajay@gmail.com",
-      "Country": "India",
-      "Gender": "Male",
-      "Mentor": "Suresh",
-      "Senior_Mentor": "Ramesh",
-
-    },
-    {
-      'SNo': "2",
-      'Image': "Image",
-      "Name": "Ajay",
-      "Email_id": "ajay@gmail.com",
-      "Country": "India",
-      "Gender": "Male",
-      "Mentor": "Suresh",
-      "Senior_Mentor": "Ramesh",
-
-    },
-    {
-      'SNo': "2",
-      'Image': "Image",
-      "Name": "Ajay",
-      "Email_id": "ajay@gmail.com",
-      "Country": "India",
-      "Gender": "Male",
-      "Mentor": "Suresh",
-      "Senior_Mentor": "Ramesh",
-
-    },
-    {
-      'SNo': "2",
-      'Image': "Image",
-      "Name": "Ajay",
-      "Email_id": "ajay@gmail.com",
-      "Country": "India",
-      "Gender": "Male",
-      "Mentor": "Suresh",
-      "Senior_Mentor": "Ramesh",
-
-    }, {
-      'SNo': "2",
-      'Image': "Image",
-      "Name": "Ajay",
-      "Email_id": "ajay@gmail.com",
-      "Country": "India",
-      "Gender": "Male",
-      "Mentor": "Suresh",
-      "Senior_Mentor": "Ramesh",
-
-    }
-
-  ]
+  data!: any
 
 
   category!: string
@@ -186,6 +120,84 @@ export class MemberspageComponent implements OnInit {
 
     }
 
+    this.data = [
+      {
+        'SNo': "1",
+        'Image': "Image",
+        "Name": "Karthik",
+        "Email_id": "karthik@gmail.com",
+        "Country": "India",
+        "Gender": "Male",
+        "Mentor": "Suresh",
+        "Senior_Mentor": "Ramesh",
+
+      }, {
+        'SNo': "2",
+        'Image': "Image",
+        "Name": "Ajay",
+        "Email_id": "ajay@gmail.com",
+        "Country": "India",
+        "Gender": "Male",
+        "Mentor": "Suresh",
+        "Senior_Mentor": "Ramesh",
+
+      },
+      {
+        'SNo': "2",
+        'Image': "Image",
+        "Name": "Ajay",
+        "Email_id": "ajay@gmail.com",
+        "Country": "India",
+        "Gender": "Male",
+        "Mentor": "Suresh",
+        "Senior_Mentor": "Ramesh",
+
+      },
+      {
+        'SNo': "2",
+        'Image': "Image",
+        "Name": "Ajay",
+        "Email_id": "ajay@gmail.com",
+        "Country": "India",
+        "Gender": "Male",
+        "Mentor": "Suresh",
+        "Senior_Mentor": "Ramesh",
+
+      },
+      {
+        'SNo': "2",
+        'Image': "Image",
+        "Name": "Ajay",
+        "Email_id": "ajay@gmail.com",
+        "Country": "India",
+        "Gender": "Male",
+        "Mentor": "Suresh",
+        "Senior_Mentor": "Ramesh",
+
+      }, {
+        'SNo': "2",
+        'Image': "Image",
+        "Name": "Ajay",
+        "Email_id": "ajay@gmail.com",
+        "Country": "India",
+        "Gender": "Male",
+        "Mentor": "Suresh",
+        "Senior_Mentor": "Ramesh",
+
+      }
+
+    ]
+
+    this.dataSource = new MatTableDataSource<any>(this.data)
+    this.filterData.gridData = this.data;
+    this.filterData.dataSource = this.dataSource;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.filterData.sort = this.sort;
+    for (let col of this.filterData.filterColumnNames) {
+      col.Value = '';
+    }
+
   }
 
   formswich(name: string) {
@@ -199,9 +211,19 @@ export class MemberspageComponent implements OnInit {
     this.categoryerror = false
     if (this.category == undefined || this.category == null) {
       this.categoryerror = true
+      return
 
     }
-
+    this.data = []
+    this.dataSource = new MatTableDataSource<any>(this.data)
+    this.filterData.gridData = this.data;
+    this.filterData.dataSource = this.dataSource;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.filterData.sort = this.sort;
+    for (let col of this.filterData.filterColumnNames) {
+      col.Value = '';
+    }
   }
   isAllSelected() {
     const numSelected = this.selection.selected.length;

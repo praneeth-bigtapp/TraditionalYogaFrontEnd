@@ -5,8 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { count } from 'console';
-import { filter, map, Observable, startWith } from 'rxjs';
+import {  map, Observable, startWith } from 'rxjs';
 import { MappingRegionsToChiefMentorService } from '../services/mapping-regions-to-chief-mentor.service';
 
 @Component({

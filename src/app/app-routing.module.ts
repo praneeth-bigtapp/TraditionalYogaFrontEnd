@@ -26,6 +26,11 @@ const routes: Routes = [
       import('./features/mapping-regions-to-chief-mentor/mapping-regions-to-chief-mentor.module').then((m) => m.MappingRegionsToChiefMentorModule)
   },
   {
+    path: "",
+    loadChildren: () =>
+      import('./features/onlineexam/onlineexam.module').then((m) => m.OnlineexamModule)
+  },
+  {
     path: '',
     loadChildren: () =>
       import('./features/websitemanagement/websitemanagement.module').then((m) => m.WebsitemanagementModule)

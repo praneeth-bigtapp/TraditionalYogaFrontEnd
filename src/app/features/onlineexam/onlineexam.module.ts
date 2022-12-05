@@ -20,11 +20,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TasksComponent } from './tasks/tasks.component';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
   declarations: [
-    OnlineexamComponent
+    OnlineexamComponent,
+    TasksComponent
   ],
   imports: [
     CommonModule,
@@ -47,6 +50,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     SharedModule,
     MatTableModule,
     MatSnackBarModule,
+    MatPaginatorModule,
+    MatSortModule,
   ]
 })
 export class OnlineexamModule { }

@@ -1,0 +1,113 @@
+<div class="ConfigurationTypes_textpadding p-5 bg-light">
+    <h3 class="mb-4 pl-2 text-secondary ">Task Assignment</h3>
+    <div class="bg-white  border ">
+        <div class="d-flex flex-row flex-wrap justify-content-between align-items-center px-4 pt-2">
+
+            <div class="d-flex flex-wrap">
+                <div class="">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Select Course</mat-label>
+                        <mat-select [(ngModel)]="course" (ngModelChange)="coursechange()">
+                            <mat-option *ngFor="let course of courseList" [value]="course.courseId">
+                                {{course.courseName}}</mat-option>
+                        </mat-select>
+                        <span class="text-danger" *ngIf="courserror">
+                            Please Select Course
+                        </span>
+                    </mat-form-field>
+                </div>
+                <div class="">
+                    <button type="button" (click)="gobutton()"
+                        class="btn btn-outline-secondary btn-rounded d-inline-block mt-3 ml-md-1"> Go
+                    </button>
+                </div>
+
+            </div>
+            <br /><br /><br />
+            <div class="">
+                <button type="button" (click)="createtask()"
+                    class="btn btn-outline-secondary btn-rounded d-inline-block mb-3">
+                    <i class="fa-sharp fa-solid fa-plus"></i> Create Task
+                </button>
+            </div>
+
+
+        </div>
+        <hr />
+
+        <div class="px-4">
+            <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
+                aria-label="users">
+
+                <ng-container matColumnDef="task">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Task Name
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseId')"
+                            [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.task | titlecase}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="dateofassignment">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Date of assignment
+                        </label>
+                        <input type="text" (keyup)="updatePagination('Region')"
+                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element">
+                        {{element.dateofassignment}}
+
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="type">
+
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Type
+                        </label>
+                        <input type="text" (keyup)="updatePagination('Country')"
+                            [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.type |titlecase}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="duedate">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Due date for submission
+                        </label>
+                        <input type="text" (keyup)="updatePagination('State')"
+                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.duedate }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            View Details
+                        </label>
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element">
+                        <button type="button" (click)="viewdetails(element)"
+                            class="btn btn-outline-secondary btn-rounded d-inline-block "> View Details</button>
+                    </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <br />
+            <div class="d-flex  flex-row justify-content-end ">
+                <mat-paginator class="" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>
