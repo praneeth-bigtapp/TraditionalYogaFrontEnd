@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { DonationserviceService } from '../service/donationservice.service';
+import { log } from 'console';
 
 @Component({
   selector: 'app-donation-management',
@@ -99,6 +100,8 @@ export class DonationManagementComponent implements OnInit {
       next: (response) => {
         this.data = response;
         this.dataSource = new MatTableDataSource<any>(this.data);
+        console.log(this.data);
+        
 
       },
       error: (error) => {

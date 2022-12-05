@@ -91,6 +91,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/pages/pages.module').then((m) => m.PagesModule)
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/mapping-regions-to-chief-mentor/mapping-regions-to-chief-mentor.module').then((m) => m.MappingRegionsToChiefMentorModule)
+  },
 
   {
     path: '',
