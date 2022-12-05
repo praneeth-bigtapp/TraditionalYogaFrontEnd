@@ -4,6 +4,18 @@
         <form [formGroup]="addCourseForm" (ngSubmit)="onAddCourse()">
             <div class="row">
                 <div class="col-md-3 pt-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Select Course Category</mat-label>
+                        <mat-select formControlName="coursecategory">
+                            <mat-option *ngFor="let category of categoryList" [value]="category">
+                                {{category}}</mat-option>
+                        </mat-select>
+                        <mat-error [hidden]=" !addCourseForm.get('coursecategory')?.hasError('required')  ">
+                            Please Type Few Words
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3 pt-1">
                     <mat-form-field class="example-full-width" appearance="outline">
                         <mat-label>Course name</mat-label>
                         <input matInput formControlName="courseName">
@@ -33,14 +45,25 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
+                <div class="col-md-3">
+
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Application Closure Date</mat-label>
+                        <input matInput formControlName="applicationclosuredate" type="date">
+                        <mat-error [hidden]="!addCourseForm.get('applicationclosuredate')?.hasError('required')  ">
+                            Please Select Date
+                        </mat-error>
+                    </mat-form-field>
+                </div>
             </div>
             <br />
             <div class="w-100 ">
-                <angular-editor [placeholder]="'Enter text here...'" [config]="editorConfig" required
-                    formControlName="description">
+
+                <angular-editor [placeholder]="'Enter text here...'" (keypress)="paragraphchange()"
+                    [config]="editorConfig" required formControlName="description">
                 </angular-editor>
-                <mat-error *ngIf="addCourseForm.value.description === null  ">
-                    Please Type field
+                <mat-error *ngIf="paragrapherror ">
+                    Please Type Words
                 </mat-error>
 
             </div>
