@@ -5,7 +5,7 @@ import { MappingRegionsToChiefMentorRoutingModule } from './mapping-regions-to-c
 import { MappingRegionsToChiefMentorComponent } from './mapping-regions-to-chief-mentor/mapping-regions-to-chief-mentor.component';
 
 
-import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { MatTableModule } from '@angular/material/table';
@@ -20,16 +20,20 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { RegioncreationComponent } from './regioncreation/regioncreation.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
-    MappingRegionsToChiefMentorComponent
+    MappingRegionsToChiefMentorComponent,
+    RegioncreationComponent
   ],
   imports: [
     CommonModule,
     MappingRegionsToChiefMentorRoutingModule,
 
-    
+
     MatSortModule,
     MatTableModule,
     MatSelectModule,
@@ -44,6 +48,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSlideToggleModule,
     SharedModule,
     MatTooltipModule,
+    MatSnackBarModule,
+    MatAutocompleteModule,
+    SharedModule,
   ]
 })
 export class MappingRegionsToChiefMentorModule { }

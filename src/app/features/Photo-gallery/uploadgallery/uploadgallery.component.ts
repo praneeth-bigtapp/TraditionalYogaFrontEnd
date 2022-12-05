@@ -90,7 +90,7 @@ export class UploadgalleryComponent implements OnInit {
     const finaldata = this.uploadfile
 
     this.uploadfile = []
-
+ 
     this.opensnackBar({ message: "Uploaded" })
 
   }
