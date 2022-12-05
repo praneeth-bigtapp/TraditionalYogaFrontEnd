@@ -17,13 +17,7 @@ export class MappingRegionsToChiefMentorComponent implements OnInit {
   regionList:any
  
   searchform!: FormGroup
-  data=[{'SNo':"1", 'Regionname':"india", 'Chiefmentorname':"kumar", "Chiefmentorid":"102"},
-  {'SNo':"2", 'Regionname':"USA", 'Chiefmentorname':"kumar", "Chiefmentorid":"102"},
-  {'SNo':"3", 'Regionname':"india", 'Chiefmentorname':"arun", "Chiefmentorid":"104"},
-  {'SNo':"4", 'Regionname':"india", 'Chiefmentorname':"kumar", "Chiefmentorid":"102"},
-  {'SNo':"5", 'Regionname':"india", 'Chiefmentorname':"kumar", "Chiefmentorid":"103"},
-  {'SNo':"6", 'Regionname':"india", 'Chiefmentorname':"kumar", "Chiefmentorid":"102"},
-  {'SNo':"7", 'Regionname':"india", 'Chiefmentorname':"kumar", "Chiefmentorid":"102"}]
+ data:any
 
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
@@ -67,12 +61,41 @@ export class MappingRegionsToChiefMentorComponent implements OnInit {
 
   }
   searchby(){
+    this.data=[{'SNo':"1", 'Regionname':"india", 'Chiefmentorname':"kumar", "Chiefmentorid":"102"},
+    {'SNo':"2", 'Regionname':"USA", 'Chiefmentorname':"kumar", "Chiefmentorid":"102"},
+    {'SNo':"3", 'Regionname':"india", 'Chiefmentorname':"arun", "Chiefmentorid":"104"},
+    {'SNo':"4", 'Regionname':"india", 'Chiefmentorname':"kumar", "Chiefmentorid":"102"},
+    {'SNo':"5", 'Regionname':"india", 'Chiefmentorname':"kumar", "Chiefmentorid":"103"},
+    {'SNo':"6", 'Regionname':"india", 'Chiefmentorname':"kumar", "Chiefmentorid":"102"},
+    {'SNo':"7", 'Regionname':"india", 'Chiefmentorname':"kumar", "Chiefmentorid":"102"}]
+  
+    // let filters = this.data.filter((ele: any) => ele.Chiefmentorname === this.searchform.value.mentorname && ele.Chiefmentorid === this.searchform.value.mentorid && ele.Regionname === this.searchform.value.regionname)
+    let filterdata = this.data
+
+    
+
+    if (this.searchform.value.regionname)
+      filterdata = filterdata.filter((ele: any) => ele.Regionname.toLowerCase() === this.searchform.value.regionname.toLowerCase())
+
+    if (this.searchform.value.mentorname)
+    filterdata = filterdata.filter((ele: any) => ele.Chiefmentorname.toLowerCase() === this.searchform.value.mentorname.toLowerCase())
+      
+
+    if (this.searchform.value.mentorid)
+      filterdata = filterdata.filter((ele: any) => ele.Chiefmentorid.toLowerCase() === this.searchform.value.mentorid.toLowerCase())
+
+    console.log(filterdata);
+
+    this.dataSource = new MatTableDataSource<any>(filterdata)
+    this.filterData.gridData = filterdata;
+    this.filterData.dataSource = this.dataSource;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.filterData.sort = this.sort;
+    for (let col of this.filterData.filterColumnNames) {
+      col.Value = '';
+    }
    
-    let filters = this.data.filter((ele: any) => ele.Chiefmentorname === this.searchform.value.mentorname && ele.Chiefmentorid === this.searchform.value.mentorid && ele.Regionname === this.searchform.value.regionname)
-    
-    console.log(filters)
-    this.dataSource = new MatTableDataSource<any>(filters);
-    
   }
   ngAfterViewInit() {
     this.filterData.dataSource.paginator = this.paginator;
