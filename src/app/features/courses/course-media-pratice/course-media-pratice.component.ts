@@ -170,10 +170,12 @@ export class CourseMediaPraticeComponent implements OnInit {
 
   ngAfterViewInit() {
     this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
   }
 
   updatePagination() {
     this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
   }
   typechange() {
 

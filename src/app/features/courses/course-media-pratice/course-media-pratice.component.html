@@ -308,8 +308,8 @@
 
     <br />
 
-    <table mat-table [dataSource]="this.filterData.dataSource" *ngIf="displaycontent" matSort
-        class="mat-elevation-z8 mat-datagrid w-100" aria-label="users">
+    <table mat-table [dataSource]="this.filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
+        aria-label="users">
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
                 <label mat-sort-header>
@@ -397,8 +397,8 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <div class="bg-white d-flex  flex-row justify-content-end " *ngIf="displaycontent">
-        <mat-paginator class="" [pageSizeOptions]="[1, 5,10,25, 50, 100]" aria-label="Select page">
+    <div class="bg-white d-flex  flex-row justify-content-end ">
+        <mat-paginator class="" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
         </mat-paginator>
     </div>
 
