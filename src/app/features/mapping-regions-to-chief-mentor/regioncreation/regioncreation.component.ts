@@ -39,47 +39,7 @@ export class RegioncreationComponent implements OnInit {
   dataSource: any;
   displayedColumns: string[] = ['SNo', "Region", "Country", "State"];
 
-  data: any = [
-    {
-      'SNo': "1",
-      "Region": "South",
-      "Country": "India",
-      "State": "Andhra Pradesh"
-
-    }, {
-      'SNo': "2",
-      "Region": "North",
-      "Country": "India",
-      "State": "Delhi"
-    },
-    {
-      'SNo': "3",
-      "Region": "East",
-      "Country": "India",
-      "State": "West Bengal"
-
-
-    },
-    {
-      'SNo': "4",
-      "Region": "West",
-      "Country": "India",
-      "State": "Goa"
-    },
-    {
-      'SNo': "5",
-      "Region": "West",
-      "Country": "India",
-      "State": "Goa"
-    },
-    {
-      'SNo': "6",
-      "Region": "West",
-      "Country": "India",
-      "State": "Goa"
-    },
-
-  ]
+  data!: any
   constructor(
     private service: MappingRegionsToChiefMentorService,
     private _snackbar: MatSnackBar,
@@ -157,7 +117,47 @@ export class RegioncreationComponent implements OnInit {
     console.log({ country, part, state });
     console.log(this.regionname);
 
-    let filterdata = this.data
+    let filterdata = [
+      {
+        'SNo': "1",
+        "Region": "South",
+        "Country": "India",
+        "State": "Andhra Pradesh"
+
+      }, {
+        'SNo': "2",
+        "Region": "North",
+        "Country": "India",
+        "State": "Delhi"
+      },
+      {
+        'SNo': "3",
+        "Region": "East",
+        "Country": "India",
+        "State": "West Bengal"
+
+
+      },
+      {
+        'SNo': "4",
+        "Region": "West",
+        "Country": "India",
+        "State": "Goa"
+      },
+      {
+        'SNo': "5",
+        "Region": "West",
+        "Country": "India",
+        "State": "Goa"
+      },
+      {
+        'SNo': "6",
+        "Region": "West",
+        "Country": "India",
+        "State": "Goa"
+      },
+
+    ]
 
     if (this.regionname) {
 
