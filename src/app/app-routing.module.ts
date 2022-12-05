@@ -21,6 +21,11 @@ const routes: Routes = [
       import('./features/blacklist-user/blacklist-user.module').then((m) => m.BlacklistUserModule)
   },
   {
+    path: "",
+    loadChildren: () =>
+      import('./features/mapping-regions-to-chief-mentor/mapping-regions-to-chief-mentor.module').then((m) => m.MappingRegionsToChiefMentorModule)
+  },
+  {
     path: '',
     loadChildren: () =>
       import('./features/websitemanagement/websitemanagement.module').then((m) => m.WebsitemanagementModule)

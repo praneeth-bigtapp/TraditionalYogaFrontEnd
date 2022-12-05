@@ -176,7 +176,6 @@ export class MemberspageComponent implements OnInit {
   }
   ngAfterViewInit() {
     this.filterData.dataSource.paginator = this.paginator;
-
   }
 
   gobutton(): void {
