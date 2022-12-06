@@ -59,7 +59,7 @@
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell class="text-center" *matCellDef="let element">
-                        {{element.createDate}}
+                        {{element.createDate || "NIL"}}
 
                     </td>
                 </ng-container>
@@ -74,7 +74,7 @@
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell class="text-center" *matCellDef="let element"><a
-                            class="text-decoration-underline text-primary" [href]="element.mediafile">Video</a> </td>
+                            class="text-decoration-underline text-primary" target="_blank"  rel=”noreferrer” [href]="element.mediafile">Video</a> </td>
                 </ng-container>
 
                 <ng-container matColumnDef="dueDate">

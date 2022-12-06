@@ -82,12 +82,13 @@ export class TasksComponent implements OnInit {
     this._snackbar.open(data.message, "Close")
   }
 
-  gettask() {
+  gettask(course: string) {
     this.service.gettask().subscribe({
       next: (value) => {
         console.log(value);
         this.data = value
 
+        // this.data =  this.data.filter((ele:any)=>ele?.courseId === course)
 
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
@@ -136,7 +137,7 @@ export class TasksComponent implements OnInit {
     this.courserror = false
     console.log(this.course);
 
-    this.gettask()
+    this.gettask(this.course)
 
 
   }
