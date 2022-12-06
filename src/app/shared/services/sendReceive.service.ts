@@ -117,7 +117,7 @@ export class SendReceiveService {
       this.router.navigateByUrl("mapuCourse");
     }
     else if (subMenuId == 18) {
-      this.router.navigateByUrl("blank");
+      this.router.navigateByUrl("administration/parameters");
     }
     else if (subMenuId == 19) {
       this.router.navigateByUrl("blank");

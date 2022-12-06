@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 @Component({
   selector: 'app-uploadgallery',
@@ -47,10 +48,8 @@ export class UploadgalleryComponent implements OnInit {
 
   constructor(
     private _snackBar: MatSnackBar,
-  ) {
-
-
-  }
+    public router: Router,
+  ) {}
 
   ngOnInit(): void {
   }
@@ -66,8 +65,9 @@ export class UploadgalleryComponent implements OnInit {
 
   }
 
-  managegallery() {
-
+  manageGallery() {
+    alert("click");
+    // this.router.navigateByUrl("");
   }
 
   addgallery() {
@@ -90,7 +90,7 @@ export class UploadgalleryComponent implements OnInit {
     const finaldata = this.uploadfile
 
     this.uploadfile = []
- 
+
     this.opensnackBar({ message: "Uploaded" })
 
   }
