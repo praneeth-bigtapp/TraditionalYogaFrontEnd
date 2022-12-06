@@ -11,8 +11,8 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Select Course</mat-label>
                         <mat-select [(ngModel)]="category" (ngModelChange)="coursechange()">
-                            <mat-option *ngFor="let course of courselist" [value]="course.courseId">
-                                {{course.courseName}}</mat-option>
+                            <mat-option *ngFor="let course of courselist" [value]="course.coursesId">
+                                {{course.coursesName}}</mat-option>
                         </mat-select>
                         <span class="text-danger" *ngIf="categoryerror">
                             Please Select Category

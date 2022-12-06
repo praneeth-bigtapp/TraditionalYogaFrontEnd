@@ -6,7 +6,7 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 })
 export class MemberService extends BaseHttp {
 
-  getallcourseURL = "student/getAll?operation=course"
+  getallcourseURL = "courseList/getAll?operation=coursesList"
 
   getallcourses() {
     return this.get(this.getallcourseURL)

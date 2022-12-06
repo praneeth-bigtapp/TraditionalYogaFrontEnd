@@ -1,14 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { UserIdleService } from 'angular-user-idle';
-import { HeaderService } from 'src/app/core/layout/header/service/header.service';
-import { DataStorageService } from 'src/app/shared/services/data-storage.service';
+
 import { SendReceiveService } from 'src/app/shared/services/sendReceive.service';
-import { LoginService } from '../../auth/login/services/login.service';
 import { CoursesService } from '../courses.service';
 
 
@@ -25,19 +21,9 @@ export class CourseMainComponent implements OnInit {
   filterData: any;
   gridData = [];
   dataSource: any;
-  displayedColumns: string[] = ['courseId', 'category', 'courseName', "courseDuration", "startDate", "endDate", "currentStatus"];
+  displayedColumns: string[] = ['coursesId', 'category', 'coursesName', "courseDuration", "startDate", "endDate", "currentStatus"];
   data: any;
-  values =
-    {
 
-      "courseId": "",
-      "category": "",
-      "courseName": "",
-      "courseDuration": "",
-      "startDate": "",
-      "endDate": "",
-      "currentStatus": ""
-    }
 
   length = 50;
   pageSize = 10;
@@ -52,8 +38,6 @@ export class CourseMainComponent implements OnInit {
 
 
 
-  // pageEvent!: PageEvent;
-
   constructor(
     private router: Router,
     public sendReceiveService: SendReceiveService,
@@ -61,15 +45,7 @@ export class CourseMainComponent implements OnInit {
 
   ) {
     this.filterData = {
-      filterColumnNames: [
-        { "Key": 'courseId', "Value": "" },
-        { "Key": 'category', "Value": "" },
-        { "Key": 'courseName', "Value": "" },
-        { "Key": 'courseDuration', "Value": "" },
-        { "Key": 'startDate', "Value": "" },
-        { "Key": 'endDate', "Value": "" },
-        { "Key": 'currentStatus', "Value": "" },
-      ],
+      filterColumnNames: this.displayedColumns.map((ele: any) => ({ "Key": ele, "Value": "" })),
       gridData: this.gridData,
       dataSource: this.dataSource,
       paginator: this.paginator,
@@ -80,7 +56,6 @@ export class CourseMainComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
     this.filterData.dataSource.paginator = this.paginator;
 
   }
@@ -123,7 +98,13 @@ export class CourseMainComponent implements OnInit {
 
 
 
-
+  getMonthDifference(startDate: any, endDate: any) {
+    return (
+      new Date(endDate).getMonth() -
+      new Date(startDate).getMonth() +
+      12 * (new Date(endDate).getFullYear() - new Date(startDate).getFullYear())
+    );
+  }
 
 
 
