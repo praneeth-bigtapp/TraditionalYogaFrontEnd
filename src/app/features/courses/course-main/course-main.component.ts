@@ -56,12 +56,7 @@ export class CourseMainComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private formbuilder: FormBuilder,
-    private loginService: LoginService,
-    private dataStorageService: DataStorageService,
     public sendReceiveService: SendReceiveService,
-    private userIdle: UserIdleService,
-    private headerService: HeaderService,
     private service: CoursesService
 
   ) {

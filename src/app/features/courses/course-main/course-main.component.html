@@ -20,7 +20,7 @@
                 </label>
                 <input type="text" (keyup)="updatePagination('courseId')" [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
             </th>
-            <td mat-cell *matCellDef="let element"> {{element.courseId}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.coursesId}} </td>
         </ng-container>
 
         <ng-container matColumnDef="category">
@@ -30,7 +30,7 @@
                 </label>
                 <input type="text" (keyup)="updatePagination('category')" [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
             </th>
-            <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.category || "Nil"}} </td>
         </ng-container>
 
         <ng-container matColumnDef="courseName">
@@ -41,7 +41,7 @@
                 </label>
                 <input type="text" (keyup)="updatePagination('courseName')" [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
             </th>
-            <td mat-cell *matCellDef="let element"> {{element.courseName}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.coursesName}} </td>
         </ng-container>
 
         <ng-container matColumnDef="courseDuration">
@@ -51,7 +51,7 @@
                 </label>
                 <input type="text" (keyup)="updatePagination('courseDuration')" [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
             </th>
-            <td mat-cell *matCellDef="let element"> {{element.courseDuration}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.courseDuration || 'Nil'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="startDate">
@@ -81,7 +81,7 @@
                 </label>
                 <input type="text" (keyup)="updatePagination('currentStatus')" [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
             </th>
-            <td mat-cell *matCellDef="let element "> {{element.currentStatus}} </td>
+            <td mat-cell *matCellDef="let element "> {{element.currentStatus || 'NIL'}} </td>
 
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

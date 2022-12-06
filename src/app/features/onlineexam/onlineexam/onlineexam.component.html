@@ -6,24 +6,22 @@
 
                 <div class="col">
                     <mat-form-field appearance="outline">
-                        <mat-label>Select Course</mat-label>
+                        <mat-label>Select Courses</mat-label>
                         <mat-select formControlName="course">
-                            <mat-option *ngFor="let course of courselist" [value]="course.courseId">
-                                {{course.courseName}}</mat-option>
+                            <mat-option *ngFor="let type of courselist" [value]="type.coursesId">
+                                {{type.coursesName | titlecase}}</mat-option>
                         </mat-select>
                         <mat-error [hidden]="!onlineexamform.get('course')?.hasError('required')">
                             Please Select Course
                         </mat-error>
                     </mat-form-field>
                 </div>
-
-
                 <div class="col">
                     <mat-form-field appearance="outline">
                         <mat-label>Test Type</mat-label>
                         <mat-select formControlName="testtype">
-                            <mat-option *ngFor="let type of typetestlist" [value]="type">
-                                {{type}}</mat-option>
+                            <mat-option *ngFor="let type of typetestlist" [value]="type.testId">
+                                {{type.testname | titlecase}}</mat-option>
                         </mat-select>
                         <mat-error [hidden]="!onlineexamform.get('testtype')?.hasError('required')">
                             Please Select Type
@@ -44,8 +42,8 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Level of Test</mat-label>
                         <mat-select formControlName="leveltest">
-                            <mat-option *ngFor="let type of testlevel" [value]="type">
-                                {{type}}</mat-option>
+                            <mat-option *ngFor="let type of testlevel" [value]="type.testId">
+                                {{type.testname | titlecase}}</mat-option>
                         </mat-select>
                         <mat-error [hidden]="!onlineexamform.get('leveltest')?.hasError('required')">
                             Please Select Test level

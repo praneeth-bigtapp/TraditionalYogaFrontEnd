@@ -6,8 +6,10 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CoursesService extends BaseHttp {
-  getURL = 'student/getAll?operation=course';
+ 
+  // getURL = 'student/getAll?operation=course';
 
+  getURL ='courseList/getAll?operation=coursesList'
   getcoursemediaURL = "course/getAll?operation=courseMediaPractice"
 
   postcoursemediaURL = "course/addCourseMediaPractice"
