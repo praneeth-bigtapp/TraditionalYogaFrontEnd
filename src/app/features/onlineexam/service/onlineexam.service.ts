@@ -14,6 +14,10 @@ export class OnlineexamService extends BaseHttp {
 
   postonlinexamURL = "courseList/onlineexam?operation=add"
 
+  gettaskURL = "course/getAll?operation=task"
+
+  posttaskURL = "course/task?operation=add"
+
   getallcourses() {
     return this.get(this.getallcourseURL)
   }
@@ -25,8 +29,17 @@ export class OnlineexamService extends BaseHttp {
     return this.get(this.getleveloftestURL)
   }
 
+  gettask() {
+    return this.get(this.gettaskURL)
+  }
+
   postonlineexam(body: any) {
     return this.post(this.postonlinexamURL, body)
+  }
+
+
+  posttask(body: any) {
+    return this.post(this.posttaskURL, body)
   }
 
 

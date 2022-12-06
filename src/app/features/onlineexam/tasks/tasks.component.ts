@@ -61,11 +61,13 @@ export class TasksComponent implements OnInit {
         this.courseList = response
 
       },
+
       error: (error) => {
         console.error(error.message);
 
       }
     })
+
   }
 
   ngOnInit(): void {
@@ -79,6 +81,34 @@ export class TasksComponent implements OnInit {
   opensnackBar(data: any) {
     this._snackbar.open(data.message, "Close")
   }
+
+  gettask() {
+    this.service.gettask().subscribe({
+      next: (value) => {
+        console.log(value);
+        this.data = value
+
+
+        this.dataSource = new MatTableDataSource<any>(this.data)
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+
+        this.updatePagination('')
+
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
+  }
+
 
   updatePagination(col: any) {
     this.ngAfterViewInit()
@@ -96,42 +126,18 @@ export class TasksComponent implements OnInit {
     for (let col of this.filterData.filterColumnNames) {
       col.Value = '';
     }
-
   }
   gobutton() {
-    if (!this.course) {
+    // if (!this.course) {
 
-      this.courserror = true
-      return
-    }
+    //   this.courserror = true
+    //   return
+    // }
     this.courserror = false
     console.log(this.course);
 
-    this.data = [
-      {
-        task: "Cat-1",
-        dateofassignment: "04-05-2022",
-        type: "Text",
-        duedate: "09-05-2022",
-      },
-      {
-        task: "Cat-2",
-        dateofassignment: "05-05-2022",
-        type: "Text",
-        duedate: "10-05-2022",
-      }]
+    this.gettask()
 
-    this.dataSource = new MatTableDataSource<any>(this.data)
-    this.filterData.gridData = this.data;
-    this.filterData.dataSource = this.dataSource;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.filterData.sort = this.sort;
-    for (let col of this.filterData.filterColumnNames) {
-      col.Value = '';
-    }
-
-    this.updatePagination('')
 
   }
 
