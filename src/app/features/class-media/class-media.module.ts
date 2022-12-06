@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { ClassMediaRoutingModule } from './class-media-routing.module';
 import { MediaComponent } from './media/media.component';
-import {MatCardModule} from '@angular/material/card';
-import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatButtonModule} from '@angular/material/button';
-import {MatTableModule} from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSortModule } from '@angular/material/sort';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -36,11 +36,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MatTableModule,
     MatTooltipModule,
     MatSortModule,
-   
-   
+
+
     FormsModule,
-    
-  
+
+
     ReactiveFormsModule,
     MatCheckboxModule,
     MatIconModule,
@@ -48,8 +48,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MatDialogModule,
     MatSlideToggleModule,
     SharedModule,
-   
-    
+    MatSortModule,
+
   ]
 })
 export class ClassMediaModule { }
