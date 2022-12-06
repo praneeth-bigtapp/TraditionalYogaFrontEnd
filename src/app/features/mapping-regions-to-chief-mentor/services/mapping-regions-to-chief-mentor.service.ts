@@ -8,9 +8,9 @@ export class MappingRegionsToChiefMentorService extends BaseHttp {
 
 
   getAllcoursesURL = "courseList/getAll?operation=coursesList";
-  postURL = 'student/donationView'
+  postregionURL = 'webSite/region?operation=add'
 
-  getregionURL="webSite/getAll?operation=region"
+  getregionURL = "webSite/getAll?operation=region"
 
   getcoursesdetails() {
     return this.get(this.getAllcoursesURL)
@@ -18,7 +18,7 @@ export class MappingRegionsToChiefMentorService extends BaseHttp {
   getregion() {
     return this.get(this.getregionURL)
   }
-  // postdonationdetails(data: any) {
-  //   return this.post(this.postURL, data)
-  // }
+  postregion(data: any) {
+    return this.post(this.postregionURL, data)
+  }
 }

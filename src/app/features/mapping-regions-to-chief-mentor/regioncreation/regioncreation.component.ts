@@ -44,15 +44,34 @@ export class RegioncreationComponent implements OnInit {
     private service: MappingRegionsToChiefMentorService,
     private _snackbar: MatSnackBar,
     private formbuilder: FormBuilder,
+    private _snackBar: MatSnackBar
   ) {
 
     this.regionfilterform = this.formbuilder.group({
-      region: [null, Validators.compose([])],
-      country: [null, Validators.compose([])],
-      part: [null, Validators.compose([])],
-      state: [null, Validators.compose([])],
+      region: [null, Validators.compose([Validators.required])],
+      country: [null, Validators.compose([Validators.required])],
+      part: [null, Validators.compose([Validators.required])],
+      state: [null, Validators.compose([Validators.required])],
     })
 
+    this.getregiondata()
+
+
+    this.filterData = {
+      filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
+    }
+  }
+
+  ngOnInit(): void {
+
+  }
+
+
+  getregiondata() {
     this.service.getregion().subscribe({
       next: (value) => {
         this.data = value
@@ -101,29 +120,6 @@ export class RegioncreationComponent implements OnInit {
 
       },
     })
-
-
-    this.filterData = {
-      filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
-      gridData: this.gridData,
-      dataSource: this.dataSource,
-      paginator: this.paginator,
-      sort: this.sort
-    }
-
-    // this.dataSource = new MatTableDataSource<any>(this.data)
-    // this.filterData.gridData = this.data;
-    // this.filterData.dataSource = this.dataSource;
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
-    // this.filterData.sort = this.sort;
-    // for (let col of this.filterData.filterColumnNames) {
-    //   col.Value = '';
-    // }
-  }
-
-  ngOnInit(): void {
-
   }
 
   countrychange(event: any) {
@@ -180,36 +176,54 @@ export class RegioncreationComponent implements OnInit {
 
     this.updatePagination("")
 
-
-
     const { region, country, part, state } = this.regionfilterform.value
-
-    let filterdata = this.data
-
-    if (region)
-      filterdata = filterdata.filter((ele: any) => ele.regionName.toLowerCase() === region.toLowerCase())
-
-    if (country)
-      filterdata = filterdata.filter((ele: any) => ele.countryName.toLowerCase() === country.toLowerCase())
-
-    if (part)
-      filterdata = filterdata.filter((ele: any) => ele.partId.partId === part)
-
-    if (state)
-      filterdata = filterdata.filter((ele: any) => ele.states.toLowerCase() === state.toLowerCase())
-
-    console.log(filterdata);
-
-    this.dataSource = new MatTableDataSource<any>(filterdata)
-    this.filterData.gridData = filterdata;
-    this.filterData.dataSource = this.dataSource;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.filterData.sort = this.sort;
-    for (let col of this.filterData.filterColumnNames) {
-      col.Value = '';
+    const body = {
+      "regionName": region,
+      "countryName": country,
+      "partId": {
+        "partId": part
+      },
+      "states": state
     }
-    this.displaycontent = true
+
+    this.service.postregion(body).subscribe({
+      next: (response) => {
+        this.opensnackBar(response)
+        this.regionfilterform.reset()
+        this.getregiondata()
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
+
+    // let filterdata = this.data
+
+    // if (region)
+    //   filterdata = filterdata.filter((ele: any) => ele.regionName.toLowerCase() === region.toLowerCase())
+
+    // if (country)
+    //   filterdata = filterdata.filter((ele: any) => ele.countryName.toLowerCase() === country.toLowerCase())
+
+    // if (part)
+    //   filterdata = filterdata.filter((ele: any) => ele.partId.partId === part)
+
+    // if (state)
+    //   filterdata = filterdata.filter((ele: any) => ele.states.toLowerCase() === state.toLowerCase())
+
+    // console.log(filterdata);
+
+    // this.dataSource = new MatTableDataSource<any>(filterdata)
+    // this.filterData.gridData = filterdata;
+    // this.filterData.dataSource = this.dataSource;
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+    // this.filterData.sort = this.sort;
+    // for (let col of this.filterData.filterColumnNames) {
+    //   col.Value = '';
+    // }
+    // this.displaycontent = true
 
   }
 

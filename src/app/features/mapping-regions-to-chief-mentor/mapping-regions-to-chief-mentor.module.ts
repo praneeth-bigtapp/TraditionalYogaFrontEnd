@@ -51,6 +51,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatSnackBarModule,
     MatAutocompleteModule,
     SharedModule,
+    MatSnackBarModule,
   ]
 })
 export class MappingRegionsToChiefMentorModule { }
