@@ -14,7 +14,7 @@ export class OnlineexamService extends BaseHttp {
 
   postonlinexamURL = "courseList/onlineexam?operation=add"
 
-  gettaskURL = "course/getAll?operation=task"
+  gettaskURL = "courseList/getAll?operation=task"
 
   posttaskURL = "course/task?operation=add"
 

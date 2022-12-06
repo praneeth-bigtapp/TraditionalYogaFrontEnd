@@ -8,8 +8,8 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Select Course</mat-label>
                         <mat-select [(ngModel)]="course" (ngModelChange)="coursechange()">
-                            <mat-option *ngFor="let course of courseList" [value]="course.courseId">
-                                {{course.courseName}}</mat-option>
+                            <mat-option *ngFor="let course of courseList" [value]="course.coursesId">
+                                {{course.coursesName}}</mat-option>
                         </mat-select>
                         <span class="text-danger" *ngIf="courserror">
                             Please Select Course
@@ -39,7 +39,7 @@
             <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
                 aria-label="users">
 
-                <ng-container matColumnDef="task">
+                <ng-container matColumnDef="taskName">
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
                             Task Name
@@ -47,10 +47,10 @@
                         <input type="text" (keyup)="updatePagination('courseId')"
                             [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.task | titlecase}} </td>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.taskName | titlecase}} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="dateofassignment">
+                <ng-container matColumnDef="createDate">
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
                             Date of assignment
@@ -59,7 +59,7 @@
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell class="text-center" *matCellDef="let element">
-                        {{element.dateofassignment}}
+                        {{element.createDate}}
 
                     </td>
                 </ng-container>
@@ -73,10 +73,11 @@
                         <input type="text" (keyup)="updatePagination('Country')"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.type |titlecase}} </td>
+                    <td mat-cell class="text-center" *matCellDef="let element"><a
+                            class="text-decoration-underline text-primary" [href]="element.mediafile">Video</a> </td>
                 </ng-container>
 
-                <ng-container matColumnDef="duedate">
+                <ng-container matColumnDef="dueDate">
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
                             Due date for submission
@@ -84,7 +85,7 @@
                         <input type="text" (keyup)="updatePagination('State')"
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.duedate }} </td>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.dueDate }} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="action">

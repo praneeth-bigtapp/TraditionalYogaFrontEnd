@@ -27,7 +27,7 @@ export class TasksComponent implements OnInit {
   filterData: any;
   gridData = [];
   dataSource: any;
-  displayedColumns: string[] = ['task', "dateofassignment", "type", "duedate", "action"];
+  displayedColumns: string[] = ['taskName', "createDate", "type", "dueDate", "action"];
 
   data!: any
 
@@ -128,11 +128,11 @@ export class TasksComponent implements OnInit {
     }
   }
   gobutton() {
-    // if (!this.course) {
+    if (!this.course) {
 
-    //   this.courserror = true
-    //   return
-    // }
+      this.courserror = true
+      return
+    }
     this.courserror = false
     console.log(this.course);
 
