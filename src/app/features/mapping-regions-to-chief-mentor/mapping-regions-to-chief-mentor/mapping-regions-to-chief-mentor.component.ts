@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { log } from 'console';
+import { MappingRegionsToChiefMentorService } from '../services/mapping-regions-to-chief-mentor.service';
 
 @Component({
   selector: 'app-mapping-regions-to-chief-mentor',
@@ -26,7 +27,7 @@ export class MappingRegionsToChiefMentorComponent implements OnInit {
   displayedColumns: string[] = ['SNo', 'Regionname', 'Chiefmentorname', "Chiefmentorid"];
   filterData:any
   displaycontent=true
-  constructor(private formbuilder:FormBuilder) { }
+  constructor(private formbuilder:FormBuilder,private service:MappingRegionsToChiefMentorService) { }
 
   ngOnInit(): void {
     this.searchform = this.formbuilder.group({
@@ -55,7 +56,21 @@ export class MappingRegionsToChiefMentorComponent implements OnInit {
     for (let col of this.filterData.filterColumnNames) {
       col.Value = '';
     }
-   
+   this. getallData() 
+  }
+  getallData() {
+    this.service.getcoursesdetails().subscribe({
+      next: (response) => {
+        this.courses = response;
+        
+        console.log(this.courses);
+        
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
   }
   coursechange(){
 

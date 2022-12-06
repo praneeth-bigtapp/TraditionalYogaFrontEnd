@@ -5,7 +5,7 @@
     <div class="row "style="display: flex;">
         <div class="col-md-3">
            <form [formGroup]=" dataForm" >
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline" class="ml-2 mt-2">
                 <mat-label>Select Course</mat-label>
                 <select matNativeControl [disabled]="disableSelect.value" formControlName="checkbox">
                   <option value="" selected></option>
@@ -20,11 +20,11 @@
         <form [formGroup]="dateForm" (submit)="datefilter()" class="col-md-9">
         <div >
            
-                <mat-form-field class="col-5" appearance="fill">
+                <mat-form-field class="col-5 mt-2" appearance="outline" >
                     <mat-label>Select date</mat-label>
                     <input matInput placeholder="Ex. Pizza" value="Sushi" type="date" formControlName="date">
                 </mat-form-field>
-                <button  mat-button class="py-2 bg-light" type="submit">Go</button>
+                <button type="submit"  class="btn btn-outline-secondary btn-rounded d-inline-block m-2 border border-dark" type="submit">Go</button>
 
 
         </div>

@@ -6,5 +6,15 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 })
 export class MappingRegionsToChiefMentorService extends BaseHttp {
 
- 
+
+  getAllcoursesURL = "courseList/getAll?operation=coursesList";
+  postURL = 'student/donationView'
+
+
+  getcoursesdetails() {
+    return this.get(this.getAllcoursesURL)
+  }
+  // postdonationdetails(data: any) {
+  //   return this.post(this.postURL, data)
+  // }
 }
