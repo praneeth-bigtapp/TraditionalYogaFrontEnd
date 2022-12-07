@@ -132,6 +132,8 @@ export class TasksComponent implements OnInit {
     for (let col of this.filterData.filterColumnNames) {
       col.Value = '';
     }
+    this.displaycontent = false
+
   }
   gobutton() {
     if (!this.course) {
@@ -140,7 +142,6 @@ export class TasksComponent implements OnInit {
       return
     }
     this.courserror = false
-    console.log(this.course);
 
     this.gettask(this.course)
 
@@ -156,7 +157,10 @@ export class TasksComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed', result);
+
+      // console.log('The dialog was closed', result);
+
+      this.gettask(this.course)
     });
 
   }

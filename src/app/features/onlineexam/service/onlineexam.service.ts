@@ -16,7 +16,7 @@ export class OnlineexamService extends BaseHttp {
 
   gettaskURL = "courseList/getAll?operation=task"
 
-  posttaskURL = "course/task?operation=add"
+  posttaskURL = "courseList/task?operation=add"
 
   getallcourses() {
     return this.get(this.getallcourseURL)
