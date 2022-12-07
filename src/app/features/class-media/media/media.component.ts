@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { SelectionModel } from '@angular/cdk/collections';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { filter } from 'rxjs';
 import { ServicesService } from '../services.service';
 
 @Component({
@@ -9,48 +13,66 @@ import { ServicesService } from '../services.service';
   styleUrls: ['./media.component.css']
 })
 export class MediaComponent implements OnInit {
-  // data=[{"s_no":"1","date":"02-08-2022","type":"Live class Link","media_file":" 12",},
-  // {"s_no":"2","date":"02-08-2022","type":"media","media_file":" 11",},
-  // {"s_no":"3","date":"02-08-2022","type":"Live class Link","media_file":" 8",},
-  // {"s_no":"4","date":"02-08-2022","type":"Live class Link","media_file":" 9",},
-  // {"s_no":"5","date":"02-08-2022","type":"Live class Link","media_file":" 10",},
-  // {"s_no":"6","date":"02-08-2022","type":"Live class Link","media_file":" 5",},
-  // {"s_no":"7","date":"02-08-2022","type":"Live class Link","media_file":" 9",},]
-  displayedColumns: string[] = ['s_no', 'date', 'type',"media_file","Action"];
-  dataSource :any;
-  disableSelect = new FormControl(false);
-  dataForm!:FormGroup
-  dateForm!:FormGroup
-  data:any
-  courses:any
-  constructor(private formbuilder: FormBuilder,private services:ServicesService) { 
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort!: MatSort;
+  selection = new SelectionModel<any>(true, []);
 
+  displayedColumns: string[] = ['classMediaId', 'date', 'typeOfClass', "noOfMediaFiles", "Action"];
+  dataSource: any;
+  disableSelect = new FormControl(false);
+  dataForm!: FormGroup
+  dateForm!: FormGroup
+  data: any
+  courses: any
+
+  filterData: any;
+  categoryerror: boolean = false
+  gridData = [];
+  selectedmember!: any
+  formtype: string = "Members"
+  // data: any;
+  displaycontent: boolean = false
+
+  constructor(private formbuilder: FormBuilder, private services: ServicesService) {
+
+    this.dateForm = this.formbuilder.group({
+
+
+      date: [null, Validators.compose([])],
+      checkbox: [null, Validators.compose([])],
+
+    })
+    this.filterData = {
+      filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
+    }
+
+    this.dataSource = new MatTableDataSource<any>(this.data)
+    this.filterData.gridData = this.data;
+    this.filterData.dataSource = this.dataSource;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.filterData.sort = this.sort;
+    for (let col of this.filterData.filterColumnNames) {
+      col.Value = '';
+    }
   }
 
   ngOnInit(): void {
-    this.dateForm = this.formbuilder.group({
 
-      
-      date: [null, Validators.compose([Validators.required])],
-      // checkbox: [null, Validators.compose([Validators.required])],
-  
-    })
-    this.dataForm = this.formbuilder.group({
-    
-      checkbox: [null, Validators.compose([Validators.required])],
-  
-    })
+
     this.getalldata()
     this.getallcourse()
   }
-  getalldata(){
+  getalldata() {
     this.services.getMediadetails().subscribe({
       next: (response) => {
-        this.data = response; 
-       console.log(this.data);
-       
-        this.dataSource = new MatTableDataSource<any>(this.data);
-      
+        this.data = response;
+        console.log(this.data);
+
       },
       error: (error) => {
         console.error(error.message);
@@ -58,14 +80,13 @@ export class MediaComponent implements OnInit {
     });
 
   }
-  getallcourse(){
+  getallcourse() {
     this.services.getcoursesdetails().subscribe({
       next: (response) => {
-        this.data = response; 
-      //  console.log(this.data);
-       this.courses=this.data.map((ele:any)=>ele.coursesName)
-       console.log(this.courses);
-      
+
+        this.courses = response
+        console.log(this.courses);
+
       },
       error: (error) => {
         console.error(error.message);
@@ -73,15 +94,43 @@ export class MediaComponent implements OnInit {
     });
 
   }
-  datefilter(){
-    const fromdate = this.dateForm.value.date
-  
-    let filters = this.data.filter((ele: any) => new Date(ele.date) >= new Date(fromdate))
-    if (fromdate !== null ) {
-      this.dataSource = new MatTableDataSource<any>(filters);
+  datefilter() {
+    const { date, checkbox } = this.dateForm.value
+
+    let filterData = this.data
+    console.log({ date, checkbox });
+
+    if (date)
+      filterData = filterData.filter((ele: any) => ele.date === date)
+
+    if (checkbox)
+      filterData = filterData.filter((ele: any) => ele.courseId === checkbox)
+
+    this.dataSource = new MatTableDataSource<any>(filterData)
+    this.filterData.gridData = filterData;
+    this.filterData.dataSource = this.dataSource;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.filterData.sort = this.sort;
+    for (let col of this.filterData.filterColumnNames) {
+      col.Value = '';
     }
   }
-  
-  
+
+  updatePagination(col: any) {
+
+    this.filterData.dataSource.paginator = this.paginator;
+  }
+
+  viewclassmedia(element: any) {
+    console.log(element);
+
+  }
+  editmedia(element: any) {
+    console.log(element);
+
+  }
+
+
 
 }

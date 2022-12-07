@@ -10,7 +10,7 @@
     <br />
     <form class="" [formGroup]="taskform" (ngSubmit)="tasksubmit()">
 
-        <div class="w-md-50">
+        <div class="w-50 ">
             <mat-form-field appearance="outline">
                 <mat-label>Task Name</mat-label>
                 <input matInput autocomplete="off" formControlName="name" required>
@@ -30,14 +30,14 @@
 
         <h6>Upload Media file</h6>
         <br />
-        <div class="w-md-75">
+        <div class="w-75">
             <input type="file" class="border" id="file" formControlName="mediafile" accept=" */*"
                 (change)="fileupload($event)" required="true" />
             <br />
             <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
         </div>
 
-        <div class="w-md-50">
+        <div class="w-50">
             <mat-form-field class="example-full-width" class="w-25" appearance="outline">
                 <mat-label>Due Date for submission</mat-label>
                 <input matInput formControlName="duedate" type="date">
