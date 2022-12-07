@@ -88,7 +88,7 @@ export class TasksComponent implements OnInit {
         console.log(value);
         this.data = value
 
-        // this.data =  this.data.filter((ele:any)=>ele?.courseId === course)
+        this.data = this.data.filter((ele: any) => ele?.coursesId.coursesId === course)
 
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
