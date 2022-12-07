@@ -22,7 +22,9 @@ export class MemberspageComponent implements OnInit {
   categoryerror: boolean = false
   gridData = [];
   dataSource: any;
-  displayedColumns: string[] = ['SNo', 'Image', 'Name', "Email_id", "Country", "Gender", "Mentor", "Senior_Mentor", "View_Profile", "View_Course_Activity", "Manage_Exemptions", "Checkbox"];
+
+  displayedColumns: string[] = ['studentId', 'Image', 'name', "emailId", "address", "genderId", "mentorId", "ChiefMentorId", "View_Profile", "View_Course_Activity", "Manage_Exemptions", "Checkbox"];
+
   selectedmember!: any
   formtype: string = "Members"
   // data: any;
@@ -92,7 +94,7 @@ export class MemberspageComponent implements OnInit {
       next: (response) => {
         this.courselist = response
         console.log(this.courselist);
-        
+
       },
       error: (error) => {
         console.error(error.message);
@@ -108,9 +110,89 @@ export class MemberspageComponent implements OnInit {
       startWith(''),
       map(value => this.regionList.filter(ele => ele.toLowerCase().includes(value.region?.toLowerCase()))),
     )
+
+    console.log(this.formtype);
+
+
   }
   ngAfterViewInit() {
     this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
+  }
+
+  getmemberslist() {
+    this.memberservice.getmembers().subscribe({
+      next: (response) => {
+        this.data = response
+        this.data = this.data.students
+
+        console.log(this.data);
+
+        this.dataSource = new MatTableDataSource<any>(this.data)
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
+  }
+
+  getmentorlist() {
+    this.memberservice.getmentor().subscribe({
+      next: (response) => {
+        this.data = response
+        this.data = this.data.students
+
+        console.log(this.data);
+
+        this.dataSource = new MatTableDataSource<any>(this.data)
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
+  }
+
+  getchiefmentorlist() {
+    this.memberservice.getcheifmentor().subscribe({
+      next: (response) => {
+        this.data = response
+        this.data = this.data.students
+
+        console.log(this.data);
+
+        this.dataSource = new MatTableDataSource<any>(this.data)
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
   }
 
   gobutton(): void {
@@ -119,91 +201,53 @@ export class MemberspageComponent implements OnInit {
     if (this.category) {
       this.displaycontent = true
 
-    }
 
-    this.data = [
-      {
-        'SNo': "1",
-        'Image': "Image",
-        "Name": "Karthik",
-        "Email_id": "karthik@gmail.com",
-        "Country": "India",
-        "Gender": "Male",
-        "Mentor": "Suresh",
-        "Senior_Mentor": "Ramesh",
+      if (this.formtype == "Members") {
 
-      }, {
-        'SNo': "2",
-        'Image': "Image",
-        "Name": "Ajay",
-        "Email_id": "ajay@gmail.com",
-        "Country": "India",
-        "Gender": "Male",
-        "Mentor": "Suresh",
-        "Senior_Mentor": "Ramesh",
+        this.getmemberslist()
 
-      },
-      {
-        'SNo': "2",
-        'Image': "Image",
-        "Name": "Ajay",
-        "Email_id": "ajay@gmail.com",
-        "Country": "India",
-        "Gender": "Male",
-        "Mentor": "Suresh",
-        "Senior_Mentor": "Ramesh",
-
-      },
-      {
-        'SNo': "2",
-        'Image': "Image",
-        "Name": "Ajay",
-        "Email_id": "ajay@gmail.com",
-        "Country": "India",
-        "Gender": "Male",
-        "Mentor": "Suresh",
-        "Senior_Mentor": "Ramesh",
-
-      },
-      {
-        'SNo': "2",
-        'Image': "Image",
-        "Name": "Ajay",
-        "Email_id": "ajay@gmail.com",
-        "Country": "India",
-        "Gender": "Male",
-        "Mentor": "Suresh",
-        "Senior_Mentor": "Ramesh",
-
-      }, {
-        'SNo': "2",
-        'Image': "Image",
-        "Name": "Ajay",
-        "Email_id": "ajay@gmail.com",
-        "Country": "India",
-        "Gender": "Male",
-        "Mentor": "Suresh",
-        "Senior_Mentor": "Ramesh",
-
+        return
       }
 
-    ]
+      if (this.formtype == "Mentor Mapping") {
+        // member mapping form
+        this.getmentorlist()
 
-    this.dataSource = new MatTableDataSource<any>(this.data)
-    this.filterData.gridData = this.data;
-    this.filterData.dataSource = this.dataSource;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.filterData.sort = this.sort;
-    for (let col of this.filterData.filterColumnNames) {
-      col.Value = '';
-    }
+        return
+      }
 
+
+      if (this.formtype == "Chief Mentor Mapping") {
+        this.getchiefmentorlist()
+        // Chief mapping form
+        return
+      }
+    } 
   }
 
   formswich(name: string) {
     this.formtype = name
     console.log(this.selection.selected);
+    if (this.formtype == "Members") {
+
+      this.getmemberslist()
+
+      return
+    }
+
+    if (this.formtype == "Mentor Mapping") {
+      // member mapping form
+      this.getmentorlist()
+
+      return
+    }
+
+
+    if (this.formtype == "Chief Mentor Mapping") {
+      this.getchiefmentorlist()
+      // Chief mapping form
+      return
+    }
 
   }
 
@@ -261,6 +305,16 @@ export class MemberspageComponent implements OnInit {
   }
 
   downloadexcel() {
+
+  }
+
+  gendername(id: number) {
+    if (id === 1)
+      return "Male"
+    if (id === 2)
+      return "Female"
+
+    return "Transgender"
 
   }
 

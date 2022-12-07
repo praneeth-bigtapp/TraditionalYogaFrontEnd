@@ -44,6 +44,9 @@ export class LiveComponent implements OnInit {
 
         this.courselist = response
 
+        console.log(this.courselist);
+        
+
       },
       error: (error) => {
         console.error(error.message);

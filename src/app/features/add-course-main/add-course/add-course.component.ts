@@ -18,10 +18,7 @@ export class AddCourseComponent implements OnInit {
   categorySelect!: any
   addCourseForm!: FormGroup
   paragrapherror: boolean = false
-  categoryList: any = ["Online Course by Guruji", "Meditation Retreat by Guruji", "Two Day Meditation by Guruji", "Guided Medidation by Volunteers", "In-person Training by Volunteers", "Others"
-  ]
-
-
+  categoryList!: any
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -82,6 +79,17 @@ export class AddCourseComponent implements OnInit {
       endDate: [null, Validators.compose([Validators.required])],
     });
 
+    this.AddCourseService.getCategory().subscribe({
+      next: (value) => {
+        console.log(value);
+        this.categoryList = value
+
+      },
+      error: (error) => {
+        console.warn(error.message);
+
+      }
+    })
   }
 
   ngOnInit(): void {
@@ -100,22 +108,27 @@ export class AddCourseComponent implements OnInit {
     if (this.addCourseForm.invalid)
       return this.addCourseForm.markAllAsTouched()
 
-    const body = {
 
-      "courseName": this.addCourseForm.value.courseName,
+
+    const body = {
+      // "coursesId": 1,
+      "categorieId": {
+        "categoriesId": this.addCourseForm.value.coursecategory.categoriesId,
+        "categoriesName": this.addCourseForm.value.coursecategory.categoriesName,
+      },
+      "coursesName": this.addCourseForm.value.courseName,
+      "description": this.addCourseForm.value.description,
       "startDate": this.addCourseForm.value.startDate,
       "endDate": this.addCourseForm.value.endDate,
-      "category": this.addCourseForm.value.coursecategory,
-      "paragraph": this.addCourseForm.value.description,
-      "applicationclosuredate": this.addCourseForm.value.applicationclosuredate
+      "applicationClouserDate": this.addCourseForm.value.applicationclosuredate
     }
-
     console.log(body);
 
 
     this.AddCourseService.postadcourse(body).subscribe({
       next: (response) => {
         this.openSnackBar(response)
+        this.addCourseForm.reset()
       },
       error: (error) => {
         console.error(error.message);

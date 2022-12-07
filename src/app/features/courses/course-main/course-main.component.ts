@@ -21,7 +21,7 @@ export class CourseMainComponent implements OnInit {
   filterData: any;
   gridData = [];
   dataSource: any;
-  displayedColumns: string[] = ['coursesId', 'category', 'coursesName', "courseDuration", "startDate", "endDate", "currentStatus"];
+  displayedColumns: string[] = ['coursesId', 'categoriesId', 'coursesName', "courseDuration", "startDate", "endDate", "currentStatus"];
   data: any;
 
 

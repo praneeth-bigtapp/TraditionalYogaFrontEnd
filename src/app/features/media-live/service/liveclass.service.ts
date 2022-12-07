@@ -6,7 +6,9 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 })
 export class LiveclassService extends BaseHttp {
 
-  getallcourseURL = "student/getAll?operation=course"
+  // getallcourseURL = "student/getAll?operation=course"
+  getallcourseURL = "courseList/getAll?operation=coursesList"
+
   getcoursemediacategoryURL = "course/getAll?operation=courseMediaCategory"
   postvideoURL = "course/addCourseMedia?type=video"
   postshortvideoURL = "course/addCourseMedia?type=shortVideo"
