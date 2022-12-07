@@ -85,7 +85,7 @@ export class SendReceiveService {
     }
     else if (subMenuId == 5) {
       this.router.navigateByUrl("administration/rolePermission");
-    } 
+    }
     else if (subMenuId == 6) {
       this.router.navigateByUrl("dashboard");
     }
@@ -94,7 +94,7 @@ export class SendReceiveService {
     }
     else if (subMenuId == 10) {
       this.router.navigateByUrl("studentMaster/studentProfile");
-    } 
+    }
     else if (subMenuId == 11) {
       this.router.navigateByUrl("pages");
     }
@@ -120,7 +120,7 @@ export class SendReceiveService {
       this.router.navigateByUrl("administration/parameters");
     }
     else if (subMenuId == 19) {
-      this.router.navigateByUrl("blank");
+      this.router.navigateByUrl("memberspage");
     }
     else if (subMenuId == 20) {
       this.router.navigateByUrl("media");

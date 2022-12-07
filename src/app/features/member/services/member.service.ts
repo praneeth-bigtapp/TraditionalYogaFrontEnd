@@ -13,7 +13,7 @@ export class MemberService extends BaseHttp {
 
   getmentorURL = "student/getAllByCourse?type=mentor&courseId=1"
 
-  getcheifmentorURL = "/student/getAllByCourse?type=chiefMentor&courseId=1"
+  getcheifmentorURL = "student/getAllByCourse?type=chiefMentor&courseId=1"
 
 
   getallcourses() {

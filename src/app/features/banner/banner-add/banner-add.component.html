@@ -2,27 +2,21 @@
     <h3 class="mb-3 pl-2"> Add Banner </h3>
 
     <div class="card border-light pt-3">
-        <div class="pl-3 ">
+        <!-- <div class="pl-3 ">
             <h3> Header Banner </h3>
         </div>
         <hr />
-        <br />
+        <br /> -->
         <div class="card-body pl-3">
 
-            <form class="" [formGroup]="headerbannerform" (ngSubmit)="submitheaderbanner()">
+            <!-- <form class="" [formGroup]="headerbannerform" (ngSubmit)="submitheaderbanner()">
 
                 <label class="" for="file">Upload Image</label>
-                <input type="file" id="file" formControlName="bannerimage" (change)="onfilechange('headerform')"
+                <input type="file" id="file" class="border" formControlName="bannerimage" (change)="onfilechange('headerform')"
                     accept="image/*" required="true" /> <br />
-                <!-- <div
-                    *ngIf="headerbannerform.controls['bannerimage'].invalid && (headerbannerform.controls['bannerimage'].dirty || headerbannerform.controls['bannerimage'].touched)">
-                    <span [hidden]=" !headerbannerform.get('bannerimage')?.hasError('bannerimage')  ">
-                        Please Upload File
-                    </span>
-                </div> -->
                 <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
                 <br />
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="outline">
                     <mat-label>Description</mat-label>
                     <textarea matInput class="p-2" formControlName="description" rows="5"
                         placeholder="Description"></textarea>
@@ -46,8 +40,6 @@
                 </div>
 
                 <br /> <br />
-                <!-- <button class="bg-light" mat-stroked-button type="submit">Submit Banner</button> -->
-
 
                 <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
                     Submit Banner
@@ -56,7 +48,7 @@
 
             </form>
             <hr />
-            <br />
+            <br /> -->
 
             <div class="pl-3 ">
                 <h3> HomePage Course Banner </h3>
@@ -84,7 +76,7 @@
                             </div>
                         </mat-form-field>  -->
 
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="outline">
                             <mat-label>Course Title</mat-label>
                             <input matInput autocomplete="off" formControlName="coursetitle" required>
                             <mat-error [hidden]=" !coursebanner.get('coursetitle')?.hasError('required')  ">
@@ -95,8 +87,8 @@
 
                     <div class="col-md-6">
                         <label class="" for="file">Upload Image</label>
-                        <input type="file" id="file" formControlName="coursebannerimage" accept=" image/*"
-                            (change)="onfilechange('courseform')" required="true" />
+                        <input type="file" id="file" class="border" formControlName="coursebannerimage"
+                            accept=" image/*" (change)="onfilechange('courseform')" required="true" />
                         <br />
                         <mat-error *ngIf="filerror2">Please Upload Valid File</mat-error>
 
@@ -118,7 +110,7 @@
                 </mat-form-field> -->
                 <div class="row">
                     <div class="col-md-6">
-                        <mat-form-field color="primary" appearance="fill">
+                        <mat-form-field color="primary" appearance="outline">
                             <mat-label>From Date</mat-label>
                             <input matInput formControlName="fromdate" [matDatepicker]="picker" [disabled]="true">
                             <mat-hint>MM/DD/YYYY</mat-hint>
@@ -134,7 +126,7 @@
 
                     </div>
                     <div class="col-md-6">
-                        <mat-form-field color="accent" appearance="fill">
+                        <mat-form-field color="accent" appearance="outline">
                             <mat-label>To Date</mat-label>
                             <input matInput formControlName="todate" [matDatepicker]="topicker" [disabled]="true">
                             <mat-hint>MM/DD/YYYY</mat-hint>
@@ -151,7 +143,7 @@
                 </div>
 
                 <br />
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="outline">
                     <mat-label>Description</mat-label>
 
                     <textarea matInput class="p-2" formControlName="description" rows="5"
