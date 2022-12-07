@@ -110,7 +110,10 @@ export class ParametersComponent implements OnInit {
   }
 
   keypressvalue(value: string) {
+
     console.log(this.parameters);
+
+    
 
   }
 }

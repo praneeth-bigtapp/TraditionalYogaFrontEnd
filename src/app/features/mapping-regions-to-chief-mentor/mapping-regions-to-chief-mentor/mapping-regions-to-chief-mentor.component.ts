@@ -59,7 +59,7 @@ export class MappingRegionsToChiefMentorComponent implements OnInit {
    this. getallData() 
   }
   getallData() {
-    this.service.getcoursesdetails().subscribe({
+    this.service.getCheifmentorAll().subscribe({
       next: (response) => {
         this.courses = response;
         

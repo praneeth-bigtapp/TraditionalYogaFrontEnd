@@ -22,6 +22,7 @@ export class MediaComponent implements OnInit {
   dataForm!:FormGroup
   dateForm!:FormGroup
   data:any
+  courses:any
   constructor(private formbuilder: FormBuilder,private services:ServicesService) { 
 
   }
@@ -46,6 +47,7 @@ export class MediaComponent implements OnInit {
     this.services.getMediadetails().subscribe({
       next: (response) => {
         this.data = response; 
+       console.log(this.data);
        
         this.dataSource = new MatTableDataSource<any>(this.data);
       
@@ -57,12 +59,12 @@ export class MediaComponent implements OnInit {
 
   }
   getallcourse(){
-    this.services.getCategorydetails().subscribe({
+    this.services.getcoursesdetails().subscribe({
       next: (response) => {
         this.data = response; 
-       console.log(this.data);
-       
-  
+      //  console.log(this.data);
+       this.courses=this.data.map((ele:any)=>ele.coursesName)
+       console.log(this.courses);
       
       },
       error: (error) => {
