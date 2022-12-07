@@ -50,14 +50,7 @@ export class DonationManagementComponent implements OnInit {
 
     })
     this.filterData = {
-      filterColumnNames : [{ "Key":'S_No', "Value": ""},
-       { "Key":'Date', "Value": ""},
-        { "Key":'DonorName', "Value": ""}, 
-        { "Key":"Country", "Value": ""},
-        { "Key":"currency", "Value": ""},
-        { "Key": "Amountdonated", "Value": ""},
-  
-         { "Key":"ViewDetails", "Value": ""}],
+      filterColumnNames : this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
       gridData: this.gridData,
       dataSource: this.dataSource,
       paginator: this.paginator,
@@ -78,17 +71,21 @@ export class DonationManagementComponent implements OnInit {
     }
     this.countryfilter = this.dateForm.valueChanges.pipe(
       startWith(''),
-      map(value => this.countryList.filter(ele => ele.toLowerCase().includes(value.dropdownbtn?.toLowerCase()))),
+      map(value => this.countryList.filter(ele => ele.toLowerCase().includes(value.countrydropdown?.toLowerCase()))),
     )
+    // console.log(this.countryfilter);
+    
    
   }
   ngAfterViewInit() {
     this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
 
   }
   updatePagination() {
 
     this.filterData.dataSource.paginator = this.paginator;
+    
   }
 
 

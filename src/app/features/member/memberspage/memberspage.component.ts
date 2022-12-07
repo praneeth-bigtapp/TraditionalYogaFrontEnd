@@ -91,7 +91,8 @@ export class MemberspageComponent implements OnInit {
     this.memberservice.getallcourses().subscribe({
       next: (response) => {
         this.courselist = response
-
+        console.log(this.courselist);
+        
       },
       error: (error) => {
         console.error(error.message);
