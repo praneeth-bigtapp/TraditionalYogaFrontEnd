@@ -132,7 +132,7 @@ export class SendReceiveService {
       this.router.navigateByUrl("audio");
     }
     else if (subMenuId == 23) {
-      this.router.navigateByUrl("blank");
+      this.router.navigateByUrl("tasks");
     }
     else if (subMenuId == 24) {
       this.router.navigateByUrl("blank");
@@ -144,7 +144,7 @@ export class SendReceiveService {
       this.router.navigateByUrl("blank");
     }
     else if (subMenuId == 27) {
-      this.router.navigateByUrl("blank");
+      this.router.navigateByUrl("regioncreation");
     }
     else if (subMenuId == 28) {
       this.router.navigateByUrl("alert");
