@@ -1,16 +1,28 @@
 <div class="ConfigurationTypes_textpadding p-5 bg-light">
     <h3 class="mb-4 pl-2 text-secondary"> Mapping regions to chief mentor </h3>
     <div class="bg-white border-bottom ">
-        <mat-form-field appearance="outline" class="col-3 mt-2">
+        <!-- <mat-form-field appearance="outline" class="col-3 mt-2">
             <mat-label>Select Course</mat-label>
             <mat-select [(ngModel)]="courses" (ngModelChange)="coursechange()">
-                <!-- <mat-option *ngFor="let course of courseList" [value]="course.courseId">
-                    {{course.courseName}}</mat-option> -->
+                <mat-option *ngFor="let course of courseList" [value]="course.courseId">
+                    {{course.courseName}}</mat-option>
                     <mat-option value="volvo">Volvo</mat-option>
                     <mat-option value="volvo">Volvo</mat-option>
             </mat-select>
             
+        </mat-form-field> -->
+<form [formGroup]="Countryform">
+        <mat-form-field appearance="outline"  class="col-3 mt-2">
+            <mat-label>Select Course</mat-label>
+            <input type="text" placeholder="Pick one" aria-label="Country" matInput
+            formControlName="countrydropdown" (valueChange)="coursechange()" [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let country of countryfilter |async " [value]="country">
+                    {{country}}
+                </mat-option>
+            </mat-autocomplete>
         </mat-form-field>
+    </form>
     </div>
     <div class="bg-white pt-4 border-bottom">
         <form class="row" [formGroup]="searchform"  (ngSubmit)="searchby()" >
@@ -27,6 +39,7 @@
             </mat-select>
             
             </mat-form-field>
+           
      </div>
      
         <div class="col-3">
