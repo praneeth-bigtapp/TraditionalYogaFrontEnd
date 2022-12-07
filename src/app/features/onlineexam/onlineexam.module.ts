@@ -22,12 +22,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TasksComponent } from './tasks/tasks.component';
 import { MatSortModule } from '@angular/material/sort';
+import { TaskCreateComponent } from './task-create/task-create.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
   declarations: [
     OnlineexamComponent,
-    TasksComponent
+    TasksComponent,
+    TaskCreateComponent
   ],
   imports: [
     CommonModule,
@@ -52,6 +55,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatSnackBarModule,
     MatPaginatorModule,
     MatSortModule,
+    MatDialogModule,
   ]
 })
 export class OnlineexamModule { }

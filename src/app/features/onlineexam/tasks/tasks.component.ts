@@ -1,11 +1,13 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { OnlineexamService } from '../service/onlineexam.service';
+import { TaskCreateComponent } from '../task-create/task-create.component';
 
 @Component({
   selector: 'app-tasks',
@@ -31,11 +33,14 @@ export class TasksComponent implements OnInit {
 
   data!: any
 
+  displaycontent: boolean = false
+
 
   constructor(
     private service: OnlineexamService,
     private formbuilder: FormBuilder,
     private _snackbar: MatSnackBar,
+    private dialog: MatDialog,
 
   ) {
 
@@ -139,13 +144,22 @@ export class TasksComponent implements OnInit {
 
     this.gettask(this.course)
 
+    this.displaycontent = true
+
 
   }
 
   createtask() {
+    const dialogRef = this.dialog.open(TaskCreateComponent, {
+      data: { courses: this.course },
+      width: "80%"
+    })
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed', result);
+    });
 
   }
-
   viewdetails(data: any) {
     console.log(data);
 
