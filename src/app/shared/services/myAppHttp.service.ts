@@ -58,7 +58,7 @@ export class MyAppHttp {
 
   public static loginErrorMessages = {
     email_id: [
-      { type: 'required', message: 'Please enter login email Id' }
+      { type: 'required', message: 'Please enter login Id' }
       // { type: 'pattern', message: 'Please enter valid login Id' },
       // { type: 'maxlength', message: 'Login Id should be maximum 50 characters.' }
     ],

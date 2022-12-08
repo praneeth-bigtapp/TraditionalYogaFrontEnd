@@ -103,6 +103,7 @@ export class LoginComponent implements OnInit {
           // }
           if (response.response.statusCode == 200) {
             this.onSuccessfullLogin(response);
+            this.router.navigateByUrl('/dashboard');
           } else {
             this.errorFlag = true;
             this.authorizationMessage = response.message;

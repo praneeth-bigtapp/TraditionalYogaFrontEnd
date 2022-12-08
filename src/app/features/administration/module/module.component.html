@@ -5,12 +5,12 @@
             Add Menu
         </div>
         <form [formGroup]="AddModuleForm" (ngSubmit)="onModuleSubmit()">
-            <div class="card-body">
+            <div class="card-body bg-white">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4    ">
                         <div class="mb-3">
                             <mat-form-field appearance="fill">
-                                <mat-label>Menu name</mat-label>
+                                <mat-label>Menu Name</mat-label>
                                 <input matInput autocomplete="off" formControlName="menuName" required>
                                 <mat-error *ngIf="AddModuleForm.controls['menuName'].hasError('required')">
                                     Menu name is required

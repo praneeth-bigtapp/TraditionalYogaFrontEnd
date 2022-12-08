@@ -53,7 +53,8 @@ nav img.logo-img {
     padding: 0.1rem 0.2rem;
     line-height: 10px;
     position: relative;
-    left: -10px;
+    left: -20px;
+    margin-bottom: 20px;
 }
 
 #sidebarCollapse svg {
@@ -63,7 +64,6 @@ nav img.logo-img {
 
 .header {
     width: 100%;
-    background: rgba(0, 0, 0, .8);
     z-index: 9;
     position: fixed;
     left: 0;
@@ -71,7 +71,7 @@ nav img.logo-img {
 
 .ConfigurationTypes_textpadding {
     margin-left: 0;
-    background: #fafafa;
+    /* background: #fafafa; */
     margin-right: 0;
     padding: 15px 15px 60px 2%;
     margin-bottom: 30px;
@@ -174,6 +174,7 @@ nav img.logo-img {
     color: #747474;
 }
 
+.text-grey { color: #7e929f;}
 .form {
     position: relative;
     width: 100%;
@@ -255,7 +256,7 @@ table.table-bordered.dataTable tbody td {
 }
 
 .bg-secondary {
-    background-color: #0a0a0a !important;
+    background-color: #7e929f !important;
 }
 
 .signup-form {
@@ -564,9 +565,9 @@ app-login {
     overflow: auto;
     width: calc(100% - 30px) !important;
 }
-.mat-paginator{
+/* .mat-paginator{
 width: calc(100% - 150px) !important;
-}
+} */
 /* .mat-paginator {
     display: contents !important;
 } */

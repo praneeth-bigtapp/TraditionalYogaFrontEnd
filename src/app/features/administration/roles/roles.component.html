@@ -5,9 +5,9 @@
             Add Role
         </div>
         <form [formGroup]="AddRoleForm" (ngSubmit)="onAddRoleSubmit()">
-            <div class="card-body">
+            <div class="card-body bg-white">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="mb-3">
                             <mat-form-field appearance="fill">
                                 <mat-label>Role name</mat-label>
@@ -33,7 +33,7 @@
         </form>
     </div>
 
-    <h4> Roles List
+    <h4 class="mb-3"> Roles List
         <span class="float-end mb-2">
             <button type="button" class="btn btn-outline-secondary btn-rounded"
                 *ngIf="!isAddRoleForm && pagePermissions.Add" (click)="onAddRole()"> Add Role </button>

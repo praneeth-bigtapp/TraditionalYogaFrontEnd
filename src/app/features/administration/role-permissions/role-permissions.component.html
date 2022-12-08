@@ -1,15 +1,15 @@
 <div class="ConfigurationTypes_textpadding">
 
-    <h4> Role Permissions List </h4>
+    <h4 class="mb-3"> Role Permissions List </h4>
 
     <div class="card border-light">
         <div class="card-header text-white bg-secondary">
             Role Permissions
         </div>
         <form [formGroup]="AddRolePermissionForm" (ngSubmit)="onSelectRoleSubmit()">
-            <div class="card-body">
+            <div class="card-body bg-white">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="mb-3">
                             <mat-form-field appearance="fill">
                                 <mat-select placeholder="Select Role" formControlName="roleName" disableOptionCentering
@@ -43,7 +43,7 @@
 
     <div class="clearfix"></div> <br>
 
-    <div style="height:10px">
+    <div >
         <div *ngIf="errorMessage" [ngStyle]="{'color': errorType == 'Error' ? 'red':'green'}"
             class="notificationMessage">
             <span>{{Message}}</span>

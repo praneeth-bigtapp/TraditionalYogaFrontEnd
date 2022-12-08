@@ -2,30 +2,19 @@
     <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container-fluid">
             <div class="row w-100">
-                <div class="col-md-4 mobile-text-center">
-                    <a [routerLink]="['/masterDataCreation']" class=""> 
-                        <img src="assets/images/Traditional Yoga.png" class="logo-img" alt="logo" /> 
-                        <h3 class="d-inline-block pt-2"> Traditional Yoga </h3>
-                    </a>
-                </div>
-                <div class="col-md-5 text-center">
-                    <!-- <div class="text-center d-inline-block pt-2">
-                        <h3 class="pb-0 mb-0"> Traditional Yoga </h3>
-                    </div> -->
-                </div>
                 <div class="col-md-3">
-                    <div class="float-right user-profile pt-3">
+                    <div class="user-profile pt-3">
                         <div class="btn-group">
-                            <div type="button" class="btn dropdown-toggle text-warning pt-2 text-white" data-toggle="dropdown"
+                            <div type="button" class="btn dropdown-toggle text-warning pt-2 text-grey" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <!-- <img src="assets/images/icon-login-orange.svg" alt="user icon" /> -->
 
-                                <span class="text-white"> <i class="fa fa-user"></i>
+                                <span class="text-grey"> <img src="../../../../assets/images/login-icon.png" width="30" alt="usericon" />
                                     {{loginData.firstName}}
                                 {{loginData.lastName}} ({{loginData.userRole}})
                                 </span>
                             </div>
-                            <div class="dropdown-menu dropdown-menu-right">
+                            <div class="dropdown-menu">
                                 <button class="dropdown-item" type="button" [routerLink]="['/changepassword']">Change
                                     Password</button>
                                 <button class="dropdown-item" type="button" (click)="onSignOut()">Sign out</button>
@@ -33,6 +22,23 @@
                         </div>
                     </div>
                 </div>
+
+                
+
+                <div class="col-md-5 text-center">
+                    <!-- <div class="text-center d-inline-block pt-2">
+                        <h3 class="pb-0 mb-0"> Traditional Yoga </h3>
+                    </div> -->
+                </div>
+
+                <div class="col-md-4 mobile-text-center float-right text-right">
+                    <a [routerLink]="['/masterDataCreation']" class=""> 
+                        
+                        <h3 class="d-inline-block pt-2 font-weight-normal"> Traditional Yoga </h3> &nbsp; &nbsp;
+                        <img src="assets/images/Traditional-yoga-new-logo.png" class="logo-img" alt="logo" /> 
+                    </a>
+                </div>
+                
             </div>
         </div>
     </nav>

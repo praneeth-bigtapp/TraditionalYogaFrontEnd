@@ -5,7 +5,7 @@
             Add Sub Menu
         </div>
         <form [formGroup]="AddSubModuleForm" (ngSubmit)="onSubModuleSubmit()">
-            <div class="card-body">
+            <div class="card-body bg-white">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="mb-3">
@@ -26,7 +26,7 @@
                     <div class="col-md-3">
                         <div class="mb-3">
                             <mat-form-field appearance="fill">
-                                <mat-label>Sub Menu name</mat-label>
+                                <mat-label>Sub Menu Name</mat-label>
                                 <input matInput autocomplete="off" formControlName="subMenuName" required>
                                 <mat-error *ngIf="AddSubModuleForm.controls['subMenuName'].hasError('required')">
                                     Sub Menu name is required
