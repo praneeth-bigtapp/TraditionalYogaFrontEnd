@@ -1,6 +1,6 @@
 <div class="ConfigurationTypes_textpadding ">
-  <h3 class="mb-4 pl-2 text-secondary"> Donations Management </h3>
-  <div class="bg-white px-2 row ">
+  <h3 class="mb-4  text-secondary"> Donations Management </h3>
+  <div class="bg-white mx-1 row ">
     <form class="col mt-3 d-flex  flex-wrap" [formGroup]="dateForm" (submit)="filterDate()">
       <mat-form-field class="col-3 border-2 mt-2" appearance="outline">
         <mat-label>From date</mat-label>
@@ -49,7 +49,7 @@
   </form>
     
   </div>
-  <div class="row  bg-white pt-4  d-flex flex-wrap">
+  <div class="row  bg-white pt-4 mx-1 d-flex flex-wrap">
 
     <div class="col-md-4 border-top border-left border-bottom  py-4  text-center">
       <!-- add icon -->
@@ -75,40 +75,40 @@
       <input type="text" (keyup)="updatePagination()"
           [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
         </th>
-        <td mat-cell *matCellDef="let element" class="col-1"> {{element.S_No}} </td>
+        <td mat-cell *matCellDef="let element" class="col-1 text-center"> {{element.S_No}} </td>
       </ng-container>
 
 
       <ng-container matColumnDef="Date">
-        <th mat-header-cell *matHeaderCellDef class="col-2">  <label mat-sort-header>
+        <th mat-header-cell *matHeaderCellDef class="col-2 text-center">  <label mat-sort-header>
           Date
       </label>
       
       <input type="text" (keyup)="updatePagination()"
           [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" /></th>
-        <td mat-cell *matCellDef="let element" class="col-2"> {{element.Date}} </td>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.Date}} </td>
       </ng-container>
 
 
       <ng-container matColumnDef="DonorName">
-        <th mat-header-cell *matHeaderCellDef class="col-2"> <label mat-sort-header>
+        <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
          Donor Name
       </label>
       
       <input type="text" (keyup)="updatePagination()"
           [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />  </th>
-        <td mat-cell *matCellDef="let element" class="col-2"> {{element.DonorName}} </td>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.DonorName}} </td>
       </ng-container>
 
 
       <ng-container matColumnDef="Country">
-        <th mat-header-cell *matHeaderCellDef class="col-1"> <label mat-sort-header>
+        <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
           Country
       </label>
       
       <input type="text" (keyup)="updatePagination()"
           [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" /> </th>
-        <td mat-cell *matCellDef="let element" class="col-1"> {{element.Country}} </td>
+        <td mat-cell *matCellDef="let element" class="col- text-center"> {{element.Country}} </td>
       </ng-container>
       <!-- <ng-container matColumnDef="currency">
         <th mat-header-cell *matHeaderCellDef class="col-1 text-center">  <label mat-sort-header>
@@ -121,13 +121,13 @@
       </ng-container> -->
 
       <ng-container matColumnDef="Amountdonated">
-        <th mat-header-cell *matHeaderCellDef class="col-3 text-center">  <label mat-sort-header>
+        <th mat-header-cell *matHeaderCellDef class="col-2 text-center">  <label mat-sort-header>
           Amount donated in Rs
       </label>
       
       <input type="text" (keyup)="updatePagination()"
           [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="filterData" /></th>
-        <td mat-cell *matCellDef="let element" class="col-3 text-center"> {{element.Amountdonated}} </td>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.Amountdonated}} </td>
       </ng-container>
       <ng-container matColumnDef="pan">
         <th mat-header-cell *matHeaderCellDef class="col-2 text-center"><label mat-sort-header>
@@ -141,8 +141,8 @@
      
 
       <ng-container matColumnDef="ViewDetails">
-        <th mat-header-cell *matHeaderCellDef class=" text-center col-2"> ViewDetails</th>
-        <td mat-cell *matCellDef="let element" class="d-flex justify-content-center col-2 my-4 ml-3 pl-2"
+        <th mat-header-cell *matHeaderCellDef class=" text-center col"> View Details</th>
+        <td mat-cell *matCellDef="let element" class="d-flex justify-content-center col-1 ml-5"
           (click)="viewDetails('sad')"> <i class="fa fa-eye" style="color:purple"></i> </td>
       </ng-container>
 
