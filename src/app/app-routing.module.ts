@@ -21,6 +21,16 @@ const routes: Routes = [
       import('./features/blacklist-user/blacklist-user.module').then((m) => m.BlacklistUserModule)
   },
   {
+    path: "",
+    loadChildren: () =>
+      import('./features/mapping-regions-to-chief-mentor/mapping-regions-to-chief-mentor.module').then((m) => m.MappingRegionsToChiefMentorModule)
+  },
+  {
+    path: "",
+    loadChildren: () =>
+      import('./features/onlineexam/onlineexam.module').then((m) => m.OnlineexamModule)
+  },
+  {
     path: '',
     loadChildren: () =>
       import('./features/websitemanagement/websitemanagement.module').then((m) => m.WebsitemanagementModule)
@@ -91,6 +101,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/pages/pages.module').then((m) => m.PagesModule)
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/mapping-regions-to-chief-mentor/mapping-regions-to-chief-mentor.module').then((m) => m.MappingRegionsToChiefMentorModule)
+  },
 
   {
     path: '',
@@ -106,6 +121,11 @@ const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('./features/add-course-main/add-course-main.module').then((m) => m.AddCourseMainModule)
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/testimonials/testimonials.module').then((m) => m.TestimonialsModule)
   },
 
   {

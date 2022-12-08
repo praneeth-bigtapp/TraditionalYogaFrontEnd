@@ -85,7 +85,7 @@ export class SendReceiveService {
     }
     else if (subMenuId == 5) {
       this.router.navigateByUrl("administration/rolePermission");
-    } 
+    }
     else if (subMenuId == 6) {
       this.router.navigateByUrl("dashboard");
     }
@@ -94,7 +94,7 @@ export class SendReceiveService {
     }
     else if (subMenuId == 10) {
       this.router.navigateByUrl("studentMaster/studentProfile");
-    } 
+    }
     else if (subMenuId == 11) {
       this.router.navigateByUrl("pages");
     }
@@ -105,7 +105,7 @@ export class SendReceiveService {
       this.router.navigateByUrl("blank");
     }
     else if (subMenuId == 14) {
-      this.router.navigateByUrl("blank");
+      this.router.navigateByUrl("testimonials");
     }
     else if (subMenuId == 15) {
       this.router.navigateByUrl("banners");
@@ -117,10 +117,10 @@ export class SendReceiveService {
       this.router.navigateByUrl("mapuCourse");
     }
     else if (subMenuId == 18) {
-      this.router.navigateByUrl("blank");
+      this.router.navigateByUrl("administration/parameters");
     }
     else if (subMenuId == 19) {
-      this.router.navigateByUrl("blank");
+      this.router.navigateByUrl("memberspage");
     }
     else if (subMenuId == 20) {
       this.router.navigateByUrl("media");
@@ -132,7 +132,7 @@ export class SendReceiveService {
       this.router.navigateByUrl("audio");
     }
     else if (subMenuId == 23) {
-      this.router.navigateByUrl("blank");
+      this.router.navigateByUrl("tasks");
     }
     else if (subMenuId == 24) {
       this.router.navigateByUrl("blank");
@@ -144,7 +144,7 @@ export class SendReceiveService {
       this.router.navigateByUrl("blank");
     }
     else if (subMenuId == 27) {
-      this.router.navigateByUrl("blank");
+      this.router.navigateByUrl("regioncreation");
     }
     else if (subMenuId == 28) {
       this.router.navigateByUrl("alert");

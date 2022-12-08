@@ -17,8 +17,8 @@ export class AddCourseComponent implements OnInit {
   filerror!: boolean
   categorySelect!: any
   addCourseForm!: FormGroup
-
-
+  paragrapherror: boolean = false
+  categoryList!: any
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -71,42 +71,64 @@ export class AddCourseComponent implements OnInit {
   constructor(private AddCourseService: AddCourseService, private formbuilder: FormBuilder, private _snackBar: MatSnackBar) {
     this.addCourseForm = this.formbuilder.group({
       courseName: [null, Validators.compose([Validators.required])],
+      coursecategory: [null, Validators.compose([Validators.required])],
+      applicationclosuredate: [null, Validators.compose([Validators.required])],
+
       description: [null, Validators.compose([Validators.required])],
       startDate: [null, Validators.compose([Validators.required])],
       endDate: [null, Validators.compose([Validators.required])],
     });
 
+    this.AddCourseService.getCategory().subscribe({
+      next: (value) => {
+        console.log(value);
+        this.categoryList = value
+
+      },
+      error: (error) => {
+        console.warn(error.message);
+
+      }
+    })
   }
 
   ngOnInit(): void {
 
   }
 
+  paragraphchange() {
+
+    this.paragrapherror = this.addCourseForm.value.description === null ? true : false
+
+  }
+
   onAddCourse() {
 
+    this.paragraphchange()
     if (this.addCourseForm.invalid)
       return this.addCourseForm.markAllAsTouched()
 
 
 
     const body = {
-
-      "courseName": this.addCourseForm.value.coursename,
-      "startDate": this.addCourseForm.value.startdate,
-      "endDate": this.addCourseForm.value.enddate,
-      "category": null,
-      "paragraph": null,
-      "Instructorname": null,
-      "verficationRequired": null,
-      "courseType": null,
-      "section": null,
-      "courseDuration": null,
-      "currentStatus": null,
+      // "coursesId": 1,
+      "categorieId": {
+        "categoriesId": this.addCourseForm.value.coursecategory.categoriesId,
+        "categoriesName": this.addCourseForm.value.coursecategory.categoriesName,
+      },
+      "coursesName": this.addCourseForm.value.courseName,
+      "description": this.addCourseForm.value.description,
+      "startDate": this.addCourseForm.value.startDate,
+      "endDate": this.addCourseForm.value.endDate,
+      "applicationClouserDate": this.addCourseForm.value.applicationclosuredate
     }
+    console.log(body);
+
 
     this.AddCourseService.postadcourse(body).subscribe({
       next: (response) => {
         this.openSnackBar(response)
+        this.addCourseForm.reset()
       },
       error: (error) => {
         console.error(error.message);

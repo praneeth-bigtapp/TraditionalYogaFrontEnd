@@ -1,102 +1,125 @@
 <div class="ConfigurationTypes_textpadding ">
     <h5>Class Media Update</h5>
-<div class="mt-5 bg-white">
-    
-    <div class="row "style="display: flex;">
-        <div class="col-md-3">
-           <form [formGroup]=" dataForm" >
-            <mat-form-field appearance="fill">
-                <mat-label>Select Course</mat-label>
-                <select matNativeControl [disabled]="disableSelect.value" formControlName="checkbox">
-                  <option value="" selected></option>
-                  <option value="volvo">Volvo</option>
-                  <option value="saab" disabled>Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
-            </mat-form-field>
-           </form>
-        </div>
-        <form [formGroup]="dateForm" (submit)="datefilter()" class="col-md-9">
-        <div >
-           
-                <mat-form-field class="col-5" appearance="fill">
-                    <mat-label>Select date</mat-label>
-                    <input matInput placeholder="Ex. Pizza" value="Sushi" type="date" formControlName="date">
-                </mat-form-field>
-                <button  mat-button class="py-2 bg-light" type="submit">Go</button>
+    <div class="mt-5 bg-white">
 
-
-        </div>
-        
-            
-        
-    </form>
-
-    </div>
-    <hr>
-    <div class="row">
-
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-datagrid w-100" aria-label="subMenu">
-
-            <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-            <!-- Position Column -->
-            <ng-container matColumnDef="s_no">
-                <th mat-header-cell class="col-md-1" *matHeaderCellDef> S-no</th>
-                <td mat-cell class="col-md-1" *matCellDef="let element">
-                    {{element.classMediaId}}
-                </td>
-            </ng-container>
-
-            <!-- Name Column -->
-            <ng-container matColumnDef="date">
-                <th mat-header-cell class="col-md-3" *matHeaderCellDef> Date </th>
-                <td class="col-md-3" *matCellDef="let element">
-
-                    {{element.date}}
-
-                </td>
-            </ng-container>
-
-            <!-- Weight Column -->
-            <ng-container matColumnDef="type">
-                <th mat-header-cell class="col-md-3" *matHeaderCellDef> Type Of Class</th>
-                <td mat-cell class="col-md-3" *matCellDef="let element"> {{element.typeOfClass}} </td>
-            </ng-container>
-
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="media_file">
-                <th mat-header-cell class="col-md-3" *matHeaderCellDef>Number Of Media File Added</th>
-                <td class="col-md-3" *matCellDef="let element">
-                    {{element.noOfMediaFiles}} </td>
-
-            </ng-container>
-            <ng-container matColumnDef="Action">
-                <th mat-header-cell class="col" *matHeaderCellDef>Action </th>
-                <td mat-cell class="col" *matCellDef="let element">
-                    <div class="row">
-                        <div class="col">
-                            <i class="fa-solid fa-eye" style="color: rgb(235, 156, 11) ;"></i>
-                        </div>
-                        <div class="col">
-                            <i class="fa-solid fa-pencil"></i>
-
-                        </div>
+        <div class="row px-2 " style="display: flex;">
+            <div class="col-md-12">
+                <form [formGroup]="dateForm" (ngSubmit)="datefilter()" class="d-flex  flex-wrap flex-row mt-2">
+                    <div class="mr-2 mt-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Select Course</mat-label>
+                            <mat-select formControlName="checkbox">
+                                <mat-option *ngFor="let course of courses" [value]="course.coursesId">
+                                    {{course.coursesName}}</mat-option>
+                            </mat-select>
+                            <mat-error [hidden]="!dateForm.get('checkbox')?.hasError('required')">
+                                Please Select Course
+                            </mat-error>
+                        </mat-form-field>
                     </div>
-                </td>
+                    <div>
 
-            </ng-container>
+                        <mat-form-field class="mt-2" appearance="outline">
+                            <mat-label>Select date</mat-label>
+                            <input matInput placeholder="Ex. Pizza" value="Sushi" type="date" formControlName="date">
+                            <mat-error [hidden]="!dateForm.get('date')?.hasError('required')">
+                                Please Select Date
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="mt-2">
+                        <button type="submit"
+                            class="btn btn-outline-secondary btn-rounded d-inline-block m-2 border border-dark"
+                            type="submit">Go</button>
+                    </div>
+                </form>
+            </div>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
+        </div>
+        <hr>
+        <div class="row px-4">
+            <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
+                aria-label="users">
+                <ng-container matColumnDef="classMediaId">
+                    <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
+                        <label mat-sort-header>
+                            S.No
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseId')"
+                            [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.classMediaId}} </td>
+                </ng-container>
+                <ng-container matColumnDef="date">
 
-        </table>
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Date
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseName')"
+                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.date}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="typeOfClass">
+
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Date
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseName')"
+                            [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.typeOfClass | titlecase}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="noOfMediaFiles">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Number Of Media File Added
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseDuration')"
+                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.noOfMediaFiles}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Action">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Action
+                        </label>
+
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element">
+                        <div class="row">
+                            <div class="col">
+                                <i class="fa-solid fa-eye" (click)="viewclassmedia(element)"
+                                    style="color: rgb(235, 156, 11) ;"></i>
+                            </div>
+                            <div class="col">
+                                <i class="fa-solid fa-pencil" (click)="editmedia(element)"></i>
+
+                            </div>
+                        </div>
+
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <br /><br />
+            <div class="bg-white d-flex  flex-row justify-content-end ">
+                <mat-paginator class="" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+
     </div>
-
-</div>
 
 
 </div>

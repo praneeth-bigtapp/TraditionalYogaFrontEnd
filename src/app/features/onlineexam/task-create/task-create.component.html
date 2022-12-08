@@ -1,0 +1,56 @@
+<div class="ConfigurationTypes_textpadding p-1  ">
+    <div class="d-flex flex-row justify-content-between align-items-center">
+        <div class="">
+            <h4>Create Task</h4>
+        </div>
+        <div class="" (click)="closeDialog()">
+            <mat-icon>close</mat-icon>
+        </div>
+    </div>
+    <br />
+    <form class="" [formGroup]="taskform" (ngSubmit)="tasksubmit()">
+
+        <div class="w-50 ">
+            <mat-form-field appearance="outline">
+                <mat-label>Task Name</mat-label>
+                <input matInput autocomplete="off" formControlName="name" required>
+                <mat-error [hidden]=" !taskform.get('name')?.hasError('required')  ">
+                    Please Type Few Words
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput class="p-2" formControlName="description" rows="3" placeholder="Description"></textarea>
+            <mat-error [hidden]=" !taskform.get('description')?.hasError('required')  ">
+                Please Type Description
+            </mat-error>
+        </mat-form-field>
+
+        <h6>Upload Media file</h6>
+        <br />
+        <div class="w-75">
+            <input type="file" class="border" id="file" formControlName="mediafile" accept=" */*"
+                (change)="fileupload($event)" required="true" />
+            <br />
+            <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
+        </div>
+
+        <div class="w-50">
+            <mat-form-field class="example-full-width" class="w-25" appearance="outline">
+                <mat-label>Due Date for submission</mat-label>
+                <input matInput formControlName="duedate" type="date">
+                <mat-error [hidden]="!taskform.get('duedate')?.hasError('required')  ">
+                    Please Select Date
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="d-flex flex-wrap justify-content-end">
+            <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block mt-3 ml-md-1"> Create Task
+            </button>
+        </div>
+
+    </form>
+</div>

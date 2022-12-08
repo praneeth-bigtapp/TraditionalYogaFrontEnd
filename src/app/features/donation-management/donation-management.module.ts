@@ -45,7 +45,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     SharedModule,
     MatTooltipModule,
     MatIconModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSortModule
   ]
 })
 export class DonationManagementModule { }

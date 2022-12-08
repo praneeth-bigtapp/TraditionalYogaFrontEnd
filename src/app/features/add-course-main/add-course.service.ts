@@ -5,21 +5,23 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
   providedIn: 'root'
 })
 export class AddCourseService extends BaseHttp {
-  getURL='student/getAll?operation=course';
-  getCoursePost='course/addCourse';
+  getURL = 'student/getAll?operation=course';
+  getCoursePost = 'courseList/coursesList?operation=add';
 
-  getCategory(){
+  getcategorylist = "courseList/getAll?operation=categoryList"
 
-    return this.get<any>(this.getURL);
- 
-   }
+  getCategory() {
 
-  
-    postadcourse(body: any) {
-      return this.post<any>(this.getCoursePost, body)
-    }
-  
- 
+    return this.get<any>(this.getcategorylist);
+
+  }
+
+
+  postadcourse(body: any) {
+    return this.post<any>(this.getCoursePost, body)
+  }
+
+
 }
 
 

@@ -10,24 +10,52 @@
             </button>
             <br /><br />
             <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block border border-dark "
-                (click)="creategallery()">
+                (click)="manageGallery()">
                 <i class="fa-solid fa-photo-film"></i>
                 Mange gallery
             </button>
         </div>
     </div>
-
     <div class="p-2">
         <h6>Wholesome Quarentine Series</h6>
         <p>Gallery Name</p>
+        <app-upload-file [inputSubModuleId]="inputSubModuleId"></app-upload-file>
+        <br />
+        <br /><br /><br />
+
+        <div class="row mt-2 w-100 ">
+
+            <div class="col-md-4 border border d-flex flex-column  bg-white py-2  mr-md-0 "
+                *ngFor="let file of uploadfile">
+
+                <div class="p-2 w-50 mx-auto" style="position: relative; height: 75%; ">
+                    <img mat-card-image class="mx-auto  w-100" [src]="file.path" [alt]="file.name">
+
+                    <span class="bg-dark w-100 text-center opacity-25"
+                        style="cursor: pointer;position: absolute; left: 0; bottom: 0; z-index: 2; "
+                        (click)="removeimage(file.name)">
+                        <mat-icon class="text-white opacity-100 ">delete_sweep</mat-icon>
+                    </span>
+                </div>
+                <br />
+                <mat-card-content>
+                    <textarea class="border w-100 p-2" (change)="detectchange()" [(ngModel)]="file.description" rows="3"
+                        placeholder="Description"></textarea>
+                </mat-card-content>
+                <mat-card-actions>
+                </mat-card-actions>
+                <br />
+            </div>
+
+        </div>
 
         <br />
-        <div class="bg-white ht-15">
-            &nbsp;
+        <div class="w-100  d-flex flex-row justify-content-center flex-wrap">
+            <button type="button" (click)="uploadimage()"
+                class="  btn btn-outline-secondary btn-rounded d-inline-block m-2">
+                Upload images
+            </button>
         </div>
 
-        <div class="">
-            
-        </div>
     </div>
 </div>

@@ -6,16 +6,40 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 })
 export class OnlineexamService extends BaseHttp {
 
-  getallcourseURL = "student/getAll?operation=course"
+  getallcourseURL = "courseList/getAll?operation=coursesList"
 
-  postonlinexamURL = ""
+  getleveloftestURL = "courseList/getAll?operation=leveloftest"
+
+  gettypeoftestURL = "courseList/getAll?operation=typeoftest"
+
+  postonlinexamURL = "courseList/onlineexam?operation=add"
+
+  gettaskURL = "courseList/getAll?operation=task"
+
+  posttaskURL = "courseList/task?operation=add"
 
   getallcourses() {
     return this.get(this.getallcourseURL)
   }
+  gettypeoftest() {
+    return this.get(this.gettypeoftestURL)
+  }
+
+  getleveloftest() {
+    return this.get(this.getleveloftestURL)
+  }
+
+  gettask() {
+    return this.get(this.gettaskURL)
+  }
 
   postonlineexam(body: any) {
     return this.post(this.postonlinexamURL, body)
+  }
+
+
+  posttask(body: any) {
+    return this.post(this.posttaskURL, body)
   }
 
 

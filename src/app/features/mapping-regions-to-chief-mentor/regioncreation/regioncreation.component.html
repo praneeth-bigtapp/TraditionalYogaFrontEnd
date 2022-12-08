@@ -1,0 +1,149 @@
+<div class="ConfigurationTypes_textpadding p-5 bg-light">
+    <h3 class="mb-4 pl-2 text-secondary"> Regions creation </h3>
+
+    <div class="bg-white border">
+
+        <form class="" [formGroup]="regionfilterform" (ngSubmit)="filtersubmit()">
+            <div class="row px-5 pt-4 ">
+                <div class="col-md-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter Region Name</mat-label>
+                        <input type="text" placeholder="Pick one" formControlName="region" aria-label="Country" matInput
+                            [matAutocomplete]="region">
+                        <mat-autocomplete autoActiveFirstOption #region="matAutocomplete">
+                            <mat-option *ngFor="let country of regionfilter |async " [value]="country">
+                                {{country}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <mat-error [hidden]="!regionfilterform.get('region')?.hasError('required')">
+                            Please Type Region
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <hr />
+
+            <div class="row px-5 pt-4">
+                <div class="col-md-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Select Country</mat-label>
+                        <input type="text" placeholder="Pick one" aria-label="Country" matInput
+                            formControlName="country" (keyup)="countrychange($event)" (change)="countrychange($event)"
+                            [matAutocomplete]="country">
+                        <mat-autocomplete autoActiveFirstOption #country="matAutocomplete">
+                            <mat-option *ngFor="let country of countryfilter |async " [value]="country">
+                                {{country}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <mat-error [hidden]="!regionfilterform.get('country')?.hasError('required')">
+                            Please Select Country
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-3">
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Part of Country</mat-label>
+                        <mat-select formControlName="part" (valueChange)="partchange($event)">
+                            <mat-option *ngFor="let part of partList" [value]="part.partId">
+                                {{part.partName}}</mat-option>
+                        </mat-select>
+                        <mat-error [hidden]="!regionfilterform.get('part')?.hasError('required')">
+                            Please Select Part
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Select States</mat-label>
+                        <input type="text" placeholder="Pick one" aria-label="Country" matInput formControlName="state"
+                            [matAutocomplete]="states">
+                        <mat-autocomplete autoActiveFirstOption #states="matAutocomplete">
+                            <mat-option *ngFor="let country of statefilter |async " [value]="country">
+                                {{country}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <mat-error [hidden]="!regionfilterform.get('state')?.hasError('required')">
+                            Please Select Country
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-3  my-2">
+                    <button type="submit" class="btn btn-outline-secondary btn-rounded    d-inline-block ">
+                        Add
+                    </button>
+                </div>
+
+            </div>
+        </form>
+        <hr />
+
+        <div class="px-5">
+
+
+            <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
+                *ngIf="displaycontent" aria-label="users">
+                <ng-container matColumnDef="regionId">
+                    <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
+                        <label mat-sort-header>
+                            S.No
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseId')"
+                            [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.regionId}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="regionName">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Region Name
+                        </label>
+                        <input type="text" (keyup)="updatePagination('Region')"
+                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element">
+                        {{element.regionName | titlecase}}
+
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="countryName">
+
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Countries
+                        </label>
+                        <input type="text" (keyup)="updatePagination('Country')"
+                            [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.countryName |titlecase}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="states">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            States
+                        </label>
+                        <input type="text" (keyup)="updatePagination('State')"
+                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.states | titlecase }} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <br />
+            <div class="d-flex  flex-row justify-content-end " *ngIf="displaycontent">
+                <mat-paginator class="" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+
+    </div>
+</div>

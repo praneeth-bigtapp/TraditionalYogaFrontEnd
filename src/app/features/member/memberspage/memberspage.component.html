@@ -11,8 +11,8 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Select Course</mat-label>
                         <mat-select [(ngModel)]="category" (ngModelChange)="coursechange()">
-                            <mat-option *ngFor="let course of courselist" [value]="course.courseId">
-                                {{course.courseName}}</mat-option>
+                            <mat-option *ngFor="let course of courselist" [value]="course.coursesId">
+                                {{course.coursesName}}</mat-option>
                         </mat-select>
                         <span class="text-danger" *ngIf="categoryerror">
                             Please Select Category
@@ -143,7 +143,7 @@
                                             formControlName="region" [matAutocomplete]="regionauto">
                                         <mat-autocomplete autoActiveFirstOption #regionauto="matAutocomplete">
                                             <mat-option *ngFor="let country of regionfilter |async " [value]="country">
-                                                {{country}}
+                                                {{country | titlecase}}
                                             </mat-option>
                                         </mat-autocomplete>
                                     </mat-form-field>
@@ -271,8 +271,8 @@
     <br />
 
     <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
-        *ngIf="displaycontent" aria-label="users">
-        <ng-container matColumnDef="SNo">
+        aria-label="users">
+        <ng-container matColumnDef="studentId">
             <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
                 <label mat-sort-header>
                     S.No
@@ -280,7 +280,7 @@
                 <input type="text" (keyup)="updatePagination('courseId')"
                     [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
             </th>
-            <td mat-cell class="text-center" *matCellDef="let element"> {{element.SNo}} </td>
+            <td mat-cell class="text-center" *matCellDef="let element"> {{element.studentId}} </td>
         </ng-container>
 
         <ng-container matColumnDef="Image">
@@ -298,7 +298,7 @@
             </td>
         </ng-container>
 
-        <ng-container matColumnDef="Name">
+        <ng-container matColumnDef="name">
 
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
@@ -307,10 +307,10 @@
                 <input type="text" (keyup)="updatePagination('courseName')"
                     [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
             </th>
-            <td mat-cell class="text-center" *matCellDef="let element"> {{element.Name |titlecase}} </td>
+            <td mat-cell class="text-center" *matCellDef="let element"> {{element.name |titlecase}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="Email_id">
+        <ng-container matColumnDef="emailId">
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
                     Email id
@@ -318,10 +318,10 @@
                 <input type="text" (keyup)="updatePagination('courseDuration')"
                     [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
             </th>
-            <td mat-cell class="text-center" *matCellDef="let element"> {{element.Email_id }} </td>
+            <td mat-cell class="text-center" *matCellDef="let element"> {{element.emailId || "Nil" }} </td>
         </ng-container>
 
-        <ng-container matColumnDef="Country">
+        <ng-container matColumnDef="address">
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
                     Country
@@ -329,10 +329,10 @@
                 <input type="text" (keyup)="updatePagination('startDate')"
                     [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
             </th>
-            <td mat-cell class="text-center" *matCellDef="let element"> {{element.Country |titlecase}} </td>
+            <td mat-cell class="text-center" *matCellDef="let element"> {{element.address || "Nil"}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="Gender">
+        <ng-container matColumnDef="genderId">
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
                     Gender
@@ -340,10 +340,10 @@
                 <input type="text" (keyup)="updatePagination('endDate')"
                     [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="filterData" />
             </th>
-            <td mat-cell class="text-center" *matCellDef="let element "> {{element.Gender |titlecase}} </td>
+            <td mat-cell class="text-center" *matCellDef="let element "> {{element.genderId }} </td>
         </ng-container>
 
-        <ng-container matColumnDef="Mentor">
+        <ng-container matColumnDef="mentorId">
             <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
                 <label mat-sort-header>
                     Mentor
@@ -351,11 +351,11 @@
                 <input type="text" (keyup)="updatePagination('currentStatus')"
                     [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
             </th>
-            <td mat-cell class="text-center" *matCellDef="let element "> {{element.Mentor | titlecase}} </td>
+            <td mat-cell class="text-center" *matCellDef="let element "> {{element.mentorId || "Nil" }} </td>
 
         </ng-container>
 
-        <ng-container matColumnDef="Senior_Mentor">
+        <ng-container matColumnDef="ChiefMentorId">
             <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
                 <label mat-sort-header>
                     Chief Mentor
@@ -363,7 +363,7 @@
                 <input type="text" (keyup)="updatePagination('currentStatus')"
                     [(ngModel)]="filterData.filterColumnNames[7].Value" [filter]="filterData" />
             </th>
-            <td mat-cell class="text-center" *matCellDef="let element "> {{element.Senior_Mentor |titlecase}} </td>
+            <td mat-cell class="text-center" *matCellDef="let element "> {{element.ChiefMentorId || "Nil"}} </td>
 
         </ng-container>
 
@@ -435,8 +435,8 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <div class="bg-white d-flex  flex-row justify-content-end " *ngIf="displaycontent">
-        <mat-paginator class="" [pageSizeOptions]="[1, 5,10,25, 50, 100]" aria-label="Select page">
+    <div class="bg-white d-flex  flex-row justify-content-end ">
+        <mat-paginator class="" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
         </mat-paginator>
     </div>
 

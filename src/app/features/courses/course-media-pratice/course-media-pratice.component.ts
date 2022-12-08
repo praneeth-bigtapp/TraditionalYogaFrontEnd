@@ -34,9 +34,10 @@ export class CourseMediaPraticeComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
-  title=''
-  keyword=''
-  description=''
+  title = ''
+  keyword = ''
+  description = ''
+  filedata!: any
 
   filterData: any;
   gridData = [];
@@ -48,7 +49,7 @@ export class CourseMediaPraticeComponent implements OnInit {
 
   classtype!: string
   filerror!: boolean
-  
+
   displaycontent: boolean = false
 
   editorConfig: AngularEditorConfig = {
@@ -112,7 +113,6 @@ export class CourseMediaPraticeComponent implements OnInit {
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
-        // this.filterData.paginator = this.paginator
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.filterData.sort = this.sort;
@@ -146,7 +146,7 @@ export class CourseMediaPraticeComponent implements OnInit {
   ngOnInit(): void {
     this.addmediaform = this.formbuilder.group({
 
-      
+
       videolink: [null, Validators.compose([Validators.required])],
       videotitle: [null, Validators.compose([Validators.required])],
       videodescription: [null, Validators.compose([Validators.required])],
@@ -162,12 +162,20 @@ export class CourseMediaPraticeComponent implements OnInit {
     })
   }
 
+  openSnackBar(data: any) {
+
+    this._snackBar.open(data.message, "Close");
+
+  }
+
   ngAfterViewInit() {
     this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
   }
 
   updatePagination() {
     this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
   }
   typechange() {
 
@@ -190,77 +198,69 @@ export class CourseMediaPraticeComponent implements OnInit {
 
     const classtype = this.classtype
     console.log(classtype);
-
-
   }
 
-  onfilechange() {
+  onfilechange(event: any) {
     this.filerror = this.addmediaform.value.mediafile === null ? true : false
+
+    this.filedata = event.target.files[0].name
   }
 
   viewmanage(data: any) {
     console.log(data);
 
   }
+
+  toHoursAndMinutes(totalMinutes: number) {
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+    return Number(`${hours}.${minutes}`)
+  }
   addmedia() {
 
-    this.onfilechange()
-   
-
+    this.filerror = this.addmediaform.value.mediafile === null ? true : false
 
     if (this.addmediaform.valid) {
 
-      const result = this.addmediaform.value
+      this.addmediaform.value.mediafile = this.filedata
 
-      console.log(result);
+      const body = {
 
-      const body= { 
+        "uploadMediaFile": this.addmediaform.value.mediafile,
 
-        "id":2,
-    
-         "uploadMediaFile": this.addmediaform.value.mediafile,
-    
-         "videoLink":this.addmediaform.value.videoLink,
-    
-         "title":this.addmediaform.value.videotitle,
-    
-         "description":this.addmediaform.value.videodescription,
-    
-         "duration":this.addmediaform.value.videoduration,
-    
-         "metaKeyword":this.addmediaform.value.vidoemetakeywords,
-    
+        "videoLink": this.addmediaform.value.videolink,
+
+        "title": this.addmediaform.value.videotitle,
+
+        "description": this.addmediaform.value.videodescription,
+
+        "duration": this.toHoursAndMinutes(Number(this.addmediaform.value.videoduration)),
+
+        "metaKeyword": this.addmediaform.value.vidoemetakeywords,
+
       }
-    
-    
+
+      console.log(body);
 
       this.service.postcoursemedia(body).subscribe({
         next: (response) => {
-          console.log(response);
-        this.addmediaform.reset()
-          this.openSnackBar("Data added Sucessfully","close")
+          this.addmediaform.reset()
+          this.openSnackBar(response)
 
         },
         error: (error) => {
           console.error(error.message);
-          // this.addmediaform.reset()
         }
       })
 
 
     }
     else {
-     
-
       this.addmediaform.markAllAsTouched()
     }
 
   }
-  openSnackBar(message: string, action: string) {
 
-    this._snackBar.open(message, action);
-
-  }
 
 
 }

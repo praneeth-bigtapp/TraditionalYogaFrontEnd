@@ -1,0 +1,127 @@
+<div class="ConfigurationTypes_textpadding p-5 bg-light">
+    <h3 class="mb-4 pl-2 text-secondary"> Mapping regions to chief mentor </h3>
+    <div class="bg-white border-bottom ">
+        <!-- <mat-form-field appearance="outline" class="col-3 mt-2">
+            <mat-label>Select Course</mat-label>
+            <mat-select [(ngModel)]="courses" (ngModelChange)="coursechange()">
+                <mat-option *ngFor="let course of courseList" [value]="course.courseId">
+                    {{course.courseName}}</mat-option>
+                    <mat-option value="volvo">Volvo</mat-option>
+                    <mat-option value="volvo">Volvo</mat-option>
+            </mat-select>
+            
+        </mat-form-field> -->
+<form [formGroup]="Countryform">
+        <mat-form-field appearance="outline"  class="col-3 mt-2">
+            <mat-label>Select Course</mat-label>
+            <input type="text" placeholder="Pick one" aria-label="Country" matInput
+            formControlName="countrydropdown" (valueChange)="coursechange()" [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let country of countryfilter |async " [value]="country">
+                    {{country}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </form>
+    </div>
+    <div class="bg-white pt-4 border-bottom">
+        <form class="row" [formGroup]="searchform"  (ngSubmit)="searchby()" >
+     <div class="col-3 ml-3">
+        <mat-form-field appearance="outline" >
+            <mat-label>Select Regions</mat-label>
+            <mat-select formControlName="regionname" (ngModelChange)="coursechange()">
+                <!-- <mat-option *ngFor="let region of regionList" [value]="region.regionId">
+                    {{region.courseName}}</mat-option> -->
+                    <mat-option value="India">India</mat-option>
+                    <mat-option value="USA">USA</mat-option>
+
+                   
+            </mat-select>
+            
+            </mat-form-field>
+           
+     </div>
+     
+        <div class="col-3">
+            <mat-form-field appearance="outline" >
+                <mat-label>Chief mentor name</mat-label>
+                <input matInput autocomplete="off" formControlName="mentorname" required
+                   >
+               
+            </mat-form-field>
+        </div>
+        <div class="col-3"> 
+            <mat-form-field appearance="outline" >
+                <mat-label>Chief mentor user id</mat-label>
+                <input matInput autocomplete="off" formControlName="mentorid" required>
+               
+            </mat-form-field>
+        </div>
+        <div class="col-2 mt-3">
+            <button mat-button class="bg-light border-mutted border-2  py-1 btn-rounded " type="submit">Assign</button>
+        </div>
+    </form>
+    </div>
+    <div class="pt-4">
+        <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
+        *ngIf="displaycontent" aria-label="users">
+        <ng-container matColumnDef="SNo">
+            <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
+                <label mat-sort-header >
+                    S.No
+                </label>
+                <input type="text" (keyup)="updatePagination()"
+                    [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
+            </th>
+            <td mat-cell class="text-center" *matCellDef="let element"> {{element.SNo}} </td>
+        </ng-container>
+
+    
+
+        <ng-container matColumnDef="Regionname">
+
+            <th mat-header-cell *matHeaderCellDef scope="col">
+                <label mat-sort-header>
+                   Region name
+                </label>
+                <input type="text" (keyup)="updatePagination()"
+                    [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+            </th>
+            <td mat-cell class="text-center" *matCellDef="let element"> {{element.Regionname }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Chiefmentorname">
+            <th mat-header-cell *matHeaderCellDef scope="col">
+                <label mat-sort-header>
+                    Chief mentor name
+                </label>
+                <input type="text" (keyup)="updatePagination()"
+                    [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
+            </th>
+            <td mat-cell class="text-center" *matCellDef="let element"> {{element.Chiefmentorname }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Chiefmentorid">
+            <th mat-header-cell *matHeaderCellDef scope="col">
+                <label mat-sort-header>
+                    Chief mentor id
+                </label>
+                <input type="text" (keyup)="updatePagination()"
+                    [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
+            </th>
+            <td mat-cell class="text-center" *matCellDef="let element"> {{element.Chiefmentorid }} </td>
+        </ng-container>
+
+      
+      
+    
+     
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <div class="bg-white d-flex  flex-row justify-content-end " *ngIf="displaycontent">
+        <mat-paginator class="" [pageSizeOptions]="[ 5,10,25, 50, 100]" aria-label="Select page">
+        </mat-paginator>
+    </div>
+    </div>
+</div>

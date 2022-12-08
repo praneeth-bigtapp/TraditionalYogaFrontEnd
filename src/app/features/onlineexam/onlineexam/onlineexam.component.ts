@@ -16,8 +16,8 @@ export class OnlineexamComponent implements OnInit {
 
   filedata !: any
 
-  typetestlist: any = ['Online', 'Question Paper']
-  testlevel: any = ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5"]
+  typetestlist!: any
+  testlevel!: any
   constructor(
     private formbuilder: FormBuilder,
     private service: OnlineexamService,
@@ -35,6 +35,26 @@ export class OnlineexamComponent implements OnInit {
       }
     })
 
+    this.service.getleveloftest().subscribe({
+      next: (response) => {
+        this.testlevel = response
+
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
+    this.service.gettypeoftest().subscribe({
+      next: (response) => {
+        this.typetestlist = response
+
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
     this.onlineexamform = this.formbuilder.group({
       course: [null, Validators.compose([Validators.required])],
       testtype: [null, Validators.compose([Validators.required])],
@@ -79,12 +99,27 @@ export class OnlineexamComponent implements OnInit {
     console.log({ course, testtype, testname, leveltest, file, description });
 
     const body = {
-
+      "courseId": {
+        "coursesId": Number(course)
+      },
+      "testId": {
+        "testId": Number(testtype)
+      },
+      "nameofTest": testname,
+      "levelId": {
+        "testId": Number(leveltest)
+      },
+      "fileUpload": file,
+      "description": description
     }
+
+    console.log(body);
+
     this.service.postonlineexam(body).subscribe({
       next: (response) => {
 
         this.openSnackBar(response)
+        this.onlineexamform.reset()
 
       },
       error: (error) => {
