@@ -9,7 +9,7 @@ export class ParametersService extends BaseHttp {
   getallcourseURL = "courseList/getAll?operation=coursesList"
 
   postparameters = "course/performance/updateRating"
-  getInputparameters ="course/performance/data?courseId=1"
+  getInputparameters = "course/performance/data?courseId=1"
 
   getallcourses() {
     return this.get(this.getallcourseURL)
@@ -19,7 +19,7 @@ export class ParametersService extends BaseHttp {
     return this.post(this.postparameters, body)
   }
 
-  getInput(){
-    return this.get(this. getInputparameters)
+  getInput() {
+    return this.get(this.getInputparameters)
   }
 }

@@ -20,60 +20,6 @@ export class ParametersComponent implements OnInit {
   body: any;
 
 
-  // parameters: any = {
-
-  //   frequency_validate: {
-  //     name: "frequency_validate",
-  //     good: "15 days",
-  //     average: "",
-  //     poor: "",
-  //     redalert: "",
-  //     disable: false,
-  //   },
-  //   live_class_min_screen: {
-  //     name: "live_class_min_screen",
-  //     good: ">60%",
-  //     average: "20-40%",
-  //     poor: "40-30%",
-  //     redalert: "<30%",
-  //     disable: false,
-  //   },
-  //   course_pratice_min_screen: {
-  //     name: "course_pratice_min_screen",
-  //     good: ">60%",
-  //     average: "20-40%",
-  //     poor: "40-30%",
-  //     redalert: "<30%",
-  //     disable: false,
-  //   },
-  //   gratitude_messages: {
-  //     name: "gratitude_messages",
-  //     good: "1",
-  //     average: "1",
-  //     poor: "1",
-  //     redalert: "1",
-  //     disable: false,
-  //   },
-  //   task_submitted: {
-  //     name: "task_submitted",
-  //     good: "",
-  //     average: "",
-  //     poor: "",
-  //     redalert: "",
-  //     disable: false,
-  //   },
-  //   shortvideo_min_screen: {
-  //     name: "shortvideo_min_screen",
-  //     good: "",
-  //     average: "",
-  //     poor: "",
-  //     redalert: "",
-  //     disable: false,
-  //   },
-  // }
-
-
-
   constructor(
     private service: ParametersService, private snackBar: MatSnackBar
   ) {
@@ -87,7 +33,7 @@ export class ParametersComponent implements OnInit {
 
       }
     })
-    
+
   }
 
 
@@ -96,13 +42,12 @@ export class ParametersComponent implements OnInit {
   }
 
 
-  getallparameter(courseid:any)
-  {
+  getallparameter(courseid: any) {
     this.service.getInput().subscribe({
       next: (response) => {
         this.parameters = response
 
-        // this.parameters = this.parameters.filter((ele:any)=> )
+        this.parameters = this.parameters.filter((ele: any) => ele.courseId.courseId === this.coursename)
         console.log(this.parameters)
 
       },
@@ -119,26 +64,77 @@ export class ParametersComponent implements OnInit {
     if (this.coursename == undefined || this.coursename == null) {
       this.courserror = true
     }
-    this.getallparameter(this.coursename)
+
 
   }
 
   gobutton() {
     this.coursechange()
     console.log(this.coursename);
-    if (this.coursename)
+    if (this.coursename) {
       this.displaycontent = true
+      this.getallparameter(this.coursename)
+    }
 
 
   }
 
 
-  onActivateParameter(paramname: string) {
+  onActivateParameter(eleid: any) {
+    const yes = ["Yes", "Y", "yes", "y"]
+    const no = ["No", "N", "no", "n"]
 
-    this.parameters[paramname].disable = !this.parameters[paramname].disable
+
+    this.parameters.map((element: any) => {
+      if (element.id === eleid) {
+        element.active = yes.includes(element.active) ? "N" : "Y"
+      }
+
+    });
+
+    console.log(this.parameters);
+    const { id, ratingGood, ratingAvearage, ratingPoor, ratingRedAlert, active } = this.parameters.filter((ele: any) => ele.id === eleid)[0]
+    console.log({ id, ratingGood, ratingAvearage, ratingPoor, ratingRedAlert, active });
+
+    const body = {
+
+      "performaceRatingId": id,
+      "ratingGood": ratingGood,
+      "ratingAvearage": ratingPoor,
+      "ratingPoor": ratingPoor,
+      "ratingRedAlert": ratingRedAlert,
+      "active": active,
+    }
+
+
+
+    // console.log(body);
+    this.service.postparamters(body).subscribe({
+      next: (response) => {
+
+        console.log(response)
+        this.openSnackBar(response)
+
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
+
+
   }
   openSnackBar(data: any) {
     this.snackBar.open(data.message, 'Close');
+  }
+
+  IsActiveorNot(value: any) {
+    const yes = ["Yes", "Y", "yes", "y"]
+    const no = ["No", "N", "no", "n"]
+    if (no.includes(value))
+      return true
+
+    return false
   }
 
   keypressvalue(eleid: any) {
