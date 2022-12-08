@@ -32,7 +32,7 @@
             <div class="col-md-2 pt-1">
                 <mat-form-field class="example-full-width" appearance="fill" id="field">
 
-                    <mat-label>Enter EmailId</mat-label>
+                    <mat-label>Enter email id</mat-label>
                     <input matInput [formControl]="mailerror">
                     <mat-error *ngIf="mailerror.hasError('required')">
                         mail is<strong>required</strong>
@@ -131,7 +131,7 @@
             <div class="col-md-2 pl-4 ">
                 <mat-form-field>
 
-                    <mat-label>Gender</mat-label>
+                    <mat-label>Users of a course</mat-label>
                     <select matNativeControl [disabled]="disableSelect.value">
               <option value="" selected></option>
               <option value="volvo">Volvo</option>
@@ -179,7 +179,7 @@
         <!-- Position Column -->
         <ng-container matColumnDef="sno">
             <th mat-header-cell class="col-md-1" *matHeaderCellDef mat-sort-header> sno </th>
-            <td class="col-md-3" *matCellDef="let element">
+            <td class="col-md-1" *matCellDef="let element">
 
                 {{element.sno}}
 
@@ -188,10 +188,10 @@
 
         <!-- Name Column -->
         <ng-container matColumnDef="image">
-            <th mat-header-cell class="col-md-3" *matHeaderCellDef mat-sort-header> Image </th>
-            <td class="col-md-3" *matCellDef="let element">
+            <th mat-header-cell class="col-md-2" *matHeaderCellDef mat-sort-header> Image </th>
+            <td class="col-md-2" *matCellDef="let element">
 
-                {{element.image}}
+                <i class="fa-solid fa-image"></i>
 
             </td>
         </ng-container>
@@ -204,27 +204,27 @@
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="emailId">
-            <th mat-header-cell class="col-md-3" *matHeaderCellDef mat-sort-header>EmailId</th>
-            <td class="col-md-3" *matCellDef="let element">
+            <th mat-header-cell class="col-md-2" *matHeaderCellDef mat-sort-header>Email id</th>
+            <td class="col-md-2" *matCellDef="let element">
                 {{element.emailId}} </td>
 
         </ng-container>
         <ng-container matColumnDef="country">
-            <th mat-header-cell class="col-md-3" *matHeaderCellDef mat-sort-header>country</th>
-            <td class="col-md-3" *matCellDef="let element">
+            <th mat-header-cell class="col-md-1" *matHeaderCellDef mat-sort-header>Country</th>
+            <td class="col-md-1" *matCellDef="let element">
                 {{element.country}} </td>
 
         </ng-container>
         <ng-container matColumnDef="Gender">
-            <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header>gender</th>
-            <td mat-cell class="col" *matCellDef="let element">
+            <th mat-header-cell class="col-md-1" *matHeaderCellDef mat-sort-header>Gender</th>
+            <td mat-cell class="col-md-1" *matCellDef="let element">
                 {{element.Gender}}
             </td>
 
         </ng-container>
         <ng-container matColumnDef="usersince">
-            <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header>usersince</th>
-            <td mat-cell class="col" *matCellDef="let element">
+            <th mat-header-cell class="col-md-3" *matHeaderCellDef mat-sort-header>User since</th>
+            <td mat-cell class="col-md-3" *matCellDef="let element">
                 {{element.usersince}}
             </td>
 
@@ -237,7 +237,7 @@
 
         </ng-container>
         <ng-container matColumnDef="view">
-            <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header></th>
+            <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header>View</th>
             <td mat-cell class="col" *matCellDef="let element">
                 <i class="fa-solid fa-eye"></i>
             </td>
