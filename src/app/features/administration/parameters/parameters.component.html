@@ -1,5 +1,6 @@
 <div class="ConfigurationTypes_textpadding p-5 bg-light">
     <h3 class="mb-4 pl-2 text-secondary ">Parameters</h3>
+    
     <div class="bg-white  border p-4">
 
         <div class="row border-bottom">
@@ -9,8 +10,8 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Select Course</mat-label>
                         <mat-select [(ngModel)]="coursename" (ngModelChange)="coursechange()">
-                            <mat-option *ngFor="let course of courselist" [value]="course.courseId">
-                                {{course.courseName}}</mat-option>
+                            <mat-option *ngFor="let course of courselist" [value]="course.coursesId">
+                                {{course.coursesName}}</mat-option>
                         </mat-select>
                         <span class="text-danger" *ngIf="courserror">
                             Select Course
@@ -26,14 +27,18 @@
             </div>
 
             <div class="col" *ngIf="displaycontent">
+                
                 <h4 class="text-center mt-4">Performance Rating</h4>
             </div>
 
         </div>
 
         <br />
+        <!-- <form [formGroup]="Ratings"   > -->
+       
         <table class="w-100 p-5 " *ngIf="displaycontent">
-            <thead class="border-bottom">
+           
+            <thead class="border-bottom"  >
                 <tr class="">
                     <th class="">&nbsp;</th>
                     <th>&nbsp;</th>
@@ -46,45 +51,51 @@
                 </tr>
             </thead>
             <br />
-            <tbody>
+             <!-- <form [formGroup]="Ratings"   > -->
+            
+            <tbody *ngFor="let element of parameters">
+                
 
                 <tr class="">
+                    
+                    
                     <td>
-                        <h6>Frequency to validate for every (Number of days)</h6>
+                        <h6>{{element.performaceName}}</h6>
                     </td>
                     <td>
                         <p>:&nbsp;</p>
                     </td>
                     <td class=" ">
-                        <input class="border w-75" autocomplete="off" [(ngModel)]="parameters.frequency_validate.good"
+                        <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingGood"
                             (keyup)="keypressvalue('frequency_validate-good')" required>
                     </td>
                     <td class="">
-                        <input class="border w-75" autocomplete="off"
-                            [(ngModel)]="parameters.frequency_validate.average"
+                        <input class="border w-75" autocomplete="off" 
+                            [(ngModel)]="element.ratingAvearage"
                             (keyup)="keypressvalue('frequency_validate-average')" required>
                     </td>
                     <td class="">
-                        <input class="border w-75" autocomplete="off" [(ngModel)]="parameters.frequency_validate.poor"
+                        <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingPoor"
                             (keyup)="keypressvalue('frequency_validate-poor')" required>
                     </td>
                     <td class="">
                         <input class="border w-75" autocomplete="off"
-                            [(ngModel)]="parameters.frequency_validate.redalert"
+                            [(ngModel)]="element.ratingRedAlert"
                             (keyup)="keypressvalue('frequency_validate-redalert')" required>
                     </td>
                     <td class="">
-                        <mat-slide-toggle [checked]="parameters.frequency_validate.disable"
-                            (change)="onActivateParameter(parameters.frequency_validate.name)"></mat-slide-toggle>
-                        <p>Disable</p>
+                        <!-- <mat-slide-toggle [checked]="parameters.frequency_validate.disable"
+                            (change)="onActivateParameter(parameters.frequency_validate.performaceName)"></mat-slide-toggle>
+                        <p>Disable</p> -->
 
                     </td>
-
+                
+               
                 </tr>
 
                 <br />
 
-                <tr class="">
+                <!-- <tr class="">
                     <td>
                         <h6>Percentage of Minimum Screen Time for Live classes</h6>
                     </td>
@@ -93,7 +104,7 @@
                     </td>
                     <td class=" ">
                         <input class="border w-75" autocomplete="off"
-                            [(ngModel)]="parameters.live_class_min_screen.good"
+                            [(ngModel)]="parameters.live_class_min_screen.ratingGood"
                             (keyup)="keypressvalue('live_class_min_screen-good')" required>
                     </td>
                     <td class="">
@@ -113,7 +124,7 @@
                     </td>
                     <td class="">
                         <mat-slide-toggle [checked]="parameters.live_class_min_screen.disable"
-                            (change)="onActivateParameter(parameters.live_class_min_screen.name)"></mat-slide-toggle>
+                            (change)="onActivateParameter(parameters.live_class_min_screen.performaceName)"></mat-slide-toggle>
                         <p>Disable</p>
 
                     </td>
@@ -130,7 +141,7 @@
                     </td>
                     <td class=" ">
                         <input class="border w-75" autocomplete="off"
-                            [(ngModel)]="parameters.course_pratice_min_screen.good"
+                            [(ngModel)]="parameters.course_pratice_min_screen.ratingGood"
                             (keyup)="keypressvalue('course_pratice_min_screen-good')" required>
                     </td>
                     <td class="">
@@ -150,7 +161,7 @@
                     </td>
                     <td class="">
                         <mat-slide-toggle [checked]="parameters.course_pratice_min_screen.disable"
-                            (change)="onActivateParameter(parameters.course_pratice_min_screen.name)">
+                            (change)="onActivateParameter(parameters.course_pratice_min_screen.performaceName)">
                         </mat-slide-toggle>
                         <p>Disable</p>
 
@@ -166,7 +177,7 @@
                         <p>:&nbsp;</p>
                     </td>
                     <td class=" ">
-                        <input class="border w-75" autocomplete="off" [(ngModel)]="parameters.gratitude_messages.good"
+                        <input class="border w-75" autocomplete="off" [(ngModel)]="parameters.gratitude_messages.ratingGood"
                             (keyup)="keypressvalue('gratitude_messages-good')" required>
                     </td>
                     <td class="">
@@ -185,7 +196,7 @@
                     </td>
                     <td class="">
                         <mat-slide-toggle [checked]="parameters.gratitude_messages.disable"
-                            (change)="onActivateParameter(parameters.gratitude_messages.name)"></mat-slide-toggle>
+                            (change)="onActivateParameter(parameters.gratitude_messages.performaceName)"></mat-slide-toggle>
                         <p>Disable</p>
 
                     </td>
@@ -200,7 +211,7 @@
                         <p>:&nbsp;</p>
                     </td>
                     <td class=" ">
-                        <input class="border w-75" autocomplete="off" [(ngModel)]="parameters.task_submitted.good"
+                        <input class="border w-75" autocomplete="off" [(ngModel)]="parameters.task_submitted.ratingGood"
                             (keyup)="keypressvalue('task_submitted-good')" required>
                     </td>
                     <td class="">
@@ -217,7 +228,7 @@
                     </td>
                     <td class="">
                         <mat-slide-toggle [checked]="parameters.task_submitted.disable"
-                            (change)="onActivateParameter(parameters.task_submitted.name)"></mat-slide-toggle>
+                            (change)="onActivateParameter(parameters.task_submitted.performaceName)"></mat-slide-toggle>
                         <p>Disable</p>
 
                     </td>
@@ -233,7 +244,7 @@
                     </td>
                     <td class=" ">
                         <input class="border w-75" autocomplete="off"
-                            [(ngModel)]="parameters.shortvideo_min_screen.good"
+                            [(ngModel)]="parameters.shortvideo_min_screen.ratingGood"
                             (keyup)="keypressvalue('shortvideo_min_screen-good')" required>
                     </td>
                     <td class="">
@@ -253,13 +264,19 @@
                     </td>
                     <td class="">
                         <mat-slide-toggle [checked]="parameters.shortvideo_min_screen.disable"
-                            (change)="onActivateParameter(parameters.shortvideo_min_screen.name)"></mat-slide-toggle>
+                            (change)="onActivateParameter(parameters.shortvideo_min_screen.performaceName)"></mat-slide-toggle>
                         <p>Disable</p>
 
                     </td>
-                </tr>
+                </tr> -->
+            
             </tbody>
+        
+           
         </table>
+
+ 
+<!-- </form> -->
 
 
 
@@ -269,4 +286,5 @@
 
 
     </div>
+
 </div>

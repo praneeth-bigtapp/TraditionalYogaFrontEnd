@@ -122,6 +122,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/add-course-main/add-course-main.module').then((m) => m.AddCourseMainModule)
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/testimonials/testimonials.module').then((m) => m.TestimonialsModule)
+  },
 
   {
     path: '',
