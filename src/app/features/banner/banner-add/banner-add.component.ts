@@ -14,6 +14,8 @@ export class BannerAddComponent implements OnInit {
   coursebanner!: FormGroup
   filerror!: boolean
   filerror2!: boolean
+  coursefile!: any
+  headerfile!: any
 
   optionscontrol = new FormControl('', [Validators.required])
   errorflag: boolean = false
@@ -66,26 +68,32 @@ export class BannerAddComponent implements OnInit {
   }
 
 
-  openSnackBar(message: any) {
-    this._snackBar.open(message, 'Close');
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close');
   }
-  onfilechange(formname: string) {
+  onfilechange(event: any, formname: string) {
 
-    if (formname === 'headerform')
-      this.filerror = this.headerbannerform.value.bannerimage === null ? true : false
+    // if (formname === 'headerform')
+    // {
+    //   this.filerror = this.headerbannerform.value.bannerimage === null ? true : false
+    // this.headerfile = event.target.files[0].name
+    // }
 
-    if (formname === 'courseform')
+    if (formname === 'courseform') {
       this.filerror2 = this.coursebanner.value.coursebannerimage === null ? true : false
+      this.coursefile = event.target.files[0].name
+    }
 
   }
 
 
   submitheaderbanner() {
 
-    this.filerror = this.headerbannerform.value.bannerimage === null ? true : false
+    this.filerror = this.coursebanner.value.bannerimage === null ? true : false
 
     if (this.headerbannerform.valid) {
       this.filerror = false
+      this.coursebanner.value.bannerimage = this.headerfile
 
       const formvalue = this.headerbannerform.value
       console.log(formvalue);
@@ -93,7 +101,7 @@ export class BannerAddComponent implements OnInit {
       this.banner.postheaderbanner(formvalue).subscribe({
         next: (response) => {
           this.headerbannerform.reset()
-          // this.openSnackBar(response.message)
+          this.openSnackBar(response)
 
         },
         error: (error) => {
@@ -101,11 +109,8 @@ export class BannerAddComponent implements OnInit {
 
         }
       })
-
-      // this.headerbannerform.reset()
     }
     else {
-      console.log("invalid");
       this.headerbannerform.markAllAsTouched()
 
     }
@@ -117,16 +122,20 @@ export class BannerAddComponent implements OnInit {
     this.filerror2 = this.coursebanner.value.coursebannerimage === null ? true : false
 
     if (this.coursebanner.valid) {
-      console.log("valid");
 
-      const formvalue = this.coursebanner.value
-      console.log(formvalue);
+      this.coursebanner.value.coursebannerimage = this.coursefile
 
+      const { coursebannerimage, coursetitle, description, fromdate, todate } = this.coursebanner.value
+      console.log({ coursebannerimage, coursetitle, description, fromdate, todate });
 
-      this.banner.postheaderbanner(formvalue).subscribe({
+      const body = {
+
+      }
+
+      this.banner.postcoursebanner(body).subscribe({
         next: (response) => {
           this.coursebanner.reset()
-          // this.openSnackBar(response.message)
+          this.openSnackBar(response)
 
         },
         error: (error) => {
@@ -138,7 +147,6 @@ export class BannerAddComponent implements OnInit {
 
     }
     else {
-      console.log("invalid");
       this.coursebanner.markAllAsTouched()
     }
 

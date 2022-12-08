@@ -9,7 +9,7 @@
                 <div class="row mb-1">
                     <label for="inputEmail3" class="col-sm-2 col-form-label fw-semibold pt-4">Select Category:</label>
                     <div class="col-sm-3">
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="outline">
                             <mat-label>Select category</mat-label>
                             <select matNativeControl formControlName="alertid" [disabled]="disableSelect.value">
                                 <option value="" selected></option>
@@ -34,10 +34,9 @@
 
                 <div class="row">
                     <div class="col-md-3">
-                        <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-form-field class="example-full-width" appearance="outline">
                             <mat-label>Start date</mat-label>
-                            <input matInput formControlName="startdate" placeholder="Ex. Pizza" value="Sushi"
-                                type="date">
+                            <input matInput formControlName="startdate" type="date">
                             <div
                                 *ngIf="alertform.controls['startdate'].invalid && (alertform.controls['startdate'].dirty || alertform.controls['startdate'].touched)">
                                 <mat-error [hidden]=" !alertform.get('startdate')?.hasError('required')  ">
@@ -47,9 +46,9 @@
                         </mat-form-field>
                     </div>
                     <div class="col-md-3">
-                        <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-form-field class="example-full-width" appearance="outline">
                             <mat-label>End date</mat-label>
-                            <input matInput formControlName="enddate" placeholder="Ex. Pizza" value="Sushi" type="date">
+                            <input matInput formControlName="enddate" type="date">
                             <div
                                 *ngIf="alertform.controls['enddate'].invalid && (alertform.controls['enddate'].dirty || alertform.controls['enddate'].touched)">
                                 <mat-error [hidden]=" !alertform.get('enddate')?.hasError('required')  ">
@@ -64,8 +63,8 @@
                 <div class="row mb-1">
                     <label for="inputEmail3" class="col-sm-2 col-form-label pt-4">Upload File:</label>
                     <div class="col-sm-8">
-                        <input type="file" id="file" (change)="onfilechange($event)" formControlName="file"
-                            accept=" image/*" required="true" />
+                        <input type="file" id="file" class="border" (change)="onfilechange($event)"
+                            formControlName="file" accept=" image/*" required="true" />
                     </div>
                     <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
 

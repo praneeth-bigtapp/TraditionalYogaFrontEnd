@@ -11,13 +11,9 @@ export class BanneraddService extends BaseHttp {
 
 
   postheaderbanner(body: any) {
-    console.log(body);
-
     return this.post(this.headerbannerURL, body)
   }
   postcoursebanner(body: any) {
-    console.log(body);
-
-    return this.post(this.headerbannerURL, body)
+    return this.post(this.coursebannerURL, body)
   }
 }

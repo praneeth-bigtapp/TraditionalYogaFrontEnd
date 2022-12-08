@@ -88,56 +88,41 @@
                     <div class="col-md-6">
                         <label class="" for="file">Upload Image</label>
                         <input type="file" id="file" class="border" formControlName="coursebannerimage"
-                            accept=" image/*" (change)="onfilechange('courseform')" required="true" />
+                            accept=" image/*" (change)="onfilechange($event,'courseform')" required="true" />
                         <br />
                         <mat-error *ngIf="filerror2">Please Upload Valid File</mat-error>
 
                     </div>
                 </div>
 
-
-                <!-- <label>From Date - To Date</label> 
-
-                <mat-form-field appearance="outline">
-                     <mat-label>From Date - To Date</mat-label> 
-                    <input matInput formControlName="fromdatetodate">
-                    <div
-                        *ngIf="coursebanner.controls['fromdatetodate'].invalid && (coursebanner.controls['fromdatetodate'].dirty || coursebanner.controls['fromdatetodate'].touched)">
-                        <mat-error [hidden]=" !coursebanner.get('fromdatetodate')?.hasError('required')  ">
-                            Please Type Few Words
-                        </mat-error>
-                    </div>
-                </mat-form-field> -->
                 <div class="row">
                     <div class="col-md-6">
-                        <mat-form-field color="primary" appearance="outline">
+                        <label>From Date</label>
+
+                        <mat-form-field class="example-full-width" appearance="outline">
                             <mat-label>From Date</mat-label>
-                            <input matInput formControlName="fromdate" [matDatepicker]="picker" [disabled]="true">
-                            <mat-hint>MM/DD/YYYY</mat-hint>
-                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker color="primary" [disabled]="false"></mat-datepicker>
-                            <div
-                                *ngIf="coursebanner.controls['fromdate'].invalid && (coursebanner.controls['fromdate'].dirty || coursebanner.controls['fromdate'].touched)">
-                                <mat-error [hidden]=" !coursebanner.get('fromdate')?.hasError('required')  ">
-                                    Please Add Date
-                                </mat-error>
-                            </div>
+                            <input matInput formControlName="fromdate" placeholder="Ex. Pizza" value="Sushi"
+                                type="date">
+
+                            <mat-error [hidden]=" !coursebanner.get('fromdate')?.hasError('required')  ">
+                                Please Select the date
+                            </mat-error>
+
                         </mat-form-field>
 
                     </div>
                     <div class="col-md-6">
-                        <mat-form-field color="accent" appearance="outline">
+                        <label>To Date</label>
+
+
+                        <mat-form-field class="example-full-width" appearance="outline">
                             <mat-label>To Date</mat-label>
-                            <input matInput formControlName="todate" [matDatepicker]="topicker" [disabled]="true">
-                            <mat-hint>MM/DD/YYYY</mat-hint>
-                            <mat-datepicker-toggle matIconSuffix [for]="topicker"></mat-datepicker-toggle>
-                            <mat-datepicker #topicker color="primary" [disabled]="false"></mat-datepicker>
-                            <div
-                                *ngIf="coursebanner.controls['todate'].invalid && (coursebanner.controls['todate'].dirty || coursebanner.controls['todate'].touched)">
-                                <mat-error [hidden]=" !coursebanner.get('todate')?.hasError('required')  ">
-                                    Please Add Date
-                                </mat-error>
-                            </div>
+                            <input matInput formControlName="todate" placeholder="Ex. Pizza" value="Sushi" type="date">
+
+                            <mat-error [hidden]=" !coursebanner.get('todate')?.hasError('required')  ">
+                                Please Select the date
+                            </mat-error>
+
                         </mat-form-field>
                     </div>
                 </div>
