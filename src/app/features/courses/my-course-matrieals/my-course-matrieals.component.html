@@ -2,56 +2,7 @@
     <h3 class="mb-4 pl-2 text-secondary"> Add Course Matrieals </h3>
 
    <div class="bg-white">
-    <!-- <div class=" pt-4 row  ">
-   
-        <form [formGroup]="courses" class="row">
-          
-            <div class="col-5">
-            <button mat-button class="bg-light border-light  rounded py-2">Go</button>
-                
-            </div>
-            <div class="col-2 pt-2 mx-3">
-                <button mat-button class="bg-white border-secondary border-2 border py-1 mx-4 px-5 "><i class="fa-solid fa-plus fa-1x rounded bg-light"></i>Add Category</button>
-                    
-                </div>
-        </form>
-      
-          
-    </div> -->
-    <!-- <div class="border-top bg-white pb-2">
-        <form [formGroup]="coursesDescription">
-            <div class=" pt-2 row ">
-                <div class="col-4 text-end pt-3 ">
-                    Add Category:
-                </div>
-                <div class="col-8">
-                    <mat-form-field class="pe-4"appearance="outline" >
-                       
-                        <input matInput formControlName="categories"  
-                            type="text">
-                    
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class=" pt-2 row ">
-                <div class="col-4 text-end pt-3">
-                    Add Description:
-                </div>
-                <div class="col-8">
-                    <mat-form-field class="pe-4"appearance="outline" >
-                       
-                        <textarea matInput formControlName="Description" rows="8" 
-                            type="text" ></textarea>
-                    
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="d-flex justify-content-end">
-                <button mat-button class="bg-light border-light border border  px-5 me-3">Add</button>
-        
-            </div>
-            </form>
-    </div> -->
+  
     <div class="border-top bg-white pb-2">
         <form [formGroup]="FormDeatils" (submit)="onsubmit()">
             <div class="row pt-2">
@@ -60,7 +11,7 @@
                         <mat-label>Select sourse</mat-label>
                         <select matNativeControl  formControlName="courses" >
                             <option value="" selected></option>
-                            <option *ngFor="let item of datas" [value]="item.roleId">{{item.roleName}}
+                            <option *ngFor="let item of courses" [value]="item.coursesId">{{item.coursesName}}
                             </option>
                         </select>
                     </mat-form-field>
@@ -74,7 +25,7 @@
                     <mat-form-field class="pe-4"appearance="outline" >
                        
                             <mat-label>Course Material Category</mat-label>
-                            <select matNativeControl  formControlName="catogory" (change)="newOthers('value')" >
+                            <select matNativeControl  formControlName="catogery" (change)="newOthers()" [(ngModel)]="othervalue">
                                 <option value="" selected></option>
                                 <option *ngFor="let item of catogeries" [value]="item.materialCategoryId">{{item.categoryName}}
                                 </option>
@@ -91,7 +42,7 @@
                 <div class="col-4 text-end pt-3 text-dark fw-bolder">
                     Others Category:
                 </div>
-                <div class="col-8">
+                <div class="col-4">
                     <mat-form-field class="pe-4"appearance="outline" >
                        
                         <input matInput formControlName="others"  

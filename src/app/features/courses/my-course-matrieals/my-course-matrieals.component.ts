@@ -18,11 +18,13 @@ export class MyCourseMatriealsComponent implements OnInit {
 FormDeatils!:FormGroup
 filterData:any
 gridData = [];
+courses:any
 catogeries:any
 othervalue:any
 media:any
 datas:any
 filerror!:boolean
+tablevalues:any
 newcatogeries=false
 data=[{'S_No':'1', 'title':'Traditional Yoga', 'date':'2022-22-12', "mtype":"images"},
 {'S_No':'2', 'title':'Traditional Yoga1', 'date':'2022-22-10', "mtype":"images2"},
@@ -35,8 +37,11 @@ displayedColumns: string[] = ['S_No', 'title', 'date', "mtype", "Details"];
   constructor(private formbuilder:FormBuilder,private service:CoursesService,private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    this.getcourseslist()
     this.getmedias()
     this.getcoursecatogery()
+    this.getcoursedetails()
+  
   
   
      this.FormDeatils = this.formbuilder.group({
@@ -71,13 +76,42 @@ displayedColumns: string[] = ['S_No', 'title', 'date', "mtype", "Details"];
  
 
   }
-  newOthers(value:any){
-    if(value=='Others'){
+  newOthers(){
+    if(this.othervalue=='4'){
       this.newcatogeries=true
   
     }
     console.log(this.FormDeatils.value)
     console.log(this.othervalue)
+    console.log(this.newcatogeries)
+  }
+  getcoursedetails() {
+    this.service.getcoursematerials().subscribe({
+      next: (response) => {
+        this.tablevalues = response;
+       
+        console.log(this.tablevalues);
+        
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
+  }
+  getcourseslist() {
+    this.service.getCourse().subscribe({
+      next: (response) => {
+        this.courses = response;
+       
+        console.log(this.courses);
+        
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
   }
 
   getmedias() {
@@ -95,7 +129,7 @@ displayedColumns: string[] = ['S_No', 'title', 'date', "mtype", "Details"];
     });
   }
   getcoursecatogery() {
-    this.service.getcatogerymaterial().subscribe({
+    this.service.getcategorymaterial().subscribe({
       next: (response) => {
         this.catogeries = response;
        

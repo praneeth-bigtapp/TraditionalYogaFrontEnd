@@ -9,27 +9,37 @@ export class CoursesService extends BaseHttp {
  
   // getURL = 'student/getAll?operation=course';
 
-  getURL ='courseList/getAll?operation=coursesList'
+ 
+
+  getAllcoursesURL = 'courseList/getAll?operation=coursesList'
+
   getcoursemediaURL = "course/getAll?operation=courseMediaPractice"
 
   postcoursemediaURL = "course/addCourseMediaPractice"
 
   getALLmediatypeURL='courseList/getAll?operation=mediaType'
 
-  getALLcatogerymaterialsURL='courseList/getAll?operation=materialCategory'
+  getALLcategorymaterialsURL='courseList/getAll?operation=materialCategory'
+
+  getAllcoursematerialURL='courseList/getAll?operation=coursematerial'
+
+  getcoursematerials(){
+    return this.get<any>(this.getAllcoursematerialURL);
+
+  }
 
   getmediatype(){
     return this.get<any>(this.getALLmediatypeURL);
 
   }
-  getcatogerymaterial(){
-    return this.get<any>(this.getALLcatogerymaterialsURL);
+  getcategorymaterial(){
+    return this.get<any>(this.getALLcategorymaterialsURL);
 
   }
 
   getCourse() {
 
-    return this.get<any>(this.getURL);
+    return this.get<any>(this.getAllcoursesURL);
 
   }
   getcoursemedia() {
