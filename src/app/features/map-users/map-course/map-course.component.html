@@ -244,9 +244,12 @@
 
         </ng-container>
         <ng-container matColumnDef="select">
-            <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header></th>
+            <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header><mat-checkbox class="example-margin" (change)="$event ? masterToggle() : null"
+                [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()"></mat-checkbox></th>
             <td mat-cell class="col" *matCellDef="let element">
-                <mat-checkbox class="example-margin"></mat-checkbox>
+                <mat-checkbox class="example-margin"(click)="$event.stopPropagation()" (change)="$event ? selection.toggle(element) : null"
+                [checked]="selection.isSelected(element)"></mat-checkbox>
             </td>
 
         </ng-container>
