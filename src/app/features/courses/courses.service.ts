@@ -14,7 +14,18 @@ export class CoursesService extends BaseHttp {
 
   postcoursemediaURL = "course/addCourseMediaPractice"
 
- 
+  getALLmediatypeURL='courseList/getAll?operation=mediaType'
+
+  getALLcatogerymaterialsURL='courseList/getAll?operation=materialCategory'
+
+  getmediatype(){
+    return this.get<any>(this.getALLmediatypeURL);
+
+  }
+  getcatogerymaterial(){
+    return this.get<any>(this.getALLcatogerymaterialsURL);
+
+  }
 
   getCourse() {
 
