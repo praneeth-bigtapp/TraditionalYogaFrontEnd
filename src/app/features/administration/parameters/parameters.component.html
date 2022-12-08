@@ -67,28 +67,28 @@
                     </td>
                     <td class=" ">
                         <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingGood"
-                            (keyup)="keypressvalue('frequency_validate-good')" required>
+                            (keyup)="keypressvalue(element.id)" required>
                     </td>
                     <td class="">
                         <input class="border w-75" autocomplete="off" 
                             [(ngModel)]="element.ratingAvearage"
-                            (keyup)="keypressvalue('frequency_validate-average')" required>
+                            (keyup)="keypressvalue(element.id)" required>
                     </td>
                     <td class="">
                         <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingPoor"
-                            (keyup)="keypressvalue('frequency_validate-poor')" required>
+                            (keyup)="keypressvalue(element.id)" required>
                     </td>
                     <td class="">
                         <input class="border w-75" autocomplete="off"
                             [(ngModel)]="element.ratingRedAlert"
-                            (keyup)="keypressvalue('frequency_validate-redalert')" required>
+                            (keyup)="keypressvalue(element.id)" required>
                     </td>
-                    <td class="">
-                        <!-- <mat-slide-toggle [checked]="parameters.frequency_validate.disable"
+                    <!-- <td class="">
+                        <mat-slide-toggle [checked]="parameters.active"
                             (change)="onActivateParameter(parameters.frequency_validate.performaceName)"></mat-slide-toggle>
-                        <p>Disable</p> -->
+                        <p>Disable</p>
 
-                    </td>
+                    </td> -->
                 
                
                 </tr>

@@ -105,7 +105,7 @@ export class SendReceiveService {
       this.router.navigateByUrl("blank");
     }
     else if (subMenuId == 14) {
-      this.router.navigateByUrl("blank");
+      this.router.navigateByUrl("testimonials");
     }
     else if (subMenuId == 15) {
       this.router.navigateByUrl("banners");

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup ,FormBuilder} from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { ParametersService } from './service/parameters.service';
 import { MatSnackBar, } from '@angular/material/snack-bar';
 
@@ -14,9 +14,9 @@ export class ParametersComponent implements OnInit {
   coursename!: any
   courserror: boolean = false
   displaycontent: boolean = false
-  Ratings!:FormGroup
+  Ratings!: FormGroup
 
-  parameters :any;
+  parameters: any;
   body: any;
 
 
@@ -75,7 +75,7 @@ export class ParametersComponent implements OnInit {
 
 
   constructor(
-    private service: ParametersService,private snackBar: MatSnackBar
+    private service: ParametersService, private snackBar: MatSnackBar
   ) {
     this.service.getallcourses().subscribe({
       next: (response) => {
@@ -87,9 +87,23 @@ export class ParametersComponent implements OnInit {
 
       }
     })
-    this.service. getInput().subscribe({
+    
+  }
+
+
+
+  ngOnInit(): void {
+  }
+
+
+  getallparameter(courseid:any)
+  {
+    this.service.getInput().subscribe({
       next: (response) => {
         this.parameters = response
+
+        // this.parameters = this.parameters.filter((ele:any)=> )
+        console.log(this.parameters)
 
       },
       error: (error) => {
@@ -98,9 +112,6 @@ export class ParametersComponent implements OnInit {
       }
     })
   }
-
-  ngOnInit(): void {
-  }
   coursechange() {
 
     this.displaycontent = false
@@ -108,6 +119,7 @@ export class ParametersComponent implements OnInit {
     if (this.coursename == undefined || this.coursename == null) {
       this.courserror = true
     }
+    this.getallparameter(this.coursename)
 
   }
 
@@ -120,29 +132,37 @@ export class ParametersComponent implements OnInit {
 
   }
 
+
   onActivateParameter(paramname: string) {
 
     this.parameters[paramname].disable = !this.parameters[paramname].disable
   }
-  // openSnackBar(message: any) {
-  //   this.snackBar.open(message, 'Close');
-  // }
+  openSnackBar(data: any) {
+    this.snackBar.open(data.message, 'Close');
+  }
 
-  keypressvalue(_value: string) {
+  keypressvalue(eleid: any) {
+
+
+    const { id, ratingGood, ratingAvearage, ratingPoor, ratingRedAlert, active } = this.parameters.filter((ele: any) => ele.id === eleid)[0]
+    console.log({ id, ratingGood, ratingAvearage, ratingPoor, ratingRedAlert, active });
+
     const body = {
 
-      "performaceRatingId": "",
-      "ratingGood": "",
-      "ratingAvearage": "",
-      "ratingPoor": "",
-      "ratingRedAlert": ""
+      "performaceRatingId": id,
+      "ratingGood": ratingGood,
+      "ratingAvearage": ratingPoor,
+      "ratingPoor": ratingPoor,
+      "ratingRedAlert": ratingRedAlert,
+      "active": active,
     }
 
-    console.log(this.parameters);
-    this.service.postparamters(this.body).subscribe({
+    // console.log(body);
+    this.service.postparamters(body).subscribe({
       next: (response) => {
-        
+
         console.log(response)
+        this.openSnackBar(response)
 
       },
       error: (error) => {
@@ -151,7 +171,7 @@ export class ParametersComponent implements OnInit {
       }
     })
 
-    
+
 
   }
 }
