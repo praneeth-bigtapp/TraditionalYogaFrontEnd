@@ -118,14 +118,14 @@
                         </tr>
 
 
-                        <!-- Video Meta Keyword-->
+                        <!-- Video Meta Keywords-->
                         <tr class="">
                             <td class="col-2">
-                                <h6 class="text-right">Meta Keyword : </h6>
+                                <h6 class="text-right">Meta Keywords : </h6>
                             </td>
                             <td>
                                 <mat-form-field appearance="outline" class="ms-3">
-                                    <mat-label>Meta Keyword</mat-label>
+                                    <mat-label>Meta Keywords</mat-label>
                                     <input matInput autocomplete="off" formControlName="vidoemetakeywords" required
                                         [(ngModel)]="keyword">
                                     <mat-error [hidden]="!addmediaform.get('vidoemetakeywords')?.hasError('required')">
@@ -174,11 +174,10 @@
                             <td>
                                 <div class="w-100 ">
                                     <angular-editor formControlName="paragraph" [placeholder]="'Enter text here...'"
-                                        [config]="editorConfig" required [(ngModel)]="description">
+                                        [config]="editorConfig" required [(ngModel)]="description" (keypress)="paragraphchange()">
                                     </angular-editor>
-
-                                    <mat-error [hidden]="!addmediaform.get('paragraph')?.hasError('required')">
-                                        Please Type Few Words
+                                    <mat-error *ngIf="paragrapherror ">
+                                        Please Type Words
                                     </mat-error>
                                 </div>
                             </td>
@@ -187,14 +186,14 @@
 
 
 
-                        <!-- Image Meta Keyword -->
+                        <!-- Image Meta Keywords -->
                         <tr class="">
                             <td class="col-2">
-                                <h6 class="text-right">Meta Keyword : </h6>
+                                <h6 class="text-right">Meta Keywords : </h6>
                             </td>
                             <td>
                                 <mat-form-field appearance="outline" class="ms-3">
-                                    <mat-label>Meta Keyword : </mat-label>
+                                    <mat-label>Meta Keywords : </mat-label>
                                     <input matInput autocomplete="off" formControlName="imagekeywords" required
                                         [(ngModel)]="keyword">
                                     <mat-error [hidden]="!addmediaform.get('imagekeywords')?.hasError('required')">
@@ -221,7 +220,7 @@
                         <!-- Media Upload  -->
                         <tr class="">
                             <td class="col-2">
-                                <h6 class="text-right">Upload File : </h6>
+                                <h6 class="text-right">Upload Media file : </h6>
                             </td>
                             <td>
                                 <div class="ms-3">
@@ -274,14 +273,14 @@
 
 
 
-                        <!-- Image Meta Keyword -->
+                        <!-- Image Meta Keywords -->
                         <tr class="">
                             <td class="col-2">
-                                <h6 class="text-right">Meta Keyword : </h6>
+                                <h6 class="text-right">Meta Keywords : </h6>
                             </td>
                             <td>
                                 <mat-form-field appearance="outline" class="ms-3">
-                                    <mat-label>Meta Keyword</mat-label>
+                                    <mat-label>Meta Keywords</mat-label>
                                     <input matInput autocomplete="off" formControlName="mediametakeywords" required
                                         [(ngModel)]="keyword">
                                     <mat-error [hidden]="!addmediaform.get('mediametakeywords')?.hasError('required')">
@@ -313,7 +312,7 @@
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
                 <label mat-sort-header>
-                    S.No
+                    S.no
                 </label>
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value"
                     [filter]="filterData" />
@@ -348,7 +347,7 @@
         <ng-container matColumnDef="uploadMediaFile">
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
-                    Media Type
+                    Media type
                 </label>
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
                     [filter]="filterData" />
@@ -359,7 +358,7 @@
         <ng-container matColumnDef="duration">
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
-                    Time Added
+                    Time added
                 </label>
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
                     [filter]="filterData" />

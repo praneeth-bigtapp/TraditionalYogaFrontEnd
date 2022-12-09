@@ -38,7 +38,7 @@ export class CourseMediaPraticeComponent implements OnInit {
   keyword = ''
   description = ''
   filedata!: any
-
+  paragrapherror: boolean = false
   filterData: any;
   gridData = [];
   dataSource: any
@@ -96,7 +96,7 @@ export class CourseMediaPraticeComponent implements OnInit {
     ]
   };
 
-  displayedColumns = ['id', 'title', 'description', 'duration', 'metaKeyword', 'buttons']
+  displayedColumns = ['id', 'title', 'description', 'uploadMediaFile', 'duration', 'metaKeyword', 'buttons']
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
@@ -167,7 +167,11 @@ export class CourseMediaPraticeComponent implements OnInit {
     this._snackBar.open(data.message, "Close");
 
   }
+  paragraphchange() {
 
+    this.paragrapherror = this.addmediaform.value.paragraph.length === 0 ? true : false
+
+  }
   ngAfterViewInit() {
     this.filterData.dataSource.paginator = this.paginator;
     this.filterData.dataSource.sort = this.sort;
@@ -218,7 +222,9 @@ export class CourseMediaPraticeComponent implements OnInit {
   }
   addmedia() {
 
-    this.filerror = this.addmediaform.value.mediafile === null ? true : false
+    this.filerror = this.addmediaform.value.mediafile === '' ? true : false
+
+    this.paragraphchange()
 
     if (this.addmediaform.valid) {
 

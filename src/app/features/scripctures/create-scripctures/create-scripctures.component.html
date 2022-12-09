@@ -10,7 +10,7 @@
 
                 <!-- Back Cover -->
                 <div class=" row align-items-center  ">
-                    <h6 class="text-md-right col-md-4 ">Upload Book Cover Image</h6>
+                    <h6 class="text-md-right col-md-4 ">Upload book cover image</h6>
                     <div class="col-md ">
                         <input type="file" id="file" class="border" formControlName="coverimage"
                             (change)="onfilechange('backcover')" accept="image/*" required="true" /> <br />
@@ -22,7 +22,7 @@
 
                 <!-- Image -->
                 <div class="row align-items-center align-items-center">
-                    <h6 class="text-md-right col-md-4">Upload File </h6>
+                    <h6 class="text-md-right col-md-4">Upload file </h6>
 
                     <div class="col-md">
                         <input type="file" id="file" class="border" formControlName="coverfile"
@@ -40,7 +40,7 @@
 
                     <div class="col">
                         <mat-form-field appearance="outline" class="ms-3">
-                            <mat-label>Title</mat-label>
+                            <mat-label>Title:</mat-label>
                             <input matInput autocomplete="off" formControlName="covertitle" required>
                             <mat-error [hidden]="!addmediaform.get('covertitle')?.hasError('required')">
                                 Please Type Few Words
@@ -52,7 +52,7 @@
 
                 <!-- Descriptions  -->
                 <div class="row align-items-center">
-                    <h6 class="text-md-right col-md-4">Description </h6>
+                    <h6 class="text-md-right col-md-4">Description: </h6>
 
                     <div class="col">
                         <mat-form-field appearance="outline" class="ms-3">
@@ -69,7 +69,7 @@
 
                 <!-- Meta Keyword  -->
                 <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Meta Keywords </h6>
+                    <h6 class="text-md-right col-md-4">Meta Keywords: </h6>
 
                     <div class="col">
                         <mat-form-field appearance="outline" class="ms-3">
