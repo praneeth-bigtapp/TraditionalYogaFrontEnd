@@ -22,6 +22,8 @@ export class MemberspageComponent implements OnInit {
   categoryerror: boolean = false
   gridData = [];
   dataSource: any;
+  totalUserApplied: any;
+  totalUser: any;
 
   displayedColumns: string[] = ['studentId', 'Image', 'name', "emailId", "address", "genderId", "mentorId", "ChiefMentorId", "View_Profile", "View_Course_Activity", "Manage_Exemptions", "Checkbox"];
 
@@ -124,6 +126,8 @@ export class MemberspageComponent implements OnInit {
     this.memberservice.getmembers().subscribe({
       next: (response) => {
         this.data = response
+        this.totalUser = this.data.userMapped;
+        this.totalUserApplied = this.data.userApplied;
         this.data = this.data.students
 
         console.log(this.data);
@@ -222,7 +226,7 @@ export class MemberspageComponent implements OnInit {
         // Chief mapping form
         return
       }
-    } 
+    }
   }
 
   formswich(name: string) {

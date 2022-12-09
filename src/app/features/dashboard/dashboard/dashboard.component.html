@@ -21,7 +21,7 @@
                             <div class="col-sm-3">
                                 <div class="tile bg-white">
                                     <p><small><span> {{overallReport.registeredUsers | number}} </span></small></p>
-                                    <h6 class="title mb-2">Total Number of Registered Users</h6>
+                                    <h6 class="title mb-2 mr-5">Total Number of Registered Users</h6>
                                     <div class="icon-place bg-white p-3">
                                         <span class="float-right"> <i class="fa fa-users"> </i> </span>
                                     </div>
@@ -31,9 +31,9 @@
                             <div class="col-sm-6">
                                 <div class="tile  bg-light">
                                     <p><small><span> {{overallReport.donationRecieved | number:'.2'}}</span></small></p>
-                                    <h6 class="title mb-1">Total Donation Recived</h6>
+                                    <h6 class="title mb-1 mr-5">Total Donations Received</h6>
                                     <div class="icon-place bg-light p-2 rounded-circle">
-                                        <span class="float-right"><i class="fa fa-money"></i></span>
+                                        <span class="float-right"><i class="fas fa-rupee-sign"></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                             <div class="col-sm-3">
                                 <div class="tile bg-white">
                                     <p><small><span> {{overallReport.courses | number}} </span></small><br></p>
-                                    <h6 class="title mb-1">No of Courses </h6>
+                                    <h6 class="title mb-1 mr-5">Total No of Courses </h6>
                                     <div class="icon-place bg-white p-2 rounded-circle">
                                         <span class="float-right"> <i class="fa fa-film"> </i></span>
                                     </div>
@@ -50,8 +50,9 @@
 
                             <div class="col-sm-3">
                                 <div class="tile bg-light">
-                                    <p><small><span> {{overallReport.subscribers | number}} </span></small><br></p>
-                                    <h6 class="title mb-1">Total No of Subscribers</h6>
+                                    <span class="fs-5 fw-bold pb-2"> {{overallReport.subscribers | number}} </span>
+                                    <!-- <h6 class="title mb-1 mr-5">Total No of Subscribers</h6> -->
+                                    <p class="mb-1 mr-5">Total No of Subscribers</p>
                                     <div class="icon-place bg-light p-2 rounded-circle">
                                         <span class="float-right"> <i class="fa fa-users"> </i></span>
                                     </div>

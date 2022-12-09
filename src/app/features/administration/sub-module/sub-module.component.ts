@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NotifierService } from 'src/app/notifier.service';
 import { SendReceiveService } from 'src/app/shared/services/sendReceive.service';
@@ -26,14 +27,16 @@ export class SubModuleComponent implements OnInit {
   MenuList: any = [];
   SubMenuList: any = [];
   filterData: any;
+  gridData = [];
   editMode: any;
   editedSubMenu: any;
   errorMessage: any;
   Message: any;
   errorType: any;
 
-  displayedColumns: string[] = ['sno', 'menuName' ,'subMenuName', 'actions'];
+  displayedColumns: string[] = ['sno', 'menuName', 'subMenuName', 'actions'];
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -50,7 +53,10 @@ export class SubModuleComponent implements OnInit {
         { "Key": 'menuName', "Value": "" },
         { "Key": 'subMenuName', "Value": "" },
       ],
+      gridData: this.gridData,
       dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
     };
 
     this.AddSubModuleForm = this.formBuilder.group({
@@ -109,7 +115,7 @@ export class SubModuleComponent implements OnInit {
   }
 
   addSubMenu() {
-    console.log(  );
+    console.log();
     const data = {
       "menuId": this.AddSubModuleForm.value.menuName,
       "subMenuName": this.AddSubModuleForm.value.subMenuName
@@ -159,6 +165,10 @@ export class SubModuleComponent implements OnInit {
         console.log(this.SubMenuList);
         this.dataSource = new MatTableDataSource(this.SubMenuList);
         this.filterData.dataSource = this.dataSource;
+        this.filterData.gridData = data;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
 
       },
       error: (error) => {
@@ -222,7 +232,7 @@ export class SubModuleComponent implements OnInit {
     this.editedSubMenu = subMenu;
     this.getMenus();
     this.AddSubModuleForm.patchValue({
-      menuName: this.editedSubMenu.moduleId,
+      menuName: this.editedSubMenu.moduleId.moduleId,
       subMenuName: this.editedSubMenu.subModuleName
     });
     this.isAddSubModuleForm = true;

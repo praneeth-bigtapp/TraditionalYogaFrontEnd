@@ -19,7 +19,7 @@ export class SideNavComponent implements OnInit {
   isRefresh!: boolean;
   selectedSubModuleId: any;
   className: any;
-  
+
   dashboardStatus: boolean = false;
   status: boolean = false;
   clickEvent() {
@@ -31,17 +31,17 @@ export class SideNavComponent implements OnInit {
     public router: Router,
     public sendReceiveService: SendReceiveService,
     // private lengthPipe: LengthPipe
-    ) { 
-      // this.lengthPipe.transform('Yet-another-string');
-    }
+  ) {
+    // this.lengthPipe.transform('Yet-another-string');
+  }
 
   ngOnInit(): void {
+    this.onClickDash();
     if (localStorage.getItem("LoginData")) {
       let data = localStorage.getItem("LoginData");
       if (data) {
         this.loginData = JSON.parse(data);
         this.menuList = this.loginData.permissions;
-        
         localStorage.setItem("MenuList", JSON.stringify(this.menuList));
       }
       this.className = false;
@@ -87,4 +87,15 @@ export class SideNavComponent implements OnInit {
     localStorage.setItem("selectedSubModuleId", this.menuId)
     this.sendReceiveService.navigateToMenu(this.menuId);
   }
+
+  subMenuIcon(menu: any) {
+    return "fa-solid fa-house";
+  }
+
+  onClickDash() {
+    this.dashboardStatus = true;
+    this.selectedIndex = -1;
+    this.menuId = 1;
+  }
+
 }
