@@ -8,13 +8,13 @@
                 <div class="col-md-3">
                     <mat-form-field appearance="outline">
                         <mat-label>Enter Region Name</mat-label>
-                        <input type="text" placeholder="Pick one" formControlName="region" aria-label="Country" matInput
-                            [matAutocomplete]="region">
-                        <mat-autocomplete autoActiveFirstOption #region="matAutocomplete">
+                        <input type="text" placeholder="Pick one" formControlName="region" aria-label="Country"
+                            matInput>
+                        <!-- <mat-autocomplete autoActiveFirstOption #region="matAutocomplete">
                             <mat-option *ngFor="let country of regionfilter |async " [value]="country">
                                 {{country}}
                             </mat-option>
-                        </mat-autocomplete>
+                        </mat-autocomplete> -->
                         <mat-error [hidden]="!regionfilterform.get('region')?.hasError('required')">
                             Please Type Region
                         </mat-error>

@@ -1,10 +1,10 @@
 <div class="ConfigurationTypes_textpadding ">
     <h3 class="mb-5 pl-2"> Create Pratice Library </h3>
 
-    <div class="card border-light pt-3 ">
+    <div class="card border-light pt-3 bg-white ">
         <div class="pl-3 d-flex flex-row flex-wrap  ">
             <div class="w-25 me-5">
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="outline">
                     <mat-label>Select Category</mat-label>
                     <mat-select [(ngModel)]="category" (ngModelChange)="coursechange()">
                         <mat-option *ngFor="let category of categoryList" [value]="category.categoryId">
