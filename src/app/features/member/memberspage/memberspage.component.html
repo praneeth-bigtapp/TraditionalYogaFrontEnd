@@ -49,14 +49,14 @@
                         <a class="nav-link active" data-toggle="tab" href="#form1" (click)="formswich('Members')"
                             role="tab">Members</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#form1" (click)="formswich('Mentor Mapping')"
                             role="tab">Mentor Mapping</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#form1" (click)="formswich('Chief Mentor Mapping')"
                             role="tab"> Chief Mentor Mapping </a>
-                    </li>
+                    </li> -->
                 </ul>
                 <div class="tab-content">
                     <div class="py-5 tab-pane active" id="form1" role="tabpanel">
@@ -213,7 +213,7 @@
                                 </div>
                             </div>
                             <div class="d-flex flex-wrap  align-items-center justify-content-md-end">
-                                <div class="" *ngIf="this.formtype == 'Members'">
+                                <!-- <div class="" *ngIf="this.formtype == 'Members'">
                                     <mat-form-field appearance="outline">
                                         <mat-label>Change UserType</mat-label>
                                         <mat-select formControlName="usertype">
@@ -256,7 +256,7 @@
                                             Please Select Type
                                         </mat-error>
                                     </mat-form-field>
-                                </div>
+                                </div> -->
                                 <div class="ml-2 mb-4">
                                     <button type="submit"
                                         class="btn btn-outline-secondary btn-rounded    d-inline-block ">
@@ -377,19 +377,21 @@
         <ng-container matColumnDef="View_Profile">
             <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
                 <label mat-sort-header>
-                    View Profile
+                    Action
                 </label>
 
             </th>
             <td mat-cell class="text-center" *matCellDef="let element ">
                 <!-- <i class="fa-solid fa-eye fs-5 bg-light" (click)="viewprofile(element)" matTooltip="View Profile"></i> -->
-                <button class="btn bg-light" (click)="viewprofile(element)">
+                <!-- <button class="btn bg-light" (click)="viewprofile(element)">
                     View
-                </button>
+                </button> -->
+                <i class="fa-solid fa-eye fs-5 text-info" (click)="viewprofile(element)"
+                    matTooltip="View Course Activity" matTooltip="View"></i>
             </td>
 
         </ng-container>
-        <ng-container matColumnDef="View_Course_Activity">
+        <!-- <ng-container matColumnDef="View_Course_Activity">
             <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
                 <label mat-sort-header>
                     View Course Activity
@@ -397,8 +399,7 @@
 
             </th>
             <td mat-cell class="text-center" *matCellDef="let element ">
-                <!-- <i class="fa-solid fa-eye fs-5 text-info" (click)="viewcourseactivity(element)"
-            matTooltip="View Course Activity"></i> -->
+              
                 <button class="btn bg-info" (click)="viewcourseactivity(element)">
                     View
                 </button>
@@ -412,8 +413,7 @@
                 </label>
             </th>
             <td mat-cell class="text-center" *matCellDef="let element ">
-                <!-- <i class="fa-solid fa-eye fs-5 text-info" (click)="viewexemption(element)"
-            matTooltip="View Manage Exemptions"></i> -->
+         
                 <button class="btn bg-info " (click)="viewexemption(element)">
                     View
                 </button>
@@ -438,7 +438,9 @@
                 </mat-checkbox>
             </td>
 
-        </ng-container>
+        </ng-container> -->
+
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
@@ -456,4 +458,6 @@
         </svg> -->
         Download Excel
     </button>
+
+    <a class="d-none" [href]="downloadurl">Download link</a>
 </div>

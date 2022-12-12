@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MemberService } from '../services/member.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { angularEditorConfig } from '@kolkov/angular-editor/lib/config';
 @Component({
   selector: 'app-memberspage',
   templateUrl: './memberspage.component.html',
@@ -25,7 +26,7 @@ export class MemberspageComponent implements OnInit {
   totalUserApplied: any;
   totalUser: any;
 
-  displayedColumns: string[] = ['studentId', 'Image', 'name', "emailId", "address", "genderId", "mentorId", "ChiefMentorId", "View_Profile", "View_Course_Activity", "Manage_Exemptions", "Checkbox"];
+  displayedColumns: string[] = ['studentId', 'Image', 'name', "emailId", "address", "genderId", "mentorId", "ChiefMentorId", "View_Profile"];
 
   selectedmember!: any
   formtype: string = "Members"
@@ -33,6 +34,8 @@ export class MemberspageComponent implements OnInit {
   displaycontent: boolean = false
 
   data!: any
+
+  downloadurl!:string
 
 
   category!: string
@@ -113,16 +116,13 @@ export class MemberspageComponent implements OnInit {
       map(value => this.regionList.filter(ele => ele.toLowerCase().includes(value.region?.toLowerCase()))),
     )
 
-    console.log(this.formtype);
-
-
   }
   ngAfterViewInit() {
     this.filterData.dataSource.paginator = this.paginator;
     this.filterData.dataSource.sort = this.sort;
   }
 
-  getmemberslist() {
+  getmemberslist(category: any) {
     this.memberservice.getmembers().subscribe({
       next: (response) => {
         this.data = response
@@ -130,7 +130,7 @@ export class MemberspageComponent implements OnInit {
         this.totalUserApplied = this.data.userApplied;
         this.data = this.data.students
 
-        console.log(this.data);
+        this.data = this.data.filter((ele: any) => ele.courseId.courseId === this.category)
 
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
@@ -155,8 +155,6 @@ export class MemberspageComponent implements OnInit {
         this.data = response
         this.data = this.data.students
 
-        console.log(this.data);
-
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
@@ -179,8 +177,6 @@ export class MemberspageComponent implements OnInit {
       next: (response) => {
         this.data = response
         this.data = this.data.students
-
-        console.log(this.data);
 
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
@@ -208,7 +204,7 @@ export class MemberspageComponent implements OnInit {
 
       if (this.formtype == "Members") {
 
-        this.getmemberslist()
+        this.getmemberslist(this.category)
 
         return
       }
@@ -231,10 +227,10 @@ export class MemberspageComponent implements OnInit {
 
   formswich(name: string) {
     this.formtype = name
-    console.log(this.selection.selected);
+    // console.log(this.selection.selected);
     if (this.formtype == "Members") {
 
-      this.getmemberslist()
+      this.getmemberslist(this.category)
 
       return
     }
@@ -291,25 +287,53 @@ export class MemberspageComponent implements OnInit {
 
   }
 
-  viewcourseactivity(data: any) {
-    console.log(data);
+  // viewcourseactivity(data: any) {
+  //   console.log(data);
 
-  }
+  // }
 
-  viewexemption(data: any) {
-    console.log(data);
+  // viewexemption(data: any) {
+  //   console.log(data);
 
-  }
+  // }
 
   selectmember(event: any, data: any) {
-
-
     console.log(data);
-
   }
 
   downloadexcel() {
 
+
+    const headers = Object.keys(this.data[0]).join(",") + "\n"
+
+
+    let content = headers
+
+    content += this.data.map((ele: any) => Object.values(ele).map((ele: any) => {
+      if (ele) {
+        if (typeof ele === "object")
+          return Object.values(ele).join(",") + "\n"
+        return ele
+
+      }
+      return "Nil"
+    })
+    ).join("\n")
+
+
+
+    console.log(content);
+
+    const mimetype = 'text/csv;encoding:utf-8'
+    const data = ""
+    const fileblob = new Blob([content], {
+      type: mimetype
+    })
+
+    this.downloadurl = URL.createObjectURL(fileblob)
+    console.log(this.downloadurl);
+
+    
   }
 
   gendername(id: number) {
@@ -353,10 +377,5 @@ export class MemberspageComponent implements OnInit {
       // Chief mapping form
       return
     }
-
-
-
-
-
   }
 }
