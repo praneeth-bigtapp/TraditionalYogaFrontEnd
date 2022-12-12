@@ -14,6 +14,7 @@ export class AlertComponent implements OnInit {
   alertform !: FormGroup
   category!: any
   filerror!: boolean
+  filedata!: any
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -78,7 +79,7 @@ export class AlertComponent implements OnInit {
   onfilechange(event: any) {
 
     this.filerror = this.alertform.value.file === null ? true : false
-    this.alertform.value.file = event.target.files[0]
+    this.filedata = event.target.files[0].name
   }
 
   ngOnInit(): void {
@@ -110,6 +111,8 @@ export class AlertComponent implements OnInit {
 
 
     if (this.alertform.valid) {
+      this.alertform.value.file = this.filedata
+
 
       const body = {
 
@@ -118,6 +121,7 @@ export class AlertComponent implements OnInit {
         "startDate": this.alertform.value.startdate,
         "endDate": this.alertform.value.enddate
       }
+
       console.log(body)
       this.alertservice.setalert(body).subscribe({
         next: (response) => {

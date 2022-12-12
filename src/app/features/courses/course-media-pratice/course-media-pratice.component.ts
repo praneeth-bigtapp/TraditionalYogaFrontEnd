@@ -222,7 +222,7 @@ export class CourseMediaPraticeComponent implements OnInit {
   }
   addmedia() {
 
-    this.filerror = this.addmediaform.value.mediafile === '' ? true : false
+    this.filerror = this.addmediaform.value.mediafile === null ? true : false
 
     this.paragraphchange()
 
