@@ -26,7 +26,7 @@ export class MemberspageComponent implements OnInit {
   totalUserApplied: any;
   totalUser: any;
 
-  displayedColumns: string[] = ['studentId', 'Image', 'name', "emailId", "address", "genderId", "mentorId", "ChiefMentorId", "View_Profile"];
+  displayedColumns: string[] = ['studentId', 'Image', 'name', "emailId", "address", "genderId", "mentorId", "ChiefMentorId", "Status", "View_Profile"];
 
   selectedmember!: any
   formtype: string = "Members"
@@ -35,7 +35,7 @@ export class MemberspageComponent implements OnInit {
 
   data!: any
 
-  downloadurl!:string
+  downloadurl!: string
 
 
   category!: string
@@ -333,7 +333,7 @@ export class MemberspageComponent implements OnInit {
     this.downloadurl = URL.createObjectURL(fileblob)
     console.log(this.downloadurl);
 
-    
+
   }
 
   gendername(id: number) {

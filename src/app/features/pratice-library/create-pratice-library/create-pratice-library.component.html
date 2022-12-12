@@ -2,7 +2,7 @@
     <h3 class="mb-5 pl-2"> Create Pratice Library </h3>
 
     <div class="card border-light pt-3 bg-white ">
-        <div class="pl-3 d-flex flex-row flex-wrap  ">
+        <!-- <div class="pl-3 d-flex flex-row flex-wrap  ">
             <div class="w-25 me-5">
                 <mat-form-field appearance="outline">
                     <mat-label>Select Category</mat-label>
@@ -21,14 +21,32 @@
                     Go
                 </button>
             </div>
-        </div>
+        </div> -->
 
 
         <div class="card-body" *ngIf="displaycontent">
-            <hr />
+            <!-- <hr /> -->
             <form [formGroup]="addmediaform" class="me-5" (ngSubmit)="addmedia()">
 
 
+                  <!-- Title -->
+                  <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Select Category : </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Select Category</mat-label>
+                            <mat-select formControlName="category">
+                                <mat-option *ngFor="let category of categoryList" [value]="category.categoryId">
+                                    {{category.categoryName}}</mat-option>
+                            </mat-select>
+                            <mat-error [hidden]="!addmediaform.get('category')?.hasError('required')">
+                                Please Select Category
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                </div>
                 <!-- Title -->
                 <div class="row align-items-center ">
                     <h6 class="text-md-right col-md-4">Video Link </h6>

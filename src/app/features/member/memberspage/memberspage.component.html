@@ -374,6 +374,18 @@
 
         </ng-container>
 
+        <ng-container matColumnDef="Status">
+            <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
+                <label mat-sort-header>
+                    Status
+                </label>
+                <input type="text" (keyup)="updatePagination('currentStatus')"
+                    [(ngModel)]="filterData.filterColumnNames[7].Value" [filter]="filterData" />
+            </th>
+            <td mat-cell class="text-center" *matCellDef="let element "> {{element.Status || "Nil"}} </td>
+
+        </ng-container>
+
         <ng-container matColumnDef="View_Profile">
             <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
                 <label mat-sort-header>
