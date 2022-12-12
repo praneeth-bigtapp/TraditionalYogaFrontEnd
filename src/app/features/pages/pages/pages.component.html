@@ -1,15 +1,15 @@
 <div class="ConfigurationTypes_textpadding  ">
- <div class="row">
+ <div class="row d-flex flex-wrap">
    <div class="col-7">
       <h3 class="mb-4 pl-2 text-secondary"> Pages </h3>
      </div>
-     <div class="col-5 d-flex justify-content-end">
-        <button class="bg-light border-mutted border-2 py-1 btn-rounded"><i class="fa-solid fa-file-circle-plus "></i>Add Page</button>
-        <button class="bg-light border-mutted border-2  py-1 btn-rounded"><i class="fas fa-file-alt "></i>Manage Page</button>
+     <div class="col-5 d-flex justify-content-end flex-wrap">
+        <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark">Add Page</button>
+        <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark">Manage Page</button>
      </div>
  </div>
- <div  class=" rounded mt-3 mat-elevation-z8">
-   <table mat-table mat-sort [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid table-bordered" >
+ <div  class=" rounded mt-3 mat-elevation-z8 table-responsive">
+   <table mat-table mat-sort [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid " >
 
       <ng-container matColumnDef="Checkbox">
          <th mat-header-cell *matHeaderCellDef  class="col-1">
@@ -31,13 +31,13 @@
      </ng-container>
     
        <ng-container matColumnDef="Pagename" >
-           <th mat-header-cell *matHeaderCellDef class="col-6 text-center " > <label>Page Name</label>
+           <th mat-header-cell *matHeaderCellDef class="col-4 text-center " > <label>Page Name</label>
                <input matInput type="text" (keyup)="updatePagination()" 
                [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;width: 90%;"  /></th>
         
-         <td mat-cell *matCellDef="let element" class="col-6 mx-2 "><br> {{element.Pagename}} - <small class="text-success">Published</small><br>
-         <div class="d-flex text-center "><p class=" mr-2" style="color:blue ;" >Edit</p>| <p class="text-danger mx-2">Delete</p> |<p class="text-muted mx-2">Draft</p></div>
-         <div class="d-flex text-center mb-3"><p class="mr-2 text-secondary">Permanent Link</p>:<p style="color:blue ;" class="ml-2">{{element.link}}</p></div>
+         <td mat-cell *matCellDef="let element" class="col-4 mx-2 "><br> {{element.Pagename}} - <small style="color: 9AA78E;">Published</small><br>
+        
+         <div class="d-flex text-center mb-3"><p class="mr-2 text-secondary">Permanent Link</p>:<p style="color:475442  ;;" class="ml-2 action">{{element.link}}</p></div>
 
        </td>
        </ng-container>
@@ -52,20 +52,33 @@
      
       
        <ng-container matColumnDef="Dateofpublish">
-         <th mat-header-cell *matHeaderCellDef class="col-4 text-center">  <label>Date of pusblish</label>
+         <th mat-header-cell *matHeaderCellDef class="col-3 text-center">  <label>Date of pusblish</label>
            <input matInput type="text" (keyup)="updatePagination()" 
            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2"   /></th>
-         <td mat-cell *matCellDef="let element" class="col-4 px-2 text-left py-2"><label>Last Modified</label><br> <u>{{element.Dateofpublish}}</u> </td>
+         <td mat-cell *matCellDef="let element" class="col-3 px-2 text-center py-2"><label>Last Modified</label><br> {{element.Dateofpublish}} </td>
        </ng-container>
+
+       <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef class="col text-center"><label>Action</label>
+          <input matInput type="text" (keyup)="updatePagination()" 
+          [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;width: 90%;" class="mx-2"  /></th>
+        <td mat-cell *matCellDef="let element" class="col px-2 text-center text-muted"  > <i class="fa-sharp fa-solid fa-pen action" matTooltip="Edit"
+          aria-label="Button that displays a tooltip when focused or hovered over" ></i>
+          <i class="fa-sharp fa-solid fa-trash action mx-4" matTooltip="Delete"
+          aria-label="Button that displays a tooltip when focused or hovered over"></i>
+          <i class="fa-solid fa-file-lines action" matTooltip="Draft"
+          aria-label="Button that displays a tooltip when focused or hovered over"></i> </td>
+      </ng-container>
      
       
     
      
        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+       
    </table>
-   <div class="col-12 bg-white">
-      <mat-paginator  [pageSizeOptions]="[ 5,10,25, 50, 100]" aria-label="Select page"></mat-paginator>
-   </div>
+   <div class="col bg-white">
+    <mat-paginator  [pageSizeOptions]="[ 5,10,25, 50, 100]" aria-label="Select page"></mat-paginator>
+ </div>
 </div>
 </div>

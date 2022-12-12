@@ -1,6 +1,8 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, } from '@angular/material/table';
 import { BlacklistUsersService } from '../blacklist-users.service';
 
@@ -11,11 +13,14 @@ import { BlacklistUsersService } from '../blacklist-users.service';
   styleUrls: ['./blacklist-users.component.css']
 })
 export class BlacklistUsersComponent implements OnInit {
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort!: MatSort;
   blacklistForm!: FormGroup
   displayedColumns: string[] = ['SNo', 'date', 'blacklistUserEmail', "comments", "action"];
   dataSource: any;
   blacklistData: any;
-
+  filterData:any
+  gridData:any
   constructor(
     private blacklistUsersService: BlacklistUsersService,
     private formBuilder: FormBuilder,
@@ -27,6 +32,13 @@ export class BlacklistUsersComponent implements OnInit {
       emailId: [null, Validators.compose([Validators.required])],
       comments: [null, Validators.compose([Validators.required])],
     });
+    this.filterData = {
+      filterColumnNames: this.displayedColumns.map((ele: any) => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
+    };
 
     this.getBlackListUser();
   }
@@ -34,8 +46,19 @@ export class BlacklistUsersComponent implements OnInit {
   getBlackListUser() {
     this.blacklistUsersService.getBlacklist().subscribe({
       next: (response) => {
+
         this.blacklistData = response;
+        console.log(this.blacklistData)
         this.dataSource = new MatTableDataSource<any>(this.blacklistData);
+       
+        this.filterData.gridData = this.blacklistData;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
       },
       error: (error) => {
         console.error(error.message);
@@ -85,5 +108,10 @@ export class BlacklistUsersComponent implements OnInit {
     this._snackBar.open(message);
     setTimeout(() => {this._snackBar.dismiss()},3000);
   }
+  updatePagination() {
+    this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort=this.sort
 
+   
+  }
 }

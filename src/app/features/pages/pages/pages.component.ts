@@ -27,7 +27,7 @@ gridData :any;
 
 
 dataSource: any;
-displayedColumns: string[] = ["Checkbox","Pagename","Author",'Dateofpublish'];
+displayedColumns: string[] = ["Checkbox","Pagename","Author",'Dateofpublish','Action'];
 
   constructor(private formbuilder:FormBuilder) { }
 
