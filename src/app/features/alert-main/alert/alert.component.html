@@ -1,6 +1,8 @@
-<div class="container-fluid bg-light">
-    <h5>Alerts</h5>
+<div class="container-fluid ">
+    <!-- remove bg-light -->
 
+    <!-- <h5>Alerts</h5> -->
+    <h3 class="mb-3 pl-2"> Alerts </h3>
     <mat-card>
         <div class="row">
 
@@ -16,6 +18,9 @@
                                 <option *ngFor="let item of category" [value]="item.roleId">{{item.roleName}}
                                 </option>
                             </select>
+                            <mat-error [hidden]=" !alertform.get('alertid')?.hasError('required')  ">
+                                Please Select Alert
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
