@@ -1,5 +1,5 @@
 <div class="ConfigurationTypes_textpadding ">
-    <h3 class="mb-3 pl-2"> Course Media Pratice Sessions </h3>
+    <h3 class="mb-3 pl-2"> Course Media Pratice sessions </h3>
 
     <div class="card border-light bg-white pt-3 ">
         <div class="pl-3   d-flex flex-row flex-wrap  ">
@@ -299,7 +299,7 @@
 
 
                 <button type="submit" class=" float-md-right btn btn-outline-secondary btn-rounded d-inline-block m-2">
-                    submit
+                    Submit
                 </button>
             </form>
         </div>
@@ -313,7 +313,7 @@
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
                 <label mat-sort-header>
-                    S.no
+                    S.No
                 </label>
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value"
                     [filter]="filterData" />
@@ -397,9 +397,9 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <div class="bg-white d-flex  flex-row justify-content-end ">
-        <mat-paginator class="" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
-        </mat-paginator>
-    </div>
+
+    <mat-paginator class="" [pageSizeOptions]="[25, 50,75, 100]" aria-label="Select page">
+    </mat-paginator>
+
 
 </div>

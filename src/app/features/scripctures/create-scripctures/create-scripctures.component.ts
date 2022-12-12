@@ -16,6 +16,8 @@ export class CreateScripcturesComponent implements OnInit {
   timerror!: boolean
   filerror!: boolean
   filerror2!: boolean
+  backcoverdata!: any
+  filedata!: any
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
@@ -41,13 +43,25 @@ export class CreateScripcturesComponent implements OnInit {
   openSnackBar(data: any) {
     this._snackBar.open(data.message, 'Close');
   }
-  onfilechange(formname: string) {
+  onfilechange(formname: string, event: any) {
 
-    if (formname === 'backcover')
+    if (formname === 'backcover') {
       this.filerror = this.addmediaform.value.coverimage === null ? true : false
 
-    if (formname === 'file')
+      this.backcoverdata = event && event.target.files[0].name
+
+      console.log(this.backcoverdata);
+
+
+
+    }
+    if (formname === 'file') {
       this.filerror2 = this.addmediaform.value.coverfile === null ? true : false
+      this.filedata = event && event.target.files[0].name
+      console.log(this.filedata);
+
+
+    }
 
   }
   ontimechange() {
@@ -56,12 +70,17 @@ export class CreateScripcturesComponent implements OnInit {
   }
   addmedia() {
 
-    this.onfilechange('backcover')
-    this.onfilechange('file')
+    this.filerror = this.addmediaform.value.coverimage === null ? true : false
+    this.filerror2 = this.addmediaform.value.coverfile === null ? true : false
+
 
     if (this.addmediaform.valid) {
+      this.addmediaform.value.coverimage = this.backcoverdata
+      this.addmediaform.value.coverfile = this.filedata
+
 
       const { coverimage, covertitle, coverdescription, coverfile, coverkeywords } = this.addmediaform.value
+      console.log({ coverimage, covertitle, coverdescription, coverfile, coverkeywords })
 
 
       const body = {

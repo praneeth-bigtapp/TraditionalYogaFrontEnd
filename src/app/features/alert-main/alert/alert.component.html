@@ -12,12 +12,12 @@
                     <label for="inputEmail3" class="col-sm-2 col-form-label fw-semibold pt-4">Select Category:</label>
                     <div class="col-sm-3">
                         <mat-form-field appearance="outline">
-                            <mat-label>Select category</mat-label>
-                            <select matNativeControl formControlName="alertid" [disabled]="disableSelect.value">
-                                <option value="" selected></option>
-                                <option *ngFor="let item of category" [value]="item.roleId">{{item.roleName}}
-                                </option>
-                            </select>
+                            <mat-label>Select Category</mat-label>
+                            <mat-select matNativeControl formControlName="alertid">
+                                <mat-option *ngFor="let item of category" [value]="item.roleId">{{item.roleName}}
+                                </mat-option>
+                            </mat-select>
+
                             <mat-error [hidden]=" !alertform.get('alertid')?.hasError('required')  ">
                                 Please Select Alert
                             </mat-error>
@@ -78,7 +78,7 @@
                 <div class="row">
                     <div class="col-md-2">
                         <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
-                            upload
+                            Upload
                         </button>
 
                     </div>

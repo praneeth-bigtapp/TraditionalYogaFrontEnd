@@ -85,8 +85,6 @@
         <hr />
 
         <div class="px-5">
-
-
             <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
                 *ngIf="displaycontent" aria-label="users">
                 <ng-container matColumnDef="regionId">
@@ -140,11 +138,13 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
-            <br />
-            <div class="d-flex  flex-row justify-content-end " *ngIf="displaycontent">
-                <mat-paginator class="" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
+            <!-- <div class="d-flex  flex-row justify-content-end " *ngIf="displaycontent">
+                <mat-paginator class="" [pageSizeOptions]="[25,50,75, 100]" aria-label="Select page">
                 </mat-paginator>
-            </div>
+            </div> -->
+
+            <mat-paginator class="" [pageSizeOptions]="[25,50,75, 100]" aria-label="Select page">
+            </mat-paginator>
         </div>
 
     </div>

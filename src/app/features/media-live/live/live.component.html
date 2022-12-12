@@ -1,7 +1,5 @@
 <div class="ConfigurationTypes_textpadding ">
-    <h5>Course Media live Class</h5>
-
-
+    <h3 class="mb-4 pl-2 text-secondary ">Course media live class</h3>
 
     <mat-card>
 
@@ -113,7 +111,7 @@
 
                 <div class="row">
                     <div class="col">
-                        <h5>Course Media Shorts Video</h5>
+                        <h5>Course media shorts videos</h5>
                     </div>
                     <div class="col" style="width: 10px;">
 
@@ -187,7 +185,7 @@
                                 <mat-select formControlName="category">
                                     <mat-option *ngFor="let category of categorylist"
                                         [value]="category.courseMediaCategoryId">
-                                        {{category.categoryName}}</mat-option>
+                                        {{category.categoryName | titlecase}}</mat-option>
                                 </mat-select>
                                 <mat-error [hidden]="!shortvideoform.get('category')?.hasError('required')">
                                     Please Select category

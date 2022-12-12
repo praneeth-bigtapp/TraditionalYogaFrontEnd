@@ -3,7 +3,7 @@
     <div class="bg-white  border  p-2">
         <form class="p-5" [formGroup]="wisdomform" (ngSubmit)="wisdomsubmit()">
             <div class="">
-                <label class="" for="file">Upload Image</label>
+                <label class="" for="file">Upload image</label>
                 <input type="file" id="file" class="border" formControlName="imagefile"
                     (change)="onfilechange($event,'imagefile')" accept="image/*" required="true" /> <br />
 

@@ -1,5 +1,5 @@
 <div class="ConfigurationTypes_textpadding ">
-    <h3 class="mb-5 pl-2"> Create Scripctures </h3>
+    <h3 class="mb-5 pl-2"> Create scripctures </h3>
 
     <div class="card border-light pt-3 ">
 
@@ -13,7 +13,7 @@
                     <h6 class="text-md-right col-md-4 ">Upload book cover image</h6>
                     <div class="col-md ">
                         <input type="file" id="file" class="border" formControlName="coverimage"
-                            (change)="onfilechange('backcover')" accept="image/*" required="true" /> <br />
+                            (change)="onfilechange('backcover',$event)" accept="image/*" required="true" /> <br />
 
                         <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
                     </div>
@@ -26,7 +26,7 @@
 
                     <div class="col-md">
                         <input type="file" id="file" class="border" formControlName="coverfile"
-                            (change)="onfilechange('backcover')" accept="image/*" required="true" /> <br />
+                            (change)="onfilechange('file',$event)" accept="image/*" required="true" /> <br />
 
                         <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
                     </div>
@@ -39,9 +39,9 @@
                     <h6 class="text-md-right col-md-4">Title </h6>
 
                     <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3">
+                        <mat-form-field appearance="outline" class="ms-3 ">
                             <mat-label>Title:</mat-label>
-                            <input matInput autocomplete="off" formControlName="covertitle" required>
+                            <input matInput autocomplete="off" class="" formControlName="covertitle" required>
                             <mat-error [hidden]="!addmediaform.get('covertitle')?.hasError('required')">
                                 Please Type Few Words
                             </mat-error>

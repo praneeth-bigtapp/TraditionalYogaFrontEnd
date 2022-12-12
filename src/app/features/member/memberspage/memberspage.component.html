@@ -65,6 +65,7 @@
 
                             <div class="row">
                                 <div class="col-md-4">
+                                    <label>Enter Name</label>
                                     <mat-form-field appearance="outline">
                                         <mat-label>Enter Name</mat-label>
                                         <input matInput autocomplete="off" formControlName="name" required>
@@ -76,8 +77,10 @@
 
 
                                 <div class="col-md-4">
+                                    <label>Enter email Id</label>
+
                                     <mat-form-field appearance="outline">
-                                        <mat-label>Enter Email Id</mat-label>
+                                        <mat-label>Enter email Id</mat-label>
                                         <input matInput autocomplete="off" formControlName="email" required>
                                         <mat-error [hidden]="!memberform.get('email')?.hasError('required')">
                                             Please Type Few Words
@@ -100,6 +103,8 @@
                                 </div> -->
 
                                 <div class="col-md-4">
+                                    <label>Country</label>
+
                                     <mat-form-field appearance="outline">
                                         <mat-label>Country</mat-label>
                                         <input type="text" placeholder="Pick one" aria-label="Country" matInput
@@ -113,6 +118,8 @@
                                 </div>
 
                                 <div class="col-md-4">
+                                    <label>Select Mobile</label>
+
                                     <mat-form-field appearance="outline">
                                         <mat-label>Select Mobile</mat-label>
                                         <input matInput autocomplete="off" formControlName="mobile" required>
@@ -436,7 +443,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <div class="bg-white d-flex  flex-row justify-content-end ">
-        <mat-paginator class="" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
+        <mat-paginator class="" [pageSizeOptions]="[10,25, 50,75, 100]" aria-label="Select page">
         </mat-paginator>
     </div>
 

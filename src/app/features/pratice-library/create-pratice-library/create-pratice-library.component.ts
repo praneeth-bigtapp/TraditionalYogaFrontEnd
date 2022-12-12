@@ -89,7 +89,8 @@ export class CreatePraticeLibraryComponent implements OnInit {
         next: (response) => {
 
           this.addmediaform.reset()
-          this.opensnackBar(response)
+          // this.opensnackBar(response)
+          this.opensnackBar({ message: "Library Created" })
 
         },
         error: (error) => {

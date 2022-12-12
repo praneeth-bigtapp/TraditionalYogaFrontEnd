@@ -18,7 +18,7 @@
                 </div>
                 <div class="col">
                     <mat-form-field appearance="outline">
-                        <mat-label>Test Type</mat-label>
+                        <mat-label>Test type</mat-label>
                         <mat-select formControlName="testtype">
                             <mat-option *ngFor="let type of typetestlist" [value]="type.testId">
                                 {{type.testname | titlecase}}</mat-option>
@@ -40,20 +40,20 @@
                 </div>
                 <div class="col">
                     <mat-form-field appearance="outline">
-                        <mat-label>Level of Test</mat-label>
+                        <mat-label>Level of test</mat-label>
                         <mat-select formControlName="leveltest">
                             <mat-option *ngFor="let type of testlevel" [value]="type.testId">
                                 {{type.testname | titlecase}}</mat-option>
                         </mat-select>
                         <mat-error [hidden]="!onlineexamform.get('leveltest')?.hasError('required')">
-                            Please Select Test level
+                            Please select test level
                         </mat-error>
                     </mat-form-field>
                 </div>
 
             </div>
             <div class="">
-                <label class="" for="file">Upload Excel File</label>
+                <label class="" for="file">Upload Excel file</label>
                 <input type="file" id="file" formControlName="file" class="border" accept=" application/*"
                     (change)="onfilechange($event)" required="true" />
                 <br />
