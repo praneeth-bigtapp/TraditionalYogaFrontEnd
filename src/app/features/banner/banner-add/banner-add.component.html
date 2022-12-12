@@ -51,7 +51,7 @@
             <br /> -->
 
             <div class="pl-3 ">
-                <h3> Home Page Course Banner </h3>
+                <h4> Home Page Course Banner </h4>
             </div>
 
             <hr />
@@ -91,7 +91,7 @@
 
                     <div class="col">
                         <mat-form-field class="example-full-width" appearance="outline">
-                            <mat-label>From date</mat-label>
+                            <!-- <mat-label>From date</mat-label> -->
                             <input matInput formControlName="fromdate" placeholder="Ex. Pizza" value="Sushi"
                                 type="date">
                             <mat-error [hidden]=" !coursebanner.get('fromdate')?.hasError('required')  ">
@@ -106,7 +106,7 @@
 
                     <div class="col">
                         <mat-form-field class="example-full-width" appearance="outline">
-                            <mat-label>From date</mat-label>
+                            <!-- <mat-label>From date</mat-label> -->
                             <input matInput formControlName="todate" placeholder="Ex. Pizza" value="Sushi" type="date">
                             <mat-error [hidden]=" !coursebanner.get('todate')?.hasError('required')  ">
                                 Please Select the date
