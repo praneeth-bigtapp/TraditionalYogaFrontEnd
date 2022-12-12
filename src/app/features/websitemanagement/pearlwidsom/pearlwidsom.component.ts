@@ -39,14 +39,14 @@ export class PearlwidsomComponent implements OnInit {
     if (name === "imagefile") {
 
       this.filerror = this.wisdomform.value.imagefile === null ? true : false
-      this.imagefiledata = event.target.files[0].name
+      this.imagefiledata = event.target.files[0]
       return
     }
 
     if (name === "auctionfile") {
 
       this.filerror2 = this.wisdomform.value.auctionfile === null ? true : false
-      this.auctionfiledata = event.target.files[0].name
+      this.auctionfiledata = event.target.files[0]
       return
     }
   }
@@ -68,6 +68,24 @@ export class PearlwidsomComponent implements OnInit {
     const { imagefile, auctionfile } = this.wisdomform.value
 
     console.log({ imagefile, auctionfile });
+
+    const body: FormData = new FormData()
+
+    body.append('image', this.imagefiledata)
+    body.append('auctionfile', this.auctionfiledata)
+
+    console.log(body);
+
+    this.service.postpearlofwisdom(body).subscribe({
+      next: (response) => {
+        this.openSnackBar(response)
+        this.wisdomform.reset()
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
 
   }
 }

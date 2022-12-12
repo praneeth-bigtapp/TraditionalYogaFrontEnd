@@ -8,175 +8,196 @@
         <div class="row d-flex">
 
 
-            
-                <div class="col-md-2 d-flex pt-2" >
+
+            <div class="col-md-2 d-flex pt-2">
+                <mat-form-field appearance="outline">
+                    <mat-label>Choose an option:</mat-label>
+                    <select matNativeControl [disabled]="disableSelect.value">
+                        <option value="" selected></option>
+                        <option value="volvo">Volvo</option>
+                        <option value="saab" disabled>Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                    </select>
+
+                </mat-form-field>
+                <!-- <div class="pt-2">
+                        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block " >
+                            GO
+                          </button>
+
+                    </div> -->
+
+            </div>
+            <!-- <div class="col pt-4 " > -->
+            <!-- <button mat-stroked-button style="height:40px; background-color: grey;">Go</button> -->
+            <!-- <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block w-10" >
+                      GO
+                    </button> -->
+
+            <div class="col-md pt-3">
+                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                    GO
+                </button>
+
+            </div>
+
+
+
+
+
+            <div class="col-md text-end ">
+
+                <!-- <button mat-raised-button style="margin-left: 700px;"></button> -->
+                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
+                    <!-- <i class="fa-solid fa-circle-plus"></i> -->
+                    create a category for audio
+                </button>
+
+            </div>
+
+
+
+
+
+        </div>
+        <hr>
+        <form [formGroup]="Audiomanagement" (ngSubmit)="audiosubmit()">
+
+
+            <div class="row align-items-center ">
+                <h6 class="text-md-right col-md-4">Select Category:</h6>
+
+                <div class="col-md-4">
                     <mat-form-field appearance="outline">
-                        <mat-label>Choose an option:</mat-label>
-                        <select matNativeControl [disabled]="disableSelect.value" >
+                        <mat-label>Select Category</mat-label>
+                        <select matNativeControl [disabled]="disableSelect.value" formControlName="category">
                             <option value="" selected></option>
                             <option value="volvo">Volvo</option>
                             <option value="saab" disabled>Saab</option>
                             <option value="mercedes">Mercedes</option>
                             <option value="audi">Audi</option>
                         </select>
-
+                        <mat-error [hidden]=" !Audiomanagement.get('category')?.hasError('required')  ">
+                            Please Select category
+                        </mat-error>
                     </mat-form-field>
-                    <!-- <div class="pt-2">
-                        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block " >
-                            GO
-                          </button>
-
-                    </div> -->
-                    
                 </div>
-                <!-- <div class="col pt-4 " > -->
-                    <!-- <button mat-stroked-button style="height:40px; background-color: grey;">Go</button> -->
-                    <!-- <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block w-10" >
-                      GO
-                    </button> -->
-
-                    <div class="col-md pt-3">
-                        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block " >
-                            GO
-                          </button>
-
-                    </div>
-                
-
-
-
-
-                <div class="col-md text-end ">
-
-                    <!-- <button mat-raised-button style="margin-left: 700px;"></button> -->
-                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
-                        <!-- <i class="fa-solid fa-circle-plus"></i> -->
-                        create a category for audio
-                    </button>
-
-                </div>
-
-
-
-
 
             </div>
-            <hr>
-            <form [formGroup]="Audiomanagement">
-               
-                
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Select Category:</h6>
-    
-                    <div class="col-md-4">
-                        <mat-form-field appearance="outline" >
-                            <mat-label>Select Category</mat-label>
-                            <select matNativeControl [disabled]="disableSelect.value" formControlName="category">
-                                <option value="" selected></option>
-                                <option value="volvo">Volvo</option>
-                                <option value="saab" disabled>Saab</option>
-                                <option value="mercedes">Mercedes</option>
-                                <option value="audi">Audi</option>
-                            </select>
-                            
-                        </mat-form-field>
-                    </div>
-    
-                </div>
 
 
 
-              
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Upload Audio:</h6>
-    
-                    <div class="col-md-4">
-                        <mat-form-field appearance="outline" >
-                            <mat-label>Audio file</mat-label>
-                            <select matNativeControl [disabled]="disableSelect.value" formControlName="upload">
-                                <option value="" selected></option>
-                                <option value="volvo">Volvo</option>
-                                <option value="saab" disabled>Saab</option>
-                                <option value="mercedes">Mercedes</option>
-                                <option value="audi">Audi</option>
-                            </select>
-                            
-                        </mat-form-field>
-                    </div>
-    
+
+            <div class="row align-items-center ">
+                <h6 class="text-md-right col-md-4">Upload Audio:</h6>
+
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Audio file</mat-label>
+                        <select matNativeControl [disabled]="disableSelect.value" formControlName="upload">
+                            <option value="" selected></option>
+                            <option value="volvo">Volvo</option>
+                            <option value="saab" disabled>Saab</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                        <mat-error [hidden]=" !Audiomanagement.get('upload')?.hasError('required')  ">
+                            Please Select Audio
+                        </mat-error>
+                    </mat-form-field>
                 </div>
 
-              
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Select Audio File:</h6>
-    
-                    <div class="col">
-                        <!-- <mat-form-field appearance="outline" class="ms-3 "> -->
-                            <input type="file" id="file"  accept=" image/*"  class="border" required="true" formControlName="file" />
-                            
-                        <!-- </mat-form-field> -->
-                    </div>
-    
-                </div>
-                
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Title:</h6>
-    
-                    <div class="col">
-                        <mat-form-field appearance="outline" >
-                            <mat-label>title here</mat-label>
-                            <input matInput formControlName="title">
-                            
-                        </mat-form-field>
-                    </div>
-    
-                </div>
-               
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Description:</h6>
-    
-                    <div class="col">
-                        <mat-form-field class="example-full-width" appearance="outline" id="field">
-                            <mat-label>Health is wealth</mat-label>
-                            <textarea matInput placeholder="Ex. It makes me feel..." formControlName="description"></textarea>
-                        </mat-form-field>
-                    </div>
-    
-                </div>
-             
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Duration Of the
-                        File:</h6>
-    
-                    <div class="col">
-                        <mat-form-field class="example-full-width"  appearance="outline" id="field">
-                            <mat-label>30:12</mat-label>
-                            <input matInput formControlName="duration">
-                        </mat-form-field>
-                    </div>
-    
-                </div>
-               
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Meta Keyword:
-                        </h6>
-    
-                    <div class="col">
-                        <mat-form-field class="example-full-width"  appearance="outline" id="field">
-                            <mat-label>meta keyword</mat-label>
-                            <input matInput formControlName="meta">
-                        </mat-form-field>
-                    </div>
-    
-                </div>
-                <div class="col text-end  pl-4">
-                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
-                        upload
-                    </button>
-                </div>
+            </div>
 
 
-            </form>
+            <div class="row align-items-center ">
+                <h6 class="text-md-right col-md-4">Select Audio File:</h6>
+
+                <div class="col">
+                    <!-- <mat-form-field appearance="outline" class="ms-3 "> -->
+                    <input type="file" id="file" (change)="filechange($event)" accept=" image/*" class="border"
+                        required="true" formControlName="file" />
+
+                    <!-- </mat-form-field> -->
+                    <mat-error *ngIf="filerror ">
+                        Please Upload Audio file
+                    </mat-error>
+                </div>
+
+            </div>
+
+            <div class="row align-items-center ">
+                <h6 class="text-md-right col-md-4">Title:</h6>
+
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>title here</mat-label>
+                        <input matInput formControlName="title">
+                        <mat-error [hidden]=" !Audiomanagement.get('title')?.hasError('required')  ">
+                            Please Type title
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <br />
+            <div class="row align-items-center ">
+                <h6 class="text-md-right col-md-4">Description:</h6>
+
+                <div class="col">
+                    <mat-form-field class="example-full-width" appearance="outline" id="field">
+                        <mat-label>Health is wealth</mat-label>
+                        <textarea matInput placeholder="Ex. It makes me feel..."
+                            formControlName="description"></textarea>
+                        <mat-error [hidden]=" !Audiomanagement.get('description')?.hasError('required')  ">
+                            Please Type description
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <br />
+            <div class="row align-items-center ">
+                <h6 class="text-md-right col-md-4">Duration Of the
+                    File:</h6>
+
+                <div class="col">
+                    <mat-form-field class="example-full-width" appearance="outline" id="field">
+                        <mat-label>30:12</mat-label>
+                        <input matInput formControlName="duration">
+                        <mat-error [hidden]=" !Audiomanagement.get('duration')?.hasError('required')  ">
+                            Please Type duration
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <br />
+            <div class="row align-items-center ">
+                <h6 class="text-md-right col-md-4">Meta Keyword:
+                </h6>
+
+                <div class="col">
+                    <mat-form-field class="example-full-width" appearance="outline" id="field">
+                        <mat-label>meta keyword</mat-label>
+                        <input matInput formControlName="meta">
+                        <mat-error [hidden]=" !Audiomanagement.get('meta')?.hasError('required')  ">
+                            Please Type meta
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <br />
+            <div class="col text-end  pl-4">
+                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
+                    upload
+                </button>
+            </div>
+
+
+        </form>
 
 
         <!-- </div> -->
