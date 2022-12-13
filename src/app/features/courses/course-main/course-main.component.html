@@ -3,7 +3,8 @@
     <div class="d-flex  flex-wrap  justify-content-between align-items-center">
         <h3>Courses</h3>
 
-        <button  class="btn d-flex  flex-wrap  btn-outline-secondary btn-rounded d-inline-block border border-dark" (click)="addviewcourses()">
+        <button class="btn d-flex  flex-wrap  btn-outline-secondary btn-rounded d-inline-block border border-dark"
+            (click)="addviewcourses()">
             <!-- <mat-icon>add</mat-icon> -->
             Add Course/View Course Details
         </button>
@@ -12,8 +13,8 @@
 
     <br />
 
-    <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100 table-responsive"
-        aria-label="users">
+    <table mat-table [dataSource]="filterData.dataSource" matSort
+        class="mat-elevation-z8 mat-datagrid w-100 table-responsive" aria-label="users">
         <ng-container matColumnDef="coursesId">
             <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
                 <label mat-sort-header>
@@ -97,9 +98,9 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-   
 
-    <mat-paginator class="table-responsive" [pageSizeOptions]="[5,10,25, 50, 100]" aria-label="Select page" >
+
+    <mat-paginator class="table-responsive" [pageSizeOptions]="[5,10,25, 50, 100]" aria-label="Select page">
     </mat-paginator>
 
 

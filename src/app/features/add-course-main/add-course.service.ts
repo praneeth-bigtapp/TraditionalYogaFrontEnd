@@ -8,6 +8,9 @@ export class AddCourseService extends BaseHttp {
   getURL = 'student/getAll?operation=course';
   getCoursePost = 'courseList/coursesList?operation=add';
 
+  updatecourseURL = ""
+
+  deleteCourseURL = ""
   getcategorylist = "courseList/getAll?operation=categoryList"
 
   getCategory() {
@@ -19,6 +22,14 @@ export class AddCourseService extends BaseHttp {
 
   postadcourse(body: any) {
     return this.post<any>(this.getCoursePost, body)
+  }
+
+  updatecourse(body: any) {
+    return this.post(this.updatecourseURL, body)
+  }
+
+  deletecourse(body: any) {
+    return this.post(this.deleteCourseURL, body)
   }
 
 

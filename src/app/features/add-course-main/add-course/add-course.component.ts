@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { AddCourseService } from './../add-course.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Location } from '@angular/common';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { CoursesService } from '../../courses/courses.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { formatDate } from '@angular/common';
 
 
 
@@ -13,8 +17,15 @@ import { Location } from '@angular/common';
   styleUrls: ['./add-course.component.css']
 })
 export class AddCourseComponent implements OnInit {
-
-  disableSelect = new FormControl(false);
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort!: MatSort;
+  filterData: any;
+  gridData = [];
+  dataSource: any;
+  displayedColumns: string[] = ['coursesId', 'category', 'coursesName', "courseDuration", "startDate", "endDate", "currentStatus", "Action"];
+  data: any;
+  displaycontent: boolean = false
+  iseditable: boolean = false
   filerror!: boolean
   categorySelect!: any
   addCourseForm!: FormGroup
@@ -69,7 +80,7 @@ export class AddCourseComponent implements OnInit {
     this._snackBar.open(data.message, 'Close');
   }
 
-  constructor(private AddCourseService: AddCourseService, private formbuilder: FormBuilder, private _snackBar: MatSnackBar,private location:Location) {
+  constructor(private AddCourseService: AddCourseService, private formbuilder: FormBuilder, private _snackBar: MatSnackBar, private service: CoursesService) {
     this.addCourseForm = this.formbuilder.group({
       courseName: [null, Validators.compose([Validators.required])],
       coursecategory: [null, Validators.compose([Validators.required])],
@@ -80,6 +91,13 @@ export class AddCourseComponent implements OnInit {
       startDate: [null, Validators.compose([Validators.required])],
       endDate: [null, Validators.compose([Validators.required])],
     });
+    this.filterData = {
+      filterColumnNames: this.displayedColumns.map((ele: any) => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
+    };
 
     this.AddCourseService.getCategory().subscribe({
       next: (value) => {
@@ -94,19 +112,89 @@ export class AddCourseComponent implements OnInit {
     })
   }
 
-  goback()
-  {
-    this.location.back()
+  addcourse() {
+    this.displaycontent = !this.displaycontent
+  }
+  updatePagination(col: any) {
+    this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort
+  }
+  ngOnInit(): void {
+    this.getdata()
 
   }
 
-  ngOnInit(): void {
+  getdata() {
+    this.service.getCourse().subscribe({
 
+
+
+      next: (response) => {
+
+        this.data = response
+        this.data = this.data.reverse()
+        console.log(this.data)
+
+
+        this.dataSource = new MatTableDataSource<any>(this.data)
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+
+      },
+
+      error: (error) => {
+        console.error(error.message);
+      }
+
+
+    })
   }
 
   paragraphchange() {
 
     this.paragrapherror = this.addCourseForm.value.description === null ? true : false
+
+  }
+
+
+  viewdetails(element: any) {
+
+  }
+  deletedetails(id: any) {
+
+    const body = {
+      "coursesId": id,
+    }
+
+    this.AddCourseService.deletecourse(body).subscribe({
+      next: (response) => {
+        this.openSnackBar(response)
+        this.addCourseForm.reset()
+        this.getdata()
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
+
+  }
+  editdetails(element: any) {
+    this.addCourseForm.setValue({
+      courseName: element.coursesName,
+      coursecategory: element.categorieId.categoriesId,
+      applicationclosuredate: element.applicationClouserDate,
+      startDate: formatDate(element.startDate, "yyyy-MM-dd", 'en'),
+      endDate: formatDate(element.endDate, "yyyy-MM-dd", 'en'),
+      description: element.description,
+    });
+    this.iseditable = !this.iseditable
 
   }
 
@@ -130,13 +218,41 @@ export class AddCourseComponent implements OnInit {
       "endDate": this.addCourseForm.value.endDate,
       "applicationClouserDate": this.addCourseForm.value.applicationclosuredate
     }
-    console.log(body);
 
 
+    if (this.iseditable) {
+      // edit
+      const body = {
+        // "coursesId": 1,
+        "categorieId": {
+          "categoriesId": this.addCourseForm.value.coursecategory.categoriesId,
+          "categoriesName": this.addCourseForm.value.coursecategory.categoriesName,
+        },
+        "coursesName": this.addCourseForm.value.courseName,
+        "description": this.addCourseForm.value.description,
+        "startDate": this.addCourseForm.value.startDate,
+        "endDate": this.addCourseForm.value.endDate,
+        "applicationClouserDate": this.addCourseForm.value.applicationclosuredate
+      }
+
+      this.AddCourseService.updatecourse(body).subscribe({
+        next: (response) => {
+          this.openSnackBar(response)
+          this.addCourseForm.reset()
+          this.getdata()
+        },
+        error: (error) => {
+          console.error(error.message);
+
+        }
+      })
+      return
+    }
     this.AddCourseService.postadcourse(body).subscribe({
       next: (response) => {
         this.openSnackBar(response)
         this.addCourseForm.reset()
+        this.getdata()
       },
       error: (error) => {
         console.error(error.message);

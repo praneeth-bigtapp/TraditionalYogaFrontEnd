@@ -90,7 +90,7 @@ export class SendReceiveService {
       this.router.navigateByUrl("dashboard");
     }
     else if (subMenuId == 9) {
-      this.router.navigateByUrl("courses");
+      this.router.navigateByUrl("addCourse");
     }
     else if (subMenuId == 10) {
       this.router.navigateByUrl("studentMaster/studentProfile");
