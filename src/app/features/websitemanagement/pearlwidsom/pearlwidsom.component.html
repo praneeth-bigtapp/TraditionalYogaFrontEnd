@@ -7,7 +7,7 @@
                 <h6 class="text-md-right col-md-4">Title : </h6>
 
                 <div class="col">
-                    <mat-form-field appearance="outline" >
+                    <mat-form-field appearance="outline">
                         <mat-label>Title</mat-label>
                         <input matInput formControlName="quotetitle">
                         <mat-error [hidden]=" !wisdomform.get('quotetitle')?.hasError('required')  ">
@@ -22,7 +22,7 @@
                 <h6 class="text-md-right col-md-4">Quote : </h6>
 
                 <div class="col">
-                    <mat-form-field appearance="outline" >
+                    <mat-form-field appearance="outline">
                         <mat-label>Quote</mat-label>
                         <textarea rows="5" matInput formControlName="quote"> </textarea>
                         <mat-error [hidden]=" !wisdomform.get('quote')?.hasError('required')  ">
@@ -92,7 +92,7 @@
 
 
         <ng-container matColumnDef="quoteTitle">
-            <th mat-header-cell *matHeaderCellDef  scope="col-2">
+            <th mat-header-cell *matHeaderCellDef scope="col-2">
                 <label mat-sort-header>
                     Title
                 </label>
@@ -115,7 +115,7 @@
         </ng-container>
 
         <ng-container matColumnDef="quoteDate">
-            <th mat-header-cell *matHeaderCellDef  scope="col">
+            <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
                     Date
                 </label>
@@ -124,7 +124,7 @@
             </th>
             <td mat-cell *matCellDef="let element"> {{element.quoteDate}} </td>
         </ng-container>
-        <ng-container matColumnDef="quoteType" >
+        <ng-container matColumnDef="quoteType">
             <th mat-header-cell *matHeaderCellDef style="width: 30px" scope="col">
                 <label mat-sort-header>
                     Type
@@ -154,15 +154,16 @@
             <td mat-cell *matCellDef="let element">
                 <div class="d-flex flex-wrap justify-content-evenly align-items-center">
 
-                    <div class="">
-                        <mat-slide-toggle [checked]="IsActiveorNot(element.quoteId)"
-                            (change)="ChangeActive(element.quoteId)" [matTooltip]="element.isActive"></mat-slide-toggle>
-                        <!-- <p>Disable</p> -->
-                    </div>
+
+                    <mat-slide-toggle [checked]="IsActiveorNot(element.quoteId)"
+                        (change)="ChangeActive(element.quoteId)" [matTooltip]="element.isActive"></mat-slide-toggle>
+                    <!-- <p>Disable</p> -->
+
+
                     <i class="fa-solid fa-eye fs-5 text-info" (click)="viewdetails(element)"
                         matTooltip="View Course Activity" matTooltip="View"></i>
 
-                    <i class="fa-solid fa-pen-to-square" matTooltip="Edit" (click)="editdetails(element)"
+                    <i class="fa-solid fa-pen-to-square mx-4" matTooltip="Edit" (click)="editdetails(element)"
                         aria-label="Button that displays a tooltip when focused or hovered over"></i>
 
                     <i class="fa-solid fa-trash" matTooltip="Delete" (click)="deletedetails(element.quoteId)"

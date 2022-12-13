@@ -14,7 +14,7 @@
                             <mat-option *ngFor="let course of courselist" [value]="course.coursesId">
                                 {{course.coursesName}}</mat-option>
                         </mat-select>
-                        <span class="text-danger" *ngIf="categoryerror">
+                        <span class="text-dark" *ngIf="categoryerror">
                             Please Select Category
                         </span>
                     </mat-form-field>
@@ -68,8 +68,8 @@
                                     <label>Enter Name</label>
                                     <mat-form-field appearance="outline">
                                         <mat-label>Enter Name</mat-label>
-                                        <input matInput autocomplete="off" formControlName="name" required>
-                                        <mat-error [hidden]="!memberform.get('name')?.hasError('required')">
+                                        <input matInput autocomplete="off"  formControlName="name" required>
+                                         <mat-error class="text-dark"  [hidden]="!memberform.get('name')?.hasError('required')">
                                             Please Type Few Words
                                         </mat-error>
                                     </mat-form-field>
@@ -82,7 +82,7 @@
                                     <mat-form-field appearance="outline">
                                         <mat-label>Enter email Id</mat-label>
                                         <input matInput autocomplete="off" formControlName="email" required>
-                                        <mat-error [hidden]="!memberform.get('email')?.hasError('required')">
+                                         <mat-error class="text-dark" [hidden]="!memberform.get('email')?.hasError('required')">
                                             Please Type Few Words
                                         </mat-error>
                                     </mat-form-field>
@@ -96,7 +96,7 @@
                                             <mat-option *ngFor="let country of countryList" [value]="country">
                                                 {{country}}</mat-option>
                                         </mat-select>
-                                        <mat-error [hidden]="!memberform.get('country')?.hasError('required')">
+                                         <mat-error class="text-dark"  [hidden]="!memberform.get('country')?.hasError('required')">
                                             Please Select Country
                                         </mat-error>
                                     </mat-form-field>
@@ -123,7 +123,7 @@
                                     <mat-form-field appearance="outline">
                                         <mat-label>Select Mobile</mat-label>
                                         <input matInput autocomplete="off" formControlName="mobile" required>
-                                        <mat-error [hidden]="!memberform.get('mobile')?.hasError('required')">
+                                         <mat-error class="text-dark"  [hidden]="!memberform.get('mobile')?.hasError('required')">
                                             Please Type Number
                                         </mat-error>
                                     </mat-form-field>
@@ -137,7 +137,7 @@
                                             <mat-option *ngFor="let country of countryList" [value]="country">
                                                 {{country}}</mat-option>
                                         </mat-select>
-                                        <mat-error [hidden]="!memberform.get('region')?.hasError('required')">
+                                         <mat-error class="text-dark"  [hidden]="!memberform.get('region')?.hasError('required')">
                                             Please Select Country
                                         </mat-error>
                                     </mat-form-field>
@@ -153,6 +153,9 @@
                                                 {{country | titlecase}}
                                             </mat-option>
                                         </mat-autocomplete>
+                                        <mat-error class="text-dark"  [hidden]="!memberform.get('region')?.hasError('required')">
+                                            Please Select Region
+                                        </mat-error>
                                     </mat-form-field>
                                 </div>
 
@@ -163,7 +166,7 @@
                                             <mat-option *ngFor="let age of agelist" [value]="age">
                                                 {{age}}</mat-option>
                                         </mat-select>
-                                        <mat-error [hidden]="!memberform.get('agefrom')?.hasError('required')">
+                                         <mat-error class="text-dark"  [hidden]="!memberform.get('agefrom')?.hasError('required')">
                                             Please Select Age
                                         </mat-error>
                                     </mat-form-field>
@@ -176,7 +179,7 @@
                                             <mat-option *ngFor="let age of agelist" [value]="age">
                                                 {{age}}</mat-option>
                                         </mat-select>
-                                        <mat-error [hidden]="!memberform.get('ageto')?.hasError('required')">
+                                         <mat-error class="text-dark"  [hidden]="!memberform.get('ageto')?.hasError('required')">
                                             Please Select Age
                                         </mat-error>
                                     </mat-form-field>
@@ -191,7 +194,7 @@
                                             <mat-option value="female">Female</mat-option>
 
                                         </mat-select>
-                                        <mat-error [hidden]="!memberform.get('gender')?.hasError('required')">
+                                         <mat-error class="text-dark"  [hidden]="!memberform.get('gender')?.hasError('required')">
                                             Please Select Gender
                                         </mat-error>
                                     </mat-form-field>
@@ -206,7 +209,7 @@
                                             <mat-option value="rejected">Rejected</mat-option>
 
                                         </mat-select>
-                                        <mat-error [hidden]="!memberform.get('status')?.hasError('required')">
+                                         <mat-error class="text-dark"  [hidden]="!memberform.get('status')?.hasError('required')">
                                             Please Select Status
                                         </mat-error>
                                     </mat-form-field>
@@ -222,7 +225,7 @@
 
                                             <mat-option value="rejected">Rejected</mat-option>
                                         </mat-select>
-                                        <mat-error [hidden]="!memberform.get('usertype')?.hasError('required')">
+                                         <mat-error class="text-dark"  [hidden]="!memberform.get('usertype')?.hasError('required')">
                                             Please Select Type
                                         </mat-error>
                                     </mat-form-field>
@@ -237,7 +240,7 @@
 
                                             <mat-option value="rejected">Rejected</mat-option>
                                         </mat-select>
-                                        <mat-error [hidden]="!memberform.get('usertype')?.hasError('required')">
+                                         <mat-error class="text-dark"  [hidden]="!memberform.get('usertype')?.hasError('required')">
                                             Please Select Type
                                         </mat-error>
                                     </mat-form-field>
@@ -252,7 +255,7 @@
 
                                             <mat-option value="rejected">Rejected</mat-option>
                                         </mat-select>
-                                        <mat-error [hidden]="!memberform.get('usertype')?.hasError('required')">
+                                         <mat-error class="text-dark"  [hidden]="!memberform.get('usertype')?.hasError('required')">
                                             Please Select Type
                                         </mat-error>
                                     </mat-form-field>
