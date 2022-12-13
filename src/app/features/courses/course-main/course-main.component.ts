@@ -113,8 +113,6 @@ export class CourseMainComponent implements OnInit {
   updatePagination(col: any) {
     this.filterData.dataSource.paginator = this.paginator;
     this.filterData.dataSource.sort=this.sort
-
-   
   }
 
 
