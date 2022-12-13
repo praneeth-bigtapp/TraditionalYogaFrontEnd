@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { AddCourseService } from './../add-course.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Location } from '@angular/common';
 
 
 
@@ -68,11 +69,12 @@ export class AddCourseComponent implements OnInit {
     this._snackBar.open(data.message, 'Close');
   }
 
-  constructor(private AddCourseService: AddCourseService, private formbuilder: FormBuilder, private _snackBar: MatSnackBar) {
+  constructor(private AddCourseService: AddCourseService, private formbuilder: FormBuilder, private _snackBar: MatSnackBar,private location:Location) {
     this.addCourseForm = this.formbuilder.group({
       courseName: [null, Validators.compose([Validators.required])],
       coursecategory: [null, Validators.compose([Validators.required])],
       applicationclosuredate: [null, Validators.compose([Validators.required])],
+      // duration: [null, Validators.compose([Validators.required])],
 
       description: [null, Validators.compose([Validators.required])],
       startDate: [null, Validators.compose([Validators.required])],
@@ -90,6 +92,12 @@ export class AddCourseComponent implements OnInit {
 
       }
     })
+  }
+
+  goback()
+  {
+    this.location.back()
+
   }
 
   ngOnInit(): void {

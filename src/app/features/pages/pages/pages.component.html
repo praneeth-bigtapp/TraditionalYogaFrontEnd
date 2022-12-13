@@ -1,84 +1,114 @@
 <div class="ConfigurationTypes_textpadding  ">
- <div class="row d-flex flex-wrap">
-   <div class="col-7">
+  <div class="row d-flex flex-wrap">
+    <div class="col-7">
       <h3 class="mb-4 pl-2 text-secondary"> Pages </h3>
-     </div>
-     <div class="col-5 d-flex justify-content-end flex-wrap">
-        <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark">Add Page</button>
-        <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark">Manage Page</button>
-     </div>
- </div>
- <div  class=" rounded mt-3 mat-elevation-z8 table-responsive">
-   <table mat-table matSort [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid " >
+    </div>
+    <div class="col-5 d-flex justify-content-end flex-wrap">
+      <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark">Add Page</button>
+      <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark">Manage Page</button>
+    </div>
+  </div>
+  <div class=" rounded mt-3 mat-elevation-z8 table-responsive">
+    <table mat-table matSort [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid ">
 
       <ng-container matColumnDef="Checkbox">
-         <th mat-header-cell *matHeaderCellDef  class="col-1">
-               <br>
-             <div class="text-center ">
-                 <mat-checkbox accent="secondary" (change)="$event ? masterToggle() : null"
-                     [checked]="selection.hasValue() && isAllSelected()"
-                     [indeterminate]="selection.hasValue() && !isAllSelected()">
-                 </mat-checkbox>
-             </div>
+        <th mat-header-cell *matHeaderCellDef class="col-1">
+          <br>
+          <div class="text-center ">
+            <mat-checkbox accent="secondary" (change)="$event ? masterToggle() : null"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </mat-checkbox>
+          </div>
 
-         </th>
-         <td mat-cell class="text-center " *matCellDef="let element ">
-             <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(element) : null"
-                 [checked]="selection.isSelected(element)">
-             </mat-checkbox>
-         </td>
+        </th>
+        <td mat-cell class="text-center " *matCellDef="let element ">
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(element) : null"
+            [checked]="selection.isSelected(element)">
+          </mat-checkbox>
+        </td>
 
-     </ng-container>
-    
-       <ng-container matColumnDef="Pagename" >
-           <th mat-header-cell *matHeaderCellDef class="col-4 text-center " > <label mat-sort-header>Page Name</label>
-               <input matInput type="text" (keyup)="updatePagination()" 
-               [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;width: 90%;"  /></th>
-        
-         <td mat-cell *matCellDef="let element" class="col-4 mx-2 "><br> {{element.Pagename}} - <small style="color: 9AA78E;">Published</small><br>
-        
-         <div class="d-flex text-center mb-3"><p class="mr-2 text-secondary">Permanent Link</p>:<p style="color:475442  ;;" class="ml-2 action">{{element.link}}</p></div>
-
-       </td>
-       </ng-container>
-     
-     
-       <ng-container matColumnDef="Author">
-         <th mat-header-cell *matHeaderCellDef class="col-2 text-center"><label mat-sort-header>Author</label>
-           <input matInput type="text" (keyup)="updatePagination()" 
-           [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;width: 90%;" class="mx-2"  /></th>
-         <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted"> {{element.Author}} </td>
-       </ng-container>
-     
-      
-       <ng-container matColumnDef="Dateofpublish">
-         <th mat-header-cell *matHeaderCellDef class="col-3 text-center">  <label mat-sort-header>Date of pusblish</label>
-           <input matInput type="text" (keyup)="updatePagination()" 
-           [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2"   /></th>
-         <td mat-cell *matCellDef="let element" class="col-3 px-2 text-center py-2"><label >Last Modified</label><br> {{element.Dateofpublish}} </td>
-       </ng-container>
-
-       <ng-container matColumnDef="Action">
-        <th mat-header-cell *matHeaderCellDef class="col text-center"><label mat-sort-header>Action</label>
-          <input matInput type="text" (keyup)="updatePagination()" 
-          [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;width: 90%;" class="mx-2"  /></th>
-        <td mat-cell *matCellDef="let element" class="col px-2 text-center text-muted"  > <i class="fa-sharp fa-solid fa-pen action" matTooltip="Edit"
-          aria-label="Button that displays a tooltip when focused or hovered over" ></i>
-          <i class="fa-sharp fa-solid fa-trash action mx-4" matTooltip="Delete"
-          aria-label="Button that displays a tooltip when focused or hovered over"></i>
-          <i class="fa-solid fa-file-lines action" matTooltip="Draft"
-          aria-label="Button that displays a tooltip when focused or hovered over"></i> </td>
       </ng-container>
-     
-      
-    
-     
-       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-       
-   </table>
-   <div class="col bg-white">
-    <mat-paginator  [pageSizeOptions]="[ 5,10,25, 50, 100]" aria-label="Select page"></mat-paginator>
- </div>
-</div>
+
+      <ng-container matColumnDef="Pagename">
+        <th mat-header-cell *matHeaderCellDef class="col-2 text-center "> <label mat-sort-header>Page Name</label>
+          <input matInput type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
+            [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 90%;" />
+        </th>
+
+        <td mat-cell *matCellDef="let element" class="col-2  text-center ">{{element.Pagename}}
+
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="Author">
+        <th mat-header-cell *matHeaderCellDef class="col-1 text-center"><label mat-sort-header>Author</label>
+          <input matInput type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
+            [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 90%;" class="mx-2" />
+        </th>
+        <td mat-cell *matCellDef="let element" class="col-1 px-2 text-center text-muted"> {{element.Author | titlecase}}
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="Dateofpublish">
+        <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>Date of pusblish</label>
+          <input matInput type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
+            [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
+        </th>
+        <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center py-2"> {{element.Dateofpublish}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastmodified">
+        <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>Last Modified</label>
+          <input matInput type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
+            [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
+        </th>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center py-2"> {{element.Dateofpublish}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="link">
+        <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>Permanent link</label>
+          <input matInput type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
+            [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
+        </th>
+        <td mat-cell *matCellDef="let element" class="col-1  text-center text-primary py-2"><u><a
+              [href]="element.link">{{element.link}}</a> </u></td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>Status</label>
+          <input matInput type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
+            [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
+        </th>
+        <td mat-cell *matCellDef="let element" class="col-1 px-2 text-center py-2">
+          {{element.status | titlecase}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef class="col text-center"><label mat-sort-header>Action</label>
+          <input matInput type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
+            [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 90%;" class="mx-2" />
+        </th>
+        <td mat-cell *matCellDef="let element" class="col px-2 text-center text-muted"> <i
+            class="fa-sharp fa-solid fa-pen action" matTooltip="Edit"
+            aria-label="Button that displays a tooltip when focused or hovered over"></i>
+          <i class="fa-sharp fa-solid fa-trash action mx-4" matTooltip="Delete"
+            aria-label="Button that displays a tooltip when focused or hovered over"></i>
+          <i class="fa-solid fa-file-lines action" matTooltip="Draft"
+            aria-label="Button that displays a tooltip when focused or hovered over"></i>
+        </td>
+      </ng-container>
+
+
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+    <div class="col bg-white">
+      <mat-paginator [pageSizeOptions]="[ 5,10,25, 50, 100]" aria-label="Select page"></mat-paginator>
+    </div>
+  </div>
 </div>
