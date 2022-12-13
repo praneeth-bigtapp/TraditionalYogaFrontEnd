@@ -24,7 +24,10 @@ export class MapCourseComponent implements OnInit {
   mailerror = new FormControl('', [Validators.required ]);
   selectMob = new FormControl('', [Validators.required ]);
   selectRegion = new FormControl('', [Validators.required ]);
+  country = new FormControl('', [Validators.required ]);
   status = new FormControl('', [Validators.required ]);
+  agefrom = new FormControl('', [Validators.required ]);
+  ageto = new FormControl('', [Validators.required ]);
   selection = new SelectionModel<any>(true, []);
  
   @ViewChild(MatPaginator)

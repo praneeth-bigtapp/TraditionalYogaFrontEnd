@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AudioService } from '../audio.service';
 
 @Component({
   selector: 'app-audio',
@@ -11,6 +12,7 @@ export class AudioComponent implements OnInit {
   Audiomanagement!: FormGroup;
   filerror: boolean = false
   audiodata!: any
+  courses!: any;
 
   // this. Audiomanagement = this.formbuilder.group({
   //   course: [null, Validators.compose([Validators.required])],
@@ -21,7 +23,7 @@ export class AudioComponent implements OnInit {
   //   description: [null, Validators.compose([Validators.required])],
 
 
-  constructor(private formbuilder: FormBuilder) {
+  constructor(private formbuilder: FormBuilder, private course:AudioService) {
     this.Audiomanagement = this.formbuilder.group({
       category: [null, Validators.compose([Validators.required])],
       outline: [null, Validators.compose([Validators.required])],
@@ -32,6 +34,17 @@ export class AudioComponent implements OnInit {
       duration: [null, Validators.compose([Validators.required])],
       meta: [null, Validators.compose([Validators.required])],
     })
+    this.course.getcourse().subscribe({
+      next: (response) => {
+
+        this.courses = response
+        console.log(this.courses);
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
 
   }
 
@@ -63,4 +76,20 @@ export class AudioComponent implements OnInit {
     this.Audiomanagement.value.file = this.audiodata
 
   }
+
+  // getcoursedata(){
+  //   this.course.getcourse().subscribe({
+  //     next: (response) => {
+
+  //       this.courses = response
+  //       console.log(this.courses);
+
+  //     },
+  //     error: (error) => {
+  //       console.error(error.message);
+  //     }
+  //   });
+
+
+  // }
 }

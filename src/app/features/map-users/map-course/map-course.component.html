@@ -43,13 +43,16 @@
                 <mat-form-field appearance="outline">
 
                     <mat-label>Select Country</mat-label>
-                    <select matNativeControl [disabled]="disableSelect.value">
+                    <select matNativeControl [disabled]="disableSelect.value"  [formControl]="country">
               <option value="" selected></option>
               <option value="volvo">Volvo</option>
               <option value="saab" disabled>Saab</option>
               <option value="mercedes">Mercedes</option>
               <option value="audi">Audi</option>
             </select>
+            <mat-error *ngIf="country.hasError('required')">
+               country is<strong>required</strong>
+            </mat-error>
                 </mat-form-field>
             </div>
             <div class="col-md-2 ">
@@ -80,13 +83,16 @@
                 <mat-form-field appearance="outline">
 
                     <mat-label>Age Form</mat-label>
-                    <select matNativeControl [disabled]="disableSelect.value">
+                    <select matNativeControl [disabled]="disableSelect.value" [formControl]="agefrom">
               <option value="" selected></option>
               <option value="volvo">Volvo</option>
               <option value="saab" disabled>Saab</option>
               <option value="mercedes">Mercedes</option>
               <option value="audi">Audi</option>
             </select>
+            <mat-error *ngIf="agefrom.hasError('required')">
+                age<strong>required</strong>
+            </mat-error>
                 </mat-form-field>
             </div>
 
@@ -94,14 +100,18 @@
                 <mat-form-field appearance="outline">
 
                     <mat-label>Age to</mat-label>
-                    <select matNativeControl [disabled]="disableSelect.value">
+                    <select matNativeControl [disabled]="disableSelect.value" formControl]="ageto">
               <option value="" selected></option>
               <option value="volvo">Volvo</option>
               <option value="saab" disabled>Saab</option>
               <option value="mercedes">Mercedes</option>
               <option value="audi">Audi</option>
             </select>
+            <mat-error *ngIf="ageto.hasError('required')">
+                age<strong>required</strong>
+            </mat-error>
                 </mat-form-field>
+              
             </div>
             <div class="col-sm-2 ">
                 <mat-form-field appearance="outline">
