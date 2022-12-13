@@ -219,8 +219,14 @@ nav img.logo-img {
 .btn-rounded {
     border-radius: 25px;
 
-    height: 45px;
+    height: 40px;
     min-width: 180px;
+    margin-right: 15px;
+}
+.btn-go {
+    border-radius: 25px;
+    height: 40px;
+    min-width: auto;
     margin-right: 15px;
 }
 
@@ -246,13 +252,12 @@ table.table-bordered.dataTable tbody td {
 .text-warning {
     color: #ffa840 !important;
 }
-
 .btn-outline-secondary:hover,
 .btn-outline-secondary:not(:disabled):not(.disabled):active,
 .btn-outline-secondary:not(:disabled):not(.disabled).active,
 .show>.btn-outline-secondary.dropdown-toggle {
     color: #212529;
-    background-color: #d2d4d6 !important;
+    background-color: #93a4ad !important;
 }
 
 .bg-secondary {
@@ -291,6 +296,7 @@ input {
     padding: 6px 30px;
     box-sizing: border-box;
     background: none;
+    border-radius: 10px;
 }
 
 
@@ -361,34 +367,28 @@ textarea:focus {
     margin: 0px;
     margin-top: 5px;
     box-shadow: none;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgb(139, 139, 139);
-    -o-border-image: initial;
-    border-image: initial;
+    border-width: 0px;
     margin-bottom: 10px;
     font-size: 14px;
     line-height: 20px;
     color: rgb(85, 85, 85);
     vertical-align: text-bottom;
-    padding: 4px;
-    border-radius: 4px;
+    padding: 4px 10px;
+    border-radius: 10px;
     display: table;
     width: 95%;
     height: 30px;
+    background-color: #fff;
 }
-
+.mat-table {
+    background: #fff;
+    opacity: 0.9;
+    border-radius: 14px !important;
+}
 .mat-datagrid tr.mat-header-row {
-    /* background-color: #cecece; */
-    border-color: #ddd;
-    background: rgba(226, 226, 226, 1);
-    background: -moz-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(219, 219, 219, 1) 50%, rgba(209, 209, 209, 1) 51%, rgba(254, 254, 254, 1) 100%);
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(226, 226, 226, 1)), color-stop(50%, rgba(219, 219, 219, 1)), color-stop(51%, rgba(209, 209, 209, 1)), color-stop(100%, rgba(254, 254, 254, 1)));
-    background: -webkit-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(219, 219, 219, 1) 50%, rgba(209, 209, 209, 1) 51%, rgba(254, 254, 254, 1) 100%);
-    background: -o-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(219, 219, 219, 1) 50%, rgba(209, 209, 209, 1) 51%, rgba(254, 254, 254, 1) 100%);
-    background: -ms-linear-gradient(top, rgba(226, 226, 226, 1) 0%, rgba(219, 219, 219, 1) 50%, rgba(209, 209, 209, 1) 51%, rgba(254, 254, 254, 1) 100%);
-    background: linear-gradient(to bottom, rgba(226, 226, 226, 1) 0%, rgba(219, 219, 219, 1) 50%, rgba(209, 209, 209, 1) 51%, rgba(254, 254, 254, 1) 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe', GradientType=0);
+    background-color: #d1d7db;
+    border:none;
+    border-radius: 14px !important;
 }
 
 .mat-datagrid td.mat-footer-cell,
@@ -404,7 +404,6 @@ textarea:focus {
     font-weight: 600 !important;
     vertical-align: middle;
     /* color: rgba(0, 0, 0, 0.87); */
-    border: 1px solid #ddd;
     white-space: unset !important;
 }
 
@@ -648,6 +647,15 @@ width: calc(100% - 150px) !important;
 }
 .modal-header .modal-title { color: #fff; font-weight: normal;}
 .modal-header .close span { color: #fff;;}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-start {
+    border-radius: 10px 0 0 10px !important;
+    min-width: 10px !important;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline-end
+{
+    border-radius: 0 10px 10px 0 !important;
+}
 /* Shake animation */
 
 @keyframes shake {

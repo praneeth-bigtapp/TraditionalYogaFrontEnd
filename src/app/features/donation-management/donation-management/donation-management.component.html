@@ -2,22 +2,26 @@
   <h3 class="mb-4 pl-2 text-secondary"> Donations Management </h3>
   <div class="bg-white px-2 row ">
     <form class="col mt-3 d-flex  flex-wrap" [formGroup]="dateForm" (submit)="filterDate()">
-      <mat-form-field class="col-3 border-2 mt-2" appearance="outline">
+      <div class="row">
+        <div class="col-md-4">
+      <mat-form-field class="" appearance="outline">
         <mat-label>From date</mat-label>
         <input matInput formControlName="fromdate" placeholder="From date" type="date">
 
       </mat-form-field>
-      <mat-form-field class="col-3 border-2 mt-2" appearance="outline">
+      </div>
+      <div class="col-md-4">
+      <mat-form-field class="" appearance="outline">
         <mat-label>To date</mat-label>
         <input matInput formControlName="todate" placeholder="To date" type="date">
 
       </mat-form-field>
-      
+    </div>
   
    
       
-
-        <mat-form-field appearance="outline" class="mr-2 col-2 mt-2">
+    <div class="col-md-4">
+        <mat-form-field appearance="outline" class="">
           <mat-label>Region</mat-label>
           <!-- <input type="text" placeholder="Pick one" aria-label="Region" matInput
           formControlName="regiondropdown" (valueChange)="updatePagination()"
@@ -29,8 +33,10 @@
           </mat-autocomplete> -->
           <input matInput type="text" formControlName="regiondropdown">
       </mat-form-field>
+      </div>
 
-      <mat-form-field appearance="outline" class="col-2 mt-2 mr-2" >
+      <div class="col-md-4">
+      <mat-form-field appearance="outline" class="" >
         <mat-label>Country</mat-label>
         <input type="text" placeholder="Pick one" aria-label="Country" matInput
         formControlName="countrydropdown" (valueChange)="updatePagination()"
@@ -41,10 +47,13 @@
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
+    </div>
 
-    <div class=" row d-flex flex-wrap  mt-3">
+    <div class=" col-md-4 mt-2">
     <button class="bg-light border-secondary   btn-rounded ">Go</button>
   </div>
+  </div>
+
     
   </form>
     

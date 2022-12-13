@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <mat-form-field appearance="fill">
+                            <mat-form-field appearance="outline">
                                 <mat-label>User Id</mat-label>
                                 <input matInput autocomplete="off" formControlName="userName" required>
                                 <mat-error *ngIf="AddUserForm.controls['userName'].hasError('required')">user name is
@@ -129,7 +129,7 @@
             </div>
         </form>
     </div>
-    <h4 cl> User List
+    <h4> User List
         <span class="float-end mb-2">
             <!-- <button type="button" class="btn btn-outline-secondary btn-rounded"
                 *ngIf="!isAddUserForm && pagePermissions.Add" (click)="onAddUser()"> Add

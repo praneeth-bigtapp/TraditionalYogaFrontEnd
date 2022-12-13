@@ -3,11 +3,11 @@
     <div class="bg-white  border  p-2">
 
 
-        <div class=" d-flex flex-row flex-wrap  justify-content-between px-5 ">
+        <div class="justify-content-between pt-2 pl-2">
 
-            <div class="d-flex flex-row flex-wrap ">
-                <div class="w-50">
-
+            <div class=" ">
+                <div class=" row ">
+                    <div class="col-md-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Select Course</mat-label>
                         <mat-select [(ngModel)]="category" (ngModelChange)="coursechange()">
@@ -19,23 +19,25 @@
                         </span>
                     </mat-form-field>
                 </div>
-                <div class="">
+                <div class="col-md-3">
                     <button type="button" (click)="gobutton()"
-                        class="btn btn-outline-secondary btn-rounded d-inline-block m-2 border border-dark">
+                        class="btn btn-outline-secondary btn-go btn-rounded d-inline-block m-2 border border-dark">
                         Go
                     </button>
                 </div>
+                </div>
+                
             </div>
-
-
-            <div class="py-3 " style="height: 100%;" *ngIf="displaycontent">
+            
+            <div class="row">
+            <div class=" col-md-6" style="height: 100%;" *ngIf="displaycontent">
                 <h6 class="">Total Number of Users applied : <span class="h3">{{128}}</span> </h6>
             </div>
 
-            <div class="py-3" style="height: 100%;" *ngIf="displaycontent">
+            <div class=" col-md-6" style="height: 100%;" *ngIf="displaycontent">
                 <h6>Number of users mapped : <span class="h3">{{128}}</span> </h6>
             </div>
-
+            </div>
         </div>
 
         <br />

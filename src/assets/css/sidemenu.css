@@ -146,11 +146,12 @@ span {
 
 #sidebar ul li a {
     padding: 10px 10px;
-    font-size: 15px;
+    font-size: 16px;
     display: block;
     /* border-bottom: 1px #ddd solid; */
     text-align: left;
     color: #fff;
+    font-weight: 500;
 }
 
 #sidebar ul li a svg {
@@ -176,7 +177,10 @@ a[aria-expanded="true"] {
 #sidebar ul ul li.active>a {
     background: transparent;
 }
-
+#sidebar ul ul li a {
+    font-size: 14px;
+    font-weight: 500;
+}
 a[data-toggle="collapse"] {
     position: relative;
 }
