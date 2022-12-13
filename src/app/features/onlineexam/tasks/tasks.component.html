@@ -13,9 +13,10 @@
                             <mat-option *ngFor="let course of courseList" [value]="course.coursesId">
                                 {{course.coursesName}}</mat-option>
                         </mat-select>
-                        <span class="text-danger" *ngIf="courserror">
+                        <span class="text-dark mat-error" *ngIf="courserror">
                             Please Select Course
                         </span>
+
                     </mat-form-field>
                 </div>
                 <div class="mt-md-3 ml-1">

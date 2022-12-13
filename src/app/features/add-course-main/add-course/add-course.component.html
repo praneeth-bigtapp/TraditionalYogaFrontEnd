@@ -24,7 +24,7 @@
                             <mat-option *ngFor="let category of categoryList" [value]="category">
                                 {{category.categoriesName}}</mat-option>
                         </mat-select>
-                         <mat-error class="text-dark"  [hidden]=" !addCourseForm.get('coursecategory')?.hasError('required')  ">
+                         <mat-error   [hidden]=" !addCourseForm.get('coursecategory')?.hasError('required')  ">
                             Please Select Category
                         </mat-error>
                     </mat-form-field>
@@ -40,7 +40,7 @@
                     <mat-form-field appearance="outline">
                         <!-- <mat-label>Select Course Category</mat-label> -->
                         <input matInput autocomplete="off" formControlName="courseName" required>
-                         <mat-error class="text-dark"  [hidden]=" !addCourseForm.get('courseName')?.hasError('required')  ">
+                         <mat-error   [hidden]=" !addCourseForm.get('courseName')?.hasError('required')  ">
                             Please Add Course Name
                         </mat-error>
                     </mat-form-field>
@@ -56,7 +56,7 @@
                     <mat-form-field appearance="outline">
                         <!-- <mat-label>Start date</mat-label> -->
                         <input matInput formControlName="startDate" type="date">
-                         <mat-error class="text-dark"  [hidden]=" !addCourseForm.get('startDate')?.hasError('required')  ">
+                         <mat-error   [hidden]=" !addCourseForm.get('startDate')?.hasError('required')  ">
                             Please Select date
                         </mat-error>
                     </mat-form-field>
@@ -70,7 +70,7 @@
                     <mat-form-field appearance="outline">
                         <!-- <mat-label>End date</mat-label> -->
                         <input matInput formControlName="endDate" type="date">
-                         <mat-error class="text-dark"  [hidden]=" !addCourseForm.get('endDate')?.hasError('required')  ">
+                         <mat-error   [hidden]=" !addCourseForm.get('endDate')?.hasError('required')  ">
                             Please Select date
                         </mat-error>
                     </mat-form-field>
@@ -83,7 +83,7 @@
                 <div class="col">
                     <mat-form-field appearance="outline">
                         <input matInput autocomplete="off" formControlName="duration" required>
-                         <mat-error class="text-dark"  [hidden]=" !addCourseForm.get('duration')?.hasError('required')  ">
+                         <mat-error   [hidden]=" !addCourseForm.get('duration')?.hasError('required')  ">
                             Please Add Duration
                         </mat-error>
                     </mat-form-field>
@@ -97,7 +97,7 @@
                     <mat-form-field appearance="outline">
                         <!-- <mat-label>Application closure date</mat-label> -->
                         <input matInput formControlName="applicationclosuredate" type="date">
-                         <mat-error class="text-dark"  [hidden]=" !addCourseForm.get('applicationclosuredate')?.hasError('required')  ">
+                         <mat-error   [hidden]=" !addCourseForm.get('applicationclosuredate')?.hasError('required')  ">
                             Please Select date
                         </mat-error>
                     </mat-form-field>
@@ -111,7 +111,7 @@
                     <angular-editor [placeholder]="'Enter text here...'" (keypress)="paragraphchange()"
                         [config]="editorConfig" required formControlName="description">
                     </angular-editor>
-                     <mat-error class="text-dark"  *ngIf="paragrapherror ">
+                     <mat-error   *ngIf="paragrapherror ">
                         Please Type Words
                     </mat-error>
                 </div>
@@ -129,7 +129,7 @@
                             <mat-option *ngFor="let category of categoryList" [value]="category">
                                 {{category.categoriesName}}</mat-option>
                         </mat-select>
-                         <mat-error class="text-dark"  [hidden]=" !addCourseForm.get('coursecategory')?.hasError('required')  ">
+                         <mat-error   [hidden]=" !addCourseForm.get('coursecategory')?.hasError('required')  ">
                             Please Type Few Words
                         </mat-error>
                     </mat-form-field>
@@ -138,7 +138,7 @@
                     <mat-form-field class="example-full-width" appearance="outline">
                         <mat-label>Course name</mat-label>
                         <input matInput formControlName="courseName">
-                         <mat-error class="text-dark"  [hidden]=" !addCourseForm.get('courseName')?.hasError('required')  ">
+                         <mat-error   [hidden]=" !addCourseForm.get('courseName')?.hasError('required')  ">
                             Please Type Few Words
                         </mat-error>
                     </mat-form-field>
@@ -148,7 +148,7 @@
                     <mat-form-field class="example-full-width" appearance="outline">
                         <mat-label>Start date</mat-label>
                         <input matInput formControlName="startDate" type="date">
-                         <mat-error class="text-dark"  [hidden]=" !addCourseForm.get('startDate')?.hasError('required')  ">
+                         <mat-error   [hidden]=" !addCourseForm.get('startDate')?.hasError('required')  ">
                             Please Select Date
                         </mat-error>
                     </mat-form-field>
@@ -159,7 +159,7 @@
                     <mat-form-field class="example-full-width" appearance="outline">
                         <mat-label>End date</mat-label>
                         <input matInput formControlName="endDate" type="date">
-                         <mat-error class="text-dark"  [hidden]="!addCourseForm.get('endDate')?.hasError('required')  ">
+                         <mat-error   [hidden]="!addCourseForm.get('endDate')?.hasError('required')  ">
                             Please Select Date
                         </mat-error>
                     </mat-form-field>
@@ -169,7 +169,7 @@
                     <mat-form-field class="example-full-width" appearance="outline">
                         <mat-label>Application closure date</mat-label>
                         <input matInput formControlName="applicationclosuredate" type="date">
-                         <mat-error class="text-dark"  [hidden]="!addCourseForm.get('applicationclosuredate')?.hasError('required')  ">
+                         <mat-error   [hidden]="!addCourseForm.get('applicationclosuredate')?.hasError('required')  ">
                             Please Select Date
                         </mat-error>
                     </mat-form-field>
@@ -181,7 +181,7 @@
                 <angular-editor [placeholder]="'Enter text here...'" (keypress)="paragraphchange()"
                     [config]="editorConfig" required formControlName="description">
                 </angular-editor>
-                 <mat-error class="text-dark"  *ngIf="paragrapherror ">
+                 <mat-error   *ngIf="paragrapherror ">
                     Please Type Words
                 </mat-error>
 

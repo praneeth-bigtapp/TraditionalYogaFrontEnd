@@ -158,16 +158,17 @@
                     <mat-slide-toggle [checked]="IsActiveorNot(element.quoteId)"
                         (change)="ChangeActive(element.quoteId)" [matTooltip]="element.isActive"></mat-slide-toggle>
                     <!-- <p>Disable</p> -->
-
-
                     <i class="fa-solid fa-eye fs-5 text-info" (click)="viewdetails(element)"
                         matTooltip="View Course Activity" matTooltip="View"></i>
+                        
+                    <span matTooltip="Edit" (click)="editdetails(element)">
+                        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                    </span>
+                    <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.quoteId)"> <i
+                            class="far fa-trash-alt" aria-hidden="true"></i>
+                    </span>
 
-                    <i class="fa-solid fa-pen-to-square mx-4" matTooltip="Edit" (click)="editdetails(element)"
-                        aria-label="Button that displays a tooltip when focused or hovered over"></i>
 
-                    <i class="fa-solid fa-trash" matTooltip="Delete" (click)="deletedetails(element.quoteId)"
-                        aria-label="Button that displays a tooltip when focused or hovered over"></i>
 
 
                 </div>

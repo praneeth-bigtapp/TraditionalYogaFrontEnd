@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <mat-form-field appearance="fill">
+                            <mat-form-field appearance="outline">
                                 <mat-label>Select Role</mat-label>
                                 <mat-select formControlName="roleId" required>
                                     <mat-option>Select Role</mat-option>
@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <mat-form-field appearance="fill">
+                            <mat-form-field appearance="outline">
                                 <mat-label>First Name</mat-label>
                                 <input matInput autocomplete="off" formControlName="firstName" required>
                                 <mat-error *ngIf="AddUserForm.controls['firstName'].hasError('required')">First name is
@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <mat-form-field appearance="fill">
+                            <mat-form-field appearance="outline">
                                 <mat-label>Last Name</mat-label>
                                 <input matInput autocomplete="off" formControlName="lastName" required>
                                 <mat-error *ngIf="AddUserForm.controls['lastName'].hasError('required')">Last name is
@@ -62,7 +62,7 @@
 
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <mat-form-field appearance="fill">
+                            <mat-form-field appearance="outline">
                                 <mat-label>Email Id</mat-label>
                                 <input type="email" autocomplete="off" matInput formControlName="email" required>
                                 <mat-error *ngFor="let validation of validation_messages.email_id">
@@ -75,7 +75,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <mat-form-field appearance="fill">
+                            <mat-form-field appearance="outline">
                                 <mat-label>Mobile</mat-label>
                                 <input matInput formControlName="mobileNumber" onCopy="return false"
                                     onDrag="return false" onDrop="return false" onPaste="return false" autocomplete=off
@@ -95,7 +95,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <mat-form-field appearance="fill">
+                            <mat-form-field appearance="outline">
                                 <mat-label>Password</mat-label>
                                 <input [type]="show_password ? 'text' : 'password'" matInput autocomplete="off"
                                     formControlName="password">
