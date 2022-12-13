@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
@@ -58,17 +58,20 @@ Tags= new FormControl('', [Validators.required, ]);
       ['fontSize']
     ]
   };
+name:any
 
-
-  constructor(private router: Router) { }
+  constructor(private router: Router,private route:ActivatedRoute) { 
+    this.name=this.route.snapshot.paramMap.get("element") 
+    console.log(this.name)
+  }
 
   ngOnInit(): void {
   }
 
   onaddpage(){
-    this.router.navigateByUrl("addpages");
+    // this.router.navigateByUrl("addpages");
   }
   onManage(){
-    this.router.navigateByUrl("addpages");
+    this.router.navigateByUrl("pages");
   }
 }

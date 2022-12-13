@@ -1,22 +1,16 @@
 <div class="ConfigurationTypes_textpadding ">
 
     <div class="row d-flex flex-row">
-        <div class="col-md-8">
-            <h5>Pages</h5>
+      <div class="row d-flex flex-wrap">
+        <div class="col-7">
+          <h4> Add Pages </h4>
         </div>
-        <div class="col-md-2">
-            <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2"(click)="onaddpage()">
-                <i class="fa-solid fa-file-circle-plus"></i>&nbsp; Add Pages
-             </button>
-
+        <div class="col-5 d-flex justify-content-end flex-wrap">
+          <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark"disabled="true" (click)="onaddpage()">Add Page</button>
+          <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark"  (click)="onManage()">Manage Page</button>
         </div>
-        <div class="col-md-2">
-            <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2" (click)="onManage()">
-                <i class="fa-solid fa-page"></i>&nbsp;  Manage Pages
-             </button>
-        </div>
-    </div>
-    <form class="bg-white">
+      </div>
+    <form class="bg-white mt-3">
         <div class="mb-3  col-md-10">
             <mat-form-field class="example-full-width" appearance="fill" id="field">
                 <mat-label>Page Name</mat-label>

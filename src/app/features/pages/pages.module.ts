@@ -19,11 +19,17 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { HttpClientModule } from '@angular/common/http';
+import { AddpagesComponent } from './addpages/addpages.component';
 
 
 @NgModule({
   declarations: [
-    PagesComponent
+    PagesComponent,
+    AddpagesComponent
+    
   ],
   imports: [
     CommonModule,
@@ -43,6 +49,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     SharedModule,
     MatTooltipModule,
     MatIconModule,
+    
+   
+    MatButtonModule,
+    AngularEditorModule,
+    HttpClientModule,
   ]
 })
 export class PagesModule { }

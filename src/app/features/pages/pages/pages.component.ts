@@ -26,7 +26,7 @@ export class PagesComponent implements OnInit {
   filterData: any
   gridData: any;
 
-  
+  elementvalue={}
   dataSource: any;
   displayedColumns: string[] = ["Checkbox", "Pagename", "Author", 'Dateofpublish','lastmodified', 'link', 'status', 'Action'];
 
@@ -76,18 +76,18 @@ export class PagesComponent implements OnInit {
       this.filterData.dataSource.data.forEach((row: any) => this.selection.select(row));
   }
   onEditRole(element:any){
-
+    this.router.navigate(["addpages",element]);
   }
   onRoleDelete(element:any){
 
   }
   onRoleDraft(element:any){
-
+    this.router.navigate(["addpages",element]);
   }
   onaddpage(){
-    this.router.navigateByUrl("addpages");
+    this.router.navigate(["addpages",'null']);
   }
   onManage(){
-    this.router.navigateByUrl("addpages");
+    // this.router.navigateByUrl("pages");
   }
 }

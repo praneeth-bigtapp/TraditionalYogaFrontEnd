@@ -5,7 +5,7 @@
     </div>
     <div class="col-5 d-flex justify-content-end flex-wrap">
       <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark" (click)="onaddpage()">Add Page</button>
-      <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark" (click)="onManage()">Manage Page</button>
+      <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark" disabled="true" (click)="onManage()">Manage Page</button>
     </div>
   </div>
   <div class=" rounded mt-3 mat-elevation-z8 table-responsive">
@@ -91,12 +91,12 @@
             [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 90%;" class="mx-2" />
         </th>
         <td mat-cell *matCellDef="let element" class="col px-2 text-center text-muted"> 
-          <span matTooltip="Edit"  (click)="onEditRole(element)"> <i
+          <span matTooltip="Edit"  (click)="onEditRole(element.Pagename)"> <i
             class="fas fa-pencil-alt" aria-hidden="true"></i> </span>
     <span matTooltip="Delete" style="cursor: pointer;" class="mx-2"
-        (click)="onRoleDelete(element)"> <i class="far fa-trash-alt" aria-hidden="true"></i> </span>
+        (click)="onRoleDelete(element.Pagename)"> <i class="far fa-trash-alt" aria-hidden="true"></i> </span>
         <span matTooltip="Draft" style="cursor: pointer;" 
-        (click)="onRoleDraft(element)"> <i class="fa-solid fa-file-pen fa-lg"></i> </span>
+        (click)="onRoleDraft(element.Pagename)"> <i class="fa-solid fa-file-pen fa-lg"></i> </span>
         </td>
       </ng-container>
       <i class="fa-sharp fa-solid fa-floppy-disks"></i>
