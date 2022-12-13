@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
@@ -59,9 +60,15 @@ Tags= new FormControl('', [Validators.required, ]);
   };
 
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  onaddpage(){
+    this.router.navigateByUrl("addpages");
+  }
+  onManage(){
+    this.router.navigateByUrl("addpages");
+  }
 }
