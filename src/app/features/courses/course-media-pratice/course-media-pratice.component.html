@@ -1,7 +1,7 @@
 <div class="ConfigurationTypes_textpadding ">
-    <h3 class="mb-3 pl-2"> Course Media Pratice Sessions </h3>
+    <h3 class="mb-3 pl-2"> Course Media Pratice sessions </h3>
 
-    <div class="card border-light pt-3 ">
+    <div class="card border-light bg-white pt-3 ">
         <div class="pl-3   d-flex flex-row flex-wrap  ">
             <div class="w-25 me-5">
                 <mat-form-field appearance="outline">
@@ -29,11 +29,193 @@
         <div class="card-body" *ngIf="displaycontent">
 
 
-            <form [formGroup]="addmediaform" class="" (ngSubmit)="addmedia()">
+            <form [formGroup]="addmediaform" class="me-5" (ngSubmit)="addmedia()">
 
+                <h4 class="ml-5">Add Media</h4>
 
-                <!-- Video SubForm/Table -->
-                <table class="w-100 ">
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Video Link : </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="ms-3 ">
+                            <mat-label>Video Link</mat-label>
+                            <input matInput autocomplete="off" class="" formControlName="videolink" required>
+                            <mat-error [hidden]="!addmediaform.get('videolink')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Title : </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="ms-3 ">
+                            <mat-label>Title</mat-label>
+                            <input matInput autocomplete="off" class="" formControlName="videotitle" required>
+                            <mat-error [hidden]="!addmediaform.get('videotitle')?.hasError('required')">
+                                Please Add Link
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Description : </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="ms-3 ">
+                            <mat-label>Description</mat-label>
+                            <textarea matInput autocomplete="off" class="" rows="5" formControlName="videodescription"
+                                required></textarea>
+                            <mat-error [hidden]="!addmediaform.get('videodescription')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Duration of Video : </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="ms-3 ">
+                            <mat-label>Duration of Video</mat-label>
+                            <input matInput autocomplete="off" class="" formControlName="videoduration" required>
+                            <mat-error [hidden]="!addmediaform.get('videoduration')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br />
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Meta keywords : </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="ms-3 ">
+                            <mat-label>Meta keywords</mat-label>
+                            <input matInput autocomplete="off" class="" formControlName="vidoemetakeywords" required>
+                            <mat-error [hidden]="!addmediaform.get('vidoemetakeywords')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br />
+                <h4 class="ml-5">Text with images</h4>
+                <br />
+
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Title : </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="ms-3 ">
+                            <mat-label>Video Link</mat-label>
+                            <input matInput autocomplete="off" class="" formControlName="imagetitle" required>
+                            <mat-error [hidden]="!addmediaform.get('imagetitle')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br />
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Paragraph : </h6>
+
+                    <div class="col">
+                        <div class="w-100 ">
+                            <angular-editor formControlName="paragraph" [placeholder]="'Enter text here...'"
+                                [config]="editorConfig" required [(ngModel)]="description"
+                                (keypress)="paragraphchange()">
+                            </angular-editor>
+                            <mat-error *ngIf="paragrapherror ">
+                                Please Type Words
+                            </mat-error>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Meta keywords : </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="ms-3 ">
+                            <mat-label>Video Link</mat-label>
+                            <input matInput autocomplete="off" class="" formControlName="imagekeywords" required>
+                            <mat-error [hidden]="!addmediaform.get('imagekeywords')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Upload Media file : </h6>
+
+                    <div class="col">
+                        <input type="file" id="file" class="border" formControlName="mediafile" accept=" */*"
+                            (change)="onfilechange($event)" required="true" />
+                        <br />
+                        <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
+
+                    </div>
+                </div>
+                <br />
+
+                <h4 class="ml-5">Media</h4>
+
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Title : </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="ms-3 ">
+                            <mat-label>Title</mat-label>
+                            <input matInput autocomplete="off" class="" formControlName="mediatitle" required>
+                            <mat-error [hidden]="!addmediaform.get('mediatitle')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Description </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="ms-3 ">
+                            <mat-label>Video Link</mat-label>
+                            <textarea rows="5" matInput autocomplete="off" class="" formControlName="mediadescription"
+                                equired></textarea>
+                            <mat-error [hidden]="!addmediaform.get('mediadescription')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Meta keywords : </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="ms-3 ">
+                            <mat-label>Meta keywords</mat-label>
+                            <input matInput autocomplete="off" class="" formControlName="mediametakeywords" rquired>
+                            <mat-error [hidden]="!addmediaform.get('mediametakeywords')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br />
+                <!--    <table class="w-80 mr-4 ">
                     <thead>
                         <th colspan="2">
                             <h4 class="ml-5"> Add Media</h4>
@@ -42,7 +224,6 @@
                     </thead>
                     <tbody>
 
-                        <!-- Video URL -->
                         <tr class="">
                             <td class="col-2">
                                 <h6 class="text-right">Video Link : </h6>
@@ -59,7 +240,6 @@
 
                         </tr>
 
-                        <!-- Title -->
                         <tr class="">
                             <td class="col-2">
                                 <h6 class="text-right">Title : </h6>
@@ -77,229 +257,228 @@
 
                         </tr>
 
-                        <!-- Description -->
-                        <tr class="">
-                            <td class="col-2">
-                                <h6 class="text-right">Description : </h6>
-                            </td>
-                            <td>
-                                <mat-form-field appearance="outline" class="ms-3">
-                                    <mat-label>Description</mat-label>
-                                    <textarea matInput class="p-2" formControlName="videodescription" rows="5"
-                                        [(ngModel)]="description" placeholder="Description"></textarea>
-                                    <mat-error [hidden]="!addmediaform.get('videodescription')?.hasError('required')">
-                                        Please Type Few Words
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
+                       Description 
+                <tr class="">
+                    <td class="col-2">
+                        <h6 class="text-right">Description : </h6>
+                    </td>
+                    <td>
+                        <mat-form-field appearance="outline" class="ms-3">
+                            <mat-label>Description</mat-label>
+                            <textarea matInput class="p-2" formControlName="videodescription" rows="5"
+                                [(ngModel)]="description" placeholder="Description"></textarea>
+                            <mat-error [hidden]="!addmediaform.get('videodescription')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
 
-                        </tr>
+                </tr>
 
-                        <!-- Duration of Video -->
-                        <tr class="">
-                            <td class="col-2">
-                                <h6 class="text-right">Duration of Video : </h6>
-                                <p class="text-right">(Hours:Minues)</p>
-                            </td>
-                            <td>
-                                <mat-form-field appearance="outline">
-                                    <mat-label>Duration of Video</mat-label>
-                                    <input matInput id="timepicker" autocomplete="off" formControlName="videoduration"
-                                        required>
-                                    <mat-error [hidden]="!addmediaform.get('videoduration')?.hasError('required')">
-                                        Please Type Few Words
-                                    </mat-error>
-                                </mat-form-field>
-
-
-
-                            </td>
-
-                        </tr>
-
-
-                        <!-- Video Meta Keyword-->
-                        <tr class="">
-                            <td class="col-2">
-                                <h6 class="text-right">Meta Keyword : </h6>
-                            </td>
-                            <td>
-                                <mat-form-field appearance="outline" class="ms-3">
-                                    <mat-label>Meta Keyword</mat-label>
-                                    <input matInput autocomplete="off" formControlName="vidoemetakeywords" required
-                                        [(ngModel)]="keyword">
-                                    <mat-error [hidden]="!addmediaform.get('vidoemetakeywords')?.hasError('required')">
-                                        Please Type Few Words
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-
-                        </tr>
-
-                        <tr>
-                            <td colspan="2">
-                                <hr />
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td colspan="2">
-                                <h4 class="ml-5">Text with images</h4>
-                            </td>
-                        </tr>
-                        <!-- Image Title -->
-                        <tr class="">
-                            <td class="col-2">
-                                <h6 class="text-right">Title : </h6>
-                            </td>
-                            <td>
-                                <mat-form-field appearance="outline" class="ms-3">
-                                    <mat-label>Title : </mat-label>
-                                    <input matInput autocomplete="off" formControlName="imagetitle" required
-                                        [(ngModel)]="title">
-                                    <mat-error [hidden]="!addmediaform.get('imagetitle')?.hasError('required')">
-                                        Please Type Few Words
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-
-                        </tr>
-
-                        <!-- TODO : Need to Add Editor -->
-                        <!-- Image Description -->
-                        <tr class="">
-                            <td class="col-2">
-                                <!-- <h6 class="text-right">Paragraph : </h6> -->
-                            </td>
-                            <td>
-                                <div class="w-100 ">
-                                    <angular-editor formControlName="paragraph" [placeholder]="'Enter text here...'"
-                                        [config]="editorConfig" required [(ngModel)]="description">
-                                    </angular-editor>
-
-                                    <mat-error [hidden]="!addmediaform.get('paragraph')?.hasError('required')">
-                                        Please Type Few Words
-                                    </mat-error>
-                                </div>
-                            </td>
-
-                        </tr>
+                Duration of Video 
+                <tr class="">
+                    <td class="col-2">
+                        <h6 class="text-right">Duration of Video : </h6>
+                        <p class="text-right">(Hours:Minues)</p>
+                    </td>
+                    <td>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Duration of Video</mat-label>
+                            <input matInput id="timepicker" autocomplete="off" formControlName="videoduration" required>
+                            <mat-error [hidden]="!addmediaform.get('videoduration')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
 
 
 
-                        <!-- Image Meta Keyword -->
-                        <tr class="">
-                            <td class="col-2">
-                                <h6 class="text-right">Meta Keyword : </h6>
-                            </td>
-                            <td>
-                                <mat-form-field appearance="outline" class="ms-3">
-                                    <mat-label>Meta Keyword : </mat-label>
-                                    <input matInput autocomplete="off" formControlName="imagekeywords" required
-                                        [(ngModel)]="keyword">
-                                    <mat-error [hidden]="!addmediaform.get('imagekeywords')?.hasError('required')">
-                                        Please Type Few Words
-                                    </mat-error>
+                    </td>
 
-                                </mat-form-field>
-                            </td>
+                </tr>
 
-                        </tr>
 
-                        <tr>
-                            <td colspan="2">
-                                <hr />
-                            </td>
-                        </tr>
+                Video Meta Keywords
+                <tr class="">
+                    <td class="col-2">
+                        <h6 class="text-right">Meta Keywords : </h6>
+                    </td>
+                    <td>
+                        <mat-form-field appearance="outline" class="ms-3">
+                            <mat-label>Meta Keywords</mat-label>
+                            <input matInput autocomplete="off" formControlName="vidoemetakeywords" required
+                                [(ngModel)]="keyword">
+                            <mat-error [hidden]="!addmediaform.get('vidoemetakeywords')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
 
-                        <tr>
-                            <td colspan="2">
-                                <h4 class="ml-5">Media</h4>
-                            </td>
-                        </tr>
+                </tr>
 
-                        <!-- Media Upload  -->
-                        <tr class="">
-                            <td class="col-2">
-                                <h6 class="text-right">Upload File : </h6>
-                            </td>
-                            <td>
-                                <div class="ms-3">
+                <tr>
+                    <td colspan="2">
+                        <hr />
+                    </td>
+                </tr>
 
-                                    <input type="file" id="file" class="border" formControlName="mediafile"
-                                        accept=" */*" (change)="onfilechange($event)" required="true" />
-                                    <br />
-                                    <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
+                <tr>
+                    <td colspan="2">
+                        <h4 class="ml-5">Text with images</h4>
+                    </td>
+                </tr>
+                Image Title 
+                <tr class="">
+                    <td class="col-2">
+                        <h6 class="text-right">Title : </h6>
+                    </td>
+                    <td>
+                        <mat-form-field appearance="outline" class="ms-3">
+                            <mat-label>Title : </mat-label>
+                            <input matInput autocomplete="off" formControlName="imagetitle" required
+                                [(ngModel)]="title">
+                            <mat-error [hidden]="!addmediaform.get('imagetitle')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
 
-                                </div>
-                            </td>
+                </tr>
 
-                        </tr>
+                TODO : Need to Add Editor 
+                Image Description 
+                <tr class="">
+                    <td class="col-2">
+                        <h6 class="text-right">Paragraph : </h6> 
+                    </td>
+                    <td>
+                        <div class="w-100 ">
+                            <angular-editor formControlName="paragraph" [placeholder]="'Enter text here...'"
+                                [config]="editorConfig" required [(ngModel)]="description"
+                                (keypress)="paragraphchange()">
+                            </angular-editor>
+                            <mat-error *ngIf="paragrapherror ">
+                                Please Type Words
+                            </mat-error>
+                        </div>
+                    </td>
 
-                        <!-- Media Title -->
-                        <tr class="">
-                            <td class="col-2">
-                                <h6 class="text-right">Title : </h6>
-                            </td>
-                            <td>
-                                <mat-form-field appearance="outline" class="ms-3">
-                                    <mat-label>Title</mat-label>
-                                    <input matInput autocomplete="off" formControlName="mediatitle" required
-                                        [(ngModel)]="title">
-                                    <mat-error [hidden]="!addmediaform.get('mediatitle')?.hasError('required')">
-                                        Please Type Few Words
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-
-                        </tr>
-
-                        <!-- Description -->
-                        <tr class="">
-                            <td class="col-2">
-                                <h6 class="text-right">Description : </h6>
-                            </td>
-                            <td>
-                                <mat-form-field appearance="outline" class="ms-3">
-                                    <mat-label>Description</mat-label>
-                                    <textarea matInput class="p-2" formControlName="mediadescription" rows="5"
-                                        [(ngModel)]="description" placeholder="Description"></textarea>
-                                    <mat-error [hidden]="!addmediaform.get('mediadescription')?.hasError('required')">
-                                        Please Type Few Words
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-
-                        </tr>
+                </tr>
 
 
 
-                        <!-- Image Meta Keyword -->
-                        <tr class="">
-                            <td class="col-2">
-                                <h6 class="text-right">Meta Keyword : </h6>
-                            </td>
-                            <td>
-                                <mat-form-field appearance="outline" class="ms-3">
-                                    <mat-label>Meta Keyword</mat-label>
-                                    <input matInput autocomplete="off" formControlName="mediametakeywords" required
-                                        [(ngModel)]="keyword">
-                                    <mat-error [hidden]="!addmediaform.get('mediametakeywords')?.hasError('required')">
-                                        Please Type Few Words
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
+                Image Meta Keywords 
+                <tr class="">
+                    <td class="col-2">
+                        <h6 class="text-right">Meta Keywords : </h6>
+                    </td>
+                    <td>
+                        <mat-form-field appearance="outline" class="ms-3">
+                            <mat-label>Meta Keywords : </mat-label>
+                            <input matInput autocomplete="off" formControlName="imagekeywords" required
+                                [(ngModel)]="keyword">
+                            <mat-error [hidden]="!addmediaform.get('imagekeywords')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
 
-                        </tr>
+                        </mat-form-field>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <hr />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <h4 class="ml-5">Media</h4>
+                    </td>
+                </tr>
+
+                Media Upload 
+                <tr class="">
+                    <td class="col-2">
+                        <h6 class="text-right">Upload Media file : </h6>
+                    </td>
+                    <td>
+                        <div class="ms-3">
+
+                            <input type="file" id="file" class="border" formControlName="mediafile" accept=" */*"
+                                (change)="onfilechange($event)" required="true" />
+                            <br />
+                            <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
+
+                        </div>
+                    </td>
+
+                </tr>
+
+                Media Title 
+                <tr class="">
+                    <td class="col-2">
+                        <h6 class="text-right">Title : </h6>
+                    </td>
+                    <td>
+                        <mat-form-field appearance="outline" class="ms-3">
+                            <mat-label>Title</mat-label>
+                            <input matInput autocomplete="off" formControlName="mediatitle" required
+                                [(ngModel)]="title">
+                            <mat-error [hidden]="!addmediaform.get('mediatitle')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+
+                </tr>
+
+                Description 
+                <tr class="">
+                    <td class="col-2">
+                        <h6 class="text-right">Description : </h6>
+                    </td>
+                    <td>
+                        <mat-form-field appearance="outline" class="ms-3">
+                            <mat-label>Description</mat-label>
+                            <textarea matInput class="p-2" formControlName="mediadescription" rows="5"
+                                [(ngModel)]="description" placeholder="Description"></textarea>
+                            <mat-error [hidden]="!addmediaform.get('mediadescription')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+
+                </tr>
 
 
-                    </tbody>
 
-                </table>
+                Image Meta Keywords 
+                <tr class="">
+                    <td class="col-2">
+                        <h6 class="text-right">Meta Keywords : </h6>
+                    </td>
+                    <td>
+                        <mat-form-field appearance="outline" class="ms-3">
+                            <mat-label>Meta Keywords</mat-label>
+                            <input matInput autocomplete="off" formControlName="mediametakeywords" required
+                                [(ngModel)]="keyword">
+                            <mat-error [hidden]="!addmediaform.get('mediametakeywords')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+
+                </tr>
+
+
+                </tbody>
+
+                </table>  -->
 
 
                 <button type="submit" class=" float-md-right btn btn-outline-secondary btn-rounded d-inline-block m-2">
-                    submit
+                    Submit
                 </button>
             </form>
         </div>
@@ -348,7 +527,7 @@
         <ng-container matColumnDef="uploadMediaFile">
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
-                    Media Type
+                    Media type
                 </label>
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
                     [filter]="filterData" />
@@ -359,7 +538,7 @@
         <ng-container matColumnDef="duration">
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
-                    Time Added
+                    Time added
                 </label>
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
                     [filter]="filterData" />
@@ -397,9 +576,9 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <div class="bg-white d-flex  flex-row justify-content-end ">
-        <mat-paginator class="" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
-        </mat-paginator>
-    </div>
+
+    <mat-paginator class="" [pageSizeOptions]="[25, 50,75, 100]" aria-label="Select page">
+    </mat-paginator>
+
 
 </div>

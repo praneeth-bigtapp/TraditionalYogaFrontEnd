@@ -170,8 +170,8 @@ export class LoginComponent implements OnInit {
           }
         }
       }
-      let subMenuName = tempSubMenuName[0];
-      // let subMenuName = 25;
+      // let subMenuName = tempSubMenuName[0];
+      let subMenuName = 6;
       this.sendReceiveService.navigateToMenu(subMenuName);
     }
   }
@@ -191,9 +191,10 @@ export class LoginComponent implements OnInit {
         }
       }
     }
-    let subMenuName = tempSubMenuName[0];
-    // let subMenuName = 25;
+    // let subMenuName = tempSubMenuName[0];
+    let subMenuName = 6;
     this.sendReceiveService.navigateToMenu(subMenuName);
+
   }
 
   onSuccessfullLogin(response: any) {

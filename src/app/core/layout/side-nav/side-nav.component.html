@@ -1,15 +1,18 @@
 <nav id="sidebar" [ngClass]="sidebar? 'active':''">
     <ul class="list-unstyled components">
         <li class="list-unstyled" [ngClass]="{'active': dashboardStatus}">
-            <a [routerLink]="['/dashboard']" (click)="dashboardStatus =true">
-                <span class="ml-1"> Dash Board</span>
+            <a [routerLink]="['/dashboard']" (click)="onClickDash()">
+                <i class="fa-solid fa-gauge"></i>
+                <span class="ml-1"> Dashboard</span>
             </a>
         </li>
+        <hr class="p-0 m-0">
         <li class="" *ngFor="let menu of menuList; let i=index">
             <a href="#homeSubmenu{{i}}" data-toggle="collapse" [attr.aria-expanded]="selectedIndex === i"
-                aria-expanded="false" class="dropdown-toggle " (click)="onModule(i)">
+                aria-expanded="false" class="" (click)="onModule(i)">
                 <span class="ml-1" *ngIf="sidebar">
-                    <img src="assets/images/sidebar/{{menu.moduleName}}.png" width="20" alt="right arrow" />
+                    <!-- <img src="assets/images/sidebar/{{menu.moduleName}}.png" width="20" alt="right arrow" /> -->
+                    <i class="fa-solid fa-house"></i>
                 </span>
                 <span class="ml-1" *ngIf="!sidebar"> {{menu.moduleName}}</span>
             </a>
@@ -19,14 +22,18 @@
                     id="homeSubmenu{{i}}">
                     <li class="list-unstyled active" style="cursor: pointer;" *ngFor="let m of menu.subModules;"
                         [ngClass]="{'active': m.subModuleId == menuId }">
-                    <li class="list-unstyled active" style="cursor: pointer;" *ngFor="let m of menu.subModules;"
-                        [ngClass]="{'active': m.subModuleId == menuId }">
-                        <a (click)="navigateToSubMenu(m)">{{m.subModuleName}}</a>
+                        <!-- <i [(ngclass)]="subMenuIcon(m)"></i> -->
+
+                        <a (click)="navigateToSubMenu(m)">
+                            <i [ngClass]="subMenuIcon(m)" class=""></i>
+                            <span>{{m.subModuleName}}</span>
+                        </a>
                         <!-- <a
                             [routerLink]="[menu.moduleName | casetile] + '/' + [m.subModuleName | casetile]">{{m.subModuleName}}</a> -->
                     </li>
                 </ul>
             </ng-container>
+            <hr class="p-0 m-0">
         </li>
     </ul>
     <div class="clearfix"></div>

@@ -1,16 +1,16 @@
 <div class="ConfigurationTypes_textpadding">
     <div class="card border-light">
-        
-            <h4 class="mb-3"> Dashboard </h4>
-        
+
+        <h4 class="mb-3 fw-bolder"> Dashboard </h4>
+
 
         <div class="dashboard-reports" style="background:#f5f5f5;">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Overall Report</a>
+                    <a class="nav-link active fw-bolder" data-toggle="tab" href="#tabs-1" role="tab" >Overall Report</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Courses Report</a>
+                    <a class="nav-link fw-bolder" data-toggle="tab" href="#tabs-2" role="tab">Course Report</a>
                 </li>
             </ul>
 
@@ -18,41 +18,41 @@
                 <div class="tab-pane active" id="tabs-1" role="tabpanel">
                     <div class=" p-3">
                         <div class="row p-3 dashboard-tails">
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="tile bg-white">
-                                    <p><small><span> {{overallReport.registeredUsers | number}} </span></small></p>
-                                    <h6 class="title mb-2">Total Number of Registered Users</h6>
-                                    <div class="icon-place bg-white p-3">
+                                    <h6 class="title mb-2 mr-5">{{overallReport.registeredUsers | number}}</h6>
+                                    <p class="mr-5 lh-sm"><small><span> Total Number of Registered users </span></small></p>
+                                    <div class="icon-place bg-white ">
                                         <span class="float-right"> <i class="fa fa-users"> </i> </span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="tile  bg-light">
-                                    <p><small><span> {{overallReport.donationRecieved | number:'.2'}}</span></small></p>
-                                    <h6 class="title mb-1">Total Donation Recived</h6>
-                                    <div class="icon-place bg-light p-2 rounded-circle">
-                                        <span class="float-right"><i class="fa fa-money"></i></span>
+                                    <h6 class="title mb-1 pb-2 mr-5">{{overallReport.donationRecieved | number:'.2'}}</h6>
+                                    <p class="mr-5 lh-sm"><small><span>Total Donations Received</span></small></p>
+                                    <div class="icon-place bg-light  rounded-circle">
+                                        <span class="float-right"><i class="fas fa-rupee-sign"></i></span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="tile bg-white">
-                                    <p><small><span> {{overallReport.courses | number}} </span></small><br></p>
-                                    <h6 class="title mb-1">No of Courses </h6>
-                                    <div class="icon-place bg-white p-2 rounded-circle">
+                                    <h6 class="title mb-1 mr-5"> {{overallReport.courses | number}} </h6>
+                                    <p><small><span> Total Number of courses </span></small><br></p>
+                                    <div class="icon-place bg-white  rounded-circle">
                                         <span class="float-right"> <i class="fa fa-film"> </i></span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="tile bg-light">
-                                    <p><small><span> {{overallReport.subscribers | number}} </span></small><br></p>
-                                    <h6 class="title mb-1">Total No of Subscribers</h6>
-                                    <div class="icon-place bg-light p-2 rounded-circle">
+                                    <h6 class="title mb-1 mr-5">{{overallReport.subscribers | number}}</h6>
+                                    <p class="mr-5 lh-sm"><small><span>Total Number of Subscribers</span></small></p>
+                                    <div class="icon-place bg-light  rounded-circle">
                                         <span class="float-right"> <i class="fa fa-users"> </i></span>
                                     </div>
                                 </div>
@@ -65,7 +65,7 @@
                     <form class="row p-3" [formGroup]="courseForm">
                         <div class="col-md-4">
                             <div class="mb-3 pl-3">
-                                <mat-form-field appearance="fill">
+                                <mat-form-field appearance="outline" >
                                     <mat-label>Select Course</mat-label>
                                     <mat-select formControlName="roleId" required>
                                         <mat-option>Select Course</mat-option>
@@ -74,10 +74,10 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <div class="mb-3 mt-1 pt-1 float-end">
                                 <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
-                                    search
+                                    Search
                                 </button>
                             </div>
                         </div>
@@ -89,9 +89,9 @@
                         <div class="row pl-3 dashboard-tails">
                             <div class="col-sm-3">
                                 <div class="tile bg-white">
-                                    <h6 class="title mb-1">Enrolled Users </h6>
-                                    <p><small><span> {{coursesReport.enrolledUsers | number}} </span></small><br></p>
-                                    <div class="icon-place bg-white p-2 rounded-circle">
+                                    <h6 class="title mb-1"> {{coursesReport.enrolledUsers | number}} </h6>
+                                    <p><small><span>Number of Enrolled Users</span></small><br></p>
+                                    <div class="icon-place bg-white  rounded-circle">
                                         <span class="float-right"> <i class="fa fa-users"> </i> </span>
                                     </div>
                                 </div>
@@ -99,9 +99,9 @@
 
                             <div class="col-sm-3">
                                 <div class="tile  bg-light">
-                                    <h6 class="title mb-1">Active User </h6>
-                                    <p><small><span> {{coursesReport.activeUser | number}} </span></small></p>
-                                    <div class="icon-place bg-light p-2 rounded-circle">
+                                    <h6 class="title mb-1">{{coursesReport.activeUser | number}} </h6>
+                                    <p><small><span> Active users </span></small></p>
+                                    <div class="icon-place bg-light  rounded-circle">
                                         <span class="float-right"> <i class="fa fa-user-check"> </i></span>
                                     </div>
                                 </div>
@@ -109,9 +109,9 @@
 
                             <div class="col-sm-3">
                                 <div class="tile bg-white">
-                                    <h6 class="title mb-1">Dropped Users </h6>
-                                    <p><small><span> {{coursesReport.droppedUsers | number}} </span></small><br></p>
-                                    <div class="icon-place bg-white p-2 rounded-circle">
+                                    <h6 class="title mb-1">{{coursesReport.droppedUsers | number}}  </h6>
+                                    <p><small><span>Dropped users </span></small><br></p>
+                                    <div class="icon-place bg-white rounded-circle">
                                         <span class="float-right"> <i class="fa fa-users"> </i></span>
                                     </div>
                                 </div>
@@ -119,9 +119,9 @@
 
                             <div class="col-sm-3">
                                 <div class="tile bg-light">
-                                    <h6 class="title mb-1">Mentor</h6>
-                                    <p><small><span> {{coursesReport.mentor | number}} </span></small><br></p>
-                                    <div class="icon-place bg-light p-2 rounded-circle">
+                                    <h6 class="title mb-1">{{coursesReport.mentor | number}}</h6>
+                                    <p><small><span> Mentors </span></small><br></p>
+                                    <div class="icon-place bg-light  rounded-circle">
                                         <span class="float-right"> <i class="fa fa-user"> </i></span>
                                     </div>
                                 </div>
@@ -129,9 +129,9 @@
 
                             <div class="col-sm-3">
                                 <div class="tile bg-light">
-                                    <h6 class="title mb-1">cheif-Mentor</h6>
-                                    <p><small><span> {{coursesReport.cheifMentor | number}} </span></small><br></p>
-                                    <div class="icon-place bg-light p-2 rounded-circle">
+                                    <h6 class="title mb-1">{{coursesReport.cheifMentor | number}}</h6>
+                                    <p><small><span> Cheif Mentors </span></small><br></p>
+                                    <div class="icon-place bg-light  rounded-circle">
                                         <span class="float-right"> <i class="fa fa-user-tie"> </i></span>
                                     </div>
                                 </div>

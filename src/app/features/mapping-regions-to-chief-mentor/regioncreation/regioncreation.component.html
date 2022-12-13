@@ -1,4 +1,6 @@
-<div class="ConfigurationTypes_textpadding p-5 bg-light">
+<div class="ConfigurationTypes_textpadding p-5 ">
+    <!-- remove bg-light -->
+
     <h3 class="mb-4 pl-2 text-secondary"> Regions creation </h3>
 
     <div class="bg-white border">
@@ -8,13 +10,13 @@
                 <div class="col-md-3">
                     <mat-form-field appearance="outline">
                         <mat-label>Enter Region Name</mat-label>
-                        <input type="text" placeholder="Pick one" formControlName="region" aria-label="Country" matInput
-                            [matAutocomplete]="region">
-                        <mat-autocomplete autoActiveFirstOption #region="matAutocomplete">
+                        <input type="text" placeholder="Pick one" formControlName="region" aria-label="Country"
+                            matInput>
+                        <!-- <mat-autocomplete autoActiveFirstOption #region="matAutocomplete">
                             <mat-option *ngFor="let country of regionfilter |async " [value]="country">
                                 {{country}}
                             </mat-option>
-                        </mat-autocomplete>
+                        </mat-autocomplete> -->
                         <mat-error [hidden]="!regionfilterform.get('region')?.hasError('required')">
                             Please Type Region
                         </mat-error>
@@ -83,8 +85,6 @@
         <hr />
 
         <div class="px-5">
-
-
             <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
                 *ngIf="displaycontent" aria-label="users">
                 <ng-container matColumnDef="regionId">
@@ -138,11 +138,13 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
-            <br />
-            <div class="d-flex  flex-row justify-content-end " *ngIf="displaycontent">
-                <mat-paginator class="" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
+            <!-- <div class="d-flex  flex-row justify-content-end " *ngIf="displaycontent">
+                <mat-paginator class="" [pageSizeOptions]="[25,50,75, 100]" aria-label="Select page">
                 </mat-paginator>
-            </div>
+            </div> -->
+
+            <mat-paginator class="" [pageSizeOptions]="[25,50,75, 100]" aria-label="Select page">
+            </mat-paginator>
         </div>
 
     </div>

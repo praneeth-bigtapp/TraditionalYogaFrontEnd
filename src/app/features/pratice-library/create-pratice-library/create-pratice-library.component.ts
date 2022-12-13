@@ -15,7 +15,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
   addmediaform!: any
   timerror!: boolean
   categoryerror: boolean = false
-  displaycontent: boolean = false
+  displaycontent: boolean = true
 
 
   categoryList!: any
@@ -40,6 +40,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
   ngOnInit(): void {
     this.addmediaform = this.formbuilder.group({
+      category: [null, Validators.compose([Validators.required])],
       videolink: [null, Validators.compose([Validators.required])],
       videotitle: [null, Validators.compose([Validators.required])],
       videodescription: [null, Validators.compose([Validators.required])],
@@ -72,7 +73,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
     if (this.addmediaform.valid) {
 
-      const { videolink, videotitle, videodescription, videoduration, vidoemetakeywords } = this.addmediaform.value
+      const { category, videolink, videotitle, videodescription, videoduration, vidoemetakeywords } = this.addmediaform.value
 
 
       const body = {
@@ -85,11 +86,12 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
       console.log(body);
 
-      this.service.postpraticelibrary(body, this.category).subscribe({
+      this.service.postpraticelibrary(body, category).subscribe({
         next: (response) => {
 
           this.addmediaform.reset()
-          this.opensnackBar(response)
+          // this.opensnackBar(response)
+          this.opensnackBar({ message: "Library Created" })
 
         },
         error: (error) => {

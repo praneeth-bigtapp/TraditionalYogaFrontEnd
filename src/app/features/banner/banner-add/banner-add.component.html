@@ -7,7 +7,7 @@
         </div>
         <hr />
         <br /> -->
-        <div class="card-body pl-3">
+        <div class="card-body bg-white pl-3">
 
             <!-- <form class="" [formGroup]="headerbannerform" (ngSubmit)="submitheaderbanner()">
 
@@ -51,33 +51,95 @@
             <br /> -->
 
             <div class="pl-3 ">
-                <h3> HomePage Course Banner </h3>
+                <h4> Home Page Course Banner </h4>
             </div>
 
             <hr />
-            <br />
-
-            <form class="" [formGroup]="coursebanner" (ngSubmit)="submitcourserbanner()">
 
 
-                <div class="row">
+            <form class="" [formGroup]="coursebanner" class="mr-5" (ngSubmit)="submitcourserbanner()">
 
-                    <div class="col-md-6">
-                        <label>Course Title</label>
-                        <!-- <mat-form-field appearance="outline">  
 
-                         <mat-label>Course Title</mat-label> 
-                         <input matInput formControlName="coursetitle">
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Course title : </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Course title</mat-label>
+                            <input matInput autocomplete="off" class="" formControlName="coursetitle" required>
+                            <mat-error [hidden]="!coursebanner.get('coursetitle')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br />
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Upload Image : </h6>
+
+                    <div class="col">
+                        <input type="file" id="file" class="border" formControlName="coursebannerimage"
+                            accept=" image/*" (change)="onfilechange($event,'courseform')" required="true" />
+                        <br />
+                        <mat-error *ngIf="filerror2">Please Upload Valid File</mat-error>
+
+                    </div>
+                </div>
+                <br />
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">From date : </h6>
+
+                    <div class="col">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <!-- <mat-label>From date</mat-label> -->
+                            <input matInput formControlName="fromdate" placeholder="Ex. Pizza" value="Sushi"
+                                type="date">
+                            <mat-error [hidden]=" !coursebanner.get('fromdate')?.hasError('required')  ">
+                                Please Select the date
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br />
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">To date : </h6>
+
+                    <div class="col">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <!-- <mat-label>From date</mat-label> -->
+                            <input matInput formControlName="todate" placeholder="Ex. Pizza" value="Sushi" type="date">
+                            <mat-error [hidden]=" !coursebanner.get('todate')?.hasError('required')  ">
+                                Please Select the date
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br />
+                <div class="row align-items-center ">
+                    <h6 class="text-md-right col-md-4">Description : </h6>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Description</mat-label>
+
+                            <textarea matInput class="p-2" formControlName="description" rows="5"
+                                placeholder="Description"></textarea>
                             <div
-                                *ngIf="coursebanner.controls['coursetitle'].invalid && (coursebanner.controls['coursetitle'].dirty || coursebanner.controls['coursetitle'].touched)">
-                                <mat-error [hidden]=" !coursebanner.get('coursetitle')?.hasError('required')  ">
+                                *ngIf="coursebanner.controls['description'].invalid && (coursebanner.controls['description'].dirty || coursebanner.controls['description'].touched)">
+                                <mat-error [hidden]=" !coursebanner.get('description')?.hasError('required')  ">
                                     Please Type Few Words
                                 </mat-error>
                             </div>
-                        </mat-form-field>  -->
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <!--<div class="row"> 
+                    <div class="col-md-6">
+                        <label>Course title</label>
 
                         <mat-form-field appearance="outline">
-                            <mat-label>Course Title</mat-label>
+                            <mat-label>Course title</mat-label>
                             <input matInput autocomplete="off" formControlName="coursetitle" required>
                             <mat-error [hidden]=" !coursebanner.get('coursetitle')?.hasError('required')  ">
                                 Please Type Few Words
@@ -100,7 +162,7 @@
                         <label>From Date</label>
 
                         <mat-form-field class="example-full-width" appearance="outline">
-                            <mat-label>From Date</mat-label>
+                            <mat-label>From date</mat-label>
                             <input matInput formControlName="fromdate" placeholder="Ex. Pizza" value="Sushi"
                                 type="date">
 
@@ -116,7 +178,7 @@
 
 
                         <mat-form-field class="example-full-width" appearance="outline">
-                            <mat-label>To Date</mat-label>
+                            <mat-label>To date</mat-label>
                             <input matInput formControlName="todate" placeholder="Ex. Pizza" value="Sushi" type="date">
 
                             <mat-error [hidden]=" !coursebanner.get('todate')?.hasError('required')  ">
@@ -140,12 +202,13 @@
                         </mat-error>
                     </div>
                 </mat-form-field>
-                <br /><br />
+                <br /><br /> 
+            </div>-->
 
                 <!-- <button class="bg-light" mat-stroked-button type="submit">Submit Banner</button> -->
 
-                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
-                    Submit Banner
+                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 float-md-right">
+                    Submit banner
                 </button>
             </form>
 

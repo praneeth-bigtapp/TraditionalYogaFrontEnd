@@ -85,22 +85,22 @@ export class DonationviewdetailsComponent implements OnInit {
 
       },
       error: (error) => {
-        console.error(error.message);
+        console.error(error);
 
-        // this.details.amount = "20000"
-        // this.details.donorname = "ajith"
-        // this.details.address = "hyderabad"
-        // this.details.email = "ajith@gmail.com"
-        // this.details.mobile = "9876543210"
-        // this.details.isIndian = " Yes"
-        // this.details.taxbenefits = "No"
-        // this.details.identityproof = "Pan Card"
-        // this.details.identitynumber = "GHYYS2222Z"
-        // this.details.isregisteredmember = "Yes"
-        // this.details.country = "India"
-        // this.details.modeofpayment = "Credit"
-        // this.details.cardname = "ajith kumar"
-        // this.details.message = "description"
+        this.details.amount = "20000"
+        this.details.donorname = "ajith"
+        this.details.address = "hyderabad"
+        this.details.email = "ajith@gmail.com"
+        this.details.mobile = "9876543210"
+        this.details.isIndian = " Yes"
+        this.details.taxbenefits = "No"
+        this.details.identityproof = "Pan Card"
+        this.details.identitynumber = "GHYYS2222Z"
+        this.details.isregisteredmember = "Yes"
+        this.details.country = "India"
+        this.details.modeofpayment = "Credit"
+        this.details.cardname = "ajith kumar"
+        this.details.message = "description"
       }
     })
 

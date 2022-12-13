@@ -25,7 +25,7 @@ gridData :any;
 
 selection = new SelectionModel<any>(true, []);
 
-displayedColumns: string[] = ["Checkbox","content","givenByName",'createDate'];
+displayedColumns: string[] = ["Checkbox","content","givenByName",'createDate','action'];
   
 applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
@@ -35,7 +35,17 @@ applyFilter(event: Event) {
   constructor(private formbuilder:FormBuilder, private test: TestimonialsService) { }
 
   ngOnInit(): void {
+
+     this.filterData = {
+      filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
+    }
    this.getTestimonial();
+
+   
    
   }
   ngAfterViewInit() {

@@ -65,19 +65,19 @@
                     </td>
                     <td class=" ">
                         <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingGood"
-                            (keyup)="keypressvalue(element.id)" required>
+                            (change)="keypressvalue(element.id)" required>
                     </td>
                     <td class="">
                         <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingAvearage"
-                            (keyup)="keypressvalue(element.id)" required>
+                            (change)="keypressvalue(element.id)" required>
                     </td>
                     <td class="">
                         <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingPoor"
-                            (keyup)="keypressvalue(element.id)" required>
+                            (change)="keypressvalue(element.id)" required>
                     </td>
                     <td class="">
                         <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingRedAlert"
-                            (keyup)="keypressvalue(element.id)" required>
+                            (change)="keypressvalue(element.id)" required>
                     </td>
                     <td class="">
                         <mat-slide-toggle [checked]="IsActiveorNot(element.active)"

@@ -21,7 +21,7 @@ export class CourseMainComponent implements OnInit {
   filterData: any;
   gridData = [];
   dataSource: any;
-  displayedColumns: string[] = ['coursesId', 'categoriesId', 'coursesName', "courseDuration", "startDate", "endDate", "currentStatus"];
+  displayedColumns: string[] = ['coursesId', 'category', 'coursesName', "courseDuration", "startDate", "endDate", "currentStatus"];
   data: any;
 
 
@@ -55,10 +55,7 @@ export class CourseMainComponent implements OnInit {
 
   }
 
-  ngAfterViewInit() {
-    this.filterData.dataSource.paginator = this.paginator;
 
-  }
 
 
   ngOnInit(): void {
@@ -115,8 +112,7 @@ export class CourseMainComponent implements OnInit {
   }
   updatePagination(col: any) {
     this.filterData.dataSource.paginator = this.paginator;
-
-    this.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort=this.sort
   }
 
 

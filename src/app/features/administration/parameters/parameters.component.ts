@@ -92,27 +92,26 @@ export class ParametersComponent implements OnInit {
 
     });
 
-    console.log(this.parameters);
     const { id, ratingGood, ratingAvearage, ratingPoor, ratingRedAlert, active } = this.parameters.filter((ele: any) => ele.id === eleid)[0]
-    console.log({ id, ratingGood, ratingAvearage, ratingPoor, ratingRedAlert, active });
+    // console.log({ id, ratingGood, ratingAvearage, ratingPoor, ratingRedAlert, active });
 
     const body = {
 
       "performaceRatingId": id,
       "ratingGood": ratingGood,
-      "ratingAvearage": ratingPoor,
+      "ratingAvearage": ratingAvearage,
       "ratingPoor": ratingPoor,
       "ratingRedAlert": ratingRedAlert,
       "active": active,
     }
 
 
+    console.log(body);
 
     // console.log(body);
     this.service.postparamters(body).subscribe({
       next: (response) => {
 
-        console.log(response)
         this.openSnackBar(response)
 
       },
@@ -141,19 +140,19 @@ export class ParametersComponent implements OnInit {
 
 
     const { id, ratingGood, ratingAvearage, ratingPoor, ratingRedAlert, active } = this.parameters.filter((ele: any) => ele.id === eleid)[0]
-    console.log({ id, ratingGood, ratingAvearage, ratingPoor, ratingRedAlert, active });
+    // console.log({ id, ratingGood, ratingAvearage, ratingPoor, ratingRedAlert, active });
 
     const body = {
 
       "performaceRatingId": id,
       "ratingGood": ratingGood,
-      "ratingAvearage": ratingPoor,
+      "ratingAvearage": ratingAvearage,
       "ratingPoor": ratingPoor,
       "ratingRedAlert": ratingRedAlert,
       "active": active,
     }
 
-    // console.log(body);
+    console.log(body);
     this.service.postparamters(body).subscribe({
       next: (response) => {
 

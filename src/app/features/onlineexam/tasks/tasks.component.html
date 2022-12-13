@@ -1,4 +1,6 @@
-<div class="ConfigurationTypes_textpadding p-5 bg-light">
+<div class="ConfigurationTypes_textpadding p-5 ">
+        <!-- remove bg-light -->
+
     <h3 class="mb-4 pl-2 text-secondary ">Task Assignment</h3>
     <div class="bg-white  border ">
         <div class="d-flex flex-wrap  justify-content-between align-items-center px-4 pt-2">
@@ -16,7 +18,7 @@
                         </span>
                     </mat-form-field>
                 </div>
-                <div class="mt-md-3">
+                <div class="mt-md-3 ml-1">
                     <button type="button" (click)="gobutton()"
                         class="btn btn-outline-secondary btn-rounded d-inline-block "> Go
                     </button>
@@ -28,7 +30,8 @@
                 <div class="" *ngIf="displaycontent">
                     <button type="button" (click)="createtask()"
                         class="btn btn-outline-secondary btn-rounded d-inline-block mb-md-3 ">
-                        <i class="fa-sharp fa-solid fa-plus"></i> Create Task
+                        <!-- <i class="fa-sharp fa-solid fa-plus"></i> -->
+                         Create Task
                     </button>
                 </div>
             </div>

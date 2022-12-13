@@ -1,93 +1,131 @@
+<div class="ConfigurationTypes_textpadding p-5  ">
+    <!-- remove bg-light -->
 
-<div class="ConfigurationTypes_textpadding p-5 bg-light ">
     <div class="row">
-      <div class="col-7">
-         <h3 class="mb-4 pl-2 text-secondary">Testimonials</h3>
+        <div class="col-7">
+            <h3 class="mb-4 pl-2 text-secondary">Testimonials</h3>
         </div>
         <div class="col-5 d-flex justify-content-end">
-           <button class="bg-light border-mutted border-2 py-1 btn-rounded"><i class="fa-solid fa-message"></i>
-            Add Testimonials</button>
-      
+            <button class="bg-light border-mutted border-2 py-1 btn-rounded">
+                Add Testimonials</button>
+
         </div>
 
         <div class="row justify-content-end">
             <div class="col-sm-3">
-                <input type="search" id="search"(keyup)="applyFilter($event)"  formControlName="" required="true" placeholder="search"  />
+                <mat-form-field appearance="outline">
+                    <mat-label>Search</mat-label>
+                    <!-- <input  id="search" (keyup)="applyFilter($event)" formControlName="" 
+                    placeholder="search" /> -->
+                    <input matInput formControlName="startdate" type="search" (keyup)="applyFilter($event) " placeholder="search">
+
+                </mat-form-field>
+              
             </div>
         </div>
     </div>
-    <div  class=" rounded mt-3 mat-elevation-z8">
-      <table mat-table  [dataSource]="dataSource" class="mat-elevation-z8 mat-datagrid table-bordered w-100" matSort>
-   
-        
-      <ng-container matColumnDef="Checkbox">
-        <th mat-header-cell *matHeaderCellDef  class="col-1">
-              <br>
-            <div class="text-center ">
-                <mat-checkbox accent="secondary" (change)="$event ? masterToggle() : null"
-                    [checked]="selection.hasValue() && isAllSelected()"
-                    [indeterminate]="selection.hasValue() && !isAllSelected()">
-                </mat-checkbox>
-            </div>
+    <div class=" rounded mt-3 mat-elevation-z8">
+        <table mat-table [dataSource]="
+        dataSource" class="mat-elevation-z8 mat-datagrid table-bordered w-100" matSort>
 
-        </th>
-        <td mat-cell class="text-center " *matCellDef="let element ">
-            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(element) : null"
-                [checked]="selection.isSelected(element)">
-            </mat-checkbox>
-        </td>
 
-    </ng-container>
-       
-       
-          <ng-container matColumnDef="content" >
-              <th mat-header-cell *matHeaderCellDef class="col-6 text-center " mat-sort-header> Content
-                 </th>
-           
-            <td mat-cell *matCellDef="let element" class="col-6 mx-2 "><br> {{element.content}} <br>
-                <div class="row d-flex">
-                    <div class="col-md-6">
-                        <div class="d-flex text-center "><p class=" mr-2" style="color:blue ;" >Edit</p>| <p class="text-danger mx-2">Delete</p> </div>
-    
-                    </div>
-                    <div class="col-md-6 ">
-                        <mat-radio-group aria-label="Select an option">
-                            <mat-radio-button value="1">Visible</mat-radio-button>&nbsp;
-                            <mat-radio-button value="2">invisible</mat-radio-button>
-                          </mat-radio-group>
-    
+            <ng-container matColumnDef="Checkbox">
+                <th mat-header-cell *matHeaderCellDef class="col-1">
+                    <br>
+                    <div class="text-center ">
+                        <mat-checkbox accent="secondary" (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+                        </mat-checkbox>
                     </div>
 
-                </div>
+                </th>
+                <td mat-cell class="text-center " *matCellDef="let element ">
+                    <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(element) : null" [checked]="selection.isSelected(element)">
+                    </mat-checkbox>
+                </td>
+
+            </ng-container>
+
+
+            <ng-container matColumnDef="content">
+                <th mat-header-cell *matHeaderCellDef class="col-1 text-center " mat-sort-header>
+                    <div class="row flex-row">
+                        <label>Content</label> 
+                        <input matInput type="text" (keyup)="updatePagination()" 
+                        [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;width: 70%;"  />
+
+                    </div>
+                    <div class="row">
+                       
+
+                    </div>
+                    
+                    
+                  
+                   
+                </th>
                 
-            
-           
-   
-          </td>
-          </ng-container>
-        
-        
-          <ng-container matColumnDef="givenByName">
-            <th mat-header-cell *matHeaderCellDef class="col-2 text-center" mat-sort-header>Given by
-              </th>
-            <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted"> {{element.givenByName}} </td>
-          </ng-container>
-        
-         
-          <ng-container matColumnDef="createDate">
-            <th mat-header-cell *matHeaderCellDef class="col-4 text-center" mat-sort-header >  Date Of Add
-            </th>
-            <td mat-cell *matCellDef="let element" class="col-4 px-2 text-left py-2"><label>Last Modified</label><br> <u>{{element.createDate}}</u> </td>
-          </ng-container>
-        
-         
-       
-        
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-      <div class="col-12 bg-white">
-         <mat-paginator  [pageSizeOptions]="[ 2,10,25, 50, 100]" aria-label="Select page"></mat-paginator>
-      </div>
-   </div>
-   </div>
+                <td mat-cell *matCellDef="let element" class="col-6 mx-2 "> 
+                    <div class="row d-flex">
+                        <!-- <div class="col-md-6">
+                            <div class="d-flex text-center ">
+                                <p class=" mr-2" style="color:blue ;">Edit</p>| <p class="text-danger mx-2">Delete</p>
+                            </div>
+
+                        </div> -->
+                        <div class="col">
+                            {{element.content}}
+
+                        </div>
+                        <div class="col-md-6 ">
+                            <mat-radio-group aria-label="Select an option">
+                                <mat-radio-button value="1">Visible</mat-radio-button>&nbsp;
+                                <mat-radio-button value="2">invisible</mat-radio-button>
+                            </mat-radio-group>
+
+                        </div>
+
+                    
+
+
+                    </div>
+
+                </td>
+                
+
+            </ng-container>
+
+
+            <ng-container matColumnDef="givenByName">
+                <th mat-header-cell *matHeaderCellDef class="col-2 text-center" mat-sort-header>Given by
+                </th>
+                <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted">
+                    {{element.givenByName}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="createDate">
+                <th mat-header-cell *matHeaderCellDef class="col-4 text-center" mat-sort-header> Date Of Add
+                </th>
+                <td mat-cell *matCellDef="let element" class="col-4 px-2 text-left py-2"><label>Last
+                        Modified</label><br> <u>{{element.createDate}}</u> </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="col-4 text-center" mat-sort-header> Action
+                </th>
+                <td mat-cell *matCellDef="let element" class="col-4 px-2 text-left py-2"><i class="fa-solid fa-pen-to-square"></i><i class="fa-solid fa-trash"></i>
+                     </td>
+            </ng-container>
+
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div class="col-12 bg-white">
+            <mat-paginator [pageSizeOptions]="[ 2,10,25, 50, 100]" aria-label="Select page"></mat-paginator>
+        </div>
+    </div>
+</div>
