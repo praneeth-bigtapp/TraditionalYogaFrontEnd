@@ -7,7 +7,7 @@
                 <h6 class="text-md-right col-md-4">Title : </h6>
 
                 <div class="col">
-                    <mat-form-field appearance="outline" class="ms-3 ">
+                    <mat-form-field appearance="outline" >
                         <mat-label>Title</mat-label>
                         <input matInput formControlName="quotetitle">
                         <mat-error [hidden]=" !wisdomform.get('quotetitle')?.hasError('required')  ">
@@ -22,7 +22,7 @@
                 <h6 class="text-md-right col-md-4">Quote : </h6>
 
                 <div class="col">
-                    <mat-form-field appearance="outline" class="ms-3 ">
+                    <mat-form-field appearance="outline" >
                         <mat-label>Quote</mat-label>
                         <textarea rows="5" matInput formControlName="quote"> </textarea>
                         <mat-error [hidden]=" !wisdomform.get('quote')?.hasError('required')  ">
@@ -38,7 +38,7 @@
                 <h6 class="text-md-right col-md-4">Date : </h6>
 
                 <div class="col">
-                    <mat-form-field appearance="outline" class="ms-3 ">
+                    <mat-form-field appearance="outline">
                         <!-- <mat-label></mat-label> -->
                         <input matInput formControlName="quotedate" type="date">
                         <mat-error [hidden]=" !wisdomform.get('quotedate')?.hasError('required')  ">
