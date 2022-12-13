@@ -12,6 +12,10 @@ export class WebsitemanagementService extends BaseHttp {
 
   getpearlofwisdomURL = "webSite/getAll?operation=wisdom"
 
+  deletepearlofwisdomURL = "webSite/wisdom?operation=delete"
+
+  updatepearlofwisdomURL = "webSite/wisdom?operation=update"
+
 
   getpearlofwisdom() {
     return this.get(this.getpearlofwisdomURL)
@@ -19,6 +23,14 @@ export class WebsitemanagementService extends BaseHttp {
 
   postpearlofwisdom(body: any) {
     return this.post(this.postpearlofwisdomURL, body)
+  }
+
+  deletepearlofwisdom(body: any) {
+    return this.post(this.deletepearlofwisdomURL, body)
+  }
+
+  updatepearlofwisdom(body: any) {
+    return this.post(this.updatepearlofwisdomURL, body)
   }
 
 }

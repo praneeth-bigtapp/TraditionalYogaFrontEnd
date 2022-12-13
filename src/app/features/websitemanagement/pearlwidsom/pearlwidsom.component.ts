@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { WebsitemanagementService } from '../service/websitemanagement.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-pearlwidsom',
@@ -18,6 +19,8 @@ export class PearlwidsomComponent implements OnInit {
 
 
   wisdomform!: FormGroup
+
+  isedit: boolean = false
 
   filterData: any;
   gridData = [];
@@ -41,6 +44,7 @@ export class PearlwidsomComponent implements OnInit {
     };
     this.getListofwisdom()
     this.wisdomform = this.formbuilder.group({
+      quoteId: [null],
       quotetitle: [null, Validators.compose([Validators.required])],
       quote: [null, Validators.compose([Validators.required])],
       quotedate: [null, Validators.compose([Validators.required])],
@@ -59,8 +63,6 @@ export class PearlwidsomComponent implements OnInit {
   getListofwisdom() {
     this.service.getpearlofwisdom().subscribe({
       next: (response) => {
-        console.log(response);
-
         this.data = response
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
@@ -74,7 +76,6 @@ export class PearlwidsomComponent implements OnInit {
       },
       error: (error) => {
         console.error(error.message);
-
       }
     })
   }
@@ -91,10 +92,30 @@ export class PearlwidsomComponent implements OnInit {
     console.log(element);
   }
   editdetails(element: any) {
-    console.log(element);
+    this.isedit = true
+    this.wisdomform.setValue({
+      quoteId: element.quoteId,
+      quotetitle: element.quoteTitle,
+      quote: element.quote,
+      quotedate: formatDate(element.quoteDate, "yyyy-MM-dd", 'en'),
+      quotetype: element.quoteType,
+    });
   }
-  deletedetails(element: any) {
-    console.log(element);
+  deletedetails(id: any) {
+    console.log(id);
+    const body = {
+      "quoteId": id
+    }
+
+    this.service.deletepearlofwisdom(body).subscribe({
+      next: (response) => {
+        this.openSnackBar(response)
+        this.getListofwisdom()
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    })
   }
 
   IsActiveorNot(id: any) {
@@ -111,11 +132,9 @@ export class PearlwidsomComponent implements OnInit {
     const yes = ["Yes", "Y", "yes", "y"]
     const no = ["No", "N", "no", "n"]
     this.data.map((element: any) => {
-      if (element.quoteId === id) {
-        element.isActive = yes.includes(element.active) ? "N" : "Y"
-      }
+      if (element.quoteId === id)
+        element.isActive = yes.includes(element.isActive) ? "N" : "Y"
     })
-    
   }
 
 
@@ -124,10 +143,9 @@ export class PearlwidsomComponent implements OnInit {
     if (this.wisdomform.invalid)
       return this.wisdomform.markAllAsTouched()
 
-    const { quotetitle, quote, quotedate, quotetype } = this.wisdomform.value
+    const { quoteId, quotetitle, quote, quotedate, quotetype } = this.wisdomform.value
 
-    console.log({ quotetitle, quote, quotedate, quotetype });
-
+    console.log({ quoteId, quotetitle, quote, quotedate, quotetype });
 
     const body = {
       "quoteTitle": quotetitle,
@@ -136,6 +154,33 @@ export class PearlwidsomComponent implements OnInit {
       "quoteType": quotetype
     }
 
+
+
+    if (this.isedit) {
+      console.log("editing");
+
+      const body = {
+        "quoteId": quoteId,
+        "quoteTitle": quotetitle,
+        "quote": quote,
+        "quoteDate": quotedate,
+        "quoteType": quotetype
+      }
+
+      console.log(body);
+      this.service.updatepearlofwisdom(body).subscribe({
+        next: (response) => {
+          this.openSnackBar(response)
+          this.wisdomform.reset()
+          this.getListofwisdom()
+          this.isedit = false
+        },
+        error: (error) => {
+          console.error(error.message);
+        }
+      })
+      return
+    }
     this.service.postpearlofwisdom(body).subscribe({
       next: (response) => {
         this.openSnackBar(response)
@@ -146,6 +191,7 @@ export class PearlwidsomComponent implements OnInit {
         console.error(error.message);
       }
     })
+    return
 
   }
 }
