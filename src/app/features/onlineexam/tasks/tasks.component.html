@@ -1,144 +1,195 @@
-<div class="ConfigurationTypes_textpadding p-5 ">
+<div class="ConfigurationTypes_textpadding">
     <!-- remove bg-light -->
 
-    <h3 class="mb-4 pl-2 text-secondary ">Task Assignment</h3>
-    <div class="bg-white  border ">
-        <div class="row align-items-center px-4 pt-2">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Task Assignment</li>
+        </ol>
+    </nav>
 
-            <!-- <div class="d-flex flex-row justify-content-between  flex-wrap   ">
-                <div class="">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Select Course</mat-label>
-                        <mat-select [(ngModel)]="course" (ngModelChange)="coursechange()">
-                            <mat-option *ngFor="let course of courseList" [value]="course.coursesId">
-                                {{course.coursesName}}</mat-option>
-                        </mat-select>
-                        <span class="text-dark mat-error" *ngIf="courserror">
-                            Please Select Course
-                        </span>
+    <div class="d-flex mb-2 flex-wrap  justify-content-between align-items-center">
+        <h3 class=" pl-2 text-secondary ">Task Assignment</h3>
+        <div class="row align-items-center  ">
+            <div class="col-md-6">
+                <mat-form-field appearance="outline" class="outsideinput">
+                    <label *ngIf="course !== null">Select Course</label>
 
-                    </mat-form-field>
-                </div>
-                <div class="mt-md-3 ml-1">
-                    <button type="button" (click)="gobutton()"
-                        class="btn btn-outline-secondary btn-go btn-rounded d-inline-block "> Go
-                    </button>
-                </div>
-
-            </div> -->
-            <div class="col-md-8">
-                <div class=" row ">
-                    <div class="col-md-8">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Select Course</mat-label>
-                            <mat-select [(ngModel)]="course" (ngModelChange)="coursechange()">
-                                <mat-option *ngFor="let course of courseList" [value]="course.coursesId">
-                                    {{course.coursesName}}</mat-option>
-                            </mat-select>
-                            <span class="text-danger" *ngIf="courserror">
-                                Please Select Category
-                            </span>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-md-3">
-                        <button type="button" (click)="gobutton()"
-                            class="btn btn-outline-secondary btn-go btn-rounded d-inline-block m-2 border border-dark">
-                            Go
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-            <br /><br /><br />
-            <div class="col-md-4 ">
-                <div class="" *ngIf="displaycontent">
-                    <button type="button" (click)="createtask()"
-                        class="btn btn-outline-secondary btn-rounded d-inline-block mb-md-3 ">
-                        <!-- <i class="fa-sharp fa-solid fa-plus"></i> -->
-                        Create Task
-                    </button>
-                </div>
+                    <mat-select [(ngModel)]="course" (ngModelChange)="coursechange()">
+                        <mat-option *ngFor="let course of courseList" [value]="course.coursesId">
+                            {{course.coursesName}}</mat-option>
+                    </mat-select>
+                    <span class="text-danger" *ngIf="courserror">
+                        Course is mandatory
+                    </span>
+                </mat-form-field>
             </div>
 
-
-        </div>
-        <hr />
-
-        <div class="px-4">
-            <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
-                aria-label="users">
-
-                <ng-container matColumnDef="taskName">
-                    <th mat-header-cell *matHeaderCellDef scope="col">
-                        <label mat-sort-header>
-                            Task Name
-                        </label>
-                        <input type="text" (keyup)="updatePagination('courseId')"
-                            [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
-                    </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.taskName | titlecase}} </td>
-                </ng-container>
-
-                <ng-container matColumnDef="createDate">
-                    <th mat-header-cell *matHeaderCellDef scope="col">
-                        <label mat-sort-header>
-                            Date of assignment
-                        </label>
-                        <input type="text" (keyup)="updatePagination('Region')"
-                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
-                    </th>
-                    <td mat-cell class="text-center" *matCellDef="let element">
-                        {{element.createDate || "NIL"}}
-
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="type">
-
-                    <th mat-header-cell *matHeaderCellDef scope="col">
-                        <label mat-sort-header>
-                            Type
-                        </label>
-                        <input type="text" (keyup)="updatePagination('Country')"
-                            [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
-                    </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"><a
-                            class="text-decoration-underline text-primary" target="_blank" rel=”noreferrer”
-                            [href]="element.mediafile">Video</a> </td>
-                </ng-container>
-
-                <ng-container matColumnDef="dueDate">
-                    <th mat-header-cell *matHeaderCellDef scope="col">
-                        <label mat-sort-header>
-                            Due date for submission
-                        </label>
-                        <input type="text" (keyup)="updatePagination('State')"
-                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
-                    </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.dueDate }} </td>
-                </ng-container>
-
-                <ng-container matColumnDef="action">
-                    <th mat-header-cell *matHeaderCellDef scope="col">
-                        <label mat-sort-header>
-                            View Details
-                        </label>
-                    </th>
-                    <td mat-cell class="text-center" *matCellDef="let element">
-                        <button type="button" (click)="viewdetails(element)"
-                            class="btn btn-outline-secondary btn-rounded d-inline-block "> View Details</button>
-                    </td>
-                </ng-container>
-
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-            <br />
-            <div class="d-flex  flex-row justify-content-end ">
-                <mat-paginator class="" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
-                </mat-paginator>
+            <div class="col-md-4">
+                <button type="button" (click)="createtask()" *ngIf="displaycontent  !displayform"
+                    class="btn btn-outline-secondary btn-rounded d-inline-block mb-md-3 ">
+                    <!-- <i class="fa-sharp fa-solid fa-plus"></i> -->
+                    Add Task
+                </button>
             </div>
         </div>
     </div>
+
+    <div class="card  bg-secondary" *ngIf=" displayform">
+        <div class="card-header text-white bg-secondary">
+            {{isedit ? "Update" :"Add" }} Task
+        </div>
+
+        <div class="card-body bg-white  py-2">
+            <form class="" [formGroup]="taskform" (ngSubmit)="tasksubmit()">
+                <div class=" row ">
+                    <div class="col-md-4">
+                        <label>Task Name</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="name" required>
+                                <mat-error [hidden]=" !taskform.get('name')?.hasError('required')  ">
+                                    Task is mandatory
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Upload Media file</label>
+                        <div class="col px-0">
+                            <input type="file" class="border" id="file" formControlName="mediafile" accept=" */*"
+                                (change)="fileupload($event)" required="true" />
+                            <mat-error *ngIf="filerror">File is mandatory</mat-error>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Due Date for submission</label>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <input matInput formControlName="duedate" type="date">
+                            <mat-error [hidden]="!taskform.get('duedate')?.hasError('required')  ">
+                                Date is mandatory
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row align-items-center">
+                    <div class="col">
+                        <label>Description</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <textarea matInput class="p-2" formControlName="description" rows="3"
+                                    placeholder="Description"></textarea>
+                                <mat-error [hidden]=" !taskform.get('description')?.hasError('required')  ">
+                                    Description is mandatory
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row col-md-6">
+                        <div class="col-md-6">
+                            <button type="submit"
+                                class="btn btn-outline-secondary btn-rounded d-inline-block mt-3 ml-md-1">
+                                {{isedit ?"Update":"Submit"}}
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" (click)="reseteditable()"
+                                class="btn btn-outline-secondary btn-rounded d-inline-block mt-3 ml-md-1">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <br />
+        </div>
+
+    </div>
+
+
+    <table mat-table [dataSource]="filterData.dataSource" [hidden]="!displaycontent" matSort
+        class="mat-elevation-z8 mat-datagrid w-100" aria-label="users">
+
+        <ng-container matColumnDef="taskName">
+            <th mat-header-cell *matHeaderCellDef scope="col">
+                <label mat-sort-header>
+                    Task Name
+                </label>
+                <input type="text" (keyup)="updatePagination('courseId')"
+                    [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
+            </th>
+            <td mat-cell class="text-center" *matCellDef="let element"> {{element.taskName | titlecase}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createDate">
+            <th mat-header-cell *matHeaderCellDef scope="col">
+                <label mat-sort-header>
+                    Date of assignment
+                </label>
+                <input type="text" (keyup)="updatePagination('Region')"
+                    [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+            </th>
+            <td mat-cell class="text-center" *matCellDef="let element">
+                {{element.createDate || "NIL"}}
+
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+
+            <th mat-header-cell *matHeaderCellDef scope="col">
+                <label mat-sort-header>
+                    Type
+                </label>
+                <input type="text" (keyup)="updatePagination('Country')"
+                    [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
+            </th>
+            <td mat-cell class="text-center" *matCellDef="let element"><a class="text-decoration-underline text-primary"
+                    target="_blank" rel=”noreferrer” [href]="element.mediafile">Video</a> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dueDate">
+            <th mat-header-cell *matHeaderCellDef scope="col">
+                <label mat-sort-header>
+                    Due date for submission
+                </label>
+                <input type="text" (keyup)="updatePagination('State')"
+                    [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
+            </th>
+            <td mat-cell class="text-center" *matCellDef="let element"> {{element.dueDate }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef scope="col">
+                <label mat-sort-header>
+                    Actions
+                </label>
+            </th>
+            <td mat-cell class="text-center" *matCellDef="let element">
+                <div class="d-flex flex-wrap justify-content-evenly align-items-center">
+
+                    <i class="fa-solid fa-eye fs-5 text-info" (click)="viewdetails(element)"
+                        matTooltip="View Course Activity" matTooltip="View"></i>
+
+                    <span matTooltip="Edit" (click)="editdetails(element)">
+                        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                    </span>
+                    <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.quoteId)"> <i
+                            class="far fa-trash-alt" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+
+    <mat-paginator class="" [hidden]="!displaycontent" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
+    </mat-paginator>
 </div>

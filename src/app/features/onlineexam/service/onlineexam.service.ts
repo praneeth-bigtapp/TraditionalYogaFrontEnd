@@ -14,9 +14,17 @@ export class OnlineexamService extends BaseHttp {
 
   postonlinexamURL = "courseList/onlineexam?operation=add"
 
+  updateonlineexamURL = ""
+
+  deleteonlineexamURL = ""
+
   gettaskURL = "courseList/getAll?operation=task"
 
   posttaskURL = "courseList/task?operation=add"
+
+  updatetaskURL = ""
+
+  deletetaskURL = ""
 
   getallcourses() {
     return this.get(this.getallcourseURL)
@@ -37,9 +45,25 @@ export class OnlineexamService extends BaseHttp {
     return this.post(this.postonlinexamURL, body)
   }
 
+  updateonlineexam(body: any) {
+    return this.post(this.updateonlineexamURL, body)
+  }
+
+  deleteonlineexam(body: any) {
+    return this.post(this.deleteonlineexamURL, body)
+  }
+
 
   posttask(body: any) {
     return this.post(this.posttaskURL, body)
+  }
+
+  updatetask(body: any) {
+    return this.post(this.updatetaskURL, body)
+  }
+
+  deletetask(body: any) {
+    return this.post(this.deletetaskURL, body)
   }
 
 

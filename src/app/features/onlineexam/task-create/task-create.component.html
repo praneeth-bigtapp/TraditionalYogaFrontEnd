@@ -20,13 +20,7 @@
             </mat-form-field>
         </div>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Description</mat-label>
-            <textarea matInput class="p-2" formControlName="description" rows="3" placeholder="Description"></textarea>
-            <mat-error [hidden]=" !taskform.get('description')?.hasError('required')  ">
-                Please Type Description
-            </mat-error>
-        </mat-form-field>
+        
 
         <h6>Upload Media file</h6>
         <br />

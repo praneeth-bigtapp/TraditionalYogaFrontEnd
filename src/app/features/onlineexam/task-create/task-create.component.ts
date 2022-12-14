@@ -47,8 +47,6 @@ export class TaskCreateComponent implements OnInit {
     this.filerror = this.taskform.value.mediafile === null ? true : false
 
     this.filedata = event.target.files[0].name
-
-
   }
 
   closeDialog() {
