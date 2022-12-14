@@ -18,6 +18,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MatOptionModule } from '@angular/material/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -44,6 +46,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MatSortModule,
     MatPaginatorModule,
     SharedModule,
+    MatSelectModule,
+    MatTooltipModule,
+  
   ]
 })
 export class AddCourseMainModule { }

@@ -1,8 +1,6 @@
 <div class="container-fluid">
     <div class="d-flex mb-0 flex-wrap  justify-content-between align-items-center">
         <h3 class=" pl-2 text-secondary "> Add Courses/View Course Details</h3>
-
-
         <button type="button" (click)="addcourse()" class="btn btn-outline-secondary btn-rounded d-inline-block ">
             {{displaycontent ? "Add Course" : "Add Course" }}
         </button>
@@ -18,30 +16,29 @@
 
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <!-- <mat-label>Select Course Category</mat-label> -->
-                                <mat-select formControlName="coursecategory">
+                                <mat-select formControlName="coursecategory" [compareWith]="compareselect">
+
                                     <mat-option *ngFor="let category of categoryList" [value]="category"
                                         aria-placeholder="Select Course Category">
                                         {{category.categoriesName}}</mat-option>
                                 </mat-select>
-                                <mat-error [hidden]=" !addCourseForm.get('coursecategory')?.hasError('required')  ">
+                                <mat-error class="error-message"
+                                    [hidden]=" !addCourseForm.get('coursecategory')?.hasError('required')  ">
                                     Please Select Category
                                 </mat-error>
                             </mat-form-field>
                         </div>
-
                     </div>
                 </div>
                 <div class="col-md-8">
-
                     <div class=" align-items-center ">
                         <h6 class="">Course name : </h6>
-
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <!-- <mat-label>Select Course Category</mat-label> -->
                                 <input matInput autocomplete="off" formControlName="courseName" required>
-                                <mat-error [hidden]=" !addCourseForm.get('courseName')?.hasError('required')  ">
+                                <mat-error class="error-message"
+                                    [hidden]=" !addCourseForm.get('courseName')?.hasError('required')  ">
                                     Please Add Course Name
                                 </mat-error>
                             </mat-form-field>
@@ -50,8 +47,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="row">
                 <div class="col-md-4">
                     <div class="">
@@ -61,7 +56,8 @@
                             <mat-form-field appearance="outline">
                                 <!-- <mat-label>Start date</mat-label> -->
                                 <input matInput formControlName="startDate" type="date">
-                                <mat-error [hidden]=" !addCourseForm.get('startDate')?.hasError('required')  ">
+                                <mat-error class="error-message"
+                                    [hidden]=" !addCourseForm.get('startDate')?.hasError('required')  ">
                                     Please Select date
                                 </mat-error>
                             </mat-form-field>
@@ -71,12 +67,12 @@
                 <div class="col-md-4">
                     <div class="">
                         <h6 class="">End date : </h6>
-
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <!-- <mat-label>End date</mat-label> -->
                                 <input matInput formControlName="endDate" type="date">
-                                <mat-error [hidden]=" !addCourseForm.get('endDate')?.hasError('required')  ">
+                                <mat-error class="error-message"
+                                    [hidden]=" !addCourseForm.get('endDate')?.hasError('required')  ">
                                     Please Select date
                                 </mat-error>
                             </mat-form-field>
@@ -90,7 +86,7 @@
                             <mat-form-field appearance="outline">
                                 <!-- <mat-label>Application closure date</mat-label> -->
                                 <input matInput formControlName="applicationclosuredate" type="date">
-                                <mat-error
+                                <mat-error class="error-message"
                                     [hidden]=" !addCourseForm.get('applicationclosuredate')?.hasError('required')  ">
                                     Please Select date
                                 </mat-error>
@@ -99,29 +95,30 @@
                     </div>
                 </div>
             </div>
-
             <div class="row">
 
                 <div class="col">
                     <div class=" ">
                         <h6 class="mb-1">Description : </h6>
-
                         <div class="col px-0">
                             <angular-editor [placeholder]="'Enter text here...'" (keypress)="paragraphchange()"
                                 [config]="editorConfig" required formControlName="description">
                             </angular-editor>
-                            <mat-error *ngIf="paragrapherror ">
+                            <mat-error class="error-message" *ngIf="paragrapherror ">
                                 Please Type Words
                             </mat-error>
                         </div>
                     </div>
                 </div>
-
             </div>
             <br />
             <div class="d-flex flex-row justify-content-end">
                 <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
-                    {{iseditable ? "Update Course" :"Add Course" }}
+                    {{iseditable ? "Update" :"Submit" }}
+                </button>
+                <button type="button" (click)="reseteditable()" *ngIf="iseditable"
+                    class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                    Cancel
                 </button>
             </div>
         </form>
@@ -139,20 +136,17 @@
             </th>
             <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
         </ng-container>
-
         <ng-container matColumnDef="category">
             <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
                 <label mat-sort-header>
                     Category
                 </label>
-                <input type="text" (keyup)="updatePagination('category')"
-                    [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+                <!-- <input type="text" (keyup)="updatePagination('category')"
+                    [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" /> -->
             </th>
             <td mat-cell *matCellDef="let element"> {{element.categorieId.categoriesName}} </td>
         </ng-container>
-
         <ng-container matColumnDef="coursesName">
-
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
                     Course Name
@@ -162,7 +156,6 @@
             </th>
             <td mat-cell *matCellDef="let element"> {{element.coursesName}} </td>
         </ng-container>
-
         <ng-container matColumnDef="courseDuration">
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
@@ -172,10 +165,7 @@
                     [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
             </th>
             <td mat-cell *matCellDef="let element"> {{element.courseDuration }} </td>
-            <!-- <td mat-cell *matCellDef="let element"> {{getMonthDifference(element.startDate,element.endDate)}} </td> -->
-
         </ng-container>
-
         <ng-container matColumnDef="startDate">
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
@@ -186,7 +176,6 @@
             </th>
             <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
         </ng-container>
-
         <ng-container matColumnDef="endDate">
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
@@ -197,7 +186,6 @@
             </th>
             <td mat-cell *matCellDef="let element "> {{element.endDate}} </td>
         </ng-container>
-
         <ng-container matColumnDef="currentStatus">
             <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
                 <label mat-sort-header>
@@ -207,23 +195,19 @@
                     [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
             </th>
             <td mat-cell *matCellDef="let element "> {{element.currentStatus }} </td>
-
         </ng-container>
         <ng-container matColumnDef="Action">
             <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
                 <label mat-sort-header>
                     Action
                 </label>
-                <input type="text" (keyup)="updatePagination('currentStatus')"
-                    [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
+                <!-- <input type="text" (keyup)="updatePagination('currentStatus')"
+                    [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" /> -->
             </th>
             <td mat-cell *matCellDef="let element ">
-
                 <div class="d-flex flex-wrap justify-content-evenly align-items-center">
-
                     <i class="fa-solid fa-eye fs-5 text-info" (click)="viewdetails(element)"
                         matTooltip="View Course Activity" matTooltip="View"></i>
-
                     <span matTooltip="Edit" (click)="editdetails(element)">
                         <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                     </span>
@@ -232,13 +216,10 @@
                     </span>
                 </div>
             </td>
-
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <mat-paginator class="table-responsive" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
     </mat-paginator>
-
-
 </div>

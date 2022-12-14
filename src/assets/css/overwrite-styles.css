@@ -1,9 +1,26 @@
 @charset "utf-8";
+
 body {
     /* font-family: 'muliregular', "Noto Sans SC", sans-serif; */
     font-family: "Times New Roman", Times, serif;
 }
-h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1, p { margin: 0px;}
+
+h6,
+.h6,
+h5,
+.h5,
+h4,
+.h4,
+h3,
+.h3,
+h2,
+.h2,
+h1,
+.h1,
+p {
+    margin: 0px;
+}
+
 hr {
     opacity: 0.1;
 }
@@ -23,7 +40,10 @@ hr {
     margin-top: 5px
 }
 
-.bg-ty-profile { background-color: #f9eded;}
+.bg-ty-profile {
+    background-color: #f9eded;
+}
+
 /* .dataTables_length , .dataTables_filter{display:none;} */
 
 .dataTables_info,
@@ -165,7 +185,7 @@ nav img.logo-img {
 .ConfigurationTypes_configTypedrag-riles .ConfigurationTypes_dropMessage {
     text-align: center;
     color: #cdd5fe;
-    
+
     font-size: 20px;
 }
 
@@ -174,7 +194,10 @@ nav img.logo-img {
     color: #747474;
 }
 
-.text-grey { color: #7e929f;}
+.text-grey {
+    color: #7e929f;
+}
+
 .form {
     position: relative;
     width: 100%;
@@ -223,6 +246,7 @@ nav img.logo-img {
     min-width: 180px;
     margin-right: 15px;
 }
+
 .btn-go {
     border-radius: 25px;
     height: 40px;
@@ -252,6 +276,7 @@ table.table-bordered.dataTable tbody td {
 .text-warning {
     color: #ffa840 !important;
 }
+
 .btn-outline-secondary:hover,
 .btn-outline-secondary:not(:disabled):not(.disabled):active,
 .btn-outline-secondary:not(:disabled):not(.disabled).active,
@@ -355,6 +380,23 @@ textarea:focus {
     font-size: 16px !important;
 }
 
+/* .mat-form-field-infix {
+    height: 40px !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0 !important;
+} */
+
+.mat-error {
+    color: #212529 !important;
+    font-size: 12px !important;
+}
+
+mat-paginator.mat-paginator.table-responsive {
+    border-radius: 10px;
+}
+
 .user-profile .dropdown-toggle::after {
     display: block;
     position: absolute;
@@ -380,20 +422,22 @@ textarea:focus {
     height: 30px;
     background-color: #fff;
 }
+
 .mat-table {
     background: #fff;
     opacity: 0.9;
     border-radius: 14px !important;
 }
+
 .mat-datagrid tr.mat-header-row {
     background-color: #d1d7db;
-    border:none;
+    border: none;
     border-radius: 14px !important;
 }
 
 .mat-datagrid td.mat-footer-cell,
 .mat-datagrid th.mat-header-cell {
-    font-family: 'muliregular',"Noto Sans SC",sans-serif !important;
+    font-family: 'muliregular', "Noto Sans SC", sans-serif !important;
     padding: 5px 10px !important;
     margin-bottom: 5px !important;
     vertical-align: text-top !important;
@@ -555,15 +599,17 @@ app-login {
     max-width: 85%;
 }
 
-.table-config-grid-new{
+.table-config-grid-new {
     overflow: auto;
     width: calc(100% - 150px) !important;
     max-width: 85%;
 }
+
 .invalid-records-grid {
     overflow: auto;
     width: calc(100% - 30px) !important;
 }
+
 /* .mat-paginator{
 width: calc(100% - 150px) !important;
 } */
@@ -571,40 +617,49 @@ width: calc(100% - 150px) !important;
     display: contents !important;
 } */
 .svg-inline--fa {
-    cursor: pointer; font-size: 20px; margin-right: 10px;}
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 10px;
+}
 
-    
-.notificationMessage{
+
+.notificationMessage {
     text-align: center;
     font-size: 20px;
     font-weight: 600;
 }
 
-.uploadNotification{
+.uploadNotification {
     height: auto;
     margin: auto;
     width: 50%;
 }
+
 .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
     background-color: rgb(133 64 5) !important;
-  }
-  .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
-    background-color: #ff7600 !important;
-  }
-  .fa-trash-alt {
-      color: red;
-  }
-  .fa-pencil-alt {
-      color: #616161;
-  }
+}
 
-  .mobile-view {
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: #ff7600 !important;
+}
+
+.fa-trash-alt {
+    color: red;
+}
+
+.fa-pencil-alt {
+    color: #616161;
+}
+
+.mobile-view {
     display: none;
 }
+
 .desktop-view {
     display: block;
 }
-.w-95{
+
+.w-95 {
     width: 95%;
 }
 
@@ -614,120 +669,174 @@ width: calc(100% - 150px) !important;
     border-bottom: 2px solid #dee2e6;
     background: #f5f5f6;
 }
-.dashboard-reports  .card-header { border: 0px;}
-.dashboard-reports .nav-tabs li { width: 50%; line-height: 35px;}
-.dashboard-reports .nav-tabs .nav-link { text-align: center;}
-.dashboard-reports .nav-tabs .nav-link:hover, .dashboard-reports .nav-tabs .nav-link.active { background: #ead6d5; border-radius: 0px;}
+
+.dashboard-reports .card-header {
+    border: 0px;
+}
+
+.dashboard-reports .nav-tabs li {
+    width: 50%;
+    line-height: 35px;
+}
+
+.dashboard-reports .nav-tabs .nav-link {
+    text-align: center;
+}
+
+.dashboard-reports .nav-tabs .nav-link:hover,
+.dashboard-reports .nav-tabs .nav-link.active {
+    background: #ead6d5;
+    border-radius: 0px;
+}
 
 .ty-tabs .nav-tabs {
     border-bottom: 2px solid #dee2e6;
     background: #f5f5f6;
 }
-.ty-tabs   .card-header { border: 0px;}
-.ty-tabs  .nav-tabs li {line-height: 35px;}
-.ty-tabs  .nav-tabs .nav-link { text-align: center;}
-.ty-tabs  .nav-tabs .nav-link:hover, .ty-tabs .nav-tabs .nav-link.active { background: #ead6d5; border-radius: 0px;}
-.profile-pic  {    
-     height: 200px;
+
+.ty-tabs .card-header {
+    border: 0px;
+}
+
+.ty-tabs .nav-tabs li {
+    line-height: 35px;
+}
+
+.ty-tabs .nav-tabs .nav-link {
+    text-align: center;
+}
+
+.ty-tabs .nav-tabs .nav-link:hover,
+.ty-tabs .nav-tabs .nav-link.active {
+    background: #ead6d5;
+    border-radius: 0px;
+}
+
+.profile-pic {
+    height: 200px;
     padding: 40px 20px;
 }
+
 .table thead th {
     vertical-align: text-top;
-	}
+}
 
 
-    /* Popup code */
+/* Popup code */
 
 .modal {
     position: fixed;
     top: 15%;
 }
-.modal-header  {
+
+.modal-header {
     background: #c05857;
 }
-.modal-header .modal-title { color: #fff; font-weight: normal;}
-.modal-header .close span { color: #fff;;}
+
+.modal-header .modal-title {
+    color: #fff;
+    font-weight: normal;
+}
+
+.modal-header .close span {
+    color: #fff;
+    ;
+}
 
 .mat-form-field-appearance-outline .mat-form-field-outline-start {
     border-radius: 10px 0 0 10px !important;
     min-width: 10px !important;
 }
-.mat-form-field-appearance-outline .mat-form-field-outline-end
-{
+
+.mat-form-field-appearance-outline .mat-form-field-outline-end {
     border-radius: 0 10px 10px 0 !important;
 }
+
 /* Shake animation */
 
 @keyframes shake {
     0% {
         transform: translate(1px, 1px) rotate(0deg);
     }
+
     10% {
         transform: translate(-1px, -2px) rotate(-1deg);
     }
+
     20% {
         transform: translate(-3px, 0px) rotate(1deg);
     }
+
     30% {
         transform: translate(3px, 2px) rotate(0deg);
     }
+
     40% {
         transform: translate(1px, -1px) rotate(1deg);
     }
+
     50% {
         transform: translate(-1px, 2px) rotate(-1deg);
     }
+
     60% {
         transform: translate(-3px, 1px) rotate(0deg);
     }
+
     70% {
         transform: translate(3px, 1px) rotate(-1deg);
     }
+
     80% {
         transform: translate(-1px, -1px) rotate(1deg);
     }
+
     90% {
         transform: translate(1px, 2px) rotate(0deg);
     }
+
     100% {
         transform: translate(1px, -2px) rotate(-1deg);
     }
 }
 
-@media(max-width:1440px){
+@media(max-width:1440px) {
     /* .table-config-grid {
         overflow: auto;
         width: 1000px !important;
     } */
-    
+
 }
 
-@media(max-width:768px){
-.mobile-text-center {
-    text-align: center;
-    width: 100%;
-    display: block;
-}
-.mobile-view {
-    display: block;
-}
-.desktop-view {
-    display: none;
-}
+@media(max-width:768px) {
+    .mobile-text-center {
+        text-align: center;
+        width: 100%;
+        display: block;
+    }
+
+    .mobile-view {
+        display: block;
+    }
+
+    .desktop-view {
+        display: none;
+    }
 }
 
-@media (min-width: 576px){
-.modal-dialog {
-    max-width: 60%;
-    margin: 1.75rem auto;
-}
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 60%;
+        margin: 1.75rem auto;
+    }
 }
 
-@media(max-width:450px){
-.ConfigurationTypes_downloadCsv {
-    width: 80%;
-}
-.drag-riles {
-    height: 300px;
+@media(max-width:450px) {
+    .ConfigurationTypes_downloadCsv {
+        width: 80%;
+    }
+
+    .drag-riles {
+        height: 300px;
     }
 }

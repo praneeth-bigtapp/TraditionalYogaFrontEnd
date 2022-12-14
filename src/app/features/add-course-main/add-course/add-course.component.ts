@@ -10,7 +10,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { formatDate } from '@angular/common';
 
 
-
 @Component({
   selector: 'app-add-course',
   templateUrl: './add-course.component.html',
@@ -67,26 +66,21 @@ export class AddCourseComponent implements OnInit {
         tag: 'h1',
       },
     ],
-    // uploadUrl: 'v1/image',
-
     toolbarHiddenButtons: [
       ['bold', 'italic'],
       ['fontSize']
     ]
   };
-
-
   openSnackBar(data: any) {
     this._snackBar.open(data.message, 'Close');
   }
-
   constructor(private AddCourseService: AddCourseService, private formbuilder: FormBuilder, private _snackBar: MatSnackBar, private service: CoursesService) {
     this.addCourseForm = this.formbuilder.group({
+      courseId: [null],
       courseName: [null, Validators.compose([Validators.required])],
       coursecategory: [null, Validators.compose([Validators.required])],
       applicationclosuredate: [null, Validators.compose([Validators.required])],
       // duration: [null, Validators.compose([Validators.required])],
-
       description: [null, Validators.compose([Validators.required])],
       startDate: [null, Validators.compose([Validators.required])],
       endDate: [null, Validators.compose([Validators.required])],
@@ -103,15 +97,12 @@ export class AddCourseComponent implements OnInit {
       next: (value) => {
         console.log(value);
         this.categoryList = value
-
       },
       error: (error) => {
         console.warn(error.message);
-
       }
     })
   }
-
   addcourse() {
     this.displaycontent = !this.displaycontent
   }
@@ -121,21 +112,12 @@ export class AddCourseComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getdata()
-
   }
-
   getdata() {
     this.service.getCourse().subscribe({
-
-
-
       next: (response) => {
-
         this.data = response
         this.data = this.data.reverse()
-        console.log(this.data)
-
-
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
@@ -145,23 +127,18 @@ export class AddCourseComponent implements OnInit {
         for (let col of this.filterData.filterColumnNames) {
           col.Value = '';
         }
-
       },
-
       error: (error) => {
         console.error(error.message);
       }
-
-
     })
   }
-
   paragraphchange() {
-
     this.paragrapherror = this.addCourseForm.value.description === null ? true : false
-
   }
-
+  compareselect(obj1: any, obj2: any) {
+    return obj1 && obj2 && obj1.categoriesId === obj2
+  }
 
   viewdetails(element: any) {
 
@@ -180,31 +157,33 @@ export class AddCourseComponent implements OnInit {
       },
       error: (error) => {
         console.error(error.message);
-
       }
     })
 
   }
   editdetails(element: any) {
     this.addCourseForm.setValue({
+      courseId: element.coursesId,
       courseName: element.coursesName,
       coursecategory: element.categorieId.categoriesId,
-      applicationclosuredate: element.applicationClouserDate,
+      applicationclosuredate: formatDate(element.applicationClouserDate, "yyyy-MM-dd", 'en'),
       startDate: formatDate(element.startDate, "yyyy-MM-dd", 'en'),
       endDate: formatDate(element.endDate, "yyyy-MM-dd", 'en'),
       description: element.description,
     });
-    this.iseditable = !this.iseditable
+    this.iseditable = true
+    this.displaycontent = true
+  }
 
+  reseteditable() {
+    this.addCourseForm.reset()
+    this.iseditable = false
   }
 
   onAddCourse() {
-
     this.paragraphchange()
     if (this.addCourseForm.invalid)
       return this.addCourseForm.markAllAsTouched()
-
-
 
     const body = {
       // "coursesId": 1,
@@ -223,7 +202,7 @@ export class AddCourseComponent implements OnInit {
     if (this.iseditable) {
       // edit
       const body = {
-        // "coursesId": 1,
+        // "coursesId": this.addCourseForm.value.courseId,
         "categorieId": {
           "categoriesId": this.addCourseForm.value.coursecategory.categoriesId,
           "categoriesName": this.addCourseForm.value.coursecategory.categoriesName,
@@ -256,7 +235,6 @@ export class AddCourseComponent implements OnInit {
       },
       error: (error) => {
         console.error(error.message);
-
       }
     })
   }
