@@ -32,7 +32,7 @@ hr {
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
     border: none;
-    border-bottom: 3px solid #c05857;
+    border-bottom: 3px solid #93a4ad;
 }
 
 .form-check-input[type=radio] {
@@ -294,6 +294,7 @@ table.table-bordered.dataTable tbody td {
 
 .signup-image {
     margin-top: 0px;
+    padding-left: 10%;
 }
 
 .form-title {
@@ -693,7 +694,7 @@ width: calc(100% - 150px) !important;
 
 .dashboard-reports .nav-tabs .nav-link:hover,
 .dashboard-reports .nav-tabs .nav-link.active {
-    background: #ead6d5;
+    background: #93a4ad;
     border-radius: 0px;
 }
 
