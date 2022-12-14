@@ -445,7 +445,7 @@ textarea:focus {
     font-family: 'Poppins', sans-serif !important;
     padding: 5px 10px !important;
     margin-bottom: 5px !important;
-    vertical-align: text-top !important;
+    vertical-align: bottom !important;
 }
 .mat-table {
     font-family: 'Poppins', sans-serif !important;
@@ -778,6 +778,7 @@ input.mat-input-element {
 .mat-paginator .mat-form-field-infix {
     padding: 15px !important;
 }
+.signup-content { padding-top: 5rem;}
 /* Shake animation */
 
 @keyframes shake {
@@ -847,6 +848,23 @@ input.mat-input-element {
 
     .desktop-view {
         display: none;
+    }
+    .signup-content { padding-top: 0rem;}
+    .signup-image{
+        text-align: center;
+    }
+    .signup-image img {
+        width: 50%;
+    }
+    .signup-form {
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-left: 0px;
+    width: 80%;
+    }
+    .btn-rounded {
+        padding: 7px 25px;
+        min-width: auto !important;
     }
 }
 

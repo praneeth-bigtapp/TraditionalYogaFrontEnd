@@ -12,8 +12,8 @@
 <!-- Masthead-->
 <div class="container-fluid">
     <div class="container-padding">
-        <div class="signup-content row pt-5">
-            <div class="signup-form col-md-5 pt-5 mt-5">
+        <div class="signup-content row">
+            <div class="signup-form col-md-5 pt-5 mt-5 order-2">
                 <!-- <h2 class="form-title">Traditional yoga </h2> -->
                 <form class="login-form " [formGroup]="LoginForm" (ngSubmit)="onSignIn()">
                     <h3> User Login </h3>
@@ -61,7 +61,7 @@
                     </div>
                 </form>
             </div>
-            <div class="signup-image col-md-5 mt-5">
+            <div class="signup-image col-md-5 mt-5 order-1">
                 <figure>
                     <img src="assets/images/Traditional Yoga.png " alt="sing up image " width="75% ">
                 </figure>
