@@ -1,11 +1,11 @@
 <div class="container-fluid">
-    <div class="d-flex mb-0 flex-wrap  justify-content-between align-items-center">
+    <div class="d-flex mb-2 flex-wrap  justify-content-between align-items-center">
         <h3 class=" pl-2 text-secondary "> Add Courses/View Course Details</h3>
         <button type="button" (click)="addcourse()" class="btn btn-outline-secondary btn-rounded d-inline-block ">
             {{displaycontent ? "Add Course" : "Add Course" }}
         </button>
     </div>
-    <br />
+
     <div class="card-body bg-white  py-2" *ngIf="displaycontent">
         <form [formGroup]="addCourseForm" class="me-5" (ngSubmit)="onAddCourse()">
 
@@ -24,7 +24,7 @@
                                 </mat-select>
                                 <mat-error class="error-message"
                                     [hidden]=" !addCourseForm.get('coursecategory')?.hasError('required')  ">
-                                    Please Select Category
+                                    Category is mandatory
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -39,7 +39,7 @@
                                 <input matInput autocomplete="off" formControlName="courseName" required>
                                 <mat-error class="error-message"
                                     [hidden]=" !addCourseForm.get('courseName')?.hasError('required')  ">
-                                    Please Add Course Name
+                                    Name is mandatory
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -58,7 +58,7 @@
                                 <input matInput formControlName="startDate" type="date">
                                 <mat-error class="error-message"
                                     [hidden]=" !addCourseForm.get('startDate')?.hasError('required')  ">
-                                    Please Select date
+                                    Date is mandatory
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -73,7 +73,7 @@
                                 <input matInput formControlName="endDate" type="date">
                                 <mat-error class="error-message"
                                     [hidden]=" !addCourseForm.get('endDate')?.hasError('required')  ">
-                                    Please Select date
+                                    Date is mandatory
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -88,7 +88,7 @@
                                 <input matInput formControlName="applicationclosuredate" type="date">
                                 <mat-error class="error-message"
                                     [hidden]=" !addCourseForm.get('applicationclosuredate')?.hasError('required')  ">
-                                    Please Select date
+                                    Date is mandatory
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -105,14 +105,14 @@
                                 [config]="editorConfig" required formControlName="description">
                             </angular-editor>
                             <mat-error class="error-message" *ngIf="paragrapherror ">
-                                Please Type Words
+                                Description is mandatory
                             </mat-error>
                         </div>
                     </div>
                 </div>
             </div>
             <br />
-            <div class="d-flex flex-row justify-content-end">
+            <div class="d-flex flex-row flex-wrap justify-content-end">
                 <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
                     {{iseditable ? "Update" :"Submit" }}
                 </button>
@@ -211,7 +211,7 @@
                     <span matTooltip="Edit" (click)="editdetails(element)">
                         <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                     </span>
-                    <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.quoteId)"> <i
+                    <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.courseId)"> <i
                             class="far fa-trash-alt" aria-hidden="true"></i>
                     </span>
                 </div>

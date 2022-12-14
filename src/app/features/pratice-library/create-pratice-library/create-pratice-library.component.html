@@ -1,7 +1,14 @@
 <div class="ConfigurationTypes_textpadding ">
-    <h3 class="mb-5 pl-2"> Create Pratice Library </h3>
+    <!-- <h3 class="mb-5 pl-2"> Create Pratice Library </h3> -->
 
-    <div class="card border-light pt-3 bg-white ">
+    <div class="d-flex mb-2 flex-wrap  justify-content-between align-items-center">
+        <h3 class=" pl-2 text-secondary ">Create Pratice Library</h3>
+        <button type="button" (click)="addlibrary()" class="btn btn-outline-secondary btn-rounded d-inline-block ">
+            Add Library
+        </button>
+    </div>
+
+    <div class="card border-light pt-3 bg-white " *ngIf="displaycontent">
         <!-- <div class="pl-3 d-flex flex-row flex-wrap  ">
             <div class="w-25 me-5">
                 <mat-form-field appearance="outline">
@@ -24,123 +31,226 @@
         </div> -->
 
 
-        <div class="card-body" *ngIf="displaycontent">
+        <div class="card-body">
             <!-- <hr /> -->
             <form [formGroup]="addmediaform" class="me-5" (ngSubmit)="addmedia()">
 
 
-                  <!-- Title -->
-                  <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Select Category</h6>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row align-items-center ">
+                            <h6 class="">Title </h6>
 
-                    <div class="col">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Select Category</mat-label>
-                            <mat-select formControlName="category">
-                                <mat-option *ngFor="let category of categoryList" [value]="category.categoryId">
-                                    {{category.categoryName}}</mat-option>
-                            </mat-select>
-                            <mat-error [hidden]="!addmediaform.get('category')?.hasError('required')">
-                                Please Select Category
-                            </mat-error>
-                        </mat-form-field>
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="">
+                                    <input matInput autocomplete="off" formControlName="videotitle" required>
+                                    <mat-error [hidden]="!addmediaform.get('videotitle')?.hasError('required')">
+                                        Title is mandatory
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
                     </div>
 
-                </div>
-                <!-- Title -->
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Video Link </h6>
 
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="">
-                            <mat-label>Video Link</mat-label>
-                            <input matInput autocomplete="off" formControlName="videolink" required>
-                            <mat-error [hidden]="!addmediaform.get('videolink')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
+                    <div class="col-md-6">
+                        <div class="row align-items-center ">
+                            <h6 class="">Video Link </h6>
 
-                </div>
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="">
+                                    <input matInput autocomplete="off" formControlName="videolink" required>
+                                    <mat-error [hidden]="!addmediaform.get('videolink')?.hasError('required')">
+                                        Link is mandatory
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
 
-
-
-                <!-- Title -->
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Duration of Video <br />
-                        <p>(Hours : Minutes)</p>
-                    </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="">
-                            <mat-label>Duration</mat-label>
-                            <input matInput autocomplete="off" formControlName="videoduration" required>
-                            <mat-error [hidden]="!addmediaform.get('videoduration')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
+                        </div>
                     </div>
 
                 </div>
 
-                <!-- Title -->
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Title </h6>
+                <div class="row">
 
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="">
-                            <mat-label>Title</mat-label>
-                            <input matInput autocomplete="off" formControlName="videotitle" required>
-                            <mat-error [hidden]="!addmediaform.get('videotitle')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
+                    <div class="col-md-4">
+                        <div class="row align-items-center ">
+                            <h6 class="">Category</h6>
+                            <div class="col">
+                                <mat-form-field appearance="outline">
+                                    <mat-select formControlName="category">
+                                        <mat-option *ngFor="let category of categoryList" [value]="category.categoryId">
+                                            {{category.categoryName}}</mat-option>
+                                    </mat-select>
+                                    <mat-error [hidden]="!addmediaform.get('category')?.hasError('required')">
+                                        Category is mandatory
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
                     </div>
 
-                </div>
+                    <div class="col-md-4">
+                        <div class="row align-items-center ">
+                            <h6 class="">Duration of Video <small class="fw-lighter">(Hours : Minutes)</small>
+                            </h6>
 
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="">
+                                    <input matInput autocomplete="off" formControlName="videoduration" required>
+                                    <mat-error [hidden]="!addmediaform.get('videoduration')?.hasError('required')">
+                                        Duration is mandatory
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
 
-                <!-- Descriptions  -->
-                <div class="row align-items-center">
-                    <h6 class="text-md-right col-md-4">Message </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="">
-                            <mat-label>Message</mat-label>
-                            <textarea matInput class="p-2" formControlName="videodescription" rows="3"
-                                placeholder="Description"></textarea>
-                            <mat-error [hidden]="!addmediaform.get('videodescription')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
+                        </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="row align-items-center ">
+                            <h6 class="">Meta Keywords</h6>
 
-                </div>
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="">
+                                    <input matInput autocomplete="off" formControlName="vidoemetakeywords" required>
+                                    <mat-error [hidden]="!addmediaform.get('vidoemetakeywords')?.hasError('required')">
+                                        Meta keywords is mandatory
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
 
-                <!-- Title -->
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Meta Keywords </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="">
-                            <mat-label>Meta Keywords</mat-label>
-                            <input matInput autocomplete="off" formControlName="vidoemetakeywords" required>
-                            <mat-error [hidden]="!addmediaform.get('vidoemetakeywords')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
+                        </div>
                     </div>
-
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <h6 class="">Message </h6>
 
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="">
+                                    <textarea matInput class="p-2" formControlName="videodescription" rows="3"
+                                        placeholder="Description"></textarea>
+                                    <mat-error [hidden]="!addmediaform.get('videodescription')?.hasError('required')">
+                                        Message is mandatory
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
 
-                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block float-md-right">
-                    Upload
-                </button>
-
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-row justify-content-end flex-wrap">
+                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                        {{iseditable ? "Update":"Upload"}}
+                    </button>
+                    <button type="button" (click)="reseteditable()" *ngIf="iseditable"
+                        class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                        Cancel
+                    </button>
+                </div>
             </form>
         </div>
     </div>
 
+    <br />
+    <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
+        aria-label="users">
+        <ng-container matColumnDef="praticeLibaryId">
+            <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
+                <label mat-sort-header>
+                    S.No
+                </label>
+                <!-- <input type="text" (keyup)="updatePagination('praticeLibaryId')"
+                    [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" /> -->
+            </th>
+            <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="videoLink">
+            <th mat-header-cell *matHeaderCellDef scope="col-2">
+                <label mat-sort-header>
+                    Video Link
+                </label>
+                <!-- <input type="text" (keyup)="updatePagination('videoLink')"
+                    [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" /> -->
+            </th>
+            <td mat-cell *matCellDef="let element" class="col-2"> <a class="text-primary" href="{{element.videoLink}}"
+                    target="_blank" rel="noopener noreferrer"><u>Open</u>
+                </a> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="duration">
+
+            <th mat-header-cell *matHeaderCellDef scope="col-3">
+                <label mat-sort-header>
+                    Duration
+                </label>
+                <input type="text" (keyup)="updatePagination('duration')"
+                    [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.duration}} mins </td>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef scope="col-2">
+                <label mat-sort-header>
+                    Title
+                </label>
+                <input type="text" (keyup)="updatePagination('title')"
+                    [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
+            </th>
+            <td mat-cell *matCellDef="let element" class="col-2"> {{element.title | titlecase}} </td>
+        </ng-container>
+        <ng-container matColumnDef="message">
+            <th mat-header-cell *matHeaderCellDef scope="col-3">
+                <label mat-sort-header>
+                    Message
+                </label>
+                <input type="text" (keyup)="updatePagination('message')"
+                    [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
+            </th>
+            <td mat-cell *matCellDef="let element" class="col-3"> {{element.message }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="metaKeyword">
+            <th mat-header-cell *matHeaderCellDef scope="col">
+                <label mat-sort-header>
+                    Meta Keywords
+                </label>
+                <input type="text" (keyup)="updatePagination('metaKeyword')"
+                    [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="filterData" />
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.metaKeyword}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef scope="col-2">
+                <label mat-sort-header>
+                    Action
+                </label>
+            </th>
+            <td mat-cell *matCellDef="let element" class="col-2">
+                <div class="d-flex flex-wrap justify-content-evenly align-items-center">
+                    <i class="fa-solid fa-eye fs-5 text-info" (click)="viewdetails(element)"
+                        matTooltip="View Course Activity" matTooltip="View"></i>
+                    <span matTooltip="Edit" (click)="editdetails(element)">
+                        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                    </span>
+                    <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.praticeLibaryId)">
+                        <i class="far fa-trash-alt" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator class="" [pageSizeOptions]="[25, 50, 100,150,200]" aria-label="Select page">
+    </mat-paginator>
 
 </div>

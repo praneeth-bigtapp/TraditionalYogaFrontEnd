@@ -12,10 +12,18 @@ export class AddCourseService extends BaseHttp {
 
   deleteCourseURL = ""
   getcategorylist = "courseList/getAll?operation=categoryList"
+  getAllcoursesURL = 'courseList/getAll?operation=coursesList'
+
 
   getCategory() {
 
     return this.get<any>(this.getcategorylist);
+
+  }
+
+  getCourse() {
+
+    return this.get<any>(this.getAllcoursesURL);
 
   }
 

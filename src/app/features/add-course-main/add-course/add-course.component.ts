@@ -74,7 +74,7 @@ export class AddCourseComponent implements OnInit {
   openSnackBar(data: any) {
     this._snackBar.open(data.message, 'Close');
   }
-  constructor(private AddCourseService: AddCourseService, private formbuilder: FormBuilder, private _snackBar: MatSnackBar, private service: CoursesService) {
+  constructor(private AddCourseService: AddCourseService, private formbuilder: FormBuilder, private _snackBar: MatSnackBar) {
     this.addCourseForm = this.formbuilder.group({
       courseId: [null],
       courseName: [null, Validators.compose([Validators.required])],
@@ -114,7 +114,7 @@ export class AddCourseComponent implements OnInit {
     this.getdata()
   }
   getdata() {
-    this.service.getCourse().subscribe({
+    this.AddCourseService.getCourse().subscribe({
       next: (response) => {
         this.data = response
         this.data = this.data.reverse()

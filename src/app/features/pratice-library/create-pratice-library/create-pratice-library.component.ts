@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { CreatepraticelibraryService } from '../service/createpraticelibrary.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-create-pratice-library',
@@ -10,13 +13,20 @@ import { CreatepraticelibraryService } from '../service/createpraticelibrary.ser
   styleUrls: ['./create-pratice-library.component.css']
 })
 export class CreatePraticeLibraryComponent implements OnInit {
-
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort!: MatSort;
   category!: string
   addmediaform!: any
   timerror!: boolean
   categoryerror: boolean = false
-  displaycontent: boolean = true
+  displaycontent: boolean = false
 
+  filterData: any;
+  gridData = [];
+  dataSource: any;
+  displayedColumns: string[] = ['praticeLibaryId', 'videoLink', "duration", "title", "message", "metaKeyword", "Action"];
+  data: any;
+  iseditable: boolean = false
 
   categoryList!: any
   constructor(
@@ -25,9 +35,18 @@ export class CreatePraticeLibraryComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) {
 
+    this.filterData = {
+      filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
+    };
+
     this.service.getcategory().subscribe({
       next: (response) => {
         this.categoryList = response
+        console.log(response);
 
       },
       error: (error) => {
@@ -35,11 +54,37 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
       }
     })
+    this.getdata()
+  }
 
+  getdata() {
+    this.service.getpraticelibrary().subscribe({
+      next: (response) => {
+        this.data = response
+        this.data = this.data.reverse()
+        console.log(response);
+
+        this.dataSource = new MatTableDataSource<any>(this.data)
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
   }
 
   ngOnInit(): void {
     this.addmediaform = this.formbuilder.group({
+      praticelibraryId: [null],
+
       category: [null, Validators.compose([Validators.required])],
       videolink: [null, Validators.compose([Validators.required])],
       videotitle: [null, Validators.compose([Validators.required])],
@@ -47,6 +92,14 @@ export class CreatePraticeLibraryComponent implements OnInit {
       videoduration: [null, Validators.compose([Validators.required])],
       vidoemetakeywords: [null, Validators.compose([Validators.required])]
     })
+  }
+
+  ngAfterViewInit() {
+    this.filterData.dataSource.paginator = this.paginator;
+
+  }
+  updatePagination(col: any) {
+    this.filterData.dataSource.paginator = this.paginator;
   }
 
   opensnackBar(data: any) {
@@ -60,12 +113,56 @@ export class CreatePraticeLibraryComponent implements OnInit {
       this.categoryerror = false
   }
 
-  gobutton() {
-    if (this.category)
-      this.displaycontent = true
-    else
-      this.categoryerror = true
+  addlibrary() {
+    this.displaycontent = !this.displaycontent
   }
+
+  compareselect(obj1: any, obj2: any) {
+    return obj1 && obj2 && obj1.categoriesId === obj2
+  }
+
+  viewdetails(element: any) {
+
+  }
+  deletedetails(id: any) {
+
+    const body = {
+      "coursesId": id,
+    }
+
+    this.service.deletelibrary(body).subscribe({
+      next: (response) => {
+        this.opensnackBar(response)
+        this.addmediaform.reset()
+        this.getdata()
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    })
+
+  }
+  editdetails(element: any) {
+    console.log(element);
+
+    this.addmediaform.setValue({
+      praticelibraryId: element.praticeLibaryId,
+      category: element.categoryId,
+      videolink: element.videoLink,
+      videotitle: element.title,
+      videodescription: element.message,
+      videoduration: element.duration,
+      vidoemetakeywords: element.metaKeyword,
+    });
+    this.iseditable = true
+    this.displaycontent = true
+  }
+
+  reseteditable() {
+    this.addmediaform.reset()
+    this.iseditable = false
+  }
+
 
 
   addmedia() {
@@ -73,7 +170,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
     if (this.addmediaform.valid) {
 
-      const { category, videolink, videotitle, videodescription, videoduration, vidoemetakeywords } = this.addmediaform.value
+      const { praticelibraryId, category, videolink, videotitle, videodescription, videoduration, vidoemetakeywords } = this.addmediaform.value
 
 
       const body = {
@@ -86,13 +183,41 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
       console.log(body);
 
-      this.service.postpraticelibrary(body, category).subscribe({
+      if (this.iseditable) {
+        //editable
+        const body = {
+          "praticeLibaryId": praticelibraryId,
+          "videoLink": videolink,
+          "duration": videoduration,
+          "title": videotitle,
+          "message": videodescription,
+          "metaKeyword": vidoemetakeywords
+        }
+        this.service.updatelibrary(body)?.subscribe({
+          next: (response) => {
+            this.addmediaform.reset()
+            // this.opensnackBar(response)
+            this.opensnackBar({ message: "Library Created" })
+            this.getdata()
+
+          },
+          error: (error) => {
+            console.error(error.message);
+
+          }
+        })
+        return
+      }
+
+
+
+      this.service.postpraticelibrary(body, category)?.subscribe({
         next: (response) => {
 
           this.addmediaform.reset()
           // this.opensnackBar(response)
           this.opensnackBar({ message: "Library Created" })
-
+          this.getdata()
         },
         error: (error) => {
           console.error(error.message);
