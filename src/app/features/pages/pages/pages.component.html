@@ -1,11 +1,11 @@
 <div class="ConfigurationTypes_textpadding  ">
   <div class="row d-flex flex-wrap">
     <div class="col-7">
-      <h3 class="mb-4 pl-2 text-secondary"> Pages </h3>
+      <h4> Pages </h4>
     </div>
     <div class="col-5 d-flex justify-content-end flex-wrap">
-      <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark">Add Page</button>
-      <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark">Manage Page</button>
+      <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark" (click)="onaddpage()">Add Page</button>
+      <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark" disabled="true" (click)="onManage()">Manage Page</button>
     </div>
   </div>
   <div class=" rounded mt-3 mat-elevation-z8 table-responsive">
@@ -90,15 +90,16 @@
           <input matInput type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
             [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 90%;" class="mx-2" />
         </th>
-        <td mat-cell *matCellDef="let element" class="col px-2 text-center text-muted"> <i
-            class="fa-sharp fa-solid fa-pen action" matTooltip="Edit"
-            aria-label="Button that displays a tooltip when focused or hovered over"></i>
-          <i class="fa-sharp fa-solid fa-trash action mx-4" matTooltip="Delete"
-            aria-label="Button that displays a tooltip when focused or hovered over"></i>
-          <i class="fa-solid fa-file-lines action" matTooltip="Draft"
-            aria-label="Button that displays a tooltip when focused or hovered over"></i>
+        <td mat-cell *matCellDef="let element" class="col px-2 text-center text-muted"> 
+          <span matTooltip="Edit"  (click)="onEditRole(element.Pagename)"> <i
+            class="fas fa-pencil-alt" aria-hidden="true"></i> </span>
+    <span matTooltip="Delete" style="cursor: pointer;" class="mx-2"
+        (click)="onRoleDelete(element.Pagename)"> <i class="far fa-trash-alt" aria-hidden="true"></i> </span>
+        <span matTooltip="Draft" style="cursor: pointer;" 
+        (click)="onRoleDraft(element.Pagename)"> <i class="fa-solid fa-file-pen fa-lg"></i> </span>
         </td>
       </ng-container>
+      <i class="fa-sharp fa-solid fa-floppy-disks"></i>
 
 
 

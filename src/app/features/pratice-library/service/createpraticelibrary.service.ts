@@ -7,39 +7,35 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 export class CreatepraticelibraryService extends BaseHttp {
 
   postrecordsessionURL = "libary/praticeLibary?operation=recordsession"
-
   postshortvideoURL = "libary/praticeLibary?operation=shortvideo"
-
   postglimpseURL = "libary/praticeLibary?operation=glimpses"
-
-  postliveclassURL = ""
-
   getcategoryURL = "libary/getAllLibary?operation=categorylibary"
+  praticelistURl = "libary/getAllLibary?operation=praticelibary"
 
+  deletepraticeURL = ""
+  updatepraticeURL = ""
 
+  getpraticelibrary() {
+    return this.get(this.praticelistURl)
+  }
   getcategory() {
     return this.get(this.getcategoryURL)
   }
-
   postpraticelibrary(body: any, type: any) {
-    let postURL = ""
-
-
     if (type === 1)
-      postURL = this.postrecordsessionURL
-
-    if (type === 2)
-      postURL = this.postliveclassURL
-
+      return this.post(this.postrecordsessionURL, body)
     if (type === 3)
-      postURL = this.postglimpseURL
-
+      return this.post(this.postglimpseURL, body)
     if (type === 4)
-      postURL = this.postshortvideoURL
+      return this.post(this.postshortvideoURL, body)
 
+    return
+  }
 
-    console.log(postURL);
-
-    return this.post(postURL, body)
+  deletelibrary(body: any) {
+    return this.post(this.deletepraticeURL, body)
+  }
+  updatelibrary(body: any) {
+    return this.post(this.updatepraticeURL, body)
   }
 }

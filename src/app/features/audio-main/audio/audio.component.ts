@@ -13,6 +13,7 @@ export class AudioComponent implements OnInit {
   filerror: boolean = false
   audiodata!: any
   courses!: any;
+  coursedata!:any
 
   // this. Audiomanagement = this.formbuilder.group({
   //   course: [null, Validators.compose([Validators.required])],
@@ -23,7 +24,7 @@ export class AudioComponent implements OnInit {
   //   description: [null, Validators.compose([Validators.required])],
 
 
-  constructor(private formbuilder: FormBuilder, private course:AudioService) {
+  constructor(private formbuilder: FormBuilder, private course: AudioService) {
     this.Audiomanagement = this.formbuilder.group({
       category: [null, Validators.compose([Validators.required])],
       outline: [null, Validators.compose([Validators.required])],
@@ -60,6 +61,11 @@ export class AudioComponent implements OnInit {
     //   duration: [null, Validators.compose([Validators.required])],
     //   meta: [null, Validators.compose([Validators.required])],
     // }
+  }
+
+  gobutton()
+  {
+    
   }
 
   filechange(event: any) {

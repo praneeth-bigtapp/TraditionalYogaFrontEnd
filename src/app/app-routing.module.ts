@@ -91,11 +91,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/Photo-gallery/photo-gallery.module').then((m) => m.PhotoGalleryModule)
   },
-  {
-    path: '',
-    loadChildren: () =>
-      import('./features/addpages/addpages.module').then((m) => m.AddpagesModule)
-  },
+  
   {
     path: '',
     loadChildren: () =>

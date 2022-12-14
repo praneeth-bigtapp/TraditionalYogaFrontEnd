@@ -45,8 +45,6 @@ export class ListOfPracticeLibrarysComponent implements OnInit {
         for (let col of this.filterData.filterColumnNames) {
           col.Value = '';
         }
-
-
       },
       error: (error) => {
         console.error(error.message);
@@ -65,8 +63,6 @@ export class ListOfPracticeLibrarysComponent implements OnInit {
   }
   updatePagination(col: any) {
     this.filterData.dataSource.paginator = this.paginator;
-
-    // this.dataSource.paginator = this.paginator;
   }
 
 }

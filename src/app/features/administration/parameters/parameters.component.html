@@ -4,26 +4,28 @@
     <div class="bg-white  border p-4">
 
         <div class="row border-bottom">
-            <div class="col-md-4     d-flex">
+            <div class=" ">
+                <div class=" row ">
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Select Course</mat-label>
+                            <mat-select [(ngModel)]="coursename" (ngModelChange)="coursechange()">
+                                <mat-option *ngFor="let course of courselist" [value]="course.coursesId">
+                                    {{course.coursesName}}</mat-option>
+                            </mat-select>
+                            <span class="text-dark" *ngIf="courserror">
+                                Please Select Category
+                            </span>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" (click)="gobutton()"
+                            class="btn btn-outline-secondary btn-go btn-rounded d-inline-block m-2 border border-dark">
+                            Go
+                        </button>
+                    </div>
+                </div>
 
-                <div class="w-50">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Select Course</mat-label>
-                        <mat-select [(ngModel)]="coursename" (ngModelChange)="coursechange()">
-                            <mat-option *ngFor="let course of courselist" [value]="course.coursesId">
-                                {{course.coursesName}}</mat-option>
-                        </mat-select>
-                        <span class="text-danger" *ngIf="courserror">
-                            Select Course
-                        </span>
-                    </mat-form-field>
-                </div>
-                <div class="w-25">
-                    <button type="button" (click)="gobutton()"
-                        class="btn btn-outline-secondary btn-rounded d-inline-block  ml-2 mt-3 ">
-                        Go
-                    </button>
-                </div>
             </div>
 
             <div class="col" *ngIf="displaycontent">

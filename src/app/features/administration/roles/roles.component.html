@@ -79,8 +79,8 @@
             <td mat-cell *matCellDef="let element">
                 <mat-slide-toggle [checked]="element.active == 'Y'? true : false"
                     (change)="onActivateRole(element,$event)"></mat-slide-toggle>
-                <span matTooltip="Edit" *ngIf="!!pagePermissions.Edit" (click)="onEditRole(element)"> <i
-                        class="fas fa-pencil-alt" aria-hidden="true"></i> </span>
+                <span matTooltip="Edit" *ngIf="!!pagePermissions.Edit" (click)="onEditRole(element)">
+                     <i  class="fas fa-pencil-alt" aria-hidden="true"></i> </span>
                 <span matTooltip="Delete" style="cursor: pointer;" *ngIf="!!pagePermissions.Delete"
                     (click)="onRoleDelete(element)"> <i class="far fa-trash-alt" aria-hidden="true"></i> </span>
             </td>

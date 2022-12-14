@@ -1,9 +1,10 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pages',
@@ -25,13 +26,14 @@ export class PagesComponent implements OnInit {
   filterData: any
   gridData: any;
 
-
+  elementvalue={}
   dataSource: any;
   displayedColumns: string[] = ["Checkbox", "Pagename", "Author", 'Dateofpublish','lastmodified', 'link', 'status', 'Action'];
 
-  constructor(private formbuilder: FormBuilder) { }
+  constructor(private formbuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
+    
     this.filterData = {
       filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
       gridData: this.gridData,
@@ -73,5 +75,19 @@ export class PagesComponent implements OnInit {
       this.selection.clear() :
       this.filterData.dataSource.data.forEach((row: any) => this.selection.select(row));
   }
+  onEditRole(element:any){
+    this.router.navigate(["addpages",element]);
+  }
+  onRoleDelete(element:any){
 
+  }
+  onRoleDraft(element:any){
+    this.router.navigate(["addpages",element]);
+  }
+  onaddpage(){
+    this.router.navigate(["addpages",'null']);
+  }
+  onManage(){
+    // this.router.navigateByUrl("pages");
+  }
 }

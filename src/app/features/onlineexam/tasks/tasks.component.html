@@ -1,11 +1,11 @@
 <div class="ConfigurationTypes_textpadding p-5 ">
-        <!-- remove bg-light -->
+    <!-- remove bg-light -->
 
     <h3 class="mb-4 pl-2 text-secondary ">Task Assignment</h3>
     <div class="bg-white  border ">
-        <div class="d-flex flex-wrap  justify-content-between align-items-center px-4 pt-2">
+        <div class="row align-items-center px-4 pt-2">
 
-            <div class="d-flex flex-row justify-content-between  flex-wrap   ">
+            <!-- <div class="d-flex flex-row justify-content-between  flex-wrap   ">
                 <div class="">
                     <mat-form-field appearance="outline">
                         <mat-label>Select Course</mat-label>
@@ -13,25 +13,49 @@
                             <mat-option *ngFor="let course of courseList" [value]="course.coursesId">
                                 {{course.coursesName}}</mat-option>
                         </mat-select>
-                        <span class="text-danger" *ngIf="courserror">
+                        <span class="text-dark mat-error" *ngIf="courserror">
                             Please Select Course
                         </span>
+
                     </mat-form-field>
                 </div>
                 <div class="mt-md-3 ml-1">
                     <button type="button" (click)="gobutton()"
-                        class="btn btn-outline-secondary btn-rounded d-inline-block "> Go
+                        class="btn btn-outline-secondary btn-go btn-rounded d-inline-block "> Go
                     </button>
+                </div>
+
+            </div> -->
+            <div class="col-md-8">
+                <div class=" row ">
+                    <div class="col-md-8">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Select Course</mat-label>
+                            <mat-select [(ngModel)]="course" (ngModelChange)="coursechange()">
+                                <mat-option *ngFor="let course of courseList" [value]="course.coursesId">
+                                    {{course.coursesName}}</mat-option>
+                            </mat-select>
+                            <span class="text-danger" *ngIf="courserror">
+                                Please Select Category
+                            </span>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" (click)="gobutton()"
+                            class="btn btn-outline-secondary btn-go btn-rounded d-inline-block m-2 border border-dark">
+                            Go
+                        </button>
+                    </div>
                 </div>
 
             </div>
             <br /><br /><br />
-            <div class="d-flex flex-row flex-wrap justify-content-between  ">
+            <div class="col-md-4 ">
                 <div class="" *ngIf="displaycontent">
                     <button type="button" (click)="createtask()"
                         class="btn btn-outline-secondary btn-rounded d-inline-block mb-md-3 ">
                         <!-- <i class="fa-sharp fa-solid fa-plus"></i> -->
-                         Create Task
+                        Create Task
                     </button>
                 </div>
             </div>

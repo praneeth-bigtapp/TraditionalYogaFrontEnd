@@ -26,9 +26,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
+<<<<<<< HEAD
                             <label> Select Role</label>
                             <mat-form-field appearance="outline">
                                 <!-- <mat-label>Select Role</mat-label> -->
+=======
+                            <mat-form-field appearance="outline">
+                                <mat-label>Select Role</mat-label>
+>>>>>>> 35fbf401207182ac0bc8a21b920783c6650ea31c
                                 <mat-select formControlName="roleId" required>
                                     <mat-option>Select Role</mat-option>
                                     <mat-option *ngFor="let role of RolesList" [value]="role.roleId">{{role.roleName}}
@@ -44,9 +49,14 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
+<<<<<<< HEAD
                             <label> First Name</label>
                             <mat-form-field appearance="outline">
                                 <!-- <mat-label>First Name</mat-label> -->
+=======
+                            <mat-form-field appearance="outline">
+                                <mat-label>First Name</mat-label>
+>>>>>>> 35fbf401207182ac0bc8a21b920783c6650ea31c
                                 <input matInput autocomplete="off" formControlName="firstName" required>
                                 <mat-error *ngIf="AddUserForm.controls['firstName'].hasError('required')">First name is
                                     required
@@ -56,9 +66,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
+<<<<<<< HEAD
                             <label> Last Name</label>
                             <mat-form-field appearance="outline">
                                 <!-- <mat-label>Last Name</mat-label> -->
+=======
+                            <mat-form-field appearance="outline">
+                                <mat-label>Last Name</mat-label>
+>>>>>>> 35fbf401207182ac0bc8a21b920783c6650ea31c
                                 <input matInput autocomplete="off" formControlName="lastName" required>
                                 <mat-error *ngIf="AddUserForm.controls['lastName'].hasError('required')">Last name is
                                     required
@@ -72,9 +87,14 @@
 
                     <div class="col-md-6">
                         <div class="mb-3">
+<<<<<<< HEAD
                             <label>Email Id</label>
                             <mat-form-field appearance="outline">
                                 <!-- <mat-label>Email Id</mat-label> -->
+=======
+                            <mat-form-field appearance="outline">
+                                <mat-label>Email Id</mat-label>
+>>>>>>> 35fbf401207182ac0bc8a21b920783c6650ea31c
                                 <input type="email" autocomplete="off" matInput formControlName="email" required>
                                 <mat-error *ngFor="let validation of validation_messages.email_id">
                                     <!-- <span *ngIf="AddUserForm.get('email').hasError(validation.type)">
@@ -86,9 +106,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
+<<<<<<< HEAD
                             <label> Mobile</label>
                             <mat-form-field appearance="outline">
                                 <!-- <mat-label>Mobile</mat-label> -->
+=======
+                            <mat-form-field appearance="outline">
+                                <mat-label>Mobile</mat-label>
+>>>>>>> 35fbf401207182ac0bc8a21b920783c6650ea31c
                                 <input matInput formControlName="mobileNumber" onCopy="return false"
                                     onDrag="return false" onDrop="return false" onPaste="return false" autocomplete=off
                                     (keypress)="onKeyPress($event)" cmsRestrictInput="onlyNumbers" type="text" required
@@ -107,9 +132,14 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
+<<<<<<< HEAD
                             <label> Password</label>
                             <mat-form-field appearance="outline">
                                 <!-- <mat-label>Password</mat-label> -->
+=======
+                            <mat-form-field appearance="outline">
+                                <mat-label>Password</mat-label>
+>>>>>>> 35fbf401207182ac0bc8a21b920783c6650ea31c
                                 <input [type]="show_password ? 'text' : 'password'" matInput autocomplete="off"
                                     formControlName="password">
                                 <span class="input-group-addon" matSuffix>
