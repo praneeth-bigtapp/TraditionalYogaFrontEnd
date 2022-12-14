@@ -3,7 +3,7 @@
 }
 
 .dragarea {
-    font-size: 1.5rem;
+
     border: 3px solid #bbb;
     padding: 1.5rem;
     background-color: #fff;
@@ -11,7 +11,7 @@
 }
 
 .droparea {
-    font-size: 1.5rem;
+
     border: 3px dashed #bbb;
     padding: 1.5rem;
     background-color: #eff;

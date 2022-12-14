@@ -5,12 +5,12 @@ body {
     height: 100%;
     background: url(assets/images/Admin-template-bg.jpg);
     background-size: 100%;
+    font-size: 14px;
 }
 
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
     color: #252F24;
 }
 .Error.mat-snack-bar-container{

@@ -12,16 +12,17 @@
 <!-- Masthead-->
 <div class="container-fluid">
     <div class="container-padding">
-        <div class="signup-content row">
-            <div class="signup-form col-md-5 pt-5">
-                <h2 class="form-title">Traditional yoga </h2>
-                <form class="login-form" [formGroup]="LoginForm" (ngSubmit)="onSignIn()">
-                    <h6> User Login </h6>
+        <div class="signup-content row pt-5">
+            <div class="signup-form col-md-5 pt-5 mt-5">
+                <!-- <h2 class="form-title">Traditional yoga </h2> -->
+                <form class="login-form " [formGroup]="LoginForm" (ngSubmit)="onSignIn()">
+                    <h3> User Login </h3>
                     <div *ngIf="errorFlag">
                         <mat-error>{{authorizationMessage}}</mat-error>
                     </div><br>
                     <div class="form-group inrne-addon ">
-                        <mat-form-field>
+                        <label> Login ID </label>
+                        <mat-form-field appearance="outline" autofill="none">
                             <input matInput type="text" autocomplete="off" name="email" id="email"
                                 placeholder=" Login ID" formControlName="email">
                             <span matPrefix> <i class="far fa-user" aria-hidden="true"></i> </span>
@@ -31,9 +32,10 @@
                                 </span>
                             </mat-error>
                         </mat-form-field>
-                    </div>
+                    </div> <br>
                     <div class="form-group inner-addon">
-                        <mat-form-field>
+                        <label> Password </label>
+                        <mat-form-field appearance="outline" autofill="none">
                             <input matInput type="password" name="password" id="password" placeholder="Password"
                                 formControlName="password" />
                             <span matPrefix> <i class="fas fa-key" aria-hidden="true"></i> </span>
@@ -44,15 +46,16 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
+                    <br>
                     <div class="form-group form-button float-right">
-                        <button type="submit" name="signup" id="signup" class="btn login-button btn-rounded ">
-                            <i class="fa fa-sign-in-alt " aria-hidden="true"></i>
+                        <button type="submit" name="signup" id="signup" class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                            <!-- <i class="fa fa-sign-in-alt mt-2 " aria-hidden="true"></i> -->
                             <span>Login</span>
                         </button>
                     </div>
                     <div class="form-group form-button float-left">
-                        <button type="button" name="register" id="register" class="btn login-button btn-rounded" (click)="onRegister()">
-                            <i class="fa fa-user-plus" aria-hidden="true"></i>
+                        <button type="button" name="register" id="register" class="btn btn-outline-secondary btn-rounded d-inline-block" (click)="onRegister()">
+                            <!-- <i class="fa fa-user-plus mt-2" aria-hidden="true"></i> -->
                             <span>Member Register</span>
                         </button>
                     </div>
