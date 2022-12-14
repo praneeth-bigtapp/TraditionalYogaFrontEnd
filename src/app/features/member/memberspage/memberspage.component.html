@@ -2,24 +2,44 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/addCourse">Course Management</a></li>
+
             <li class="breadcrumb-item active" aria-current="page">Members</li>
         </ol>
     </nav>
-    <div class="d-flex mb-2 flex-wrap  justify-content-between align-items-center">
+
+    <!-- <div class="d-flex mb-2 flex-wrap  justify-content-between align-items-center">
         <h3 class=" pl-2 text-secondary ">Members</h3>
-        <div class="row align-items-center  ">
-            <div class="col-md-12">
-                <mat-form-field appearance="outline">
+    </div> -->
+    <br />
+    <div class="card  bg-secondary">
+        <div class="card-header text-white bg-secondary">
+            Members
+        </div>
+        <div class="card-body  bg-white  py-2">
+
+            <div class="row align-items-center">
+                <div class="col-md-4">
                     <label>Select Course</label>
-                    <mat-select [(ngModel)]="category" (ngModelChange)="coursechange()">
-                        <mat-option *ngFor="let course of courselist" [value]="course.coursesId">
-                            {{course.coursesName}}</mat-option>
-                    </mat-select>
-                    <span class="text-dark" *ngIf="categoryerror">
+                    <mat-form-field appearance="outline">
+                        <mat-select [(ngModel)]="category">
+                            <mat-option *ngFor="let course of courselist" [value]="course.coursesId">
+                                {{course.coursesName}}</mat-option>
+                        </mat-select>
+
+                    </mat-form-field>
+                    <span class="mat-error" *ngIf="categoryerror">
                         Please Select Category
                     </span>
-                </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <button type="button" (click)="coursechange()"
+                        class="btn btn-outline-secondary btn-rounded d-inline-block mt-3 ml-md-1">
+                        Submit
+                    </button>
+                </div>
             </div>
+
         </div>
     </div>
 
@@ -30,10 +50,10 @@
         <div class="card-body bg-white  py-2">
             <div class="row align-items-center">
                 <div class="col-md-4">
-                    <h4>Total Number of Users Applied : <span>{{totalUserApplied}}</span></h4>
+                    <h4>Total Number of Users Applied : <span>{{totalUserApplied | number}}</span></h4>
                 </div>
                 <div class="col-md-4">
-                    <h4>Number of users mapped : <span>{{totalUser}}</span></h4>
+                    <h4>Number of users mapped : <span>{{totalUser | number}}</span></h4>
                 </div>
                 <div class="col-md-4">
                     <button type="button"
@@ -220,136 +240,149 @@
         </div>
 
     </div>
-    <table mat-table [hidden]="!displaycontent" [dataSource]="filterData.dataSource" matSort
-        class="mat-elevation-z8 mat-datagrid w-100" aria-label="users">
-        <ng-container matColumnDef="studentId">
-            <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
-                <label mat-sort-header>
-                    S.No
-                </label>
-                <!-- <input type="text" (keyup)="updatePagination('courseId')"
-                    [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" /> -->
-            </th>
-            <td mat-cell class="text-center" *matCellDef="let i=index"> {{i+1}} </td>
-        </ng-container>
 
-        <ng-container matColumnDef="Image">
-            <th mat-header-cell *matHeaderCellDef scope="col">
-                <label mat-sort-header>
-                    Image
-                </label>
-                <!-- <input type="text" (keyup)="updatePagination('category')"
-            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" /> -->
-            </th>
-            <td mat-cell class="text-center" *matCellDef="let element">
+    <div class="card " [hidden]="!displaycontent">
+        <div class="card-header text-white bg-secondary">
+            Members
+        </div>
+        <div class="card-body bg-transparent px-0 py-2">
 
-                <img src="../../../../assets/images/user-profile.png" width="20" alt="user pic" />
+            <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
+                aria-label="users">
+                <ng-container matColumnDef="studentId">
+                    <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
+                        <label mat-sort-header>
+                            S.No
+                        </label>
+                        <!-- <input type="text" (keyup)="updatePagination('courseId')"
+                        [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" /> -->
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let i=index"> {{i+1}} </td>
+                </ng-container>
 
-            </td>
-        </ng-container>
+                <ng-container matColumnDef="Image">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Image
+                        </label>
+                        <!-- <input type="text" (keyup)="updatePagination('category')"
+                [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" /> -->
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element">
 
-        <ng-container matColumnDef="name">
+                        <img src="../../../../assets/images/user-profile.png" width="20" alt="user pic" />
 
-            <th mat-header-cell *matHeaderCellDef scope="col">
-                <label mat-sort-header>
-                    Name
-                </label>
-                <input type="text" (keyup)="updatePagination('courseName')"
-                    [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
-            </th>
-            <td mat-cell class="text-center" *matCellDef="let element"> {{element.name |titlecase}} </td>
-        </ng-container>
+                    </td>
+                </ng-container>
 
-        <ng-container matColumnDef="emailId">
-            <th mat-header-cell *matHeaderCellDef scope="col-2">
-                <label mat-sort-header>
-                    Email id
-                </label>
-                <input type="text" (keyup)="updatePagination('courseDuration')"
-                    [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
-            </th>
-            <td mat-cell class="text-center col-2" *matCellDef="let element"> {{element.emailId || "Nil" }} </td>
-        </ng-container>
+                <ng-container matColumnDef="name">
 
-        <ng-container matColumnDef="address">
-            <th mat-header-cell *matHeaderCellDef scope="col">
-                <label mat-sort-header>
-                    Country
-                </label>
-                <input type="text" (keyup)="updatePagination('startDate')"
-                    [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
-            </th>
-            <td mat-cell class="text-center" *matCellDef="let element"> {{element.address || "Nil"}} </td>
-        </ng-container>
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Name
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseName')"
+                            [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.name |titlecase}} </td>
+                </ng-container>
 
-        <ng-container matColumnDef="genderId">
-            <th mat-header-cell *matHeaderCellDef scope="col">
-                <label mat-sort-header>
-                    Gender
-                </label>
-                <input type="text" (keyup)="updatePagination('endDate')"
-                    [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="filterData" />
-            </th>
-            <td mat-cell class="text-center" *matCellDef="let element "> {{element.genderId }} </td>
-        </ng-container>
+                <ng-container matColumnDef="emailId">
+                    <th mat-header-cell *matHeaderCellDef scope="col-2">
+                        <label mat-sort-header>
+                            Email id
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseDuration')"
+                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center col-2" *matCellDef="let element"> {{element.emailId || "Nil" }}
+                    </td>
+                </ng-container>
 
-        <ng-container matColumnDef="mentorId">
-            <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
-                <label mat-sort-header>
-                    Mentor
-                </label>
-                <input type="text" (keyup)="updatePagination('currentStatus')"
-                    [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
-            </th>
-            <td mat-cell class="text-center" *matCellDef="let element "> {{element.mentorId || "Nil" }} </td>
+                <ng-container matColumnDef="address">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Country
+                        </label>
+                        <input type="text" (keyup)="updatePagination('startDate')"
+                            [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.address || "Nil"}} </td>
+                </ng-container>
 
-        </ng-container>
+                <ng-container matColumnDef="genderId">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Gender
+                        </label>
+                        <input type="text" (keyup)="updatePagination('endDate')"
+                            [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element "> {{element.genderId }} </td>
+                </ng-container>
 
-        <ng-container matColumnDef="ChiefMentorId">
-            <th mat-header-cell *matHeaderCellDef scope="col-3">
-                <label mat-sort-header>
-                    Chief Mentor
-                </label>
-                <input type="text" (keyup)="updatePagination('currentStatus')"
-                    [(ngModel)]="filterData.filterColumnNames[7].Value" [filter]="filterData" />
-            </th>
-            <td mat-cell class="text-center col-md-2" *matCellDef="let element "> {{element.ChiefMentorId || "Nil"}}
-            </td>
+                <ng-container matColumnDef="mentorId">
+                    <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
+                        <label mat-sort-header>
+                            Mentor
+                        </label>
+                        <input type="text" (keyup)="updatePagination('currentStatus')"
+                            [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element "> {{element.mentorId || "Nil" }} </td>
 
-        </ng-container>
+                </ng-container>
 
-        <ng-container matColumnDef="Status">
-            <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
-                <label mat-sort-header>
-                    Status
-                </label>
-                <input type="text" (keyup)="updatePagination('currentStatus')"
-                    [(ngModel)]="filterData.filterColumnNames[7].Value" [filter]="filterData" />
-            </th>
-            <td mat-cell class="text-center" *matCellDef="let element "> {{element.Status || "Nil"}} </td>
+                <ng-container matColumnDef="ChiefMentorId">
+                    <th mat-header-cell *matHeaderCellDef scope="col-3">
+                        <label mat-sort-header>
+                            Chief Mentor
+                        </label>
+                        <input type="text" (keyup)="updatePagination('currentStatus')"
+                            [(ngModel)]="filterData.filterColumnNames[7].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center col-md-2" *matCellDef="let element "> {{element.ChiefMentorId ||
+                        "Nil"}}
+                    </td>
 
-        </ng-container>
+                </ng-container>
 
-        <ng-container matColumnDef="View_Profile">
-            <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
-                <label mat-sort-header>
-                    Action
-                </label>
+                <ng-container matColumnDef="Status">
+                    <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
+                        <label mat-sort-header>
+                            Status
+                        </label>
+                        <input type="text" (keyup)="updatePagination('currentStatus')"
+                            [(ngModel)]="filterData.filterColumnNames[7].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element "> {{element.Status || "Nil"}} </td>
 
-            </th>
-            <td mat-cell class="text-center" *matCellDef="let element ">
+                </ng-container>
 
-                <i class="fa-solid fa-eye fs-5 text-info" (click)="viewprofile(element)"
-                    matTooltip="View Course Activity" matTooltip="View"></i>
-            </td>
+                <ng-container matColumnDef="View_Profile">
+                    <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
+                        <label mat-sort-header>
+                            Action
+                        </label>
 
-        </ng-container>
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element ">
+
+                        <i class="fa-solid fa-eye fs-5 text-info" (click)="viewprofile(element)"
+                            matTooltip="View Course Activity" matTooltip="View"></i>
+                    </td>
+
+                </ng-container>
 
 
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <mat-paginator [hidden]="!displaycontent" class="" [pageSizeOptions]="[10,25, 50,75, 100]" aria-label="Select page">
-    </mat-paginator>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [hidden]="!displaycontent" class="bg-transparent" [pageSizeOptions]="[10,25, 50,75, 100]"
+                aria-label="Select page">
+            </mat-paginator>
+        </div>
+    </div>
+
 </div>

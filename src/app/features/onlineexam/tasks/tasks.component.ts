@@ -138,8 +138,15 @@ export class TasksComponent implements OnInit {
 
   coursechange() {
 
+    if (!this.course) {
+      this.courserror = true
+      return
+    }
     this.gettask(this.course)
+
     this.displaycontent = true
+
+    this.courserror = false
 
 
 

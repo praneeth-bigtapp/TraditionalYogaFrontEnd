@@ -16,6 +16,9 @@ export class AlertComponent implements OnInit {
   filerror!: boolean
   filedata!: any
 
+  displaycontent: boolean = true
+  iseditable: boolean = false
+
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -75,6 +78,9 @@ export class AlertComponent implements OnInit {
     })
   }
 
+  addalert() {
+    this.displaycontent = !this.displaycontent
+  }
 
   onfilechange(event: any) {
 
