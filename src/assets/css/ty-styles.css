@@ -354,6 +354,10 @@ label {
     display: inline-block;
     margin: 0px;
     padding: 0px;
+    font-size: 14px;
+}
+table.mat-table label {
+    font-weight: bold;
 }
 
 button {

@@ -1,8 +1,7 @@
 @charset "utf-8";
 
 body {
-    /* font-family: 'muliregular', "Noto Sans SC", sans-serif; */
-    font-family: "Times New Roman", Times, serif;
+    font-family: 'Poppins', sans-serif !important;
 }
 
 h6,
@@ -419,7 +418,7 @@ textarea:focus {
     border-radius: 10px;
     display: table;
     width: 95%;
-    height: 30px;
+    height: 36px;
     background-color: #fff;
 }
 
@@ -443,10 +442,13 @@ textarea:focus {
 
 .mat-datagrid td.mat-footer-cell,
 .mat-datagrid th.mat-header-cell {
-    font-family: 'muliregular', "Noto Sans SC", sans-serif !important;
+    font-family: 'Poppins', sans-serif !important;
     padding: 5px 10px !important;
     margin-bottom: 5px !important;
     vertical-align: text-top !important;
+}
+.mat-table {
+    font-family: 'Poppins', sans-serif !important;
 }
 
 .mat-datagrid .mat-header-cell {
