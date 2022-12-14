@@ -1,14 +1,26 @@
-<div class="ConfigurationTypes_textpadding p-5 bg-light">
-    <h3 class="mb-4 pl-2 text-secondary"> Add Course Matrieals </h3>
+<div class="ConfigurationTypes_textpadding p-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="#/addCourse">Course Management</a></li>          
+          <li class="breadcrumb-item active" aria-current="page">  Add Course Matrieals </li>
+        </ol>
+      </nav>
 
+
+<div class="card mt-5">
+        <div class="card-header text-white bg-secondary" >
+            Add Course Matrieals 
+      </div>
    <div class="bg-white">
   
-    <div class="border-top bg-white pb-2">
+    <div class="card-body bg-white pb-2">
         <form [formGroup]="FormDeatils" (submit)="onsubmit()">
             <div class="row pt-2">
                 <div class="col-4 ml-4">
+                    <label>Select Course:</label>
+
                     <mat-form-field appearance="outline" >
-                        <mat-label>Select sourse</mat-label>
                         <select matNativeControl  formControlName="courses" >
                             <option value="" selected></option>
                             <option *ngFor="let item of courses" [value]="item.coursesId">{{item.coursesName}}
@@ -22,9 +34,10 @@
                     Course Material Category:
                 </div>
                 <div class="col-4">
+                    <label>Course Material Category:</label>
                     <mat-form-field class="pe-4"appearance="outline" >
                        
-                            <mat-label>Course Material Category</mat-label>
+                           
                             <select matNativeControl  formControlName="catogery" (change)="newOthers()" [(ngModel)]="othervalue">
                                 <option value="" selected></option>
                                 <option *ngFor="let item of catogeries" [value]="item.materialCategoryId">{{item.categoryName}}
@@ -43,6 +56,7 @@
                     Others Category:
                 </div>
                 <div class="col-4">
+                    <label>Others Category:</label>
                     <mat-form-field class="pe-4"appearance="outline" >
                        
                         <input matInput formControlName="others"  
@@ -56,6 +70,8 @@
                     Course Material Title:
                 </div>
                 <div class="col-8">
+                    <label>Course Material Title:</label>
+
                     <mat-form-field class="pe-4"appearance="outline" >
                        
                         <input matInput formControlName="coursetitle"  
@@ -69,9 +85,11 @@
                     Add Media:
                 </div>
                 <div class="col-4">
+                    <label>Add Media:</label>
+                    
                     <mat-form-field class="pe-4"appearance="outline" >
                        
-                            <mat-label>Add Media</mat-label>
+                            
                             <select matNativeControl  formControlName="addMedia">
                                 <option value="" selected></option>
                                 <option *ngFor="let item of media" [value]="item.mediaId">{{item.mediaType}}
@@ -88,6 +106,8 @@
                     Video Link:
                 </div>
                 <div class="col-8">
+                    <label>Video Link:</label>
+
                     <mat-form-field class="pe-4"appearance="outline" >
                        
                         <input matInput formControlName="videoLink"  
@@ -101,7 +121,8 @@
                     Upload:
                 </div>
                 <div class="col-7 mb-3">
-                    
+                    <label>Upload:</label>
+
                         <input class="border" type="file" id="formFile" formControlName="upload" required="true"  (change)="onfilechange()"/>
                         <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
                     
@@ -113,6 +134,8 @@
                     Message:
                 </div>
                 <div class="col-8">
+                    <label>Message:</label>
+
                     <mat-form-field class="pe-4"appearance="outline" >
                        
                         <textarea matInput formControlName="message" rows="8" 
@@ -122,11 +145,12 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end mb-3">
-                <button  class=" border-secondary border   px-5 me-3 btn-rounded" type="submit">Add</button>
+                <button  class=" btn btn-outline-secondary  btn-rounded d-inline-block m-2" type="submit">Add</button>
         
             </div>
             </form>
     </div>
+   </div>
    </div>
    <div  class=" rounded mt-3 mat-elevation-z8 mt-4 table-responsive">
     <table mat-table matSort [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid " >

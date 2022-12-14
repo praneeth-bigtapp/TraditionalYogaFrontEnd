@@ -8,7 +8,7 @@
         <li class="breadcrumb-item active" aria-current="page">Pages</li>
       </ol>
     </nav>
-    <div class="row d-flex flex-wrap">
+    <div class="row d-flex flex-wrap mb-3">
       <div class="col-7">
         <h4> Pages </h4>
       </div>
@@ -22,10 +22,11 @@
         <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark"(click)="   addPages() " *ngIf="!displaycontent"> Add Pages</button>
         <!-- <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark"(click)=" onManage()" >Manage Page</button> -->
       </div>
-    </div><br>
-  <form class=" card bg-white mt-3"  *ngIf="displaycontent">
+    </div>
+   
+  <form class=" card bg-white "  *ngIf="displaycontent">
     <h4 class="card-header text-white card bg-secondary"> Add Pages </h4>
-    <div class="row m-2">
+    <div class="row">
 
     
       <div class="mb-3  col-md-6">
@@ -132,6 +133,11 @@
   </form>
 
   <br>
+ <div class="card">
+  <div class="card-header text-white bg-secondary" >
+    Pages
+</div>
+
   <table mat-table matSort [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid ">
 
     <ng-container matColumnDef="Checkbox">
@@ -234,6 +240,7 @@
   <div class="col bg-white">
     <mat-paginator [pageSizeOptions]="[ 5,10,25, 50, 100]" aria-label="Select page"></mat-paginator>
   </div>
+ </div>
 
 
 </div>

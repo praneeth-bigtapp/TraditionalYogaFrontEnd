@@ -126,7 +126,7 @@ export class SendReceiveService {
       this.router.navigateByUrl("media");
     }
     else if (subMenuId == 21) {
-      this.router.navigateByUrl("coursesaddmedia");
+      this.router.navigateByUrl("coursemediapracticessession");
     }
     else if (subMenuId == 22) {
       this.router.navigateByUrl("audio");

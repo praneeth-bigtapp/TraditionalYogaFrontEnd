@@ -1,8 +1,20 @@
 <div class="ConfigurationTypes_textpadding p-5">
-  <h4 class="mb-3"> Blacklist Users </h4>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#/studentMaster/studentProfile">User Management</a></li>          
+      <li class="breadcrumb-item active" aria-current="page"> Blacklist Users </li>
+    </ol>
+  </nav>
 
-  <form class=" py-3 mb-4 card-body  bg-white row" [formGroup]="blacklistForm" (ngSubmit)="onBlockUser()">
 
+<div class="card mt-5">
+    <div class="card-header text-white bg-secondary" >
+      Blacklist Users
+  </div>
+
+  <form class=" py-3 mb-4 card-body  bg-white " [formGroup]="blacklistForm" (ngSubmit)="onBlockUser()">
+    <div class="row">
     <div class="col-6">
       <label>Email Id to BlackList</label>
       <mat-form-field  appearance="outline">
@@ -28,7 +40,10 @@
         type="submit">BlackList
       </button>
     </div>
+  </div>
   </form>
+  </div>
+  
 
   <div class=" mt-3 table-responsive mat-elevation-z8">
     <table mat-table [dataSource]="filterData.dataSource"matSort class="mat-elevation-z8 mat-datagrid ">
