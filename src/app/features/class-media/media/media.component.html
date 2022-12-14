@@ -1,28 +1,35 @@
 <div class="ConfigurationTypes_textpadding ">
     <!-- <h5>Class Media Update</h5> -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Class Media Update </li>
+        </ol>
+      </nav>
     <h3 class="mb-4 pl-2 text-secondary">Class Media Update</h3>
 
-    <div class="mt-5 bg-white">
+    <div class="mt-5 card-body bg-white">
 
         <div class="row px-2 " style="display: flex;">
             <div class="col-md-12">
                 <form [formGroup]="dateForm" (ngSubmit)="datefilter()" class="d-flex  flex-wrap flex-row mt-2">
                     <div class="mr-2 mt-2">
+                        <label>Select Course:</label>
+
                         <mat-form-field appearance="outline">
-                            <mat-label>Select Course</mat-label>
-                            <mat-select formControlName="checkbox">
+                            <mat-select formControlName="courseslist">
                                 <mat-option *ngFor="let course of courses" [value]="course.coursesId">
                                     {{course.coursesName}}</mat-option>
                             </mat-select>
-                            <mat-error [hidden]="!dateForm.get('checkbox')?.hasError('required')">
+                            <mat-error [hidden]="!dateForm.get('courseslist')?.hasError('required')">
                                 Please Select Course
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div>
+                        <label>Select date:</label>
 
                         <mat-form-field class="mt-2" appearance="outline">
-                            <mat-label>Select date</mat-label>
                             <input matInput placeholder="Ex. Pizza" value="Sushi" type="date" formControlName="date">
                             <mat-error [hidden]="!dateForm.get('date')?.hasError('required')">
                                 Please Select Date
@@ -31,7 +38,7 @@
                     </div>
                     <div class="mt-2">
                         <button type="submit"
-                            class="btn btn-outline-secondary btn-go btn-rounded d-inline-block m-2 border border-dark"
+                            class="btn btn-outline-secondary btn-go btn-rounded d-inline-block m-2 mt-4 border border-dark"
                             type="submit">Go</button>
                     </div>
                 </form>
@@ -40,87 +47,91 @@
 
         </div>
         <hr>
-        <div class="row px-4">
-            <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
-                aria-label="users">
-                <ng-container matColumnDef="classMediaId">
-                    <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
-                        <label mat-sort-header>
-                            S.No
-                        </label>
-                        <input type="text" (keyup)="updatePagination('courseId')"
-                            [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
-                    </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.classMediaId}} </td>
-                </ng-container>
-                <ng-container matColumnDef="date">
+        
 
-                    <th mat-header-cell *matHeaderCellDef scope="col">
-                        <label mat-sort-header>
-                            Date
-                        </label>
-                        <input type="text" (keyup)="updatePagination('courseName')"
-                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
-                    </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.date}} </td>
-                </ng-container>
+    </div>
+    <div class="  table-responsive">
+        <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
+           >
+            <ng-container matColumnDef="classMediaId">
+                <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
+                    <label mat-sort-header>
+                        S.No
+                    </label>
+                    <input type="text" (keyup)="updatePagination('courseId')"
+                        [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
+                </th>
+                <td mat-cell class="text-center" *matCellDef="let element"> {{element.classMediaId}} </td>
+            </ng-container>
+            <ng-container matColumnDef="date">
 
-                <ng-container matColumnDef="typeOfClass">
+                <th mat-header-cell *matHeaderCellDef scope="col">
+                    <label mat-sort-header>
+                        Date
+                    </label>
+                    <input type="text" (keyup)="updatePagination('courseName')"
+                        [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+                </th>
+                <td mat-cell class="text-center" *matCellDef="let element"> {{element.date}} </td>
+            </ng-container>
 
-                    <th mat-header-cell *matHeaderCellDef scope="col">
-                        <label mat-sort-header>
-                            Date
-                        </label>
-                        <input type="text" (keyup)="updatePagination('courseName')"
-                            [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
-                    </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.typeOfClass | titlecase}}
-                    </td>
-                </ng-container>
+            <ng-container matColumnDef="typeOfClass">
 
-                <ng-container matColumnDef="noOfMediaFiles">
-                    <th mat-header-cell *matHeaderCellDef scope="col">
-                        <label mat-sort-header>
-                            Number Of Media File Added
-                        </label>
-                        <input type="text" (keyup)="updatePagination('courseDuration')"
-                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
-                    </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.noOfMediaFiles}} </td>
-                </ng-container>
+                <th mat-header-cell *matHeaderCellDef scope="col">
+                    <label mat-sort-header>
+                        Date
+                    </label>
+                    <input type="text" (keyup)="updatePagination('courseName')"
+                        [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
+                </th>
+                <td mat-cell class="text-center" *matCellDef="let element"> {{element.typeOfClass | titlecase}}
+                </td>
+            </ng-container>
 
-                <ng-container matColumnDef="Action">
-                    <th mat-header-cell *matHeaderCellDef scope="col">
-                        <label mat-sort-header>
-                            Action
-                        </label>
+            <ng-container matColumnDef="noOfMediaFiles">
+                <th mat-header-cell *matHeaderCellDef scope="col">
+                    <label mat-sort-header>
+                        Number Of Media File Added
+                    </label>
+                    <input type="text" (keyup)="updatePagination('courseDuration')"
+                        [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
+                </th>
+                <td mat-cell class="text-center" *matCellDef="let element"> {{element.noOfMediaFiles}} </td>
+            </ng-container>
 
-                    </th>
-                    <td mat-cell class="text-center" *matCellDef="let element">
-                        <div class="row">
-                            <div class="col">
-                                <i class="fa-solid fa-eye" (click)="viewclassmedia(element)"
-                                    style="color: rgb(235, 156, 11) ;"></i>
-                            </div>
-                            <div class="col">
-                                <i class="fa-solid fa-pencil" (click)="editmedia(element)"></i>
+            <ng-container matColumnDef="Action">
+                <th mat-header-cell *matHeaderCellDef scope="col">
+                    <label mat-sort-header>
+                        Actions
+                    </label>
 
-                            </div>
+                </th>
+                <td mat-cell class="text-center" *matCellDef="let element">
+                    <div class="row">
+                        <div class="col">
+                          
+                                <i class="fa-solid fa-eye fs-5 text-info" (click)="viewclassmedia(element)"
+          matTooltip="View Course Activity" matTooltip="View"></i>
                         </div>
+                        <div class="col">
+                           
+                            <span matTooltip="Edit"  (click)="editmedia(element)"> <i
+                                class="fas fa-pencil-alt" aria-hidden="true"></i> </span>
 
-                    </td>
-                </ng-container>
+                        </div>
+                    </div>
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-            <br /><br />
-            <div class="bg-white d-flex  flex-row justify-content-end ">
-                <mat-paginator class="" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
-                </mat-paginator>
-            </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        
+        <div class="bg-white d-flex  flex-row justify-content-end ">
+            <mat-paginator class="" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
+            </mat-paginator>
         </div>
-
     </div>
 
 

@@ -10,7 +10,7 @@ const routes: Routes = [
 
   },
   {
-    path: "coursesaddmedia", component: CourseMediaPraticeComponent
+    path: "coursemediapracticessession", component: CourseMediaPraticeComponent
 
   },
   {

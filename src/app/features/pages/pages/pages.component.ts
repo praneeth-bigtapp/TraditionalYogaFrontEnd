@@ -15,14 +15,14 @@ export class PagesComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   selection = new SelectionModel<any>(true, []);
-  data = [{ "Pagename": "About US", "Author": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" },
-  { "Pagename": "About US", "Author": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" },
-  { "Pagename": "About US", "Author": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" },
-  { "Pagename": "About US", "Author": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" },
-  { "Pagename": "About US", "Author": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" },
-  { "Pagename": "About US", "Author": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" },
-  { "Pagename": "About US", "Author": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" },
-  { "Pagename": "About US", "Author": 'bdmin', 'Dateofpublish': '02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" }]
+  data = [{ "Pagename": "About US", "Author": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37',"lastmodified":'02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/aboutus", "status": "published" },
+  { "Pagename": "About US1", "Author": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37',"lastmodified":'02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status1": "published1" },
+  { "Pagename": "About US", "Author1": 'admin1', 'Dateofpublish': '02,Aug,2022, 12:30:37',"lastmodified":'03,Aug,2022, 12:30:37', "links": "https://tradiationalyoga.co.in/about", "status": "published" },
+  { "Pagename": "About US3", "Author": 'admin', 'Dateofpublish1': '04,Aug,2022, 12:30:37',"lastmodified":'02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published3" },
+  { "Pagename": "About US", "Author3": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37',"lastmodified":'02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status3": "published" },
+  { "Pagename": "About US", "Author": 'admin3', 'Dateofpublish3': '02,Aug,2022, 12:30:37',"lastmodified":'04,Aug,2022, 12:30:37', "linked": "https://tradiationalyoga.co.in/about", "status": "published" },
+  { "Pagename": "About US", "Author": 'admin', 'Dateofpublish': '03,Aug,2022, 12:30:37',"lastmodified":'02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" },
+  { "Pagename": "About US", "Author": 'bdmin', 'Dateofpublish': '02,Aug,2022, 12:30:37',"lastmodified":'02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" }]
   filterData: any
   gridData: any;
 

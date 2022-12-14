@@ -1,65 +1,70 @@
-<div class="ConfigurationTypes_textpadding p-5 bg-light">
-    <h3 class="mb-4 pl-2 text-secondary"> Mapping regions to chief mentor </h3>
-    <div class="bg-white border-bottom ">
-        <!-- <mat-form-field appearance="outline" class="col-3 mt-2">
-            <mat-label>Select Course</mat-label>
-            <mat-select [(ngModel)]="courses" (ngModelChange)="coursechange()">
-                <mat-option *ngFor="let course of courseList" [value]="course.courseId">
-                    {{course.courseName}}</mat-option>
-                    <mat-option value="volvo">Volvo</mat-option>
-                    <mat-option value="volvo">Volvo</mat-option>
-            </mat-select>
-            
-        </mat-form-field> -->
-<form [formGroup]="Countryform">
-        <mat-form-field appearance="outline"  class="col-3 mt-2">
-            <mat-label>Select Course</mat-label>
-            <input type="text" placeholder="Pick one" aria-label="Country" matInput
-            formControlName="countrydropdown" (valueChange)="coursechange()" [matAutocomplete]="auto">
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                <mat-option *ngFor="let country of countryfilter |async " [value]="country">
-                    {{country}}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
-    </form>
-    </div>
-    <div class="bg-white pt-4 border-bottom ">
+<div class="ConfigurationTypes_textpadding p-5 ">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Mapping regions to chief mentor</li>
+        </ol>
+      </nav>
+    <h3 class="mb-4 pl-2  text-secondary "> Mapping regions to chief mentor </h3>
+ 
+    <div class="bg-white pt-4 card-body">
         <form class="row d-flex flex-wrap" [formGroup]="searchform"  (ngSubmit)="searchby()" >
-     <div class="col-3 ml-3">
-        <mat-form-field appearance="outline" >
-            <mat-label>Select Regions</mat-label>
-            <mat-select formControlName="regionname" (ngModelChange)="coursechange()">
-                <!-- <mat-option *ngFor="let region of regionList" [value]="region.regionId">
-                    {{region.courseName}}</mat-option> -->
-                    <mat-option value="India">India</mat-option>
-                    <mat-option value="USA">USA</mat-option>
 
+       <div class="row">
+        <div class="col-3 ml-3">
+            <label>Select Course:</label>
+            <mat-form-field appearance="outline"  >
+                
+                <input type="text" placeholder="Pick one" aria-label="Country" matInput
+                formControlName="countrydropdown" (valueChange)="coursechange()" [matAutocomplete]="auto">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let country of countryfilter |async " [value]="country">
+                        {{country}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+        
+       </div>
+       <div class="row mb-2">
+        <div class="col-3 ml-3">
+            <label>Select Regions:</label>
+
+            <mat-form-field appearance="outline" >
+                <mat-select formControlName="regionname" (ngModelChange)="coursechange()">
+                    <!-- <mat-option *ngFor="let region of regionList" [value]="region.regionId">
+                        {{region.courseName}}</mat-option> -->
+                        <mat-option value="India">India</mat-option>
+                        <mat-option value="USA">USA</mat-option>
+    
+                       
+                </mat-select>
+                
+                </mat-form-field>
+               
+         </div>
+         
+            <div class="col-3">
+                <label>Chief mentor name:</label>
+
+                <mat-form-field appearance="outline" >
+                    <input matInput autocomplete="off" formControlName="mentorname" required
+                       >
                    
-            </mat-select>
-            
-            </mat-form-field>
-           
-     </div>
-     
-        <div class="col-3">
-            <mat-form-field appearance="outline" >
-                <mat-label>Chief mentor name</mat-label>
-                <input matInput autocomplete="off" formControlName="mentorname" required
-                   >
-               
-            </mat-form-field>
-        </div>
-        <div class="col-3"> 
-            <mat-form-field appearance="outline" >
-                <mat-label>Chief mentor user id</mat-label>
-                <input matInput autocomplete="off" formControlName="mentorid" required>
-               
-            </mat-form-field>
-        </div>
-        <div class="col-2 mt-3">
-            <button mat-button class="bg-light border-mutted border-2  py-1 btn-rounded " type="submit">Assign</button>
-        </div>
+                </mat-form-field>
+            </div>
+            <div class="col-3"> 
+                <label>Chief mentor user id</label>
+
+                <mat-form-field appearance="outline" >
+                    <input matInput autocomplete="off" formControlName="mentorid" required>
+                   
+                </mat-form-field>
+            </div>
+            <div class="col-2 mt-3">
+                <button mat-button class="btn btn-outline-secondary mt-3  btn-rounded d-inline-block " type="submit">Assign</button>
+            </div>
+       </div>
     </form>
     </div>
     <div class="pt-4">
