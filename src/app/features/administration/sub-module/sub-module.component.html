@@ -9,8 +9,9 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="mb-3">
+                            <label>Select Menu </label>
                             <mat-form-field appearance="outline">
-                                <mat-label>Select Menu</mat-label>
+                                <!-- <mat-label>Select Menu</mat-label> -->
                                 <mat-select formControlName="menuName" required>
                                     <mat-option>Select Menu</mat-option>
                                     <mat-option *ngFor="let menu of MenuList" [value]="menu.moduleId">
@@ -25,8 +26,9 @@
                     </div>
                     <div class="col-md-3">
                         <div class="mb-3">
+                            <label>Sub Menu Name </label>
                             <mat-form-field appearance="outline">
-                                <mat-label>Sub Menu Name</mat-label>
+                                <!-- <mat-label>Sub Menu Name</mat-label> -->
                                 <input matInput autocomplete="off" formControlName="subMenuName" required>
                                 <mat-error *ngIf="AddSubModuleForm.controls['subMenuName'].hasError('required')">
                                     Sub Menu name is required
@@ -35,7 +37,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 ">
-                        <div class="mb-3 mt-1 pt-1">
+                        <div class="mb-3 mt-1 pt-3">
                             <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
                                 Submit
                             </button>

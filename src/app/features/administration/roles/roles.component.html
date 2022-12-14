@@ -9,8 +9,9 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="mb-3">
+                            <label>Role name</label>
                             <mat-form-field  appearance="outline">
-                                <mat-label>Role name</mat-label>
+                                <!-- <mat-label>Role name</mat-label> -->
                                 <input matInput autocomplete="off" formControlName="roleName" required>
                                 <mat-error *ngIf="AddRoleForm.controls['roleName'].hasError('required')">Role name is
                                     required
@@ -19,7 +20,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 ">
-                        <div class="mb-3 mt-1 pt-1">
+                        <div class="mb-3 mt-1 pt-3">
                             <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
                                 Submit
                             </button>
