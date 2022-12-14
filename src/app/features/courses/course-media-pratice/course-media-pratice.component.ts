@@ -172,10 +172,6 @@ export class CourseMediaPraticeComponent implements OnInit {
     this.paragrapherror = this.addmediaform.value.paragraph.length === 0 ? true : false
 
   }
-  ngAfterViewInit() {
-    this.filterData.dataSource.paginator = this.paginator;
-    this.filterData.dataSource.sort = this.sort;
-  }
 
   updatePagination() {
     this.filterData.dataSource.paginator = this.paginator;

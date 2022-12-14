@@ -4,7 +4,7 @@ import { AddpagesComponent } from './addpages/addpages.component';
 import { PagesComponent } from './pages/pages.component';
 
 const routes: Routes = [ { path: 'pages', component: PagesComponent },
-{path:'addpages/:element',component:AddpagesComponent}];
+{path:'addpages',component:AddpagesComponent}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

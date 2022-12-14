@@ -1,37 +1,22 @@
 <div class="ConfigurationTypes_textpadding ">
-    <!-- <h3 class="mb-5 pl-2"> Create Pratice Library </h3> -->
-
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Pratice library</li>
+        </ol>
+    </nav>
     <div class="d-flex mb-2 flex-wrap  justify-content-between align-items-center">
-        <h3 class=" pl-2 text-secondary ">Create Pratice Library</h3>
-        <button type="button" (click)="addlibrary()" class="btn btn-outline-secondary btn-rounded d-inline-block ">
+        <h3 class=" pl-2 text-secondary ">Pratice library</h3>
+        <button type="button" *ngIf="!displaycontent" (click)="addlibrary()"
+            class="btn btn-outline-secondary btn-rounded d-inline-block ">
             Add Library
         </button>
     </div>
-
-    <div class="card border-light pt-3 bg-white " *ngIf="displaycontent">
-        <!-- <div class="pl-3 d-flex flex-row flex-wrap  ">
-            <div class="w-25 me-5">
-                <mat-form-field appearance="outline">
-                    <mat-label>Select Category</mat-label>
-                    <mat-select [(ngModel)]="category" (ngModelChange)="coursechange()">
-                        <mat-option *ngFor="let category of categoryList" [value]="category.categoryId">
-                            {{category.categoryName}}</mat-option>
-                    </mat-select>
-                    <span class="text-danger" *ngIf="categoryerror">
-                        Please Select Category
-                    </span>
-                </mat-form-field>
-            </div>
-            <div>
-                <button type="button" (click)="gobutton()"
-                    class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
-                    Go
-                </button>
-            </div>
-        </div> -->
-
-
-        <div class="card-body">
+    <div class="card  bg-secondary" *ngIf="displaycontent">
+        <div class="card-header text-white bg-secondary">
+            {{iseditable ? "Update" :"Add" }} Pratice library
+        </div>
+        <div class="card-body bg-white  py-2">
             <!-- <hr /> -->
             <form [formGroup]="addmediaform" class="me-5" (ngSubmit)="addmedia()">
 
@@ -39,8 +24,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="row align-items-center ">
-                            <h6 class="">Title </h6>
-
+                            <label>Title</label>
                             <div class="col">
                                 <mat-form-field appearance="outline" class="">
                                     <input matInput autocomplete="off" formControlName="videotitle" required>
@@ -56,8 +40,7 @@
 
                     <div class="col-md-6">
                         <div class="row align-items-center ">
-                            <h6 class="">Video Link </h6>
-
+                            <label>Video Link</label>
                             <div class="col">
                                 <mat-form-field appearance="outline" class="">
                                     <input matInput autocomplete="off" formControlName="videolink" required>
@@ -71,12 +54,12 @@
                     </div>
 
                 </div>
-
+                <br />
                 <div class="row">
 
                     <div class="col-md-4">
                         <div class="row align-items-center ">
-                            <h6 class="">Category</h6>
+                            <label>Category</label>
                             <div class="col">
                                 <mat-form-field appearance="outline">
                                     <mat-select formControlName="category">
@@ -93,9 +76,7 @@
 
                     <div class="col-md-4">
                         <div class="row align-items-center ">
-                            <h6 class="">Duration of Video <small class="fw-lighter">(Hours : Minutes)</small>
-                            </h6>
-
+                            <label> Duration of Video<small class="fw-lighter"> (Hours : Minutes)</small> </label>
                             <div class="col">
                                 <mat-form-field appearance="outline" class="">
                                     <input matInput autocomplete="off" formControlName="videoduration" required>
@@ -109,8 +90,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="row align-items-center ">
-                            <h6 class="">Meta Keywords</h6>
-
+                            <label>Meta Keywords</label>
                             <div class="col">
                                 <mat-form-field appearance="outline" class="">
                                     <input matInput autocomplete="off" formControlName="vidoemetakeywords" required>
@@ -123,11 +103,11 @@
                         </div>
                     </div>
                 </div>
+                <br />
                 <div class="row">
                     <div class="col">
                         <div class="row align-items-center">
-                            <h6 class="">Message </h6>
-
+                            <label>Message</label>
                             <div class="col">
                                 <mat-form-field appearance="outline" class="">
                                     <textarea matInput class="p-2" formControlName="videodescription" rows="3"
@@ -141,19 +121,20 @@
                         </div>
                     </div>
                 </div>
+                <br />
                 <div class="d-flex flex-row justify-content-end flex-wrap">
                     <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
                         {{iseditable ? "Update":"Upload"}}
                     </button>
-                    <button type="button" (click)="reseteditable()" *ngIf="iseditable"
+                    <button type="button" (click)="reseteditable()"
                         class="btn btn-outline-secondary btn-rounded d-inline-block ">
                         Cancel
                     </button>
                 </div>
             </form>
         </div>
-    </div>
 
+    </div>
     <br />
     <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
         aria-label="users">
@@ -191,7 +172,7 @@
                 <input type="text" (keyup)="updatePagination('duration')"
                     [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
             </th>
-            <td mat-cell *matCellDef="let element"> {{element.duration}} mins </td>
+            <td mat-cell *matCellDef="let element"> {{element.duration}} </td>
         </ng-container>
 
         <ng-container matColumnDef="title">
@@ -229,7 +210,7 @@
         <ng-container matColumnDef="Action">
             <th mat-header-cell *matHeaderCellDef scope="col-2">
                 <label mat-sort-header>
-                    Action
+                    Actions
                 </label>
             </th>
             <td mat-cell *matCellDef="let element" class="col-2">

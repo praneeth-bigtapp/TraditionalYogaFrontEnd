@@ -24,7 +24,7 @@ export class MediaComponent implements OnInit {
   dateForm!: FormGroup
   data: any
   courses: any
-
+  id:any
   filterData: any;
   categoryerror: boolean = false
   gridData = [];
@@ -39,7 +39,7 @@ export class MediaComponent implements OnInit {
 
 
       date: [null, Validators.compose([])],
-      checkbox: [null, Validators.compose([])],
+      courseslist: [null, Validators.compose([])],
 
     })
     this.filterData = {
@@ -50,6 +50,14 @@ export class MediaComponent implements OnInit {
       sort: this.sort
     }
 
+ 
+  }
+
+  ngOnInit(): void {
+
+
+    this.getalldata()
+    this.getallcourse()
     this.dataSource = new MatTableDataSource<any>(this.data)
     this.filterData.gridData = this.data;
     this.filterData.dataSource = this.dataSource;
@@ -59,13 +67,6 @@ export class MediaComponent implements OnInit {
     for (let col of this.filterData.filterColumnNames) {
       col.Value = '';
     }
-  }
-
-  ngOnInit(): void {
-
-
-    this.getalldata()
-    this.getallcourse()
   }
   getalldata() {
     this.services.getMediadetails().subscribe({
@@ -95,16 +96,31 @@ export class MediaComponent implements OnInit {
 
   }
   datefilter() {
-    const { date, checkbox } = this.dateForm.value
+    const { date, courseslist } = this.dateForm.value
+    // const courseslist=this.dataForm.value.courseslist
 
     let filterData = this.data
-    console.log({ date, checkbox });
+    let filterData2=this.courses
+    
+    console.log({ date, courseslist });
+
+    if (courseslist)
+      
+     {
+      // this.id = filterData2.filter((ele: any) => {if(ele.coursesName === courseslist){
+      //   return ele.coursesId
+
+      // }})
+      filterData = filterData.filter((ele: any) => ele.courseId.courseId=== courseslist)
+     }
+
 
     if (date)
+     {
       filterData = filterData.filter((ele: any) => ele.date === date)
 
-    if (checkbox)
-      filterData = filterData.filter((ele: any) => ele.courseId === checkbox)
+     }
+    
 
     this.dataSource = new MatTableDataSource<any>(filterData)
     this.filterData.gridData = filterData;

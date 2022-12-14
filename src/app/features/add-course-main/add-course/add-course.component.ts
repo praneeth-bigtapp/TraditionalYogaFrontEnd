@@ -178,6 +178,7 @@ export class AddCourseComponent implements OnInit {
   reseteditable() {
     this.addCourseForm.reset()
     this.iseditable = false
+    this.displaycontent = !this.displaycontent
   }
 
   onAddCourse() {

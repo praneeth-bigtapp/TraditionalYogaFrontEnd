@@ -36,7 +36,6 @@ export class SideNavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.onClickDash();
     if (localStorage.getItem("LoginData")) {
       let data = localStorage.getItem("LoginData");
       if (data) {
@@ -48,6 +47,7 @@ export class SideNavComponent implements OnInit {
       this.isRefresh = browserRefresh;
       this.selectedIndex = 0;
       this.menuId = 1;
+      this.onClickDash();
       this.refresh();
     }
   }

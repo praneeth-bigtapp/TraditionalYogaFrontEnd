@@ -1,18 +1,26 @@
 <div class="ConfigurationTypes_textpadding ">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Donations Management </li>
+    </ol>
+  </nav>
   <h3 class="mb-4  text-secondary"> Donations Management </h3>
-  <div class="bg-white mx-1 row ">
+  <div class="bg-white card-body mx-1 row ">
     <form class="col mt-3 d-flex  flex-wrap" [formGroup]="dateForm" (submit)="filterDate()">
       <div class="row">
         <div class="col-md-4">
+          <label>From date:</label>
           <mat-form-field class="" appearance="outline">
-            <mat-label>From date</mat-label>
+            
             <input matInput formControlName="fromdate" placeholder="From date" type="date">
 
           </mat-form-field>
         </div>
         <div class="col-md-4">
+          <label>To date:</label>
           <mat-form-field class="" appearance="outline">
-            <mat-label>To date</mat-label>
+           
             <input matInput formControlName="todate" placeholder="To date" type="date">
 
           </mat-form-field>
@@ -21,8 +29,9 @@
 
 
         <div class="col-md-4">
+          <label>Region:</label>
           <mat-form-field appearance="outline" class="">
-            <mat-label>Region</mat-label>
+            
             <!-- <input type="text" placeholder="Pick one" aria-label="Region" matInput
           formControlName="regiondropdown" (valueChange)="updatePagination()"
           [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" [matAutocomplete]="auto">
@@ -36,8 +45,9 @@
         </div>
 
         <div class="col-md-4">
+          <label>Country:</label>
           <mat-form-field appearance="outline" class="">
-            <mat-label>Country</mat-label>
+            
             <input type="text" placeholder="Pick one" aria-label="Country" matInput formControlName="countrydropdown"
               (valueChange)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
               [filter]="filterData" [matAutocomplete]="auto">
@@ -50,7 +60,7 @@
         </div>
 
         <div class=" col-md-4 mt-2">
-          <button type="button" class="btn btn-outline-secondary btn-go btn-rounded d-inline-block "> Go
+          <button type="button" class="btn btn-outline-secondary mt-3 btn-go btn-rounded d-inline-block "> Go
           </button>
         </div>
       </div>
@@ -59,7 +69,7 @@
     </form>
 
   </div>
-  <div class="row  bg-white pt-4 mx-1 d-flex flex-wrap">
+  <div class="row card-body bg-white pt-4 mx-1 d-flex flex-wrap">
 
     <div class="col-md-4 border-top border-left border-bottom  py-4  text-center">
       <!-- add icon -->
@@ -157,8 +167,9 @@
 
       <ng-container matColumnDef="ViewDetails">
         <th mat-header-cell *matHeaderCellDef class=" text-center col"> View Details</th>
-        <td mat-cell *matCellDef="let element" class="d-flex justify-content-center col-1 ml-5"
-          (click)="viewDetails('sad')"> <i class="fa fa-eye" style="color:purple"></i> </td>
+        <td mat-cell *matCellDef="let element" class="d-flex justify-content-center col-1 ml-5">
+            <i class="fa-solid fa-eye fs-5 text-info" (click)="viewDetails('')"
+          matTooltip="View Course Activity" matTooltip="View"></i> </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

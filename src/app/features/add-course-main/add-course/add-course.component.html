@@ -1,127 +1,142 @@
 <div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Course</li>
+        </ol>
+      </nav>
     <div class="d-flex mb-2 flex-wrap  justify-content-between align-items-center">
-        <h3 class=" pl-2 text-secondary "> Add Courses/View Course Details</h3>
-        <button type="button" (click)="addcourse()" class="btn btn-outline-secondary btn-rounded d-inline-block ">
-            {{displaycontent ? "Add Course" : "Add Course" }}
+        <!-- <h3 class=" pl-2 text-secondary "> Add Courses/View Course Details</h3> -->
+        <h3 class=" pl-2 text-secondary ">Courses</h3>
+        
+        <button type="button" (click)="addcourse()" *ngIf="!displaycontent" class="btn btn-outline-secondary btn-rounded d-inline-block ">
+           Add Course
         </button>
     </div>
+    <div class="card  bg-secondary" *ngIf="displaycontent">
+        <div class="card-header text-white bg-secondary" >
+            {{iseditable ? "Update" :"Add" }} Course
+        </div>
+        <div class="card-body bg-white  py-2" >
 
-    <div class="card-body bg-white  py-2" *ngIf="displaycontent">
-        <form [formGroup]="addCourseForm" class="me-5" (ngSubmit)="onAddCourse()">
+            <form [formGroup]="addCourseForm" class="me-5" (ngSubmit)="onAddCourse()">
 
-            <div class="row">
-                <div class="col-md-4">
-                    <div class=" align-items-center  ">
-                        <h6 class="">Course category : </h6>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class=" align-items-center  ">
+                            <label>Course category : </label>
 
-                        <div class="col px-0">
-                            <mat-form-field appearance="outline">
-                                <mat-select formControlName="coursecategory" [compareWith]="compareselect">
+                            <div class="col px-0">
+                                <mat-form-field appearance="outline">
+                                    <mat-select formControlName="coursecategory" [compareWith]="compareselect">
 
-                                    <mat-option *ngFor="let category of categoryList" [value]="category"
-                                        aria-placeholder="Select Course Category">
-                                        {{category.categoriesName}}</mat-option>
-                                </mat-select>
-                                <mat-error class="error-message"
-                                    [hidden]=" !addCourseForm.get('coursecategory')?.hasError('required')  ">
-                                    Category is mandatory
+                                        <mat-option *ngFor="let category of categoryList" [value]="category"
+                                            aria-placeholder="Select Course Category">
+                                            {{category.categoriesName}}</mat-option>
+                                    </mat-select>
+                                    <mat-error class="error-message"
+                                        [hidden]=" !addCourseForm.get('coursecategory')?.hasError('required')  ">
+                                        Category is mandatory
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class=" align-items-center ">
+                            <label>Course name : </label>
+                            <div class="col px-0">
+                                <mat-form-field appearance="outline">
+                                    <!-- <mat-label>Select Course Category</mat-label> -->
+                                    <input matInput autocomplete="off" formControlName="courseName" required>
+                                    <mat-error class="error-message"
+                                        [hidden]=" !addCourseForm.get('courseName')?.hasError('required')  ">
+                                        Name is mandatory
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="">
+                            <label>Start date : </label>
+
+                            <div class="col px-0">
+                                <mat-form-field appearance="outline">
+                                    <!-- <mat-label>Start date</mat-label> -->
+                                    <input matInput formControlName="startDate" type="date">
+                                    <mat-error class="error-message"
+                                        [hidden]=" !addCourseForm.get('startDate')?.hasError('required')  ">
+                                        Date is mandatory
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="">
+                            <label>End date : </label>
+                            <div class="col px-0">
+                                <mat-form-field appearance="outline">
+                                    <!-- <mat-label>End date</mat-label> -->
+                                    <input matInput formControlName="endDate" type="date">
+                                    <mat-error class="error-message"
+                                        [hidden]=" !addCourseForm.get('endDate')?.hasError('required')  ">
+                                        Date is mandatory
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="">
+                            <label class="">Application closure date : </label>
+                            <div class="col px-0">
+                                <mat-form-field appearance="outline">
+                                    <!-- <mat-label>Application closure date</mat-label> -->
+                                    <input matInput formControlName="applicationclosuredate" type="date">
+                                    <mat-error class="error-message"
+                                        [hidden]=" !addCourseForm.get('applicationclosuredate')?.hasError('required')  ">
+                                        Date is mandatory
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+
+                    <div class="col">
+                        <div class=" ">
+                            <label class="mb-1">Description : </label>
+                            <div class="col px-0">
+                                <angular-editor [placeholder]="'Enter text here...'" (keypress)="paragraphchange()"
+                                    [config]="editorConfig" required formControlName="description">
+                                </angular-editor>
+                                <mat-error class="error-message" *ngIf="paragrapherror ">
+                                    Description is mandatory
                                 </mat-error>
-                            </mat-form-field>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div class=" align-items-center ">
-                        <h6 class="">Course name : </h6>
-                        <div class="col px-0">
-                            <mat-form-field appearance="outline">
-                                <!-- <mat-label>Select Course Category</mat-label> -->
-                                <input matInput autocomplete="off" formControlName="courseName" required>
-                                <mat-error class="error-message"
-                                    [hidden]=" !addCourseForm.get('courseName')?.hasError('required')  ">
-                                    Name is mandatory
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-
-                    </div>
+                <br />
+                <div class="d-flex flex-row flex-wrap justify-content-end">
+                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                        {{iseditable ? "Update" :"Submit" }}
+                    </button>
+                    <button type="button" (click)="reseteditable()" 
+                        class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                        Cancel
+                    </button>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="">
-                        <h6 class="">Start date : </h6>
-
-                        <div class="col px-0">
-                            <mat-form-field appearance="outline">
-                                <!-- <mat-label>Start date</mat-label> -->
-                                <input matInput formControlName="startDate" type="date">
-                                <mat-error class="error-message"
-                                    [hidden]=" !addCourseForm.get('startDate')?.hasError('required')  ">
-                                    Date is mandatory
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="">
-                        <h6 class="">End date : </h6>
-                        <div class="col px-0">
-                            <mat-form-field appearance="outline">
-                                <!-- <mat-label>End date</mat-label> -->
-                                <input matInput formControlName="endDate" type="date">
-                                <mat-error class="error-message"
-                                    [hidden]=" !addCourseForm.get('endDate')?.hasError('required')  ">
-                                    Date is mandatory
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class=" ">
-                        <h6 class="">Application closure date : </h6>
-                        <div class="col px-0">
-                            <mat-form-field appearance="outline">
-                                <!-- <mat-label>Application closure date</mat-label> -->
-                                <input matInput formControlName="applicationclosuredate" type="date">
-                                <mat-error class="error-message"
-                                    [hidden]=" !addCourseForm.get('applicationclosuredate')?.hasError('required')  ">
-                                    Date is mandatory
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-
-                <div class="col">
-                    <div class=" ">
-                        <h6 class="mb-1">Description : </h6>
-                        <div class="col px-0">
-                            <angular-editor [placeholder]="'Enter text here...'" (keypress)="paragraphchange()"
-                                [config]="editorConfig" required formControlName="description">
-                            </angular-editor>
-                            <mat-error class="error-message" *ngIf="paragrapherror ">
-                                Description is mandatory
-                            </mat-error>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br />
-            <div class="d-flex flex-row flex-wrap justify-content-end">
-                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
-                    {{iseditable ? "Update" :"Submit" }}
-                </button>
-                <button type="button" (click)="reseteditable()" *ngIf="iseditable"
-                    class="btn btn-outline-secondary btn-rounded d-inline-block ">
-                    Cancel
-                </button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
     <br />
     <table mat-table [dataSource]="filterData.dataSource" matSort
@@ -199,7 +214,7 @@
         <ng-container matColumnDef="Action">
             <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
                 <label mat-sort-header>
-                    Action
+                    Actions
                 </label>
                 <!-- <input type="text" (keyup)="updatePagination('currentStatus')"
                     [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" /> -->
@@ -220,6 +235,6 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator class="table-responsive" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
+    <mat-paginator class="" [pageSizeOptions]="[10,25, 50, 100,150,200]" aria-label="Select page">
     </mat-paginator>
 </div>

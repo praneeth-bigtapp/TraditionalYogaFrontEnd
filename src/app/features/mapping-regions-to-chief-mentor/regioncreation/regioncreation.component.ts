@@ -5,7 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { filter, map, Observable, startWith } from 'rxjs';
+import { map, Observable, startWith } from 'rxjs';
 import { MappingRegionsToChiefMentorService } from '../services/mapping-regions-to-chief-mentor.service';
 
 @Component({
@@ -22,8 +22,9 @@ export class RegioncreationComponent implements OnInit {
 
   regionfilterform!: FormGroup
 
-  displaycontent: boolean = true
+  displaycontent: boolean = false
 
+  iseditable: boolean = false
 
 
 
@@ -31,7 +32,7 @@ export class RegioncreationComponent implements OnInit {
   filterData: any;
   gridData = [];
   dataSource: any;
-  displayedColumns: string[] = ['regionId', "regionName", "countryName", "states"];
+  displayedColumns: string[] = ['regionId', "regionName", "countryName", "states", "Action"];
 
   data!: any
   countryList: any;
@@ -48,6 +49,7 @@ export class RegioncreationComponent implements OnInit {
   ) {
 
     this.regionfilterform = this.formbuilder.group({
+      regionId: [null],
       region: [null, Validators.compose([Validators.required])],
       country: [null, Validators.compose([Validators.required])],
       part: [null, Validators.compose([Validators.required])],
@@ -75,6 +77,7 @@ export class RegioncreationComponent implements OnInit {
     this.service.getregion().subscribe({
       next: (value) => {
         this.data = value
+        this.data = this.data.reverse()
         this.countryList = [...new Set(this.data.map((ele: any) => ele.countryName))]
         this.statelist = [...new Set(this.data.map((ele: any) => ele.states))]
 
@@ -112,8 +115,6 @@ export class RegioncreationComponent implements OnInit {
         for (let col of this.filterData.filterColumnNames) {
           col.Value = '';
         }
-        this.displaycontent = true
-
       },
       error: (error: any) => {
         console.error(error.message);
@@ -158,14 +159,58 @@ export class RegioncreationComponent implements OnInit {
   updatePagination(col: any) {
     this.ngAfterViewInit()
   }
+  compareselect(obj1: any, obj2: any) {
+    return obj1 && obj2 && obj1 === obj2
+  }
 
   ngAfterViewInit() {
     this.filterData.dataSource.paginator = this.paginator;
     this.filterData.dataSource.sort = this.sort;
 
   }
+  addregion() {
+    this.displaycontent = !this.displaycontent
+  }
+  viewdetails(element: any) {
 
+  }
+  deletedetails(id: any) {
 
+    const body = {
+      "regionId": id,
+    }
+
+    this.service.deleteregion(body).subscribe({
+      next: (response) => {
+        this.opensnackBar(response)
+        this.regionfilterform.reset()
+        this.getregiondata()
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    })
+
+  }
+  editdetails(element: any) {
+
+    this.regionfilterform.setValue({
+      regionId: element.regionId,
+      region: element.regionName,
+      country: element.countryName,
+      part: element.partId.partId,
+      state: element.states
+
+    });
+    this.iseditable = true
+    this.displaycontent = true
+  }
+
+  reseteditable() {
+    this.regionfilterform.reset()
+    this.iseditable = false
+    this.displaycontent = !this.displaycontent
+  }
 
 
   filtersubmit() {
@@ -176,7 +221,7 @@ export class RegioncreationComponent implements OnInit {
 
     this.updatePagination("")
 
-    const { region, country, part, state } = this.regionfilterform.value
+    const { regionId, region, country, part, state } = this.regionfilterform.value
     const body = {
       "regionName": region,
       "countryName": country,
@@ -184,6 +229,32 @@ export class RegioncreationComponent implements OnInit {
         "partId": part
       },
       "states": state
+    }
+
+    if (this.iseditable) {
+      //editable
+
+      const body = {
+        "regionId": regionId,
+        "regionName": region,
+        "countryName": country,
+        "partId": {
+          "partId": part
+        },
+        "states": state
+      }
+
+      this.service.updateregion(body).subscribe({
+        next: (response) => {
+          this.opensnackBar(response)
+          this.regionfilterform.reset()
+          this.getregiondata()
+        },
+        error: (error) => {
+          console.error(error.message);
+
+        }
+      })
     }
 
     this.service.postregion(body).subscribe({
@@ -197,34 +268,6 @@ export class RegioncreationComponent implements OnInit {
 
       }
     })
-
-    // let filterdata = this.data
-
-    // if (region)
-    //   filterdata = filterdata.filter((ele: any) => ele.regionName.toLowerCase() === region.toLowerCase())
-
-    // if (country)
-    //   filterdata = filterdata.filter((ele: any) => ele.countryName.toLowerCase() === country.toLowerCase())
-
-    // if (part)
-    //   filterdata = filterdata.filter((ele: any) => ele.partId.partId === part)
-
-    // if (state)
-    //   filterdata = filterdata.filter((ele: any) => ele.states.toLowerCase() === state.toLowerCase())
-
-    // console.log(filterdata);
-
-    // this.dataSource = new MatTableDataSource<any>(filterdata)
-    // this.filterData.gridData = filterdata;
-    // this.filterData.dataSource = this.dataSource;
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
-    // this.filterData.sort = this.sort;
-    // for (let col of this.filterData.filterColumnNames) {
-    //   col.Value = '';
-    // }
-    // this.displaycontent = true
-
   }
 
 

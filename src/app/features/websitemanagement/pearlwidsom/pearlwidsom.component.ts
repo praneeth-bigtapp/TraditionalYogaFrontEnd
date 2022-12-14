@@ -22,6 +22,8 @@ export class PearlwidsomComponent implements OnInit {
 
   isedit: boolean = false
 
+  displaycontent: boolean = false
+
   filterData: any;
   gridData = [];
   dataSource: any;
@@ -64,6 +66,7 @@ export class PearlwidsomComponent implements OnInit {
     this.service.getpearlofwisdom().subscribe({
       next: (response) => {
         this.data = response
+        this.data = this.data.reverse()
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
@@ -93,6 +96,10 @@ export class PearlwidsomComponent implements OnInit {
   }
   editdetails(element: any) {
     this.isedit = true
+    this.displaycontent = true
+
+    console.log(element);
+    
     this.wisdomform.setValue({
       quoteId: element.quoteId,
       quotetitle: element.quoteTitle,
@@ -137,6 +144,15 @@ export class PearlwidsomComponent implements OnInit {
     })
   }
 
+  addwisdom() {
+    this.displaycontent = !this.displaycontent
+  }
+
+  cancelbutton() {
+    this.displaycontent = !this.displaycontent
+    this.isedit = !this.isedit
+    this.wisdomform.reset()
+  }
 
   wisdomsubmit() {
 
