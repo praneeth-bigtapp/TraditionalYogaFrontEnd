@@ -3,12 +3,17 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="#/addCourse">Course Management</a></li>          
           <li class="breadcrumb-item active" aria-current="page">Class Media Update </li>
         </ol>
       </nav>
-    <h3 class="mb-4 pl-2 text-secondary">Class Media Update</h3>
+    
 
-    <div class="mt-5 card-body bg-white">
+    <div class="card mt-5">
+        <div class="card-header text-white bg-secondary" >
+            Class Media Update
+      </div>
+    <div class=" card-body bg-white">
 
         <div class="row px-2 " style="display: flex;">
             <div class="col-md-12">
@@ -38,8 +43,8 @@
                     </div>
                     <div class="mt-2">
                         <button type="submit"
-                            class="btn btn-outline-secondary btn-go btn-rounded d-inline-block m-2 mt-4 border border-dark"
-                            type="submit">Go</button>
+                            class="btn btn-outline-secondary  btn-rounded d-inline-block m-2 mt-4 border border-dark"
+                            type="submit">Submit</button>
                     </div>
                 </form>
             </div>
@@ -49,6 +54,7 @@
         <hr>
         
 
+    </div>
     </div>
     <div class="  table-responsive">
         <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"

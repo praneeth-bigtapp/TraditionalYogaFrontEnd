@@ -2,13 +2,20 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">List of practice library </li>
+      <li class="breadcrumb-item"><a href="#/createpraticelibrary">Practice Library</a></li>          
+      <li class="breadcrumb-item active" aria-current="page"> List of practice library </li>
     </ol>
   </nav>
-  <h3 class="mb-3 pl-2 text-secondary"> List of practice library </h3>
 
 
-  <div class=" mt-5 rounded mat-elevation-z8">
+<div class="card mt-5">
+    <div class="card-header text-white bg-secondary" >
+      List of practice library
+  </div>
+ 
+
+
+  <div class="rounded mat-elevation-z8">
     <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
       aria-label="users">
       <ng-container matColumnDef="praticeLibaryId">
@@ -85,6 +92,8 @@
 
     <mat-paginator class="" [pageSizeOptions]="[10,25, 50, 100,150,200]" aria-label="Select page">
     </mat-paginator>
+ 
   </div>
+</div>
 
 </div>

@@ -5,8 +5,12 @@
       <li class="breadcrumb-item active" aria-current="page">Donations Management </li>
     </ol>
   </nav>
-  <h3 class="mb-4  text-secondary"> Donations Management </h3>
-  <div class="bg-white card-body mx-1 row ">
+  <div class="card mt-5">
+    <div class="card-header text-white bg-secondary" >
+      Donations Management
+  </div>
+  <div class="card-body bg-white">
+  <div class="bg-white   ">
     <form class="col mt-3 d-flex  flex-wrap" [formGroup]="dateForm" (submit)="filterDate()">
       <div class="row">
         <div class="col-md-4">
@@ -60,7 +64,7 @@
         </div>
 
         <div class=" col-md-4 mt-2">
-          <button type="button" class="btn btn-outline-secondary mt-3 btn-go btn-rounded d-inline-block "> Go
+          <button type="button" class="btn btn-outline-secondary mt-3  btn-rounded d-inline-block "> Submit
           </button>
         </div>
       </div>
@@ -68,8 +72,9 @@
 
     </form>
 
+
   </div>
-  <div class="row card-body bg-white pt-4 mx-1 d-flex flex-wrap">
+  <div class="  bg-white pt-4  d-flex flex-wrap">
 
     <div class="col-md-4 border-top border-left border-bottom  py-4  text-center">
       <!-- add icon -->
@@ -82,6 +87,9 @@
     </div>
 
   </div>
+</div>
+  </div>
+
 
   <div class=" rounded mt-3 mat-elevation-z8 table-responsive">
     <table mat-table matSort [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid ">
