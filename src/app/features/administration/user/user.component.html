@@ -1,6 +1,12 @@
 <div class="ConfigurationTypes_textpadding">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Library</li>
+        </ol>
+      </nav>
     <div class="card border-light" *ngIf="isAddUserForm">
-        <div class="card-header text-white bg-secondary">
+     <div class="card-header text-white bg-secondary">
             Add User
         </div>
         <form [formGroup]="AddUserForm" (ngSubmit)="onAddUserSubmit()">
@@ -8,8 +14,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
+                            <label> User Id</label>
                             <mat-form-field appearance="outline">
-                                <mat-label>User Id</mat-label>
+                                <!-- <mat-label>User Id</mat-label> -->
                                 <input matInput autocomplete="off" formControlName="userName" required>
                                 <mat-error *ngIf="AddUserForm.controls['userName'].hasError('required')">user name is
                                     required
@@ -19,8 +26,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Select Role</mat-label>
+                            <label> Select Role</label>
+                            <mat-form-field appearance="outline">
+                                <!-- <mat-label>Select Role</mat-label> -->
                                 <mat-select formControlName="roleId" required>
                                     <mat-option>Select Role</mat-option>
                                     <mat-option *ngFor="let role of RolesList" [value]="role.roleId">{{role.roleName}}
@@ -36,8 +44,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <mat-form-field appearance="fill">
-                                <mat-label>First Name</mat-label>
+                            <label> First Name</label>
+                            <mat-form-field appearance="outline">
+                                <!-- <mat-label>First Name</mat-label> -->
                                 <input matInput autocomplete="off" formControlName="firstName" required>
                                 <mat-error *ngIf="AddUserForm.controls['firstName'].hasError('required')">First name is
                                     required
@@ -47,8 +56,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Last Name</mat-label>
+                            <label> Last Name</label>
+                            <mat-form-field appearance="outline">
+                                <!-- <mat-label>Last Name</mat-label> -->
                                 <input matInput autocomplete="off" formControlName="lastName" required>
                                 <mat-error *ngIf="AddUserForm.controls['lastName'].hasError('required')">Last name is
                                     required
@@ -62,8 +72,9 @@
 
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Email Id</mat-label>
+                            <label>Email Id</label>
+                            <mat-form-field appearance="outline">
+                                <!-- <mat-label>Email Id</mat-label> -->
                                 <input type="email" autocomplete="off" matInput formControlName="email" required>
                                 <mat-error *ngFor="let validation of validation_messages.email_id">
                                     <!-- <span *ngIf="AddUserForm.get('email').hasError(validation.type)">
@@ -75,8 +86,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Mobile</mat-label>
+                            <label> Mobile</label>
+                            <mat-form-field appearance="outline">
+                                <!-- <mat-label>Mobile</mat-label> -->
                                 <input matInput formControlName="mobileNumber" onCopy="return false"
                                     onDrag="return false" onDrop="return false" onPaste="return false" autocomplete=off
                                     (keypress)="onKeyPress($event)" cmsRestrictInput="onlyNumbers" type="text" required
@@ -95,8 +107,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Password</mat-label>
+                            <label> Password</label>
+                            <mat-form-field appearance="outline">
+                                <!-- <mat-label>Password</mat-label> -->
                                 <input [type]="show_password ? 'text' : 'password'" matInput autocomplete="off"
                                     formControlName="password">
                                 <span class="input-group-addon" matSuffix>
@@ -112,11 +125,9 @@
                             </mat-form-field>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6"></div>
+
                     <div class="col-md-6">
-                        <div class="mb-3 mt-1 pt-1 float-end">
+                        <div class="mb-3 mt-1 pt-3 float-end">
                             <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
                                 Submit
                             </button>
@@ -125,11 +136,13 @@
                             </button>
                         </div>
                     </div>
+
                 </div>
+
             </div>
         </form>
     </div>
-    <h4> User List
+    <h3> User List
         <span class="float-end mb-2">
             <!-- <button type="button" class="btn btn-outline-secondary btn-rounded"
                 *ngIf="!isAddUserForm && pagePermissions.Add" (click)="onAddUser()"> Add
@@ -142,7 +155,7 @@
             <div *ngIf="errorMessage" [ngStyle]="{'color': errorType == 'Error' ? 'red':'green'}"
                 class="notificationMessage">{{Message}}</div>
         </div>
-    </h4>
+    </h3>
     <div class="clearfix"></div>
     <table mat-table [dataSource]="this.filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100" aria-label="users">
         <ng-container matColumnDef="sno">

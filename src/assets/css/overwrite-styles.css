@@ -65,7 +65,6 @@ nav img.logo-img {
 .header {
     width: 100%;
     z-index: 9;
-    position: fixed;
     left: 0;
 }
 
@@ -73,7 +72,7 @@ nav img.logo-img {
     margin-left: 0;
     /* background: #fafafa; */
     margin-right: 0;
-    padding: 15px 15px 60px 2%;
+    padding: 0px 15px 60px 2%;
     margin-bottom: 30px;
     min-height: 450px;
 }
@@ -381,13 +380,18 @@ textarea:focus {
     background-color: #fff;
 }
 .mat-table {
-    background: #fff;
-    opacity: 0.9;
-    border-radius: 14px !important;
+    background: transparent !important;
+    border-radius: 15px !important;
+    box-shadow: none;
+    border: none;
+}
+.mat-table tbody {
+    background: #fff !important;
 }
 .mat-datagrid tr.mat-header-row {
-    background-color: #d1d7db;
+    /* background-color: #d1d7db; */
     border:none;
+    background-color: transparent;
     border-radius: 14px !important;
 }
 
@@ -650,11 +654,21 @@ width: calc(100% - 150px) !important;
 
 .mat-form-field-appearance-outline .mat-form-field-outline-start {
     border-radius: 10px 0 0 10px !important;
-    min-width: 10px !important;
+    min-width: 15px !important;
 }
 .mat-form-field-appearance-outline .mat-form-field-outline-end
 {
     border-radius: 0 10px 10px 0 !important;
+}
+.mat-form-field-infix { padding: 0px !important;}
+.mat-form-field-appearance-outline .mat-form-field-infix{
+    padding: 0.25em 0 0.50em 0 !important;
+}
+.mat-form-field-wrapper {
+    padding-bottom: 0em !important;
+}
+.mat-form-field-subscript-wrapper{
+    margin-top: 1.5rem !important; 
 }
 /* Shake animation */
 

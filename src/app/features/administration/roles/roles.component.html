@@ -33,7 +33,7 @@
         </form>
     </div>
 
-    <h4 class="mb-3"> Roles List
+    <h3 class="mb-3"> Roles List
         <span class="float-end mb-2">
             <button type="button" class="btn btn-outline-secondary btn-rounded"
                 *ngIf="!isAddRoleForm && pagePermissions.Add" (click)="onAddRole()"> Add Role </button>
@@ -42,7 +42,7 @@
             <div *ngIf="errorMessage" [ngStyle]="{'color': errorType == 'Error' ? 'red':'green'}"
                 class="notificationMessage">{{Message}}</div>
         </div>
-    </h4>
+    </h3>
     <div class="clearfix"></div>
 
     <table mat-table [dataSource]="this.filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"

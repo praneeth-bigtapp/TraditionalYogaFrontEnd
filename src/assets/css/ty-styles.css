@@ -352,6 +352,8 @@ th {
 
 label {
     display: inline-block;
+    margin: 0px;
+    padding: 0px;
 }
 
 button {
@@ -3772,6 +3774,7 @@ fieldset:disabled .btn {
     background-clip: padding-box;
     border: 0.125rem solid rgba(0, 0, 0, 0.15);
     border-radius: 0rem;
+    left: 90%;
 }
 
 .dropdown-menu[data-bs-popper] {
@@ -4844,7 +4847,7 @@ fieldset:disabled .btn {
 
 .card-body {
     flex: 1 1 auto;
-    padding: 1rem 1rem;
+    padding: 1rem 1.25rem;
 }
 
 .card-title {
@@ -4865,7 +4868,7 @@ fieldset:disabled .btn {
 }
 
 .card-header {
-    padding: 0.5rem 1rem;
+    padding: 0.25rem 1.25rem;
     margin-bottom: 0;
     background-color: transparent;
     border-bottom: 0.125rem solid rgba(0, 0, 0, 0.125);
@@ -5103,9 +5106,11 @@ fieldset:disabled .btn {
     display: flex;
     flex-wrap: wrap;
     padding: 0 0;
-    margin-bottom: 1rem;
+    margin-bottom: 0.25rem;
     list-style: none;
+    background: transparent;
 }
+
 
 .breadcrumb-item+.breadcrumb-item {
     padding-left: 0.5rem;

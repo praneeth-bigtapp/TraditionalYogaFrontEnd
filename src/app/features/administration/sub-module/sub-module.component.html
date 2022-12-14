@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="mb-3">
-                            <mat-form-field appearance="fill">
+                            <mat-form-field appearance="outline">
                                 <mat-label>Select Menu</mat-label>
                                 <mat-select formControlName="menuName" required>
                                     <mat-option>Select Menu</mat-option>
@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="mb-3">
-                            <mat-form-field appearance="fill">
+                            <mat-form-field appearance="outline">
                                 <mat-label>Sub Menu Name</mat-label>
                                 <input matInput autocomplete="off" formControlName="subMenuName" required>
                                 <mat-error *ngIf="AddSubModuleForm.controls['subMenuName'].hasError('required')">
@@ -49,7 +49,7 @@
         </form>
     </div>
 
-    <h4> Sub Menu List
+    <h3> Sub Menu List
         <span class="float-end mb-2">
             <button type="button" class="btn btn-outline-secondary btn-rounded"
                 *ngIf="!isAddSubModuleForm && pagePermissions.Add" (click)="onAddSubMenu()"> Add Sub Menu </button>
@@ -58,7 +58,7 @@
             <div *ngIf="errorMessage" [ngStyle]="{'color': errorType == 'Error' ? 'red':'green'}"
                 class="notificationMessage">{{Message}}</div>
         </div>
-    </h4>
+    </h3>
     <div class="clearfix"></div>
 
     <table mat-table [dataSource]="this.filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"

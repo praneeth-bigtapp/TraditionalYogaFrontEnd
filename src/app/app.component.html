@@ -1,9 +1,15 @@
 <app-header *ngIf="!!this.dataStorage.isUserLoggedIn"></app-header>
 <div class="" style="height:100vh">
-    <div class="wrapper pt-5">
-        <app-side-nav class="pt-3 mt-3" *ngIf="!!this.dataStorage.isUserLoggedIn"></app-side-nav>
+    <div class="wrapper">
+        <!-- <app-side-nav class="pt-3 mt-3" *ngIf="!!this.dataStorage.isUserLoggedIn"></app-side-nav>
         <div class="pt-3 mt-3" id="content">
             <router-outlet></router-outlet>
+        </div> -->
+
+        <app-side-nav class="" *ngIf="!!this.dataStorage.isUserLoggedIn"></app-side-nav>
+        <div class="" id="content">
+            <router-outlet></router-outlet>
         </div>
+
     </div>
 </div>

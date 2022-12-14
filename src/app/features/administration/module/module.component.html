@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-md-4    ">
                         <div class="mb-3">
-                            <mat-form-field appearance="fill">
+                            <mat-form-field appearance="outline">
                                 <mat-label>Menu Name</mat-label>
                                 <input matInput autocomplete="off" formControlName="menuName" required>
                                 <mat-error *ngIf="AddModuleForm.controls['menuName'].hasError('required')">
@@ -33,7 +33,7 @@
         </form>
     </div>
 
-    <h4> Menu List
+    <h3> Menu List
         <span class="float-end mb-2">
             <button type="button" class="btn btn-outline-secondary btn-rounded"
                 *ngIf="!isAddModuleForm && pagePermissions.Add" (click)="onAddMenu()"> Add Menu </button>
@@ -42,7 +42,7 @@
             <div *ngIf="errorMessage" [ngStyle]="{'color': errorType == 'Error' ? 'red':'green'}"
                 class="notificationMessage">{{Message}}</div>
         </div>
-    </h4>
+    </h3>
     <div class="clearfix"></div>
 
     <table mat-table [dataSource]="this.filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"

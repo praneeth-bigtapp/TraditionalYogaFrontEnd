@@ -58,7 +58,7 @@ span {
 .wrapper {
     display: flex;
     align-items: stretch;
-     padding-top: 80px; 
+     padding-top: 0px; 
      overflow-x: hidden;
      height: 100vh;
 }
