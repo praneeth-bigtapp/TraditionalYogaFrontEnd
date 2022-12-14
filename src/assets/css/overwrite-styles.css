@@ -775,7 +775,9 @@ input.mat-input-element {
 .mat-form-field-subscript-wrapper{
     margin-top: 1.75rem !important; 
 }
-
+.mat-paginator .mat-form-field-infix {
+    padding: 15px !important;
+}
 /* Shake animation */
 
 @keyframes shake {
