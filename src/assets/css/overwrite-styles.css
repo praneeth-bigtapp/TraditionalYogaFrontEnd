@@ -388,8 +388,13 @@ textarea:focus {
     padding: 0 !important;
 } */
 
+<<<<<<< HEAD
 /* .mat-error {
     color: #212529 !important;
+=======
+.mat-error {
+    /* color: #212529 !important; */
+>>>>>>> 7f346660428b9c05e47925db5b4c3d6d3518711e
     font-size: 12px !important;
 } */
 
