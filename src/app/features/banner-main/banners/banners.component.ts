@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-
+import { FormBuilder } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { BannerviewService } from '../service/bannerview.service';
 import { Router } from '@angular/router';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-banners',
@@ -14,7 +15,8 @@ import { Router } from '@angular/router';
 export class BannersComponent implements OnInit {
   displayedColumns: string[] = ['bannerId', 'bannerName', 'categoryId', "date", "Action"];
   dataSource: any;
-
+  filterData:any;
+  gridData:any;
   data!: any;
   checks=false;
 
@@ -22,12 +24,17 @@ export class BannersComponent implements OnInit {
   paginator!: MatPaginator;
   @ViewChild(MatSort)
   sort!: MatSort;
-
+  selection = new SelectionModel<any>(true, []);
   
   
     applyFilter(event: Event) {
       const filterValue = (event.target as HTMLInputElement).value;
       this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+    updatePagination() {
+
+      this.filterData.dataSource.paginator = this.paginator;
+      this.filterData.dataSource.sort = this.sort;
     }
   
 
@@ -37,8 +44,16 @@ export class BannersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.filterData = {
+      filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
+    }
     this.getBanner();
   }
+ 
 
   getBanner() {
     this.banner.getbanner().subscribe({
@@ -49,11 +64,24 @@ export class BannersComponent implements OnInit {
         }
         console.log(this.data);
 
+        // this.dataSource = new MatTableDataSource<any>(this.data)
+        // this.dataSource.paginator = this.paginator;
+        // this.dataSource.sort = this.sort;
         this.dataSource = new MatTableDataSource<any>(this.data)
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
       }
     });
+  }
+  ngAfterViewInit() {
+    this.filterData.dataSource.paginator = this.paginator;
+
   }
 
   checkAll(e:any) {
@@ -76,6 +104,19 @@ export class BannersComponent implements OnInit {
 
   onAddBanner() {
     this.router.navigateByUrl("addbanner");
+  }
+ 
+  
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  masterToggle() {
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.dataSource.data.forEach((row: any) => this.selection.select(row));
   }
 
 }

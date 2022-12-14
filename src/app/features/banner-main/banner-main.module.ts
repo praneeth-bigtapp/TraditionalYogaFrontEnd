@@ -12,6 +12,9 @@ import {MatInputModule} from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -28,7 +31,12 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatSelectModule,
     MatInputModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    FormsModule,
+    SharedModule,
+    MatCheckboxModule,
+
+    ReactiveFormsModule,
   ]
 })
 export class BannerMainModule { }

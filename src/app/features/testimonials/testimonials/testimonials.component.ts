@@ -61,9 +61,19 @@ applyFilter(event: Event) {
         }
         console.log(this.data);
 
+        // this.dataSource = new MatTableDataSource<any>(this.data)
+        // this.dataSource.sort = this.sort;
+        // this.dataSource.paginator = this.paginator;
         this.dataSource = new MatTableDataSource<any>(this.data)
-        this.dataSource.sort = this.sort;
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+
     
       }
     });
@@ -73,7 +83,8 @@ applyFilter(event: Event) {
   }
   updatePagination() {
 
-    this.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
   }
   
   isAllSelected() {

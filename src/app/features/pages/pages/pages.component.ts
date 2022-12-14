@@ -76,16 +76,16 @@ export class PagesComponent implements OnInit {
       this.filterData.dataSource.data.forEach((row: any) => this.selection.select(row));
   }
   onEditRole(element:any){
-    this.router.navigate(["addpages",element]);
+    this.router.navigateByUrl("addpages");
   }
   onRoleDelete(element:any){
 
   }
   onRoleDraft(element:any){
-    this.router.navigate(["addpages",element]);
+    this.router.navigateByUrl("addpages");
   }
   onaddpage(){
-    this.router.navigate(["addpages",'null']);
+   this.router.navigateByUrl("addpages");
   }
   onManage(){
     // this.router.navigateByUrl("pages");

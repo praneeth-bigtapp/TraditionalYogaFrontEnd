@@ -1,103 +1,225 @@
 <div class="ConfigurationTypes_textpadding ">
 
-    <div class="row d-flex flex-row">
-      <div class="row d-flex flex-wrap">
-        <div class="col-7">
-          <h4> Add Pages </h4>
-        </div>
-        <div class="col-5 d-flex justify-content-end flex-wrap">
-          <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark"disabled="true" (click)="onaddpage()">Add Page</button>
-          <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark"  (click)="onManage()">Manage Page</button>
-        </div>
+  <div class="row d-flex flex-row">
+  
+
+    
+      <!-- <div class="col-7">
+        <h4 class="card-header text-white card bg-secondary"> Add Pages </h4>
+      </div> -->
+      <div class="col-md-12 d-flex justify-content-end flex-wrap">
+        <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark"  disabled="true" > Add Pages</button>
+        <button class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark"(click)=" onManage()" >Manage Page</button>
       </div>
-    <form class="bg-white mt-3">
-        <div class="mb-3  col-md-10 ">
-            <mat-form-field class="example-full-width" appearance="fill" id="field">
-                <mat-label>Page Name</mat-label>
-                <input  [formControl]="pageName" matInput >
-                <mat-error *ngIf="pageName.hasError('required')">
-                    Page Name <strong>required</strong>
-                  </mat-error>
-                
-            </mat-form-field>
-        </div>
-          <div class="mb-3 col-md-10">
-            <mat-form-field class="example-full-width" appearance="fill" id="field">
-                <mat-label>Page Title</mat-label>
-                <input matInput [formControl]="Title" >
-                <mat-error *ngIf="Title.hasError('required')">
-                    Page Name <strong>required</strong>
-                  </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="mb-3 col-md-10">
+    </div>
+  <form class=" card bg-white mt-3"  *ngIf="displaycontent">
+    <h4 class="card-header text-white card bg-secondary"> Add Pages </h4>
+    <div class="row m-2">
+
+    
+      <div class="mb-3  col-md-6">
+        <label>Page Name:</label>
+          <mat-form-field class="example-full-width" appearance="outline" id="field">
+              <!-- <mat-label>Page Name</mat-label> -->
+              <input  [formControl]="pageName" matInput >
+              <mat-error *ngIf="pageName.hasError('required')">
+                  Page Name <strong>required</strong>
+                </mat-error>
+              
+          </mat-form-field>
+      </div>
+        <div class="mb-3 col-md-6">
+          <label>Page Title:</label>
           
-            <angular-editor  [placeholder]="'Enter text here...'" [config]="editorConfig" required  >
-               
-            </angular-editor>
+          <mat-form-field class="example-full-width" appearance="outline" id="field">
             
-      
-          </div>
-          <div class="mb-3 col-md-10">
-            <mat-form-field class="example-full-width" appearance="fill" id="field">
-                <mat-label>Hover Title:</mat-label>
-                <input matInput [formControl]="hover">
-                <mat-error *ngIf="hover.hasError('required')">
-                   Hover title <strong>required</strong>
-                  </mat-error>
+              <input matInput [formControl]="Title" >
+              <mat-error *ngIf="Title.hasError('required')">
+                  Page Title <strong>required</strong>
+                </mat-error>
+          </mat-form-field>
+        </div><br>
+        <div class="mb-3 col-md-12">
+         
+        
+          <angular-editor  [placeholder]="'Enter text here...'" [config]="editorConfig" required  [formControl]="Description" >
+             
+          </angular-editor>
+          <!-- <mat-error *ngIf="Description.hasError('required')">
+           Type few words
+           </mat-error> -->
+          
+         
+        </div>
+        <div class="col-md-6">
+          <label>Hover Title:</label>
+          <mat-form-field class="example-full-width" appearance="outline" id="field">
+              <!-- <mat-label>Hover Title:</mat-label> -->
+              <input matInput [formControl]="hover">
+              <mat-error *ngIf="hover.hasError('required')">
+                 Hover title <strong>required</strong>
+                </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="mb-3 col-md-6 ">
+          <label>Related tags:</label>
+          <mat-form-field class="example-full-width" appearance="outline" id="field">
+              <!-- <mat-label>Related Tags: <br> <span><p>Seperated By Space</p></span></mat-label><br> -->
+              <input matInput [formControl]="Tags">
+              <mat-error *ngIf="Tags.hasError('required')">
+                 tags <strong>required</strong>
+                </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="mb-3 col-md-10">
+          <label>Description:</label>
+          <mat-form-field class="example-full-width" appearance="outline" >
+              <!-- <mat-label>Description</mat-label> -->
+              <textarea matInput   [formControl]="description"></textarea>
+              <mat-error *ngIf="description.hasError('required')">
+                  Description<strong>required</strong>
+                 </mat-error>
+              
             </mat-form-field>
-          </div>
-          <div class="mb-3 col-md-10 ">
-            <mat-form-field class="example-full-width" appearance="fill" id="field">
-                <mat-label>Related Tags: <br> <span><p>Seperated By Space</p></span></mat-label><br>
-                <input matInput [formControl]="Tags" placeholder="Related tags">
-                <mat-error *ngIf="Tags.hasError('required')">
-                   tags <strong>required</strong>
-                  </mat-error>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label>Subject:</label>
+          <mat-form-field class="example-full-width" appearance="outline" >
+              <!-- <mat-label>Subject</mat-label> -->
+              <input matInput [formControl]="subject">
+              <mat-error *ngIf="subject.hasError('required')">
+                  tags <strong>required</strong>
+                 </mat-error>
+              
             </mat-form-field>
-          </div>
-          <div class="mb-3 col-md-10">
-            <mat-form-field class="example-full-width">
-                <mat-label>Description</mat-label>
-                <textarea matInput placeholder="Enter Page related Description Here"  [formControl]="description"></textarea>
-                <mat-error *ngIf="description.hasError('required')">
-                    tags <strong>required</strong>
-                   </mat-error>
-                
-              </mat-form-field>
-          </div>
-          <div class="mb-3 col-md-10">
-            <mat-form-field class="example-full-width">
-                <mat-label>Subject</mat-label>
-                <textarea matInput placeholder="Enter Page related Subject Here"[formControl]="subject"></textarea>
-                <mat-error *ngIf="subject.hasError('required')">
-                    tags <strong>required</strong>
-                   </mat-error>
-                
-              </mat-form-field>
-          </div>
-
-          <div class="mb-3 text-center">
-           <p> Cant Read the Image? Click <a href="">here</a>To Refresh</p>
-          </div>
-
-          <div class="mb-3 col-md-10">
-            <mat-form-field class="example-full-width">
-                <mat-label>Enter Capcha</mat-label>
-                <textarea matInput placeholder="Enter Page related Subject Here"></textarea>
-              </mat-form-field>
-          </div>
-          <div class="col-md-2">
-            <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
-               Publish Pages
-             </button>
         </div>
 
+        <div class="mb-3 text-center">
+         <p> Cant Read the Image? Click <a href="">here</a>To Refresh</p>
+        </div>
+
+        <div class="mb-3 col-md-6">
+          <label>Enter Capcha:</label>
+          <mat-form-field class="example-full-width" appearance="outline">
+              <!-- <mat-label>Enter Capcha</mat-label> -->
+              <input matInput >
+            </mat-form-field>
+        </div>
+       
+
+    </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
+         Publish Pages
+       </button>
+  </div>
+
+
+  </form>
+
+  <br>
+  <table mat-table matSort [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid ">
+
+    <ng-container matColumnDef="Checkbox">
+      <th mat-header-cell *matHeaderCellDef class="col-1">
+        <br>
+        <div class="text-center ">
+          <mat-checkbox accent="secondary" (change)="$event ? masterToggle() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </div>
+
+      </th>
+      <td mat-cell class="text-center " *matCellDef="let element ">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(element) : null"
+          [checked]="selection.isSelected(element)">
+        </mat-checkbox>
+      </td>
+
+    </ng-container>
+
+    <ng-container matColumnDef="Pagename">
+      <th mat-header-cell *matHeaderCellDef class="col-2 text-center "> <label mat-sort-header>Page Name</label>
+        <input matInput type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
+          [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 90%;" />
+      </th>
+
+      <td mat-cell *matCellDef="let element" class="col-2  text-center ">{{element.Pagename}}
+
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="Author">
+      <th mat-header-cell *matHeaderCellDef class="col-1 text-center"><label mat-sort-header>Author</label>
+        <input matInput type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
+          [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 90%;" class="mx-2" />
+      </th>
+      <td mat-cell *matCellDef="let element" class="col-1 px-2 text-center text-muted"> {{element.Author | titlecase}}
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="Dateofpublish">
+      <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>Date of pusblish</label>
+        <input matInput type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
+          [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
+      </th>
+      <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center py-2"> {{element.Dateofpublish}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastmodified">
+      <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>Last Modified</label>
+        <input matInput type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
+          [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
+      </th>
+      <td mat-cell *matCellDef="let element" class="col-2 text-center py-2"> {{element.Dateofpublish}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="link">
+      <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>Permanent link</label>
+        <input matInput type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
+          [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
+      </th>
+      <td mat-cell *matCellDef="let element" class="col-1  text-center text-primary py-2"><u><a
+            [href]="element.link">{{element.link}}</a> </u></td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>Status</label>
+        <input matInput type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
+          [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
+      </th>
+      <td mat-cell *matCellDef="let element" class="col-1 px-2 text-center py-2">
+        {{element.status | titlecase}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Action">
+      <th mat-header-cell *matHeaderCellDef class="col text-center"><label mat-sort-header>Action</label>
+        <input matInput type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
+          [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 90%;" class="mx-2" />
+      </th>
+      <td mat-cell *matCellDef="let element" class="col px-2 text-center text-muted"> 
+        <span matTooltip="Edit"  > <i
+          class="fas fa-pencil-alt" aria-hidden="true"></i> </span>
+  <span matTooltip="Delete" style="cursor: pointer;" class="mx-2"
+      > <i class="far fa-trash-alt" aria-hidden="true"></i> </span>
+      <span matTooltip="Draft" style="cursor: pointer;" 
+      > <i class="fa-solid fa-file-pen fa-lg"></i> </span>
+      </td>
+    </ng-container>
+    <i class="fa-sharp fa-solid fa-floppy-disks"></i>
 
 
 
 
-    </form>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+  <div class="col bg-white">
+    <mat-paginator [pageSizeOptions]="[ 5,10,25, 50, 100]" aria-label="Select page"></mat-paginator>
+  </div>
 
 
 </div>
