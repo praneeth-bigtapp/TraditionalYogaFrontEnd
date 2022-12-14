@@ -25,6 +25,8 @@ export class MemberspageComponent implements OnInit {
   dataSource: any;
   totalUserApplied: any;
   totalUser: any;
+  displayform: boolean = false
+  isedit: boolean = false
 
   displayedColumns: string[] = ['studentId', 'Image', 'name', "emailId", "address", "genderId", "mentorId", "ChiefMentorId", "Status", "View_Profile"];
 
@@ -132,6 +134,8 @@ export class MemberspageComponent implements OnInit {
 
         this.data = this.data.filter((ele: any) => ele.courseId.courseId === this.category)
 
+        this.data = this.data.reverse()
+
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
@@ -172,103 +176,18 @@ export class MemberspageComponent implements OnInit {
     })
   }
 
-  getchiefmentorlist() {
-    this.memberservice.getcheifmentor().subscribe({
-      next: (response) => {
-        this.data = response
-        this.data = this.data.students
 
-        this.dataSource = new MatTableDataSource<any>(this.data)
-        this.filterData.gridData = this.data;
-        this.filterData.dataSource = this.dataSource;
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.filterData.sort = this.sort;
-        for (let col of this.filterData.filterColumnNames) {
-          col.Value = '';
-        }
-      },
-      error: (error) => {
-        console.error(error.message);
-
-      }
-    })
+  reseteditable() {
+    this.memberform.reset()
+    this.isedit = false
+    this.displayform = !this.displayform
   }
-
-  gobutton(): void {
-    this.coursechange()
-
-    if (this.category) {
-      this.displaycontent = true
-
-
-      if (this.formtype == "Members") {
-
-        this.getmemberslist(this.category)
-
-        return
-      }
-
-      if (this.formtype == "Mentor Mapping") {
-        // member mapping form
-        this.getmentorlist()
-
-        return
-      }
-
-
-      if (this.formtype == "Chief Mentor Mapping") {
-        this.getchiefmentorlist()
-        // Chief mapping form
-        return
-      }
-    }
-  }
-
-  formswich(name: string) {
-    this.formtype = name
-    // console.log(this.selection.selected);
-    if (this.formtype == "Members") {
-
-      this.getmemberslist(this.category)
-
-      return
-    }
-
-    if (this.formtype == "Mentor Mapping") {
-      // member mapping form
-      this.getmentorlist()
-
-      return
-    }
-
-
-    if (this.formtype == "Chief Mentor Mapping") {
-      this.getchiefmentorlist()
-      // Chief mapping form
-      return
-    }
-
-  }
-
   coursechange() {
-    this.displaycontent = false
-    this.categoryerror = false
-    if (this.category == undefined || this.category == null) {
-      this.categoryerror = true
-      return
 
-    }
-    this.data = []
-    this.dataSource = new MatTableDataSource<any>(this.data)
-    this.filterData.gridData = this.data;
-    this.filterData.dataSource = this.dataSource;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.filterData.sort = this.sort;
-    for (let col of this.filterData.filterColumnNames) {
-      col.Value = '';
-    }
+    this.displaycontent = true
+    this.displayform = true
+    this.getmemberslist(this.category)
+
   }
   isAllSelected() {
     const numSelected = this.selection.selected.length;

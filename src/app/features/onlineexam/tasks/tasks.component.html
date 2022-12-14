@@ -12,10 +12,10 @@
         <h3 class=" pl-2 text-secondary ">Task Assignment</h3>
         <div class="row align-items-center  ">
             <div class="col-md-6">
-                <mat-form-field appearance="outline" class="outsideinput">
+                <mat-form-field appearance="outline" class="outsideinput" >
                     <label *ngIf="course !== null">Select Course</label>
 
-                    <mat-select [(ngModel)]="course" (ngModelChange)="coursechange()">
+                    <mat-select [(ngModel)]="course"  (ngModelChange)="coursechange()">
                         <mat-option *ngFor="let course of courseList" [value]="course.coursesId">
                             {{course.coursesName}}</mat-option>
                     </mat-select>
