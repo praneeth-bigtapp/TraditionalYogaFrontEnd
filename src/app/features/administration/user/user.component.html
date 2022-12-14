@@ -26,8 +26,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
+                            <label> Select Role</label>
                             <mat-form-field appearance="outline">
-                                <mat-label>Select Role</mat-label>
+                                <!-- <mat-label>Select Role</mat-label> -->
                                 <mat-select formControlName="roleId" required>
                                     <mat-option>Select Role</mat-option>
                                     <mat-option *ngFor="let role of RolesList" [value]="role.roleId">{{role.roleName}}
@@ -43,8 +44,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
+                            <label> First Name</label>
                             <mat-form-field appearance="outline">
-                                <mat-label>First Name</mat-label>
+                                <!-- <mat-label>First Name</mat-label> -->
                                 <input matInput autocomplete="off" formControlName="firstName" required>
                                 <mat-error *ngIf="AddUserForm.controls['firstName'].hasError('required')">First name is
                                     required
@@ -54,8 +56,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
+                            <label> Last Name</label>
                             <mat-form-field appearance="outline">
-                                <mat-label>Last Name</mat-label>
+                                <!-- <mat-label>Last Name</mat-label> -->
                                 <input matInput autocomplete="off" formControlName="lastName" required>
                                 <mat-error *ngIf="AddUserForm.controls['lastName'].hasError('required')">Last name is
                                     required
@@ -69,8 +72,9 @@
 
                     <div class="col-md-6">
                         <div class="mb-3">
+                            <label>Email Id</label>
                             <mat-form-field appearance="outline">
-                                <mat-label>Email Id</mat-label>
+                                <!-- <mat-label>Email Id</mat-label> -->
                                 <input type="email" autocomplete="off" matInput formControlName="email" required>
                                 <mat-error *ngFor="let validation of validation_messages.email_id">
                                     <!-- <span *ngIf="AddUserForm.get('email').hasError(validation.type)">
@@ -82,8 +86,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
+                            <label> Mobile</label>
                             <mat-form-field appearance="outline">
-                                <mat-label>Mobile</mat-label>
+                                <!-- <mat-label>Mobile</mat-label> -->
                                 <input matInput formControlName="mobileNumber" onCopy="return false"
                                     onDrag="return false" onDrop="return false" onPaste="return false" autocomplete=off
                                     (keypress)="onKeyPress($event)" cmsRestrictInput="onlyNumbers" type="text" required
@@ -102,8 +107,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
+                            <label> Password</label>
                             <mat-form-field appearance="outline">
-                                <mat-label>Password</mat-label>
+                                <!-- <mat-label>Password</mat-label> -->
                                 <input [type]="show_password ? 'text' : 'password'" matInput autocomplete="off"
                                     formControlName="password">
                                 <span class="input-group-addon" matSuffix>
