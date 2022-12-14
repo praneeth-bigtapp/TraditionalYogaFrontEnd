@@ -388,13 +388,8 @@ textarea:focus {
     padding: 0 !important;
 } */
 
-<<<<<<< HEAD
 /* .mat-error {
     color: #212529 !important;
-=======
-.mat-error {
-    /* color: #212529 !important; */
->>>>>>> 7f346660428b9c05e47925db5b4c3d6d3518711e
     font-size: 12px !important;
 } */
 
@@ -764,12 +759,12 @@ width: calc(100% - 150px) !important;
 }
 .mat-form-field-infix { padding: 0px !important;}
 .mat-form-field-appearance-outline .mat-form-field-infix{
-    /* padding: 0.25em 0 0.50em 0 !important; */
-    padding: 0px !important;
+    padding: 0.30em 0 0.55em 0 !important;
+    /* padding: 0px !important; */
 }
 input.mat-input-element {
     margin-top: -0.0625em;
-    height: 38px !important;
+    /* height: 38px !important; */
 }
 
 .mat-form-field-wrapper {
