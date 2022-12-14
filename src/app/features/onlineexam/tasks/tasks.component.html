@@ -4,34 +4,54 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/addCourse">Course Management</a></li>
+
             <li class="breadcrumb-item active" aria-current="page">Task Assignment</li>
         </ol>
     </nav>
 
-    <div class="d-flex mb-2 flex-wrap  justify-content-between align-items-center">
-        <h3 class=" pl-2 text-secondary ">Task Assignment</h3>
-        <div class="row align-items-center  ">
-            <div class="col-md-6">
-                <mat-form-field appearance="outline" class="outsideinput" >
-                    <label *ngIf="course !== null">Select Course</label>
+    <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
+        <!-- <h3 class=" pl-2 text-secondary ">Task Assignment</h3> -->
+        <div class="">
+            <button type="button" (click)="createtask()" *ngIf="displaycontent  !displayform"
+                class="btn btn-outline-secondary btn-rounded d-inline-block mb-md-3 ">
+                <!-- <i class="fa-sharp fa-solid fa-plus"></i> -->
+                Add Task
+            </button>
+        </div>
+    </div>
 
-                    <mat-select [(ngModel)]="course"  (ngModelChange)="coursechange()">
-                        <mat-option *ngFor="let course of courseList" [value]="course.coursesId">
-                            {{course.coursesName}}</mat-option>
-                    </mat-select>
-                    <span class="text-danger" *ngIf="courserror">
+    <div class="card  bg-secondary">
+        <div class="card-header text-white bg-secondary">
+            Task Assignment
+        </div>
+
+        <div class="card-body bg-white  py-2">
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <label>Select Course</label>
+
+                    <mat-form-field appearance="outline">
+                        <mat-select [(ngModel)]="course">
+                            <mat-option *ngFor="let course of courseList" [value]="course.coursesId">
+                                {{course.coursesName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <span class=" mat-error" *ngIf="courserror">
                         Course is mandatory
                     </span>
-                </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <button type="button" (click)="coursechange()"
+                        class="btn btn-outline-secondary btn-rounded d-inline-block mt-3 ml-md-1">
+                        Submit
+                    </button>
+                </div>
+
             </div>
 
-            <div class="col-md-4">
-                <button type="button" (click)="createtask()" *ngIf="displaycontent  !displayform"
-                    class="btn btn-outline-secondary btn-rounded d-inline-block mb-md-3 ">
-                    <!-- <i class="fa-sharp fa-solid fa-plus"></i> -->
-                    Add Task
-                </button>
-            </div>
         </div>
     </div>
 
@@ -110,86 +130,98 @@
     </div>
 
 
-    <table mat-table [dataSource]="filterData.dataSource" [hidden]="!displaycontent" matSort
-        class="mat-elevation-z8 mat-datagrid w-100" aria-label="users">
+    <div class="card " [hidden]="!displaycontent">
+        <div class="card-header text-white bg-secondary">
+            Task Assignment
+        </div>
+        <div class="card-body bg-transparent px-0 py-2">
+            <table mat-table [dataSource]="filterData.dataSource" [hidden]="!displaycontent" matSort
+                class="mat-elevation-z8 mat-datagrid w-100" aria-label="users">
 
-        <ng-container matColumnDef="taskName">
-            <th mat-header-cell *matHeaderCellDef scope="col">
-                <label mat-sort-header>
-                    Task Name
-                </label>
-                <input type="text" (keyup)="updatePagination('courseId')"
-                    [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
-            </th>
-            <td mat-cell class="text-center" *matCellDef="let element"> {{element.taskName | titlecase}} </td>
-        </ng-container>
+                <ng-container matColumnDef="taskName">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Task Name
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseId')"
+                            [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.taskName | titlecase}} </td>
+                </ng-container>
 
-        <ng-container matColumnDef="createDate">
-            <th mat-header-cell *matHeaderCellDef scope="col">
-                <label mat-sort-header>
-                    Date of assignment
-                </label>
-                <input type="text" (keyup)="updatePagination('Region')"
-                    [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
-            </th>
-            <td mat-cell class="text-center" *matCellDef="let element">
-                {{element.createDate || "NIL"}}
+                <ng-container matColumnDef="createDate">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Date of assignment
+                        </label>
+                        <input type="text" (keyup)="updatePagination('Region')"
+                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element">
+                        {{element.createDate || "NIL"}}
+                    </td>
+                </ng-container>
 
-            </td>
-        </ng-container>
+                <ng-container matColumnDef="type">
 
-        <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Type
+                        </label>
+                        <input type="text" (keyup)="updatePagination('Country')"
+                            [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"><a
+                            class="text-decoration-underline text-primary" target="_blank" rel=”noreferrer”
+                            [href]="element.mediafile">Video</a> </td>
+                </ng-container>
 
-            <th mat-header-cell *matHeaderCellDef scope="col">
-                <label mat-sort-header>
-                    Type
-                </label>
-                <input type="text" (keyup)="updatePagination('Country')"
-                    [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
-            </th>
-            <td mat-cell class="text-center" *matCellDef="let element"><a class="text-decoration-underline text-primary"
-                    target="_blank" rel=”noreferrer” [href]="element.mediafile">Video</a> </td>
-        </ng-container>
+                <ng-container matColumnDef="dueDate">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Due date for submission
+                        </label>
+                        <input type="text" (keyup)="updatePagination('State')"
+                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.dueDate }} </td>
+                </ng-container>
 
-        <ng-container matColumnDef="dueDate">
-            <th mat-header-cell *matHeaderCellDef scope="col">
-                <label mat-sort-header>
-                    Due date for submission
-                </label>
-                <input type="text" (keyup)="updatePagination('State')"
-                    [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
-            </th>
-            <td mat-cell class="text-center" *matCellDef="let element"> {{element.dueDate }} </td>
-        </ng-container>
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Actions
+                        </label>
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element">
+                        <div class="d-flex flex-wrap justify-content-evenly align-items-center">
 
-        <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef scope="col">
-                <label mat-sort-header>
-                    Actions
-                </label>
-            </th>
-            <td mat-cell class="text-center" *matCellDef="let element">
-                <div class="d-flex flex-wrap justify-content-evenly align-items-center">
+                            <i class="fa-solid fa-eye fs-5 text-info" (click)="viewdetails(element)"
+                                matTooltip="View Course Activity" matTooltip="View"></i>
 
-                    <i class="fa-solid fa-eye fs-5 text-info" (click)="viewdetails(element)"
-                        matTooltip="View Course Activity" matTooltip="View"></i>
-
-                    <span matTooltip="Edit" (click)="editdetails(element)">
-                        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                    </span>
-                    <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.quoteId)"> <i
-                            class="far fa-trash-alt" aria-hidden="true"></i>
-                    </span>
-                </div>
-            </td>
-        </ng-container>
-
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+                            <span matTooltip="Edit" (click)="editdetails(element)">
+                                <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                            </span>
+                            <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.quoteId)">
+                                <i class="far fa-trash-alt" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </td>
+                </ng-container>
 
 
-    <mat-paginator class="" [hidden]="!displaycontent" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
-    </mat-paginator>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+
+            <mat-paginator class="bg-transparent" [hidden]="!displaycontent" [pageSizeOptions]="[10,25, 50, 100]"
+                aria-label="Select page">
+            </mat-paginator>
+        </div>
+    </div>
+
+
+
+
 </div>

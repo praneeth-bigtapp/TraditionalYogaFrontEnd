@@ -15,7 +15,6 @@ const routes: Routes = [
   },
   {
     path: "MycourseMatrieals", component: MyCourseMatriealsComponent
-
   }
 ];
 

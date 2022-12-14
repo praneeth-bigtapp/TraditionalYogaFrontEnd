@@ -184,8 +184,13 @@ export class MemberspageComponent implements OnInit {
   }
   coursechange() {
 
+    if (!this.category) {
+      this.categoryerror = true
+      return
+    }
     this.displaycontent = true
     this.displayform = true
+    this.categoryerror = false
     this.getmemberslist(this.category)
 
   }

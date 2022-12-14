@@ -1,45 +1,85 @@
 <div class="container-fluid ">
-    <!-- remove bg-light -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Alerts</li>
+        </ol>
+    </nav>
 
-    <!-- <h5>Alerts</h5> -->
-    <h3 class="mb-3 pl-2"> Alerts </h3>
+    <div class="d-flex mb-2 flex-wrap  justify-content-between align-items-center">
+        <h3 class=" pl-2 text-secondary ">Alerts</h3>
+
+        <button type="button" (click)="addalert()" class="btn btn-outline-secondary btn-rounded d-inline-block ">
+            Add Alerts
+        </button>
+    </div>
+
+    <div class="card  bg-secondary" *ngIf="displaycontent">
+        <div class="card-header text-white bg-secondary">
+            {{iseditable ? "Update" :"Add" }} Alerts
+        </div>
+        <div class="card-body bg-white py-5">
+            <form [formGroup]="alertform" class="mr-5" (ngSubmit)="onalertsubmit()">
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="row align-items-center ">
+                            <label>Select Category : </label>
+                            <div class="col">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-select matNativeControl formControlName="alertid">
+                                        <mat-option *ngFor="let item of category"
+                                            [value]="item.roleId">{{item.roleName}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error [hidden]=" !alertform.get('fromdate')?.hasError('required')  ">
+                                        Category is mandatory
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <!-- <div class="row align-items-center ">
+                                <label>Description : </label>
+                
+                                <div class="col">
+                                    <angular-editor formControlName="paragraph" [placeholder]="'Enter text here...'" required>
+                                    </angular-editor>
+                                    <div
+                                        *ngIf="alertform.controls['paragraph'].invalid && (alertform.controls['paragraph'].dirty || alertform.controls['paragraph'].touched)">
+                                        <mat-error [hidden]=" !alertform.get('paragraph')?.hasError('required')  ">
+                                            Please Type Few Words
+                                        </mat-error>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+
+                        <div class="col-md-3"></div>
+
+
+                        <div class="col-md-3"></div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </form>
+        </div>
+    </div>
     <div class="card-body bg-white  py-5">
 
 
         <form [formGroup]="alertform" class="mr-5" (ngSubmit)="onalertsubmit()">
 
 
-            <div class="row align-items-center ">
-                <h6 class="text-md-right col-md-4">Select Category : </h6>
 
-                <div class="col">
-                    <mat-form-field class="example-full-width" appearance="outline">
-                        <mat-label>Select Category</mat-label>
-                        <mat-select matNativeControl formControlName="alertid">
-                            <mat-option *ngFor="let item of category" [value]="item.roleId">{{item.roleName}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error [hidden]=" !alertform.get('fromdate')?.hasError('required')  ">
-                            Please Select Alert
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-            </div>
             <br />
-            <div class="row align-items-center ">
-                <h6 class="text-md-right col-md-4">Description : </h6>
-
-                <div class="col">
-                    <angular-editor formControlName="paragraph" [placeholder]="'Enter text here...'" required>
-                    </angular-editor>
-                    <div
-                        *ngIf="alertform.controls['paragraph'].invalid && (alertform.controls['paragraph'].dirty || alertform.controls['paragraph'].touched)">
-                        <mat-error [hidden]=" !alertform.get('paragraph')?.hasError('required')  ">
-                            Please Type Few Words
-                        </mat-error>
-                    </div>
-                </div>
-            </div>
+         
             <br />
             <div class="row align-items-center ">
                 <h6 class="text-md-right col-md-4">Start date : </h6>
