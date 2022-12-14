@@ -5,7 +5,6 @@ import { CreatepraticelibraryService } from '../service/createpraticelibrary.ser
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-create-pratice-library',
@@ -118,7 +117,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
   }
 
   viewdetails(element: any) {
-    
+
   }
   deletedetails(id: any) {
 
@@ -157,6 +156,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
   reseteditable() {
     this.addmediaform.reset()
     this.iseditable = false
+    this.displaycontent = !this.displaycontent
   }
 
   addmedia() {
@@ -187,7 +187,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
           "metaKeyword": vidoemetakeywords
         }
         console.log(body);
-        
+
         this.service.updatelibrary(body).subscribe({
           next: (response) => {
             this.addmediaform.reset()

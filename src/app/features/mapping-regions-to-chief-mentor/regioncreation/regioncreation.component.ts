@@ -5,7 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { filter, map, Observable, startWith } from 'rxjs';
+import { map, Observable, startWith } from 'rxjs';
 import { MappingRegionsToChiefMentorService } from '../services/mapping-regions-to-chief-mentor.service';
 
 @Component({
@@ -209,6 +209,7 @@ export class RegioncreationComponent implements OnInit {
   reseteditable() {
     this.regionfilterform.reset()
     this.iseditable = false
+    this.displaycontent = !this.displaycontent
   }
 
 

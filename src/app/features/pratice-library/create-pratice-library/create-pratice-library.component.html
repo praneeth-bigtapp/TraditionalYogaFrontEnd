@@ -1,13 +1,14 @@
 <div class="ConfigurationTypes_textpadding ">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Pratice library</li>
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Pratice library</li>
         </ol>
-      </nav>
+    </nav>
     <div class="d-flex mb-2 flex-wrap  justify-content-between align-items-center">
         <h3 class=" pl-2 text-secondary ">Pratice library</h3>
-        <button type="button" (click)="addlibrary()" class="btn btn-outline-secondary btn-rounded d-inline-block ">
+        <button type="button" *ngIf="!displaycontent" (click)="addlibrary()"
+            class="btn btn-outline-secondary btn-rounded d-inline-block ">
             Add Library
         </button>
     </div>
@@ -120,12 +121,12 @@
                         </div>
                     </div>
                 </div>
-                <br/>
+                <br />
                 <div class="d-flex flex-row justify-content-end flex-wrap">
                     <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
                         {{iseditable ? "Update":"Upload"}}
                     </button>
-                    <button type="button" (click)="reseteditable()" *ngIf="iseditable"
+                    <button type="button" (click)="reseteditable()"
                         class="btn btn-outline-secondary btn-rounded d-inline-block ">
                         Cancel
                     </button>

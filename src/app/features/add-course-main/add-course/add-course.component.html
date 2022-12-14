@@ -9,8 +9,8 @@
         <!-- <h3 class=" pl-2 text-secondary "> Add Courses/View Course Details</h3> -->
         <h3 class=" pl-2 text-secondary ">Courses</h3>
         
-        <button type="button" (click)="addcourse()" class="btn btn-outline-secondary btn-rounded d-inline-block ">
-            {{displaycontent ? "Add Course" : "Add Course" }}
+        <button type="button" (click)="addcourse()" *ngIf="!displaycontent" class="btn btn-outline-secondary btn-rounded d-inline-block ">
+           Add Course
         </button>
     </div>
     <div class="card  bg-secondary" *ngIf="displaycontent">
@@ -130,7 +130,7 @@
                     <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
                         {{iseditable ? "Update" :"Submit" }}
                     </button>
-                    <button type="button" (click)="reseteditable()" *ngIf="iseditable"
+                    <button type="button" (click)="reseteditable()" 
                         class="btn btn-outline-secondary btn-rounded d-inline-block ">
                         Cancel
                     </button>
