@@ -159,8 +159,6 @@ export class CreatePraticeLibraryComponent implements OnInit {
     this.iseditable = false
   }
 
-
-
   addmedia() {
 
 
