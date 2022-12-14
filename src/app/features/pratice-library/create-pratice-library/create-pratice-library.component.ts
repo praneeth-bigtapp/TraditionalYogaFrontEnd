@@ -46,8 +46,6 @@ export class CreatePraticeLibraryComponent implements OnInit {
     this.service.getcategory().subscribe({
       next: (response) => {
         this.categoryList = response
-        console.log(response);
-
       },
       error: (error) => {
         console.error(error.message);
@@ -62,8 +60,6 @@ export class CreatePraticeLibraryComponent implements OnInit {
       next: (response) => {
         this.data = response
         this.data = this.data.reverse()
-        console.log(response);
-
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
@@ -122,12 +118,12 @@ export class CreatePraticeLibraryComponent implements OnInit {
   }
 
   viewdetails(element: any) {
-
+    
   }
   deletedetails(id: any) {
 
     const body = {
-      "coursesId": id,
+      "praticeLibaryId": id,
     }
 
     this.service.deletelibrary(body).subscribe({
@@ -181,7 +177,6 @@ export class CreatePraticeLibraryComponent implements OnInit {
         "metaKeyword": vidoemetakeywords
       }
 
-      console.log(body);
 
       if (this.iseditable) {
         //editable
@@ -193,7 +188,9 @@ export class CreatePraticeLibraryComponent implements OnInit {
           "message": videodescription,
           "metaKeyword": vidoemetakeywords
         }
-        this.service.updatelibrary(body)?.subscribe({
+        console.log(body);
+        
+        this.service.updatelibrary(body).subscribe({
           next: (response) => {
             this.addmediaform.reset()
             // this.opensnackBar(response)

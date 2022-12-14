@@ -388,13 +388,13 @@ textarea:focus {
 } */
 
 .mat-error {
-    color: #212529 !important;
+    /* color: #212529 !important; */
     font-size: 12px !important;
 }
 
-mat-paginator.mat-paginator.table-responsive {
+/* mat-paginator.mat-paginator.table-responsive {
     border-radius: 10px;
-}
+} */
 
 .user-profile .dropdown-toggle::after {
     display: block;
@@ -428,13 +428,14 @@ mat-paginator.mat-paginator.table-responsive {
     box-shadow: none;
     border: none;
 }
+
 .mat-table tbody {
     background: #fff !important;
 }
 
 .mat-datagrid tr.mat-header-row {
     /* background-color: #d1d7db; */
-    border:none;
+    border: none;
     background-color: transparent;
     border-radius: 14px !important;
 }
@@ -755,16 +756,23 @@ width: calc(100% - 150px) !important;
 .mat-form-field-appearance-outline .mat-form-field-outline-end {
     border-radius: 0 10px 10px 0 !important;
 }
-.mat-form-field-infix { padding: 0px !important;}
-.mat-form-field-appearance-outline .mat-form-field-infix{
+
+.mat-form-field-infix {
+    padding: 0px !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
     padding: 0.25em 0 0.50em 0 !important;
 }
+
 .mat-form-field-wrapper {
     padding-bottom: 0em !important;
 }
-.mat-form-field-subscript-wrapper{
-    margin-top: 1.5rem !important; 
+
+.mat-form-field-subscript-wrapper {
+    margin-top: 1.5rem !important;
 }
+
 /* Shake animation */
 
 @keyframes shake {
