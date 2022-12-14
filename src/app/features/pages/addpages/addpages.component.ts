@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -16,21 +16,20 @@ export class AddpagesComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   selection = new SelectionModel<any>(true, []);
-  data = [{ "Pagename": "About US", "Author": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" },
-  { "Pagename": "About US", "Author": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" },
-  { "Pagename": "About US", "Author": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" },
-  { "Pagename": "About US", "Author": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" },
-  { "Pagename": "About US", "Author": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" },
-  { "Pagename": "About US", "Author": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" },
-  { "Pagename": "About US", "Author": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" },
-  { "Pagename": "About US", "Author": 'bdmin', 'Dateofpublish': '02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" }]
-  filterData: any
+  data = [{ "Pagename": "About US", "Author": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37',"lastmodified":'02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/aboutus", "status": "published" },
+  { "Pagename": "About US1", "Author": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37',"lastmodified":'02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status1": "published1" },
+  { "Pagename": "About US", "Author1": 'admin1', 'Dateofpublish': '02,Aug,2022, 12:30:37',"lastmodified":'03,Aug,2022, 12:30:37', "links": "https://tradiationalyoga.co.in/about", "status": "published" },
+  { "Pagename": "About US3", "Author": 'admin', 'Dateofpublish1': '04,Aug,2022, 12:30:37',"lastmodified":'02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published3" },
+  { "Pagename": "About US", "Author3": 'admin', 'Dateofpublish': '02,Aug,2022, 12:30:37',"lastmodified":'02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status3": "published" },
+  { "Pagename": "About US", "Author": 'admin3', 'Dateofpublish3': '02,Aug,2022, 12:30:37',"lastmodified":'04,Aug,2022, 12:30:37', "linked": "https://tradiationalyoga.co.in/about", "status": "published" },
+  { "Pagename": "About US", "Author": 'admin', 'Dateofpublish': '03,Aug,2022, 12:30:37',"lastmodified":'02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" },
+  { "Pagename": "About US", "Author": 'bdmin', 'Dateofpublish': '02,Aug,2022, 12:30:37',"lastmodified":'02,Aug,2022, 12:30:37', "link": "https://tradiationalyoga.co.in/about", "status": "published" }]
   gridData: any;
-
+  addCourseForm!: FormBuilder;
   elementvalue={}
   dataSource: any;
   displayedColumns: string[] = ["Checkbox", "Pagename", "Author", 'Dateofpublish','lastmodified', 'link', 'status', 'Action'];
-
+  iseditable: boolean = false
 
   displaycontent: boolean = false
 
@@ -44,7 +43,7 @@ Tags= new FormControl('', [Validators.required, ]);
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    height: '16rem',
+    height: '8rem',
     minHeight: '0',
     maxHeight: 'auto',
     width: 'auto',
@@ -85,6 +84,7 @@ Tags= new FormControl('', [Validators.required, ]);
     ]
   };
 name:any
+  filterData: any;
 
   constructor(private router: Router,private route:ActivatedRoute) { 
     this.name=this.route.snapshot.paramMap.get("element") 
@@ -110,12 +110,17 @@ name:any
       this.selection.clear() :
       this.filterData.dataSource.data.forEach((row: any) => this.selection.select(row));
   }
-  addcourse() {
+  addPages() {
+    this.displaycontent = !this.displaycontent
+  }
+  reseteditable() {
+    // this.addCourseForm.reset()
+    this.iseditable = false
     this.displaycontent = !this.displaycontent
   }
 
   ngOnInit(): void {
-    this.addcourse();
+    // this.addcourse();
         
     this.filterData = {
       filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),

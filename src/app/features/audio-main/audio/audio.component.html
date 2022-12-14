@@ -2,16 +2,19 @@
     <!-- remove bg-light -->
 
     <!-- <h4>Audio Management- Audio dharanas</h4> -->
-    <h3 class="mb-4 pl-2 text-secondary">Audio Management- Audio dharanas</h3>
 
-    <mat-card>
-        <div class="row d-flex">
+  
+    <div class=" card bg-white mt-3">
+        <h3 class="card-header text-white card bg-secondary">Audio Management- Audio dharanas</h3>
+        
+        <div class="row d-flex m-2">
 
+            <label>Select Course:</label>
 
-
-            <div class="col-md-2 d-flex pt-2" >
+            <div class="col-md-3 d-flex pt-2 " >
+             
                 <mat-form-field appearance="outline">
-                    <mat-label>Choose an option:</mat-label>
+                
                     <mat-select  >
                        
                         <mat-option value="categoryName" *ngFor="let element of courses">{{element.coursesName}}</mat-option>
@@ -21,9 +24,9 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-md pt-3">
+            <div class="col-md pt-2">
                 <button type="submit" class="btn btn-outline-secondary btn-go btn-rounded d-inline-block ">
-                    GO
+                   Submit
                 </button>
 
             </div>
@@ -49,14 +52,17 @@
         </div>
         <hr>
         <form [formGroup]="Audiomanagement" (ngSubmit)="audiosubmit()">
+            
 
 
-            <div class="row align-items-center ">
-                <h6 class="text-md-right col-md-4">Select Category:</h6>
+            <div class="row m-2" >
+                <!-- <h6 class="text-md-right col-md-4">Select Category:</h6> -->
+                
 
-                <div class="col-md-4">
+                <div class="col-md-6">
+                    <label>Select Category:</label>
                     <mat-form-field appearance="outline">
-                        <mat-label>Select Category</mat-label>
+                        
                         <select matNativeControl [disabled]="disableSelect.value" formControlName="category">
                             <option value="" selected></option>
                             <option value="volvo">Volvo</option>
@@ -70,17 +76,14 @@
                     </mat-form-field>
                 </div>
 
-            </div>
+     
+                <!-- <h6 class="text-md-right col-md-4"></h6> -->
+            
 
-
-
-
-            <div class="row align-items-center ">
-                <h6 class="text-md-right col-md-4">Upload Audio:</h6>
-
-                <div class="col-md-4">
+                <div class="col-md-6">
+                    <label>Upload Audio:</label>
                     <mat-form-field appearance="outline">
-                        <mat-label>Audio file</mat-label>
+                        <!-- <mat-label>Audio file</mat-label> -->
                         <select matNativeControl [disabled]="disableSelect.value" formControlName="upload">
                             <option value="" selected></option>
                             <option value="volvo">Volvo</option>
@@ -94,13 +97,11 @@
                     </mat-form-field>
                 </div>
 
-            </div>
+<!--          
+                <h6 class="text-md-right col-md-4">Select Audio File:</h6> -->
 
-
-            <div class="row align-items-center ">
-                <h6 class="text-md-right col-md-4">Select Audio File:</h6>
-
-                <div class="col">
+                <div class="col-md-6">
+                    <label>Select Audio File:</label>
                     <!-- <mat-form-field appearance="outline" class="ms-3 "> -->
                     <input type="file" id="file" (change)="filechange($event)" accept=" image/*" class="border"
                         required="true" formControlName="file" />
@@ -111,14 +112,12 @@
                     </mat-error>
                 </div>
 
-            </div>
+                <!-- <h6 class="text-md-right col-md-4">Title:</h6> -->
 
-            <div class="row align-items-center ">
-                <h6 class="text-md-right col-md-4">Title:</h6>
-
-                <div class="col">
+                <div class="col-md-6">
+                    <label>Title:</label>
                     <mat-form-field appearance="outline">
-                        <mat-label>title here</mat-label>
+                        <!-- <mat-label>title here</mat-label> -->
                         <input matInput formControlName="title">
                         <mat-error [hidden]=" !Audiomanagement.get('title')?.hasError('required')  ">
                             Please Type title
@@ -126,15 +125,14 @@
                     </mat-form-field>
                 </div>
 
-            </div>
-            <br />
-            <div class="row align-items-center ">
-                <h6 class="text-md-right col-md-4">Description:</h6>
+        
+                <!-- <h6 class="text-md-right col-md-4">Description:</h6> -->
 
-                <div class="col">
+                <div class="col-md-12">
+                    <label>Description:</label>
                     <mat-form-field class="example-full-width" appearance="outline" id="field">
-                        <mat-label>Health is wealth</mat-label>
-                        <textarea matInput placeholder="Ex. It makes me feel..."
+                        <!-- <mat-label>Health is wealth</mat-label> -->
+                        <textarea matInput 
                             formControlName="description"></textarea>
                         <mat-error [hidden]=" !Audiomanagement.get('description')?.hasError('required')  ">
                             Please Type description
@@ -142,15 +140,15 @@
                     </mat-form-field>
                 </div>
 
-            </div>
-            <br />
-            <div class="row align-items-center ">
-                <h6 class="text-md-right col-md-4">Duration Of the
-                    File:</h6>
+       
+                <!-- <h6 class="text-md-right col-md-4">Duration Of the
+                    File:</h6> -->
 
-                <div class="col">
+                <div class="col-md-6">
+                    <label>Duration Of the
+                        File:</label>
                     <mat-form-field class="example-full-width" appearance="outline" id="field">
-                        <mat-label>30:12</mat-label>
+                        <!-- <mat-label>30:12</mat-label> -->
                         <input matInput formControlName="duration">
                         <mat-error [hidden]=" !Audiomanagement.get('duration')?.hasError('required')  ">
                             Please Type duration
@@ -158,15 +156,14 @@
                     </mat-form-field>
                 </div>
 
-            </div>
-            <br />
-            <div class="row align-items-center ">
-                <h6 class="text-md-right col-md-4">Meta Keyword:
-                </h6>
+           
+                <!-- <h6 class="text-md-right col-md-4">Meta Keyword:
+                </h6> -->
 
                 <div class="col">
+                    <label>Meta Keyword:</label>
                     <mat-form-field class="example-full-width" appearance="outline" id="field">
-                        <mat-label>meta keyword</mat-label>
+                        <!-- <mat-label>meta keyword</mat-label> -->
                         <input matInput formControlName="meta">
                         <mat-error [hidden]=" !Audiomanagement.get('meta')?.hasError('required')  ">
                             Please Type meta
@@ -188,7 +185,7 @@
 
         <!-- </div> -->
 
-    </mat-card>
+    </div>
 
 
 </div>
