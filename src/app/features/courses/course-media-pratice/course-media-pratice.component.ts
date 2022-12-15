@@ -55,7 +55,7 @@ export class CourseMediaPraticeComponent implements OnInit {
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    height: '15rem',
+    height: '7rem',
     minHeight: '0',
     maxHeight: 'auto',
     width: 'auto',

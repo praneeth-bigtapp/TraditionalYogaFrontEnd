@@ -13,8 +13,8 @@
             Course Media Pratice sessions
       </div>
     <div class="card border-light bg-white pt-3 ">
-        <div class="pl-3   d-flex flex-row flex-wrap pb-2 ">
-            <div class="w-25 me-5">
+        <div class="  d-flex flex-row flex-wrap pb-2 ">
+            <div class="col-3">
                 <label>Select type: </label>
 
                 <mat-form-field appearance="outline">
@@ -22,10 +22,11 @@
                         <mat-option value="live">Live</mat-option>
                         <mat-option value="recording">Recording</mat-option>
                     </mat-select>
-                    <span class="text-danger" *ngIf="categoryerror">
-                        Please Select Category
-                    </span>
+                    
                 </mat-form-field>
+                <span class=" mat-error" *ngIf="categoryerror">
+                    Please Select Category
+                </span>
             </div>
             <div>
                 <button type="button" (click)="gobutton()"
@@ -38,108 +39,114 @@
         </div>
     </div>
 
-        <div class="card-body" *ngIf="displaycontent">
+        <div *ngIf="displaycontent">
+            
 
-
-            <form [formGroup]="addmediaform" class="me-5" (ngSubmit)="addmedia()">
-
-                <h4 class="ml-5">Add Media</h4>
-
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Video Link : </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Video Link</mat-label>
+            <form [formGroup]="addmediaform"  (ngSubmit)="addmedia()">
+                <div class="card mt-5">
+                    <div class="card-header text-white bg-secondary" >
+                        Add Media
+                  </div>
+                  <div class="card-body border-light bg-white pt-3 pb-4">
+                    <div class=" row pb-4">
+                    <div class="col-4 pl-3">
+                        <label>Video Link</label>
+                        <mat-form-field appearance="outline" >
                             <input matInput autocomplete="off" class="" formControlName="videolink" required>
                             <mat-error [hidden]="!addmediaform.get('videolink')?.hasError('required')">
-                                Please Type Few Words
+                                Please Type the video link
                             </mat-error>
                         </mat-form-field>
                     </div>
-                </div>
-                <br />
+                    <div class="col-4">
+                        <label>Title</label>
 
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Title : </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Title</mat-label>
+                        <mat-form-field appearance="outline" >
                             <input matInput autocomplete="off" class="" formControlName="videotitle" required>
                             <mat-error [hidden]="!addmediaform.get('videotitle')?.hasError('required')">
-                                Please Add Link
+                                Please Add Title
                             </mat-error>
                         </mat-form-field>
                     </div>
-                </div>
-                <br />
+                    <div class="col-4">
+                        <label>Duration of Video</label>
 
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Description : </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Description</mat-label>
-                            <textarea matInput autocomplete="off" class="" rows="5" formControlName="videodescription"
-                                required></textarea>
-                            <mat-error [hidden]="!addmediaform.get('videodescription')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <br />
-
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Duration of Video : </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Duration of Video</mat-label>
+                        <mat-form-field appearance="outline" >
                             <input matInput autocomplete="off" class="" formControlName="videoduration" required>
                             <mat-error [hidden]="!addmediaform.get('videoduration')?.hasError('required')">
-                                Please Type Few Words
+                                Please Type Duration
                             </mat-error>
                         </mat-form-field>
                     </div>
-                </div>
-                <br />
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Meta keywords : </h6>
+                   
+                  </div>
+                  <div class="row">
+                    
+                 
+                    <div class="col-4">
+                        <label>Meta keywords</label>
 
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Meta keywords</mat-label>
+                        <mat-form-field appearance="outline" >
                             <input matInput autocomplete="off" class="" formControlName="vidoemetakeywords" required>
                             <mat-error [hidden]="!addmediaform.get('vidoemetakeywords')?.hasError('required')">
                                 Please Type Few Words
                             </mat-error>
                         </mat-form-field>
                     </div>
-                </div>
-                <br />
-                <h4 class="ml-5">Text with images</h4>
-                <br />
-
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Title : </h6>
-
                     <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Video Link</mat-label>
+                        <label>Description</label>
+
+                        <mat-form-field appearance="outline" >
+                            <textarea rows="5" matInput autocomplete="off" class="" formControlName="videodescription"
+                                equired></textarea>
+                            <mat-error [hidden]="!addmediaform.get('videodescription')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                  
+                </div>
+                </div>
+
+                <div class="card mt-5">
+                    <div class="card-header text-white bg-secondary" >
+                        Text with images
+                  </div>
+                  <div class="card-body border-light bg-white pt-3 pb-4">
+                    <div class=" row pb-4">
+                    <div class="col-4 pl-3">
+                        <label>Video Link</label>
+                        <mat-form-field appearance="outline" >
                             <input matInput autocomplete="off" class="" formControlName="imagetitle" required>
                             <mat-error [hidden]="!addmediaform.get('imagetitle')?.hasError('required')">
                                 Please Type Few Words
                             </mat-error>
                         </mat-form-field>
                     </div>
-                </div>
-                <br />
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Paragraph : </h6>
+                  
+                    <div class="col-4">
+                        <label>Meta keywords</label>
 
+                        <mat-form-field appearance="outline" >
+                            <input matInput autocomplete="off" class="" formControlName="imagekeywords" required>
+                            <mat-error [hidden]="!addmediaform.get('imagekeywords')?.hasError('required')">
+                                Please Type Few Words
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-4">
+                        <label>Upload:</label>
+                        <input type="file" id="file" class="border" formControlName="mediafile" accept=" */*"
+                            (change)="onfilechange($event)" required="true" />
+                        
+                        <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
+
+                    </div>   
+                </div>
+                  <div class="row">
                     <div class="col">
+                        <label>Paragraph:</label>
                         <div class="w-100 ">
                             <angular-editor formControlName="paragraph" [placeholder]="'Enter text here...'"
                                 [config]="editorConfig" required [(ngModel)]="description"
@@ -150,90 +157,66 @@
                             </mat-error>
                         </div>
                     </div>
+                  
+                    
                 </div>
-                <br />
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Meta keywords : </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Video Link</mat-label>
-                            <input matInput autocomplete="off" class="" formControlName="imagekeywords" required>
-                            <mat-error [hidden]="!addmediaform.get('imagekeywords')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
+                  
+                
                 </div>
-                <br />
-
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Upload Media file : </h6>
-
-                    <div class="col">
-                        <input type="file" id="file" class="border" formControlName="mediafile" accept=" */*"
-                            (change)="onfilechange($event)" required="true" />
-                        <br />
-                        <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
-
-                    </div>
                 </div>
-                <br />
 
-                <h4 class="ml-5">Media</h4>
+                <div class="card mt-5">
+                    <div class="card-header text-white bg-secondary" >
+                        Text with images
+                  </div>
+                  <div class="card-body border-light bg-white pt-3 pb-4">
+                    <div class=" row pb-4">
+                        <div class="col-4">
 
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Title : </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Title</mat-label>
+                            <label>Title</label>
+                        <mat-form-field appearance="outline" >
+                            
                             <input matInput autocomplete="off" class="" formControlName="mediatitle" required>
                             <mat-error [hidden]="!addmediaform.get('mediatitle')?.hasError('required')">
                                 Please Type Few Words
                             </mat-error>
                         </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                            <label>Meta keywords</label>
+
+                            <mat-form-field appearance="outline" >
+                                <input matInput autocomplete="off" class="" formControlName="mediametakeywords" rquired>
+                                <mat-error [hidden]="!addmediaform.get('mediametakeywords')?.hasError('required')">
+                                    Please Type Few Words
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>Description</label>
+
+                            <mat-form-field appearance="outline" >
+                                <textarea rows="5" matInput autocomplete="off" class="" formControlName="mediadescription"
+                                    equired></textarea>
+                                <mat-error [hidden]="!addmediaform.get('mediadescription')?.hasError('required')">
+                                    Please Type Few Words
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row  d-flex justify-content-end">
+                        <button type="submit" class="col-2 btn btn-outline-secondary btn-rounded  m-2">
+                            Submit
+                        </button>
                     </div>
                 </div>
-                <br />
-
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Description </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Video Link</mat-label>
-                            <textarea rows="5" matInput autocomplete="off" class="" formControlName="mediadescription"
-                                equired></textarea>
-                            <mat-error [hidden]="!addmediaform.get('mediadescription')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
                 </div>
-                <br />
-
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Meta keywords : </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Meta keywords</mat-label>
-                            <input matInput autocomplete="off" class="" formControlName="mediametakeywords" rquired>
-                            <mat-error [hidden]="!addmediaform.get('mediametakeywords')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <br />
-                
-
-
-                <button type="submit" class=" float-md-right btn btn-outline-secondary btn-rounded d-inline-block m-2">
-                    Submit
-                </button>
             </form>
+
+
         </div>
 
     </div>
@@ -313,7 +296,7 @@
         <ng-container matColumnDef="buttons">
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
-                    View/Manage
+                    Actions
                 </label>
             </th>
             <td mat-cell *matCellDef="let element " class="text-center">
