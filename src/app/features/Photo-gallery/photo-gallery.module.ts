@@ -17,6 +17,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatPaginatedTabHeader } from '@angular/material/tabs/paginated-tab-header';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
     MatSnackBarModule,
     MatPaginatorModule,
     MatSortModule,
+    MatSlideToggleModule,
+    MatTooltipModule,
     
   ]
 })

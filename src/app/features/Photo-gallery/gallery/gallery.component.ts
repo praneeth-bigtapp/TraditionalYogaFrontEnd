@@ -15,7 +15,7 @@ export class GalleryComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   filterData: any
   gridData: any;
-
+  
     data = [
     {
       "GalaryName": "RYT 200 Course photos",
@@ -92,16 +92,21 @@ export class GalleryComponent implements OnInit {
 
   }
 
-  onEditRole(element:any){
+  ChangeActive(element:any){
 
   }
-  onDeleteRole(element:any){
+  IsActiveorNot(element:any){
+    return true
+  }
+  viewdetails(element:any){
 
   }
-  onVisibleRole(element:any){
+  editdetails(element:any){
 
   }
+  deletedetails(element:any){
 
+  }
 
 
 }

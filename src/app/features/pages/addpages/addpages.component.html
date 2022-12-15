@@ -5,12 +5,14 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#/addpages">Website Management</a></li>
         <li class="breadcrumb-item active" aria-current="page">Pages</li>
       </ol>
     </nav>
+ 
     <div class="row d-flex flex-wrap mb-3">
       <div class="col-7">
-        <h4> Pages </h4>
+        
       </div>
   
 
@@ -24,8 +26,12 @@
       </div>
     </div>
    
-  <form class=" card bg-white "  *ngIf="displaycontent">
-    <h4 class="card-header text-white card bg-secondary"> Add Pages </h4>
+    <div class="card mt-5" *ngIf="displaycontent">
+      <div class="card-header text-white bg-secondary" >
+        Add Pages
+    </div>
+  <form class=" card-body bg-white "  >
+   
     <div class="row">
 
     
@@ -131,16 +137,17 @@
 
 
   </form>
-
+</div>
   <br>
  <div class="card">
   <div class="card-header text-white bg-secondary" >
     Pages
 </div>
 
-  <table mat-table matSort [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid ">
-
-    <ng-container matColumnDef="Checkbox">
+<div class="rounded mat-elevation-z8">
+  <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
+    aria-label="users">
+<ng-container matColumnDef="Checkbox">
       <th mat-header-cell *matHeaderCellDef class="col-1">
         <br>
         <div class="text-center ">
@@ -237,6 +244,8 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
   </table>
+  </div>
+
   <div class="col bg-white">
     <mat-paginator [pageSizeOptions]="[ 5,10,25, 50, 100]" aria-label="Select page"></mat-paginator>
   </div>
