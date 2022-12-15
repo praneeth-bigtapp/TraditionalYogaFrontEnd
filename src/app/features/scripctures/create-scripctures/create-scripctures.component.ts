@@ -18,6 +18,8 @@ export class CreateScripcturesComponent implements OnInit {
   filerror2!: boolean
   backcoverdata!: any
   filedata!: any
+  displaycontent: boolean = true
+  iseditable: boolean = false
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
@@ -43,30 +45,34 @@ export class CreateScripcturesComponent implements OnInit {
   openSnackBar(data: any) {
     this._snackBar.open(data.message, 'Close');
   }
+
+  add() {
+    this.displaycontent = !this.displaycontent
+  }
+
   onfilechange(formname: string, event: any) {
 
     if (formname === 'backcover') {
       this.filerror = this.addmediaform.value.coverimage === null ? true : false
 
       this.backcoverdata = event && event.target.files[0].name
-
       console.log(this.backcoverdata);
-
-
-
     }
     if (formname === 'file') {
       this.filerror2 = this.addmediaform.value.coverfile === null ? true : false
       this.filedata = event && event.target.files[0].name
       console.log(this.filedata);
-
-
     }
 
   }
   ontimechange() {
     this.timerror = this.addmediaform.value.videoduration === null ? true : false
 
+  }
+  reseteditable() {
+    this.addmediaform.reset()
+    this.iseditable = false
+    this.displaycontent = !this.displaycontent
   }
   addmedia() {
 

@@ -80,7 +80,7 @@
                     </div>
                     <div class="col d-flex flex-row flex-wrap mt-4">
                         <button type="submit" class="btn btn-outline-secondary btn-rounded  d-inline-block ">
-                            Add
+                            {{iseditable ? "Update" :"Add" }}
                         </button>
                         <button type="button" (click)="reseteditable()"
                             class="btn btn-outline-secondary btn-rounded d-inline-block ">

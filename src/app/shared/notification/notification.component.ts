@@ -17,7 +17,7 @@ export class NotificationComponent implements OnInit {
   filterData: any;
   gridData = [];
   dataSource: any;
-  displayedColumns: string[] = ['coursesId', 'category', 'coursesName', "courseDuration", "startDate", "endDate", "currentStatus", "Action"];
+  displayedColumns: string[] = ['notificationId', 'title', 'categoryId', "uploadFile", "Action"];
   data: any;
 
   category!: string
@@ -36,6 +36,7 @@ export class NotificationComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) {
     this.notificationform = this.formbuilder.group({
+      notificationId: [null],
       category: [null, Validators.compose([Validators.required])],
       title: [null, Validators.compose([Validators.required])],
       description: [null, Validators.compose([Validators.required])],
@@ -53,15 +54,14 @@ export class NotificationComponent implements OnInit {
 
     this.service.getnotificationcategory().subscribe({
       next: (response) => {
-        console.log(response);
-        this.notificationform = response
-
+        this.notificationtypes = response
       },
       error: (error) => {
         console.error(error.message);
 
       }
     })
+    this.getdata()
   }
   ngOnInit(): void {
 
@@ -93,7 +93,7 @@ export class NotificationComponent implements OnInit {
     })
   }
   compareselect(obj1: any, obj2: any) {
-    return obj1 && obj2 && obj1.categoriesId === obj2
+    return obj1 && obj2 && obj1 === obj2
   }
   openSnackBar(data: any) {
     this._snackBar.open(data.message, 'Close');
@@ -136,7 +136,11 @@ export class NotificationComponent implements OnInit {
   }
   editdetails(element: any) {
     this.notificationform.setValue({
-      // need to add form
+      notificationId: element.notificationId,
+      category: element.categoryId.categoryId,
+      title: element.title,
+      description: element.message,
+      file: null,
     });
     this.iseditable = true
     this.displaycontent = true
@@ -152,13 +156,17 @@ export class NotificationComponent implements OnInit {
 
       this.notificationform.value.file = this.filedata
 
-      const { category, title, description, file } = this.notificationform.value
+      const { notificationId, category, title, description, file } = this.notificationform.value
 
-      console.log({ category, title, description, file });
+      console.log({ notificationId, category, title, description, file });
 
       const body = {
-
+        "categoryId": category,
+        "title": title,
+        "uploadFile": file,
+        "message": description
       }
+
 
       if (this.iseditable) {
         //editable

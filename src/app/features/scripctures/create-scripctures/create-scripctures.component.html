@@ -1,95 +1,110 @@
 <div class="ConfigurationTypes_textpadding ">
-    <h3 class="mb-5 pl-2"> Create scripctures </h3>
 
-    <div class="card border-light pt-3 ">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/addCourse">Course Management</a></li>
 
-        <div class="card-body bg-white  ">
+            <li class="breadcrumb-item active" aria-current="page">Create scripctures</li>
+        </ol>
+    </nav>
+    <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
+        <!-- <h3 class=" pl-2 text-secondary "> Add Courses/View Course Details</h3> -->
+        <!-- <h3 class=" pl-2 text-secondary ">Courses</h3> -->
 
+        <button type="button" (click)="add()" *ngIf="!displaycontent"
+            class="btn btn-outline-secondary btn-rounded d-inline-block ">
+            Add scripctures
+        </button>
+    </div>
+    <br/>
+    <div class="card  bg-secondary" *ngIf="displaycontent">
+        <div class="card-header text-white bg-secondary">
+            {{iseditable ? "Update" :"Add" }} scripctures
 
-            <form [formGroup]="addmediaform" class=" me-5" (ngSubmit)="addmedia()">
+        </div>
+        <div class="card-body bg-white  py-3">
+            <form [formGroup]="addmediaform" (ngSubmit)="addmedia()">
 
-                <!-- Back Cover -->
-                <div class=" row align-items-center  ">
-                    <h6 class="text-md-right col-md-4 ">Upload book cover image</h6>
-                    <div class="col-md ">
-                        <input type="file" id="file" class="border" formControlName="coverimage"
-                            (change)="onfilechange('backcover',$event)" accept="image/*" required="true" /> <br />
+                <div class="row">
 
-                        <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
+                    <div class="row align-items-center col-md-3 ">
+                        <label>Title </label>
+
+                        <div class="col">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" class="" formControlName="covertitle" required>
+                                <mat-error [hidden]="!addmediaform.get('covertitle')?.hasError('required')">
+                                    Title is mandatory
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
                     </div>
-                </div>
 
+                    <div class=" row align-items-center col-md-3 mr-1  ">
+                        <label class="mb-1">Upload book cover image</label>
+                        <input type="file" id="file" class="border" formControlName="coverimage"
+                            (change)="onfilechange('backcover',$event)" accept="image/*" required="true" />
+                        <mat-error *ngIf="filerror">Book cover is mandatory</mat-error>
 
-                <!-- Image -->
-                <div class="row align-items-center align-items-center">
-                    <h6 class="text-md-right col-md-4">Upload file </h6>
+                    </div>
 
-                    <div class="col-md">
+                    <div class="row col-md-3 align-items-center r">
+                        <label class="mb-1">Upload file </label>
+
                         <input type="file" id="file" class="border" formControlName="coverfile"
                             (change)="onfilechange('file',$event)" accept="image/*" required="true" /> <br />
+                        <mat-error *ngIf="filerror">Image is mandatory</mat-error>
 
-                        <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
                     </div>
+                    <div class=" col-md-3 row align-items-center ">
+                        <label>Meta Keywords</label>
 
-                </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="coverkeywords" required>
+                                <mat-error [hidden]="!addmediaform.get('coverkeywords')?.hasError('required')">
+                                    Keywords is mandatory
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
 
-
-                <!-- Title -->
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Title </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Title:</mat-label>
-                            <input matInput autocomplete="off" class="" formControlName="covertitle" required>
-                            <mat-error [hidden]="!addmediaform.get('covertitle')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
                     </div>
                 </div>
-
-                <!-- Descriptions  -->
+                <br />
                 <div class="row align-items-center">
-                    <h6 class="text-md-right col-md-4">Description: </h6>
+                    <div class="row align-items-center col-md-6">
+                        <label>Description </label>
 
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3">
-                            <mat-label>Description</mat-label>
-                            <textarea matInput class="p-2" formControlName="coverdescription" rows="3"
-                                placeholder="Description"></textarea>
-                            <mat-error [hidden]="!addmediaform.get('coverdescription')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
+                        <div class="col">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Description</mat-label>
+                                <textarea matInput class="p-2" formControlName="coverdescription" rows="3"
+                                    placeholder="Description"></textarea>
+                                <mat-error [hidden]="!addmediaform.get('coverdescription')?.hasError('required')">
+                                    Description is mandatory
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
                     </div>
-
-                </div>
-
-                <!-- Meta Keyword  -->
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Meta Keywords: </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3">
-                            <mat-label>Meta Keyword</mat-label>
-                            <input matInput autocomplete="off" formControlName="coverkeywords" required>
-                            <mat-error [hidden]="!addmediaform.get('coverkeywords')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                            {{iseditable ? "Update" :"Submit" }}
+                        </button>
                     </div>
-
+                    <div class="col-md-3">
+                        <button type="button" (click)="reseteditable()"
+                        class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                        Cancel
+                    </button>
+                    </div>
                 </div>
+                <br />
 
 
-                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block float-md-right">
-                    Submit
-                </button>
 
             </form>
         </div>
-
     </div>
-
 </div>
