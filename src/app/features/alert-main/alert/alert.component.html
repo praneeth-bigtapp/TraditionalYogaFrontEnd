@@ -51,14 +51,11 @@
                                 <mat-form-field class="example-full-width" appearance="outline">
                                     <!-- <mat-label>Start date</mat-label> -->
                                     <input matInput formControlName="startdate" type="date">
-
-                                </mat-form-field>
-                                <div
-                                    *ngIf="alertform.controls['startdate'].invalid && (alertform.controls['startdate'].dirty || alertform.controls['startdate'].touched)">
-                                    <mat-error [hidden]=" !alertform.get('startdate')?.hasError('required')  ">
+                                    <mat-error [hidden]="!alertform.get('startdate')?.hasError('required')  ">
                                         Date is mandatory
                                     </mat-error>
-                                </div>
+                                </mat-form-field>
+                                 
                             </div>
                         </div>
                     </div>
@@ -72,14 +69,13 @@
                                 <mat-form-field class="example-full-width" appearance="outline">
                                     <!-- <mat-label>End date</mat-label> -->
                                     <input matInput formControlName="enddate" type="date">
-
-                                </mat-form-field>
-                                <div
-                                    *ngIf="alertform.controls['enddate'].invalid && (alertform.controls['startdate'].dirty || alertform.controls['startdate'].touched)">
                                     <mat-error [hidden]=" !alertform.get('startdate')?.hasError('required')  ">
                                         Date is mandatory
                                     </mat-error>
-                                </div>
+                                </mat-form-field>
+                                
+                                 
+                                
                             </div>
                         </div>
                     </div>
