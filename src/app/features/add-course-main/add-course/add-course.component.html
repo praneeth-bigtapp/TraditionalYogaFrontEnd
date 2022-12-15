@@ -16,6 +16,7 @@
             Add Course
         </button>
     </div>
+    <br />
     <div class="card  bg-secondary" *ngIf="displaycontent">
         <div class="card-header text-white bg-secondary">
             {{iseditable ? "Update" :"Add" }} Course
@@ -131,7 +132,8 @@
                 </div>
                 <br />
                 <div class="d-flex flex-row flex-wrap justify-content-end">
-                    <button type="submit" *ngIf="issubmit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                    <button type="submit" *ngIf="issubmit"
+                        class="btn btn-outline-secondary btn-rounded d-inline-block ">
                         {{iseditable ? "Update" :"Submit" }}
                     </button>
                     <button type="button" (click)="reseteditable()"

@@ -206,8 +206,8 @@ export class MemberspageComponent implements OnInit {
       this.filterData.dataSource.data.forEach((row: any) => this.selection.select(row));
   }
 
-  viewprofile(data: any) {
-    console.log(data);
+  viewprofile(element: any) {
+    console.log(element);
 
   }
 

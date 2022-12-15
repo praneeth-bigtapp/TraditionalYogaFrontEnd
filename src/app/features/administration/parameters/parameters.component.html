@@ -1,105 +1,123 @@
 <div class="ConfigurationTypes_textpadding ">
-    <h3 class="mb-4 pl-2 text-secondary ">Parameters</h3>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/addCourse">Course Management</a></li>
 
-    <div class="bg-white  border p-4">
+            <li class="breadcrumb-item active" aria-current="page">Parameters</li>
+        </ol>
+    </nav>
+    <br />
+    <div class="card  bg-secondary">
+        <div class="card-header text-white bg-secondary">
+            Parameters
 
-        <div class="row border-bottom">
-            <div class=" ">
-                <div class=" row ">
-                    <div class="col-md-4">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Select Course</mat-label>
-                            <mat-select [(ngModel)]="coursename" (ngModelChange)="coursechange()">
-                                <mat-option *ngFor="let course of courselist" [value]="course.coursesId">
-                                    {{course.coursesName}}</mat-option>
-                            </mat-select>
-                            <span class="text-dark" *ngIf="courserror">
-                                Please Select Category
-                            </span>
-                        </mat-form-field>
+        </div>
+        <div class="card-body bg-white  py-2">
+            <div class="row">
+                <div class=" ">
+                    <div class=" row  align-items-center">
+                        <label>Course</label>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-select [(ngModel)]="coursename" (ngModelChange)="coursechange()">
+                                    <mat-option *ngFor="let course of courselist" [value]="course.coursesId">
+                                        {{course.coursesName}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-error class="mat-error" *ngIf="courserror">
+                                Course is mandatory
+                            </mat-error>
+                        </div>
+                        <div class="col-md-3">
+                            <!-- <button type="button" (click)="gobutton()"
+                                class="btn btn-outline-secondary btn-go btn-rounded d-inline-block m-2 border border-dark">
+                                Go
+                            </button> -->
+                            <button type="button" (click)="gobutton()"
+                                class="btn btn-outline-secondary  btn-rounded d-inline-block m-2 border border-dark">
+                                Submit
+                            </button>
+                        </div>
+                        <div class="col-md-5" *ngIf="displaycontent">
+                            <h4 class="text-center">Performance Rating</h4>
+
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <button type="button" (click)="gobutton()"
-                            class="btn btn-outline-secondary btn-go btn-rounded d-inline-block m-2 border border-dark">
-                            Go
-                        </button>
+                    <hr *ngIf="displaycontent" />
+                    <div class="" *ngIf="displaycontent">
+                        <table class="w-100 p-5 ">
+
+                            <thead class="border-bottom">
+                                <tr class="">
+                                    <th class="">&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th class="">Good</th>
+
+                                    <th>Average</th>
+                                    <th>Poor</th>
+                                    <th>Red Alert</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <br />
+                            <!-- <form [formGroup]="Ratings"   > -->
+
+                            <tbody *ngFor="let element of parameters">
+
+
+                                <tr class="">
+
+
+                                    <td>
+                                        <h6>{{element.performaceName}}</h6>
+                                    </td>
+                                    <td>
+                                        <p>:&nbsp;</p>
+                                    </td>
+                                    <td class=" ">
+                                        <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingGood"
+                                            (change)="keypressvalue(element.id)" required>
+                                    </td>
+                                    <td class="">
+                                        <input class="border w-75" autocomplete="off"
+                                            [(ngModel)]="element.ratingAvearage" (change)="keypressvalue(element.id)"
+                                            required>
+                                    </td>
+                                    <td class="">
+                                        <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingPoor"
+                                            (change)="keypressvalue(element.id)" required>
+                                    </td>
+                                    <td class="">
+                                        <input class="border w-75" autocomplete="off"
+                                            [(ngModel)]="element.ratingRedAlert" (change)="keypressvalue(element.id)"
+                                            required>
+                                    </td>
+                                    <td class="">
+                                        <mat-slide-toggle [checked]="IsActiveorNot(element.active)"
+                                            (change)="onActivateParameter(element.id)"></mat-slide-toggle>
+                                        <p>Disable</p>
+
+                                    </td>
+
+
+                                </tr>
+
+                                <br />
+
+
+                            </tbody>
+
+
+                        </table>
                     </div>
+
                 </div>
 
-            </div>
 
-            <div class="col" *ngIf="displaycontent">
 
-                <h4 class="text-center mt-4">Performance Rating</h4>
             </div>
 
         </div>
-
-        <br />
-        <table class="w-100 p-5 " *ngIf="displaycontent">
-
-            <thead class="border-bottom">
-                <tr class="">
-                    <th class="">&nbsp;</th>
-                    <th>&nbsp;</th>
-                    <th class="">Good</th>
-
-                    <th>Average</th>
-                    <th>Poor</th>
-                    <th>Red Alert</th>
-                    <th>&nbsp;</th>
-                </tr>
-            </thead>
-            <br />
-            <!-- <form [formGroup]="Ratings"   > -->
-
-            <tbody *ngFor="let element of parameters">
-
-
-                <tr class="">
-
-
-                    <td>
-                        <h6>{{element.performaceName}}</h6>
-                    </td>
-                    <td>
-                        <p>:&nbsp;</p>
-                    </td>
-                    <td class=" ">
-                        <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingGood"
-                            (change)="keypressvalue(element.id)" required>
-                    </td>
-                    <td class="">
-                        <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingAvearage"
-                            (change)="keypressvalue(element.id)" required>
-                    </td>
-                    <td class="">
-                        <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingPoor"
-                            (change)="keypressvalue(element.id)" required>
-                    </td>
-                    <td class="">
-                        <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingRedAlert"
-                            (change)="keypressvalue(element.id)" required>
-                    </td>
-                    <td class="">
-                        <mat-slide-toggle [checked]="IsActiveorNot(element.active)"
-                            (change)="onActivateParameter(element.id)"></mat-slide-toggle>
-                        <p>Disable</p>
-
-                    </td>
-
-
-                </tr>
-
-                <br />
-
-
-            </tbody>
-
-
-        </table>
-
-
     </div>
-
 </div>

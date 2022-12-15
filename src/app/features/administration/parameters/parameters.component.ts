@@ -47,7 +47,9 @@ export class ParametersComponent implements OnInit {
       next: (response) => {
         this.parameters = response
 
-        this.parameters = this.parameters.filter((ele: any) => ele.courseId.courseId === this.coursename)
+        console.log(this.parameters);
+
+        this.parameters = this.parameters.filter((ele: any) => ele.courseId.courseId === courseid)
         console.log(this.parameters)
 
       },
@@ -63,7 +65,9 @@ export class ParametersComponent implements OnInit {
     this.courserror = false
     if (this.coursename == undefined || this.coursename == null) {
       this.courserror = true
+      return
     }
+    // this.gobutton()
 
 
   }
