@@ -25,6 +25,7 @@ export class RegioncreationComponent implements OnInit {
   displaycontent: boolean = false
 
   iseditable: boolean = false
+  issubmit: boolean = true
 
 
 
@@ -172,7 +173,16 @@ export class RegioncreationComponent implements OnInit {
     this.displaycontent = !this.displaycontent
   }
   viewdetails(element: any) {
+    this.regionfilterform.setValue({
+      regionId: element.regionId,
+      region: element.regionName,
+      country: element.countryName,
+      part: element.partId.partId,
+      state: element.states
 
+    });
+    this.displaycontent = true
+    this.issubmit = false
   }
   deletedetails(id: any) {
 
@@ -204,12 +214,15 @@ export class RegioncreationComponent implements OnInit {
     });
     this.iseditable = true
     this.displaycontent = true
+    this.issubmit = true
   }
 
   reseteditable() {
     this.regionfilterform.reset()
     this.iseditable = false
     this.displaycontent = !this.displaycontent
+    this.issubmit = true
+
   }
 
 
