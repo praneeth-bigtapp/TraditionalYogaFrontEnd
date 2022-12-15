@@ -9,18 +9,16 @@
             <li class="breadcrumb-item active" aria-current="page">Task Assignment</li>
         </ol>
     </nav>
-
+    <!-- 
     <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
-        <!-- <h3 class=" pl-2 text-secondary ">Task Assignment</h3> -->
         <div class="">
             <button type="button" (click)="createtask()" *ngIf="displaycontent  !displayform"
                 class="btn btn-outline-secondary btn-rounded d-inline-block mb-md-3 ">
-                <!-- <i class="fa-sharp fa-solid fa-plus"></i> -->
                 Add Task
             </button>
         </div>
-    </div>
-
+    </div> -->
+    <br />
     <div class="card  bg-secondary">
         <div class="card-header text-white bg-secondary">
             Task Assignment
@@ -28,10 +26,10 @@
 
         <div class="card-body bg-white  py-2">
 
-            <div class="row">
+            <div class="row align-items-center">
 
                 <div class="col-md-4">
-                    <label>Select Course</label>
+                    <label>Course</label>
 
                     <mat-form-field appearance="outline">
                         <mat-select [(ngModel)]="course">
@@ -49,19 +47,25 @@
                         Submit
                     </button>
                 </div>
+                <div class="col-md-4" *ngIf="!displayform">
+                    <div class="d-flex  flex-wrap  justify-content-end align-items-center">
+                        <div class="">
+                            <button type="button" (click)="createtask()" *ngIf="displaycontent  !displayform"
+                                class="btn btn-outline-secondary btn-rounded d-inline-block mt-3  ">
+                                Add Task
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
             </div>
+            <hr />
 
-        </div>
-    </div>
-
-    <div class="card  bg-secondary" *ngIf=" displayform">
-        <div class="card-header text-white bg-secondary">
-            {{isedit ? "Update" :"Add" }} Task
-        </div>
-
-        <div class="card-body bg-white  py-2">
-            <form class="" [formGroup]="taskform" (ngSubmit)="tasksubmit()">
+            <form class="" *ngIf=" displayform" [formGroup]="taskform" (ngSubmit)="tasksubmit()">
+                <div class="">
+                    <h4>{{isedit ? "Update" :"Add" }} Task</h4>
+                </div>
+                <br />
                 <div class=" row ">
                     <div class="col-md-4">
                         <label>Task Name</label>
@@ -126,8 +130,18 @@
             </form>
             <br />
         </div>
-
     </div>
+
+    <!-- <div class="card  bg-secondary" *ngIf=" displayform">
+        <div class="card-header text-white bg-secondary">
+            {{isedit ? "Update" :"Add" }} Task
+        </div>
+
+        <div class="card-body bg-white  py-2">
+          
+        </div>
+
+    </div> -->
 
 
     <div class="card " [hidden]="!displaycontent">
@@ -192,6 +206,8 @@
                         <label mat-sort-header>
                             Actions
                         </label>
+                        <input type="text" (keyup)="updatePagination('State')" disabled
+                            [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell class="text-center" *matCellDef="let element">
                         <div class="d-flex flex-wrap justify-content-evenly align-items-center">

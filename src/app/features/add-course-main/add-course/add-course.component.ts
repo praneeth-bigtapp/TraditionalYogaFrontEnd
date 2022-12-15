@@ -136,7 +136,7 @@ export class AddCourseComponent implements OnInit {
     this.paragrapherror = this.addCourseForm.value.description === null ? true : false
   }
   compareselect(obj1: any, obj2: any) {
-    return obj1 && obj2 && obj1.categoriesId === obj2
+    return obj1 && obj2 && obj1 === obj2
   }
 
   viewdetails(element: any) {

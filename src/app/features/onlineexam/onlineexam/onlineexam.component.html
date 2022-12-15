@@ -131,8 +131,8 @@
                             S.No
                         </label>
                      
-                        <!-- <input type="text"  (keyup)="updatePagination('courseId')"
-                    [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" /> -->
+                        <input type="text"  (keyup)="updatePagination('courseId')" disabled
+                    [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
                 </ng-container>
@@ -181,8 +181,8 @@
                         <label mat-sort-header>
                             Actions
                         </label>
-                        <!-- <input type="text" (keyup)="updatePagination('currentStatus')"
-                    [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" /> -->
+                        <input type="text" (keyup)="updatePagination('currentStatus')" disabled
+                    [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell *matCellDef="let element ">
                         <div class="d-flex flex-wrap justify-content-evenly align-items-center">

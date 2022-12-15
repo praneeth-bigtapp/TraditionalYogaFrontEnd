@@ -151,8 +151,8 @@
                         <label mat-sort-header>
                             S.No
                         </label>
-                        <!-- <input type="text" (keyup)="updatePagination('praticeLibaryId')"
-                    [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" /> -->
+                        <input type="text" (keyup)="updatePagination('praticeLibaryId')" disabled
+                    [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
                 </ng-container>
@@ -163,8 +163,8 @@
                         <label mat-sort-header>
                             Video Link
                         </label>
-                        <!-- <input type="text" (keyup)="updatePagination('videoLink')"
-                    [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" /> -->
+                        <input type="text" (keyup)="updatePagination('videoLink')" disabled
+                    [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell *matCellDef="let element" class="col-2"> <a class="text-primary"
                             href="{{element.videoLink}}" target="_blank" rel="noopener noreferrer"><u>Open</u>
@@ -220,6 +220,8 @@
                         <label mat-sort-header>
                             Actions
                         </label>
+                        <input type="text" (keyup)="updatePagination('State')" disabled
+                        [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell *matCellDef="let element" class="col-2">
                         <div class="d-flex flex-wrap justify-content-evenly align-items-center">

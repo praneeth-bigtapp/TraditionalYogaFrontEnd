@@ -13,6 +13,10 @@ export class AlertService extends BaseHttp {
 
   alertpostURL = 'webSite/alerts?operation=add'
 
+  updatealertURL=""
+
+  deletealertURL=""
+
   getAllAlerts() {
     return this.get<any>(this.alertgetURL)
   }
@@ -20,9 +24,18 @@ export class AlertService extends BaseHttp {
     return this.get<any>(this.getroles)
   }
 
-
   setalert(body: any) {
     return this.post<any>(this.alertpostURL, body)
+  }
+
+  updatealert(body:any)
+  {
+    return this.post<any>(this.updatealertURL, body)
+  }
+
+  deletealert(body:any)
+  {
+    return this.post<any>(this.deletealertURL, body)
   }
 
 

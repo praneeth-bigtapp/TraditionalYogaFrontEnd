@@ -27,7 +27,7 @@ export class NotificationComponent implements OnInit {
   filerror2!: boolean
   datafile!: any
   filedata!: any
-  displaycontent: boolean = true
+  displaycontent: boolean = false
   iseditable: boolean = false
   notificationtypes: any
   constructor(
