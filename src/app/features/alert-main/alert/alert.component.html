@@ -8,9 +8,10 @@
         </ol>
     </nav>
 
-    <div class="d-flex mb-2 flex-wrap  justify-content-between align-items-center">
+    <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
 
-        <button type="button" *ngIf="!displaycontent" (click)="addalert()" class="btn btn-outline-secondary btn-rounded d-inline-block ">
+        <button type="button" *ngIf="!displaycontent" (click)="addalert()"
+            class="btn btn-outline-secondary btn-rounded d-inline-block ">
             Add Alerts
         </button>
     </div>
@@ -27,8 +28,9 @@
                         <div class="row align-items-center ">
                             <label>Select Category : </label>
                             <div class="col">
-                                <mat-form-field class="example-full-width" appearance="outline" >
-                                    <mat-select matNativeControl formControlName="alertid" [disabled]="iseditable" [compareWith]="compareselect">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-select matNativeControl formControlName="alertid" [disabled]="iseditable"
+                                        [compareWith]="compareselect">
                                         <mat-option *ngFor="let item of category"
                                             [value]="item.roleId">{{item.roleName}}
                                         </mat-option>
@@ -54,7 +56,7 @@
                                 <div
                                     *ngIf="alertform.controls['startdate'].invalid && (alertform.controls['startdate'].dirty || alertform.controls['startdate'].touched)">
                                     <mat-error [hidden]=" !alertform.get('startdate')?.hasError('required')  ">
-                                        Please Select the date
+                                        Date is mandatory
                                     </mat-error>
                                 </div>
                             </div>
@@ -75,14 +77,14 @@
                                 <div
                                     *ngIf="alertform.controls['enddate'].invalid && (alertform.controls['startdate'].dirty || alertform.controls['startdate'].touched)">
                                     <mat-error [hidden]=" !alertform.get('startdate')?.hasError('required')  ">
-                                        Please Select the date
+                                        Date is mandatory
                                     </mat-error>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-3">
 
 
                         <div class="row align-items-center ">
@@ -91,11 +93,11 @@
                             <div class="col">
                                 <input type="file" id="file" class="border" (change)="onfilechange($event)"
                                     formControlName="file" accept=" image/*" required="true" />
-                                <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
+                                <mat-error *ngIf="filerror">File is mandatory</mat-error>
 
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
 
                 </div>
@@ -106,16 +108,15 @@
                             <label>Description : </label>
 
                             <div class="col">
-                                <angular-editor formControlName="paragraph" [placeholder]="'Enter text here...'"
-                                    required>
-                                </angular-editor>
-                                <div
-                                    *ngIf="alertform.controls['paragraph'].invalid && (alertform.controls['paragraph'].dirty || alertform.controls['paragraph'].touched)">
+                                <mat-form-field class="example-full-width" appearance="outline" id="field">
+                                    <!-- <mat-label>Health is wealth</mat-label> -->
+                                    <textarea matInput formControlName="paragraph"></textarea>
                                     <mat-error [hidden]=" !alertform.get('paragraph')?.hasError('required')  ">
                                         Description is mandatory
                                     </mat-error>
-                                </div>
+                                </mat-form-field>
                             </div>
+
                         </div>
                     </div>
 
@@ -197,7 +198,7 @@
                     </th>
                     <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
                 </ng-container>
-                
+
                 <ng-container matColumnDef="Action">
                     <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
                         <label mat-sort-header>
@@ -213,9 +214,8 @@
                             <span matTooltip="Edit" (click)="editdetails(element)">
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                             </span>
-                            <span matTooltip="Delete" style="cursor: pointer;"
-                                (click)="deletedetails(element.alertId)"> <i class="far fa-trash-alt"
-                                    aria-hidden="true"></i>
+                            <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.alertId)">
+                                <i class="far fa-trash-alt" aria-hidden="true"></i>
                             </span>
                         </div>
                     </td>

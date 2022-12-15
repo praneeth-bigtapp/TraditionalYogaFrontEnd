@@ -85,8 +85,7 @@ export class AlertComponent implements OnInit {
       paragraph: [null, Validators.compose([Validators.required])],
       startdate: [null, Validators.compose([Validators.required])],
       enddate: [null, Validators.compose([Validators.required])],
-      // file: [null, Validators.compose([Validators.required])],
-      file: [null, Validators.compose([])],
+
     })
     this.filterData = {
       filterColumnNames: this.displayedColumns.map((ele: any) => ({ "Key": ele, "Value": "" })),
@@ -161,24 +160,22 @@ export class AlertComponent implements OnInit {
   }
 
   viewdetails(element: any) {
+    this.displaycontent = true
+    this.issubmit = false
     this.alertform.setValue({
       alertsno: element.alertId,
       alertid: Number(element.categoryId),
       paragraph: element.alertDescription,
       startdate: element.startDate,
       enddate: element.endDate,
-      file: null,
     });
-    this.displaycontent = true
-    this.issubmit = false
+
   }
   deletedetails(id: any) {
 
     const body = {
       "alertId": id,
     }
-    console.log(body);
-
     this.alertservice.deletealert(body).subscribe({
       next: (response) => {
         this.openSnackBar({ message: "Alert Deleted" })
@@ -192,17 +189,17 @@ export class AlertComponent implements OnInit {
 
   }
   editdetails(element: any) {
+    this.iseditable = true
+    this.displaycontent = true
+    this.issubmit = true
     this.alertform.setValue({
       alertsno: element.alertId,
       alertid: Number(element.categoryId),
       paragraph: element.alertDescription,
       startdate: element.startDate,
       enddate: element.endDate,
-      file: null,
     });
-    this.iseditable = true
-    this.displaycontent = true
-    this.issubmit = true
+
   }
 
   reseteditable() {
@@ -221,26 +218,19 @@ export class AlertComponent implements OnInit {
       this.alertform.value.file = this.filedata
 
 
-      const body = {
-
-        "categoryId": this.alertform.value.alertid,
-        "alertDescription": this.alertform.value.paragraph,
-        "startDate": this.alertform.value.startdate,
-        "endDate": this.alertform.value.enddate
-      }
-
-
-
       if (this.iseditable) {
         //editable
 
         const body = {
           "alertId": this.alertform.value.alertsno,
-          "categoryId": this.alertform.value.alertid,
+          "categoryId": this.alertform.value.alertid + "",
           "alertDescription": this.alertform.value.paragraph,
           "startDate": this.alertform.value.startdate,
           "endDate": this.alertform.value.enddate
         }
+
+        console.log(body);
+
         this.alertservice.updatealert(body).subscribe({
           next: (response) => {
             this.alertform.reset()
@@ -256,6 +246,16 @@ export class AlertComponent implements OnInit {
 
         return
       }
+
+
+      const body = {
+
+        "categoryId": this.alertform.value.alertid + "",
+        "alertDescription": this.alertform.value.paragraph,
+        "startDate": this.alertform.value.startdate,
+        "endDate": this.alertform.value.enddate
+      }
+
       this.alertservice.setalert(body).subscribe({
         next: (response) => {
           this.alertform.reset()
