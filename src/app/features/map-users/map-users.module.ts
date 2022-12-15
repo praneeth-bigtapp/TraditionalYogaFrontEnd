@@ -13,6 +13,7 @@ import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    SharedModule,
     MatCheckboxModule
   ]
 })

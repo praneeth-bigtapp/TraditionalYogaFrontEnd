@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { BannerviewService } from '../service/bannerview.service';
@@ -14,17 +14,25 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class BannersComponent implements OnInit {
   displayedColumns: string[] = ['bannerId', 'bannerName', 'categoryId', "date", "Action"];
+  iseditable: boolean = false
   dataSource: any;
   filterData:any;
   gridData:any;
   data!: any;
   checks=false;
-
+  headerbannerform!: FormGroup
+  coursebanner!: FormGroup
+  filerror!: boolean
+  filerror2!: boolean
+  coursefile!: any
+  headerfile!: any
+  displaycontent: boolean = false
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
   sort!: MatSort;
   selection = new SelectionModel<any>(true, []);
+  optionscontrol: any;
   
   
     applyFilter(event: Event) {
@@ -36,12 +44,38 @@ export class BannersComponent implements OnInit {
       this.filterData.dataSource.paginator = this.paginator;
       this.filterData.dataSource.sort = this.sort;
     }
+    reseteditable() {
+      // this.addCourseForm.reset()
+      this.iseditable = false
+      this.displaycontent = !this.displaycontent
+    }
+    onfilechange(event: any, formname: string) {
+
+      // if (formname === 'headerform')
+      // {
+      //   this.filerror = this.headerbannerform.value.bannerimage === null ? true : false
+      // this.headerfile = event.target.files[0].name
+      // }
   
+      if (formname === 'courseform') {
+        this.filerror2 = this.coursebanner.value.coursebannerimage === null ? true : false
+        this.coursefile = event.target.files[0].name
+      }
+  
+    }
 
   constructor(
     private banner: BannerviewService,
     private router: Router,
+   
+    private formBuilder: FormBuilder,
+ 
+ 
   ) { }
+
+  addcourse() {
+    this.displaycontent = !this.displaycontent
+  }
 
   ngOnInit(): void {
     this.filterData = {
@@ -52,6 +86,41 @@ export class BannersComponent implements OnInit {
       sort: this.sort
     }
     this.getBanner();
+
+    this.headerbannerform = this.formBuilder.group({
+      bannerimage: [
+        null,
+        Validators.compose([Validators.required])
+      ],
+      description: [
+        null,
+        Validators.compose([Validators.required])
+      ],
+      others: this.optionscontrol
+    })
+
+    this.coursebanner = this.formBuilder.group({
+      coursebannerimage: [
+        null,
+        Validators.compose([Validators.required])
+      ],
+      coursetitle: [
+        null,
+        Validators.compose([Validators.required])
+      ],
+      description: [
+        null,
+        Validators.compose([Validators.required])
+      ],
+      fromdate: [
+        null,
+        Validators.compose([Validators.required])
+      ],
+      todate: [
+        null,
+        Validators.compose([Validators.required])
+      ]
+    })
   }
  
 
