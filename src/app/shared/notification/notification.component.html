@@ -1,52 +1,64 @@
 <div class="ConfigurationTypes_textpadding ">
-    <h3 class="mb-5 pl-2"> Notifications </h3>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/addpages">Website Management</a></li>
 
-    <div class="card border-light pt-3 ">
+            <li class="breadcrumb-item active" aria-current="page">Notification</li>
+        </ol>
+    </nav>
+    <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
+        <!-- <h3 class=" pl-2 text-secondary "> Add Courses/View Course Details</h3> -->
+        <!-- <h3 class=" pl-2 text-secondary ">Courses</h3> -->
 
-        <div class="card-body bg-white">
+        <button type="button" (click)="addnotification()" class="btn btn-outline-secondary btn-rounded d-inline-block ">
+            Add Notification
+        </button>
+    </div>
 
 
+    <div class="card  bg-secondary" *ngIf="displaycontent">
+        <div class="card-header text-white bg-secondary">
+            {{iseditable ? "Update" :"Add" }} Notification
+
+        </div>
+        <div class="card-body bg-white  py-2">
             <form [formGroup]="notificationform" class=" me-5" (ngSubmit)="addmedia()">
 
-                <!-- Back Cover -->
-                <div class=" row align-items-center  ">
-                    <h6 class="text-md-right col-md-4 ">Select Category</h6>
-                    <div class="col ">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Select Category</mat-label>
-                            <mat-select formControlName="category">
-                                <mat-option *ngFor="let notification of notificationtypes" [value]="notification">
-                                    {{notification}}</mat-option>
-                            </mat-select>
-                            <mat-error [hidden]="!notificationform.get('category')?.hasError('required')">
-                                Please Select Category
-                            </mat-error>
-                        </mat-form-field>
+                <div class="row">
+                    <div class=" col-md-4 row align-items-center  ">
+                        <label>Select Category</label>
+                        <div class="col ">
+                            <mat-form-field appearance="outline">
+                                <mat-select formControlName="category">
+                                    <mat-option *ngFor="let notification of notificationtypes" [value]="notification">
+                                        {{notification}}</mat-option>
+                                </mat-select>
+                                <mat-error [hidden]="!notificationform.get('category')?.hasError('required')">
+                                    Category is mandatory
+                                </mat-error>
+                            </mat-form-field>
 
-                    </div>
-                </div>
-                <!-- Title -->
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Title </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="">
-                            <mat-label>Title</mat-label>
-                            <input matInput autocomplete="off" formControlName="title" required>
-                            <mat-error [hidden]="!notificationform.get('title')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
+                        </div>
                     </div>
 
-                </div>
+                    <div class=" col-md-4 row align-items-center ">
+                        <label>Title </label>
 
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="">
+                                <input matInput autocomplete="off" formControlName="title" required>
+                                <mat-error [hidden]="!notificationform.get('title')?.hasError('required')">
+                                    Title is mandatory
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
 
-                <!-- Image -->
-                <div class="row align-items-center align-items-center ">
-                    <h6 class="text-md-right col-md-4">Upload file </h6>
+                    </div>
 
-                    <div class="col-md ">
+                    <div class=" col-md-4 row align-items-center ">
+                        <label>Upload file </label>
+
                         <input type="file" class="border" id="file" formControlName="file"
                             (change)="onfilechange($event)" accept="image/*" required="true" /> <br />
 
@@ -55,32 +67,44 @@
 
                 </div>
 
-                <!-- Descriptions  -->
-                <div class="row align-items-center">
-                    <h6 class="text-md-right col-md-4">Message </h6>
+                <br />
 
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="">
-                            <mat-label>Message</mat-label>
-                            <textarea matInput class="p-2" formControlName="description" rows="3"
-                                placeholder="Description"></textarea>
-                            <mat-error [hidden]="!notificationform.get('description')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
+                <div class="row align-items-center ">
+                    <div class="col-md-6">
+                        <div class="row align-items-center">
+                            <label>Message </label>
+
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="">
+                                    <mat-label>Message</mat-label>
+                                    <textarea matInput class="p-2" formControlName="description" rows="3"
+                                        placeholder="Description"></textarea>
+                                    <mat-error [hidden]="!notificationform.get('description')?.hasError('required')">
+                                        Message is mandatory
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
                     </div>
-
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                            {{iseditable ? "Update" :"Submit" }}
+                        </button>
+                      
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" (click)="reseteditable()"
+                        class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                        Cancel
+                    </button>
+                    </div>
                 </div>
-
-
-                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block float-md-right">
-                    Upload
-                </button>
-
+                <br/>
             </form>
         </div>
-
     </div>
+
 
 
 

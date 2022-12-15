@@ -5,7 +5,6 @@ import { AddCourseService } from './../add-course.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { CoursesService } from '../../courses/courses.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { formatDate } from '@angular/common';
 

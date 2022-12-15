@@ -388,10 +388,10 @@ textarea:focus {
     padding: 0 !important;
 } */
 
-/* .mat-error {
-    color: #212529 !important;
+.mat-error {
+    /* color: #212529 !important; */
     font-size: 12px !important;
-} */
+}
 
 /* mat-paginator.mat-paginator.table-responsive {
     border-radius: 10px;

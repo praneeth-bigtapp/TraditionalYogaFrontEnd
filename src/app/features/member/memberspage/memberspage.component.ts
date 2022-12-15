@@ -7,7 +7,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MemberService } from '../services/member.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { angularEditorConfig } from '@kolkov/angular-editor/lib/config';
 @Component({
   selector: 'app-memberspage',
   templateUrl: './memberspage.component.html',
@@ -100,8 +99,6 @@ export class MemberspageComponent implements OnInit {
     this.memberservice.getallcourses().subscribe({
       next: (response) => {
         this.courselist = response
-        console.log(this.courselist);
-
       },
       error: (error) => {
         console.error(error.message);
@@ -131,6 +128,9 @@ export class MemberspageComponent implements OnInit {
         this.totalUser = this.data.userMapped;
         this.totalUserApplied = this.data.userApplied;
         this.data = this.data.students
+
+        console.log(this.data);
+        
 
         this.data = this.data.filter((ele: any) => ele.courseId.courseId === this.category)
 
@@ -228,34 +228,35 @@ export class MemberspageComponent implements OnInit {
   downloadexcel() {
 
 
-    const headers = Object.keys(this.data[0]).join(",") + "\n"
+    // const headers = Object.keys(this.data[0]).join(",") + "\n"
 
 
-    let content = headers
+    // let content = headers
+ 
+    
 
-    content += this.data.map((ele: any) => Object.values(ele).map((ele: any) => {
-      if (ele) {
-        if (typeof ele === "object")
-          return Object.values(ele).join(",") + "\n"
-        return ele
+    // content += this.data.map((ele: any) => Object.values(ele).map((ele: any) => {
+    //   if (ele) {
+    //     if (typeof ele === "object")
+    //       return Object.values(ele).join(",") + "\n"
+    //     return ele
 
-      }
-      return "Nil"
-    })
-    ).join("\n")
+    //   }
+    //   return "Nil"
+    // })
+    // ).join("\n")
 
+    // console.log(content);
+    // const mimetype = 'text/csv;encoding:utf-8'
 
+    // const fileblob = new Blob([content], {
+    //   type: mimetype
+    // })
 
-    console.log(content);
-
-    const mimetype = 'text/csv;encoding:utf-8'
-    const data = ""
-    const fileblob = new Blob([content], {
-      type: mimetype
-    })
-
-    this.downloadurl = URL.createObjectURL(fileblob)
-    console.log(this.downloadurl);
+    // var anchor = document.createElement("a");
+    // anchor.download = `${this.category}-members.csv`;
+    // anchor.href = URL.createObjectURL(fileblob);
+    // anchor.click();
 
 
   }

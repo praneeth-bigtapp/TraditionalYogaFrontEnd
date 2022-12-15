@@ -14,6 +14,7 @@ export class OnlineexamService extends BaseHttp {
 
   postonlinexamURL = "courseList/onlineexam?operation=add"
 
+  getonlineexamURL = "courseList/getAll?operation=onlineexam"
   updateonlineexamURL = ""
 
   deleteonlineexamURL = ""
@@ -28,6 +29,10 @@ export class OnlineexamService extends BaseHttp {
 
   getallcourses() {
     return this.get(this.getallcourseURL)
+  }
+
+  getonlineexam() {
+    return this.get(this.getonlineexamURL)
   }
   gettypeoftest() {
     return this.get(this.gettypeoftestURL)
