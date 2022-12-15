@@ -97,7 +97,8 @@
                     </div>
                 </div>
                 <div class="d-flex flex-row justify-content-end flex-wrap">
-                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2  ">
+                    <button type="submit" *ngIf="issubmit"
+                        class="btn btn-outline-secondary btn-rounded d-inline-block m-2  ">
                         {{isedit ? "Update":"Upload"}}
                     </button>
 
@@ -122,8 +123,8 @@
                         <label mat-sort-header>
                             S.No
                         </label>
-                        <!-- <input type="text" (keyup)="updatePagination('praticeLibaryId')"
-                        [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" /> -->
+                        <input type="text" (keyup)="updatePagination('praticeLibaryId')" disabled
+                            [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
                 </ng-container>
@@ -177,6 +178,8 @@
                         <label mat-sort-header>
                             Actions
                         </label>
+                        <input type="text" (keyup)="updatePagination('message')" disabled
+                            [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell *matCellDef="let element">
                         <div class="d-flex flex-wrap justify-content-evenly align-items-center">

@@ -131,7 +131,7 @@
                 </div>
                 <br />
                 <div class="d-flex flex-row flex-wrap justify-content-end">
-                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                    <button type="submit" *ngIf="issubmit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
                         {{iseditable ? "Update" :"Submit" }}
                     </button>
                     <button type="button" (click)="reseteditable()"

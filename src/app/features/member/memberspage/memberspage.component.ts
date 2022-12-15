@@ -57,16 +57,16 @@ export class MemberspageComponent implements OnInit {
   ) {
 
     this.memberform = this._formbuilder.group({
-      name: [null, Validators.compose([Validators.required])],
-      email: [null, Validators.compose([Validators.required, Validators.email])],
-      country: [null, Validators.compose([Validators.required])],
-      mobile: [null, Validators.compose([Validators.required,])],
-      region: [null, Validators.compose([Validators.required])],
-      agefrom: [null, Validators.compose([Validators.required])],
-      ageto: [null, Validators.compose([Validators.required])],
-      gender: [null, Validators.compose([Validators.required])],
-      status: [null, Validators.compose([Validators.required])],
-      usertype: [null, Validators.compose([Validators.required])],
+      name: [null],
+      email: [null],
+      country: [null],
+      mobile: [null],
+      region: [null],
+      agefrom: [null],
+      ageto: [null],
+      gender: [null],
+      status: [null],
+      usertype: [null],
     })
 
     this.filterData = {
@@ -130,7 +130,7 @@ export class MemberspageComponent implements OnInit {
         this.data = this.data.students
 
         console.log(this.data);
-        
+
 
         this.data = this.data.filter((ele: any) => ele.courseId.courseId === this.category)
 
@@ -232,8 +232,8 @@ export class MemberspageComponent implements OnInit {
 
 
     // let content = headers
- 
-    
+
+
 
     // content += this.data.map((ele: any) => Object.values(ele).map((ele: any) => {
     //   if (ele) {

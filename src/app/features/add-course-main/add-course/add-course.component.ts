@@ -29,6 +29,7 @@ export class AddCourseComponent implements OnInit {
   addCourseForm!: FormGroup
   paragrapherror: boolean = false
   categoryList!: any
+  issubmit: boolean = true
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -136,11 +137,21 @@ export class AddCourseComponent implements OnInit {
     this.paragrapherror = this.addCourseForm.value.description === null ? true : false
   }
   compareselect(obj1: any, obj2: any) {
-    return obj1 && obj2 && obj1 === obj2
+    return obj1 && obj2 && obj1.categoriesId === obj2
   }
 
   viewdetails(element: any) {
-
+    this.addCourseForm.setValue({
+      courseId: element.coursesId,
+      courseName: element.coursesName,
+      coursecategory: element.categorieId.categoriesId,
+      applicationclosuredate: formatDate(element.applicationClouserDate, "yyyy-MM-dd", 'en'),
+      startDate: formatDate(element.startDate, "yyyy-MM-dd", 'en'),
+      endDate: formatDate(element.endDate, "yyyy-MM-dd", 'en'),
+      description: element.description,
+    });
+    this.issubmit = false
+    this.displaycontent = true
   }
   deletedetails(id: any) {
 
@@ -172,12 +183,15 @@ export class AddCourseComponent implements OnInit {
     });
     this.iseditable = true
     this.displaycontent = true
+    this.issubmit = true
   }
 
   reseteditable() {
     this.addCourseForm.reset()
     this.iseditable = false
     this.displaycontent = !this.displaycontent
+    this.issubmit = true
+
   }
 
   onAddCourse() {

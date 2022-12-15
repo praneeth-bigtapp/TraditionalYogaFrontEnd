@@ -19,7 +19,7 @@ export class OnlineexamComponent implements OnInit {
   dataSource: any;
   displayedColumns: string[] = ['examsId', 'nameofTest', 'courseId', "levelId", "testId", "Action"];
   data: any;
-
+  issubmit: boolean = true
   onlineexamform!: FormGroup
   courselist!: any
   filerror!: any
@@ -132,6 +132,7 @@ export class OnlineexamComponent implements OnInit {
     this.onlineexamform.reset()
     this.iseditable = false
     this.displaycontent = !this.displaycontent
+    this.issubmit = true
   }
 
   onfilechange(event: any) {
@@ -142,6 +143,18 @@ export class OnlineexamComponent implements OnInit {
   }
 
   viewdetails(element: any) {
+    this.onlineexamform.setValue({
+      examsId: element.examsId,
+      course: element.courseId.coursesId,
+      testtype: element.testId.testId,
+      testname: element.nameofTest,
+      leveltest: element.levelId.testId,
+      file: null,
+      description: element.description,
+
+    });
+    this.issubmit = false
+    this.displaycontent = true
 
   }
   deletedetails(id: any) {
@@ -175,6 +188,7 @@ export class OnlineexamComponent implements OnInit {
     });
     this.iseditable = true
     this.displaycontent = true
+    this.issubmit = true
   }
 
   addexam() {

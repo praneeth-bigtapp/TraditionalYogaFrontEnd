@@ -23,6 +23,7 @@ export class PearlwidsomComponent implements OnInit {
   isedit: boolean = false
 
   displaycontent: boolean = false
+  issubmit: boolean = true
 
   filterData: any;
   gridData = [];
@@ -92,14 +93,22 @@ export class PearlwidsomComponent implements OnInit {
   }
 
   viewdetails(element: any) {
-    console.log(element);
+    this.issubmit = false
+    this.displaycontent = true
+    this.wisdomform.setValue({
+      quoteId: element.quoteId,
+      quotetitle: element.quoteTitle,
+      quote: element.quote,
+      quotedate: formatDate(element.quoteDate, "yyyy-MM-dd", 'en'),
+      quotetype: element.quoteType,
+    });
   }
   editdetails(element: any) {
     this.isedit = true
     this.displaycontent = true
+    this.issubmit = true
 
-    console.log(element);
-    
+
     this.wisdomform.setValue({
       quoteId: element.quoteId,
       quotetitle: element.quoteTitle,

@@ -19,7 +19,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
   timerror!: boolean
   categoryerror: boolean = false
   displaycontent: boolean = false
-
+  issubmit: boolean = true
   filterData: any;
   gridData = [];
   dataSource: any;
@@ -117,7 +117,18 @@ export class CreatePraticeLibraryComponent implements OnInit {
   }
 
   viewdetails(element: any) {
+    this.addmediaform.setValue({
+      praticelibraryId: element.praticeLibaryId,
+      category: element.categoryId,
+      videolink: element.videoLink,
+      videotitle: element.title,
+      videodescription: element.message,
+      videoduration: element.duration,
+      vidoemetakeywords: element.metaKeyword,
+    });
 
+    this.issubmit = false
+    this.displaycontent = true
   }
   deletedetails(id: any) {
 
@@ -150,6 +161,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
       vidoemetakeywords: element.metaKeyword,
     });
     this.iseditable = true
+    this.issubmit = true
     this.displaycontent = true
   }
 

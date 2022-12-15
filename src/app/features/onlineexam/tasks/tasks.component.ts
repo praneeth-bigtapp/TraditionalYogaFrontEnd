@@ -2,7 +2,6 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { formatDate } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
@@ -27,7 +26,7 @@ export class TasksComponent implements OnInit {
   course!: string
   courserror: boolean = false
   courseList!: any
-
+  issubmit: boolean = true
   filterData: any;
   gridData = [];
   dataSource: any;
@@ -155,9 +154,20 @@ export class TasksComponent implements OnInit {
     this.displayform = !this.displayform
 
   }
-  viewdetails(data: any) {
-    console.log(data);
+  viewdetails(element: any) {
+    console.log(element);
 
+
+    this.taskform.setValue({
+      taskid: element.taskId,
+      name: element.taskName,
+      description: element.description,
+      mediafile: null,
+      duedate: formatDate(element.dueDate, "yyyy-MM-dd", "en"),
+
+    });
+    this.displayform = true
+    this.issubmit = false
   }
 
   deletedetails(id: any) {
@@ -191,12 +201,14 @@ export class TasksComponent implements OnInit {
     });
     this.isedit = true
     this.displayform = true
+    this.issubmit = true
   }
 
   reseteditable() {
     this.taskform.reset()
     this.isedit = false
     this.displayform = !this.displayform
+    this.issubmit = true
   }
 
 
