@@ -85,6 +85,12 @@ export class GalleryComponent implements OnInit {
   createGallery() {
     this.dialog.open(CreateGalleryComponent);
   }
+  ngAfterViewInit() {
+    this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
+
+  }
+  
   updatePagination() {
 
     this.filterData.dataSource.paginator = this.paginator;

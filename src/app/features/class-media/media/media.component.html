@@ -26,9 +26,10 @@
                                 <mat-option *ngFor="let course of courses" [value]="course.coursesId">
                                     {{course.coursesName}}</mat-option>
                             </mat-select>
-                            <mat-error [hidden]="!dateForm.get('courseslist')?.hasError('required')">
-                                Please Select Course
-                            </mat-error>
+                            <!-- <mat-error *ngIf="dataForm.controls['courseslist'].hasError('required')">
+                                Please Select the Course
+                              </mat-error> -->
+                           
                         </mat-form-field>
                     </div>
                     <div>
@@ -36,9 +37,9 @@
 
                         <mat-form-field class="mt-2" appearance="outline">
                             <input matInput placeholder="Ex. Pizza" value="Sushi" type="date" formControlName="date">
-                            <mat-error [hidden]="!dateForm.get('date')?.hasError('required')">
+                            <!-- <mat-error [hidden]="!dateForm.get('date')?.hasError('required')">
                                 Please Select Date
-                            </mat-error>
+                            </mat-error> -->
                         </mat-form-field>
                     </div>
                     <div class="mt-2">

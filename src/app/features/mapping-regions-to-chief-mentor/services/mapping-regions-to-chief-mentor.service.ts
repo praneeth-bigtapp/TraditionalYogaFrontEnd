@@ -8,6 +8,7 @@ export class MappingRegionsToChiefMentorService extends BaseHttp {
 
 
   getAllcoursesURL = "courseList/getAll?operation=coursesList";
+
   postregionURL = 'webSite/region?operation=add'
 
   getregionURL = "webSite/getAll?operation=region"
@@ -17,6 +18,8 @@ export class MappingRegionsToChiefMentorService extends BaseHttp {
   updateregionURL = "webSite/region?operation=update"
 
   deleteregionURL = "webSite/region?operation=delete"
+  
+  
 
   getCheifmentorAll() {
     return this.get(this.getcheifmentorURL)
