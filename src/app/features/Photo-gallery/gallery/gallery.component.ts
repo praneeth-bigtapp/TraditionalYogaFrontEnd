@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { CreateGalleryComponent } from '../create-gallery/create-gallery.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.css']
 })
 export class GalleryComponent implements OnInit {
-  //   data=[{"Galleryname":"RYT 200 Course Photos","DateOfCreation":'21/07/2022 01:41:18','numOfPhotos':'17'},
-  //   {"Galleryname":"RYT 200 Course Photos","DateOfCreation":'21/07/2022 01:41:18','numOfPhotos':'17'},
-  //   {"Galleryname":"RYT 200 Course Photos","DateOfCreation":'21/07/2022 01:41:18','numOfPhotos':'17'},
-  //   {"Galleryname":"RYT 200 Course Photos","DateOfCreation":'21/07/2022 01:41:18','numOfPhotos':'17'},
-  // ]
-  data = [
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort!: MatSort;
+  filterData: any
+  gridData: any;
+
+    data = [
     {
       "courseName": "RYT 200 Course photos",
       "date": "21-07-2022",
@@ -59,14 +61,44 @@ export class GalleryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.dataSource = new MatTableDataSource<any>(this.data)
+     
+    this.filterData = {
+      filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
+    }
+
+    this.dataSource = new MatTableDataSource<any>(this.data)
+    this.filterData.gridData = this.data;
+    this.filterData.dataSource = this.dataSource;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.filterData.sort = this.sort;
+    for (let col of this.filterData.filterColumnNames) {
+      col.Value = '';
+    }
+
   }
   createGallery() {
     this.dialog.open(CreateGalleryComponent);
   }
+  updatePagination() {
 
-  manageGallery() {
-    this.router.navigateByUrl("uploadGallery");
+    this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
+
+  }
+
+  onEditRole(element:any){
+
+  }
+  onDeleteRole(element:any){
+
+  }
+  onVisibleRole(element:any){
+
   }
 
 

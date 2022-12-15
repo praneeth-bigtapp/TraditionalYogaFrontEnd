@@ -37,16 +37,15 @@
             </div>
 
         </div>
-    </div>
+    
 
-        <div *ngIf="displaycontent">
-            
+        <div >
+            <!-- *ngIf="displaycontent" -->
 
             <form [formGroup]="addmediaform"  (ngSubmit)="addmedia()">
-                <div class="card mt-5">
-                    <div class="card-header text-white bg-secondary" >
-                        Add Media
-                  </div>
+                <div class="card-body mt-2">
+                    <hr>
+                  <h3 class="ml-3 mb-1">Add Media</h3> 
                   <div class="card-body border-light bg-white pt-3 pb-4">
                     <div class=" row pb-4">
                     <div class="col-4 pl-3">
@@ -109,10 +108,10 @@
                 </div>
                 </div>
 
-                <div class="card mt-5">
-                    <div class="card-header text-white bg-secondary" >
-                        Text with images
-                  </div>
+                <div class="card-body mt-2">
+                    <hr>
+                  <h3 class="ml-3 mb-1">Text with images</h3> 
+                   
                   <div class="card-body border-light bg-white pt-3 pb-4">
                     <div class=" row pb-4">
                     <div class="col-4 pl-3">
@@ -165,10 +164,11 @@
                 </div>
                 </div>
 
-                <div class="card mt-5">
-                    <div class="card-header text-white bg-secondary" >
-                        Text with images
-                  </div>
+               
+                  <div class="card-body mt-2">
+                    <hr>
+                  <h3 class="ml-3 mb-1">Media</h3> 
+                  
                   <div class="card-body border-light bg-white pt-3 pb-4">
                     <div class=" row pb-4">
                         <div class="col-4">
@@ -218,7 +218,7 @@
 
 
         </div>
-
+</div>
     </div>
 
    

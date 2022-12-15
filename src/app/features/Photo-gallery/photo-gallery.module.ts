@@ -14,6 +14,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatCardModule } from '@angular/material/card';
+import { MatPaginatedTabHeader } from '@angular/material/tabs/paginated-tab-header';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import { MatCardModule } from '@angular/material/card';
     SharedModule,
     MatCardModule,
     MatSnackBarModule,
+    MatPaginatorModule,
+    
   ]
 })
 export class PhotoGalleryModule { }
