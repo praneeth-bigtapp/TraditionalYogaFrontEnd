@@ -13,9 +13,9 @@ export class AlertService extends BaseHttp {
 
   alertpostURL = 'webSite/alerts?operation=add'
 
-  updatealertURL=""
+  updatealertURL="webSite/alerts?operation=update"
 
-  deletealertURL=""
+  deletealertURL="webSite/alerts?operation=delete"
 
   getAllAlerts() {
     return this.get<any>(this.alertgetURL)

@@ -14,9 +14,9 @@ export class MappingRegionsToChiefMentorService extends BaseHttp {
 
   getcheifmentorURL = 'student/getAllByCourse?type=chiefMentor&courseId=1'
 
-  updateregionURL = ""
+  updateregionURL = "webSite/region?operation=update"
 
-  deleteregionURL = ""
+  deleteregionURL = "webSite/region?operation=delete"
 
   getCheifmentorAll() {
     return this.get(this.getcheifmentorURL)

@@ -190,6 +190,9 @@ export class RegioncreationComponent implements OnInit {
       "regionId": id,
     }
 
+    console.log(body);
+
+
     this.service.deleteregion(body).subscribe({
       next: (response) => {
         this.opensnackBar(response)
@@ -200,6 +203,7 @@ export class RegioncreationComponent implements OnInit {
         console.error(error.message);
       }
     })
+    return
 
   }
   editdetails(element: any) {
@@ -247,15 +251,19 @@ export class RegioncreationComponent implements OnInit {
     if (this.iseditable) {
       //editable
 
+      const partname = this.data.filter((ele: any) => ele.partId.partId === part)[0].partId.partName
       const body = {
         "regionId": regionId,
         "regionName": region,
         "countryName": country,
         "partId": {
-          "partId": part
+          "partId": part,
+          "partName": partname,
         },
         "states": state
       }
+
+      console.log(body);
 
       this.service.updateregion(body).subscribe({
         next: (response) => {
@@ -268,6 +276,7 @@ export class RegioncreationComponent implements OnInit {
 
         }
       })
+      return
     }
 
     this.service.postregion(body).subscribe({
