@@ -27,7 +27,7 @@ export class AlertComponent implements OnInit {
   filerror!: boolean
   filedata!: any
   issubmit: boolean = true
-  displaycontent: boolean = true
+  displaycontent: boolean = false
   iseditable: boolean = false
 
   editorConfig: AngularEditorConfig = {
