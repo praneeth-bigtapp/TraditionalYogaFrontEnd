@@ -19,14 +19,14 @@ export class AlertComponent implements OnInit {
   filterData: any;
   gridData = [];
   dataSource: any;
-  displayedColumns: string[] = ['coursesId', 'category', 'coursesName', "courseDuration", "startDate", "endDate", "currentStatus", "Action"];
+  displayedColumns: string[] = ['alertId', 'alertDescription', 'categoryId', 'startDate', "endDate", "Action"];
   data: any;
   disableSelect = new FormControl(false);
   alertform !: FormGroup
   category!: any
   filerror!: boolean
   filedata!: any
-
+  issubmit: boolean = true
   displaycontent: boolean = true
   iseditable: boolean = false
 
@@ -80,6 +80,7 @@ export class AlertComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) {
     this.alertform = this.formbuilder.group({
+      alertsno: [null],
       alertid: [null, Validators.compose([Validators.required])],
       paragraph: [null, Validators.compose([Validators.required])],
       startdate: [null, Validators.compose([Validators.required])],
@@ -151,26 +152,36 @@ export class AlertComponent implements OnInit {
     })
   }
 
-  openSnackBar(message: any) {
-    this._snackBar.open(message, 'Close');
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close');
   }
 
   compareselect(obj1: any, obj2: any) {
-    return obj1 && obj2 && obj1.categoriesId === obj2
+    return obj1 && obj2 && obj1 === obj2
   }
 
   viewdetails(element: any) {
-
+    this.alertform.setValue({
+      alertsno: element.alertId,
+      alertid: Number(element.categoryId),
+      paragraph: element.alertDescription,
+      startdate: element.startDate,
+      enddate: element.endDate,
+      file: null,
+    });
+    this.displaycontent = true
+    this.issubmit = false
   }
   deletedetails(id: any) {
 
     const body = {
-      "coursesId": id,
+      "alertId": id,
     }
+    console.log(body);
 
     this.alertservice.deletealert(body).subscribe({
       next: (response) => {
-        this.openSnackBar(response)
+        this.openSnackBar({ message: "Alert Deleted" })
         this.alertform.reset()
         this.getdata()
       },
@@ -182,10 +193,16 @@ export class AlertComponent implements OnInit {
   }
   editdetails(element: any) {
     this.alertform.setValue({
-
+      alertsno: element.alertId,
+      alertid: Number(element.categoryId),
+      paragraph: element.alertDescription,
+      startdate: element.startDate,
+      enddate: element.endDate,
+      file: null,
     });
     this.iseditable = true
     this.displaycontent = true
+    this.issubmit = true
   }
 
   reseteditable() {
@@ -213,14 +230,21 @@ export class AlertComponent implements OnInit {
       }
 
 
-      console.log(body)
 
       if (this.iseditable) {
         //editable
+
+        const body = {
+          "alertId": this.alertform.value.alertsno,
+          "categoryId": this.alertform.value.alertid,
+          "alertDescription": this.alertform.value.paragraph,
+          "startDate": this.alertform.value.startdate,
+          "endDate": this.alertform.value.enddate
+        }
         this.alertservice.updatealert(body).subscribe({
           next: (response) => {
             this.alertform.reset()
-            this.openSnackBar(response.message)
+            this.openSnackBar({ message: "Alert Updated" })
             this.getdata()
 
           },
@@ -232,6 +256,18 @@ export class AlertComponent implements OnInit {
 
         return
       }
+      this.alertservice.setalert(body).subscribe({
+        next: (response) => {
+          this.alertform.reset()
+          this.openSnackBar({ message: "Alert Added" })
+          this.getdata()
+
+        },
+        error: (error) => {
+          console.error(error.message);
+
+        }
+      })
 
     }
     else {

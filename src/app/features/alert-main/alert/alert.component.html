@@ -9,9 +9,8 @@
     </nav>
 
     <div class="d-flex mb-2 flex-wrap  justify-content-between align-items-center">
-        <h3 class=" pl-2 text-secondary ">Alerts</h3>
 
-        <button type="button" (click)="addalert()" class="btn btn-outline-secondary btn-rounded d-inline-block ">
+        <button type="button" *ngIf="!displaycontent" (click)="addalert()" class="btn btn-outline-secondary btn-rounded d-inline-block ">
             Add Alerts
         </button>
     </div>
@@ -28,8 +27,8 @@
                         <div class="row align-items-center ">
                             <label>Select Category : </label>
                             <div class="col">
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-select matNativeControl formControlName="alertid">
+                                <mat-form-field class="example-full-width" appearance="outline" >
+                                    <mat-select matNativeControl formControlName="alertid" [disabled]="iseditable" [compareWith]="compareselect">
                                         <mat-option *ngFor="let item of category"
                                             [value]="item.roleId">{{item.roleName}}
                                         </mat-option>
@@ -120,7 +119,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-3" [hidden]="!issubmit">
                         <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
                             {{iseditable ? "Update" :"Submit" }}
                         </button>
@@ -140,4 +139,92 @@
         </div>
     </div>
     <br />
+
+    <div class="card ">
+        <div class="card-header text-white bg-secondary">
+            Alerts
+        </div>
+        <div class="bg-transparent px-0 py-0">
+            <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
+                aria-label="alertId">
+                <ng-container matColumnDef="alertId">
+                    <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
+                        <label mat-sort-header>
+                            S.No
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseId')"
+                            [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" disabled />
+                    </th>
+                    <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
+                </ng-container>
+                <ng-container matColumnDef="alertDescription">
+                    <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
+                        <label mat-sort-header>
+                            Description
+                        </label>
+                        <input type="text" (keyup)="updatePagination('category')"
+                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.alertDescription}} </td>
+                </ng-container>
+                <ng-container matColumnDef="categoryId">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Category
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseName')"
+                            [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.categoryId}} </td>
+                </ng-container>
+                <ng-container matColumnDef="startDate">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Start date
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseDuration')"
+                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.startDate }} </td>
+                </ng-container>
+                <ng-container matColumnDef="endDate">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            End date
+                        </label>
+                        <input type="text" (keyup)="updatePagination('startDate')"
+                            [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="Action">
+                    <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
+                        <label mat-sort-header>
+                            Actions
+                        </label>
+                        <input type="text" (keyup)="updatePagination('currentStatus')"
+                            [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="filterData" disabled />
+                    </th>
+                    <td mat-cell *matCellDef="let element ">
+                        <div class="d-flex flex-wrap justify-content-evenly align-items-center">
+                            <i class="fa-solid fa-eye fs-5 text-info" (click)="viewdetails(element)"
+                                matTooltip="View Course Activity" matTooltip="View"></i>
+                            <span matTooltip="Edit" (click)="editdetails(element)">
+                                <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                            </span>
+                            <span matTooltip="Delete" style="cursor: pointer;"
+                                (click)="deletedetails(element.alertId)"> <i class="far fa-trash-alt"
+                                    aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator class="bg-transparent" [pageSizeOptions]="[10,25, 50, 100,150,200]" aria-label="Select page">
+            </mat-paginator>
+        </div>
+    </div>
 </div>

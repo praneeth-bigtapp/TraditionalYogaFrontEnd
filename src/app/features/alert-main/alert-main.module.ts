@@ -12,6 +12,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -30,6 +33,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatPaginatorModule,
+    MatTableModule,
+    SharedModule,
   ]
 })
 export class AlertMainModule { }

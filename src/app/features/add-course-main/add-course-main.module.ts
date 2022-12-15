@@ -13,12 +13,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { MatOptionModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 
@@ -48,6 +46,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     SharedModule,
     MatSelectModule,
     MatTooltipModule,
+    SharedModule,
   
   ]
 })
