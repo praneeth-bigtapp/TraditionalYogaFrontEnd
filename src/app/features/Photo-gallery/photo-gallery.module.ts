@@ -16,6 +16,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatedTabHeader } from '@angular/material/tabs/paginated-tab-header';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     MatCardModule,
     MatSnackBarModule,
     MatPaginatorModule,
+    MatSortModule,
     
   ]
 })
