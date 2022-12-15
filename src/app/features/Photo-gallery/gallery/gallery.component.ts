@@ -18,42 +18,42 @@ export class GalleryComponent implements OnInit {
 
     data = [
     {
-      "courseName": "RYT 200 Course photos",
-      "date": "21-07-2022",
+      "GalaryName": "RYT 200 Course photos",
+      "dateofcreation": "21-07-2022",
       "role": "Admin",
-      "count": 18,
+      "numberofphotosadded": 18,
       "isvisible": false
     },
     {
-      "courseName": "RYT 800Course photos",
-      "date": "22-07-2022",
+      "GalaryName": "RYT 800Course photos",
+      "dateofcreation": "22-07-2022",
       "role": "Student",
-      "count": 108,
+      "numberofphotosadded": 108,
       "isvisible": true
     },
     {
-      "courseName": "RYT 800Course photos",
-      "date": "22-07-2022",
+      "GalaryName": "RYT 800Course photos",
+      "dateofcreation": "22-07-2022",
       "role": "Student",
-      "count": 10,
+      "numberofphotosadded": 10,
       "isvisible": true
     },
     {
-      "courseName": "RYT 800Course photos",
-      "date": "22-07-2022",
+      "GalaryName": "RYT 800Course photos",
+      "dateofcreation": "22-07-2022",
       "role": "Student",
-      "count": 108,
+      "numberofphotosadded": 108,
       "isvisible": true
     }
 
 
 
   ]
-  displayedColumns: string[] = ["courseName", "date", "role", "count", "isvisible"];
+  displayedColumns: string[] = ["GalaryName", "dateofcreation", "role", "numberofphotosadded", "Actions"];
 
   dataSource: any;
 
-  // displayedColumns: string[] = ["image","Galleryname","DateOfCreation",'numOfPhotos','status', 'view'];
+  // displayedColumns: string[] = ["image","Galleryname","dateofcreationOfCreation",'numOfPhotos','status', 'view'];
 
   constructor(
     public dialog: MatDialog,
@@ -62,15 +62,16 @@ export class GalleryComponent implements OnInit {
 
   ngOnInit(): void {
      
+    this.dataSource = new MatTableDataSource<any>(this.data)
     this.filterData = {
       filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
       gridData: this.gridData,
       dataSource: this.dataSource,
       paginator: this.paginator,
       sort: this.sort
-    }
+    };
 
-    this.dataSource = new MatTableDataSource<any>(this.data)
+   
     this.filterData.gridData = this.data;
     this.filterData.dataSource = this.dataSource;
     this.dataSource.paginator = this.paginator;

@@ -31,7 +31,7 @@
             <div>
                 <button type="button" (click)="gobutton()"
                     class="btn btn-outline-secondary mt-4 btn-rounded d-inline-block m-2">
-                    Submit
+                    Add
                 </button>
 
             </div>
@@ -39,8 +39,8 @@
         </div>
     
 
-        <div >
-            <!-- *ngIf="displaycontent" -->
+        <div  *ngIf="displaycontent">
+           
 
             <form [formGroup]="addmediaform"  (ngSubmit)="addmedia()">
                 <div class="card-body mt-2">
