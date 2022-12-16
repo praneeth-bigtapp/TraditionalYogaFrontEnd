@@ -9,7 +9,7 @@
         
         <div class="row d-flex m-2">
 
-            <label>Select Course:</label>
+            <label>Course:</label>
 
             <div class="col-md-3 d-flex pt-2 " >
              
@@ -60,7 +60,7 @@
                 
 
                 <div class="col-md-6">
-                    <label>Select Category:</label>
+                    <label>Category:</label>
                     <mat-form-field appearance="outline">
                         
                         <select matNativeControl [disabled]="disableSelect.value" formControlName="category">
@@ -71,7 +71,7 @@
                             <option value="audi">Audi</option>
                         </select>
                         <mat-error [hidden]=" !Audiomanagement.get('category')?.hasError('required')  ">
-                            Please Select category
+                            Category is mandatory
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -92,7 +92,7 @@
                             <option value="audi">Audi</option>
                         </select>
                         <mat-error [hidden]=" !Audiomanagement.get('upload')?.hasError('required')  ">
-                            Please Select Audio
+                            Audio is mandatory
                         </mat-error>
                     </mat-form-field>
                 </div><br><br>
@@ -101,26 +101,30 @@
                 <h6 class="text-md-right col-md-4">Select Audio File:</h6> -->
 
                 <div class="col-md-6">
-                    <label>Select Audio File:</label>
+                    <br/>
+
+                    <label>Upload Audio File:</label>
                     <!-- <mat-form-field appearance="outline" class="ms-3 "> -->
                     <input type="file" id="file" (change)="filechange($event)" accept=" image/*" class="border"
                         required="true" formControlName="file" />
 
                     <!-- </mat-form-field> -->
                     <mat-error *ngIf="filerror ">
-                        Please Upload Audio file
+                            Audio is mandatory
                     </mat-error>
                 </div>
 
                 <!-- <h6 class="text-md-right col-md-4">Title:</h6> -->
 
                 <div class="col-md-6">
+                    <br/>
+
                     <label>Title:</label>
                     <mat-form-field appearance="outline">
                         <!-- <mat-label>title here</mat-label> -->
                         <input matInput formControlName="title">
                         <mat-error [hidden]=" !Audiomanagement.get('title')?.hasError('required')  ">
-                            Please Type title
+                            Title is mandatory
                         </mat-error>
                     </mat-form-field>
                 </div><br>
@@ -129,13 +133,15 @@
                 <!-- <h6 class="text-md-right col-md-4">Description:</h6> -->
 
                 <div class="col-md-12">
+                    <br/>
+
                     <label>Description:</label>
                     <mat-form-field class="example-full-width" appearance="outline" id="field">
                         <!-- <mat-label>Health is wealth</mat-label> -->
                         <textarea matInput 
                             formControlName="description"></textarea>
                         <mat-error [hidden]=" !Audiomanagement.get('description')?.hasError('required')  ">
-                            Please Type description
+                            Description is mandatory
                         </mat-error>
                     </mat-form-field>
                 </div><br>
@@ -143,15 +149,16 @@
        
                 <!-- <h6 class="text-md-right col-md-4">Duration Of the
                     File:</h6> -->
-
+                    
                 <div class="col-md-6">
+                    <br/>
                     <label>Duration Of the
                         File:</label>
                     <mat-form-field class="example-full-width" appearance="outline" id="field">
                         <!-- <mat-label>30:12</mat-label> -->
                         <input matInput formControlName="duration">
                         <mat-error [hidden]=" !Audiomanagement.get('duration')?.hasError('required')  ">
-                            Please Type duration
+                            File is mandatory
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -161,12 +168,14 @@
                 </h6> -->
 
                 <div class="col">
+                    <br/>
+
                     <label>Meta Keyword:</label>
                     <mat-form-field class="example-full-width" appearance="outline" id="field">
                         <!-- <mat-label>meta keyword</mat-label> -->
                         <input matInput formControlName="meta">
                         <mat-error [hidden]=" !Audiomanagement.get('meta')?.hasError('required')  ">
-                            Please Type meta
+                            keywords is mandatory
                         </mat-error>
                     </mat-form-field>
                 </div>

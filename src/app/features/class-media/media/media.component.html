@@ -19,7 +19,7 @@
             <div class="col-md-12">
                 <form [formGroup]="dateForm" (ngSubmit)="datefilter()" class="d-flex  flex-wrap flex-row mt-2">
                     <div class="mr-2 mt-2">
-                        <label>Select Course:</label>
+                        <label>Course:</label>
 
                         <mat-form-field appearance="outline">
                             <mat-select formControlName="courseslist">
@@ -33,7 +33,7 @@
                         </mat-form-field>
                     </div>
                     <div>
-                        <label>Select date:</label>
+                        <label>Date:</label>
 
                         <mat-form-field class="mt-2" appearance="outline">
                             <input matInput placeholder="Ex. Pizza" value="Sushi" type="date" formControlName="date">
