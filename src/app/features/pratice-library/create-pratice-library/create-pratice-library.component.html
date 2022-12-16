@@ -63,8 +63,8 @@
                         <div class="row align-items-center ">
                             <label>Category</label>
                             <div class="col">
-                                <mat-form-field appearance="outline">
-                                    <mat-select formControlName="category">
+                                <mat-form-field appearance="outline" >
+                                    <mat-select formControlName="category" [disabled]="iseditable" >
                                         <mat-option *ngFor="let category of categoryList" [value]="category.categoryId">
                                             {{category.categoryName}}</mat-option>
                                     </mat-select>

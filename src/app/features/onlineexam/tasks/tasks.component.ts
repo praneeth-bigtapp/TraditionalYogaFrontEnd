@@ -155,7 +155,6 @@ export class TasksComponent implements OnInit {
 
   }
   viewdetails(element: any) {
-    console.log(element);
 
 
     this.taskform.setValue({

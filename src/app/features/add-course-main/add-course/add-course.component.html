@@ -33,7 +33,7 @@
 
                             <div class="col px-0">
                                 <mat-form-field appearance="outline">
-                                    <mat-select formControlName="coursecategory" [compareWith]="compareselect">
+                                    <mat-select formControlName="coursecategory" [compareWith]="compareselect" [disabled]="iseditable">
 
                                         <mat-option *ngFor="let category of categoryList" [value]="category"
                                             aria-placeholder="Select Course Category">
