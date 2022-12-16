@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup ,  FormControl, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -22,39 +22,39 @@ export class TestimonialsComponent implements OnInit {
   iseditable: boolean = false
 
   data!: any;
-filterData:any
-gridData :any;
+  filterData: any
+  gridData: any;
 
 
-selection = new SelectionModel<any>(true, []);
+  selection = new SelectionModel<any>(true, []);
 
-displayedColumns: string[] = ["Checkbox","content","givenByName",'createDate','action'];
-  
+  displayedColumns: string[] = ["Checkbox", "content", "givenByName", 'createDate', 'action'];
 
 
-  constructor(private formbuilder:FormBuilder, private test: TestimonialsService) { }
+
+  constructor(private formbuilder: FormBuilder, private test: TestimonialsService) { }
 
   ngOnInit(): void {
 
-     this.filterData = {
+    this.filterData = {
       filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
       gridData: this.gridData,
       dataSource: this.dataSource,
       paginator: this.paginator,
       sort: this.sort
     }
-   this.getTestimonial();
+    this.getTestimonial();
 
-   this. testimonial = this.formbuilder.group({
-    
-    content: [null, Validators.compose([Validators.required])],
-    name: [null, Validators.compose([Validators.required])],
-    link: [null, Validators.compose([Validators.required])],
-   
-    description: [null, Validators.compose([Validators.required])],
-   
-  });
-   
+    this.testimonial = this.formbuilder.group({
+
+      content: [null, Validators.compose([Validators.required])],
+      name: [null, Validators.compose([Validators.required])],
+      link: [null, Validators.compose([Validators.required])],
+
+      description: [null, Validators.compose([Validators.required])],
+
+    });
+
   }
   // ngAfterViewInit() {
   //   this.filterData.dataSource.paginator = this.paginator;
@@ -82,7 +82,7 @@ displayedColumns: string[] = ["Checkbox","content","givenByName",'createDate','a
           col.Value = '';
         }
 
-    
+
       }
     });
   }
@@ -95,15 +95,15 @@ displayedColumns: string[] = ["Checkbox","content","givenByName",'createDate','a
     this.iseditable = false
     this.displaycontent = !this.displaycontent
   }
-  viewDetails(element:any){
-  
+  viewDetails(element: any) {
+
   }
   updatePagination() {
 
     this.filterData.dataSource.paginator = this.paginator;
     this.filterData.dataSource.sort = this.sort;
   }
-  
+
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
@@ -116,28 +116,31 @@ displayedColumns: string[] = ["Checkbox","content","givenByName",'createDate','a
       this.dataSource.data.forEach((row: any) => this.selection.select(row));
   }
 
-  addtestimonial(){
+  addtestimonial() {
     this.displaycontent = !this.displaycontent
 
   }
-  addTestdata(){
+  addTestdata() {
+
+    if (this.testimonial.invalid)
+      return this.testimonial.markAllAsTouched()
+
     const body = {
-      // "coursesId": 1,
-      
-        "content": this.testimonial.value.content,
-        "givenByName": this.testimonial.value.name,
-   
+      "content": this.testimonial.value.content,
+      "givenByName": this.testimonial.value.name,
+
       "video_link": this.testimonial.value.link,
       "description": this.testimonial.value.description,
-      
     }
-    this.test. posttestimonial(body).subscribe({
+    console.log("working");
+
+    this.test.posttestimonial(body).subscribe({
       next: (response) => {
         console.log(response)
         this.testimonial.reset()
-       
+
         this.getTestimonial()
-       
+
       },
       error: (error) => {
         console.error(error.message);
