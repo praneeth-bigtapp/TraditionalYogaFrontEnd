@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup ,  FormControl, Validators} from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -16,7 +16,7 @@ export class TestimonialsComponent implements OnInit {
   sort!: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   displaycontent: boolean = false
- 
+  testimonial!: FormGroup;
   dataSource: any;
   issubmit: boolean = true
   iseditable: boolean = false
@@ -24,6 +24,7 @@ export class TestimonialsComponent implements OnInit {
   data!: any;
 filterData:any
 gridData :any;
+
 
 selection = new SelectionModel<any>(true, []);
 
@@ -108,6 +109,32 @@ reseteditable() {
 
   addtestimonial(){
     this.displaycontent = !this.displaycontent
+
+  }
+  addTestdata(){
+    const body = {
+      // "coursesId": 1,
+      
+        "content": this.testimonial.value.content,
+        "name": this.testimonial.value.givenByName,
+   
+      "link": this.testimonial.value.video_link,
+      "description": this.testimonial.value.description,
+      
+    }
+    this.test. posttestimonial(body).subscribe({
+      next: (response) => {
+        console.log(response)
+        this.testimonial.reset()
+       
+        this.getTestimonial()
+       
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
 
   }
 

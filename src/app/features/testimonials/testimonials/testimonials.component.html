@@ -10,22 +10,23 @@
         <div class="card-header text-white bg-secondary" >
           Add testimonials
       </div>
-    <form class=" card-body bg-white "  >
+
+    <form class=" card-body bg-white "  [formGroup]="testimonial" (ngSubmit)="addTestdata()">
      
       <div class="row">
         <div class="col-md-12">
             <label>Content</label>
-            <mat-form-field class="example-full-width" appearance="outline" id="field">
+            <mat-form-field class="example-full-width" appearance="outline" id="field" >
                 <!-- <mat-label>Health is wealth</mat-label> -->
-                <textarea matInput 
+                <textarea matInput formControlName="content" 
                   ></textarea></mat-form-field>
 
         </div>
         <div class="col-md-6">
             <label>Given By Name</label>
-            <mat-form-field class="example-full-width" appearance="outline" id="field">
+            <mat-form-field class="example-full-width" appearance="outline" id="field" >
                 <!-- <mat-label>Health is wealth</mat-label> -->
-                <input matInput 
+                <input matInput formControlName="name"
                   ></mat-form-field>
 
         </div>
@@ -33,7 +34,7 @@
             <label>Video Link</label>
             <mat-form-field class="example-full-width" appearance="outline" id="field">
         
-                <input matInput 
+                <input matInput  formControlName="link"
                     ></mat-form-field>
 
         </div>
@@ -41,7 +42,7 @@
             <label>Description</label>
             <mat-form-field class="example-full-width" appearance="outline" >
                 <!-- <mat-label>Health is wealth</mat-label> -->
-                <textarea matInput 
+                <textarea matInput formControlName="description"
                    ></textarea></mat-form-field>
 
         </div>
@@ -51,12 +52,13 @@
         </div>
         <div class="row float-right">
             <div class="col-md-12 ">
-                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2"(click)="reseteditable()">
+                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
+                    Upload Testimonial
+                      </button>
+                <button  class="btn btn-outline-secondary btn-rounded d-inline-block m-2"(click)="reseteditable()">
                     Cancel
                       </button>
-                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
-                Upload Testimonial
-                  </button>
+             
             </div>
 
         </div>
