@@ -19,6 +19,9 @@ export class BlacklistUsersComponent implements OnInit {
   displayedColumns: string[] = ['SNo', 'date', 'blacklistUserEmail', "comments", "action"];
   dataSource: any;
   blacklistData: any;
+  updatebtn=false
+  blackbtn=true
+  
   filterData:any
   gridData:any
   constructor(
@@ -113,5 +116,25 @@ export class BlacklistUsersComponent implements OnInit {
     this.filterData.dataSource.sort=this.sort
 
    
+  }
+  editdetails(element:any){
+    
+    this.blacklistForm.setValue({emailId:element.blacklistUserEmail,
+    comments:element.comments
+    })
+    this.blackbtn=false
+    this.updatebtn=true
+
+
+  }
+  onupdate(){
+    this.blackbtn=true
+    this.updatebtn=false
+  }
+  oncancel(){
+    this.blacklistForm.reset()
+    this.blackbtn=true
+    this.updatebtn=false
+
   }
 }

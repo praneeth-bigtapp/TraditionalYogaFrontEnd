@@ -36,9 +36,18 @@
       </mat-form-field>
     </div>
     <div class="row d-flex justify-content-end mr-1">
-      <button mat-button class="btn   btn-outline-secondary btn-rounded d-inline-block border border-dark col-1 text-center"
+      <button mat-button *ngIf="blackbtn" class="btn mt-2  btn-outline-secondary btn-rounded d-inline-block border border-dark col-1 text-center"
         type="submit">BlackList
       </button>
+      <div class="d-flex justify-content-end mr-1 mt-2" *ngIf="updatebtn">
+        <button mat-button  class="btn   btn-outline-secondary btn-rounded d-inline-block border border-dark col-1 text-center"
+        type="submit" (click)="onupdate()">Update
+      </button> 
+      <button mat-button (click)="oncancel()" class="btn   btn-outline-secondary btn-rounded d-inline-block border border-dark col-1 text-center"
+      type="submit">Cancel
+    </button> 
+      </div>
+     
     </div>
   </div>
   </form>
@@ -71,18 +80,21 @@
       </ng-container>
 
       <ng-container matColumnDef="comments" >
-        <th mat-header-cell *matHeaderCellDef class="col"><label mat-sort-header> Comments</label>
+        <th mat-header-cell *matHeaderCellDef class="col-5"><label mat-sort-header> Comments</label>
           <input type="text" (keyup)="updatePagination()"
           [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" /></th>
-        <td mat-cell *matCellDef="let element" class="col"> {{element.comments}} </td>
+        <td mat-cell *matCellDef="let element" class="col-5"> {{element.comments}} </td>
       </ng-container>
 
       <ng-container matColumnDef="action" class="col-2">
         <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>Actions</label>
           </th>
         <td mat-cell *matCellDef="let element" class="col-2">
-          <span matTooltip="Delete" style="cursor: pointer;" class="mx-2"
+          <span matTooltip="Delete" style="cursor: pointer;" class=""
           (click)="unBlockUser(element)"> <i class="far fa-trash-alt" aria-hidden="true"></i> </span>
+          <span matTooltip="Edit" (click)="editdetails(element)">
+            <i class="fas fa-pencil-alt mx-4" aria-hidden="true"></i>
+        </span>
         
         </td>
       </ng-container>
