@@ -20,12 +20,13 @@
                         <label>Course</label>
                         <div class="col-md-4">
                             <mat-form-field appearance="outline">
-                                <mat-select [(ngModel)]="coursename" (ngModelChange)="coursechange()">
+                                <mat-select [(ngModel)]="selectCourse" (ngModelChange)="courseChange()">
                                     <mat-option *ngFor="let course of courselist" [value]="course.coursesId">
-                                        {{course.coursesName}}</mat-option>
+                                        {{course.coursesName}}
+                                    </mat-option>
                                 </mat-select>
                             </mat-form-field>
-                            <mat-error class="mat-error" *ngIf="courserror">
+                            <mat-error class="mat-error" *ngIf="courseError">
                                 Course is mandatory
                             </mat-error>
                         </div>
@@ -34,90 +35,140 @@
                                 class="btn btn-outline-secondary btn-go btn-rounded d-inline-block m-2 border border-dark">
                                 Go
                             </button> -->
-                            <button type="button" (click)="gobutton()"
+                            <button type="button" (click)="onClkCourse()"
                                 class="btn btn-outline-secondary  btn-rounded d-inline-block m-2 border border-dark">
                                 Submit
                             </button>
                         </div>
-                        <div class="col-md-5" *ngIf="displaycontent">
-                            <h4 class="text-center">Performance Rating</h4>
-
-                        </div>
                     </div>
-                    <hr *ngIf="displaycontent" />
-                    <div class="" *ngIf="displaycontent">
-                        <table class="w-100 p-5 ">
+                    <div class="" *ngIf="displayContent">
+                        <div class="col-md-5">
+                            <h4 class="text-center">Performance Rating</h4>
+                        </div>
+                        <hr/>
+                        <table mat-table [dataSource]="sectionDataB" matSort class="mat-elevation-z8 mat-datagrid w-100"
+                            aria-label="parameters">
+                            <ng-container matColumnDef="parameterName">
+                                <th mat-header-cell *matHeaderCellDef scope="col">
+                                    <!-- <label mat-sort-header>
+                                        Parameter Name
+                                    </label> -->
+                                </th>
+                                <td mat-cell *matCellDef="let element"> {{element.parametersName}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="rating">
+                                <th mat-header-cell *matHeaderCellDef scope="col">
+                                    <!-- <label mat-sort-header>
+                                        rating
+                                    </label> -->
+                                </th>
+                                <!-- <td mat-cell *matCellDef="let element"> {{element.rating}} </td> -->
+                                <td mat-cell *matCellDef="let element">
+                                    <input class="border w-75" autocomplete="off" [(ngModel)]="element.rating"
+                                        (change)="ratingSectionB(element)">
+                                </td>
 
-                            <thead class="border-bottom">
-                                <tr class="">
-                                    <th class="">&nbsp;</th>
-                                    <th>&nbsp;</th>
-                                    <th class="">Good</th>
-
-                                    <th>Average</th>
-                                    <th>Poor</th>
-                                    <th>Red Alert</th>
-                                    <th>&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <br />
-                            <!-- <form [formGroup]="Ratings"   > -->
-
-                            <tbody *ngFor="let element of parameters">
-
-
-                                <tr class="">
-
-
-                                    <td>
-                                        <h6>{{element.performaceName}}</h6>
-                                    </td>
-                                    <td>
-                                        <p>:&nbsp;</p>
-                                    </td>
-                                    <td class=" ">
-                                        <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingGood"
-                                            (change)="keypressvalue(element.id)" required>
-                                    </td>
-                                    <td class="">
-                                        <input class="border w-75" autocomplete="off"
-                                            [(ngModel)]="element.ratingAvearage" (change)="keypressvalue(element.id)"
-                                            required>
-                                    </td>
-                                    <td class="">
-                                        <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingPoor"
-                                            (change)="keypressvalue(element.id)" required>
-                                    </td>
-                                    <td class="">
-                                        <input class="border w-75" autocomplete="off"
-                                            [(ngModel)]="element.ratingRedAlert" (change)="keypressvalue(element.id)"
-                                            required>
-                                    </td>
-                                    <td class="">
-                                        <mat-slide-toggle [checked]="IsActiveorNot(element.active)"
-                                            (change)="onActivateParameter(element.id)"></mat-slide-toggle>
-                                        <p>Disable</p>
-
-                                    </td>
-
-
-                                </tr>
-
-                                <br />
-
-
-                            </tbody>
-
-
+                            </ng-container>
+                            <ng-container matColumnDef="active">
+                                <th mat-header-cell *matHeaderCellDef scope="col">
+                                    <!-- <label mat-sort-header>
+                                        Actions
+                                    </label> -->
+                                </th>
+                                <!-- <td mat-cell *matCellDef="let element"> {{element.active}} </td> -->
+                                <td mat-cell *matCellDef="let element">
+                                    <mat-slide-toggle [checked]="element.active == 'Y'? true : false"
+                                        (change)="onActiveParameterB(element,$event)">
+                                    </mat-slide-toggle>
+                                    <span>{{element.active == 'Y'? "Enable" : "Disable"}}</span>
+                                </td>
+                                <!-- <td mat-cell *matCellDef="let element">
+                                    <mat-slide-toggle [checked]="IsActiveorNot(element.active)"
+                                        (change)="onActivateParameter(element.id)"></mat-slide-toggle>
+                                    <p>Disable</p>
+                                </td> -->
+                            </ng-container>
+                            <!-- <tr mat-header-row *matHeaderRowDef="sectionColumnsB"></tr> -->
+                            <tr mat-row *matRowDef="let row; columns: sectionColumnsB;"></tr>
+                        </table>
+                        <table mat-table [dataSource]="sectionDataA" matSort class="mat-elevation-z8 mat-datagrid w-100"
+                            aria-label="parameters">
+                            <ng-container matColumnDef="parameterName">
+                                <th mat-header-cell *matHeaderCellDef scope="col">
+                                    <label mat-sort-header>
+                                        Parameter Name
+                                    </label>
+                                </th>
+                                <td mat-cell *matCellDef="let element"> {{element.parametersName}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="ratingGood">
+                                <th mat-header-cell *matHeaderCellDef scope="col">
+                                    <label mat-sort-header>
+                                        Good
+                                    </label>
+                                </th>
+                                <!-- <td mat-cell *matCellDef="let element"> {{element.ratingGood}} </td> -->
+                                <td mat-cell *matCellDef="let element">
+                                    <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingGood"
+                                        (change)="ratingSectionA(element)">
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="ratingAvearage">
+                                <th mat-header-cell *matHeaderCellDef scope="col">
+                                    <label mat-sort-header>
+                                        Avearage
+                                    </label>
+                                </th>
+                                <!-- <td mat-cell *matCellDef="let element"> {{element.ratingAvearage}} </td> -->
+                                <td mat-cell *matCellDef="let element">
+                                    <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingAvearage"
+                                        (change)="ratingSectionA(element)">
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="ratingPoor">
+                                <th mat-header-cell *matHeaderCellDef scope="col">
+                                    <label mat-sort-header>
+                                        Poor
+                                    </label>
+                                </th>
+                                <!-- <td mat-cell *matCellDef="let element"> {{element.ratingPoor}} </td> -->
+                                <td mat-cell *matCellDef="let element">
+                                    <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingPoor"
+                                        (change)="ratingSectionA(element)">
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="ratingRedAlert">
+                                <th mat-header-cell *matHeaderCellDef scope="col">
+                                    <label mat-sort-header>
+                                        Red Alert
+                                    </label>
+                                </th>
+                                <!-- <td mat-cell *matCellDef="let element"> {{element.ratingRedAlert}} </td> -->
+                                <td mat-cell *matCellDef="let element">
+                                    <input class="border w-75" autocomplete="off" [(ngModel)]="element.ratingRedAlert"
+                                        (change)="ratingSectionA(element)">
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="active">
+                                <th mat-header-cell *matHeaderCellDef scope="col">
+                                    <label mat-sort-header>
+                                        Actions
+                                    </label>
+                                </th>
+                                <!-- <td mat-cell *matCellDef="let element"> {{element.active}} </td> -->
+                                <td mat-cell *matCellDef="let element">
+                                    <mat-slide-toggle [checked]="element.active == 'Y'? true : false"
+                                        (change)="onActiveParameterA(element,$event)">
+                                    </mat-slide-toggle>
+                                    <span>{{element.active == 'Y'? "Enable" : "Disable"}}</span>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="sectionColumnsA"></tr>
+                            <tr mat-row *matRowDef="let row; columns: sectionColumnsA;"></tr>
                         </table>
                     </div>
-
                 </div>
-
-
-
             </div>
-
         </div>
     </div>
 </div>

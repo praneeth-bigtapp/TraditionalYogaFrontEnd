@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ParametersService } from './service/parameters.service';
 import { MatSnackBar, } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-parameters',
@@ -9,168 +11,150 @@ import { MatSnackBar, } from '@angular/material/snack-bar';
   styleUrls: ['./parameters.component.css']
 })
 export class ParametersComponent implements OnInit {
+  performanceRating: any = [];
 
-  courselist!: any
-  coursename!: any
-  courserror: boolean = false
-  displaycontent: boolean = false
-  Ratings!: FormGroup
+  courselist: any;
+  selectCourse: any;
 
-  parameters: any;
-  body: any;
+  courseError: boolean = false;
+  displayContent: boolean = false;
 
+  sectionDataA!: MatTableDataSource<any>;
+  sectionDataB!: MatTableDataSource<any>;
+
+  sectionColumnsA: string[] = ['parameterName', 'ratingGood', 'ratingAvearage', 'ratingPoor', 'ratingRedAlert', 'active'];
+  sectionColumnsB: string[] = ['parameterName', 'rating', 'active'];
 
   constructor(
-    private service: ParametersService, private snackBar: MatSnackBar
-  ) {
-    this.service.getallcourses().subscribe({
-      next: (response) => {
-        this.courselist = response
-
-      },
-      error: (error) => {
-        console.error(error.message);
-
-      }
-    })
-
-  }
-
-
+    private parameterService: ParametersService,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
+    this.getCourse();
   }
 
-
-  getallparameter(courseid: any) {
-    this.service.getInput().subscribe({
+  getCourse() {
+    this.parameterService.getallcourses().subscribe({
       next: (response) => {
-        this.parameters = response
-
-        console.log(this.parameters);
-
-        this.parameters = this.parameters.filter((ele: any) => ele.courseId.courseId === courseid)
-        console.log(this.parameters)
-
+        this.courselist = response;
+        console.log(this.courselist);
       },
       error: (error) => {
         console.error(error.message);
-
       }
-    })
+    });
   }
-  coursechange() {
 
-    this.displaycontent = false
-    this.courserror = false
-    if (this.coursename == undefined || this.coursename == null) {
-      this.courserror = true
+  courseChange() {
+    this.displayContent = false;
+    this.courseError = false;
+    if (this.selectCourse == undefined || this.selectCourse == null) {
+      this.courseError = true;
       return
     }
-    // this.gobutton()
-
-
   }
 
-  gobutton() {
-    this.coursechange()
-    console.log(this.coursename);
-    if (this.coursename) {
-      this.displaycontent = true
-      this.getallparameter(this.coursename)
+  onClkCourse() {
+    console.log(this.selectCourse);
+    if (this.selectCourse == undefined || this.selectCourse == null) {
+      this.displayContent = false;
+      this.courseError = true;
+    } else {
+      this.displayContent = true;
+      this.courseError = false;
+      this.getParameter(this.selectCourse);
     }
-
-
   }
 
-
-  onActivateParameter(eleid: any) {
-    const yes = ["Yes", "Y", "yes", "y"]
-    const no = ["No", "N", "no", "n"]
-
-
-    this.parameters.map((element: any) => {
-      if (element.id === eleid) {
-        element.active = yes.includes(element.active) ? "N" : "Y"
-      }
-
-    });
-
-    const { id, ratingGood, ratingAvearage, ratingPoor, ratingRedAlert, active } = this.parameters.filter((ele: any) => ele.id === eleid)[0]
-    // console.log({ id, ratingGood, ratingAvearage, ratingPoor, ratingRedAlert, active });
-
-    const body = {
-
-      "performaceRatingId": id,
-      "ratingGood": ratingGood,
-      "ratingAvearage": ratingAvearage,
-      "ratingPoor": ratingPoor,
-      "ratingRedAlert": ratingRedAlert,
-      "active": active,
-    }
-
-
-    console.log(body);
-
-    // console.log(body);
-    this.service.postparamters(body).subscribe({
+  getParameter(courseId: any) {
+    this.parameterService.getInput(courseId).subscribe({
       next: (response) => {
-
-        this.openSnackBar(response)
-
+        this.performanceRating = response;
+        console.log(this.performanceRating);
+        this.sectionDataA = new MatTableDataSource(this.performanceRating.sectionA);
+        this.sectionDataB = new MatTableDataSource(this.performanceRating.sectionB);
       },
       error: (error) => {
-        console.error(error.message);
 
       }
-    })
-
-
+    });
   }
+  
   openSnackBar(data: any) {
     this.snackBar.open(data.message, 'Close');
   }
 
-  IsActiveorNot(value: any) {
-    const yes = ["Yes", "Y", "yes", "y"]
-    const no = ["No", "N", "no", "n"]
-    if (no.includes(value))
-      return true
-
-    return false
+  // For Posting the Input fields
+  // Create a method here
+  ratingSectionB(parameter: any) {
+    this.updateSectionB(parameter);
   }
 
-  keypressvalue(eleid: any) {
+  ratingSectionA(parameter: any) {
+    this.updateSectionA(parameter);
+  }
 
-
-    const { id, ratingGood, ratingAvearage, ratingPoor, ratingRedAlert, active } = this.parameters.filter((ele: any) => ele.id === eleid)[0]
-    // console.log({ id, ratingGood, ratingAvearage, ratingPoor, ratingRedAlert, active });
-
-    const body = {
-
-      "performaceRatingId": id,
-      "ratingGood": ratingGood,
-      "ratingAvearage": ratingAvearage,
-      "ratingPoor": ratingPoor,
-      "ratingRedAlert": ratingRedAlert,
-      "active": active,
+  onActiveParameterB(parameter: any, event: MatSlideToggleChange) {
+    console.log(event);
+    if (event.checked) {
+      parameter.active = "Y"
+    } else {
+      parameter.active = "N"
     }
+    this.updateSectionB(parameter);
+  }
 
-    console.log(body);
-    this.service.postparamters(body).subscribe({
+  onActiveParameterA(parameter: any, event: MatSlideToggleChange) {
+    console.log(event);
+    if (event.checked) {
+      parameter.active = "Y"
+    } else {
+      parameter.active = "N"
+    }
+    this.updateSectionA(parameter);
+  }
+
+  updateSectionB(parameter: any) {
+    console.log(parameter);
+    const data = {
+      "performaceRatingId": parameter.parametersId,
+      "ratingGood": parameter.rating,
+      "active": parameter.active
+    };
+    this.parameterService.saveParamters(data, 2).subscribe({
       next: (response) => {
-
-        console.log(response)
-        this.openSnackBar(response)
-
+        console.log(response);
+        this.openSnackBar(response);
+        this.getParameter(this.selectCourse);
       },
       error: (error) => {
         console.error(error.message);
-
+        this.getParameter(this.selectCourse);
       }
-    })
+    });
+  }
 
-
-
+  updateSectionA(parameter: any) {
+    console.log(parameter);
+    const data = {
+      "performaceRatingId": parameter.parametersId,
+      "ratingGood": parameter.ratingGood,
+      "ratingAvearage": parameter.ratingAvearage,
+      "ratingPoor": parameter.ratingPoor,
+      "ratingRedAlert": parameter.ratingRedAlert,
+      "active": parameter.active
+    };
+    this.parameterService.saveParamters(data, 1).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.openSnackBar(response);
+        this.getParameter(this.selectCourse);
+      },
+      error: (error) => {
+        console.error(error.message);
+        this.getParameter(this.selectCourse);
+      }
+    });
   }
 }
