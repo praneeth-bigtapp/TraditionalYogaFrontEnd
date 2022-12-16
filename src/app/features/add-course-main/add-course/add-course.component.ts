@@ -218,17 +218,30 @@ export class AddCourseComponent implements OnInit {
 
 
 
+      // const body = {
+      //   "coursesId": this.addCourseForm.value.courseId,
+      //   "categorieId": {
+      //     "categoriesId": this.addCourseForm.value.coursecategory,
+      //     "categoriesName": this.categoryList.filter((ele: any) => ele.categoriesId === this.addCourseForm.value.coursecategory)[0].categoriesName,
+      //   },
+      //   "coursesName": this.addCourseForm.value.courseName,
+      //   "description": this.addCourseForm.value.description,
+      //   "startDate": this.addCourseForm.value.startDate,
+      //   "endDate": this.addCourseForm.value.endDate,
+      //   "applicationClouserDate": this.addCourseForm.value.applicationclosuredate
+      // }
+
       const body = {
-        "coursesId": this.addCourseForm.value.courseId,
+        "applicationClouserDate": this.addCourseForm.value.applicationclosuredate,
         "categorieId": {
           "categoriesId": this.addCourseForm.value.coursecategory,
-          "categoriesName": this.categoryList.filter((ele: any) => ele.categoriesId === this.addCourseForm.value.coursecategory)[0].categoriesName,
+          "categoriesName": this.categoryList.filter((ele: any) => ele.categoriesId === this.addCourseForm.value.coursecategory)[0].categoriesName
         },
+        "coursesId": this.addCourseForm.value.courseId,
         "coursesName": this.addCourseForm.value.courseName,
         "description": this.addCourseForm.value.description,
-        "startDate": this.addCourseForm.value.startDate,
         "endDate": this.addCourseForm.value.endDate,
-        "applicationClouserDate": this.addCourseForm.value.applicationclosuredate
+        "startDate": this.addCourseForm.value.startDate
       }
 
       console.log(body);
