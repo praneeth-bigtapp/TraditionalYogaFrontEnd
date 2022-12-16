@@ -150,6 +150,12 @@ displayedColumns: string[] = ['S_No', 'title', 'date', "mtype", "Details"];
   viewDetails(element:any){
 
   }
+  editdetails(element:any){
+
+  }
+  deletedetails(element:any){
+    
+  }
   ngAfterViewInit() {
     this.filterData.dataSource.paginator = this.paginator;
     this.filterData.dataSource.sort = this.sort;

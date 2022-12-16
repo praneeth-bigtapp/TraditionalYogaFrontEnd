@@ -118,14 +118,14 @@
 
 
       <ng-container matColumnDef="Date">
-        <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
+        <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>
             Date
           </label>
 
           <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
             [filter]="filterData" />
         </th>
-        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.Date}} </td>
+        <td mat-cell *matCellDef="let element" class="col-1 text-center"> {{element.Date}} </td>
       </ng-container>
 
 
@@ -149,7 +149,7 @@
           <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
             [filter]="filterData" />
         </th>
-        <td mat-cell *matCellDef="let element" class="col- text-center"> {{element.Country}} </td>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.Country}} </td>
       </ng-container>
       <!-- <ng-container matColumnDef="currency">
         <th mat-header-cell *matHeaderCellDef class="col-1 text-center">  <label mat-sort-header>
@@ -194,8 +194,15 @@
 
 
         <td mat-cell *matCellDef="let element" class="text-center col-1 ml-5 mt-3">
-          <i class="fa-solid fa-eye fs-5 text-info" (click)="viewDetails('')" matTooltip="View Course Activity"
-            matTooltip="View"></i>
+          <i class="fa-solid fa-eye fs-5 text-info" (click)="viewDetails(element)"
+          matTooltip="View Course Activity" matTooltip="View"></i>
+      <span matTooltip="Edit" (click)="editdetails(element)">
+          <i class="fas fa-pencil-alt mx-4" aria-hidden="true"></i>
+      </span>
+      <span matTooltip="Delete" style="cursor: pointer;"
+          (click)="deletedetails(element.praticeLibaryId)">
+          <i class="far fa-trash-alt" aria-hidden="true"></i>
+      </span>
         </td>
       </ng-container>
 

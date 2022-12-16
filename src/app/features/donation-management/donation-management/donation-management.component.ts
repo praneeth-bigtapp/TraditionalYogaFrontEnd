@@ -88,7 +88,12 @@ export class DonationManagementComponent implements OnInit {
     this.filterData.dataSource.paginator = this.paginator;
     
   }
+  editdetails(element:any){
 
+  }
+  deletedetails(element:any){
+    
+  }
 
   viewDetails(name: any) {
     alert("click");

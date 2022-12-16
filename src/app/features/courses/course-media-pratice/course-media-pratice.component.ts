@@ -262,6 +262,16 @@ export class CourseMediaPraticeComponent implements OnInit {
     }
 
   }
+  
+  viewDetails(element:any){
+
+  }
+  editdetails(element:any){
+
+  }
+  deletedetails(element:any){
+    
+  }
 
 
 

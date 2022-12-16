@@ -138,13 +138,14 @@ export class MediaComponent implements OnInit {
     this.filterData.dataSource.paginator = this.paginator;
   }
 
-  viewclassmedia(element: any) {
-    console.log(element);
+  viewDetails(element:any){
 
   }
-  editmedia(element: any) {
-    console.log(element);
+  editdetails(element:any){
 
+  }
+  deletedetails(element:any){
+    
   }
 
 
