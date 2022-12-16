@@ -113,7 +113,7 @@
                         </div>
                     </div>
                     <div class="row col-md-6">
-                        <div class="col-md-6" *ngIf="issubmit" >
+                        <div class="col-md-6" *ngIf="issubmit">
                             <button type="submit"
                                 class="btn btn-outline-secondary btn-rounded d-inline-block mt-3 ml-md-1">
                                 {{isedit ?"Update":"Submit"}}
@@ -218,7 +218,7 @@
                             <span matTooltip="Edit" (click)="editdetails(element)">
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                             </span>
-                            <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.quoteId)">
+                            <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.taskId)">
                                 <i class="far fa-trash-alt" aria-hidden="true"></i>
                             </span>
                         </div>

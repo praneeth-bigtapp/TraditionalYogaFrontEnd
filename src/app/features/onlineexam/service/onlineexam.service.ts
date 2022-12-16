@@ -25,7 +25,7 @@ export class OnlineexamService extends BaseHttp {
 
   updatetaskURL = ""
 
-  deletetaskURL = ""
+  deletetaskURL = "courseList/task?operation=delete"
 
   getallcourses() {
     return this.get(this.getallcourseURL)
