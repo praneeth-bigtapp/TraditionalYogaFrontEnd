@@ -63,7 +63,7 @@
               <mat-form-field appearance="outline" class="">
 
                 <input type="text" placeholder="Pick one" aria-label="Country" matInput
-                  formControlName="countrydropdown" (valueChange)="updatePagination()"
+                  formControlName="countrydropdown" (keyup)="updatePagination()"
                   [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" [matAutocomplete]="auto">
                 <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                   <mat-option *ngFor="let country of countryfilter |async " [value]="country">

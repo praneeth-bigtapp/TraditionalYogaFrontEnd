@@ -141,10 +141,15 @@ export class DonationManagementComponent implements OnInit {
   
 
   manualcompare(event: any) {
+    let filterdata= this.data 
 
+if(this.filterData.dataSource.filteredData.length!==0 && event.target.value.length!==0){
+   filterdata = this.filterData.dataSource.filteredData 
+}
 
-
-    let filterdata = this.filterData.dataSource.filteredData && this.data
+   
+    console.log(filterdata);
+    
 
     const [symbol, value] = [event.target.value[0], event.target.value.slice(1, event.target.value.length)]
 

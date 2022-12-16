@@ -16,11 +16,11 @@
   
     <div class="card-body bg-white pb-2">
         <form [formGroup]="FormDeatils" (submit)="onsubmit()">
-            <div class="row pt-2">
-                <div class="col-4 ">
+            <div class=" pt-3 row ">
+                <div class="col-4">
                     <label>Select Course:</label>
 
-                    <mat-form-field appearance="outline" >
+                    <mat-form-field class="pe-4" appearance="outline" >
                         <select matNativeControl  formControlName="courses" >
                             <option value="" selected></option>
                             <option *ngFor="let item of courses" [value]="item.coursesId">{{item.coursesName}}
@@ -167,9 +167,9 @@
 
      
         <ng-container matColumnDef="S_No" >
-            <th mat-header-cell *matHeaderCellDef class="col-2 text-center pb-3" > <label  mat-sort-header>S_No</label>
+            <th mat-header-cell *matHeaderCellDef class="col-2 text-center pb-3" > <label  mat-sort-header>S.No</label>
                 <input matInput type="text" (keyup)="updatePagination()" 
-                [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;width: 90%;"  /></th>
+                [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" disabled="true"  style="border-style: solid;border-radius: 5px;width: 90%;"  /></th>
           <!-- <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
             <label mat-sort-header>
                 S.No
@@ -208,14 +208,14 @@
 
         <ng-container  matColumnDef="Details">
           <th mat-header-cell *matHeaderCellDef class=" text-center col-2 pb-3"> <label  mat-sort-header> Action</label>
-            <!-- <input matInput type="text" (keyup)="updatePagination()" 
-            [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;"   /></th> -->
+            <input matInput type="text" (keyup)="updatePagination()" 
+            disabled="true"  style="border-style: solid;border-radius: 5px;"   /></th>
           
           <td mat-cell *matCellDef="let element" class="text-center col-2 my-4  ">
-            <i class="fa-solid fa-eye fs-5 text-info" (click)="viewDetails(element)"
+            <i class="fa-solid fa-eye fs-5 text-info " (click)="viewDetails(element)"
             matTooltip="View Course Activity" matTooltip="View"></i>
         <span matTooltip="Edit" (click)="editdetails(element)">
-            <i class="fas fa-pencil-alt mx-4" aria-hidden="true"></i>
+            <i class="fas fa-pencil-alt mx-4 " aria-hidden="true"></i>
         </span>
         <span matTooltip="Delete" style="cursor: pointer;"
             (click)="deletedetails(element.praticeLibaryId)">
@@ -227,6 +227,10 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <div class="bg-white d-flex  flex-row justify-content-end card-body ">
+        <mat-paginator class="" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
+        </mat-paginator>
+    </div>
 </div>
 </div>
 
