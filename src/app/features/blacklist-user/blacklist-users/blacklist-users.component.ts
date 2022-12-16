@@ -44,6 +44,7 @@ export class BlacklistUsersComponent implements OnInit {
     };
 
     this.getBlackListUser();
+    
   }
 
   getBlackListUser() {

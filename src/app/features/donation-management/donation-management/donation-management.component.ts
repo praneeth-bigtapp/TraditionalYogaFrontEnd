@@ -57,7 +57,8 @@ export class DonationManagementComponent implements OnInit {
       dataSource: this.dataSource,
       paginator: this.paginator,
       sort: this.sort,
-      total: this.total
+      total: this.total,
+      sub:this.subtotal
     }
     this.total = this.sum(this.data.map((ele: any) => Number(ele.Amountdonated)))
     this.subtotal = this.sum(this.data.map((ele: any) => Number(ele.Amountdonated)))
@@ -69,6 +70,7 @@ export class DonationManagementComponent implements OnInit {
     this.dataSource.sort = this.sort;
     this.filterData.sort = this.sort;
     this.filterData.total = this.total;
+    this.filterData.sub= this.subtotal;
 
     for (let col of this.filterData.filterColumnNames) {
       col.Value = '';
@@ -81,14 +83,28 @@ export class DonationManagementComponent implements OnInit {
 
 
   }
-  ngAfterViewInit() {
+  // ngAfterViewInit() {
+  //   this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.Amountdonated)))
+
+  //   this.filterData.dataSource.paginator = this.paginator;
+   
+
+  //   this.filterData.dataSource.sort = this.sort;
+  //   this.filterData.dataSource.sub=this.subtotal
+
+  // }
+  updatePagination() {
+  
+      
+    this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.Amountdonated)))
+
+    
     this.filterData.dataSource.paginator = this.paginator;
     this.filterData.dataSource.sort = this.sort;
+    this.filterData.dataSource.sub=this.subtotal
 
-  }
-  updatePagination() {
 
-    this.filterData.dataSource.paginator = this.paginator;
+
 
   }
   editdetails(element: any) {
@@ -108,7 +124,7 @@ export class DonationManagementComponent implements OnInit {
       next: (response) => {
         this.data = response;
         this.dataSource = new MatTableDataSource<any>(this.data);
-        console.log(this.data);
+        
 
 
       },
@@ -123,11 +139,14 @@ export class DonationManagementComponent implements OnInit {
   }
 
   manualcompare(event: any) {
-
+    
+      
+      
     let filterdata = this.data
     const [symbol, value] = [event.target.value[0], event.target.value.slice(1, event.target.value.length)]
 
     if (event.target.value.length === 0) {
+      this.subtotal = this.sum(filterdata.map((ele: any) => Number(ele.Amountdonated)))
 
       this.dataSource = new MatTableDataSource<any>(filterdata)
       this.filterData.gridData = filterdata;
@@ -136,11 +155,15 @@ export class DonationManagementComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.filterData.sort = this.sort;
       this.filterData.total = this.total;
-      this.subtotal = this.sum(filterdata.map((ele: any) => Number(ele.Amountdonated)))
+      this.filterData.dataSource.paginator = this.paginator;
+      this.filterData.dataSource.sort = this.sort;
+      this.filterData.dataSource.sub=this.subtotal
       return
     }
 
     if (![">", "<"].includes(symbol)) {
+      this.subtotal = this.sum(filterdata.map((ele: any) => Number(ele.Amountdonated)))
+
       filterdata = filterdata.filter((ele: any) => Number(ele.Amountdonated) === Number(event.target.value))
       this.dataSource = new MatTableDataSource<any>(filterdata)
       this.filterData.gridData = filterdata;
@@ -149,8 +172,11 @@ export class DonationManagementComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.filterData.sort = this.sort;
       this.filterData.total = this.total;
+      
+      this.filterData.dataSource.paginator = this.paginator;
+      this.filterData.dataSource.sort = this.sort;
+      this.filterData.dataSource.sub=this.subtotal
 
-      this.subtotal = this.sum(filterdata.map((ele: any) => Number(ele.Amountdonated)))
       return
     }
 
@@ -161,6 +187,8 @@ export class DonationManagementComponent implements OnInit {
       filterdata = filterdata.filter((ele: any) => Number(ele.Amountdonated) <= value)
     }
     console.log(filterdata);
+    this.subtotal = this.sum(filterdata.map((ele: any) => Number(ele.Amountdonated)))
+
     this.dataSource = new MatTableDataSource<any>(filterdata)
     this.filterData.gridData = filterdata;
     this.filterData.dataSource = this.dataSource;
@@ -168,10 +196,14 @@ export class DonationManagementComponent implements OnInit {
     this.dataSource.sort = this.sort;
     this.filterData.sort = this.sort;
     this.filterData.total = this.total;
+    this.filterData.sub= this.subtotal;
+    this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
+    this.filterData.dataSource.sub=this.subtotal
+    console.log(this.subtotal);
+    
 
-    this.updatePagination()
 
-    this.subtotal = this.sum(filterdata.map((ele: any) => Number(ele.Amountdonated)))
   }
 
   getallregions() {
