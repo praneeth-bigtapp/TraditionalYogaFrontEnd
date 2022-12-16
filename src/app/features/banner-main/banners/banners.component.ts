@@ -14,18 +14,18 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./banners.component.css']
 })
 export class BannersComponent implements OnInit {
-  displayedColumns: string[] = ['bannerId', 'bannerName', 'categoryId', "date","Status", "Action"];
+  displayedColumns: string[] = ['bannerId', 'bannerName', 'categoryId', "date", "Status", "Action"];
   issubmit: boolean = true
   iseditable: boolean = false
   dataSource: any;
-  filterData:any;
-  gridData:any;
+  filterData: any;
+  gridData: any;
   data!: any;
-  checks=false;
+  checks = false;
   headerbannerform!: FormGroup
   coursebanner!: FormGroup
   filerror!: boolean
-  filerror2!: boolean
+  filerror2: boolean = false
   coursefile!: any
   headerfile!: any
   displaycontent: boolean = false
@@ -35,44 +35,40 @@ export class BannersComponent implements OnInit {
   sort!: MatSort;
   selection = new SelectionModel<any>(true, []);
   optionscontrol: any;
-  
-  
-    applyFilter(event: Event) {
-      const filterValue = (event.target as HTMLInputElement).value;
-      this.dataSource.filter = filterValue.trim().toLowerCase();
-    }
-    updatePagination() {
 
-      this.filterData.dataSource.paginator = this.paginator;
-      this.filterData.dataSource.sort = this.sort;
-    }
-    reseteditable() {
-      // this.addCourseForm.reset()
-      this.iseditable = false
-      this.displaycontent = !this.displaycontent
-    }
-    onfilechange(event: any, formname: string) {
 
-      // if (formname === 'headerform')
-      // {
-      //   this.filerror = this.headerbannerform.value.bannerimage === null ? true : false
-      // this.headerfile = event.target.files[0].name
-      // }
-  
-      if (formname === 'courseform') {
-        this.filerror2 = this.coursebanner.value.coursebannerimage === null ? true : false
-        this.coursefile = event.target.files[0].name
-      }
-  
-    }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  updatePagination() {
+
+    this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
+  }
+  reseteditable() {
+    this.coursebanner.reset()
+    this.iseditable = false
+    this.displaycontent = !this.displaycontent
+    this.issubmit = true
+    this.filerror2 = false
+  }
+  onfilechange(event: any) {
+
+    this.filerror2 = this.coursebanner.value.coursebannerimage === null ? true : false
+    if (event === null)
+      return
+
+    this.coursefile = event.target.files[0].name
+  }
 
   constructor(
     private banner: BannerviewService,
     private router: Router,
-   
+
     private formBuilder: FormBuilder,
- 
- 
+
+
   ) { }
 
   addcourse() {
@@ -89,17 +85,7 @@ export class BannersComponent implements OnInit {
     }
     this.getBanner();
 
-    this.headerbannerform = this.formBuilder.group({
-      bannerimage: [
-        null,
-        Validators.compose([Validators.required])
-      ],
-      description: [
-        null,
-        Validators.compose([Validators.required])
-      ],
-      others: this.optionscontrol
-    })
+
 
     this.coursebanner = this.formBuilder.group({
       coursebannerimage: [
@@ -124,7 +110,7 @@ export class BannersComponent implements OnInit {
       ]
     })
   }
- 
+
 
   getBanner() {
     this.banner.getbanner().subscribe({
@@ -134,10 +120,8 @@ export class BannersComponent implements OnInit {
           data.check = false;
         }
         console.log(this.data);
+        this.data = this.data.reverse()
 
-        // this.dataSource = new MatTableDataSource<any>(this.data)
-        // this.dataSource.paginator = this.paginator;
-        // this.dataSource.sort = this.sort;
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
@@ -155,7 +139,7 @@ export class BannersComponent implements OnInit {
 
   }
 
-  checkAll(e:any) {
+  checkAll(e: any) {
     // console.log(status.value);
     // for (let data of this.data) {
     //   data.check = true;
@@ -164,20 +148,20 @@ export class BannersComponent implements OnInit {
     // this.dataSource = new MatTableDataSource<any>(this.data)
     // this.dataSource.paginator = this.paginator;
     // this.dataSource.sort = this.sort;
-    if(e.target.checked==true){
-      this.checks=true;
-        }
-        else{
-          this.checks=false;
-        }
+    if (e.target.checked == true) {
+      this.checks = true;
+    }
+    else {
+      this.checks = false;
+    }
 
   }
 
   onAddBanner() {
     this.router.navigateByUrl("addbanner");
   }
- 
-  
+
+
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
@@ -194,8 +178,8 @@ export class BannersComponent implements OnInit {
     this.coursebanner.setValue({
       coursetitle: element.courseTitle,
       coursebannerimage: element.imagePath,
-    
-      
+
+
       fromdate: formatDate(element.fromDate, "yyyy-MM-dd", 'en'),
       todate: formatDate(element.toDate, "yyyy-MM-dd", 'en'),
       description: element.description,
@@ -207,8 +191,8 @@ export class BannersComponent implements OnInit {
     this.coursebanner.setValue({
       coursetitle: element.courseTitle,
       coursebannerimage: element.imagePath,
-    
-      
+
+
       fromdate: formatDate(element.fromDate, "yyyy-MM-dd", 'en'),
       todate: formatDate(element.toDate, "yyyy-MM-dd", 'en'),
       description: element.description,
@@ -216,6 +200,13 @@ export class BannersComponent implements OnInit {
     this.iseditable = true
     this.displaycontent = true
     this.issubmit = true
+  }
+
+  bannersubmit() {
+    this.onfilechange(null)
+
+    if (this.coursebanner.invalid)
+      return this.coursebanner.markAllAsTouched()
   }
 
 }
