@@ -2,6 +2,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TestimonialsService } from '../testimonials.service';
@@ -120,6 +121,17 @@ export class TestimonialsComponent implements OnInit {
     this.displaycontent = !this.displaycontent
 
   }
+  // onActivateRole(role: any, event: MatSlideToggleChange) {
+  //   console.log(role);
+  //   if (event.checked) {
+  //     role.active = 'Y';
+  //   } else {
+  //     role.active = 'N';
+  //   }
+    // this.rolesService.activateRole(role).subscribe((response) => {
+    //   this.getRoles();
+    // });
+  // }
   addTestdata() {
 
     if (this.testimonial.invalid)

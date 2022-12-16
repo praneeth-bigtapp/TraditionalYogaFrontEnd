@@ -14,6 +14,7 @@ export class AudioComponent implements OnInit {
   audiodata!: any
   courses!: any;
   coursedata!:any
+  audiocategory!:any;
 
   // this. Audiomanagement = this.formbuilder.group({
   //   course: [null, Validators.compose([Validators.required])],
@@ -27,7 +28,7 @@ export class AudioComponent implements OnInit {
   constructor(private formbuilder: FormBuilder, private course: AudioService) {
     this.Audiomanagement = this.formbuilder.group({
       category: [null, Validators.compose([Validators.required])],
-      outline: [null, Validators.compose([Validators.required])],
+     
       file: [null, Validators.compose([Validators.required])],
       title: [null, Validators.compose([Validators.required])],
       upload: [null, Validators.compose([Validators.required])],
@@ -47,9 +48,37 @@ export class AudioComponent implements OnInit {
       }
     });
 
+    // this.audiocategory.getaudio().subscribe({
+    //   next: (response) => {
+
+    //     this. audiocategory = response
+    //     console.log(this. audiocategory);
+
+    //   },
+    //   error: (error) => {
+    //     console.error(error.message);
+    //   }
+
+    // })
+
+  }
+  getaudiocategory(){
+    this.course.getaudio().subscribe({
+      next: (response: any) => {
+
+        this. audiocategory = response
+        console.log(this. audiocategory);
+
+      },
+      error: (error: { message: any; }) => {
+        console.error(error.message);
+      }
+
+    })
   }
 
   ngOnInit(): void {
+    this.getaudiocategory()
 
     // this. Audiomanagement = this.formbuilder.group({
     //   category: [null, Validators.compose([Validators.required])],
@@ -73,15 +102,15 @@ export class AudioComponent implements OnInit {
 
     this.audiodata = event.target.files[0]
   }
-  audiosubmit() {
-    this.filerror = this.Audiomanagement.value.file === null ? true : false
+  // audiosubmit() {
+  //   this.filerror = this.Audiomanagement.value.file === null ? true : false
 
-    if (this.Audiomanagement.invalid)
-      return this.Audiomanagement.markAllAsTouched()
+  //   if (this.Audiomanagement.invalid)
+  //     return this.Audiomanagement.markAllAsTouched()
 
-    this.Audiomanagement.value.file = this.audiodata
+  //   this.Audiomanagement.value.file = this.audiodata
 
-  }
+  // }
 
   // getcoursedata(){
   //   this.course.getcourse().subscribe({
@@ -98,4 +127,38 @@ export class AudioComponent implements OnInit {
 
 
   // }
+
+  addAudiocategory() {
+
+    if (this.Audiomanagement.invalid)
+      return this.Audiomanagement.markAllAsTouched()
+
+    const body = {
+      "uploadCategory": this.Audiomanagement.value.category,
+      "audioFile": this.Audiomanagement.value.file,
+
+      "audioTitle": this.Audiomanagement.value.title,
+      "audioDesc": this.Audiomanagement.value.description,
+      "audioDuration": this.Audiomanagement.value.duration,
+      "metakey": this.Audiomanagement.value.meta,
+      "audioCategoryId":this.Audiomanagement.value.meta,
+    }
+    console.log(body);
+
+    this.course.audiopost(body).subscribe({
+      next: (response) => {
+        console.log(response)
+        this.Audiomanagement.reset()
+
+        // this.getTestimonial()
+
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
+
+  }
+
 }

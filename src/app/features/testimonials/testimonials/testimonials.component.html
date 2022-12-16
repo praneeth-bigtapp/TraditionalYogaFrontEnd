@@ -1,4 +1,11 @@
 <div class="ConfigurationTypes_textpadding p-5  ">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="#/addpages">Website Management</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Testimonials</li>
+        </ol>
+      </nav>
     <div class="col-md-12 d-flex justify-content-end">
         <button class="btn btn-outline-secondary btn-rounded d-inline-block m-2"(click)="addtestimonial()"*ngIf="!displaycontent" >
             Add Testimonials</button>
@@ -144,10 +151,10 @@
 
                         </div>
                         <div class="col-md-6 ">
-                            <mat-radio-group aria-label="Select an option">
+                            <!-- <mat-radio-group aria-label="Select an option">
                                 <mat-radio-button value="1">Visible</mat-radio-button>&nbsp;
                                 <mat-radio-button value="2">invisible</mat-radio-button>
-                            </mat-radio-group>
+                            </mat-radio-group> -->
 
                         </div>
 
@@ -197,6 +204,10 @@
                 </th>
                 <td mat-cell *matCellDef="let element" class="col-4 px-2 text-left py-2">
                     <div class=" d-flex">
+                        <mat-slide-toggle [checked]="element.active == 'Y'? true : false"
+                       ></mat-slide-toggle>
+<!-- 
+                       (change)="onActivateRole(element,$event)" -->
                         <i
                         class="fas fa-pencil-alt" aria-hidden="true"></i> &nbsp; <i class="fa-solid fa-eye  " matTooltip="View"
                         aria-label="Button that displays a tooltip when focused or hovered over"></i>

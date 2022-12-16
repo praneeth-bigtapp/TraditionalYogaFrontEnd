@@ -38,10 +38,10 @@
             <div class="col-md text-end ">
 
                 <!-- <button mat-raised-button style="margin-left: 700px;"></button> -->
-                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
+                <!-- <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 "> -->
                     <!-- <i class="fa-solid fa-circle-plus"></i> -->
-                    create a category for audio
-                </button>
+                    <!-- create a category for audio
+                </button> -->
 
             </div>
 
@@ -51,7 +51,7 @@
 
         </div>
         <hr>
-        <form [formGroup]="Audiomanagement" (ngSubmit)="audiosubmit()">
+        <form [formGroup]="Audiomanagement" (ngSubmit)=" addAudiocategory()">
             
 
 
@@ -63,13 +63,13 @@
                     <label>Category:</label>
                     <mat-form-field appearance="outline">
                         
-                        <select matNativeControl [disabled]="disableSelect.value" formControlName="category">
-                            <option value="" selected></option>
-                            <option value="volvo">Volvo</option>
+                        <mat-select  formControlName="category">
+                            <mat-option value=""  *ngFor="let element of audiocategory">{{element.uploadCategory}}</mat-option>
+                            <!-- <option value="volvo">Volvo</option>
                             <option value="saab" disabled>Saab</option>
                             <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
-                        </select>
+                            <option value="audi">Audi</option> -->
+                        </mat-select>
                         <mat-error [hidden]=" !Audiomanagement.get('category')?.hasError('required')  ">
                             Category is mandatory
                         </mat-error>
@@ -81,16 +81,13 @@
             
 
                 <div class="col-md-6">
-                    <label>Upload Audio:</label>
+                    <label>Audio File Type</label>
                     <mat-form-field appearance="outline">
                         <!-- <mat-label>Audio file</mat-label> -->
-                        <select matNativeControl [disabled]="disableSelect.value" formControlName="upload">
-                            <option value="" selected></option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab" disabled>Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
-                        </select>
+                        <mat-select  formControlName="upload">
+                          
+                            <mat-option value="volvo" *ngFor="let element of audiocategory">{{element.audioCategoryId}}</mat-option></mat-select>
+                            
                         <mat-error [hidden]=" !Audiomanagement.get('upload')?.hasError('required')  ">
                             Audio is mandatory
                         </mat-error>
