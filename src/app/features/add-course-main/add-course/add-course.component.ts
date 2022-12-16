@@ -156,7 +156,7 @@ export class AddCourseComponent implements OnInit {
   deletedetails(id: any) {
 
     const body = {
-      "coursesId": id,
+      "coursesId": id
     }
 
     this.AddCourseService.deletecourse(body).subscribe({
@@ -215,11 +215,14 @@ export class AddCourseComponent implements OnInit {
 
     if (this.iseditable) {
       // edit
+
+
+
       const body = {
-        // "coursesId": this.addCourseForm.value.courseId,
+        "coursesId": this.addCourseForm.value.courseId,
         "categorieId": {
-          "categoriesId": this.addCourseForm.value.coursecategory.categoriesId,
-          "categoriesName": this.addCourseForm.value.coursecategory.categoriesName,
+          "categoriesId": this.addCourseForm.value.coursecategory,
+          "categoriesName": this.categoryList.filter((ele: any) => ele.categoriesId === this.addCourseForm.value.coursecategory)[0].categoriesName,
         },
         "coursesName": this.addCourseForm.value.courseName,
         "description": this.addCourseForm.value.description,
@@ -227,6 +230,8 @@ export class AddCourseComponent implements OnInit {
         "endDate": this.addCourseForm.value.endDate,
         "applicationClouserDate": this.addCourseForm.value.applicationclosuredate
       }
+
+      console.log(body);
 
       this.AddCourseService.updatecourse(body).subscribe({
         next: (response) => {
