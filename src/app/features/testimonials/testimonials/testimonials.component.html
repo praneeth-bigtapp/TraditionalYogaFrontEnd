@@ -1,15 +1,77 @@
 <div class="ConfigurationTypes_textpadding p-5  ">
-    <!-- remove bg-light -->
+    <div class="col-md-12 d-flex justify-content-end">
+        <button class="btn btn-outline-secondary btn-rounded d-inline-block m-2"(click)="addtestimonial()"*ngIf="!displaycontent" >
+            Add Testimonials</button>
 
-    <div class="row">
-        <div class="col-7">
-            <h3 class="mb-4 pl-2 text-secondary">Testimonials</h3>
-        </div>
-        <div class="col-5 d-flex justify-content-end">
-            <button class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
-                Add Testimonials</button>
+    </div>
+ 
+   
+    <div class="card mt-5" *ngIf="displaycontent">
+        <div class="card-header text-white bg-secondary" >
+          Add testimonials
+      </div>
+    <form class=" card-body bg-white "  >
+     
+      <div class="row">
+        <div class="col-md-12">
+            <label>Content</label>
+            <mat-form-field class="example-full-width" appearance="outline" id="field">
+                <!-- <mat-label>Health is wealth</mat-label> -->
+                <textarea matInput 
+                  ></textarea></mat-form-field>
 
         </div>
+        <div class="col-md-6">
+            <label>Given By Name</label>
+            <mat-form-field class="example-full-width" appearance="outline" id="field">
+                <!-- <mat-label>Health is wealth</mat-label> -->
+                <input matInput 
+                  ></mat-form-field>
+
+        </div>
+        <div class="col-md-6">
+            <label>Video Link</label>
+            <mat-form-field class="example-full-width" appearance="outline" id="field">
+        
+                <input matInput 
+                    ></mat-form-field>
+
+        </div>
+        <div class="col-md-12">
+            <label>Description</label>
+            <mat-form-field class="example-full-width" appearance="outline" >
+                <!-- <mat-label>Health is wealth</mat-label> -->
+                <textarea matInput 
+                   ></textarea></mat-form-field>
+
+        </div>
+      
+     
+
+        </div>
+        <div class="row float-right">
+            <div class="col-md-12 ">
+                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2"(click)="reseteditable()">
+                    Cancel
+                      </button>
+                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
+                Upload Testimonial
+                  </button>
+            </div>
+
+        </div>
+       
+    </form>
+
+
+
+
+
+
+
+
+  
+     
 
         <div class="row justify-content-end">
             <!-- <div class="col-sm-3">

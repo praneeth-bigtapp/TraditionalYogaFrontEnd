@@ -15,9 +15,11 @@ export class TestimonialsComponent implements OnInit {
   @ViewChild(MatSort)
   sort!: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
-
+  displaycontent: boolean = false
  
   dataSource: any;
+  issubmit: boolean = true
+  iseditable: boolean = false
 
   data!: any;
 filterData:any
@@ -30,6 +32,11 @@ displayedColumns: string[] = ["Checkbox","content","givenByName",'createDate','a
 applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
+}
+reseteditable() {
+  // this.addCourseForm.reset()
+  this.iseditable = false
+  this.displaycontent = !this.displaycontent
 }
 
   constructor(private formbuilder:FormBuilder, private test: TestimonialsService) { }
@@ -97,6 +104,11 @@ applyFilter(event: Event) {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach((row: any) => this.selection.select(row));
+  }
+
+  addtestimonial(){
+    this.displaycontent = !this.displaycontent
+
   }
 
 }

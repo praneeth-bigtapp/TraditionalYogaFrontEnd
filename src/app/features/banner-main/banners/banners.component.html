@@ -1,4 +1,4 @@
-<!-- <div class="ConfigurationTypes_textpadding"> -->
+<div class="ConfigurationTypes_textpadding">
     <!-- <div class="row">
         <div class="col-md-10 "> -->
             <!-- <h4>Banners</h4> -->
@@ -6,7 +6,13 @@
 
         </div> -->
       
-
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="#/addpages">Website Management</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Banners</li>
+            </ol>
+          </nav>
        
 
         <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
@@ -128,8 +134,9 @@
     
             
     
-                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 float-md-right">
-                        Submit banner
+                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 float-md-right"*ngIf="issubmit"
+                    >
+                    {{iseditable ? "Update" :"Submit" }}
                     </button>
                     <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 float-md-right"(click)="reseteditable()">
                       cancel
@@ -177,7 +184,7 @@
                  </th>
             <td class="row col-md-6" *matCellDef="let element">
                 <div style="display: flex ;">
-                    <div> {{element.bannerName}} - <span class="text-success"> Published </span></div>
+                    <div> {{element.bannerName}} </div>
                 </div>
 
             </td>
@@ -206,30 +213,41 @@
                 </div>
                  </th>
             <td mat-cell class="col" *matCellDef="let element">
-                Last Modified<br> {{element.Comments || "at Wed 2 2017"}}
+                 {{element.Comments || "at Wed 2 2017"}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="Status">
+            <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header>
+                <div class="row">
+                    <label class="text-start">Status </label>
+                    <input matInput type="text" (keyup)="updatePagination()" 
+                    [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="  filterData"  style="border-style: solid;border-radius: 5px;width: 70%;"  />
+                </div>
+                 </th>
+            <td mat-cell class="col" *matCellDef="let element">
+               Published
             </td>
         </ng-container>
         <ng-container matColumnDef="Action">
             <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header>Action </th>
             <td mat-cell class="col" *matCellDef="let element">
-                <div style="display: flex ; ">
-                    <a class="nav-link active text-blue" aria-current="page" href="#">
-                        <span matTooltip="Edit">  <i
+                <div style="display: flex ; " class="d-flex">
+                 
+                        <span matTooltip="Edit" (click)="editdetails(element)">  <i
                         class="fas fa-pencil-alt" matTooltip="Info about the action"
                         aria-label="Button that displays a tooltip when focused or hovered over"></i></span> 
-                    </a>
-                    <a class="nav-link active text-danger " aria-current="page" href="#">
+                 
+       
                       <span  matTooltip="Delete"> <i class="far fa-trash-alt"
                             aria-label="Button that displays a tooltip when focused or hovered over"></i></span> 
-                    </a>
-                    <a class="nav-link active text-primary" aria-current="page" href="#">
-                        <i class="fa-solid fa-eye  " matTooltip="View"
-                            aria-label="Button that displays a tooltip when focused or hovered over"></i>
-                    </a>
-                    <a class="nav-link active " aria-current="page" href="#">
-                        <i class="fa-sharp fa-solid fa-floppy-disk" matTooltip="Draft"
-                            aria-label="Button that displays a tooltip when focused or hovered over"></i>
-                    </a>
+            
+                            <span  matTooltip="View"> <i class="fa-solid fa-eye  " 
+                            aria-label="Button that displays a tooltip when focused or hovered over" (click)="viewdetails(element)"></i></span> &nbsp;&nbsp;
+                
+  
+                            <span   matTooltip="Draft"> <i class="fa-sharp fa-solid fa-floppy-disk" 
+                            aria-label="Button that displays a tooltip when focused or hovered over"></i></span>
+                  
                 </div>
 
             </td>
@@ -237,7 +255,7 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table><br>
+    </table>
 
     <div class="row">
         <div class="col">
@@ -246,4 +264,4 @@
         </div>
     </div>
 </div>
-<!-- </div> -->
+</div>

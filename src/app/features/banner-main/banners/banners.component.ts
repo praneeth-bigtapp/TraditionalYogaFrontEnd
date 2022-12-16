@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { BannerviewService } from '../service/bannerview.service';
 import { Router } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-banners',
@@ -13,7 +14,8 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./banners.component.css']
 })
 export class BannersComponent implements OnInit {
-  displayedColumns: string[] = ['bannerId', 'bannerName', 'categoryId', "date", "Action"];
+  displayedColumns: string[] = ['bannerId', 'bannerName', 'categoryId', "date","Status", "Action"];
+  issubmit: boolean = true
   iseditable: boolean = false
   dataSource: any;
   filterData:any;
@@ -186,6 +188,34 @@ export class BannersComponent implements OnInit {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach((row: any) => this.selection.select(row));
+  }
+
+  viewdetails(element: any) {
+    this.coursebanner.setValue({
+      coursetitle: element.courseTitle,
+      coursebannerimage: element.imagePath,
+    
+      
+      fromdate: formatDate(element.fromDate, "yyyy-MM-dd", 'en'),
+      todate: formatDate(element.toDate, "yyyy-MM-dd", 'en'),
+      description: element.description,
+    });
+    this.issubmit = false
+    this.displaycontent = true
+  }
+  editdetails(element: any) {
+    this.coursebanner.setValue({
+      coursetitle: element.courseTitle,
+      coursebannerimage: element.imagePath,
+    
+      
+      fromdate: formatDate(element.fromDate, "yyyy-MM-dd", 'en'),
+      todate: formatDate(element.toDate, "yyyy-MM-dd", 'en'),
+      description: element.description,
+    });
+    this.iseditable = true
+    this.displaycontent = true
+    this.issubmit = true
   }
 
 }

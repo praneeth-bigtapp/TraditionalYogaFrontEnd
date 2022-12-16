@@ -5,7 +5,8 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
   providedIn: 'root'
 })
 export class TestimonialsService extends BaseHttp{
-  getTestmonial = "courseList/getAll?operation=testimonal"
+  getTestmonial = "courseList/getAll?operation=testimonal";
+  postTestimonial=""
 
 
   getTestimonial() {
