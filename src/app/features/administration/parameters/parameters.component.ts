@@ -17,6 +17,7 @@ export class ParametersComponent implements OnInit {
   selectCourse: any;
 
   courseError: boolean = false;
+  performanceError: boolean = false;
   displayContent: boolean = false;
 
   sectionDataA!: MatTableDataSource<any>;
@@ -71,12 +72,19 @@ export class ParametersComponent implements OnInit {
     this.parameterService.getInput(courseId).subscribe({
       next: (response) => {
         this.performanceRating = response;
+        // console.log(this.performanceRating.sectionA);
         console.log(this.performanceRating);
         this.sectionDataA = new MatTableDataSource(this.performanceRating.sectionA);
         this.sectionDataB = new MatTableDataSource(this.performanceRating.sectionB);
+        this.performanceError = false;
+        // if (this.performanceRating.sectionA == null && this.performanceRating.sectionB == null) {
+        // } else {
+        //   this.displayContent = false;
+        //   this.performanceError = true;
+        // }
       },
       error: (error) => {
-
+        this.performanceError = true;
       }
     });
   }
