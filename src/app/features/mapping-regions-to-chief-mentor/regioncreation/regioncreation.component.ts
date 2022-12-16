@@ -67,6 +67,21 @@ export class RegioncreationComponent implements OnInit {
       paginator: this.paginator,
       sort: this.sort
     }
+    this.service.getcountry().subscribe({
+      next: (response) => {
+
+        this.countryList = response
+        this.countryList = this.countryList.map((ele: any) => ele.countryName)
+        console.log(response);
+
+
+        // this.countryfilter = data
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
   }
 
   ngOnInit(): void {
@@ -79,7 +94,7 @@ export class RegioncreationComponent implements OnInit {
       next: (value) => {
         this.data = value
         this.data = this.data.reverse()
-        this.countryList = [...new Set(this.data.map((ele: any) => ele.countryName))]
+        // this.countryList = [...new Set(this.data.map((ele: any) => ele.countryName))]
         this.statelist = [...new Set(this.data.map((ele: any) => ele.states))]
 
         const key = "partId"

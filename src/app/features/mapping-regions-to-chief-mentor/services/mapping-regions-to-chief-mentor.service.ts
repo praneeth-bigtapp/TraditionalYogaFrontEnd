@@ -18,13 +18,16 @@ export class MappingRegionsToChiefMentorService extends BaseHttp {
   updateregionURL = "webSite/region?operation=update"
 
   deleteregionURL = "webSite/region?operation=delete"
-  
-  
+
+  getcountryURL = "webSite/getAll?operation=country"
 
   getCheifmentorAll() {
     return this.get(this.getcheifmentorURL)
   }
 
+  getcountry() {
+    return this.get(this.getcountryURL)
+  }
   getcoursesdetails() {
     return this.get(this.getAllcoursesURL)
   }
