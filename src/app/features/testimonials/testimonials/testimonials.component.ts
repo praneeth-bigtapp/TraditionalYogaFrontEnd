@@ -30,15 +30,7 @@ selection = new SelectionModel<any>(true, []);
 
 displayedColumns: string[] = ["Checkbox","content","givenByName",'createDate','action'];
   
-applyFilter(event: Event) {
-  const filterValue = (event.target as HTMLInputElement).value;
-  this.dataSource.filter = filterValue.trim().toLowerCase();
-}
-reseteditable() {
-  // this.addCourseForm.reset()
-  this.iseditable = false
-  this.displaycontent = !this.displaycontent
-}
+
 
   constructor(private formbuilder:FormBuilder, private test: TestimonialsService) { }
 
@@ -53,13 +45,21 @@ reseteditable() {
     }
    this.getTestimonial();
 
+   this. testimonial = this.formbuilder.group({
+    
+    content: [null, Validators.compose([Validators.required])],
+    name: [null, Validators.compose([Validators.required])],
+    link: [null, Validators.compose([Validators.required])],
    
+    description: [null, Validators.compose([Validators.required])],
+   
+  });
    
   }
-  ngAfterViewInit() {
-    this.filterData.dataSource.paginator = this.paginator;
+  // ngAfterViewInit() {
+  //   this.filterData.dataSource.paginator = this.paginator;
 
-  }
+  // }
   getTestimonial() {
     this.test.getTestimonial().subscribe({
       next: (response) => {
@@ -85,6 +85,15 @@ reseteditable() {
     
       }
     });
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  reseteditable() {
+    // this.addCourseForm.reset()
+    this.iseditable = false
+    this.displaycontent = !this.displaycontent
   }
   viewDetails(element:any){
   
@@ -116,9 +125,9 @@ reseteditable() {
       // "coursesId": 1,
       
         "content": this.testimonial.value.content,
-        "name": this.testimonial.value.givenByName,
+        "givenByName": this.testimonial.value.name,
    
-      "link": this.testimonial.value.video_link,
+      "video_link": this.testimonial.value.link,
       "description": this.testimonial.value.description,
       
     }
