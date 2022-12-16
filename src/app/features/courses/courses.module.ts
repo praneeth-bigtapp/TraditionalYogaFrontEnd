@@ -49,6 +49,7 @@ import { MyCourseMatriealsComponent } from './my-course-matrieals/my-course-matr
     MatSlideToggleModule,
     MatSelectModule,
     AngularEditorModule,
+  
 
 
   ]

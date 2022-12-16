@@ -17,7 +17,7 @@
     <div class="card-body bg-white pb-2">
         <form [formGroup]="FormDeatils" (submit)="onsubmit()">
             <div class="row pt-2">
-                <div class="col-4 ml-4">
+                <div class="col-4 ">
                     <label>Select Course:</label>
 
                     <mat-form-field appearance="outline" >
@@ -26,13 +26,13 @@
                             <option *ngFor="let item of courses" [value]="item.coursesId">{{item.coursesName}}
                             </option>
                         </select>
+                        <mat-error *ngIf="FormDeatils.controls['courses'].hasError('required')">
+                            Please select any course
+                          </mat-error>
                     </mat-form-field>
                 </div>
             </div>
-            <div class=" pt-5 row ">
-                <div class="col-4 text-end pt-3 fw-bolder">
-                    Course Material Category:
-                </div>
+            <div class=" pt-3 row ">
                 <div class="col-4">
                     <label>Course Material Category:</label>
                     <mat-form-field class="pe-4"appearance="outline" >
@@ -43,113 +43,123 @@
                                 <option *ngFor="let item of catogeries" [value]="item.materialCategoryId">{{item.categoryName}}
                                 </option>
                             </select>
-                        
-                    
-                    </mat-form-field>
-                </div>
-                <!-- <div class="col-2">
-                    <p>Technical/Scientific information Festival/Day specials </p>
-                </div> --> 
-            </div>
-            <div class=" pt-2 row " *ngIf="newcatogeries">
-                <div class="col-4 text-end pt-3 text-dark fw-bolder">
-                    Others Category:
-                </div>
-                <div class="col-4">
-                    <label>Others Category:</label>
-                    <mat-form-field class="pe-4"appearance="outline" >
-                       
-                        <input matInput formControlName="others"  
-                            type="text" />
-                    
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class=" pt-2 row ">
-                <div class="col-4 text-end pt-3 text-dark fw-bolder">
-                    Course Material Title:
-                </div>
-                <div class="col-8">
-                    <label>Course Material Title:</label>
-
-                    <mat-form-field class="pe-4"appearance="outline" >
-                       
-                        <input matInput formControlName="coursetitle"  
-                            type="text" />
-                    
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class=" pt-2 row ">
-                <div class="col-4 text-end pt-3 text-dark fw-bolder">
-                    Add Media:
-                </div>
-                <div class="col-4">
-                    <label>Add Media:</label>
-                    
-                    <mat-form-field class="pe-4"appearance="outline" >
-                       
-                            
-                            <select matNativeControl  formControlName="addMedia">
-                                <option value="" selected></option>
-                                <option *ngFor="let item of media" [value]="item.mediaId">{{item.mediaType}}
-                                </option>
-                            </select>
+                            <mat-error *ngIf="FormDeatils.controls['catogery'].hasError('required')">
+                                Please select any catogery
+                              </mat-error>
                         
                     
                     </mat-form-field>
                 </div>
                 
-            </div>
-            <div class=" pt-2 row ">
-                <div class="col-4 text-end pt-3 ">
-                    Video Link:
-                </div>
-                <div class="col-8">
-                    <label>Video Link:</label>
-
-                    <mat-form-field class="pe-4"appearance="outline" >
-                       
-                        <input matInput formControlName="videoLink"  
-                            type="text">
-                    
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class=" pt-2 row ">
-                <div class="col-4 text-end pt-3 ">
-                    Upload:
-                </div>
-                <div class="col-7 mb-3">
-                    <label>Upload:</label>
-
-                        <input class="border" type="file" id="formFile" formControlName="upload" required="true"  (change)="onfilechange()"/>
-                        <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
-                    
                    
+                    <div class="col-4" *ngIf="newcatogeries">
+                        <label>Others Category:</label>
+                        <mat-form-field class="pe-4"appearance="outline" >
+                           
+                            <input matInput formControlName="others"  
+                                type="text" />
+                                <mat-error *ngIf="FormDeatils.controls['others'].hasError('required')">
+                                    Please Fill the Category
+                                  </mat-error>
+                        
+                        </mat-form-field>
+                    </div>
+                    <!-- <div class="col-4">
+                        <label>Course Material Title:</label>
+    
+                        <mat-form-field class="pe-4"appearance="outline" >
+                           
+                            <input matInput formControlName="coursetitle"  
+                                type="text" />
+                                <mat-error *ngIf="FormDeatils.controls['coursetitle'].hasError('required')">
+                                    Please select any course
+                                  </mat-error>
+                        
+                        </mat-form-field>
+                    </div> -->
                 </div>
-            </div>
-            <div class=" pt-2 row ">
-                <div class="col-4 text-end pt-3">
-                    Message:
+                <div class="pt-3 row">
+                    <div class="col-4">
+                        <label>Course Material Title:</label>
+    
+                        <mat-form-field class="pe-4"appearance="outline" >
+                           
+                            <input matInput formControlName="coursetitle"  
+                                type="text" />
+                                <mat-error *ngIf="FormDeatils.controls['coursetitle'].hasError('required')">
+                                    Please Fill the Title
+                                  </mat-error>
+                        
+                        </mat-form-field>
+                    </div>
+                    <div class="col-4">
+                        <label>Add Media:</label>
+                        
+                        <mat-form-field class="pe-4"appearance="outline" >
+                           
+                                
+                                <select matNativeControl  formControlName="addMedia">
+                                    <option value="" selected></option>
+                                    <option *ngFor="let item of media" [value]="item.mediaId">{{item.mediaType}}
+                                    </option>
+                                </select>
+                                <mat-error *ngIf="FormDeatils.controls['addMedia'].hasError('required')">
+                                    Please Add Media
+                                  </mat-error>
+                            
+                        
+                        </mat-form-field>
+                    </div>
+                    <div class="col-4">
+                        <label>Video Link:</label>
+    
+                        <mat-form-field class="pe-4"appearance="outline" >
+                           
+                            <input matInput formControlName="videoLink"  
+                                type="text">
+                                <mat-error *ngIf="FormDeatils.controls['videoLink'].hasError('required')">
+                                    Please Fill the Link
+                                  </mat-error>
+                        
+                        </mat-form-field>
+                    </div>
                 </div>
-                <div class="col-8">
-                    <label>Message:</label>
-
-                    <mat-form-field class="pe-4"appearance="outline" >
+                <div class="pt-3 row">
+                   
+                    <div class="col-4 ">
+                        <label>Upload:</label>
+    
+                            <input class="border" type="file" id="formFile" formControlName="upload" required="true"  (change)="onfilechange()"/>
+                            <mat-error *ngIf="filerror" class="ms-3">Please Upload Valid File</mat-error>
+                            <!-- <mat-error *ngIf="FormDeatils.controls['upload'].hasError('required')">
+                                Please Upload the File
+                              </mat-error> -->
+                        
                        
-                        <textarea matInput formControlName="message" rows="8" 
-                            type="text" ></textarea>
-                    
-                    </mat-form-field>
+                    </div>
+                    <div class="col-8">
+                        <label>Message:</label>
+    
+                        <mat-form-field class="pe-4"appearance="outline" >
+                           
+                            <textarea matInput formControlName="message" rows="8" 
+                                type="text" ></textarea>
+                                <mat-error *ngIf="FormDeatils.controls['message'].hasError('required')">
+                                    Please Fill the Message
+                                  </mat-error>
+                        
+                        </mat-form-field>
+                    </div>
                 </div>
-            </div>
-            <div class="d-flex justify-content-end mb-3">
-                <button  class=" btn btn-outline-secondary  btn-rounded d-inline-block m-2" type="submit">Add</button>
-        
-            </div>
-            </form>
-    </div>
+                <div class="pt-3 row">
+                    <div class="d-flex justify-content-end mb-3">
+                        <button  class=" btn btn-outline-secondary  btn-rounded d-inline-block m-2" type="submit">Add</button>
+                
+                    </div>
+                </div>
+                
+   
+</form>
    </div>
    </div>
    <div  class=" rounded mt-3 mat-elevation-z8 mt-4 table-responsive">

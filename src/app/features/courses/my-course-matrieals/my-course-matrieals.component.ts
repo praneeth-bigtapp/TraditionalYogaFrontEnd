@@ -81,6 +81,9 @@ displayedColumns: string[] = ['S_No', 'title', 'date', "mtype", "Details"];
       this.newcatogeries=true
   
     }
+    else{
+      this.newcatogeries=false
+    }
     console.log(this.FormDeatils.value)
     console.log(this.othervalue)
     console.log(this.newcatogeries)
