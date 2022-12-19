@@ -108,9 +108,10 @@ export class BlacklistUsersComponent implements OnInit {
     }
   }
 
-  openSnackBar(message: string) {
-    this._snackBar.open(message);
-    setTimeout(() => {this._snackBar.dismiss()},3000);
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
   }
   updatePagination() {
     this.filterData.dataSource.paginator = this.paginator;

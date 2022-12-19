@@ -1,1 +1,127 @@
-<p>view-mycourse-matrieals works!</p>
+<div class="ConfigurationTypes_textpadding ">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/addCourse">Course Management</a></li>
+
+            <li class="breadcrumb-item active" aria-current="page">View Course Material</li>
+        </ol>
+    </nav>
+    <br />
+    <div class="card ">
+        <div class="card-header text-white bg-secondary">
+            View Course Material
+        </div>
+        <div class="card-body bg-white px-0 py-0">
+            <div class=" ">
+                <div class="row">
+                    <div class="col-md-4  border-right py-0     text-center">
+                        <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                            <div>
+                                <p> <i class=" fa-solid fa-user me-4 "></i></p>
+                            </div>
+                            <div>
+                                <p class=""> Title : </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8  py-3  ps-4 my-auto">
+                        <h4>{{ details.donorname |titlecase }}</h4>
+                    </div>
+                </div>
+
+                <hr class="my-0" />
+                <div class="row">
+                    <div class="col-md-4  border-right py-0     text-center">
+                        <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                            <div>
+                                <p> <i class=" fa-solid fa-address-card me-4 "></i></p>
+                            </div>
+                            <div>
+                                <p class=""> Course : </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8  py-3  ps-4 my-auto">
+                        <h4>{{ details.address |titlecase }}</h4>
+                    </div>
+                </div>
+                <hr class="my-0" />
+                <div class="row">
+                    <div class="col-md-4  border-right py-0     text-center">
+                        <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                            <div>
+                                <p> <i class=" fa-solid fa-envelope-open-text me-4 "></i></p>
+                            </div>
+                            <div>
+                                <p class=""> Category : </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8  py-3  ps-4 my-auto">
+                        <h4>{{ details.email }}</h4>
+                    </div>
+                </div>
+
+                <hr class="my-0" />
+                <div class="row">
+                    <div class="col-md-4  border-right py-0     text-center">
+                        <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                            <div>
+                                <p> <i class=" fa-solid fa-envelope-open-text me-4 "></i></p>
+                            </div>
+                            <div>
+                                <p class=""> Media type : </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8  py-3  ps-4 my-auto">
+                        <h4>{{ details.mobile }}</h4>
+                    </div>
+                </div>
+
+
+                <hr class="my-0" />
+                <div class="row">
+                    <div class="col-md-4  border-right py-0     text-center">
+                        <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                            <div>
+                                <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                            </div>
+                            <div>
+                                <p class=""> Video Link : </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8  py-3  ps-4 my-auto">
+                        <h4>{{ details.isIndian }}</h4>
+                    </div>
+                </div>
+
+                <hr class="my-0" />
+                <div class="row">
+                    <div class="col-md-4  border-right py-0     text-center">
+                        <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                            <div>
+                                <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                            </div>
+                            <div>
+                                <p class=""> Message : </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8  py-3  ps-4 my-auto">
+                        <h4>{{ details.taxbenefits }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

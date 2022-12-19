@@ -16,74 +16,77 @@ export class MyCourseMatriealsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
-FormDeatils!:FormGroup
-filterData:any
-gridData = [];
-courses:any
-catogeries:any
-othervalue:any
-media:any
-datas:any
-filerror!:boolean
-tablevalues:any
-newcatogeries=false
-data=[{'S_No':'1', 'title':'Traditional Yoga', 'date':'2022-22-12', "mtype":"images"},
-{'S_No':'2', 'title':'Traditional Yoga1', 'date':'2022-22-10', "mtype":"images2"},
-{'S_No':'3', 'title':'Traditional Yoga2', 'date':'2022-22-12', "mtype":"images3"},
-{'S_No':'4', 'title':'Traditional Yoga3', 'date':'2022-22-2', "mtype":"images4"},
-{'S_No':'5', 'title':'Traditional Yoga4', 'date':'2022-22-1', "mtype":"images"}]
-dataSource: any;
-displayedColumns: string[] = ['S_No', 'title', 'date', "mtype", "Details"];
+  displayform: boolean = false
+  iseditable: boolean = false
+  issubmit: boolean = true
+  FormDeatils!: FormGroup
+  filterData: any
+  gridData = [];
+  courses: any
+  catogeries: any
+  othervalue: any
+  media: any
+  datas: any
+  filerror!: boolean
+  tablevalues: any
+  newcatogeries = false
+  data = [{ 'S_No': '1', 'title': 'Traditional Yoga', 'date': '2022-22-12', "mtype": "images" },
+  { 'S_No': '2', 'title': 'Traditional Yoga1', 'date': '2022-22-10', "mtype": "images2" },
+  { 'S_No': '3', 'title': 'Traditional Yoga2', 'date': '2022-22-12', "mtype": "images3" },
+  { 'S_No': '4', 'title': 'Traditional Yoga3', 'date': '2022-22-2', "mtype": "images4" },
+  { 'S_No': '5', 'title': 'Traditional Yoga4', 'date': '2022-22-1', "mtype": "images" }]
+  dataSource: any;
+  displayedColumns: string[] = ['S_No', 'title', 'date', "mtype", "Details"];
 
-  constructor(private formbuilder:FormBuilder,private service:CoursesService,private _snackBar: MatSnackBar,private router:Router) { }
+  constructor(private formbuilder: FormBuilder, private service: CoursesService, private _snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
     this.getcourseslist()
     this.getmedias()
     this.getcoursecatogery()
     this.getcoursedetails()
-  
-  
-  
-     this.FormDeatils = this.formbuilder.group({
+
+
+
+    this.FormDeatils = this.formbuilder.group({
       courses: [null, Validators.compose([Validators.required])],
       others: [null, Validators.compose([Validators.required])],
       catogery: [null, Validators.compose([Validators.required])],
-      addMedia : [null, Validators.compose([Validators.required])],
+      addMedia: [null, Validators.compose([Validators.required])],
       upload: [null, Validators.compose([Validators.required])],
-      videoLink : [null, Validators.compose([Validators.required])],
-      message : [null, Validators.compose([Validators.required])],
-      coursetitle:[null, Validators.compose([Validators.required])],
-    
+      videoLink: [null, Validators.compose([Validators.required])],
+      message: [null, Validators.compose([Validators.required])],
+      coursetitle: [null, Validators.compose([Validators.required])],
 
-   })
-   this.filterData = {
-    filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
-    gridData: this.gridData,
-    dataSource: this.dataSource,
-    paginator: this.paginator,
-    sort: this.sort
-  }
-  this.data.map(ele=>ele.date).sort()
-  this.dataSource = new MatTableDataSource<any>(this.data)
-  this.filterData.gridData = this.data;
-  this.filterData.dataSource = this.dataSource;
-  this.dataSource.paginator = this.paginator;
-  this.dataSource.sort = this.sort;
-  this.filterData.sort = this.sort;
-  for (let col of this.filterData.filterColumnNames) {
-    col.Value = '';
-  }
- 
 
-  }
-  newOthers(){
-    if(this.othervalue=='4'){
-      this.newcatogeries=true
-  
+    })
+    this.filterData = {
+      filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
     }
-    else{
-      this.newcatogeries=false
+    this.data.map(ele => ele.date).sort()
+    this.dataSource = new MatTableDataSource<any>(this.data)
+    this.filterData.gridData = this.data;
+    this.filterData.dataSource = this.dataSource;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.filterData.sort = this.sort;
+    for (let col of this.filterData.filterColumnNames) {
+      col.Value = '';
+    }
+
+
+  }
+  newOthers() {
+    if (this.othervalue == '4') {
+      this.newcatogeries = true
+
+    }
+    else {
+      this.newcatogeries = false
     }
     console.log(this.FormDeatils.value)
     console.log(this.othervalue)
@@ -93,9 +96,9 @@ displayedColumns: string[] = ['S_No', 'title', 'date', "mtype", "Details"];
     this.service.getcoursematerials().subscribe({
       next: (response) => {
         this.tablevalues = response;
-       
+
         console.log(this.tablevalues);
-        
+
 
       },
       error: (error) => {
@@ -107,9 +110,9 @@ displayedColumns: string[] = ['S_No', 'title', 'date', "mtype", "Details"];
     this.service.getCourse().subscribe({
       next: (response) => {
         this.courses = response;
-       
+
         console.log(this.courses);
-        
+
 
       },
       error: (error) => {
@@ -122,9 +125,9 @@ displayedColumns: string[] = ['S_No', 'title', 'date', "mtype", "Details"];
     this.service.getmediatype().subscribe({
       next: (response) => {
         this.media = response;
-       
+
         console.log(this.media);
-        
+
 
       },
       error: (error) => {
@@ -136,9 +139,9 @@ displayedColumns: string[] = ['S_No', 'title', 'date', "mtype", "Details"];
     this.service.getcategorymaterial().subscribe({
       next: (response) => {
         this.catogeries = response;
-       
+
         console.log(this.catogeries);
-        
+
 
       },
       error: (error) => {
@@ -148,12 +151,27 @@ displayedColumns: string[] = ['S_No', 'title', 'date', "mtype", "Details"];
   }
 
 
- 
-  editdetails(element:any){
 
+  editdetails(element: any) {
+
+    console.log(element);
+
+    // this.FormDeatils.setValue({
+    //   courses: ,
+    //   others:,
+    //   catogery: ,
+    //   addMedia: ,
+    //   upload: ,
+    //   videoLink:,
+    //   message: ,
+    //   coursetitle:,
+    // });
+    this.iseditable = true
+    this.displayform = true
+    this.issubmit = true
   }
-  deletedetails(element:any){
-    
+  deletedetails(element: any) {
+
   }
   ngAfterViewInit() {
     this.filterData.dataSource.paginator = this.paginator;
@@ -164,24 +182,46 @@ displayedColumns: string[] = ['S_No', 'title', 'date', "mtype", "Details"];
 
     this.dataSource.paginator = this.paginator;
   }
-  onsubmit(){
+  onsubmit() {
     this.onfilechange()
-    if(this.filerror==false){
-      this.openSnackBar('Data Added Successfully','ok')
+
+
+
+    if (this.iseditable) {
+
+      //editable
+      return
+    }
+
+    if (this.filerror == false) {
+      this.openSnackBar('Data Added Successfully')
       this.FormDeatils.reset()
     }
   }
   onfilechange() {
-      this.filerror = this.FormDeatils.value.upload === null ? true : false
+    this.filerror = this.FormDeatils.value.upload === null ? true : false
 
   }
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
+  openSnackBar(message: any) {
+    this._snackBar.open(message, 'Close', {
+      duration: 2 * 1000,
+    });
   }
-  viewDetails(name: any) {
-    
-    this.router.navigateByUrl("ViewMycourseMatrieals");
+  viewDetails(id: any) {
+
+    this.router.navigate(["ViewMycourseMatrieals", id]);
     // this.getallData()
   }
 
+  addcoursematerial() {
+    this.displayform = true
+    this.issubmit = true
+  }
+
+  reseteditable() {
+    this.FormDeatils.reset()
+    this.iseditable = false
+    this.displayform = !this.displayform
+    this.issubmit = true
+  }
 }

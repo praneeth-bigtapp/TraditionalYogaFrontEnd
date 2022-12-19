@@ -90,7 +90,9 @@ export class ParametersComponent implements OnInit {
   }
   
   openSnackBar(data: any) {
-    this.snackBar.open(data.message, 'Close');
+    this.snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
   }
 
   // For Posting the Input fields

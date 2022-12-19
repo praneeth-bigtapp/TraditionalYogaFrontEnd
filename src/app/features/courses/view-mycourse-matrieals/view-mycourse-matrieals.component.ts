@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-view-mycourse-matrieals',
@@ -7,7 +8,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewMycourseMatriealsComponent implements OnInit {
 
-  constructor() { }
+  id: any
+  details = {
+    amount: "",
+    donorname: "",
+    address: "",
+    email: "",
+    mobile: "",
+    isIndian: "",
+    taxbenefits: "",
+    identitynumber: "",
+    isregisteredmember: "",
+    country: "",
+    message: "",
+    modeofpayment: "",
+    cardname: "",
+    identityproof: ""
+  }
+  
+  constructor(
+    private route: ActivatedRoute,
+  ) {
+
+    this.id = this.route.snapshot.paramMap.get('id')
+    console.log(this.id);
+
+  }
 
   ngOnInit(): void {
   }

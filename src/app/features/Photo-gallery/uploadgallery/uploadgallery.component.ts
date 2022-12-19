@@ -56,8 +56,10 @@ export class UploadgalleryComponent implements OnInit {
 
 
 
-  opensnackBar(data: any) {
-    this._snackBar.open(data.message, "Close")
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
   }
 
 
@@ -91,7 +93,7 @@ export class UploadgalleryComponent implements OnInit {
 
     this.uploadfile = []
 
-    this.opensnackBar({ message: "Uploaded" })
+    this.openSnackBar({ message: "Uploaded" })
 
   }
 

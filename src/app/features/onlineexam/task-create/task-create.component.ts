@@ -38,8 +38,10 @@ export class TaskCreateComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  opensnackBar(data: any) {
-    this._snackBar.open(data.message, "Close")
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
   }
 
   fileupload(event: any) {
@@ -83,7 +85,7 @@ export class TaskCreateComponent implements OnInit {
     this.service.posttask(body).subscribe({
       next: (response) => {
 
-        this.opensnackBar(response)
+        this.openSnackBar(response)
         this.taskform.reset()
 
 

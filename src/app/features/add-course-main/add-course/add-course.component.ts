@@ -72,7 +72,9 @@ export class AddCourseComponent implements OnInit {
     ]
   };
   openSnackBar(data: any) {
-    this._snackBar.open(data.message, 'Close');
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
   }
   constructor(private AddCourseService: AddCourseService, private formbuilder: FormBuilder, private _snackBar: MatSnackBar) {
     this.addCourseForm = this.formbuilder.group({
@@ -191,7 +193,6 @@ export class AddCourseComponent implements OnInit {
     this.iseditable = false
     this.displaycontent = !this.displaycontent
     this.issubmit = true
-
   }
 
   onAddCourse() {
@@ -214,22 +215,7 @@ export class AddCourseComponent implements OnInit {
 
 
     if (this.iseditable) {
-      // edit
 
-
-
-      // const body = {
-      //   "coursesId": this.addCourseForm.value.courseId,
-      //   "categorieId": {
-      //     "categoriesId": this.addCourseForm.value.coursecategory,
-      //     "categoriesName": this.categoryList.filter((ele: any) => ele.categoriesId === this.addCourseForm.value.coursecategory)[0].categoriesName,
-      //   },
-      //   "coursesName": this.addCourseForm.value.courseName,
-      //   "description": this.addCourseForm.value.description,
-      //   "startDate": this.addCourseForm.value.startDate,
-      //   "endDate": this.addCourseForm.value.endDate,
-      //   "applicationClouserDate": this.addCourseForm.value.applicationclosuredate
-      // }
 
       const body = {
         "applicationClouserDate": this.addCourseForm.value.applicationclosuredate,

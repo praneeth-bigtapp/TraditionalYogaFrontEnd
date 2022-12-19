@@ -16,7 +16,7 @@
             Add Course
         </button>
     </div>
-    <br />
+
     <div class="card  bg-secondary" *ngIf="displaycontent">
         <div class="card-header text-white bg-secondary">
             {{iseditable ? "Update" :"Add" }} Course
@@ -33,7 +33,8 @@
 
                             <div class="col px-0">
                                 <mat-form-field appearance="outline">
-                                    <mat-select formControlName="coursecategory" [compareWith]="compareselect" [disabled]="iseditable">
+                                    <mat-select formControlName="coursecategory" [compareWith]="compareselect"
+                                        [disabled]="iseditable">
 
                                         <mat-option *ngFor="let category of categoryList" [value]="category"
                                             aria-placeholder="Select Course Category">
@@ -120,12 +121,13 @@
                         <div class=" ">
                             <label class="mb-1">Description</label>
                             <div class="col px-0">
-                                <angular-editor [placeholder]="'Enter text here...'" (keypress)="paragraphchange()"
-                                    [config]="editorConfig" required formControlName="description">
-                                </angular-editor>
-                                <mat-error class="error-message" *ngIf="paragrapherror ">
-                                    Description is mandatory
-                                </mat-error>
+                                <mat-form-field appearance="outline">
+                                    <textarea matInput formControlName="description" rows="8" type="text"></textarea>
+                                    <mat-error [hidden]="!addCourseForm.get('description')?.hasError('required')  ">
+                                        Description is mandatory
+                                    </mat-error>
+                                </mat-form-field>
+
                             </div>
                         </div>
                     </div>
@@ -134,7 +136,7 @@
                 <div class="d-flex flex-row flex-wrap justify-content-end">
                     <button type="submit" *ngIf="issubmit"
                         class="btn btn-outline-secondary btn-rounded d-inline-block ">
-                        {{iseditable ? "Update" :"Submit" }}
+                        {{iseditable ? "Update" :"Add " }}
                     </button>
                     <button type="button" (click)="reseteditable()"
                         class="btn btn-outline-secondary btn-rounded d-inline-block ">

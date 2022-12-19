@@ -18,7 +18,7 @@ const routes: Routes = [
     path: "MycourseMatrieals", component: MyCourseMatriealsComponent
   },
   {
-    path: "ViewMycourseMatrieals", component: ViewMycourseMatriealsComponent
+    path: "ViewMycourseMatrieals/:id", component: ViewMycourseMatriealsComponent
   }
 ];
 

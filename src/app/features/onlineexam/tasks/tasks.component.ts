@@ -90,8 +90,10 @@ export class TasksComponent implements OnInit {
     this.filterData.dataSource.sort = this.sort;
   }
 
-  opensnackBar(data: any) {
-    this._snackbar.open(data.message, "Close")
+  openSnackBar(data: any) {
+    this._snackbar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
   }
 
   gettask(course: string) {
@@ -177,7 +179,7 @@ export class TasksComponent implements OnInit {
 
     this.service.deletetask(body).subscribe({
       next: (response) => {
-        this.opensnackBar(response)
+        this.openSnackBar(response)
         this.taskform.reset()
         this.gettask(this.course)
       },
@@ -253,7 +255,7 @@ export class TasksComponent implements OnInit {
 
       this.service.updatetask(body).subscribe({
         next: (response) => {
-          this.opensnackBar(response)
+          this.openSnackBar(response)
           this.taskform.reset()
           this.gettask(this.course)
         },
@@ -269,7 +271,7 @@ export class TasksComponent implements OnInit {
 
     this.service.posttask(body).subscribe({
       next: (response) => {
-        this.opensnackBar(response)
+        this.openSnackBar(response)
         this.taskform.reset()
         this.gettask(this.course)
       },

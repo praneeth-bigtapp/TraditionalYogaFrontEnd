@@ -97,8 +97,10 @@ export class CreatePraticeLibraryComponent implements OnInit {
     this.filterData.dataSource.paginator = this.paginator;
   }
 
-  opensnackBar(data: any) {
-    this._snackBar.open(data.message, 'Close')
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
   }
 
   coursechange() {
@@ -138,7 +140,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
     this.service.deletelibrary(body).subscribe({
       next: (response) => {
-        this.opensnackBar(response)
+        this.openSnackBar(response)
         this.addmediaform.reset()
         this.getdata()
       },
@@ -204,7 +206,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
           next: (response) => {
             this.addmediaform.reset()
             // this.opensnackBar(response)
-            this.opensnackBar({ message: "Library Created" })
+            this.openSnackBar({ message: "Library Created" })
             this.getdata()
 
           },
@@ -223,7 +225,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
           this.addmediaform.reset()
           // this.opensnackBar(response)
-          this.opensnackBar({ message: "Library Created" })
+          this.openSnackBar({ message: "Library Created" })
           this.getdata()
         },
         error: (error) => {

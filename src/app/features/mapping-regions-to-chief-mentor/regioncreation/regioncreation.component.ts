@@ -168,8 +168,10 @@ export class RegioncreationComponent implements OnInit {
     )
   }
 
-  opensnackBar(data: any) {
-    this._snackbar.open(data.message, "Close")
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
   }
 
   updatePagination(col: any) {
@@ -210,7 +212,7 @@ export class RegioncreationComponent implements OnInit {
 
     this.service.deleteregion(body).subscribe({
       next: (response) => {
-        this.opensnackBar(response)
+        this.openSnackBar(response)
         this.regionfilterform.reset()
         this.getregiondata()
       },
@@ -282,7 +284,7 @@ export class RegioncreationComponent implements OnInit {
 
       this.service.updateregion(body).subscribe({
         next: (response) => {
-          this.opensnackBar(response)
+          this.openSnackBar(response)
           this.regionfilterform.reset()
           this.getregiondata()
         },
@@ -296,7 +298,7 @@ export class RegioncreationComponent implements OnInit {
 
     this.service.postregion(body).subscribe({
       next: (response) => {
-        this.opensnackBar(response)
+        this.openSnackBar(response)
         this.regionfilterform.reset()
         this.getregiondata()
       },

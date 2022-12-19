@@ -125,7 +125,9 @@ export class OnlineexamComponent implements OnInit {
   }
 
   openSnackBar(data: any) {
-    this._snackBar.open(data.message, 'Close');
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
   }
 
   reseteditable() {

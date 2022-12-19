@@ -95,10 +95,12 @@ export class NotificationComponent implements OnInit {
   compareselect(obj1: any, obj2: any) {
     return obj1 && obj2 && obj1 === obj2
   }
-  openSnackBar(data: any) {
-    this._snackBar.open(data.message, 'Close');
-  }
 
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
+  }
 
   onfilechange(event: any) {
     this.filedata = event.target.files[0].name
