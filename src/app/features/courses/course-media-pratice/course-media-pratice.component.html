@@ -59,6 +59,9 @@
                                         <mat-error [hidden]=" !addmediaform.get('videolink')?.hasError('required')  ">
                                             Link is mandatory
                                         </mat-error>
+                                        <mat-error [hidden]=" !addmediaform.get('videolink')?.hasError('pattern')  ">
+                                            Invalid link
+                                        </mat-error>
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -88,6 +91,10 @@
                                             [hidden]=" !addmediaform.get('videoduration')?.hasError('required')  ">
                                             Duration is mandatory
                                         </mat-error>
+                                        <mat-error
+                                            [hidden]=" !addmediaform.get('videoduration')?.hasError('pattern')  ">
+                                            Invalid duration
+                                        </mat-error>
                                     </div>
                                 </div>
 
@@ -107,6 +114,10 @@
                                         <mat-error
                                             [hidden]=" !addmediaform.get('vidoemetakeywords')?.hasError('required')  ">
                                             keywords is mandatory
+                                        </mat-error>
+                                        <mat-error
+                                            [hidden]=" !addmediaform.get('vidoemetakeywords')?.hasError('pattern')  ">
+                                            Invalid keywords
                                         </mat-error>
                                     </div>
                                 </div>
@@ -147,7 +158,10 @@
                                     <div class="error-message"
                                         *ngIf="addmediaform.controls['imagetitle'].invalid && (addmediaform.controls['imagetitle'].dirty || addmediaform.controls['imagetitle'].touched)">
                                         <mat-error [hidden]=" !addmediaform.get('imagetitle')?.hasError('required')  ">
-                                            Title is mandatory
+                                            Link is mandatory
+                                        </mat-error>
+                                        <mat-error [hidden]=" !addmediaform.get('imagetitle')?.hasError('pattern')  ">
+                                            Invalid link
                                         </mat-error>
                                     </div>
                                 </div>
@@ -165,6 +179,10 @@
                                         <mat-error
                                             [hidden]=" !addmediaform.get('imagekeywords')?.hasError('required')  ">
                                             Keywords is mandatory
+                                        </mat-error>
+                                        <mat-error
+                                            [hidden]=" !addmediaform.get('imagekeywords')?.hasError('pattern')  ">
+                                            Invalid keywords
                                         </mat-error>
                                     </div>
                                 </div>
@@ -238,6 +256,10 @@
                                             Keywords is mandatory
                                         </mat-error>
                                     </div>
+                                    <mat-error
+                                        [hidden]=" !addmediaform.get('mediametakeywords')?.hasError('pattern')  ">
+                                        Keywords is mandatory
+                                    </mat-error>
                                 </div>
 
                             </div>

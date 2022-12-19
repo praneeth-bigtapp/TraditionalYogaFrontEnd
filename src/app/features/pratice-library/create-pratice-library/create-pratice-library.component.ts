@@ -83,9 +83,8 @@ export class CreatePraticeLibraryComponent implements OnInit {
   ngOnInit(): void {
     this.addmediaform = this.formbuilder.group({
       praticelibraryId: [null],
-
       category: [null, Validators.compose([Validators.required])],
-      videolink: [null, Validators.compose([Validators.required])],
+      videolink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
       videotitle: [null, Validators.compose([Validators.required])],
       videodescription: [null, Validators.compose([Validators.required])],
       videoduration: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.durationvalidation)])],

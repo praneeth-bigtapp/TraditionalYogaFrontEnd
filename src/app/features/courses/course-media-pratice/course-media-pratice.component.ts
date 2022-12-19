@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 import { CoursesService } from '../courses.service';
 
 
@@ -106,18 +107,18 @@ export class CourseMediaPraticeComponent implements OnInit {
     this.addmediaform = this.formbuilder.group({
 
 
-      videolink: [null, Validators.compose([Validators.required])],
+      videolink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
       videotitle: [null, Validators.compose([Validators.required])],
       videodescription: [null, Validators.compose([Validators.required])],
-      videoduration: [null, Validators.compose([Validators.required])],
-      vidoemetakeywords: [null, Validators.compose([Validators.required])],
+      videoduration: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.durationvalidation)])],
+      vidoemetakeywords: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])],
       imagetitle: [null, Validators.compose([Validators.required])],
       paragraph: [null, Validators.compose([Validators.required])],
-      imagekeywords: [null, Validators.compose([Validators.required])],
+      imagekeywords: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])],
       mediafile: [null, Validators.compose([Validators.required])],
       mediatitle: [null, Validators.compose([Validators.required])],
       mediadescription: [null, Validators.compose([Validators.required])],
-      mediametakeywords: [null, Validators.compose([Validators.required])],
+      mediametakeywords: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])],
     })
   }
 

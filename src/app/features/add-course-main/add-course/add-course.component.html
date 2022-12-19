@@ -117,7 +117,7 @@
                                     <input matInput formControlName="applicationclosuredate" type="date">
                                 </mat-form-field>
                                 <div class="error-message"
-                                    *ngIf="addCourseForm.controls['applicationclosuredate'].invalid && (addCourseForm.controls['applicationclosuredate'].dirty || addCourseForm.controls['coursecategory'].touched)">
+                                    *ngIf="addCourseForm.controls['applicationclosuredate'].invalid && (addCourseForm.controls['applicationclosuredate'].dirty || addCourseForm.controls['applicationclosuredate'].touched)">
                                     <mat-error
                                         [hidden]=" !addCourseForm.get('applicationclosuredate')?.hasError('required')  ">
                                         Application closure date is mandatory
@@ -135,7 +135,7 @@
                             <label class="mb-1">Description</label>
                             <div class="col px-0">
                                 <mat-form-field appearance="outline">
-                                    <textarea matInput formControlName="description" rows="8" type="text"></textarea>
+                                    <textarea matInput formControlName="description" rows="5" type="text"></textarea>
 
                                 </mat-form-field>
                                 <div

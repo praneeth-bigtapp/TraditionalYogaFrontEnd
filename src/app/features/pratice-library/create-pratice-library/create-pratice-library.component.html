@@ -55,6 +55,9 @@
                                     <mat-error [hidden]=" !addmediaform.get('videolink')?.hasError('required')  ">
                                         Link is mandatory
                                     </mat-error>
+                                    <mat-error [hidden]=" !addmediaform.get('videolink')?.hasError('pattern')  ">
+                                        Invalid link
+                                    </mat-error>
                                 </div>
                             </div>
 
