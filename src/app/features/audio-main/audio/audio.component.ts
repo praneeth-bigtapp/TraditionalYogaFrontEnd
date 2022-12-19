@@ -136,14 +136,14 @@ export class AudioComponent implements OnInit {
     const body = {
       "uploadCategory": this.Audiomanagement.value.category,
       "audioFile": this.Audiomanagement.value.file,
-
+"audioCategoryId": this.Audiomanagement.value.pload,
       "audioTitle": this.Audiomanagement.value.title,
       "audioDesc": this.Audiomanagement.value.description,
       "audioDuration": this.Audiomanagement.value.duration,
       "metakey": this.Audiomanagement.value.meta,
-      "audioCategoryId":this.Audiomanagement.value.meta,
+      // "audioCategoryId":this.Audiomanagement.value.meta,
     }
-    console.log(body);
+    console.log(this.Audiomanagement);
 
     this.course.audiopost(body).subscribe({
       next: (response) => {

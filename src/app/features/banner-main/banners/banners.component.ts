@@ -196,6 +196,8 @@ export class BannersComponent implements OnInit {
       fromdate: formatDate(element.fromDate, "yyyy-MM-dd", 'en'),
       todate: formatDate(element.toDate, "yyyy-MM-dd", 'en'),
       description: element.description,
+
+      
     });
     this.iseditable = true
     this.displaycontent = true

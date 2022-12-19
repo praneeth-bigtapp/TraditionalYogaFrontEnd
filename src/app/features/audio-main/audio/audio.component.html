@@ -64,16 +64,16 @@
                     <mat-form-field appearance="outline">
                         
                         <mat-select  formControlName="category">
-                            <mat-option value=""  *ngFor="let element of audiocategory">{{element.uploadCategory}}</mat-option>
-                            <!-- <option value="volvo">Volvo</option>
-                            <option value="saab" disabled>Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option> -->
+                            <mat-option value="category"  *ngFor="let element of audiocategory">{{element.uploadCategory}}</mat-option>
+                      
+                         
                         </mat-select>
                         <mat-error [hidden]=" !Audiomanagement.get('category')?.hasError('required')  ">
                             Category is mandatory
                         </mat-error>
                     </mat-form-field>
+                       
+                  
                 </div>
 
      

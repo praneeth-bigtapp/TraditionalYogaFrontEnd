@@ -1,4 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
+import { formatDate } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -116,6 +117,38 @@ export class TestimonialsComponent implements OnInit {
       this.selection.clear() :
       this.dataSource.data.forEach((row: any) => this.selection.select(row));
   }
+  viewdetails(element: any) {
+    this.  testimonial.setValue({
+      content: element.content,
+      name: element.givenByName,
+      link: element.videoLink,
+      description:element.description,
+      // "content": "this is the testing content-2",
+      // "description": "This is the testing Files ",
+      // "video_link": "https://youtu.be/4CDe-8ngRmkKKKEEd",
+      // "givenByName": "karthik"
+
+
+      // fromdate: formatDate(element.fromDate, "yyyy-MM-dd", 'en'),
+      // todate: formatDate(element.toDate, "yyyy-MM-dd", 'en'),
+      
+    });
+    this.issubmit = false
+    this.displaycontent = true
+  }
+  editdetails(element: any) {
+    this.testimonial.setValue({
+      content: element.content,
+      name: element.givenByName,
+      link: element.videoLink,
+      description:element.description,
+
+      
+    });
+    this.iseditable = true
+    this.displaycontent = true
+    this.issubmit = true
+  }
 
   addtestimonial() {
     this.displaycontent = !this.displaycontent
@@ -144,7 +177,7 @@ export class TestimonialsComponent implements OnInit {
       "video_link": this.testimonial.value.link,
       "description": this.testimonial.value.description,
     }
-    console.log("working");
+    console.log(this.testimonial);
 
     this.test.posttestimonial(body).subscribe({
       next: (response) => {
@@ -161,5 +194,6 @@ export class TestimonialsComponent implements OnInit {
     })
 
   }
+ 
 
 }
