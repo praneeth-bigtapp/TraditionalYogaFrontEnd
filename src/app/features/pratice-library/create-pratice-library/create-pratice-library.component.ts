@@ -127,7 +127,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
       category: element.categoryId,
       videolink: element.videoLink,
       videotitle: element.title,
-    videodescription: element.message,
+      videodescription: element.message,
       videoduration: element.duration,
       vidoemetakeywords: element.metaKeyword,
     });
@@ -170,7 +170,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
   }
   editdetails(element: any) {
-    
+
     this.addmediaform.setValue({
       praticelibraryId: element.praticeLibaryId,
       category: element.categoryId,
@@ -183,7 +183,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
     this.iseditable = true
     this.issubmit = true
     this.displaycontent = true
-   
+
   }
 
   reseteditable() {

@@ -33,13 +33,17 @@
                                         [value]="item.coursesId">{{item.coursesName}}
                                     </mat-option>
                                 </mat-select>
-                                <mat-error *ngIf="FormDeatils.controls['courses'].hasError('required')">
+
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="FormDeatils.controls['courses'].invalid && (FormDeatils.controls['courses'].dirty || FormDeatils.controls['courses'].touched)">
+                                <mat-error [hidden]=" !FormDeatils.get('courses')?.hasError('required')  ">
                                     Course is mandatory
                                 </mat-error>
-                            </mat-form-field>
+                            </div>
                         </div>
-                        </div>
-                        <div class=" mt-3 row ">
+                    </div>
+                    <div class=" mt-3 row ">
                         <div class="col-4">
                             <label>Course Material Category</label>
                             <mat-form-field class="pe-4" appearance="outline">
@@ -51,21 +55,28 @@
                                         {{item.categoryName}}
                                     </mat-option>
                                 </mat-select>
-                                <mat-error *ngIf="FormDeatils.controls['catogery'].hasError('required')">
+
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="FormDeatils.controls['catogery'].invalid && (FormDeatils.controls['catogery'].dirty || FormDeatils.controls['catogery'].touched)">
+                                <mat-error [hidden]=" !FormDeatils.get('catogery')?.hasError('required')  ">
                                     Category is mandatory
                                 </mat-error>
-                            </mat-form-field>
+                            </div>
                         </div>
                         <div class="col-4" *ngIf="newcatogeries">
                             <label>Others Category</label>
                             <mat-form-field class="pe-4" appearance="outline">
 
                                 <input matInput formControlName="others" type="text" />
-                                <mat-error *ngIf="FormDeatils.controls['others'].hasError('required')">
-                                    Others is mandatory
-                                </mat-error>
 
                             </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="FormDeatils.controls['others'].invalid && (FormDeatils.controls['others'].dirty || FormDeatils.controls['others'].touched)">
+                                <mat-error [hidden]=" !FormDeatils.get('others')?.hasError('required')  ">
+                                    Others is mandatory
+                                </mat-error>
+                            </div>
                         </div>
                         <div class="col-4">
                             <label>Add Media</label>
@@ -77,14 +88,17 @@
                                     <mat-option *ngFor="let item of media" [value]="item.mediaId">{{item.mediaType}}
                                     </mat-option>
                                 </mat-select>
-                                <mat-error *ngIf="FormDeatils.controls['addMedia'].hasError('required')">
-                                    Media is mandatory
-                                </mat-error>
 
 
                             </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="FormDeatils.controls['addMedia'].invalid && (FormDeatils.controls['addMedia'].dirty || FormDeatils.controls['addMedia'].touched)">
+                                <mat-error [hidden]=" !FormDeatils.get('courses')?.hasError('required')  ">
+                                    Media is mandatory
+                                </mat-error>
+                            </div>
                         </div>
-                       
+
                     </div>
                     <div class=" pt-3 row ">
                         <!-- <div class="col-4">
@@ -108,11 +122,13 @@
                             <mat-form-field class="pe-4" appearance="outline">
 
                                 <input matInput formControlName="coursetitle" type="text" />
-                                <mat-error *ngIf="FormDeatils.controls['coursetitle'].hasError('required')">
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="FormDeatils.controls['coursetitle'].invalid && (FormDeatils.controls['coursetitle'].dirty || FormDeatils.controls['coursetitle'].touched)">
+                                <mat-error [hidden]=" !FormDeatils.get('coursetitle')?.hasError('required')  ">
                                     Title is mandatory
                                 </mat-error>
-
-                            </mat-form-field>
+                            </div>
                         </div>
 
                         <div class="col-4">
@@ -121,11 +137,13 @@
                             <mat-form-field class="pe-4" appearance="outline">
 
                                 <input matInput formControlName="videoLink" type="text">
-                                <mat-error *ngIf="FormDeatils.controls['videoLink'].hasError('required')">
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="FormDeatils.controls['videoLink'].invalid && (FormDeatils.controls['videoLink'].dirty || FormDeatils.controls['videoLink'].touched)">
+                                <mat-error [hidden]=" !FormDeatils.get('courses')?.hasError('required')  ">
                                     Link is mandatory
                                 </mat-error>
-
-                            </mat-form-field>
+                            </div>
                         </div>
                         <div class="col-4 ">
                             <label>Upload</label>
@@ -148,11 +166,13 @@
                             <mat-form-field class="pe-4" appearance="outline">
 
                                 <textarea matInput formControlName="message" rows="8" type="text"></textarea>
-                                <mat-error *ngIf="FormDeatils.controls['message'].hasError('required')">
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="FormDeatils.controls['message'].invalid && (FormDeatils.controls['message'].dirty || FormDeatils.controls['message'].touched)">
+                                <mat-error [hidden]=" !FormDeatils.get('message')?.hasError('required')  ">
                                     Message is mandatory
                                 </mat-error>
-
-                            </mat-form-field>
+                            </div>
                         </div>
                         <div class="col-md-3">
                             <button class=" btn btn-outline-secondary  btn-rounded d-inline-block m-2" type="submit"
@@ -163,7 +183,7 @@
                                 (click)="reseteditable()" type="button">Cancel</button>
                         </div>
                     </div>
-                    <br />
+
                 </form>
             </div>
         </div>

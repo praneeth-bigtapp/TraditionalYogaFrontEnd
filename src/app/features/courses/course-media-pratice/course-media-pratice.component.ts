@@ -53,7 +53,7 @@ export class CourseMediaPraticeComponent implements OnInit {
 
   displaycontent: boolean = false
 
-  
+
 
   displayedColumns = ['id', 'title', 'description', 'uploadMediaFile', 'duration', 'metaKeyword', 'buttons']
   constructor(
@@ -124,7 +124,7 @@ export class CourseMediaPraticeComponent implements OnInit {
 
   paragraphchange() {
 
-    this.paragrapherror = this.addmediaform.value.paragraph.length === 0 ? true : false
+    this.paragrapherror = this.addmediaform.value.paragraph === null ? true : false
 
   }
 
@@ -140,6 +140,8 @@ export class CourseMediaPraticeComponent implements OnInit {
       this.categoryerror = true
       return
     }
+
+    this.gobutton()
   }
   gobutton() {
     if (!this.classtype) {
@@ -176,6 +178,9 @@ export class CourseMediaPraticeComponent implements OnInit {
     this.filerror = this.addmediaform.value.mediafile === null ? true : false
 
     this.paragraphchange()
+
+    console.log(this.addmediaform.valid);
+
 
     if (this.addmediaform.valid) {
 
@@ -217,11 +222,11 @@ export class CourseMediaPraticeComponent implements OnInit {
     }
 
   }
-  
-  viewDetails(element:any){
+
+  viewDetails(element: any) {
 
   }
-  editdetails(element:any){
+  editdetails(element: any) {
 
   }
   openSnackBar(data: any) {
@@ -229,7 +234,7 @@ export class CourseMediaPraticeComponent implements OnInit {
       duration: 2 * 1000,
     });
   }
-  
+
   deletedetails(id: any) {
 
     // const body = {

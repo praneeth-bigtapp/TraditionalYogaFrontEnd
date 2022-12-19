@@ -33,10 +33,14 @@
                         <div class="col">
                             <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" class="" formControlName="covertitle" required>
-                                <mat-error [hidden]="!addmediaform.get('covertitle')?.hasError('required')">
+
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="addmediaform.controls['covertitle'].invalid && (addmediaform.controls['covertitle'].dirty || addmediaform.controls['covertitle'].touched)">
+                                <mat-error [hidden]=" !addmediaform.get('covertitle')?.hasError('required')  ">
                                     Title is mandatory
                                 </mat-error>
-                            </mat-form-field>
+                            </div>
                         </div>
                     </div>
 
@@ -44,7 +48,7 @@
                         <label class="mb-1">Upload book cover image</label>
                         <input type="file" id="file" class="border" formControlName="coverimage"
                             (change)="onfilechange('backcover',$event)" accept="image/*" required="true" />
-                        <mat-error *ngIf="filerror">Book cover is mandatory</mat-error>
+                        <mat-error class="error-message" *ngIf="filerror">Book cover is mandatory</mat-error>
 
                     </div>
 
@@ -53,7 +57,7 @@
 
                         <input type="file" id="file" class="border" formControlName="coverfile"
                             (change)="onfilechange('file',$event)" accept="image/*" required="true" /> <br />
-                        <mat-error *ngIf="filerror">Image is mandatory</mat-error>
+                        <mat-error class="error-message" *ngIf="filerror">Image is mandatory</mat-error>
 
                     </div>
                     <div class=" col-md-3 row align-items-center ">
@@ -62,10 +66,13 @@
                         <div class="col">
                             <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" formControlName="coverkeywords" required>
-                                <mat-error [hidden]="!addmediaform.get('coverkeywords')?.hasError('required')">
-                                    Keywords is mandatory
-                                </mat-error>
                             </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="addmediaform.controls['coverkeywords'].invalid && (addmediaform.controls['coverkeywords'].dirty || addmediaform.controls['coverkeywords'].touched)">
+                                <mat-error [hidden]=" !addmediaform.get('coverkeywords')?.hasError('required')  ">
+                                    Keyword is mandatory
+                                </mat-error>
+                            </div>
                         </div>
 
                     </div>
@@ -80,10 +87,13 @@
                                 <mat-label>Description</mat-label>
                                 <textarea matInput class="p-2" formControlName="coverdescription" rows="3"
                                     placeholder="Description"></textarea>
-                                <mat-error [hidden]="!addmediaform.get('coverdescription')?.hasError('required')">
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="addmediaform.controls['coverdescription'].invalid && (addmediaform.controls['coverdescription'].dirty || addmediaform.controls['coverdescription'].touched)">
+                                <mat-error [hidden]=" !addmediaform.get('coverdescription')?.hasError('required')  ">
                                     Description is mandatory
                                 </mat-error>
-                            </mat-form-field>
+                            </div>
                         </div>
 
                     </div>

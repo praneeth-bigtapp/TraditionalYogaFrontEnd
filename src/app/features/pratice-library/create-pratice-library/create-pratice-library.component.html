@@ -20,7 +20,7 @@
         </div>
         <div class="card-body bg-white  py-2">
             <!-- <hr /> -->
-            <form [formGroup]="addmediaform" class="me-5" (ngSubmit)="addmedia()"id='inputform'>
+            <form [formGroup]="addmediaform" class="me-5" (ngSubmit)="addmedia()">
 
 
                 <div class="row">
@@ -30,10 +30,13 @@
                             <div class="col">
                                 <mat-form-field appearance="outline" class="">
                                     <input matInput autocomplete="off" formControlName="videotitle" required>
-                                    <mat-error [hidden]="!addmediaform.get('videotitle')?.hasError('required')">
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="addmediaform.controls['videotitle'].invalid && (addmediaform.controls['videotitle'].dirty || addmediaform.controls['videotitle'].touched)">
+                                    <mat-error [hidden]=" !addmediaform.get('videotitle')?.hasError('required')  ">
                                         Title is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
 
                         </div>
@@ -46,10 +49,13 @@
                             <div class="col">
                                 <mat-form-field appearance="outline" class="">
                                     <input matInput autocomplete="off" formControlName="videolink" required>
-                                    <mat-error [hidden]="!addmediaform.get('videolink')?.hasError('required')">
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="addmediaform.controls['videolink'].invalid && (addmediaform.controls['videolink'].dirty || addmediaform.controls['videolink'].touched)">
+                                    <mat-error [hidden]=" !addmediaform.get('videolink')?.hasError('required')  ">
                                         Link is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
 
                         </div>
@@ -63,15 +69,19 @@
                         <div class="row align-items-center ">
                             <label>Category</label>
                             <div class="col">
-                                <mat-form-field appearance="outline" >
-                                    <mat-select formControlName="category" [disabled]="iseditable" >
+                                <mat-form-field appearance="outline">
+                                    <mat-select formControlName="category" [disabled]="iseditable">
                                         <mat-option *ngFor="let category of categoryList" [value]="category.categoryId">
                                             {{category.categoryName}}</mat-option>
                                     </mat-select>
-                                    <mat-error [hidden]="!addmediaform.get('category')?.hasError('required')">
+
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="addmediaform.controls['category'].invalid && (addmediaform.controls['category'].dirty || addmediaform.controls['category'].touched)">
+                                    <mat-error [hidden]=" !addmediaform.get('category')?.hasError('required')  ">
                                         Category is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -82,10 +92,14 @@
                             <div class="col">
                                 <mat-form-field appearance="outline" class="">
                                     <input matInput autocomplete="off" formControlName="videoduration" required>
-                                    <mat-error [hidden]="!addmediaform.get('videoduration')?.hasError('required')">
+
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="addmediaform.controls['videoduration'].invalid && (addmediaform.controls['videoduration'].dirty || addmediaform.controls['videoduration'].touched)">
+                                    <mat-error [hidden]=" !addmediaform.get('videoduration')?.hasError('required')  ">
                                         Duration is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
 
                         </div>
@@ -96,10 +110,15 @@
                             <div class="col">
                                 <mat-form-field appearance="outline" class="">
                                     <input matInput autocomplete="off" formControlName="vidoemetakeywords" required>
-                                    <mat-error [hidden]="!addmediaform.get('vidoemetakeywords')?.hasError('required')">
-                                        Meta keywords is mandatory
-                                    </mat-error>
+
                                 </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="addmediaform.controls['vidoemetakeywords'].invalid && (addmediaform.controls['vidoemetakeywords'].dirty || addmediaform.controls['vidoemetakeywords'].touched)">
+                                    <mat-error
+                                        [hidden]=" !addmediaform.get('vidoemetakeywords')?.hasError('required')  ">
+                                        Keywords is mandatory
+                                    </mat-error>
+                                </div>
                             </div>
 
                         </div>
@@ -114,10 +133,15 @@
                                 <mat-form-field appearance="outline" class="">
                                     <textarea matInput class="p-2" formControlName="videodescription" rows="3"
                                         placeholder="Description"></textarea>
-                                    <mat-error [hidden]="!addmediaform.get('videodescription')?.hasError('required')">
+
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="addmediaform.controls['videodescription'].invalid && (addmediaform.controls['videodescription'].dirty || addmediaform.controls['videodescription'].touched)">
+                                    <mat-error
+                                        [hidden]=" !addmediaform.get('videodescription')?.hasError('required')  ">
                                         Message is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
 
                         </div>
@@ -125,8 +149,9 @@
                 </div>
                 <br />
                 <div class="d-flex flex-row justify-content-end flex-wrap">
-                    <button type="submit" *ngIf="issubmit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
-                        {{iseditable ? "Update":"Upload"}}
+                    <button type="submit" *ngIf="issubmit"
+                        class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                        {{iseditable ? "Update":"Add"}}
                     </button>
                     <button type="button" (click)="reseteditable()"
                         class="btn btn-outline-secondary btn-rounded d-inline-block ">
@@ -137,7 +162,7 @@
         </div>
 
     </div>
-    
+
     <div class="card ">
         <div class="card-header text-white bg-secondary">
             Pratice library
@@ -151,7 +176,7 @@
                             S.No
                         </label>
                         <input type="text" (keyup)="updatePagination('praticeLibaryId')" disabled
-                    [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
+                            [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
                 </ng-container>
@@ -163,7 +188,7 @@
                             Video Link
                         </label>
                         <input type="text" (keyup)="updatePagination('videoLink')" disabled
-                    [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell *matCellDef="let element" class="col-2"> <a class="text-primary"
                             href="{{element.videoLink}}" target="_blank" rel="noopener noreferrer"><u>Open</u>
@@ -220,13 +245,13 @@
                             Actions
                         </label>
                         <input type="text" (keyup)="updatePagination('State')" disabled
-                        [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
+                            [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell *matCellDef="let element" class="col-2">
                         <div class="d-flex flex-wrap justify-content-evenly align-items-center">
                             <i class="fa-solid fa-eye fs-5 text-info" (click)="viewdetails(element)"
                                 matTooltip="View Course Activity" matTooltip="View"></i>
-                          <span matTooltip="Edit" (click)="editdetails(element)">
+                            <span matTooltip="Edit" (click)="editdetails(element)">
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                             </span>
                             <span matTooltip="Delete" style="cursor: pointer;"
