@@ -167,6 +167,11 @@ export class SendReceiveService {
     else if (subMenuId == 35) {
       this.router.navigateByUrl("pearlofwidsom");
     }
+    else if (subMenuId == 36) {
+
+      this.router.navigateByUrl("MycourseMatrieals");
+
+    }
     else {
       console.log(" Sub Menu is not Mapped ")
       this.router.navigateByUrl("blank")
