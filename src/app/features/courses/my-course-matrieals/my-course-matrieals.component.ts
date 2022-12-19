@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { CoursesService } from '../courses.service';
 
 @Component({
@@ -34,7 +35,7 @@ data=[{'S_No':'1', 'title':'Traditional Yoga', 'date':'2022-22-12', "mtype":"ima
 dataSource: any;
 displayedColumns: string[] = ['S_No', 'title', 'date', "mtype", "Details"];
 
-  constructor(private formbuilder:FormBuilder,private service:CoursesService,private _snackBar: MatSnackBar) { }
+  constructor(private formbuilder:FormBuilder,private service:CoursesService,private _snackBar: MatSnackBar,private router:Router) { }
 
   ngOnInit(): void {
     this.getcourseslist()
@@ -147,9 +148,7 @@ displayedColumns: string[] = ['S_No', 'title', 'date', "mtype", "Details"];
   }
 
 
-  viewDetails(element:any){
-
-  }
+ 
   editdetails(element:any){
 
   }
@@ -178,6 +177,11 @@ displayedColumns: string[] = ['S_No', 'title', 'date', "mtype", "Details"];
   }
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action);
+  }
+  viewDetails(name: any) {
+    
+    this.router.navigateByUrl("ViewMycourseMatrieals");
+    // this.getallData()
   }
 
 }
