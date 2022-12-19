@@ -32,7 +32,7 @@
                     <label>Course</label>
 
                     <mat-form-field appearance="outline">
-                        <mat-select [(ngModel)]="course">
+                        <mat-select [(ngModel)]="course" (selectionChange)="coursechange()">
                             <mat-option *ngFor="let course of courseList" [value]="course.coursesId">
                                 {{course.coursesName}}</mat-option>
                         </mat-select>
@@ -41,12 +41,12 @@
                         Course is mandatory
                     </span>
                 </div>
-                <div class="col-md-3">
+                <!-- <div class="col-md-3">
                     <button type="button" (click)="coursechange()"
                         class="btn btn-outline-secondary btn-rounded d-inline-block mt-3 ml-md-1">
                         Submit
                     </button>
-                </div>
+                </div> -->
                 <div class="col-md-4" *ngIf="!displayform">
                     <div class="d-flex  flex-wrap  justify-content-end align-items-center">
                         <div class="">

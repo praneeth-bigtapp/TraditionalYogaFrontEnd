@@ -8,9 +8,14 @@
         </ol>
     </nav>
 
-    <!-- <div class="d-flex mb-2 flex-wrap  justify-content-between align-items-center">
-        <h3 class=" pl-2 text-secondary ">Members</h3>
-    </div> -->
+    <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center" *ngIf="displaycontent">
+        <div class="">
+            <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block border border-dark "
+                (click)="downloadexcel()">
+                Download Excel
+            </button>
+        </div>
+    </div>
     <br />
     <div class="card  bg-secondary">
         <div class="card-header text-white bg-secondary">
@@ -22,7 +27,7 @@
                 <div class="col-md-4">
                     <label>Course</label>
                     <mat-form-field appearance="outline">
-                        <mat-select [(ngModel)]="category">
+                        <mat-select [(ngModel)]="category" (selectionChange)="coursechange()">
                             <mat-option *ngFor="let course of courselist" [value]="course.coursesId">
                                 {{course.coursesName}}</mat-option>
                         </mat-select>
@@ -32,12 +37,12 @@
                         Please Select Category
                     </span>
                 </div>
-                <div class="col-md-3">
+                <!-- <div class="col-md-3">
                     <button type="button" (click)="coursechange()"
                         class="btn btn-outline-secondary btn-rounded d-inline-block mt-3 ml-md-1">
                         Submit
                     </button>
-                </div>
+                </div> -->
             </div>
             <hr *ngIf="displaycontent" />
             <div class="row align-items-center" *ngIf="displaycontent">
@@ -48,24 +53,19 @@
                     <h4>Number of users mapped : <span>{{totalUser | number}}</span></h4>
                 </div>
                 <div class="col-md-4">
-                    <button type="button"
-                        class="btn btn-outline-secondary btn-rounded d-inline-block border border-dark "
-                        (click)="downloadexcel()">
 
-                        Download Excel
-                    </button>
                 </div>
             </div>
             <hr *ngIf="displaycontent" />
             <form class=" mx-2" [formGroup]="memberform" *ngIf="displaycontent" (ngSubmit)="memberformsubmit()">
-        
+
                 <div class="row">
                     <div class="col-md-4">
                         <div class="row">
                             <label>Enter Name</label>
                             <div class="col">
                                 <mat-form-field appearance="outline">
-                                    <input matInput autocomplete="off" formControlName="name" >
+                                    <input matInput autocomplete="off" formControlName="name">
                                     <mat-error [hidden]="!memberform.get('name')?.hasError('required')">
                                         Name is mandatory
                                     </mat-error>
@@ -80,7 +80,7 @@
                             <label>Enter email Id</label>
                             <div class="col">
                                 <mat-form-field appearance="outline">
-                                    <input matInput autocomplete="off" formControlName="email" >
+                                    <input matInput autocomplete="off" formControlName="email">
                                     <mat-error [hidden]="!memberform.get('email')?.hasError('required')">
                                         Email is mandatory
                                     </mat-error>
@@ -116,7 +116,7 @@
                         <div class="col px-0">
 
                             <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" formControlName="mobile" >
+                                <input matInput autocomplete="off" formControlName="mobile">
                                 <mat-error [hidden]="!memberform.get('mobile')?.hasError('required')">
                                     Mobile mandatory
                                 </mat-error>
@@ -240,7 +240,7 @@
                             S.No
                         </label>
                         <input type="text" (keyup)="updatePagination('courseId')" disabled
-                        [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
+                            [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell class="text-center" *matCellDef="let i=index"> {{i+1}} </td>
                 </ng-container>
@@ -251,7 +251,7 @@
                             Image
                         </label>
                         <input type="text" (keyup)="updatePagination('category')" disabled
-                [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell class="text-center" *matCellDef="let element">
 
@@ -350,7 +350,7 @@
                             Action
                         </label>
                         <input type="text" (keyup)="updatePagination('currentStatus')" disabled
-                        [(ngModel)]="filterData.filterColumnNames[8].Value" [filter]="filterData" />
+                            [(ngModel)]="filterData.filterColumnNames[8].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell class="text-center" *matCellDef="let element ">
 

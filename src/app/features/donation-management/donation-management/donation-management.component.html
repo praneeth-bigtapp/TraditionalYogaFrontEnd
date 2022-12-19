@@ -43,7 +43,7 @@
                 </mat-select>
               </mat-form-field>
 
-            
+
             </div>
 
             <div class="col-md-4">
@@ -52,12 +52,13 @@
               <label>Country</label>
 
               <mat-form-field appearance="outline">
-                <mat-select matNativeControl  formControlName="countrydropdown" >
-                  <mat-option *ngFor="let item of countryList" [value]="item.countryName">{{item.countryName | titlecase}}
+                <mat-select matNativeControl formControlName="countrydropdown">
+                  <mat-option *ngFor="let item of countryList" [value]="item.countryName">{{item.countryName |
+                    titlecase}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-             
+
             </div>
 
             <div class=" col-md-4 mt-2">
@@ -182,8 +183,8 @@
 
 
         <td mat-cell *matCellDef="let element" class="text-center col-1 ml-5 mt-3">
-          <i class="fa-solid fa-eye fs-5 text-info" (click)="viewDetails(element.donarId.donarId)" matTooltip="View Course Activity"
-            matTooltip="View"></i>
+          <i class="fa-solid fa-eye fs-5 text-info" (click)="viewDetails(element.donationId)"
+            matTooltip="View Course Activity" matTooltip="View"></i>
           <!-- <span matTooltip="Edit" (click)="editdetails(element)">
             <i class="fas fa-pencil-alt mx-4" aria-hidden="true"></i>
           </span>
