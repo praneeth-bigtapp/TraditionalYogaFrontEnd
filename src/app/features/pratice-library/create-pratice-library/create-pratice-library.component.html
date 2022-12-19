@@ -99,6 +99,9 @@
                                     <mat-error [hidden]=" !addmediaform.get('videoduration')?.hasError('required')  ">
                                         Duration is mandatory
                                     </mat-error>
+                                    <mat-error [hidden]=" !addmediaform.get('videoduration')?.hasError('pattern')  ">
+                                        Invalid Duration
+                                    </mat-error>
                                 </div>
                             </div>
 
@@ -117,6 +120,10 @@
                                     <mat-error
                                         [hidden]=" !addmediaform.get('vidoemetakeywords')?.hasError('required')  ">
                                         Keywords is mandatory
+                                    </mat-error>
+                                    <mat-error
+                                        [hidden]=" !addmediaform.get('vidoemetakeywords')?.hasError('pattern')  ">
+                                        Invalid Keywords
                                     </mat-error>
                                 </div>
                             </div>

@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
+import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 
 @Component({
   selector: 'app-create-pratice-library',
@@ -87,8 +88,8 @@ export class CreatePraticeLibraryComponent implements OnInit {
       videolink: [null, Validators.compose([Validators.required])],
       videotitle: [null, Validators.compose([Validators.required])],
       videodescription: [null, Validators.compose([Validators.required])],
-      videoduration: [null, Validators.compose([Validators.required])],
-      vidoemetakeywords: [null, Validators.compose([Validators.required])]
+      videoduration: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.durationvalidation)])],
+      vidoemetakeywords: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])]
     })
   }
 
