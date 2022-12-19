@@ -134,7 +134,7 @@ export class AudioComponent implements OnInit {
       return this.Audiomanagement.markAllAsTouched()
 
     const body = {
-      "courseId": 1,
+      "courseId": "",
       "uploadCategory": this.Audiomanagement.value.category,
       "audioCategoryId": this.Audiomanagement.value.upload,
       "audioFile": this.Audiomanagement.value.file,
