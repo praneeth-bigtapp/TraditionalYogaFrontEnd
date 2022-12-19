@@ -2,10 +2,12 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { formatDate } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { OnlineexamService } from '../service/onlineexam.service';
 
 @Component({
@@ -42,6 +44,7 @@ export class TasksComponent implements OnInit {
     private service: OnlineexamService,
     private formbuilder: FormBuilder,
     private _snackbar: MatSnackBar,
+    private dialog: MatDialog,
   ) {
 
     this.taskform = this.formbuilder.group({
@@ -177,20 +180,35 @@ export class TasksComponent implements OnInit {
       "taskId": id,
     }
 
-    this.service.deletetask(body).subscribe({
-      next: (response) => {
-        this.openSnackBar(response)
-        this.taskform.reset()
-        this.gettask(this.course)
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this Task ?"
       },
-      error: (error) => {
-        console.error(error.message);
-      }
+      width: "30%"
     })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.service.deletetask(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.taskform.reset()
+            this.gettask(this.course)
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
+
+    })
+
+
 
   }
   editdetails(element: any) {
-    console.log(element.dueDate);
 
     this.taskform.setValue({
       taskid: element.taskId,

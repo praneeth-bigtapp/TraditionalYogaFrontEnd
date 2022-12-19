@@ -6,6 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { WebsitemanagementService } from '../service/websitemanagement.service';
 import { formatDate } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 
 @Component({
   selector: 'app-pearlwidsom',
@@ -36,6 +38,7 @@ export class PearlwidsomComponent implements OnInit {
     private service: WebsitemanagementService,
     private formbuilder: FormBuilder,
     private _snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {
 
     this.filterData = {
@@ -125,15 +128,32 @@ export class PearlwidsomComponent implements OnInit {
       "quoteId": id
     }
 
-    this.service.deletepearlofwisdom(body).subscribe({
-      next: (response) => {
-        this.openSnackBar(response)
-        this.getListofwisdom()
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this quote ?"
       },
-      error: (error) => {
-        console.error(error.message);
-      }
+      width: "30%"
     })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.service.deletepearlofwisdom(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.getListofwisdom()
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
+
+    })
+
+
+
   }
 
   IsActiveorNot(id: any) {

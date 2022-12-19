@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogPopupComponent } from '../dialog-popup/dialog-popup.component';
 import { NotificationService } from '../services/notification.service';
 
 @Component({
@@ -33,7 +35,8 @@ export class NotificationComponent implements OnInit {
   constructor(
     private formbuilder: FormBuilder,
     private service: NotificationService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {
     this.notificationform = this.formbuilder.group({
       notificationId: [null],
@@ -124,15 +127,29 @@ export class NotificationComponent implements OnInit {
       "coursesId": id,
     }
 
-    this.service.deletenotification(body).subscribe({
-      next: (response) => {
-        this.openSnackBar(response)
-        this.notificationform.reset()
-        this.getdata()
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this notification ?"
       },
-      error: (error) => {
-        console.error(error.message);
+      width: "30%"
+    })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.service.deletenotification(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.notificationform.reset()
+            this.getdata()
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
       }
+
     })
 
   }

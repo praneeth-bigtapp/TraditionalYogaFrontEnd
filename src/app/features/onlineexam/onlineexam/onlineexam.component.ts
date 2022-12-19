@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { OnlineexamService } from '../service/onlineexam.service';
 
 @Component({
@@ -34,7 +36,8 @@ export class OnlineexamComponent implements OnInit {
   constructor(
     private formbuilder: FormBuilder,
     private service: OnlineexamService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {
 
     this.service.getallcourses().subscribe({
@@ -165,16 +168,31 @@ export class OnlineexamComponent implements OnInit {
       "coursesId": id,
     }
 
-    this.service.deleteonlineexam(body).subscribe({
-      next: (response) => {
-        this.openSnackBar(response)
-        this.onlineexamform.reset()
-        this.getonlinexam()
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this Exam ?"
       },
-      error: (error) => {
-        console.error(error.message);
+      width: "30%"
+    })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.service.deleteonlineexam(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.onlineexamform.reset()
+            this.getonlinexam()
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
       }
     })
+
+
+
 
   }
   editdetails(element: any) {

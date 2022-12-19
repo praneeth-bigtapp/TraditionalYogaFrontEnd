@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { ScripcturesService } from '../service/scripctures.service';
 
 @Component({
@@ -24,7 +26,8 @@ export class CreateScripcturesComponent implements OnInit {
     private router: Router,
     private formbuilder: FormBuilder,
     private service: ScripcturesService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -76,6 +79,26 @@ export class CreateScripcturesComponent implements OnInit {
     this.iseditable = false
     this.displaycontent = !this.displaycontent
   }
+
+
+  deletedetails() {
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this scripctures ?"
+      },
+      width: "25%"
+    })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        //delete API 
+        return
+      }
+
+    })
+  }
+
   addmedia() {
 
     this.filerror = this.addmediaform.value.coverimage === null ? true : false

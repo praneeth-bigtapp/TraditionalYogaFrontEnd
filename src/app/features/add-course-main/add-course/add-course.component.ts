@@ -7,6 +7,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { formatDate } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 
 
 @Component({
@@ -76,7 +78,7 @@ export class AddCourseComponent implements OnInit {
       duration: 2 * 1000,
     });
   }
-  constructor(private AddCourseService: AddCourseService, private formbuilder: FormBuilder, private _snackBar: MatSnackBar) {
+  constructor(private AddCourseService: AddCourseService, private formbuilder: FormBuilder, private _snackBar: MatSnackBar, private dialog: MatDialog) {
     this.addCourseForm = this.formbuilder.group({
       courseId: [null],
       courseName: [null, Validators.compose([Validators.required])],
@@ -115,6 +117,8 @@ export class AddCourseComponent implements OnInit {
   ngOnInit(): void {
     this.getdata()
   }
+
+
   getdata() {
     this.AddCourseService.getCourse().subscribe({
       next: (response) => {
@@ -161,16 +165,32 @@ export class AddCourseComponent implements OnInit {
       "coursesId": id
     }
 
-    this.AddCourseService.deletecourse(body).subscribe({
-      next: (response) => {
-        this.openSnackBar(response)
-        this.addCourseForm.reset()
-        this.getdata()
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this Course ?"
       },
-      error: (error) => {
-        console.error(error.message);
-      }
+      width: "30%"
     })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.AddCourseService.deletecourse(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.addCourseForm.reset()
+            this.getdata()
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
+
+    })
+
+
 
   }
   editdetails(element: any) {

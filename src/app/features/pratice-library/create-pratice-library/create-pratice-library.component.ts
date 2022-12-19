@@ -5,6 +5,8 @@ import { CreatepraticelibraryService } from '../service/createpraticelibrary.ser
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 
 @Component({
   selector: 'app-create-pratice-library',
@@ -31,7 +33,8 @@ export class CreatePraticeLibraryComponent implements OnInit {
   constructor(
     private formbuilder: FormBuilder,
     private service: CreatepraticelibraryService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {
 
     this.filterData = {
@@ -138,20 +141,35 @@ export class CreatePraticeLibraryComponent implements OnInit {
       "praticeLibaryId": id,
     }
 
-    this.service.deletelibrary(body).subscribe({
-      next: (response) => {
-        this.openSnackBar(response)
-        this.addmediaform.reset()
-        this.getdata()
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this Course ?"
       },
-      error: (error) => {
-        console.error(error.message);
-      }
+      width: "30%"
     })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.service.deletelibrary(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.addmediaform.reset()
+            this.getdata()
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
+
+    })
+
+
 
   }
   editdetails(element: any) {
-    console.log(element);
 
     this.addmediaform.setValue({
       praticelibraryId: element.praticeLibaryId,

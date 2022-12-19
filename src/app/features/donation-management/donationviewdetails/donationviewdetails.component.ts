@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DonationserviceService } from '../service/donationservice.service';
 
 @Component({
@@ -30,11 +31,19 @@ export class DonationviewdetailsComponent implements OnInit {
 
 
   constructor(
-    private donationservice: DonationserviceService
-  ) { }
+    private donationservice: DonationserviceService,
+    private activeroute: ActivatedRoute
+  ) {
+
+    activeroute.queryParams.subscribe(params => {
+      this.getData(params["id"])
+    })
+
+
+  }
 
   ngOnInit(): void {
-    this.getData()
+    this.getData("3")
   }
   fullform(value: any) {
     const yes = ["Yes", "Y", "yes", "y"]
@@ -46,10 +55,10 @@ export class DonationviewdetailsComponent implements OnInit {
     return "No"
   };
 
-  getData() {
+  getData(id: any) {
 
     const body = {
-      "donationId": "3"
+      "donationId": id
     }
 
     this.donationservice.postdonationdetails(body).subscribe({

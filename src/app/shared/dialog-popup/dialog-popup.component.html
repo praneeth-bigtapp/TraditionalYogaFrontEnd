@@ -1,23 +1,47 @@
-<mat-card class="p-0">
-    <a class="f-right close-icon" (click)="dialogRef.close(false)">
-        <span><i class="fas fa-times text-danger" aria-hidden="true"></i></span>
-    </a>
+<!-- <mat-card class="p-0">
+
     <mat-card-title class="">
         <div class="card-title-text">
-            <h3>{{data}}</h3>
+            <div class="d-flex flex-row justify-content-between align-items-center">
+                <h3>{{data.title}}</h3>
+                <div class="">
+                    <a class="f-right close-icon" (click)="dialogRef.close(false)">
+                        <span><i class="fas fa-times text-danger" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+            </div>
         </div>
     </mat-card-title>
     <mat-card-content style="width: 85%;">
         <div class="pb-1">
-            {{message }}
+            {{data.message}}
         </div>
     </mat-card-content>
     <mat-card-footer>
-        <div style="text-align: center">
-            <button mat-button class="btn btn-outline-secondary btn-rounded d-inline-block m-2 btn-s" type="button" ng-transclude=""
-                (click)="dialogRef.close(true)"><span class="ng-scope">Yes</span></button> &nbsp;
-            <button mat-button class="btn btn-outline-secondary btn-rounded d-inline-block m-2 btn-d" type="button" ng-transclude=""
-                (click)="dialogRef.close(false)"><span class="ng-scope">No</span></button>
+        <div style="text-align: right">
+            <button mat-button class="btn btn-outline-secondary btn-rounded d-inline-block m-2 btn-s" type="button"
+                ng-transclude="" (click)="dialogRef.close(true)"><span class="ng-scope">Yes</span></button> &nbsp;
+            <button mat-button class="btn btn-outline-secondary btn-rounded d-inline-block m-2 btn-d" type="button"
+                ng-transclude="" (click)="dialogRef.close(false)"><span class="ng-scope">No</span></button>
         </div>
     </mat-card-footer>
-</mat-card>
+</mat-card> -->
+
+
+<div class="card my-auto   p-0">
+    <!-- <div class="card-header ">
+        {{data.title}}
+    </div> -->
+    <div class="card-body text-center   py-2">
+        <h6><b>{{data.message}}</b></h6>
+        <br/>
+        <div class="">
+            <div style="text-align: center">
+                <button mat-button class="btn btn-outline-secondary btn-rounded d-inline-block m-2 btn-s" type="button"
+                    ng-transclude="" (click)="dialogRef.close(true)"><span class="ng-scope">Yes</span></button> &nbsp;
+                <button mat-button class="btn btn-outline-secondary btn-rounded d-inline-block m-2 btn-d" type="button"
+                    ng-transclude="" (click)="dialogRef.close(false)"><span class="ng-scope">No</span></button>
+            </div>
+        </div>
+    </div>
+</div>

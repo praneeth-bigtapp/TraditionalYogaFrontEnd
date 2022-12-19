@@ -1,11 +1,13 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { map, Observable, startWith } from 'rxjs';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { MappingRegionsToChiefMentorService } from '../services/mapping-regions-to-chief-mentor.service';
 
 @Component({
@@ -46,7 +48,8 @@ export class RegioncreationComponent implements OnInit {
     private service: MappingRegionsToChiefMentorService,
     private _snackbar: MatSnackBar,
     private formbuilder: FormBuilder,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {
 
     this.regionfilterform = this.formbuilder.group({
@@ -209,17 +212,33 @@ export class RegioncreationComponent implements OnInit {
 
     console.log(body);
 
-
-    this.service.deleteregion(body).subscribe({
-      next: (response) => {
-        this.openSnackBar(response)
-        this.regionfilterform.reset()
-        this.getregiondata()
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this region ?"
       },
-      error: (error) => {
-        console.error(error.message);
-      }
+      width: "30%"
     })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.service.deleteregion(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.regionfilterform.reset()
+            this.getregiondata()
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
+
+    })
+
+
+
     return
 
   }
