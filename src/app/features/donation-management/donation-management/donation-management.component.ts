@@ -250,11 +250,13 @@ data:any
     const todate = this.dateForm.value.todate
     console.log(fromdate, todate)
     console.log(this.data)
+    console.log(region);
+    
     let filters = this.data.filter((ele: any) => new Date(ele.date) >= new Date(fromdate) && new Date(ele.date) <= new Date(todate))
     console.log(filters)
     if (fromdate !== null && todate !== null) {
       if(region!==null){
-        filters=this.region(filters)
+        filters=this.regionfilter(filters)
       }
       if(country!==null){
         filters=this.countryfilter(filters)
@@ -269,7 +271,7 @@ data:any
 
   }
   regionfilter(element:any){
-    let reg=element.filter((ele:any)=>ele.regionId===this.dateForm.value.regiondropdown)
+    let reg=element.filter((ele:any)=>ele.donarId.countryId.regionId.regionId===this.dateForm.value.regiondropdown)
     return reg
   }
   countryfilter(element:any){
