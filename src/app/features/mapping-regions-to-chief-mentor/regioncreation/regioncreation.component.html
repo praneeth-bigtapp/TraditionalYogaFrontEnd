@@ -27,10 +27,13 @@
                         <label>Enter Region</label>
                         <mat-form-field appearance="outline">
                             <input type="text" formControlName="region" aria-label="Country" matInput>
-                            <mat-error [hidden]="!regionfilterform.get('region')?.hasError('required')">
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="regionfilterform.controls['region'].invalid && (regionfilterform.controls['region'].dirty || regionfilterform.controls['region'].touched)">
+                            <mat-error [hidden]=" !regionfilterform.get('region')?.hasError('required')  ">
                                 Region is mandatory
                             </mat-error>
-                        </mat-form-field>
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <label>Country</label>
@@ -43,10 +46,14 @@
                                     {{country}}
                                 </mat-option>
                             </mat-autocomplete>
-                            <mat-error [hidden]="!regionfilterform.get('country')?.hasError('required')">
+
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="regionfilterform.controls['country'].invalid && (regionfilterform.controls['country'].dirty || regionfilterform.controls['country'].touched)">
+                            <mat-error [hidden]=" !regionfilterform.get('country')?.hasError('required')  ">
                                 Country is mandatory
                             </mat-error>
-                        </mat-form-field>
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <label>Part</label>
@@ -55,10 +62,14 @@
                                 <mat-option *ngFor="let part of partList" [value]="part.partId">
                                     {{part.partName}}</mat-option>
                             </mat-select>
-                            <mat-error [hidden]="!regionfilterform.get('part')?.hasError('required')">
+
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="regionfilterform.controls['part'].invalid && (regionfilterform.controls['part'].dirty || regionfilterform.controls['part'].touched)">
+                            <mat-error [hidden]=" !regionfilterform.get('part')?.hasError('required')  ">
                                 Part is mandatory
                             </mat-error>
-                        </mat-form-field>
+                        </div>
                     </div>
                 </div>
                 <br />
@@ -74,15 +85,19 @@
                                     {{country}}
                                 </mat-option>
                             </mat-autocomplete>
-                            <mat-error [hidden]="!regionfilterform.get('state')?.hasError('required')">
-                                State is mandatory
-                            </mat-error>
+
                         </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="regionfilterform.controls['state'].invalid && (regionfilterform.controls['state'].dirty || regionfilterform.controls['state'].touched)">
+                            <mat-error [hidden]=" !regionfilterform.get('state')?.hasError('required')  ">
+                                States is mandatory
+                            </mat-error>
+                        </div>
                     </div>
                     <div class="col d-flex flex-row flex-wrap mt-4">
                         <button type="submit" *ngIf="issubmit"
-                            class="btn btn-outline-secondary btn-rounded  d-inline-block ">
-                            {{iseditable ? "Update" :"Add" }}
+                            class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                            {{iseditable ? "Update" :"Add " }}
                         </button>
                         <button type="button" (click)="reseteditable()"
                             class="btn btn-outline-secondary btn-rounded d-inline-block ">

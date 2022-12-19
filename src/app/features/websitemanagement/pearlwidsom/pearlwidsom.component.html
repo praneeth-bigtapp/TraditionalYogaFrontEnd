@@ -7,7 +7,7 @@
             <li class="breadcrumb-item active" aria-current="page">Pearls of wisdom</li>
         </ol>
     </nav>
-    <br/>
+    <br />
     <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
         <!-- <h3 class=" pl-2 text-secondary ">Pearls of wisdom</h3> -->
         <button type="button" *ngIf="!displaycontent" (click)="addwisdom()"
@@ -31,10 +31,14 @@
                             <div class="col">
                                 <mat-form-field appearance="outline">
                                     <input matInput formControlName="quotetitle">
+
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="wisdomform.controls['quotetitle'].invalid && (wisdomform.controls['quotetitle'].dirty || wisdomform.controls['quotetitle'].touched)">
                                     <mat-error [hidden]=" !wisdomform.get('quotetitle')?.hasError('required')  ">
                                         Title is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
 
                         </div>
@@ -48,10 +52,14 @@
                                 <mat-form-field appearance="outline">
                                     <!-- <mat-label></mat-label> -->
                                     <input matInput formControlName="quotedate" type="date">
+
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="wisdomform.controls['quotedate'].invalid && (wisdomform.controls['quotedate'].dirty || wisdomform.controls['quotedate'].touched)">
                                     <mat-error [hidden]=" !wisdomform.get('quotedate')?.hasError('required')  ">
                                         Date is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
 
                         </div>
@@ -67,10 +75,14 @@
                                         {{category.name}}</mat-option>
                                 </mat-select> -->
                                     <input matInput formControlName="quotetype" type="text">
+
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="wisdomform.controls['quotetype'].invalid && (wisdomform.controls['quotetype'].dirty || wisdomform.controls['quotetype'].touched)">
                                     <mat-error [hidden]=" !wisdomform.get('quotetype')?.hasError('required')  ">
                                         Type is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
 
                         </div>
@@ -87,10 +99,13 @@
                             <div class="col">
                                 <mat-form-field appearance="outline">
                                     <textarea rows="5" matInput formControlName="quote"> </textarea>
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="wisdomform.controls['quote'].invalid && (wisdomform.controls['quote'].dirty || wisdomform.controls['quote'].touched)">
                                     <mat-error [hidden]=" !wisdomform.get('quote')?.hasError('required')  ">
                                         Quote is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
 
                         </div>

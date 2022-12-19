@@ -1,4 +1,4 @@
-<div class="ConfigurationTypes_textpadding ">
+<div class="ConfigurationTypes_textpadding">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -40,11 +40,14 @@
                                             aria-placeholder="Select Course Category">
                                             {{category.categoriesName}}</mat-option>
                                     </mat-select>
-                                    <mat-error class="error-message"
-                                        [hidden]=" !addCourseForm.get('coursecategory')?.hasError('required')  ">
+
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="addCourseForm.controls['coursecategory'].invalid && (addCourseForm.controls['coursecategory'].dirty || addCourseForm.controls['coursecategory'].touched)">
+                                    <mat-error [hidden]=" !addCourseForm.get('coursecategory')?.hasError('required')  ">
                                         Category is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -55,11 +58,14 @@
                                 <mat-form-field appearance="outline">
                                     <!-- <mat-label>Select Course Category</mat-label> -->
                                     <input matInput autocomplete="off" formControlName="courseName" required>
-                                    <mat-error class="error-message"
-                                        [hidden]=" !addCourseForm.get('courseName')?.hasError('required')  ">
+
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="addCourseForm.controls['courseName'].invalid && (addCourseForm.controls['courseName'].dirty || addCourseForm.controls['courseName'].touched)">
+                                    <mat-error [hidden]=" !addCourseForm.get('courseName')?.hasError('required')  ">
                                         Name is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
 
                         </div>
@@ -75,11 +81,14 @@
                                 <mat-form-field appearance="outline">
                                     <!-- <mat-label>Start date</mat-label> -->
                                     <input matInput formControlName="startDate" type="date">
-                                    <mat-error class="error-message"
-                                        [hidden]=" !addCourseForm.get('startDate')?.hasError('required')  ">
+
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="addCourseForm.controls['startDate'].invalid && (addCourseForm.controls['startDate'].dirty || addCourseForm.controls['startDate'].touched)">
+                                    <mat-error [hidden]=" !addCourseForm.get('startDate')?.hasError('required')  ">
                                         Date is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -90,11 +99,13 @@
                                 <mat-form-field appearance="outline">
                                     <!-- <mat-label>End date</mat-label> -->
                                     <input matInput formControlName="endDate" type="date">
-                                    <mat-error class="error-message"
-                                        [hidden]=" !addCourseForm.get('endDate')?.hasError('required')  ">
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="addCourseForm.controls['endDate'].invalid && (addCourseForm.controls['endDate'].dirty || addCourseForm.controls['endDate'].touched)">
+                                    <mat-error [hidden]=" !addCourseForm.get('endDate')?.hasError('required')  ">
                                         Date is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -103,13 +114,15 @@
                             <label class="">Application closure date</label>
                             <div class="col px-0">
                                 <mat-form-field appearance="outline">
-                                    <!-- <mat-label>Application closure date</mat-label> -->
                                     <input matInput formControlName="applicationclosuredate" type="date">
-                                    <mat-error class="error-message"
-                                        [hidden]=" !addCourseForm.get('applicationclosuredate')?.hasError('required')  ">
-                                        Date is mandatory
-                                    </mat-error>
                                 </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="addCourseForm.controls['applicationclosuredate'].invalid && (addCourseForm.controls['applicationclosuredate'].dirty || addCourseForm.controls['coursecategory'].touched)">
+                                    <mat-error
+                                        [hidden]=" !addCourseForm.get('applicationclosuredate')?.hasError('required')  ">
+                                        Application closure date is mandatory
+                                    </mat-error>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -123,10 +136,14 @@
                             <div class="col px-0">
                                 <mat-form-field appearance="outline">
                                     <textarea matInput formControlName="description" rows="8" type="text"></textarea>
-                                    <mat-error [hidden]="!addCourseForm.get('description')?.hasError('required')  ">
+
+                                </mat-form-field>
+                                <div
+                                    *ngIf="addCourseForm.controls['description'].invalid && (addCourseForm.controls['description'].dirty || addCourseForm.controls['description'].touched)">
+                                    <mat-error [hidden]=" !addCourseForm.get('description')?.hasError('required')  ">
                                         Description is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
 
                             </div>
                         </div>
@@ -146,7 +163,7 @@
             </form>
         </div>
     </div>
-    
+
     <div class="card ">
         <div class="card-header text-white bg-secondary">
             Courses

@@ -2,7 +2,7 @@
     <!-- <h3 class="mb-3 pl-2 card-header text-white card bg-secondary"> Add Banner </h3> -->
 
     <div class="card bg-white mt-3">
-     
+
         <!-- <div class="pl-3 ">
             <h3> Header Banner </h3>
         </div>
@@ -10,9 +10,9 @@
         <br /> -->
         <h3 class="mb-3 pl-2 card-header text-white card bg-secondary"> Add Banner </h3>
         <div class="card-body bg-white pl-3">
-          
 
-           
+
+
 
             <div class="pl-3 ">
                 <h4> Home Page Course Banner </h4>
@@ -26,21 +26,24 @@
 
                 <div class="row ">
                     <!-- <h6 class="text-md-right col-md-4">Course title : </h6> -->
-                 
+
 
                     <div class="col-md-6">
                         <label>Course title : </label>
                         <mat-form-field appearance="outline">
                             <mat-label>Course title</mat-label>
                             <input matInput autocomplete="off" class="" formControlName="coursetitle" required>
-                            <mat-error [hidden]="!coursebanner.get('coursetitle')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
                         </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="coursebanner.controls['coursetitle'].invalid && (coursebanner.controls['coursetitle'].dirty || coursebanner.controls['coursetitle'].touched)">
+                            <mat-error [hidden]=" !coursebanner.get('coursetitle')?.hasError('required')  ">
+                                Title is mandatory
+                            </mat-error>
+                        </div>
                     </div>
-               
+
                     <!-- <h6 class="text-md-right col-md-4">Upload Image : </h6> -->
-                 
+
 
                     <div class="col-md-6">
                         <label>Upload Image : </label>
@@ -50,9 +53,9 @@
                         <mat-error *ngIf="filerror2">Please Upload Valid File</mat-error>
 
                     </div>
-              
+
                     <!-- <h6 class="text-md-right col-md-4">From date : </h6> -->
-                 
+
 
                     <div class="col-md-6">
                         <label>From date : </label>
@@ -64,8 +67,15 @@
                                 Please Select the date
                             </mat-error>
                         </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="coursebanner.controls['fromdate'].invalid && (coursebanner.controls['fromdate'].dirty || coursebanner.controls['fromdate'].touched)">
+                            <mat-error [hidden]=" !coursebanner.get('fromdate')?.hasError('required')  ">
+                                Date is mandatory
+                            </mat-error>
+                        </div>
+
                     </div>
-<!--                 
+                    <!--                 
                     <h6 class="text-md-right col-md-4">To date : </h6> -->
 
                     <div class="col-md-6">
@@ -77,8 +87,14 @@
                                 Please Select the date
                             </mat-error>
                         </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="coursebanner.controls['todate'].invalid && (coursebanner.controls['todate'].dirty || coursebanner.controls['todate'].touched)">
+                            <mat-error [hidden]=" !coursebanner.get('todate')?.hasError('required')  ">
+                                Date is mandatory
+                            </mat-error>
+                        </div>
                     </div><br>&nbsp;
-            
+
                     <!-- <h6 class="text-md-right col-md-4">Description : </h6> -->
 
                     <div class="col-md-12">
@@ -91,14 +107,14 @@
                             <div
                                 *ngIf="coursebanner.controls['description'].invalid && (coursebanner.controls['description'].dirty || coursebanner.controls['description'].touched)">
                                 <mat-error [hidden]=" !coursebanner.get('description')?.hasError('required')  ">
-                                    Please Type Few Words
+                                    Description is mandatory
                                 </mat-error>
                             </div>
                         </mat-form-field>
                     </div>
                 </div>
 
-        
+
 
                 <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 float-md-right">
                     Submit banner

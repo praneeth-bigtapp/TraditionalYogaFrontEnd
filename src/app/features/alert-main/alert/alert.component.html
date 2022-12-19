@@ -35,10 +35,13 @@
                                             [value]="item.roleId">{{item.roleName}}
                                         </mat-option>
                                     </mat-select>
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="alertform.controls['alertid'].invalid && (alertform.controls['alertid'].dirty || alertform.controls['alertid'].touched)">
                                     <mat-error [hidden]=" !alertform.get('alertid')?.hasError('required')  ">
                                         Category is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -51,10 +54,14 @@
                                 <mat-form-field class="example-full-width" appearance="outline">
                                     <!-- <mat-label>Start date</mat-label> -->
                                     <input matInput formControlName="startdate" type="date">
-                                    <mat-error [hidden]="!alertform.get('startdate')?.hasError('required')  ">
+
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="alertform.controls['startdate'].invalid && (alertform.controls['startdate'].dirty || alertform.controls['startdate'].touched)">
+                                    <mat-error [hidden]=" !alertform.get('startdate')?.hasError('required')  ">
                                         Date is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
 
                             </div>
                         </div>
@@ -69,33 +76,18 @@
                                 <mat-form-field class="example-full-width" appearance="outline">
                                     <!-- <mat-label>End date</mat-label> -->
                                     <input matInput formControlName="enddate" type="date">
-                                    <mat-error [hidden]=" !alertform.get('startdate')?.hasError('required')  ">
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="alertform.controls['enddate'].invalid && (alertform.controls['enddate'].dirty || alertform.controls['enddate'].touched)">
+                                    <mat-error [hidden]=" !alertform.get('enddate')?.hasError('required')  ">
                                         Date is mandatory
                                     </mat-error>
-                                </mat-form-field>
-
+                                </div>
 
 
                             </div>
                         </div>
                     </div>
-
-                    <!-- <div class="col-md-3">
-
-
-                        <div class="row align-items-center ">
-                            <label>Upload File : </label>
-
-                            <div class="col">
-                                <input type="file" id="file" class="border" (change)="onfilechange($event)"
-                                    formControlName="file" accept=" image/*" required="true" />
-                                <mat-error *ngIf="filerror">File is mandatory</mat-error>
-
-                            </div>
-                        </div>
-                    </div> -->
-
-
                 </div>
                 <br />
                 <div class="row align-items-center ">
@@ -107,10 +99,13 @@
                                 <mat-form-field class="example-full-width" appearance="outline" id="field">
                                     <!-- <mat-label>Health is wealth</mat-label> -->
                                     <textarea matInput formControlName="paragraph"></textarea>
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="alertform.controls['paragraph'].invalid && (alertform.controls['paragraph'].dirty || alertform.controls['paragraph'].touched)">
                                     <mat-error [hidden]=" !alertform.get('paragraph')?.hasError('required')  ">
                                         Description is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
 
                         </div>
@@ -118,7 +113,7 @@
 
                     <div class="col-md-3" [hidden]="!issubmit">
                         <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
-                            {{iseditable ? "Add" :"Submit" }}
+                            {{iseditable ? "Update" :"Add" }}
                         </button>
 
                     </div>
@@ -135,8 +130,6 @@
             </form>
         </div>
     </div>
-    <br />
-
     <div class="card ">
         <div class="card-header text-white bg-secondary">
             Alerts

@@ -161,7 +161,7 @@ export class AddCourseComponent implements OnInit {
       duration: 2 * 1000,
     });
   }
-  
+
   deletedetails(id: any) {
 
     const body = {

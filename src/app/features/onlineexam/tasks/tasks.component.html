@@ -37,9 +37,10 @@
                                 {{course.coursesName}}</mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <span class=" mat-error" *ngIf="courserror">
+                    <span class="mat-error" *ngIf="courserror">
                         Course is mandatory
                     </span>
+
                 </div>
                 <!-- <div class="col-md-3">
                     <button type="button" (click)="coursechange()"
@@ -72,10 +73,13 @@
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" formControlName="name" required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="taskform.controls['name'].invalid && (taskform.controls['name'].dirty || taskform.controls['name'].touched)">
                                 <mat-error [hidden]=" !taskform.get('name')?.hasError('required')  ">
                                     Task is mandatory
                                 </mat-error>
-                            </mat-form-field>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -92,10 +96,15 @@
                         <label>Due Date for submission</label>
                         <mat-form-field class="example-full-width" appearance="outline">
                             <input matInput formControlName="duedate" type="date">
-                            <mat-error [hidden]="!taskform.get('duedate')?.hasError('required')  ">
+
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="taskform.controls['duedate'].invalid && (taskform.controls['duedate'].dirty || taskform.controls['duedate'].touched)">
+                            <mat-error [hidden]=" !taskform.get('duedate')?.hasError('required')  ">
                                 Date is mandatory
                             </mat-error>
-                        </mat-form-field>
+                        </div>
+
                     </div>
                 </div>
 
@@ -106,10 +115,14 @@
                             <mat-form-field appearance="outline">
                                 <textarea matInput class="p-2" formControlName="description" rows="3"
                                     placeholder="Description"></textarea>
+
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="taskform.controls['description'].invalid && (taskform.controls['description'].dirty || taskform.controls['description'].touched)">
                                 <mat-error [hidden]=" !taskform.get('description')?.hasError('required')  ">
                                     Description is mandatory
                                 </mat-error>
-                            </mat-form-field>
+                            </div>
                         </div>
                     </div>
                     <div class="row col-md-6">

@@ -33,10 +33,14 @@
                                 <mat-option *ngFor="let type of courselist" [value]="type.coursesId">
                                     {{type.coursesName | titlecase}}</mat-option>
                             </mat-select>
-                            <mat-error [hidden]="!onlineexamform.get('course')?.hasError('required')">
+
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="onlineexamform.controls['course'].invalid && (onlineexamform.controls['course'].dirty || onlineexamform.controls['coursetitle'].touched)">
+                            <mat-error [hidden]=" !onlineexamform.get('course')?.hasError('required')  ">
                                 Course is mandatory
                             </mat-error>
-                        </mat-form-field>
+                        </div>
                     </div>
                     <div class="col-md-2">
                         <label>Test type</label>
@@ -46,21 +50,27 @@
                                 <mat-option *ngFor="let type of typetestlist" [value]="type.testId">
                                     {{type.testname | titlecase}}</mat-option>
                             </mat-select>
-                            <mat-error [hidden]="!onlineexamform.get('testtype')?.hasError('required')">
+
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="onlineexamform.controls['testtype'].invalid && (onlineexamform.controls['testtype'].dirty || onlineexamform.controls['testtype'].touched)">
+                            <mat-error [hidden]=" !onlineexamform.get('testype')?.hasError('required')  ">
                                 Type is mandatory
                             </mat-error>
-                        </mat-form-field>
+                        </div>
                     </div>
 
                     <div class="col">
                         <label>Test Name</label>
-
                         <mat-form-field appearance="outline">
                             <input matInput autocomplete="off" formControlName="testname" required>
-                            <mat-error [hidden]="!onlineexamform.get('testname')?.hasError('required')">
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="onlineexamform.controls['testname'].invalid && (onlineexamform.controls['testname'].dirty || onlineexamform.controls['testname'].touched)">
+                            <mat-error [hidden]=" !onlineexamform.get('testname')?.hasError('required')  ">
                                 Test is mandatory
                             </mat-error>
-                        </mat-form-field>
+                        </div>
                     </div>
 
 
@@ -73,10 +83,14 @@
                         <mat-form-field appearance="outline">
                             <textarea matInput class="p-2" formControlName="description" rows="3"
                                 placeholder="Description"></textarea>
-                            <mat-error [hidden]="!onlineexamform.get('description')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
+
                         </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="onlineexamform.controls['description'].invalid && (onlineexamform.controls['description'].dirty || onlineexamform.controls['description'].touched)">
+                            <mat-error [hidden]=" !onlineexamform.get('description')?.hasError('required')  ">
+                                Description is mandatory
+                            </mat-error>
+                        </div>
                     </div>
                 </div>
                 <br />
@@ -89,10 +103,14 @@
                                 <mat-option *ngFor="let type of testlevel" [value]="type.testId">
                                     {{type.testname | titlecase}}</mat-option>
                             </mat-select>
-                            <mat-error [hidden]="!onlineexamform.get('leveltest')?.hasError('required')">
+
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="onlineexamform.controls['leveltest'].invalid && (onlineexamform.controls['leveltest'].dirty || onlineexamform.controls['leveltest'].touched)">
+                            <mat-error [hidden]=" !onlineexamform.get('leveltest')?.hasError('required')  ">
                                 Level is mandatory
                             </mat-error>
-                        </mat-form-field>
+                        </div>
                     </div>
                     <div class="col-md-3">
                         <label class="" for="file">Upload Excel file</label>
@@ -102,7 +120,7 @@
                     </div>
                     <div class="col-md-3" *ngIf="issubmit">
                         <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
-                            {{iseditable ? "Update" :"Submit" }}
+                            {{iseditable ? "Update" :"Add" }}
                         </button>
                     </div>
                     <div class="col-md-3">
@@ -117,7 +135,7 @@
         </div>
     </div>
 
-    
+
     <div class="card ">
         <div class="card-header text-white bg-secondary">
             Online Exam
