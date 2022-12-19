@@ -73,11 +73,7 @@ export class AddCourseComponent implements OnInit {
       ['fontSize']
     ]
   };
-  openSnackBar(data: any) {
-    this._snackBar.open(data.message, 'Close', {
-      duration: 2 * 1000,
-    });
-  }
+
   constructor(private AddCourseService: AddCourseService, private formbuilder: FormBuilder, private _snackBar: MatSnackBar, private dialog: MatDialog) {
     this.addCourseForm = this.formbuilder.group({
       courseId: [null],
@@ -159,6 +155,13 @@ export class AddCourseComponent implements OnInit {
     this.issubmit = false
     this.displaycontent = true
   }
+
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
+  }
+  
   deletedetails(id: any) {
 
     const body = {

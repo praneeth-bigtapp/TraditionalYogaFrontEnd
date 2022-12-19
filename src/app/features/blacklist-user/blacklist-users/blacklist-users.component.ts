@@ -1,9 +1,11 @@
 import { Component, OnInit, AfterViewChecked, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, } from '@angular/material/table';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { BlacklistUsersService } from '../blacklist-users.service';
 
 
@@ -21,13 +23,13 @@ export class BlacklistUsersComponent implements OnInit {
   blacklistData: any;
   updatebtn=false
   blackbtn=true
-  
+  formdisplay=false
   filterData:any
   gridData:any
   constructor(
     private blacklistUsersService: BlacklistUsersService,
     private formBuilder: FormBuilder,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar, private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -46,12 +48,15 @@ export class BlacklistUsersComponent implements OnInit {
     this.getBlackListUser();
     
   }
-
+  formtoggle(){
+    this.formdisplay=!this.formdisplay
+  }
   getBlackListUser() {
     this.blacklistUsersService.getBlacklist().subscribe({
       next: (response) => {
 
         this.blacklistData = response;
+        this.blacklistData=this.blacklistData.reverse()
         console.log(this.blacklistData)
         this.dataSource = new MatTableDataSource<any>(this.blacklistData);
        
@@ -108,11 +113,7 @@ export class BlacklistUsersComponent implements OnInit {
     }
   }
 
-  openSnackBar(data: any) {
-    this._snackBar.open(data.message, 'Close', {
-      duration: 2 * 1000,
-    });
-  }
+
   updatePagination() {
     this.filterData.dataSource.paginator = this.paginator;
     this.filterData.dataSource.sort=this.sort
@@ -137,6 +138,34 @@ export class BlacklistUsersComponent implements OnInit {
     this.blacklistForm.reset()
     this.blackbtn=true
     this.updatebtn=false
+    this.formtoggle()
 
   }
+  
+  openSnackBar(data: any) {
+    this._snackBar.open(data, 'Close', {
+      duration: 2 * 1000,
+    });
+  }
+  
+  deletedetails(element: any) {
+
+
+
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To UnBlack the user ?"
+      },
+      width: "30%"
+    })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+       this.unBlockUser(element)
+          }
+        })
+        return
+      }
+
 }

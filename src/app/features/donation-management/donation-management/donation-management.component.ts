@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { filter, map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { DonationserviceService } from '../service/donationservice.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 
 @Component({
   selector: 'app-donation-management',
@@ -43,7 +46,7 @@ data:any
   countryList:any
    dataSource: any;
   region: any;
-  constructor(private formbuilder: FormBuilder, private router: Router, private service: DonationserviceService) { }
+  constructor(private formbuilder: FormBuilder, private router: Router, private service: DonationserviceService, private _snackBar: MatSnackBar, private dialog: MatDialog) { }
   
   ngOnInit(): void {
     this.getallregions()
@@ -71,35 +74,11 @@ data:any
     }
     
 
-    // this.filterData.gridData = this.data;
-    // this.filterData.dataSource = this.dataSource;
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
-    // this.filterData.sort = this.sort;
-    // this.filterData.total = this.total;
-    // this.filterData.sub = this.subtotal;
-
-    // for (let col of this.filterData.filterColumnNames) {
-    //   col.Value = '';
-    // }
-    // this.countryfilter = this.dateForm.valueChanges.pipe(
-    //   startWith(''),
-    //   map(value => this.countryList.filter(ele => ele.toLowerCase().includes(value.countrydropdown?.toLowerCase()))),
-    // )
 
 
 
   }
-  // ngAfterViewInit() {
-  //   this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.Amountdonated)))
 
-  //   this.filterData.dataSource.paginator = this.paginator;
-
-
-  //   this.filterData.dataSource.sort = this.sort;
-  //   this.filterData.dataSource.sub=this.subtotal
-
-  // }
   updatePagination() {
 
 
@@ -117,9 +96,7 @@ data:any
   editdetails(element: any) {
 
   }
-  deletedetails(element: any) {
 
-  }
 
   viewDetails(id: any) {
    
@@ -160,49 +137,50 @@ data:any
     return data.reduce((previousValue: any, currentValue: any) => Number(previousValue) + Number(currentValue),0)
   }
 
+  basicfilter(filtervalues:any){
+    this.filterData.gridData = filtervalues;
+    this.filterData.dataSource = this.dataSource;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.filterData.sort = this.sort;
+    this.filterData.total = this.total;
+    this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
+    this.filterData.dataSource.sub = this.subtotal
+  }
+
   
 
   manualcompare(event: any) {
     let filterdata=  this.filterData.dataSource.filteredData && this.data
+    let [symbol, value] = [event.target.value[0], event.target.value.slice(1, event.target.value.length)]
 
+    
    
-    // console.log(filterdata);
+    if(event.target.value[1]=='=')
+    {
+       [symbol, value] = [event.target.value.slice(0,1), event.target.value.slice(1, event.target.value.length)]
+    }
+    
+ console.log(symbol);
     
 
-    const [symbol, value] = [event.target.value[0], event.target.value.slice(1, event.target.value.length)]
 
     if (event.target.value.length === 0) {
 
       this.dataSource = new MatTableDataSource<any>(filterdata)
-      this.filterData.gridData = filterdata;
-      this.filterData.dataSource = this.dataSource;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      this.filterData.sort = this.sort;
-      this.filterData.total = this.total;
-      this.filterData.dataSource.paginator = this.paginator;
-      this.filterData.dataSource.sort = this.sort;
-      this.filterData.dataSource.sub = this.subtotal
+     this.basicfilter(filterdata)
       this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.donarId.donationAmount)))
 
       return
     }
 
-    if (![">", "<"].includes(symbol)) {
+    if (![">", "<","="].includes(symbol)) {
 
 
       filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) === Number(event.target.value))
       this.dataSource = new MatTableDataSource<any>(filterdata)
-      this.filterData.gridData = filterdata;
-      this.filterData.dataSource = this.dataSource;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      this.filterData.sort = this.sort;
-      this.filterData.total = this.total;
-
-      this.filterData.dataSource.paginator = this.paginator;
-      this.filterData.dataSource.sort = this.sort;
-      this.filterData.dataSource.sub = this.subtotal
+      this.basicfilter(filterdata)
       this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.donarId.donationAmount)))
 
 
@@ -210,23 +188,27 @@ data:any
     }
 
     if (symbol === ">") {
+      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) > value)
+    }
+
+    else if (symbol === "<") {
+      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) < value)
+    }
+    else if (symbol === "<=") {
+      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) <= value)
+    }
+    else if (symbol === ">=") {
       filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) >= value)
     }
-    else if (symbol === "<") {
-      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) <= value)
+    else if (symbol === "=") {
+      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) == value)
+    }
+    else if (symbol === "==") {
+      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) == value)
     }
 
     this.dataSource = new MatTableDataSource<any>(filterdata)
-    this.filterData.gridData = filterdata;
-    this.filterData.dataSource = this.dataSource;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.filterData.sort = this.sort;
-    this.filterData.total = this.total;
-    this.filterData.sub = this.subtotal;
-    this.filterData.dataSource.paginator = this.paginator;
-    this.filterData.dataSource.sort = this.sort;
-    this.filterData.dataSource.sub = this.subtotal
+    this.basicfilter(filterdata)
     this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.donarId.donationAmount)))
 
   }
@@ -278,14 +260,7 @@ data:any
         filters=this.countryfilter(filters)
       }
       this.dataSource = new MatTableDataSource<any>(filters)
-      this.filterData.gridData = filters;
-      this.filterData.dataSource = this.dataSource;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      this.filterData.sort = this.sort;
-      this.filterData.total = this.total;
-      this.filterData.sub = this.subtotal;
-      this.filterData.dataSource.paginator = this.paginator;
+      this.basicfilter(filters)
       this.filterData.dataSource.sort = this.sort;
       this.filterData.dataSource.sub = this.subtotal
       this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.donarId.donationAmount)))
@@ -300,5 +275,46 @@ data:any
   countryfilter(element:any){
     let reg=element.filter((ele:any)=>ele.countryName===this.dateForm.value.countrydropdown)
     return reg
+  }
+  
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
+  }
+  
+  deletedetails(id: any) {
+
+    // const body = {
+    //   "coursesId": id
+    // }
+
+    // const dialogref = this.dialog.open(DialogPopupComponent, {
+    //   data: {
+    //     title: "Delete Confirmation",
+    //     message: "Are You Sure You Want To Delete this Course ?"
+    //   },
+    //   width: "30%"
+    // })
+
+    // dialogref.afterClosed().subscribe(data => {
+    //   if (data) {
+    //     this.AddCourseService.deletecourse(body).subscribe({
+    //       next: (response) => {
+    //         this.openSnackBar(response)
+    //         this.addCourseForm.reset()
+    //         this.getdata()
+    //       },
+    //       error: (error) => {
+    //         console.error(error.message);
+    //       }
+    //     })
+    //     return
+    //   }
+
+    // })
+
+
+
   }
 }

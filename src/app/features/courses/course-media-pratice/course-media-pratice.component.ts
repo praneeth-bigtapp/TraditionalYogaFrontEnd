@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
@@ -52,56 +53,14 @@ export class CourseMediaPraticeComponent implements OnInit {
 
   displaycontent: boolean = false
 
-  editorConfig: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: '7rem',
-    minHeight: '0',
-    maxHeight: 'auto',
-    width: 'auto',
-    minWidth: '0',
-    translate: 'yes',
-    enableToolbar: true,
-    showToolbar: true,
-    placeholder: 'Enter text here...',
-    defaultParagraphSeparator: '',
-    defaultFontName: '',
-    defaultFontSize: '',
-    fonts: [
-      { class: 'arial', name: 'Arial' },
-      { class: 'times-new-roman', name: 'Times New Roman' },
-      { class: 'calibri', name: 'Calibri' },
-      { class: 'comic-sans-ms', name: 'Comic Sans MS' }
-    ],
-    customClasses: [
-      {
-        name: 'quote',
-        class: 'quote',
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1',
-      },
-    ],
-    // uploadUrl: 'v1/image',
-
-    toolbarHiddenButtons: [
-      ['bold', 'italic'],
-      ['fontSize']
-    ]
-  };
+  
 
   displayedColumns = ['id', 'title', 'description', 'uploadMediaFile', 'duration', 'metaKeyword', 'buttons']
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
     private service: CoursesService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar, private dialog: MatDialog
   ) {
 
 
@@ -162,11 +121,7 @@ export class CourseMediaPraticeComponent implements OnInit {
     })
   }
 
-  openSnackBar(data: any) {
-    this._snackBar.open(data.message, 'Close', {
-      duration: 2 * 1000,
-    });
-  }
+
   paragraphchange() {
 
     this.paragrapherror = this.addmediaform.value.paragraph.length === 0 ? true : false
@@ -269,8 +224,45 @@ export class CourseMediaPraticeComponent implements OnInit {
   editdetails(element:any){
 
   }
-  deletedetails(element:any){
-    
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
+  }
+  
+  deletedetails(id: any) {
+
+    // const body = {
+    //   "coursesId": id
+    // }
+
+    // const dialogref = this.dialog.open(DialogPopupComponent, {
+    //   data: {
+    //     title: "Delete Confirmation",
+    //     message: "Are You Sure You Want To Delete this Course ?"
+    //   },
+    //   width: "30%"
+    // })
+
+    // dialogref.afterClosed().subscribe(data => {
+    //   if (data) {
+    //     this.AddCourseService.deletecourse(body).subscribe({
+    //       next: (response) => {
+    //         this.openSnackBar(response)
+    //         this.addCourseForm.reset()
+    //         this.getdata()
+    //       },
+    //       error: (error) => {
+    //         console.error(error.message);
+    //       }
+    //     })
+    //     return
+    //   }
+
+    // })
+
+
+
   }
 
 

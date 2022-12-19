@@ -29,7 +29,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
   imports: [
     CommonModule,
     DonationManagementRoutingModule,
-
+    SharedModule,
     MatSortModule,
     MatTableModule,
     MatSelectModule,
@@ -46,7 +46,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatTooltipModule,
     MatIconModule,
     MatAutocompleteModule,
-    MatSortModule
+    MatSortModule,
+    SharedModule,
+    MatDialogModule,
   ]
 })
 export class DonationManagementModule { }
