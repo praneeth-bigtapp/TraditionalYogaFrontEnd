@@ -159,7 +159,7 @@ data:any
    
     if(event.target.value[1]=='=')
     {
-       [symbol, value] = [event.target.value.slice(0,1), event.target.value.slice(1, event.target.value.length)]
+       [symbol, value] = [event.target.value.slice(0,2), event.target.value.slice(1, event.target.value.length)]
     }
     
  console.log(symbol);
@@ -200,10 +200,10 @@ data:any
     else if (symbol === ">=") {
       filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) >= value)
     }
-    else if (symbol === "=") {
+    else if (symbol === "==") {
       filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) == value)
     }
-    else if (symbol === "==") {
+    else if (symbol === "=") {
       filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) == value)
     }
 
