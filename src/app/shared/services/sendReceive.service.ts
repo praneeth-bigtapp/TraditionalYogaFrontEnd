@@ -164,6 +164,17 @@ export class SendReceiveService {
     else if (subMenuId == 33) {
       this.router.navigateByUrl("hidemenuoption");
     }
+<<<<<<< HEAD
+=======
+    else if (subMenuId == 35) {
+      this.router.navigateByUrl("pearlofwidsom");
+    }
+    else if (subMenuId == 36) {
+
+      this.router.navigateByUrl("MycourseMatrieals");
+
+    }
+>>>>>>> 4becb9597bce011c54058e4060965cbd225ce072
     else {
       console.log(" Sub Menu is not Mapped ")
       this.router.navigateByUrl("blank")
