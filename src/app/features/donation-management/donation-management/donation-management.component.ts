@@ -49,6 +49,7 @@ data:any
   constructor(private formbuilder: FormBuilder, private router: Router, private service: DonationserviceService, private _snackBar: MatSnackBar, private dialog: MatDialog) { }
   
   ngOnInit(): void {
+   
     this.getallregions()
     this.getallData()
     this.getallcountry()
@@ -56,11 +57,12 @@ data:any
 
       fromdate: [null, Validators.compose([Validators.required])],
       todate: [null, Validators.compose([Validators.required])],
-      countrydropdown: [null],
-      regiondropdown: [null],
+      countrydropdown: null,
+      regiondropdown: null,
 
 
     })
+   
     // this.dataSource = new MatTableDataSource<any>(this.data)
 
     this.filterData = {
@@ -190,7 +192,7 @@ data:any
     }
 
      if (symbol === "==") {
-      console.log('otu');
+      
       
       filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) == value)
     }
@@ -239,6 +241,9 @@ data:any
       next: (response) => {
         this.countryList= response;
         // this.dataSource = new MatTableDataSource<any>(this.data);
+        if(this.dateForm.value.regiondropdown!=null){
+          this.countryList=this.countryList.filter((ele:any)=>ele.regionId.regionId===this.dateForm.value.regiondropdown)
+        }
         console.log(this.countryList);
 
 

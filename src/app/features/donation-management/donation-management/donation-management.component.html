@@ -41,7 +41,7 @@
               <label>Region</label>
 
               <mat-form-field appearance="outline">
-                <mat-select matNativeControl formControlName="regiondropdown">
+                <mat-select matNativeControl formControlName="regiondropdown" (selectionChange)="getallcountry()">
                   <mat-option *ngFor="let item of region" [value]="item.regionId">{{item.regionName | titlecase}}
                   </mat-option>
                 </mat-select>
