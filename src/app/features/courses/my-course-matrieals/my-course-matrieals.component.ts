@@ -28,6 +28,7 @@ export class MyCourseMatriealsComponent implements OnInit {
   media: any
   datas: any
   filerror!: boolean
+  filedata!: any
   tablevalues: any
   newcatogeries = false
   data = [{ 'S_No': '1', 'title': 'Traditional Yoga', 'date': '2022-22-12', "mtype": "images" },
@@ -53,7 +54,7 @@ export class MyCourseMatriealsComponent implements OnInit {
       others: [null, Validators.compose([Validators.required])],
       catogery: [null, Validators.compose([Validators.required])],
       addMedia: [null, Validators.compose([Validators.required])],
-      upload: [null, Validators.compose([Validators.required])],
+      upload: [null],
       videoLink: [null, Validators.compose([Validators.required])],
       message: [null, Validators.compose([Validators.required])],
       coursetitle: [null, Validators.compose([Validators.required])],
@@ -88,9 +89,6 @@ export class MyCourseMatriealsComponent implements OnInit {
     else {
       this.newcatogeries = false
     }
-    console.log(this.FormDeatils.value)
-    console.log(this.othervalue)
-    console.log(this.newcatogeries)
   }
   getcoursedetails() {
     this.service.getcoursematerials().subscribe({
@@ -183,9 +181,18 @@ export class MyCourseMatriealsComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
   onsubmit() {
-    this.onfilechange()
+    this.onfilechange(null)
+    console.log(this.FormDeatils.value);
 
 
+    if (this.FormDeatils.invalid)
+      return this.FormDeatils.markAllAsTouched()
+
+    this.FormDeatils.value.addMedia = this.filedata
+
+    const { courses, others, category, addMedia, upload, videoLink, message, coursetitle } = this.FormDeatils.value
+
+    console.log({ courses, others, category, addMedia, upload, videoLink, message, coursetitle });
 
     if (this.iseditable) {
 
@@ -193,17 +200,44 @@ export class MyCourseMatriealsComponent implements OnInit {
       return
     }
 
+    const body = {
+      "coursesId": {
+        "coursesId": 3,
+        "categorieId": {
+          "categoriesId": 3
+        }
+
+      },
+      "addCategory": "Testing purpose-2",
+      "addDescription": "testing ",
+      "materialCategoryId": {
+        "materialCategoryId": 2
+
+      },
+      "mediaId": {
+        "mediaId": 2
+      },
+      "videoLink": "https://www.youtube.com/watch?v=18PCf6aq5wI&list=RDMM18PCf6aq5wI&start_radio=1",
+      "fileUpload": "",
+      "message": "Tetsing-2"
+
+
+    }
+
     if (this.filerror == false) {
       this.openSnackBar('Data Added Successfully')
       this.FormDeatils.reset()
     }
   }
-  onfilechange() {
+  onfilechange(event: any) {
     this.filerror = this.FormDeatils.value.upload === null ? true : false
-
+    if (event) {
+      this.filedata = event.target.files[0].name
+      return
+    }
   }
-  openSnackBar(message: any) {
-    this._snackBar.open(message, 'Close', {
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
       duration: 2 * 1000,
     });
   }

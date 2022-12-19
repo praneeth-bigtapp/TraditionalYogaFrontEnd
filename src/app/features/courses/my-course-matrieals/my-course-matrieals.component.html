@@ -22,13 +22,13 @@
         <div class="card-body bg-white">
 
             <div class="card-body bg-white pb-2">
-                <form [formGroup]="FormDeatils" (submit)="onsubmit()">
+                <form [formGroup]="FormDeatils" (ngSubmit)="onsubmit()">
                     <div class=" pt-3 row ">
-                        <div class="col-4">
+                        <div class="col-3">
                             <label>Course:</label>
 
                             <mat-form-field class="pe-4" appearance="outline">
-                                <mat-select matNativeControl formControlName="courses">
+                                <mat-select matNativeControl formControlName="courses" [disabled]="iseditable">
                                     <mat-option *ngFor="let item of courses"
                                         [value]="item.coursesId">{{item.coursesName}}
                                     </mat-option>
@@ -38,12 +38,12 @@
                                 </mat-error>
                             </mat-form-field>
                         </div>
-                        <div class="col-4">
-                            <label>Course Material Category:</label>
+                        <div class="col-3">
+                            <label>Course Material Category</label>
                             <mat-form-field class="pe-4" appearance="outline">
 
 
-                                <mat-select matNativeControl formControlName="catogery" (change)="newOthers()"
+                                <mat-select matNativeControl formControlName="catogery" (selectionChange)="newOthers()"
                                     [disabled]="iseditable" [(ngModel)]="othervalue">
                                     <mat-option *ngFor="let item of catogeries" [value]="item.materialCategoryId">
                                         {{item.categoryName}}
@@ -54,16 +54,15 @@
                                 </mat-error>
                             </mat-form-field>
                         </div>
-                        <div class="col-4">
-                            <label>Add Media:</label>
+                        <div class="col-3">
+                            <label>Add Media</label>
 
                             <mat-form-field class="pe-4" appearance="outline">
 
 
                                 <mat-select matNativeControl formControlName="addMedia" [disabled]="iseditable">
-                                    <mat-option value="" selected></mat-option>
-                                    <option *ngFor="let item of media" [value]="item.mediaId">{{item.mediaType}}
-                                    </option>
+                                    <mat-option *ngFor="let item of media" [value]="item.mediaId">{{item.mediaType}}
+                                    </mat-option>
                                 </mat-select>
                                 <mat-error *ngIf="FormDeatils.controls['addMedia'].hasError('required')">
                                     Media is mandatory
@@ -72,13 +71,8 @@
 
                             </mat-form-field>
                         </div>
-                    </div>
-                    <div class=" pt-3 row ">
-
-
-
-                        <div class="col-4" *ngIf="newcatogeries">
-                            <label>Others Category:</label>
+                        <div class="col-3" *ngIf="newcatogeries">
+                            <label>Others Category</label>
                             <mat-form-field class="pe-4" appearance="outline">
 
                                 <input matInput formControlName="others" type="text" />
@@ -88,6 +82,8 @@
 
                             </mat-form-field>
                         </div>
+                    </div>
+                    <div class=" pt-3 row ">
                         <!-- <div class="col-4">
                         <label>Course Material Title:</label>
     
@@ -104,7 +100,7 @@
                     </div>
                     <div class="pt-3 row">
                         <div class="col-4">
-                            <label>Course Material Title:</label>
+                            <label>Course Material Title</label>
 
                             <mat-form-field class="pe-4" appearance="outline">
 
@@ -117,7 +113,7 @@
                         </div>
 
                         <div class="col-4">
-                            <label>Video Link:</label>
+                            <label>Video Link</label>
 
                             <mat-form-field class="pe-4" appearance="outline">
 
@@ -129,10 +125,10 @@
                             </mat-form-field>
                         </div>
                         <div class="col-4 ">
-                            <label>Upload:</label>
+                            <label>Upload</label>
 
                             <input class="border" type="file" id="formFile" formControlName="upload" required="true"
-                                (change)="onfilechange()" />
+                                (change)="onfilechange($event)" />
                             <mat-error *ngIf="filerror" class="ms-3">File is mandatory</mat-error>
                             <!-- <mat-error *ngIf="FormDeatils.controls['upload'].hasError('required')">
                                 Please Upload the File
@@ -144,7 +140,7 @@
                     <div class="pt-3 row align-items-center">
 
                         <div class="col-6">
-                            <label>Message:</label>
+                            <label>Message</label>
 
                             <mat-form-field class="pe-4" appearance="outline">
 
