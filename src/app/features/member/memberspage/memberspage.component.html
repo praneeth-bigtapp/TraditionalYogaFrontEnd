@@ -365,7 +365,7 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
-            <mat-paginator [hidden]="!displaycontent" class="bg-transparent" [pageSizeOptions]="[10,25, 50,75, 100]"
+            <mat-paginator [hidden]="!displaycontent" class="card-body" [pageSizeOptions]="[10,25, 50,75, 100]"
                 aria-label="Select page">
             </mat-paginator>
         </div>
