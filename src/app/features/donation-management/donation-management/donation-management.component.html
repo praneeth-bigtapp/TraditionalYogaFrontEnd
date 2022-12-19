@@ -14,7 +14,7 @@
         <form class="col mt-3 d-flex  flex-wrap" [formGroup]="dateForm" (submit)="filterDate()">
           <div class="row">
             <div class="col-md-4">
-              <label>From date:</label>
+              <label>From date</label>
               <mat-form-field class="" appearance="outline">
 
                 <input matInput formControlName="fromdate" placeholder="From date" type="date">
@@ -22,7 +22,7 @@
               </mat-form-field>
             </div>
             <div class="col-md-4">
-              <label>To date:</label>
+              <label>To date</label>
               <mat-form-field class="" appearance="outline">
 
                 <input matInput formControlName="todate" placeholder="To date" type="date">
@@ -34,7 +34,7 @@
 
             <div class="col-md-4">
 
-              <label>Region:</label>
+              <label>Region</label>
 
               <mat-form-field appearance="outline">
                 <mat-select matNativeControl formControlName="regiondropdown">
@@ -43,38 +43,25 @@
                 </mat-select>
               </mat-form-field>
 
-              <!-- <label>Region:</label>
-          <mat-form-field appearance="outline" class="">
             
-            <input type="text" placeholder="Pick one" aria-label="Region" matInput
-          formControlName="regiondropdown" (valueChange)="updatePagination()"
-          [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" [matAutocomplete]="auto">
-          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-              <mat-option *ngFor="let country of countryfilter |async " [value]="country">
-                  {{country}}
-              </mat-option>
-          </mat-autocomplete>
-            <input matInput type="text" formControlName="regiondropdown">
-          </mat-form-field> -->
             </div>
 
             <div class="col-md-4">
-              <label>Country:</label>
-              <mat-form-field appearance="outline" class="">
 
-                <input type="text" placeholder="Pick one" aria-label="Country" matInput
-                  formControlName="countrydropdown" (keyup)="updatePagination()"
-                  [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" [matAutocomplete]="auto">
-                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                  <mat-option *ngFor="let country of countryfilter |async " [value]="country">
-                    {{country}}
+
+              <label>Country</label>
+
+              <mat-form-field appearance="outline">
+                <mat-select matNativeControl  formControlName="countrydropdown" >
+                  <mat-option *ngFor="let item of countryList" [value]="item.countryName">{{item.countryName | titlecase}}
                   </mat-option>
-                </mat-autocomplete>
+                </mat-select>
               </mat-form-field>
+             
             </div>
 
             <div class=" col-md-4 mt-2">
-              <button type="button" class="btn btn-outline-secondary mt-3  btn-rounded d-inline-block "> Submit
+              <button type="submit" class="btn btn-outline-secondary mt-3  btn-rounded d-inline-block "> Submit
               </button>
             </div>
           </div>
@@ -111,21 +98,21 @@
           </label>
 
           <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value" disabled
-            [filter]="filterData" />
+            [filter]="filterData" disabled="true" />
         </th>
         <td mat-cell *matCellDef="let i=index" class="col-1 text-center"> {{i+1}} </td>
       </ng-container>
 
 
-      <ng-container matColumnDef="Date">
-        <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
             Date
           </label>
 
           <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
             [filter]="filterData" />
         </th>
-        <td mat-cell *matCellDef="let element" class="col-1 text-center"> {{element.Date}} </td>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.date}} </td>
       </ng-container>
 
 
@@ -137,11 +124,11 @@
           <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
             [filter]="filterData" />
         </th>
-        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.DonorName}} </td>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{DonorName}} </td>
       </ng-container>
 
 
-      <ng-container matColumnDef="Country">
+      <ng-container matColumnDef="country">
         <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
             Country
           </label>
@@ -149,7 +136,7 @@
           <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
             [filter]="filterData" />
         </th>
-        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.Country}} </td>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.donarId.country}} </td>
       </ng-container>
       <!-- <ng-container matColumnDef="currency">
         <th mat-header-cell *matHeaderCellDef class="col-1 text-center">  <label mat-sort-header>
@@ -161,7 +148,7 @@
         <td mat-cell *matCellDef="let element" class="col-1 text-center"> {{element.currency}} </td>
       </ng-container> -->
 
-      <ng-container matColumnDef="Amountdonated">
+      <ng-container matColumnDef="amountDonated">
         <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
             Amount (Rs)
           </label>
@@ -170,7 +157,7 @@
             [filter]="filterData" /> -->
           <input type="text" (keyup)="manualcompare($event)" />
         </th>
-        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.Amountdonated}} </td>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.donarId.donationAmount}} </td>
       </ng-container>
       <ng-container matColumnDef="pan">
         <th mat-header-cell *matHeaderCellDef class="col-2 text-center"><label mat-sort-header>
@@ -180,7 +167,7 @@
           <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[5].Value"
             [filter]="filterData" />
         </th>
-        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.pan}} </td>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{pan}} </td>
       </ng-container>
 
 
@@ -190,12 +177,12 @@
             Actions
           </label>
           <input type="text" (keyup)="updatePagination()" disabled [(ngModel)]="filterData.filterColumnNames[6].Value"
-            [filter]="filterData" />
+            [filter]="filterData" disabled="true" />
         </th>
 
 
         <td mat-cell *matCellDef="let element" class="text-center col-1 ml-5 mt-3">
-          <i class="fa-solid fa-eye fs-5 text-info" (click)="viewDetails(element)" matTooltip="View Course Activity"
+          <i class="fa-solid fa-eye fs-5 text-info" (click)="viewDetails(element.donarId.donarId)" matTooltip="View Course Activity"
             matTooltip="View"></i>
           <!-- <span matTooltip="Edit" (click)="editdetails(element)">
             <i class="fas fa-pencil-alt mx-4" aria-hidden="true"></i>
@@ -210,7 +197,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
-  <div class="bg-white d-flex  flex-row justify-content-end ">
+  <div class="bg-white d-flex  flex-row justify-content-end card-body">
     <mat-paginator class="" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
     </mat-paginator>
   </div>

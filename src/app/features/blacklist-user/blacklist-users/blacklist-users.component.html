@@ -1,4 +1,4 @@
-<div class="ConfigurationTypes_textpadding p-5">
+<div class="ConfigurationTypes_textpadding ">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -8,14 +8,14 @@
   </nav>
 
 
-<div class="card mt-5">
+<div class=" ">
     <div class="card-header text-white bg-secondary" >
       Blacklist Users
   </div>
 
-  <form class=" py-3 mb-4 card-body  bg-white " [formGroup]="blacklistForm" (ngSubmit)="onBlockUser()">
-    <div class="row">
-    <div class="col-6">
+  <form class="  mb-4 card-body bg-white " [formGroup]="blacklistForm" (ngSubmit)="onBlockUser()">
+    <div class="row py-3 px-4">
+    <div class="col-6 ">
       <label>Email Id to BlackList</label>
       <mat-form-field  appearance="outline">
         
@@ -54,7 +54,7 @@
   </div>
   
 
-  <div class=" card-body">
+  <div class=" ">
     <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
       aria-label="users">
 
@@ -81,18 +81,20 @@
       </ng-container>
 
       <ng-container matColumnDef="comments" >
-        <th mat-header-cell *matHeaderCellDef class="col-5"><label mat-sort-header> Comments</label>
+        <th mat-header-cell *matHeaderCellDef class="col-4"><label mat-sort-header> Comments</label>
           <input type="text" (keyup)="updatePagination()"
           [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" /></th>
-        <td mat-cell *matCellDef="let element" class="col-5"> {{element.comments}} </td>
+        <td mat-cell *matCellDef="let element" class="col-4"> {{element.comments}} </td>
       </ng-container>
 
+      
+
       <ng-container matColumnDef="action" class="col-2">
-        <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>Actions</label>
+        <th mat-header-cell *matHeaderCellDef class="col-3 text-center"> <label mat-sort-header>Actions</label>
           <input  type="text" (keyup)="updatePagination()"
           [filter]="filterData"  class="mx-2" disabled="true"/>
           </th>
-        <td mat-cell *matCellDef="let element" class="col-2">
+        <td mat-cell *matCellDef="let element" class="col-3 text-center">
           <span matTooltip="Unblock" style="cursor: pointer;" class=""
           (click)="unBlockUser(element)"> <i class="far fa-trash-alt" aria-hidden="true"></i> </span>
           <span matTooltip="Edit" (click)="editdetails(element)">
