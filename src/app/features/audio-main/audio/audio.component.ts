@@ -25,7 +25,7 @@ export class AudioComponent implements OnInit {
   //   description: [null, Validators.compose([Validators.required])],
 
 
-  constructor(private formbuilder: FormBuilder, private course: AudioService) {
+  constructor(private formbuilder: FormBuilder, private audio: AudioService) {
     this.Audiomanagement = this.formbuilder.group({
       category: [null, Validators.compose([Validators.required])],
      
@@ -36,7 +36,7 @@ export class AudioComponent implements OnInit {
       duration: [null, Validators.compose([Validators.required])],
       meta: [null, Validators.compose([Validators.required])],
     })
-    this.course.getcourse().subscribe({
+    this.audio.getcourse().subscribe({
       next: (response) => {
 
         this.courses = response
@@ -63,7 +63,7 @@ export class AudioComponent implements OnInit {
 
   }
   getaudiocategory(){
-    this.course.getaudio().subscribe({
+    this.audio.getaudio().subscribe({
       next: (response: any) => {
 
         this. audiocategory = response
@@ -134,23 +134,38 @@ export class AudioComponent implements OnInit {
       return this.Audiomanagement.markAllAsTouched()
 
     const body = {
+      "courseId": 1,
       "uploadCategory": this.Audiomanagement.value.category,
+      "audioCategoryId": this.Audiomanagement.value.upload,
       "audioFile": this.Audiomanagement.value.file,
-"audioCategoryId": this.Audiomanagement.value.pload,
+
       "audioTitle": this.Audiomanagement.value.title,
       "audioDesc": this.Audiomanagement.value.description,
       "audioDuration": this.Audiomanagement.value.duration,
       "metakey": this.Audiomanagement.value.meta,
+      "active": ""
+
+    //   {
+    //     "courseId": 1,
+    //     "audioCategoryId": 1,
+    //     "uploadCategory": "File link",
+    //     "audioFile": "audio/audio2.mp3",
+    //     "audioTitle": "dharanas 2",
+    //     "audioDesc": "Audio audioDesc",
+    //     "audioDuration": 18,
+    //     "metakey": "meta 2",
+    //     "active": "Y"
+    // }
       // "audioCategoryId":this.Audiomanagement.value.meta,
     }
     console.log(this.Audiomanagement);
 
-    this.course.audiopost(body).subscribe({
+    this.audio.audiopost(body).subscribe({
       next: (response) => {
         console.log(response)
         this.Audiomanagement.reset()
 
-        // this.getTestimonial()
+        this.getaudiocategory()
 
       },
       error: (error) => {

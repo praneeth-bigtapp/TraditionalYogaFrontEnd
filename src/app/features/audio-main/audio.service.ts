@@ -8,7 +8,7 @@ export class AudioService extends BaseHttp {
   getcourseURL="courseList/getAll?operation=coursesList";
   getcategory="course/getAll?operation=audio";
 
-    postaudioURL="course/audio?operation=add"
+    postaudioURL="course/audio?operation=add";
 
   getcourse() {
     return this.get(this.getcourseURL)

@@ -64,7 +64,7 @@
                     <mat-form-field appearance="outline">
                         
                         <mat-select  formControlName="category">
-                            <mat-option value="category"  *ngFor="let element of audiocategory">{{element.uploadCategory}}</mat-option>
+                            <mat-option [value]="element.id"  *ngFor="let element of audiocategory">{{element.uploadCategory}}</mat-option>
                       
                          
                         </mat-select>
@@ -86,7 +86,7 @@
                         <!-- <mat-label>Audio file</mat-label> -->
                         <mat-select  formControlName="upload">
                           
-                            <mat-option value="volvo" *ngFor="let element of audiocategory">{{element.audioCategoryId}}</mat-option></mat-select>
+                            <mat-option [value]="element.id"  *ngFor="let element of audiocategory">{{element.audioCategoryId}}</mat-option></mat-select>
                             
                         <mat-error [hidden]=" !Audiomanagement.get('upload')?.hasError('required')  ">
                             Audio is mandatory
@@ -102,7 +102,7 @@
 
                     <label>Upload Audio File:</label>
                     <!-- <mat-form-field appearance="outline" class="ms-3 "> -->
-                    <input type="file" id="file" (change)="filechange($event)" accept=" image/*" class="border"
+                    <input type="file"  (change)="filechange($event)" accept=" image/*" class="border"
                         required="true" formControlName="file" />
 
                     <!-- </mat-form-field> -->
