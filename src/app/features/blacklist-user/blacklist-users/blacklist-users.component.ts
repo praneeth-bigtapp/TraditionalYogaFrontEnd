@@ -121,7 +121,7 @@ export class BlacklistUsersComponent implements OnInit {
    
   }
   editdetails(element:any){
-    
+    this.formdisplay=true 
     this.blacklistForm.setValue({emailId:element.blacklistUserEmail,
     comments:element.comments
     })
@@ -133,6 +133,7 @@ export class BlacklistUsersComponent implements OnInit {
   onupdate(){
     this.blackbtn=true
     this.updatebtn=false
+    this.blacklistForm.reset()
   }
   oncancel(){
     this.blacklistForm.reset()
