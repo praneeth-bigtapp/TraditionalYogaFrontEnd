@@ -164,6 +164,9 @@ export class SendReceiveService {
     else if (subMenuId == 33) {
       this.router.navigateByUrl("hidemenuoption");
     }
+    else if (subMenuId == 35) {
+      this.router.navigateByUrl("pearlofwidsom");
+    }
     else {
       console.log(" Sub Menu is not Mapped ")
       this.router.navigateByUrl("blank")
