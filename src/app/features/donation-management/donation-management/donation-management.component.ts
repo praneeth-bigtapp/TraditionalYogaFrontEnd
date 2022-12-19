@@ -159,15 +159,17 @@ data:any
    
     if(event.target.value[1]=='=')
     {
-       [symbol, value] = [event.target.value.slice(0,2), event.target.value.slice(1, event.target.value.length)]
+       [symbol, value] = [event.target.value.slice(0,2), event.target.value.slice(2, event.target.value.length)]
     }
     
  console.log(symbol);
+ console.log(value);
+ 
     
 
 
     if (event.target.value.length === 0) {
-
+      
       this.dataSource = new MatTableDataSource<any>(filterdata)
      this.basicfilter(filterdata)
       this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.donarId.donationAmount)))
@@ -175,9 +177,9 @@ data:any
       return
     }
 
-    if (![">", "<","="].includes(symbol)) {
+    if (![">", "<","=",'<=',">=","=="].includes(symbol)) {
 
-
+      
       filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) === Number(event.target.value))
       this.dataSource = new MatTableDataSource<any>(filterdata)
       this.basicfilter(filterdata)
@@ -187,26 +189,31 @@ data:any
       return
     }
 
-    if (symbol === ">") {
-      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) > value)
-    }
-
-    else if (symbol === "<") {
-      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) < value)
-    }
-    else if (symbol === "<=") {
-      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) <= value)
-    }
-    else if (symbol === ">=") {
-      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) >= value)
-    }
-    else if (symbol === "==") {
+     if (symbol === "==") {
+      console.log('otu');
+      
       filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) == value)
     }
     else if (symbol === "=") {
       filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) == value)
     }
+    else if (symbol === ">=") {
+      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) >= value)
+    }
 
+    else if (symbol === "<=") {
+      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) <= value)
+    }
+    else if (symbol === "<") {
+      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) < value )
+    }
+    else if (symbol === ">") {
+      
+      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) > value)
+    }
+   
+    console.log(filterdata);
+    
     this.dataSource = new MatTableDataSource<any>(filterdata)
     this.basicfilter(filterdata)
     this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.donarId.donationAmount)))

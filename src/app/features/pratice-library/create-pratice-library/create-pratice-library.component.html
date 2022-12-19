@@ -20,7 +20,7 @@
         </div>
         <div class="card-body bg-white  py-2">
             <!-- <hr /> -->
-            <form [formGroup]="addmediaform" class="me-5" (ngSubmit)="addmedia()">
+            <form [formGroup]="addmediaform" class="me-5" (ngSubmit)="addmedia()"id='inputform'>
 
 
                 <div class="row">
@@ -226,7 +226,7 @@
                         <div class="d-flex flex-wrap justify-content-evenly align-items-center">
                             <i class="fa-solid fa-eye fs-5 text-info" (click)="viewdetails(element)"
                                 matTooltip="View Course Activity" matTooltip="View"></i>
-                            <span matTooltip="Edit" (click)="editdetails(element)">
+                          <span matTooltip="Edit" (click)="editdetails(element)">
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                             </span>
                             <span matTooltip="Delete" style="cursor: pointer;"
