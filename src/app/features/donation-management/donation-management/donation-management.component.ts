@@ -39,7 +39,7 @@ data:any
 
 
 
-  displayedColumns: string[] = ['S_No', 'date', 'DonorName', "country", "amountDonated", "pan", "ViewDetails"];
+  displayedColumns: string[] = ['S_No', 'date', 'DonorName', "country", "amountDonated", "panNumber", "ViewDetails"];
 
   total = 0;
   subtotal: number = 0

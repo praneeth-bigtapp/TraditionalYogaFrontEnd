@@ -129,7 +129,7 @@
           <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
             [filter]="filterData" />
         </th>
-        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{DonorName}} </td>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.donarId.donarName}} </td>
       </ng-container>
 
 
@@ -141,7 +141,7 @@
           <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
             [filter]="filterData" />
         </th>
-        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.donarId.country}} </td>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.donarId.countryId.countryName}} </td>
       </ng-container>
       <!-- <ng-container matColumnDef="currency">
         <th mat-header-cell *matHeaderCellDef class="col-1 text-center">  <label mat-sort-header>
@@ -164,7 +164,7 @@
         </th>
         <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.donarId.donationAmount}} </td>
       </ng-container>
-      <ng-container matColumnDef="pan">
+      <ng-container matColumnDef="panNumber">
         <th mat-header-cell *matHeaderCellDef class="col-2 text-center"><label mat-sort-header>
             PAN
           </label>
@@ -172,7 +172,7 @@
           <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[5].Value"
             [filter]="filterData" />
         </th>
-        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{pan}} </td>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.donarId.panNumber}} </td>
       </ng-container>
 
 

@@ -23,8 +23,8 @@
 
             <div class="card-body bg-white pb-2">
                 <form [formGroup]="FormDeatils" (ngSubmit)="onsubmit()">
-                    <div class=" pt-3 row ">
-                        <div class="col-3">
+                    <div class=" mt-3 row ">
+                        <div class="col-4">
                             <label>Course:</label>
 
                             <mat-form-field class="pe-4" appearance="outline">
@@ -38,7 +38,9 @@
                                 </mat-error>
                             </mat-form-field>
                         </div>
-                        <div class="col-3">
+                        </div>
+                        <div class=" mt-3 row ">
+                        <div class="col-4">
                             <label>Course Material Category</label>
                             <mat-form-field class="pe-4" appearance="outline">
 
@@ -54,7 +56,18 @@
                                 </mat-error>
                             </mat-form-field>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4" *ngIf="newcatogeries">
+                            <label>Others Category</label>
+                            <mat-form-field class="pe-4" appearance="outline">
+
+                                <input matInput formControlName="others" type="text" />
+                                <mat-error *ngIf="FormDeatils.controls['others'].hasError('required')">
+                                    Others is mandatory
+                                </mat-error>
+
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4">
                             <label>Add Media</label>
 
                             <mat-form-field class="pe-4" appearance="outline">
@@ -71,17 +84,7 @@
 
                             </mat-form-field>
                         </div>
-                        <div class="col-3" *ngIf="newcatogeries">
-                            <label>Others Category</label>
-                            <mat-form-field class="pe-4" appearance="outline">
-
-                                <input matInput formControlName="others" type="text" />
-                                <mat-error *ngIf="FormDeatils.controls['others'].hasError('required')">
-                                    Others is mandatory
-                                </mat-error>
-
-                            </mat-form-field>
-                        </div>
+                       
                     </div>
                     <div class=" pt-3 row ">
                         <!-- <div class="col-4">
