@@ -214,7 +214,7 @@
         <input type="text" (keyup)="updatePagination('courseId')"
             [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
     </th> -->
-                    <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
+                    <td mat-cell *matCellDef="let element" class="col-2 mx-2 text-center"> {{element.S_No}} </td>
                 </ng-container>
 
 
@@ -275,8 +275,7 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
-            <mat-paginator class="card-body" [pageSizeOptions]="[10,25, 50, 100,150,200]"
-                (page)="onpaginatechange($event)" aria-label="Select page">
+            <mat-paginator class="card-body" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
             </mat-paginator>
         </div>
     </div>
