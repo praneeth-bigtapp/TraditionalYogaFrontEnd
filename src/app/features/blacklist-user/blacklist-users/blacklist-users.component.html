@@ -19,11 +19,11 @@
  
   <form class="  mb-4 card-body bg-white " [formGroup]="blacklistForm" (ngSubmit)="onBlockUser()">
     <div class="row py-3 px-4">
-    <div class="col-6 ">
+    <div class="col-6 " >
       <label>Email Id to BlackList</label>
       <mat-form-field  appearance="outline">
         
-        <input matInput  autocomplete="off" formControlName="emailId">
+        <input matInput [disabled]="true"  autocomplete="off" formControlName="emailId" [readonly]="updatebtn">
         <mat-error *ngIf="blacklistForm.controls['emailId'].hasError('required')">
           Email Id is required
         </mat-error>

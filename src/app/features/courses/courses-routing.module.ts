@@ -15,7 +15,7 @@ const routes: Routes = [
 
   },
   {
-    path: "MycourseMatrieals", component: MyCourseMatriealsComponent
+    path: "courseMatrieals", component: MyCourseMatriealsComponent
   },
   {
     path: "ViewMycourseMatrieals/:id", component: ViewMycourseMatriealsComponent

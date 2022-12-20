@@ -10,6 +10,7 @@ import { DonationserviceService } from '../service/donationservice.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
+import { getLocaleMonthNames } from '@angular/common';
 
 @Component({
   selector: 'app-donation-management',
@@ -22,7 +23,7 @@ export class DonationManagementComponent implements OnInit {
   dateForm!: FormGroup
   filterData: any
   gridData: any
-
+date:any
 DonorName='Donar1'
 pan="ABCD2574"
 
@@ -51,7 +52,7 @@ data:any
   ngOnInit(): void {
    
     this.getallregions()
-    this.getallData()
+    this.getallData('')
     this.getallcountry()
     this.dateForm = this.formbuilder.group({
 
@@ -64,6 +65,7 @@ data:any
     })
    
     // this.dataSource = new MatTableDataSource<any>(this.data)
+
 
     this.filterData = {
       filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
@@ -105,7 +107,18 @@ data:any
     this.router.navigate(["viewdonation",id]);
     // this.getallData()
   }
-  getallData() {
+  getdate(){
+    let today=new Date()
+
+    this.date=today.getDate()+'-'+today.getMonth()+'-'+today.getFullYear()
+    console.log(this.date);
+    
+  }
+  getallData(variable:any) {
+
+    if(variable!='full'){
+      this.getdate()
+    }
     this.service.getdonationdetails().subscribe({
       next: (response) => {
         this.data = response;
@@ -255,6 +268,8 @@ data:any
   }
 
   filterDate() {
+    this.getallData('full')
+
     const fromdate = this.dateForm.value.fromdate
     const region=this.dateForm.value.regiondropdown
     const country=this.dateForm.value.countrydropdown

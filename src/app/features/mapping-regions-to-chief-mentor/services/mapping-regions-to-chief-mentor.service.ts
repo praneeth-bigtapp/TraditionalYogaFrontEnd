@@ -11,7 +11,7 @@ export class MappingRegionsToChiefMentorService extends BaseHttp {
 
   postregionURL = 'webSite/region?operation=add'
 
-  getregionURL = "webSite/getAll?operation=region"
+  getregionURL = "webSite/getAll?operation=regionsList" 
 
   getcheifmentorURL = 'student/getAllByCourse?type=chiefMentor&courseId=1'
 
