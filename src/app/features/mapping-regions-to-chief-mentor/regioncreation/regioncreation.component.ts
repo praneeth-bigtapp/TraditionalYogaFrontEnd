@@ -75,10 +75,6 @@ export class RegioncreationComponent implements OnInit {
 
         this.countryList = response
         this.countryList = this.countryList.map((ele: any) => ele.countryName)
-        console.log(response);
-
-
-        // this.countryfilter = data
       },
       error: (error) => {
         console.error(error.message);

@@ -20,6 +20,8 @@ export class AddCourseComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   filterData: any;
+
+  pageno: number = 1
   gridData = [];
   dataSource: any;
   displayedColumns: string[] = ['coursesId', 'category', 'coursesName', "courseDuration", "startDate", "endDate", "currentStatus", "Action"];
@@ -120,6 +122,7 @@ export class AddCourseComponent implements OnInit {
       next: (response) => {
         this.data = response
         this.data = this.data.reverse()
+
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
@@ -160,6 +163,16 @@ export class AddCourseComponent implements OnInit {
     this._snackBar.open(data.message, 'Close', {
       duration: 2 * 1000,
     });
+  }
+
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+
+    return
   }
 
   deletedetails(id: any) {

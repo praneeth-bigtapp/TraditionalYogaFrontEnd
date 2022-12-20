@@ -8,7 +8,10 @@
         </ol>
     </nav>
 
-    <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center" *ngIf="displaycontent">
+    <div class="d-flex mb-2 flex-wrap  justify-content-between align-items-center" *ngIf="displaycontent">
+        <h4>Total Number of Users Applied : <span>{{totalUserApplied | number}}</span></h4>
+        <h4>Number of users mapped : <span>{{totalUser | number}}</span></h4>
+
         <div class="">
             <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block border border-dark "
                 (click)="downloadexcel()">
@@ -16,7 +19,7 @@
             </button>
         </div>
     </div>
-    <br />
+    <br *ngIf="!displaycontent" />
     <div class="card  bg-secondary">
         <div class="card-header text-white bg-secondary">
             Members
@@ -43,18 +46,6 @@
                         Submit
                     </button>
                 </div> -->
-            </div>
-            <hr *ngIf="displaycontent" />
-            <div class="row align-items-center" *ngIf="displaycontent">
-                <div class="col-md-4">
-                    <h4>Total Number of Users Applied : <span>{{totalUserApplied | number}}</span></h4>
-                </div>
-                <div class="col-md-4">
-                    <h4>Number of users mapped : <span>{{totalUser | number}}</span></h4>
-                </div>
-                <div class="col-md-4">
-
-                </div>
             </div>
             <hr *ngIf="displaycontent" />
             <form class=" mx-2" [formGroup]="memberform" *ngIf="displaycontent" (ngSubmit)="memberformsubmit()">
@@ -94,14 +85,15 @@
                             <label>Enter Country</label>
                             <div class="col">
                                 <mat-form-field appearance="outline">
-                                    <mat-select formControlName="country">
-                                        <mat-option *ngFor="let country of countryList" [value]="country">
-                                            {{country}}</mat-option>
-                                    </mat-select>
-                                    <mat-error [hidden]="!memberform.get('country')?.hasError('required')">
-                                        Country is mandatory
-                                    </mat-error>
+                                    <input type="text" aria-label="Country" matInput formControlName="country"
+                                        [matAutocomplete]="country">
+                                    <mat-autocomplete autoActiveFirstOption #country="matAutocomplete">
+                                        <mat-option *ngFor="let country of countryfilter |async " [value]="country">
+                                            {{country}}
+                                        </mat-option>
+                                    </mat-autocomplete>
                                 </mat-form-field>
+
                             </div>
                         </div>
 
@@ -128,13 +120,13 @@
                         <label>Enter Region</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <mat-select formControlName="region">
-                                    <mat-option *ngFor="let country of countryList" [value]="country">
-                                        {{country}}</mat-option>
-                                </mat-select>
-                                <mat-error [hidden]="!memberform.get('region')?.hasError('required')">
-                                    Region is mandatory
-                                </mat-error>
+                                <input type="text" aria-label="Country" matInput formControlName="region"
+                                    [matAutocomplete]="region">
+                                <mat-autocomplete autoActiveFirstOption #region="matAutocomplete">
+                                    <mat-option *ngFor="let region of regionfilter |async " [value]="region">
+                                        {{region}}
+                                    </mat-option>
+                                </mat-autocomplete>
                             </mat-form-field>
                         </div>
                     </div>
@@ -242,7 +234,7 @@
                         <input type="text" (keyup)="updatePagination('courseId')" disabled
                             [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let i=index"> {{i+1}} </td>
+                    <td mat-cell class="text-center" *matCellDef="let i=index"> {{i+pageno}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="Image">
@@ -365,8 +357,8 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
-            <mat-paginator [hidden]="!displaycontent" class="card-body" [pageSizeOptions]="[10,25, 50,75, 100]"
-                aria-label="Select page">
+            <mat-paginator [hidden]="!displaycontent" class="card-body" (page)="onpaginatechange($event)"
+                [pageSizeOptions]="[1,10,25, 50,75, 100]" aria-label="Select page">
             </mat-paginator>
         </div>
     </div>

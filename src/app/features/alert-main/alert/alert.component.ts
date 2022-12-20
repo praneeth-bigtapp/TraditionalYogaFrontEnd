@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { AlertService } from '../service/alertservoce.service';
 
 @Component({
@@ -29,7 +31,7 @@ export class AlertComponent implements OnInit {
   issubmit: boolean = true
   displaycontent: boolean = false
   iseditable: boolean = false
-
+  pageno: number = 1
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -77,7 +79,8 @@ export class AlertComponent implements OnInit {
   constructor(
     private formbuilder: FormBuilder,
     private alertservice: AlertService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {
     this.alertform = this.formbuilder.group({
       alertsno: [null],
@@ -150,7 +153,14 @@ export class AlertComponent implements OnInit {
       }
     })
   }
-
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
   openSnackBar(data: any) {
     this._snackBar.open(data.message, 'Close', {
       duration: 2 * 1000,
@@ -178,16 +188,32 @@ export class AlertComponent implements OnInit {
     const body = {
       "alertId": id,
     }
-    this.alertservice.deletealert(body).subscribe({
-      next: (response) => {
-        this.openSnackBar({ message: "Alert Deleted" })
-        this.alertform.reset()
-        this.getdata()
+
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this Alert ?"
       },
-      error: (error) => {
-        console.error(error.message);
-      }
+      width: "30%"
     })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.alertservice.deletealert(body).subscribe({
+          next: (response) => {
+            this.openSnackBar({ message: "Alert Deleted" })
+            this.alertform.reset()
+            this.getdata()
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
+
+    })
+
 
   }
   editdetails(element: any) {

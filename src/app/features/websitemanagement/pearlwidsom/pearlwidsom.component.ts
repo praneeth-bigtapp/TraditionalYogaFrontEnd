@@ -19,7 +19,7 @@ export class PearlwidsomComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
 
-
+  pageno: number = 1
   wisdomform!: FormGroup
 
   isedit: boolean = false
@@ -85,6 +85,15 @@ export class PearlwidsomComponent implements OnInit {
         console.error(error.message);
       }
     })
+  }
+
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
   }
 
   openSnackBar(data: any) {

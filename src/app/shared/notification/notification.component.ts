@@ -32,6 +32,7 @@ export class NotificationComponent implements OnInit {
   displaycontent: boolean = false
   iseditable: boolean = false
   notificationtypes: any
+  pageno: number = 1
   constructor(
     private formbuilder: FormBuilder,
     private service: NotificationService,
@@ -72,6 +73,15 @@ export class NotificationComponent implements OnInit {
   updatePagination(col: any) {
     this.filterData.dataSource.paginator = this.paginator;
     this.filterData.dataSource.sort = this.sort
+  }
+
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
   }
 
   getdata() {

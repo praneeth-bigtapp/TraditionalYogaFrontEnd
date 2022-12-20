@@ -16,6 +16,7 @@ export class TaskCreateComponent implements OnInit {
   course!: any
 
   filedata!: any
+  pageno: number = 1
 
   constructor(
     public dialogRef: MatDialogRef<TaskCreateComponent>,
@@ -53,6 +54,15 @@ export class TaskCreateComponent implements OnInit {
 
   closeDialog() {
     this.dialogRef.close({ event: 'close', data: null });
+  }
+
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
   }
 
 

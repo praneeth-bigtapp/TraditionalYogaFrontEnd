@@ -30,6 +30,7 @@ export class OnlineexamComponent implements OnInit {
   displaycontent: boolean = false
 
   iseditable: boolean = false
+  pageno: number = 1
 
   typetestlist!: any
   testlevel!: any
@@ -94,6 +95,14 @@ export class OnlineexamComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
   updatePagination(col: any) {
     this.filterData.dataSource.paginator = this.paginator;
     this.filterData.dataSource.sort = this.sort

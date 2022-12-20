@@ -63,8 +63,9 @@ export class DonationviewdetailsComponent implements OnInit {
         const { amountDonated, modeOfPayment, date } = this.apidata
 
         const { donarId, donarName, address, email, contactNumber, indianCitizen, countryId, taxBenefits, identityProof, identityNumber, donationAmount, stripeCreditCard, cardName, message } = this.apidata.donarId
-
-        this.details.amount = amountDonated || "NIL"
+        console.log(this.apidata);
+        
+        this.details.amount = donationAmount || "NIL"
         this.details.donorname = donarName || "NIL"
         this.details.address = address || "NIL"
         this.details.email = email || "NIL"

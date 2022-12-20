@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 import { AudioService } from '../audio.service';
 
 @Component({
@@ -13,8 +14,8 @@ export class AudioComponent implements OnInit {
   filerror: boolean = false
   audiodata!: any
   courses!: any;
-  coursedata!:any
-  audiocategory!:any;
+  coursedata!: any
+  audiocategory!: any;
 
   // this. Audiomanagement = this.formbuilder.group({
   //   course: [null, Validators.compose([Validators.required])],
@@ -28,13 +29,13 @@ export class AudioComponent implements OnInit {
   constructor(private formbuilder: FormBuilder, private audio: AudioService) {
     this.Audiomanagement = this.formbuilder.group({
       category: [null, Validators.compose([Validators.required])],
-     
+
       file: [null, Validators.compose([Validators.required])],
       title: [null, Validators.compose([Validators.required])],
       upload: [null, Validators.compose([Validators.required])],
       description: [null, Validators.compose([Validators.required])],
       duration: [null, Validators.compose([Validators.required])],
-      meta: [null, Validators.compose([Validators.required])],
+      meta: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])],
     })
     this.audio.getcourse().subscribe({
       next: (response) => {
@@ -62,12 +63,12 @@ export class AudioComponent implements OnInit {
     // })
 
   }
-  getaudiocategory(){
+  getaudiocategory() {
     this.audio.getaudio().subscribe({
       next: (response: any) => {
 
-        this. audiocategory = response
-        console.log(this. audiocategory);
+        this.audiocategory = response
+        console.log(this.audiocategory);
 
       },
       error: (error: { message: any; }) => {
@@ -92,9 +93,8 @@ export class AudioComponent implements OnInit {
     // }
   }
 
-  gobutton()
-  {
-    
+  gobutton() {
+
   }
 
   filechange(event: any) {
@@ -145,17 +145,17 @@ export class AudioComponent implements OnInit {
       "metakey": this.Audiomanagement.value.meta,
       "active": ""
 
-    //   {
-    //     "courseId": 1,
-    //     "audioCategoryId": 1,
-    //     "uploadCategory": "File link",
-    //     "audioFile": "audio/audio2.mp3",
-    //     "audioTitle": "dharanas 2",
-    //     "audioDesc": "Audio audioDesc",
-    //     "audioDuration": 18,
-    //     "metakey": "meta 2",
-    //     "active": "Y"
-    // }
+      //   {
+      //     "courseId": 1,
+      //     "audioCategoryId": 1,
+      //     "uploadCategory": "File link",
+      //     "audioFile": "audio/audio2.mp3",
+      //     "audioTitle": "dharanas 2",
+      //     "audioDesc": "Audio audioDesc",
+      //     "audioDuration": 18,
+      //     "metakey": "meta 2",
+      //     "active": "Y"
+      // }
       // "audioCategoryId":this.Audiomanagement.value.meta,
     }
     console.log(this.Audiomanagement);

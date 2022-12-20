@@ -17,6 +17,9 @@ import { InputvalidationService } from 'src/app/shared/services/inputvalidation.
 export class CreatePraticeLibraryComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
+
+
+  pageno: number = 1
   category!: string
   addmediaform!: any
   timerror!: boolean
@@ -63,6 +66,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
       next: (response) => {
         this.data = response
         this.data = this.data.reverse()
+
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
@@ -80,6 +84,16 @@ export class CreatePraticeLibraryComponent implements OnInit {
     })
   }
 
+  onpaginatechange(event: any) {
+    console.log(event);
+
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
   ngOnInit(): void {
     this.addmediaform = this.formbuilder.group({
       praticelibraryId: [null],

@@ -5,8 +5,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MemberService } from '../services/member.service';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, Observable, startWith } from 'rxjs';
+
 @Component({
   selector: 'app-memberspage',
   templateUrl: './memberspage.component.html',
@@ -17,6 +17,7 @@ export class MemberspageComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   selection = new SelectionModel<any>(true, []);
 
+  serialnumber: any = Number(1)
 
   filterData: any;
   categoryerror: boolean = false
@@ -38,7 +39,7 @@ export class MemberspageComponent implements OnInit {
 
   downloadurl!: string
 
-
+  pageno: number = 1
   category!: string
   courselist!: any
   memberform!: FormGroup
@@ -102,9 +103,10 @@ export class MemberspageComponent implements OnInit {
       next: (response) => {
 
         this.regionList = response
-        console.log(response);
 
-        this.regionList = this.countryList.map((ele: any) => ele.regionName)
+        this.regionList = this.regionList.map((ele: any) => ele.regionName)
+        console.log(this.regionList);
+
 
 
       },
@@ -137,10 +139,13 @@ export class MemberspageComponent implements OnInit {
       startWith(''),
       map(value => this.countryList.filter((ele: any) => ele.toLowerCase().includes(value.country?.toLowerCase()))),
     )
+
+
     this.regionfilter = this.memberform.valueChanges.pipe(
       startWith(''),
       map(value => this.regionList.filter((ele: any) => ele.toLowerCase().includes(value.region?.toLowerCase()))),
     )
+
 
   }
   ngAfterViewInit() {
@@ -201,6 +206,15 @@ export class MemberspageComponent implements OnInit {
 
       }
     })
+  }
+
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
   }
 
 
