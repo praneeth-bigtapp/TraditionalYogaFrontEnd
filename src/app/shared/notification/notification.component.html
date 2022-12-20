@@ -36,10 +36,14 @@
                                         [value]="notification.categoryId">
                                         {{notification.categoryName}}</mat-option>
                                 </mat-select>
-                                <mat-error [hidden]="!notificationform.get('category')?.hasError('required')">
+
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="notificationform.controls['category'].invalid && (notificationform.controls['category'].dirty || notificationform.controls['category'].touched)">
+                                <mat-error [hidden]=" !notificationform.get('category')?.hasError('required')  ">
                                     Category is mandatory
                                 </mat-error>
-                            </mat-form-field>
+                            </div>
 
                         </div>
                     </div>
@@ -50,10 +54,14 @@
                         <div class="col">
                             <mat-form-field appearance="outline" class="">
                                 <input matInput autocomplete="off" formControlName="title" required>
-                                <mat-error [hidden]="!notificationform.get('title')?.hasError('required')">
+
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="notificationform.controls['title'].invalid && (notificationform.controls['title'].dirty || notificationform.controls['title'].touched)">
+                                <mat-error [hidden]=" !notificationform.get('title')?.hasError('required')  ">
                                     Title is mandatory
                                 </mat-error>
-                            </mat-form-field>
+                            </div>
                         </div>
 
                     </div>
@@ -78,13 +86,16 @@
 
                             <div class="col">
                                 <mat-form-field appearance="outline" class="">
-                                    <mat-label>Message</mat-label>
                                     <textarea matInput class="p-2" formControlName="description" rows="3"
                                         placeholder="Description"></textarea>
-                                    <mat-error [hidden]="!notificationform.get('description')?.hasError('required')">
-                                        Message is mandatory
-                                    </mat-error>
+
                                 </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="notificationform.controls['description'].invalid && (notificationform.controls['description'].dirty || notificationform.controls['description'].touched)">
+                                    <mat-error [hidden]=" !notificationform.get('description')?.hasError('required')  ">
+                                        Category is mandatory
+                                    </mat-error>
+                                </div>
                             </div>
 
                         </div>
@@ -180,7 +191,8 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
-            <mat-paginator class="card-body"   (page)="onpaginatechange($event)" [pageSizeOptions]="[10,25, 50, 100,150,200]" aria-label="Select page">
+            <mat-paginator class="card-body" (page)="onpaginatechange($event)"
+                [pageSizeOptions]="[10,25, 50, 100,150,200]" aria-label="Select page">
             </mat-paginator>
         </div>
     </div>

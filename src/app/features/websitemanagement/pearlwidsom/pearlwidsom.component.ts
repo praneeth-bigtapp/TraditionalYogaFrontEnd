@@ -176,11 +176,39 @@ export class PearlwidsomComponent implements OnInit {
 
   ChangeActive(id: any) {
 
+    const body = {
+      "quoteId": id
+    }
     const yes = ["Yes", "Y", "yes", "y"]
     const no = ["No", "N", "no", "n"]
     this.data.map((element: any) => {
       if (element.quoteId === id)
-        element.isActive = yes.includes(element.isActive) ? "N" : "Y"
+        // element.isActive = yes.includes(element.isActive) ? "N" : "Y"
+        if (yes.includes(element.isActive)) {
+          this.service.deactivepearlofwisdom(body).subscribe({
+            next: (response) => {
+              this.openSnackBar(response)
+              this.getListofwisdom()
+            },
+            error: (error) => {
+              console.error(error.message);
+
+            }
+          })
+        }
+        else {
+          this.service.activepearlofwisdom(body).subscribe({
+            next: (response) => {
+              this.openSnackBar(response)
+              this.getListofwisdom()
+            },
+            error: (error) => {
+              console.error(error.message);
+
+            }
+          })
+        }
+
     })
   }
 
