@@ -38,6 +38,16 @@ export class MappingRegionsToChiefMentorComponent implements OnInit {
   {'SNo':"5", 'Regionname':"india", 'Chiefmentorname':"kumar", "Chiefmentorid":"103"},
   {'SNo':"6", 'Regionname':"india", 'Chiefmentorname':"kumar", "Chiefmentorid":"102"},
   {'SNo':"7", 'Regionname':"india", 'Chiefmentorname':"kumar", "Chiefmentorid":"102"}]
+  pageno: number = 1
+
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
 
   constructor(private formbuilder:FormBuilder,private service:MappingRegionsToChiefMentorService) { }
 
@@ -161,6 +171,12 @@ export class MappingRegionsToChiefMentorComponent implements OnInit {
     //   col.Value = '';
     // }
    
+  }
+  ngAfterViewInit() {
+    this.filterData.dataSource.paginator = this.paginator;
+    
+    this.filterData.dataSource.sort = this.sort;
+
   }
   updatePagination() {
 

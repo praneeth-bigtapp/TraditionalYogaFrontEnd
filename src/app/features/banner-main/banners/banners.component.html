@@ -183,7 +183,7 @@
                     </div>
                 </th>
                 <td mat-cell class="col-2" *matCellDef="let element">
-                    {{element.dateOfAdd || "Wed 2 2017"}}
+                    {{element.dateOfAdd | date:'dd-MM-YYYY' }}
                 </td>
             </ng-container>
             <ng-container matColumnDef="Status">

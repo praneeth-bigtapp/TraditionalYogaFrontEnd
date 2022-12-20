@@ -1,9 +1,9 @@
-<div class="ConfigurationTypes_textpadding p-5">
+<div class="ConfigurationTypes_textpadding ">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item"><a href="#/addCourse">Course Management</a></li>
-            <li class="breadcrumb-item active" aria-current="page"> My Course Matrieals </li>
+            <li class="breadcrumb-item active" aria-current="page">  Course Matrieals </li>
         </ol>
     </nav>
 
@@ -25,7 +25,7 @@
                 <form [formGroup]="FormDeatils" (ngSubmit)="onsubmit()">
                     <div class=" mt-3 row ">
                         <div class="col-4">
-                            <label>Course:</label>
+                            <label>Course</label>
 
                             <mat-form-field class="pe-4" appearance="outline">
                                 <mat-select matNativeControl formControlName="courses" [disabled]="iseditable">
@@ -158,14 +158,14 @@
 
                         </div>
                     </div>
-                    <div class="pt-3 row align-items-center">
+                    <div class="pt-3 row ">
 
-                        <div class="col-6">
+                        <div class="col">
                             <label>Message</label>
 
                             <mat-form-field class="pe-4" appearance="outline">
 
-                                <textarea matInput formControlName="message" rows="8" type="text"></textarea>
+                                <textarea matInput formControlName="message" rows="5" type="text" ></textarea>
                             </mat-form-field>
                             <div class="error-message"
                                 *ngIf="FormDeatils.controls['message'].invalid && (FormDeatils.controls['message'].dirty || FormDeatils.controls['message'].touched)">
@@ -174,14 +174,16 @@
                                 </mat-error>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <button class=" btn btn-outline-secondary  btn-rounded d-inline-block m-2" type="submit"
+                       
+                    </div>
+                    <div class="pt-3 d-flex justify-content-end">
+                        
+                            <button class=" btn btn-outline-secondary  btn-rounded d-inline-block " type="submit"
                                 *ngIf="issubmit">{{iseditable ? "Update":"Add"}}</button>
-                        </div>
-                        <div class="col-md-3">
-                            <button class=" btn btn-outline-secondary  btn-rounded d-inline-block m-2"
+                       
+                            <button class=" btn btn-outline-secondary  btn-rounded d-inline-block "
                                 (click)="reseteditable()" type="button">Cancel</button>
-                        </div>
+                        
                     </div>
 
                 </form>
@@ -192,7 +194,7 @@
 
     <div class="card ">
         <div class="card-header text-white bg-secondary">
-            My Course Materials
+             Course Materials
         </div>
         <div class="bg-transparent px-0 py-0">
             <table mat-table matSort [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid "
