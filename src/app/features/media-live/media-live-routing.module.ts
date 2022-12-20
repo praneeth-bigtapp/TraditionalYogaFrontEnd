@@ -4,7 +4,7 @@ import { LiveComponent } from './live/live.component';
 
 const routes: Routes = [
   
-    {path:'liveMedia', component:LiveComponent}
+    {path:'classmedia', component:LiveComponent}
   
 ];
 

@@ -175,6 +175,12 @@ export class SendReceiveService {
 
     }
 
+    else if (subMenuId == 37) {
+
+      this.router.navigateByUrl("onlineexam");
+
+    }
+
     else {
       console.log(" Sub Menu is not Mapped ")
       this.router.navigateByUrl("blank")

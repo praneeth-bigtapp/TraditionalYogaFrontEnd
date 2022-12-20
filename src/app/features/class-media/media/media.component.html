@@ -2,64 +2,371 @@
     <!-- <h5>Class Media Update</h5> -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item"><a href="#/addCourse">Course Management</a></li>          
-          <li class="breadcrumb-item active" aria-current="page">Class Media Update </li>
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/addCourse">Course Management</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Class Media Update </li>
         </ol>
-      </nav>
-    
+    </nav>
 
-    <div class="card mt-5">
-        <div class="card-header text-white bg-secondary" >
-            Class Media Update
-      </div>
-    <div class=" card-body bg-white">
+    <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
 
-        <div class="row px-2 " style="display: flex;">
-            <div class="col-md-12">
-                <form [formGroup]="dateForm" (ngSubmit)="datefilter()" class="d-flex  flex-wrap flex-row mt-2">
-                    <div class="mr-2 mt-2">
-                        <label>Course</label>
 
-                        <mat-form-field appearance="outline">
-                            <mat-select formControlName="courseslist">
-                                <mat-option *ngFor="let course of courses" [value]="course.coursesId">
-                                    {{course.coursesName}}</mat-option>
-                            </mat-select>
-                            <!-- <mat-error *ngIf="dataForm.controls['courseslist'].hasError('required')">
-                                Please Select the Course
-                              </mat-error> -->
-                           
-                        </mat-form-field>
-                    </div>
-                    <div>
-                        <label class="pl-5">Date</label>
+        <button type="button" (click)="gobutton()" *ngIf="!displaycontent"
+            class="btn btn-outline-secondary btn-rounded d-inline-block ">
+            Add Media
+        </button>
+    </div>
 
-                        <mat-form-field class="mt-2 col" appearance="outline">
-                            <input matInput placeholder="DD-MM-YYYY" value="Sushi" type="date" formControlName="date">
-                            <!-- <mat-error [hidden]="!dateForm.get('date')?.hasError('required')">
+    <div class="card  bg-secondary" *ngIf="displaycontent">
+        <div class="card-header text-white bg-secondary">
+            {{iseditable ? "Update" :"Add" }} Class media
+
+        </div>
+        <div class="card-body bg-white  py-2">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Course</label>
+                    <mat-form-field appearance="outline">
+                        <mat-select [(ngModel)]="coursename" (ngModelChange)="coursechange()">
+                            <mat-option *ngFor="let course of courses" [value]="course.coursesId">
+                                {{course.coursesName}}</mat-option>
+                        </mat-select>
+                        <span class="text-danger" *ngIf="categoryerror">
+                            Category is mandatory
+                        </span>
+                    </mat-form-field>
+                </div>
+                <!-- <div *ngIf="coursename && !displaycontent" (click)="gobutton()"
+                    class="col-md-6  d-flex flex-row flex-wrap justify-content-end    ">
+                    <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block mt-3  ">
+                        Add Media
+                    </button>
+                </div> -->
+                <br />
+                <div class="row" *ngIf="coursename">
+                    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+                        <mat-tab label="Live">
+                            <br />
+                            <form [formGroup]="videoform" (ngSubmit)="videoformsubmit()">
+
+                                <div class="row">
+                                    <div class="row col-md-4">
+                                        <label>Class link</label>
+                                        <div class="col">
+                                            <mat-form-field class="example-full-width" appearance="outline" id="field">
+                                                <input matInput formControlName="videolink">
+                                            </mat-form-field>
+                                            <div class="error-message"
+                                                *ngIf="videoform.controls['videolink'].invalid && (videoform.controls['videolink'].dirty || videoform.controls['videolink'].touched)">
+                                                <mat-error
+                                                    [hidden]=" !videoform.get('videolink')?.hasError('required')  ">
+                                                    Link is mandatory
+                                                </mat-error>
+                                                <mat-error
+                                                    [hidden]=" !videoform.get('videolink')?.hasError('pattern')  ">
+                                                    Invalid link
+                                                </mat-error>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row col-md-4">
+                                        <label>Class Date</label>
+                                        <div class="col">
+                                            <mat-form-field class="example-full-width" appearance="outline">
+                                                <input matInput formControlName="date" type="date">
+                                            </mat-form-field>
+                                            <div class="error-message"
+                                                *ngIf="videoform.controls['date'].invalid && (videoform.controls['date'].dirty || videoform.controls['date'].touched)">
+                                                <mat-error [hidden]=" !videoform.get('date')?.hasError('required')  ">
+                                                    Date is mandatory
+                                                </mat-error>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row col-md-4">
+                                        <label>Title</label>
+                                        <div class="">
+                                            <mat-form-field class="example-full-width" appearance="outline">
+                                                <input matInput formControlName="title" type="text">
+                                            </mat-form-field>
+                                            <div class="error-message"
+                                                *ngIf="videoform.controls['title'].invalid && (videoform.controls['title'].dirty || videoform.controls['title'].touched)">
+                                                <mat-error [hidden]=" !videoform.get('title')?.hasError('required')  ">
+                                                    Title is mandatory
+                                                </mat-error>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row align-items-center ">
+                                    <div class="col-md-6">
+                                        <label>Description</label>
+                                        <div class="col px-0">
+                                            <mat-form-field class="example-full-width" appearance="outline">
+                                                <textarea matInput rows="5" formControlName="description"></textarea>
+                                            </mat-form-field>
+                                            <div class="error-message"
+                                                *ngIf="videoform.controls['description'].invalid && (videoform.controls['description'].dirty || videoform.controls['description'].touched)">
+                                                <mat-error
+                                                    [hidden]=" !videoform.get('description')?.hasError('required')  ">
+                                                    Description is mandatory
+                                                </mat-error>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
+                                        <button type="submit"
+                                            class="btn btn-outline-secondary btn-rounded d-inline-block   ">
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <br />
+                        </mat-tab>
+
+                        <!-- Short Video -->
+                        <mat-tab label="Short Video">
+                            <br />
+                            <h6 class="text-right">Number of short Video Added : {{shortvideolist.length}}</h6>
+                            <br />
+                            <form [formGroup]="shortvideoform" (ngSubmit)="shortvideoformsubmit()">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Category</label>
+                                        <div class="col px-0">
+                                            <mat-form-field appearance="outline">
+                                                <mat-select formControlName="category">
+                                                    <mat-option *ngFor="let category of categorylist"
+                                                        [value]="category.courseMediaCategoryId">
+                                                        {{category.categoryName | titlecase}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <div class="error-message"
+                                                *ngIf="shortvideoform.controls['category'].invalid && (shortvideoform.controls['category'].dirty || shortvideoform.controls['category'].touched)">
+                                                <mat-error
+                                                    [hidden]=" !shortvideoform.get('category')?.hasError('required')  ">
+                                                    Category is mandatory
+                                                </mat-error>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>Video link</label>
+                                        <div class="col px-0">
+                                            <mat-form-field class="example-full-width" appearance="outline" id="field">
+                                                <input matInput formControlName="videolink">
+
+                                            </mat-form-field>
+                                            <div class="error-message"
+                                                *ngIf="shortvideoform.controls['videolink'].invalid && (shortvideoform.controls['videolink'].dirty || shortvideoform.controls['videolink'].touched)">
+                                                <mat-error
+                                                    [hidden]=" !shortvideoform.get('videolink')?.hasError('required')  ">
+                                                    Date is mandatory
+                                                </mat-error>
+                                                <mat-error
+                                                    [hidden]=" !shortvideoform.get('videolink')?.hasError('pattern')  ">
+                                                    Invalid Link
+                                                </mat-error>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Title</label>
+                                        <div class="col px-0">
+                                            <mat-form-field class="example-full-width" appearance="outline" id="field">
+                                                <input matInput formControlName="title">
+                                            </mat-form-field>
+                                            <div class="error-message"
+                                                *ngIf="shortvideoform.controls['title'].invalid && (shortvideoform.controls['title'].dirty || shortvideoform.controls['title'].touched)">
+                                                <mat-error
+                                                    [hidden]=" !shortvideoform.get('title')?.hasError('required')  ">
+                                                    Title is mandatory
+                                                </mat-error>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label>Description</label>
+                                        <div class="col px-0">
+                                            <div class="col px-0">
+                                                <mat-form-field class="example-full-width" appearance="outline">
+                                                    <textarea matInput rows="3"
+                                                        formControlName="description"></textarea>
+                                                </mat-form-field>
+                                                <div class="error-message"
+                                                    *ngIf="shortvideoform.controls['description'].invalid && (shortvideoform.controls['description'].dirty || shortvideoform.controls['description'].touched)">
+                                                    <mat-error
+                                                        [hidden]=" !shortvideoform.get('description')?.hasError('required')  ">
+                                                        Description is mandatory
+                                                    </mat-error>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row  align-items-center">
+
+                                    <div class="col-md-3">
+                                        <label>Class Date</label>
+                                        <div class="col px-0">
+                                            <mat-form-field class="example-full-width" appearance="outline">
+                                                <input matInput formControlName="date" type="date">
+                                            </mat-form-field>
+                                            <div class="error-message"
+                                                *ngIf="shortvideoform.controls['date'].invalid && (shortvideoform.controls['date'].dirty || shortvideoform.controls['date'].touched)">
+                                                <mat-error
+                                                    [hidden]=" !shortvideoform.get('date')?.hasError('required')  ">
+                                                    Date is mandatory
+                                                </mat-error>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Duration of Video <small>(Hours:Minutes)</small></label>
+                                        <div class="col px-0">
+                                            <div class="col px-0">
+                                                <mat-form-field class="example-full-width" appearance="outline">
+                                                    <input matInput formControlName="duration" type="text">
+                                                </mat-form-field>
+                                                <div class="error-message"
+                                                    *ngIf="shortvideoform.controls['duration'].invalid && (shortvideoform.controls['duration'].dirty || shortvideoform.controls['duration'].touched)">
+                                                    <mat-error
+                                                        [hidden]=" !shortvideoform.get('duration')?.hasError('required')  ">
+                                                        Duration is mandatory
+                                                    </mat-error>
+                                                    <mat-error
+                                                        [hidden]=" !shortvideoform.get('duration')?.hasError('pattern')  ">
+                                                        Invalid pattern
+                                                    </mat-error>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 d-flex flex-row justify-content-evenly align-items-center  ">
+                                        <button type="submit"
+                                            class="btn btn-outline-secondary btn-rounded d-inline-block mt-2  ">
+                                            Add
+                                        </button>
+                                        <button type="button"
+                                            class="btn btn-outline-secondary btn-rounded d-inline-block mt-2   ">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <br />
+                        </mat-tab>
+
+                        <!-- Glimpse -->
+                        <mat-tab label="Glimpse">
+                            <br />
+                            <form [formGroup]="glimpseform" (ngSubmit)="glimpseformsubmit()">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Class Date</label>
+                                        <div class="col px-0">
+                                            <mat-form-field class="example-full-width" appearance="outline">
+                                                <input matInput formControlName="date" type="date">
+                                            </mat-form-field>
+                                            <div class="error-message"
+                                                *ngIf="glimpseform.controls['date'].invalid && (glimpseform.controls['date'].dirty || glimpseform.controls['date'].touched)">
+                                                <mat-error [hidden]=" !glimpseform.get('date')?.hasError('required')  ">
+                                                    Date is mandatory
+                                                </mat-error>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>Upload File</label>
+                                        <div class="col px-0">
+                                            <input type="file" class="border" id="file" (change)="filechange($event)"
+                                                formControlName="file" accept=" image/*" required="true" />
+                                            <mat-error *ngIf="filerror">File is mandatory</mat-error>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 d-flex flex-row justify-content-end align-items-center">
+                                        <button type="submit"
+                                            class="btn btn-outline-secondary btn-rounded d-inline-block   ">
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <br />
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="card-header text-white bg-secondary">
+            Class Media
+        </div>
+        <div class=" card-body bg-white">
+
+            <div class="row px-2 " style="display: flex;">
+                <div class="col-md-12">
+                    <form [formGroup]="dateForm" (ngSubmit)="datefilter()" class="d-flex  flex-wrap flex-row mt-2">
+                        <div class="mr-2 mt-2">
+                            <label>Course</label>
+
+                            <mat-form-field appearance="outline">
+                                <mat-select formControlName="courseslist">
+                                    <mat-option *ngFor="let course of courses" [value]="course.coursesId">
+                                        {{course.coursesName}}</mat-option>
+                                </mat-select>
+
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <label class="">Date</label>
+
+                            <mat-form-field class="mt-2 col px-0" appearance="outline">
+                                <input matInput placeholder="DD-MM-YYYY" value="Sushi" type="date"
+                                    formControlName="date">
+                                <!-- <mat-error [hidden]="!dateForm.get('date')?.hasError('required')">
                                 Please Select Date
                             </mat-error> -->
-                        </mat-form-field>
-                    </div>
-                    <div class="mt-2">
-                        <button type="submit"
-                            class="btn btn-outline-secondary  btn-rounded d-inline-block m-2 mt-4 border border-dark"
-                            type="submit">Submit</button>
-                    </div>
-                </form>
+                            </mat-form-field>
+                        </div>
+                        <div class="mt-2">
+                            <button type="submit"
+                                class="btn btn-outline-secondary  btn-rounded d-inline-block m-2 mt-4 border border-dark"
+                                type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+
+
             </div>
+            <hr>
 
 
         </div>
-        <hr>
-        
-
-    </div>
     </div>
     <div class="rounded mat-elevation-z8">
         <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
-          aria-label="users">
+            aria-label="users">
             <ng-container matColumnDef="classMediaId">
                 <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
                     <label mat-sort-header>
@@ -68,7 +375,7 @@
                     <input type="text" (keyup)="updatePagination('courseId')"
                         [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" disabled="true" />
                 </th>
-                <td mat-cell class="text-center" *matCellDef="let element"> {{element.classMediaId}} </td>
+                <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
             </ng-container>
             <ng-container matColumnDef="date">
 
@@ -111,23 +418,22 @@
                     <label mat-sort-header>
                         Actions
                     </label>
-                    <input type="text" (keyup)="updatePagination('courseDuration')"
-                       disabled="true"/>
+                    <input type="text" (keyup)="updatePagination('courseDuration')" disabled="true" />
 
                 </th>
                 <td mat-cell class="text-center" *matCellDef="let element">
                     <div class="row">
                         <div class="col">
-                          
+
                             <i class="fa-solid fa-eye fs-5 text-info" (click)="viewDetails(element)"
-                            matTooltip="View Course Activity" matTooltip="View"></i>
-                        <span matTooltip="Edit" (click)="editdetails(element)">
-                            <i class="fas fa-pencil-alt mx-4" aria-hidden="true"></i>
-                        </span>
-                        <span matTooltip="Delete" style="cursor: pointer;"
-                            (click)="deletedetails(element.praticeLibaryId)">
-                            <i class="far fa-trash-alt" aria-hidden="true"></i>
-                        </span>
+                                matTooltip="View Course Activity" matTooltip="View"></i>
+                            <span matTooltip="Edit" (click)="editdetails(element)">
+                                <i class="fas fa-pencil-alt mx-4" aria-hidden="true"></i>
+                            </span>
+                            <span matTooltip="Delete" style="cursor: pointer;"
+                                (click)="deletedetails(element.praticeLibaryId)">
+                                <i class="far fa-trash-alt" aria-hidden="true"></i>
+                            </span>
 
                         </div>
                     </div>
@@ -138,11 +444,9 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        
-        <div class="bg-white d-flex  flex-row justify-content-end card-body ">
-            <mat-paginator class="" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page">
-            </mat-paginator>
-        </div>
+        <mat-paginator class="card-body" [pageSizeOptions]="[10,25, 50, 100,150,200]" (page)="onpaginatechange($event)"
+            aria-label="Select page">
+        </mat-paginator>
     </div>
 
 
