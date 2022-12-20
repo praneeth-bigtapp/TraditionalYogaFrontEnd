@@ -87,6 +87,7 @@ export class AddpagesComponent implements OnInit {
   name: any
   filterData: any;
 
+  
   constructor(private router: Router, private route: ActivatedRoute) {
     this.name = this.route.snapshot.paramMap.get("element")
     console.log(this.name)

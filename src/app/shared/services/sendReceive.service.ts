@@ -171,7 +171,7 @@ export class SendReceiveService {
     }
     else if (subMenuId == 36) {
 
-      this.router.navigateByUrl("MycourseMatrieals");
+      this.router.navigateByUrl("courseMatrieals");
 
     }
 

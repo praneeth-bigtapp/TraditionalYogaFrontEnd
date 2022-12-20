@@ -38,6 +38,34 @@ export class GalleryComponent implements OnInit {
       "numberofphotosadded": 10,
       "isvisible": true
     },
+    {
+      "GalaryName": "RYT 800Course photos",
+      "dateofcreation": "22-07-2022",
+      "role": "Student",
+      "numberofphotosadded": 10,
+      "isvisible": true
+    },
+    {
+      "GalaryName": "RYT 800Course photos",
+      "dateofcreation": "22-07-2022",
+      "role": "Student",
+      "numberofphotosadded": 108,
+      "isvisible": true
+    },
+    {
+      "GalaryName": "RYT 800Course photos",
+      "dateofcreation": "22-07-2022",
+      "role": "Student",
+      "numberofphotosadded": 10,
+      "isvisible": true
+    },
+    {
+      "GalaryName": "RYT 800Course photos",
+      "dateofcreation": "22-07-2022",
+      "role": "Student",
+      "numberofphotosadded": 10,
+      "isvisible": true
+    }
   
 
 
