@@ -26,7 +26,7 @@
 
                     <div class="col-md-3">
                         <div class="row align-items-center ">
-                            <label>Select Category : </label>
+                            <label>Category : </label>
                             <div class="col">
                                 <mat-form-field class="example-full-width" appearance="outline">
                                     <mat-select matNativeControl formControlName="alertid" [disabled]="iseditable"
@@ -131,10 +131,10 @@
         </div>
     </div>
     <div class="card ">
-        <div class="card-header text-white bg-secondary">
+        <div class="card-header  text-white bg-secondary">
             Alerts
         </div>
-        <div class="bg-transparent px-0 py-0">
+        <div class="bg-transparent text-center px-0 py-0">
             <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
                 aria-label="alertId">
                 <ng-container matColumnDef="alertId">

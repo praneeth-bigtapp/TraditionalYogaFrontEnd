@@ -66,7 +66,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
       next: (response) => {
         this.data = response
         this.data = this.data.reverse()
-
+        
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
@@ -86,12 +86,12 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
   onpaginatechange(event: any) {
     console.log(event);
-
+    
     if (event.pageIndex === 0) {
       this.pageno = 1
       return
     }
-    this.pageno = (event.pageIndex * event.pageSize) + 1
+    this.pageno = (event.pageIndex * event.pageSize) +1
     return
   }
   ngOnInit(): void {
@@ -113,7 +113,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
   updatePagination(col: any) {
     this.filterData.dataSource.paginator = this.paginator;
   }
-
+ 
   openSnackBar(data: any) {
     this._snackBar.open(data.message, 'Close', {
       duration: 2 * 1000,
