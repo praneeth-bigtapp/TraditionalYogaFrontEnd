@@ -264,6 +264,7 @@ table.table-bordered.dataTable tbody th,
 table.table-bordered.dataTable tbody td {
     border-bottom-width: 0;
     vertical-align: baseline;
+    
 }
 
 .btn-warning {

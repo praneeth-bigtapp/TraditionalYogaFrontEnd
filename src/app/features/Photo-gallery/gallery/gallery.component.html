@@ -48,7 +48,7 @@
           <input  type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
             [filter]="filterData"  class="mx-2" />
         </th>
-        <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted"> {{element.dateofcreation}}
+        <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted"> {{element.dateofcreation | date:'dd-MM-YYYY'}}
         </td>
       </ng-container>
 

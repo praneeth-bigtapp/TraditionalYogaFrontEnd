@@ -179,6 +179,13 @@ export class SendReceiveService {
 
       this.router.navigateByUrl("onlineexam");
 
+
+    }
+    else if (subMenuId == 38) {
+
+      this.router.navigateByUrl("mappingregionstoCheifMentor");
+
+
     }
 
     else {

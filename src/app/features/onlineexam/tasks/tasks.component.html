@@ -185,7 +185,7 @@
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell class="text-center" *matCellDef="let element">
-                        {{element.createDate || "NIL"}}
+                        {{element.dueDate  | date:'dd-MM-YYY'}}
                     </td>
                 </ng-container>
 
@@ -211,7 +211,7 @@
                         <input type="text" (keyup)="updatePagination('State')"
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.dueDate }} </td>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.dueDate |date:'dd-MM-YYY'}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="action">

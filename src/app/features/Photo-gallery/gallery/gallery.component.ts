@@ -38,13 +38,8 @@ export class GalleryComponent implements OnInit {
       "numberofphotosadded": 10,
       "isvisible": true
     },
-    {
-      "GalaryName": "RYT 800Course photos",
-      "dateofcreation": "22-07-2022",
-      "role": "Student",
-      "numberofphotosadded": 108,
-      "isvisible": true
-    }
+  
+
 
 
 
@@ -85,11 +80,7 @@ export class GalleryComponent implements OnInit {
   createGallery() {
     this.dialog.open(CreateGalleryComponent);
   }
-  ngAfterViewInit() {
-    this.filterData.dataSource.paginator = this.paginator;
-    this.filterData.dataSource.sort = this.sort;
 
-  }
   
   updatePagination() {
 

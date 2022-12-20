@@ -219,7 +219,7 @@
                         <input type="text" (keyup)="updatePagination('startDate')"
                             [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.startDate | date:'dd-MM-YYYY'}} </td>
                 </ng-container>
                 <ng-container matColumnDef="endDate">
                     <th mat-header-cell *matHeaderCellDef scope="col">
@@ -229,7 +229,7 @@
                         <input type="text" (keyup)="updatePagination('endDate')"
                             [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let element "> {{element.endDate}} </td>
+                    <td mat-cell *matCellDef="let element "> {{element.endDate | date:'dd-MM-YYYY'}} </td>
                 </ng-container>
                 <ng-container matColumnDef="currentStatus">
                     <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">

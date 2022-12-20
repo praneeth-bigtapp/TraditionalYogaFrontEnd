@@ -176,7 +176,7 @@
                         <input type="text" (keyup)="updatePagination('title')"
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let element"> {{element.quoteDate}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.quoteDate | date:'dd-MM-YYYY'}} </td>
                 </ng-container>
                 <ng-container matColumnDef="quoteType">
                     <th mat-header-cell *matHeaderCellDef style="width: 30px" scope="col">

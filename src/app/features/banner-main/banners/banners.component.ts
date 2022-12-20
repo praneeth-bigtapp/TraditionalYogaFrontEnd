@@ -134,10 +134,10 @@ export class BannersComponent implements OnInit {
       }
     });
   }
-  ngAfterViewInit() {
-    this.filterData.dataSource.paginator = this.paginator;
+  // ngAfterViewInit() {
+  //   this.filterData.dataSource.paginator = this.paginator;
 
-  }
+  // }
 
   checkAll(e: any) {
     // console.log(status.value);

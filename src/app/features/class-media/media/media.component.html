@@ -24,7 +24,7 @@
         </div>
         <div class="card-body bg-white  py-2">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label>Course</label>
                     <mat-form-field appearance="outline">
                         <mat-select [(ngModel)]="coursename" (ngModelChange)="coursechange()">
@@ -327,7 +327,7 @@
             <div class="row px-2 " style="display: flex;">
                 <div class="col-md-12">
                     <form [formGroup]="dateForm" (ngSubmit)="datefilter()" class="d-flex  flex-wrap flex-row mt-2">
-                        <div class="mr-2 mt-2">
+                        <div class="mr-2 mt-2 col-4">
                             <label>Course</label>
 
                             <mat-form-field appearance="outline">
@@ -338,7 +338,7 @@
 
                             </mat-form-field>
                         </div>
-                        <div>
+                        <div class="col-4">
                             <label class="">Date</label>
 
                             <mat-form-field class="mt-2 col px-0" appearance="outline">
@@ -386,7 +386,7 @@
                     <input type="text" (keyup)="updatePagination('courseName')"
                         [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                 </th>
-                <td mat-cell class="text-center" *matCellDef="let element"> {{element.date}} </td>
+                <td mat-cell class="text-center" *matCellDef="let element"> {{element.date | date:'dd-MM-YYYY'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="typeOfClass">
