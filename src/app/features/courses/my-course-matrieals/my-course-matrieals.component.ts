@@ -16,6 +16,8 @@ export class MyCourseMatriealsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
+  pageno: number = 1
+
   displayform: boolean = false
   iseditable: boolean = false
   issubmit: boolean = true
@@ -90,6 +92,15 @@ export class MyCourseMatriealsComponent implements OnInit {
       this.newcatogeries = false
     }
   }
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
+
   getcoursedetails() {
     this.service.getcoursematerials().subscribe({
       next: (response) => {

@@ -20,7 +20,8 @@ export class UserComponent implements OnInit {
   AddUserForm!: FormGroup;
   isAddUserForm: boolean = false;
   RolesList: any = [];
-  
+  pageno: number = 1
+
   validation_messages = {
     email_id: [
       { type: 'required', message: 'Please Enter Email' },
@@ -92,6 +93,15 @@ export class UserComponent implements OnInit {
   updatePagination() {
     this.filterData.dataSource.paginator = this.paginator;
   }
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
+
 
   onKeyPress(event: any) {
     const pattern = /[\d]/;

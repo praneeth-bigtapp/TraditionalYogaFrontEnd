@@ -36,7 +36,7 @@
 
                         </mat-form-field>
                         <div class="error-message"
-                            *ngIf="onlineexamform.controls['course'].invalid && (onlineexamform.controls['course'].dirty || onlineexamform.controls['coursetitle'].touched)">
+                            *ngIf="onlineexamform.controls['course'].invalid && (onlineexamform.controls['course'].dirty || onlineexamform.controls['course'].touched)">
                             <mat-error [hidden]=" !onlineexamform.get('course')?.hasError('required')  ">
                                 Course is mandatory
                             </mat-error>
@@ -54,7 +54,7 @@
                         </mat-form-field>
                         <div class="error-message"
                             *ngIf="onlineexamform.controls['testtype'].invalid && (onlineexamform.controls['testtype'].dirty || onlineexamform.controls['testtype'].touched)">
-                            <mat-error [hidden]=" !onlineexamform.get('testype')?.hasError('required')  ">
+                            <mat-error [hidden]=" !onlineexamform.get('testtype')?.hasError('required')  ">
                                 Type is mandatory
                             </mat-error>
                         </div>

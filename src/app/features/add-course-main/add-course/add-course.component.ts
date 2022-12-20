@@ -104,6 +104,7 @@ export class AddCourseComponent implements OnInit {
         console.warn(error.message);
       }
     })
+
   }
   addcourse() {
     this.displaycontent = !this.displaycontent
@@ -146,6 +147,9 @@ export class AddCourseComponent implements OnInit {
   }
 
   viewdetails(element: any) {
+    
+    
+
     this.addCourseForm.setValue({
       courseId: element.coursesId,
       courseName: element.coursesName,
@@ -157,6 +161,7 @@ export class AddCourseComponent implements OnInit {
     });
     this.issubmit = false
     this.displaycontent = true
+
   }
 
   openSnackBar(data: any) {
