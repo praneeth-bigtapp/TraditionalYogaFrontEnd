@@ -7,10 +7,15 @@ import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 import {MatButtonModule} from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BannerMainRoutingModule } from '../banner-main/banner-main-routing.module';
+import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -26,7 +31,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatButtonModule,
     FormsModule,
+    SharedModule,
     ReactiveFormsModule,
+    BannerMainRoutingModule,
+    MatTableModule,
+    MatTooltipModule,
+    MatPaginatorModule
+   
   ]
 })
 export class AudioMainModule { }

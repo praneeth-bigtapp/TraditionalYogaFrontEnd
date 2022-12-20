@@ -141,7 +141,7 @@
             <ng-container matColumnDef="bannerName">
                 <th mat-header-cell class="col-md-3" *matHeaderCellDef mat-sort-header>
                     <div class="">
-                        <label class="text-start"> Banner Name</label>
+                        <label class=""> Banner Name</label>
                         <input matInput type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData"
                              />
@@ -161,7 +161,7 @@
             <ng-container matColumnDef="categoryId">
                 <th mat-header-cell class=" col-md-1 pl-1" *matHeaderCellDef mat-sort-header>
                     <div class="row">
-                        <label class="text-start">Given By</label>
+                        <label class="">Given By</label>
                         <input matInput type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="  filterData"
                              />
@@ -176,20 +176,20 @@
             <ng-container matColumnDef="date">
                 <th mat-header-cell class="col-2" *matHeaderCellDef mat-sort-header>
                     <div class="">
-                        <label class="text-start">Date of add </label>
+                        <label class="">Date of add </label>
                         <input  type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="  filterData"
                              />
                     </div>
                 </th>
                 <td mat-cell class="col-2" *matCellDef="let element">
-                    {{element.dateOfAdd | date:'dd-MM-YYYY' }}
+                    {{element.dateOfAdd || "Wed 2 2017"}}
                 </td>
             </ng-container>
             <ng-container matColumnDef="Status">
                 <th mat-header-cell class="col-1" *matHeaderCellDef mat-sort-header>
                     <div class="">
-                        <label class="text-start">Status </label>
+                        <label class="">Status </label>
                         <input matInput type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="  filterData"
                              />
@@ -202,7 +202,7 @@
             <ng-container matColumnDef="Action">
                 <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header>
                     <div class="row">
-                        <label class="text-start">Action </label>
+                        <label class="">Action </label>
                         <input matInput type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[5].Value" disabled [filter]="  filterData"
                              />

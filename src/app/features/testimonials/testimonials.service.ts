@@ -6,7 +6,8 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 })
 export class TestimonialsService extends BaseHttp{
   getTestmonial = "courseList/getAll?operation=testimonal";
-  postTestimonial="courseList/testimonal?operation=add"
+  postTestimonial="courseList/testimonal?operation=add";
+  updateTestimonial="courseList/testimonal?operation=update";
 
 
   getTestimonial() {
@@ -14,6 +15,10 @@ export class TestimonialsService extends BaseHttp{
   }
   posttestimonial(body: any) {
     return this.post<any>(this.postTestimonial, body)
+  }
+  updatetest(body: any){
+    return this.post<any>(this. updateTestimonial, body)
+
   }
 
  

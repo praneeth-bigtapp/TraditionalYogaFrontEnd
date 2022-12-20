@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { AudioService } from '../audio.service';
 
 @Component({
@@ -9,13 +11,25 @@ import { AudioService } from '../audio.service';
   styleUrls: ['./audio.component.css']
 })
 export class AudioComponent implements OnInit {
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort!: MatSort;
+  displayedColumns: string[] = ["Title", "Caregory", "FileType", "Duration", "Actions"];
+  dataSource: any;
+  issubmit: boolean = true
+  iseditable: boolean = false
+  displaycontent: boolean = false
+  filerror!: boolean
+  filerror2: boolean = false
+  gridData: any;
+  filterData: any
   disableSelect = new FormControl(false);
   Audiomanagement!: FormGroup;
-  filerror: boolean = false
+ 
   audiodata!: any
   courses!: any;
-  coursedata!: any
-  audiocategory!: any;
+  coursedata!:any
+  audiocategory!:any;
+  data:any;
 
   // this. Audiomanagement = this.formbuilder.group({
   //   course: [null, Validators.compose([Validators.required])],
@@ -24,18 +38,51 @@ export class AudioComponent implements OnInit {
   //   leveltest: [null, Validators.compose([Validators.required])],
   //   file: [null, Validators.compose([Validators.required])],
   //   description: [null, Validators.compose([Validators.required])],
+  // data = [
+  //   {
+  //     "Title": "RYT 200 Course photos",
+  //     "category": "21-07-2022",
+  //     "File Type": "Admin",
+  //     "numberofphotosadded": 18,
+      
+  //   },
+  //   {
+  //     "GalaryName": "RYT 800Course photos",
+  //     "dateofcreation": "22-07-2022",
+  //     "role": "Student",
+  //     "numberofphotosadded": 108,
+  //     "isvisible": true
+  //   },
+  //   {
+  //     "GalaryName": "RYT 800Course photos",
+  //     "dateofcreation": "22-07-2022",
+  //     "role": "Student",
+  //     "numberofphotosadded": 10,
+  //     "isvisible": true
+  //   },
+  //   {
+  //     "GalaryName": "RYT 800Course photos",
+  //     "dateofcreation": "22-07-2022",
+  //     "role": "Student",
+  //     "numberofphotosadded": 108,
+  //     "isvisible": true
+  //   }
+
+
+
+  // ]
 
 
   constructor(private formbuilder: FormBuilder, private audio: AudioService) {
     this.Audiomanagement = this.formbuilder.group({
       category: [null, Validators.compose([Validators.required])],
-
+     
       file: [null, Validators.compose([Validators.required])],
       title: [null, Validators.compose([Validators.required])],
       upload: [null, Validators.compose([Validators.required])],
       description: [null, Validators.compose([Validators.required])],
       duration: [null, Validators.compose([Validators.required])],
-      meta: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])],
+      meta: [null, Validators.compose([Validators.required])],
     })
     this.audio.getcourse().subscribe({
       next: (response) => {
@@ -61,14 +108,39 @@ export class AudioComponent implements OnInit {
     //   }
 
     // })
+    this.audio.getaudio().subscribe({
+      next:(Response:any)=>{
+        this. audiocategory = Response
+        
+
+      },
+      error: (error: { message: any; }) => {
+        console.error(error.message);
+      }
+      
+    })
 
   }
-  getaudiocategory() {
+  getaudiocategory(){
     this.audio.getaudio().subscribe({
       next: (response: any) => {
+        this.data= response
 
-        this.audiocategory = response
-        console.log(this.audiocategory);
+        this.data=this.data.reverse()
+        for (let data of this.data) {
+          data.check = false;
+        }
+        // this. audiocategory = response
+        console.log(this. audiocategory);
+        this.dataSource = new MatTableDataSource<any>(this.data)
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
 
       },
       error: (error: { message: any; }) => {
@@ -76,6 +148,43 @@ export class AudioComponent implements OnInit {
       }
 
     })
+  }
+  updatePagination() {
+
+    this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
+
+  }
+  ngAfterViewInit() {
+    this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
+
+  }
+  
+  ChangeActive(_element:any){
+
+  }
+  IsActiveorNot(_element:any){
+    return true
+  }
+  viewdetails(_element:any){
+
+  }
+  editdetails(_element:any){
+
+  }
+  deletedetails(_element:any){
+
+  }
+  addcourse() {
+    this.displaycontent = !this.displaycontent
+  }
+  reseteditable() {
+    this. Audiomanagement.reset()
+    this.iseditable = false
+    this.displaycontent = !this.displaycontent
+    this.issubmit = true
+    this.filerror2 = false
   }
 
   ngOnInit(): void {
@@ -91,10 +200,30 @@ export class AudioComponent implements OnInit {
     //   duration: [null, Validators.compose([Validators.required])],
     //   meta: [null, Validators.compose([Validators.required])],
     // }
+    this.dataSource = new MatTableDataSource<any>(this.data)
+    this.filterData = {
+      filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
+    };
+
+   
+    this.filterData.gridData = this.data;
+    this.filterData.dataSource = this.dataSource;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.filterData.sort = this.sort;
+    for (let col of this.filterData.filterColumnNames) {
+      col.Value = '';
+    }
+
   }
 
-  gobutton() {
-
+  gobutton()
+  {
+    
   }
 
   filechange(event: any) {
@@ -145,17 +274,17 @@ export class AudioComponent implements OnInit {
       "metakey": this.Audiomanagement.value.meta,
       "active": ""
 
-      //   {
-      //     "courseId": 1,
-      //     "audioCategoryId": 1,
-      //     "uploadCategory": "File link",
-      //     "audioFile": "audio/audio2.mp3",
-      //     "audioTitle": "dharanas 2",
-      //     "audioDesc": "Audio audioDesc",
-      //     "audioDuration": 18,
-      //     "metakey": "meta 2",
-      //     "active": "Y"
-      // }
+    //   {
+    //     "courseId": 1,
+    //     "audioCategoryId": 1,
+    //     "uploadCategory": "File link",
+    //     "audioFile": "audio/audio2.mp3",
+    //     "audioTitle": "dharanas 2",
+    //     "audioDesc": "Audio audioDesc",
+    //     "audioDuration": 18,
+    //     "metakey": "meta 2",
+    //     "active": "Y"
+    // }
       // "audioCategoryId":this.Audiomanagement.value.meta,
     }
     console.log(this.Audiomanagement);

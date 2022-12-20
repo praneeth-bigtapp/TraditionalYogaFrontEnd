@@ -49,7 +49,7 @@ export class TestimonialsComponent implements OnInit {
 
     this.testimonial = this.formbuilder.group({
 
-      content: [null, Validators.compose([Validators.required])],
+      Content: [null, Validators.compose([Validators.required])],
       name: [null, Validators.compose([Validators.required])],
       link: [null, Validators.compose([Validators.required])],
 
@@ -66,6 +66,7 @@ export class TestimonialsComponent implements OnInit {
     this.test.getTestimonial().subscribe({
       next: (response) => {
         this.data = response
+        this.data=this.data.reverse()
         for (let data of this.data) {
           data.check = false;
         }
@@ -138,7 +139,7 @@ export class TestimonialsComponent implements OnInit {
   }
   editdetails(element: any) {
     this.testimonial.setValue({
-      content: element.content,
+      Content: element.content,
       name: element.givenByName,
       link: element.videoLink,
       description:element.description,
@@ -171,12 +172,40 @@ export class TestimonialsComponent implements OnInit {
       return this.testimonial.markAllAsTouched()
 
     const body = {
-      "content": this.testimonial.value.content,
+      "content": this.testimonial.value.Content,
       "givenByName": this.testimonial.value.name,
 
-      "video_link": this.testimonial.value.link,
+      "videoLink": this.testimonial.value.link,
       "description": this.testimonial.value.description,
     }
+    if (this.iseditable) {
+      //editable
+      // const name = this.data.filter((ele: any) => ele.content.content === Content)[0].givenByName.description
+
+      // const body = {
+      //   "content": this.testimonial.value.Content,
+      //   "givenByName": this.testimonial.value.name,
+  
+      //   "videoLink": this.testimonial.value.link,
+      //   "description": this.testimonial.value.description,
+      // }
+
+      console.log(body);
+
+      this.test.updatetest(body).subscribe({
+        next: (response) => {
+          console.log(response)
+          this.testimonial.reset()
+          this.getTestimonial()
+        },
+        error: (error) => {
+          console.error(error.message);
+
+        }
+      }) 
+      return
+    }
+    
     console.log(this.testimonial);
 
     this.test.posttestimonial(body).subscribe({
@@ -195,5 +224,5 @@ export class TestimonialsComponent implements OnInit {
 
   }
  
+  }
 
-}

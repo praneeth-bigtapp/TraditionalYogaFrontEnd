@@ -46,7 +46,7 @@
                 <label>Name</label>
                 <mat-form-field class="example-full-width"appearance="outline" id="field">
 
-                    <mat-label>Enter Name</mat-label>
+                    <!-- <mat-label>Enter Name</mat-label> -->
                     <input type="text" matInput formControlName="nameerror" matInput>
                     <mat-error class="error-message"
                     [hidden]=" !Mapusers.get('nameerror')?.hasError('required')  ">
@@ -60,7 +60,7 @@
                 <label>Email</label>
                 <mat-form-field class="example-full-width" appearance="outline" id="field">
 
-                    <mat-label>Enter email id</mat-label>
+                    <!-- <mat-label>Enter email id</mat-label> -->
                     <input matInput formControlName="mailerror">
                     <mat-error class="error-message"
                     [hidden]=" !Mapusers.get('mailerror')?.hasError('required')  ">
@@ -72,7 +72,7 @@
                 <label>Country</label>
                 <mat-form-field appearance="outline">
 
-                    <mat-label>Select Country</mat-label>
+                    <!-- <mat-label>Select Country</mat-label> -->
                     <select matNativeControl [disabled]="disableSelect.value"formControlName="country">
               <option value="" selected></option>
               <option value="volvo">Volvo</option>
@@ -90,7 +90,7 @@
                 <label>Mobile</label>
                 <mat-form-field class="example-full-width"appearance="outline"id="field">
 
-                    <mat-label>Select Mobile</mat-label>
+                    <!-- <mat-label>Select Mobile</mat-label> -->
                     <input matInput formControlName="selectMob">
                     <mat-error class="error-message"
                     [hidden]=" !Mapusers.get('selectMob')?.hasError('required')  ">
@@ -103,7 +103,7 @@
                 <label>Region</label>
                 <mat-form-field class="example-full-width" appearance="outline" id="field">
 
-                    <mat-label>Select Region</mat-label>
+                    <!-- <mat-label>Select Region</mat-label> -->
                     <input matInput formControlName="selectRegion">
                     <mat-error class="error-message"
                     [hidden]=" !Mapusers.get('selectRegion')?.hasError('required')  ">
@@ -116,7 +116,7 @@
                 <label>Age Form</label>
                 <mat-form-field appearance="outline">
 
-                    <mat-label>Age Form</mat-label>
+                    <!-- <mat-label>Age Form</mat-label> -->
                     <select matNativeControl [disabled]="disableSelect.value"formControlName="agefrom">
               <option value="" selected></option>
               <option value="volvo">Volvo</option>
@@ -132,7 +132,7 @@
             </div>
 
             <div class="col-md-4 ">
-                <label>Age To</label>
+                <!-- <label>Age To</label> -->
                 <mat-form-field appearance="outline">
 
                     <mat-label>Age to</mat-label>
@@ -154,7 +154,7 @@
                 <label>Gender</label>
                 <mat-form-field appearance="outline">
 
-                    <mat-label>Gender</mat-label>
+                    <!-- <mat-label>Gender</mat-label> -->
                     <select matNativeControl [disabled]="disableSelect.value" formControlName="gender">
               <option value="" selected></option>
               <option value="volvo">Volvo</option>
@@ -172,7 +172,7 @@
                 <label>Status</label>
                 <mat-form-field class="example-full-width" appearance="outline" id="field">
 
-                    <mat-label>Status</mat-label>
+                    <!-- <mat-label>Status</mat-label> -->
                     <input matInput formControlName="status">
                     <mat-error class="error-message"
                     [hidden]=" !Mapusers.get('status')?.hasError('required')  ">
@@ -185,7 +185,7 @@
                 <label>Course</label>
                 <mat-form-field appearance="outline">
 
-                    <mat-label>Users of a course</mat-label>
+                    <!-- <mat-label>Users of a course</mat-label> -->
                     <select matNativeControl [disabled]="disableSelect.value" formControlName="course">
               <option value="" selected></option>
               <option value="volvo">Volvo</option>
@@ -202,7 +202,10 @@
             
 
         </div>
-        <div class=" col-md-12 justify-content-end">
+        <div class="row justify-content-end">
+
+        
+        <div class=" col-md-5">
             <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
                 search Users
             </button>
@@ -210,6 +213,7 @@
                 Cancel
             </button>
         </div>
+    </div>
         <!-- <div class="row float-right">
             <div class="col pl-4  ">
                 <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
@@ -388,7 +392,7 @@
     <div class="row">
         <div class="col">
             <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
-       download excel
+       Download excel
     </button>
         </div>
     </div><br>
