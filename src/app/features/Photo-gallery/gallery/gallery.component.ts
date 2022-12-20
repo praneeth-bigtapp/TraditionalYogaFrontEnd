@@ -65,14 +65,20 @@ export class GalleryComponent implements OnInit {
       "role": "Student",
       "numberofphotosadded": 10,
       "isvisible": true
+    }]
+
+    pageno: number = 1
+
+    onpaginatechange(event: any) {
+      if (event.pageIndex === 0) {
+        this.pageno = 1
+        return
+      }
+      this.pageno = (event.pageIndex * event.pageSize) + 1
+      return
     }
-  
 
-
-
-
-  ]
-  displayedColumns: string[] = ["GalaryName", "dateofcreation", "role", "numberofphotosadded", "Actions"];
+  displayedColumns: string[] = ["S.no","GalaryName", "dateofcreation", "role", "numberofphotosadded", "Actions"];
 
   dataSource: any;
 
@@ -103,6 +109,12 @@ export class GalleryComponent implements OnInit {
     for (let col of this.filterData.filterColumnNames) {
       col.Value = '';
     }
+
+  }
+   ngAfterViewInit() {
+    this.filterData.dataSource.paginator = this.paginator;
+    
+    this.filterData.dataSource.sort = this.sort;
 
   }
   createGallery() {
