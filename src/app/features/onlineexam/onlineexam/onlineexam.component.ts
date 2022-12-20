@@ -153,7 +153,7 @@ export class OnlineexamComponent implements OnInit {
 
     this.filerror = this.onlineexamform.value.file === null ? true : false
 
-    this.filedata = event.target.files[0].name
+    this.filedata = event.target.files[0]
   }
 
   viewdetails(element: any) {
@@ -239,6 +239,13 @@ export class OnlineexamComponent implements OnInit {
 
     console.log({ examsId, course, testtype, testname, leveltest, file, description });
 
+    const formData = new FormData()
+
+    console.log(this.filedata);
+    
+
+    formData.append("file", this.filedata)
+
     const body = {
       "courseId": {
         "coursesId": Number(course)
@@ -250,7 +257,7 @@ export class OnlineexamComponent implements OnInit {
       "levelId": {
         "testId": Number(leveltest)
       },
-      "fileUpload": file,
+      "fileUpload": formData,
       "description": description
     }
 

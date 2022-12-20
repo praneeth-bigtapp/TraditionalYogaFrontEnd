@@ -36,6 +36,8 @@ export class CourseMediaPraticeComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
+  pageno: number = 1
+
   title = ''
   keyword = ''
   description = ''
@@ -54,6 +56,14 @@ export class CourseMediaPraticeComponent implements OnInit {
 
   displaycontent: boolean = false
 
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
 
 
   displayedColumns = ['id', 'title', 'description', 'uploadMediaFile', 'duration', 'metaKeyword', 'buttons']

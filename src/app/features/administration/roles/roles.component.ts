@@ -34,6 +34,8 @@ export class RolesComponent implements OnInit {
   Message: any;
   errorType: any;
   validt: any;
+  pageno: number = 1
+
 
   constructor(
     private rolesService: RolesService,
@@ -85,6 +87,16 @@ export class RolesComponent implements OnInit {
       }
     });
   }
+
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
+
 
   onAddRoleSubmit() {
     if (this.AddRoleForm.valid) {

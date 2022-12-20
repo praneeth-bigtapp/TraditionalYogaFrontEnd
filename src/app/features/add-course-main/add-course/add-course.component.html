@@ -189,17 +189,17 @@
                         <input type="text" (keyup)="updatePagination('category')"
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let element"> {{element.categorieId.categoriesName}} </td>
+                    <td mat-cell *matCellDef="let element" class="text-justify"> {{element.categorieId.categoriesName}} </td>
                 </ng-container>
                 <ng-container matColumnDef="coursesName">
-                    <th mat-header-cell *matHeaderCellDef scope="col">
+                    <th mat-header-cell *matHeaderCellDef scope="col-2">
                         <label mat-sort-header>
                             Course Name
                         </label>
                         <input type="text" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let element"> {{element.coursesName}} </td>
+                    <td mat-cell *matCellDef="let element" class="col-3 text-justify"> {{element.coursesName}} </td>
                 </ng-container>
                 <ng-container matColumnDef="courseDuration">
                     <th mat-header-cell *matHeaderCellDef scope="col">

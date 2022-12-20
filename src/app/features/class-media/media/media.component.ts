@@ -20,6 +20,7 @@ export class MediaComponent implements OnInit {
   selection = new SelectionModel<any>(true, []);
 
   pageno: number = 1
+  isothers: boolean = false
 
   courselist!: any
   categorylist!: any
@@ -96,6 +97,10 @@ export class MediaComponent implements OnInit {
       category: [null, Validators.compose([Validators.required])],
       title: [null, Validators.compose([Validators.required])],
       description: [null, Validators.compose([Validators.required])],
+      others: [null, Validators.compose([Validators.required])],
+      subcategory: [null, Validators.compose([Validators.required])],
+
+
 
     })
     this.glimpseform = this.formbuilder.group({

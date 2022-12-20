@@ -23,6 +23,8 @@ export class SubModuleComponent implements OnInit {
   navList: any = [];
   permissionName: any;
   pagePermissions: any;
+  pageno: number = 1
+
 
   MenuList: any = [];
   SubMenuList: any = [];
@@ -66,6 +68,15 @@ export class SubModuleComponent implements OnInit {
     this.getSubMenus();
     this.setPageLevelPermissions();
   }
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
+
 
   onSubModuleSubmit() {
     if (this.AddSubModuleForm.valid) {
