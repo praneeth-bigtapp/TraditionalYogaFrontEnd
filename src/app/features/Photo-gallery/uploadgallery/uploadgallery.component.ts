@@ -23,29 +23,27 @@ export class UploadgalleryComponent implements OnInit {
 
   onFileChange(event: any): void {
 
-    this.formdata.append("files", event.target.files)
-    this.filelist = Object.values(event.target.files).map((file: any) => {
+    const temp = this.filelist
+    this.filelist = Object.values(event.target.files).map((file: any, index) => {
       const { name, lastModified, lastModifiedDate, type, size } = Object(file)
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = (_event) => {
-
-        this.addfilestoUI(({
+        const currentvalue = ({
           name,
           description: "",
           path: reader.result,
-        }))
+          file
+        })
+        this.filelist.push(currentvalue)
+        if (Object.values(event.target.files).length - 1 === index) {
+          this.filelist = [...temp, ...this.filelist]
+          this.filelist = this.filelist.filter(Boolean)
+        }
       }
     })
 
   }
-
-  addfilestoUI(value: any) {
-    this.filelist.push(value)
-    this.filelist = this.filelist.filter(Boolean)
-  }
-
-
   openSnackBar(data: any) {
     this._snackBar.open(data.message, 'Close', {
       duration: 2 * 1000,
@@ -66,7 +64,7 @@ export class UploadgalleryComponent implements OnInit {
   }
 
   detectchange() {
-    console.log(this.filelist);
+    // console.log(this.filelist);
   }
   removeimage(name: any) {
 
@@ -75,8 +73,9 @@ export class UploadgalleryComponent implements OnInit {
   }
 
   uploadimage() {
-    console.log(this.formdata.get("files"));
-    // this.openSnackBar({ message: "Uploaded" })
+    const files = this.filelist.map((ele: any) => ele.file)
+    console.log(files);
+
   }
 
 }
