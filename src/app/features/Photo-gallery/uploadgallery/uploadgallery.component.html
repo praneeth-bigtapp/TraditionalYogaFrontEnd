@@ -4,53 +4,59 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item"><a href="#/addpages">Website Management</a></li>
+            <li class="breadcrumb-item"><a href="#/gallery">Photo Album</a></li>
 
             <li class="breadcrumb-item active" aria-current="page">Upload image to album</li>
         </ol>
     </nav>
 
     <div class="mb-4 pl-2 text-secondary d-flex flex-row flex-wrap justify-content-between align-items-center">
-        <!-- <h3 class=" "> Upload Images to album</h3> -->
         <br />
         <div class="d-flex flex-row flex-wrap">
-            <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block border border-dark "
+            <!-- <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block border border-dark "
                 (click)="creategallery()">
-                <!-- <i class="fa-solid fa-camera"></i> -->
                 Create Album
             </button>
-            <br /><br />
+            <br /><br /> -->
             <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block border border-dark "
                 (click)="manageGallery()">
-                <!-- <i class="fa-solid fa-photo-film"></i> -->
-                Mange Album
+                Mange Albums
             </button>
         </div>
     </div>
     <div class="card  bg-secondary">
         <div class="card-header text-white bg-secondary">
-            Upload Images to Album
+            Add Photo to Album
         </div>
-        <div class="card-body text-center bg-white  py-2">
-            <h6>Wholesome Quarantine Series</h6>
-            <p>Gallery Name</p>
-            <br />
-            <div class="">
-                <app-upload-file [inputSubModuleId]="inputSubModuleId"></app-upload-file>
+        <div class="card-body text-center bg-white px-0 py-0">
+
+            <div id="upload py-0">
+                <div class="drag-riles border-none " appDnd (fileDropped)="onFileChange($event)">
+                    <!-- <input type="file" #fileDropRef id="fileDropRef" (click)="$event.target.value=null" -->
+                    <input type="file" #fileDropRef id="fileDropRef" (change)="onFileChange($event)" accept="images/*"
+                        multiple />
+                    <img src="assets/images/UploadImg.jpeg" alt="Upload Image" width="80" height="64">
+                    <h3>Drag and drop image here</h3>
+                    <h3>or</h3>
+                    <label for="fileDropRef" class="btn btn-outline-secondary btn-rounded">Browse image</label>
+                    <p class="ConfigurationTypes_noteInfo">Note: Only image files allowed.</p>
+                </div>
+
             </div>
         </div>
     </div>
 
-    <div class="card  bg-secondary">
+    <div class="card  bg-secondary" [hidden]="!filelist.length">
         <div class="card-header text-white bg-secondary">
             Manage Album
         </div>
         <div class="card-body bg-white  py-2">
             <div class="row">
                 <div class="col-md-4 border border d-flex flex-column  bg-white py-2  mr-md-0 "
-                    *ngFor="let file of uploadfile">
+                    *ngFor="let file of filelist">
 
                     <div class="p-2 w-50 mx-auto" style="position: relative; height: 75%; ">
-                        <img mat-card-image class="mx-auto  w-100" [src]="file.path" [alt]="file.name">
+                        <img mat-card-image class="mx-auto  w-100" [src]="file?.path" [alt]="file.name">
 
                         <span class="bg-dark w-100 text-center opacity-25"
                             style="cursor: pointer;position: absolute; left: 0; bottom: 0; z-index: 2; "
@@ -68,27 +74,14 @@
                     <br />
                 </div>
             </div>
-            <br/>
+            <br />
             <div class="w-100  d-flex flex-row justify-content-center flex-wrap">
                 <button type="button" (click)="uploadimage()"
                     class="  btn btn-outline-secondary btn-rounded d-inline-block m-2">
-                    Upload images
+                    Upload
                 </button>
             </div>
         </div>
     </div>
-    <div class="p-2">
 
-
-
-        <div class="row mt-2 w-100 ">
-
-
-
-        </div>
-
-        <br />
-
-
-    </div>
 </div>

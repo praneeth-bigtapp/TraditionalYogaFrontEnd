@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { FormControl, Validators,FormGroup,  FormBuilder, } from '@angular/forms';
+import { FormControl, Validators, FormGroup, FormBuilder, } from '@angular/forms';
 import { CreateGalleryComponent } from '../create-gallery/create-gallery.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -16,14 +16,14 @@ export class GalleryComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   filterData: any
   gridData: any;
-  createalbum!:FormGroup
+  createalbum!: FormGroup
   displaycontent: boolean = false
   issubmit: boolean = true
   iseditable: boolean = false
   filerror!: boolean
   filerror2: boolean = false
-  
-    data = [
+
+  data = [
     {
       "GalaryName": "RYT 200 Course photos",
       "dateofcreation": "21-07-2022",
@@ -65,22 +65,22 @@ export class GalleryComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     public router: Router,
-    private formbuilder:FormBuilder
-  ) { 
+    private formbuilder: FormBuilder
+  ) {
 
     this.createalbum = this.formbuilder.group({
-     
+
       albumname: [null, Validators.compose([Validators.required])],
       description: [null, Validators.compose([Validators.required])],
       fromdate: [null, Validators.compose([Validators.required])],
       // duration: [null, Validators.compose([Validators.required])],
       todate: [null, Validators.compose([Validators.required])],
-    
+
     });
   }
 
   ngOnInit(): void {
-     
+
     this.dataSource = new MatTableDataSource<any>(this.data)
     this.filterData = {
       filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
@@ -90,7 +90,7 @@ export class GalleryComponent implements OnInit {
       sort: this.sort
     };
 
-   
+
     this.filterData.gridData = this.data;
     this.filterData.dataSource = this.dataSource;
     this.dataSource.paginator = this.paginator;
@@ -109,28 +109,31 @@ export class GalleryComponent implements OnInit {
     this.filterData.dataSource.sort = this.sort;
 
   }
-  
+
   updatePagination() {
 
     this.filterData.dataSource.paginator = this.paginator;
     this.filterData.dataSource.sort = this.sort;
 
   }
- 
 
-  ChangeActive(element:any){
+  addphoto() {
+    this.router.navigate(["uploadGallery"])
+  }
+
+  ChangeActive(element: any) {
 
   }
-  IsActiveorNot(element:any){
+  IsActiveorNot(element: any) {
     return true
   }
-  viewdetails(element:any){
+  viewdetails(element: any) {
 
   }
-  editdetails(element:any){
+  editdetails(element: any) {
 
   }
-  deletedetails(element:any){
+  deletedetails(element: any) {
 
   }
   album() {
