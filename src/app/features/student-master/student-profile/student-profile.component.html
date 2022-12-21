@@ -9,28 +9,18 @@
     </nav>
     <div class="card border-light">
         <div class=" border-0">
+            <div class="card-header text-white bg-secondary mt-3">
+                Student
+            </div>
             
-            <form class="d-flex justify-content-end " [formGroup]="searchStudentForm" >
-               
-                <div class="col-md-3" *ngIf="studentSelectStatus">
-                    <label> Course</label>
-                    <mat-form-field appearance="outline" >
-                        
-                        <mat-select formControlName="course" required (selectionChange)="oncourseselect()" >
-                            <mat-option *ngFor="let course of CourseList" [value]="course.courseId" >
-                                {{course.courseName}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="searchStudentForm.controls['course'].hasError('required')">
-                            Course is to be selected
-                        </mat-error>
-                    </mat-form-field>
-                </div>
+            <form class=" d-flex card-body bg-white" [formGroup]="searchStudentForm" (submit)="oncourseselect()">
+                
+              
                 <div class="col-md-3">
                     <label>Student</label>
 
                     <mat-form-field appearance="outline">
-                        <mat-select placeholder="Select Student" formControlName="studentId" disableOptionCentering
+                        <mat-select  formControlName="studentId" disableOptionCentering
                             required>
                             <mat-option *ngFor="let student of StudentList" [value]="student.studentId"
                                 (click)="onSelectStudent(student) ">
@@ -42,6 +32,27 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
+                
+                
+                <div class="col-md-3" >
+                    <label> Course</label>
+                    <mat-form-field appearance="outline" >
+                        
+                        <mat-select formControlName="course" required  >
+                            <mat-option *ngFor="let course of CourseList" [value]="course.courseId" >
+                                {{course.courseName}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="searchStudentForm.controls['course'].hasError('required')">
+                            Course is to be selected
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-outline-secondary btn-rounded d-inline-block mt-4" type="submit" >
+                        Submit</button>
+                </div>
+                
             </form>
         </div>
 
@@ -85,6 +96,268 @@
                                 </mat-card>
                             </div>
                             <div class="col-md-10">
+                                <div class="card ">
+                                    <!-- <div class="card-header text-white bg-secondary">
+                                        View Course Material
+                                    </div> -->
+                                    <div class="card-body bg-white px-0 py-0">
+                                        <div class=" ">
+                                            <div class="row">
+                                                <div class="col-md-4  border-right py-0     text-center">
+                                                    <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                                        <div>
+                                                            <p> <i class=" fa-solid fa-user me-4 "></i></p>
+                                                        </div>
+                                                        <div>
+                                                            <p class=""> Student Id : </p>
+                                                        </div>
+                                                    </div>
+                            
+                                                </div>
+                                                <div class="col-md-8  py-3  ps-4 my-auto">
+                                                    <h4>{{ studentProfile.roleId  }}</h4>
+                                                </div>
+                                            </div>
+                            
+                                            <hr class="my-0" />
+                                            <div class="row">
+                                                <div class="col-md-4  border-right py-0     text-center">
+                                                    <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                                        <div>
+                                                            <p> <i class=" fa-solid fa-address-card me-4 "></i></p>
+                                                        </div>
+                                                        <div>
+                                                            <p class=""> Name : </p>
+                                                        </div>
+                                                    </div>
+                            
+                                                </div>
+                                                <div class="col-md-8  py-3  ps-4 my-auto">
+                                                    <h4>{{ studentProfile.name | titlecase }}</h4>
+                                                </div>
+                                            </div>
+                                            <hr class="my-0" />
+                                            <div class="row">
+                                                <div class="col-md-4  border-right py-0     text-center">
+                                                    <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                                        <div>
+                                                            <p> <i class=" fa-solid fa-envelope-open-text me-4 "></i></p>
+                                                        </div>
+                                                        <div>
+                                                            <p class=""> Profession : </p>
+                                                        </div>
+                                                    </div>
+                            
+                                                </div>
+                                                <div class="col-md-8  py-3  ps-4 my-auto">
+                                                    <h4>{{studentProfile.professionId }}</h4>
+                                                </div>
+                                            </div>
+                            
+                                            <hr class="my-0" />
+                                            <div class="row">
+                                                <div class="col-md-4  border-right py-0     text-center">
+                                                    <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                                        <div>
+                                                            <p> <i class=" fa-solid fa-envelope-open-text me-4 "></i></p>
+                                                        </div>
+                                                        <div>
+                                                            <p class=""> Educational details : </p>
+                                                        </div>
+                                                    </div>
+                            
+                                                </div>
+                                                <div class="col-md-8  py-3  ps-4 my-auto">
+                                                    <h4>{{ studentProfile.qulificationId }}</h4>
+                                                </div>
+                                            </div>
+                            
+                            
+                                            <hr class="my-0" />
+                                            <div class="row">
+                                                <div class="col-md-4  border-right py-0     text-center">
+                                                    <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                                        <div>
+                                                            <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                                                        </div>
+                                                        <div>
+                                                            <p class=""> Gender : </p>
+                                                        </div>
+                                                    </div>
+                            
+                                                </div>
+                                                <div class="col-md-8  py-3  ps-4 my-auto">
+                                                    <h4>{{ studentProfile.genderId }}</h4>
+                                                </div>
+                                            </div>
+                            
+                                            <hr class="my-0" />
+                                            <div class="row">
+                                                <div class="col-md-4  border-right py-0     text-center">
+                                                    <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                                        <div>
+                                                            <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                                                        </div>
+                                                        <div>
+                                                            <p class=""> Age : </p>
+                                                        </div>
+                                                    </div>
+                            
+                                                </div>
+                                                <div class="col-md-8  py-3  ps-4 my-auto">
+                                                    <h4>{{ studentProfile.age }}</h4>
+                                                </div>
+                                            </div>
+
+
+                                            <hr class="my-0" />
+                                            <div class="row">
+                                                <div class="col-md-4  border-right py-0     text-center">
+                                                    <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                                        <div>
+                                                            <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                                                        </div>
+                                                        <div>
+                                                            <p class=""> Mobile : </p>
+                                                        </div>
+                                                    </div>
+                            
+                                                </div>
+                                                <div class="col-md-8  py-3  ps-4 my-auto">
+                                                    <h4>{{ studentProfile.mobile }}</h4>
+                                                </div>
+                                            </div>
+
+                                            <hr class="my-0" />
+                                            <div class="row">
+                                                <div class="col-md-4  border-right py-0     text-center">
+                                                    <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                                        <div>
+                                                            <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                                                        </div>
+                                                        <div>
+                                                            <p class=""> Address : </p>
+                                                        </div>
+                                                    </div>
+                            
+                                                </div>
+                                                <div class="col-md-8  py-3  ps-4 my-auto">
+                                                    <h4>{{ studentProfile.address }}</h4>
+                                                </div>
+                                            </div>
+
+                                            <hr class="my-0" />
+                                            <div class="row">
+                                                <div class="col-md-4  border-right py-0     text-center">
+                                                    <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                                        <div>
+                                                            <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                                                        </div>
+                                                        <div>
+                                                            <p class=""> Email id: </p>
+                                                        </div>
+                                                    </div>
+                            
+                                                </div>
+                                                <div class="col-md-8  py-3  ps-4 my-auto">
+                                                    <h4>{{ studentProfile.emailId }}</h4>
+                                                </div>
+                                            </div>
+
+                                            
+                                            <hr class="my-0" />
+                                            <div class="row">
+                                                <div class="col-md-4  border-right py-0     text-center">
+                                                    <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                                        <div>
+                                                            <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                                                        </div>
+                                                        <div>
+                                                            <p class=""> Member registered on: </p>
+                                                        </div>
+                                                    </div>
+                            
+                                                </div>
+                                                <div class="col-md-8  py-3  ps-4 my-auto">
+                                                    <h4>{{ studentProfile.regesiterDate }}</h4>
+                                                </div>
+                                            </div>
+
+                                            
+                                            <hr class="my-0" />
+                                            <div class="row">
+                                                <div class="col-md-4  border-right py-0     text-center">
+                                                    <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                                        <div>
+                                                            <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                                                        </div>
+                                                        <div>
+                                                            <p class=""> Registered from IP address: </p>
+                                                        </div>
+                                                    </div>
+                            
+                                                </div>
+                                                <div class="col-md-8  py-3  ps-4 my-auto">
+                                                    <h4>{{ studentProfile.registedIpAddress }}</h4>
+                                                </div>
+                                            </div>
+
+                                            <hr class="my-0" />
+                                            <div class="row">
+                                                <div class="col-md-4  border-right py-0     text-center">
+                                                    <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                                        <div>
+                                                            <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                                                        </div>
+                                                        <div>
+                                                            <p class=""> Change status: </p>
+                                                        </div>
+                                                    </div>
+                            
+                                                </div>
+                                                <div class="col-md-8  py-3  ps-4 my-auto">
+                                                    <mat-radio-group aria-label="Select an option" class="d-inline-block">
+                                                        <mat-radio-button value="1">Active </mat-radio-button> &nbsp; &nbsp;
+                                                        &nbsp;
+                                                        <mat-radio-button value="2">Mentor Removed </mat-radio-button>
+                                                        &nbsp; &nbsp; &nbsp;
+                                                        <mat-radio-button value="3">Withdrawn </mat-radio-button> &nbsp;
+                                                        &nbsp; &nbsp;
+                                                        <mat-radio-button value="4">System removed </mat-radio-button>
+                                                        &nbsp; &nbsp; &nbsp;
+                                                        <mat-radio-button value="5">Reprovisioned (Only for admin & chief
+                                                            mentor)</mat-radio-button> &nbsp; &nbsp; &nbsp;
+                                                    </mat-radio-group>
+                                                </div>
+                                            </div>
+
+
+                                            <hr class="my-0" />
+                                            <div class="row">
+                                                <div class="col-md-4  border-right py-0     text-center">
+                                                    <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                                        <div>
+                                                            <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                                                        </div>
+                                                        <div>
+                                                            <p class=""> Map to a course: </p>
+                                                        </div>
+                                                    </div>
+                            
+                                                </div>
+                                                <div class="col-md-8  py-3  ps-4 my-auto">
+                                                    <h4>{{ studentProfile.courseId.courseName }}</h4>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="col-md-10">
                                 <div class="bg-white border border-2">
                                     <div class="row pt-4 pl-4 pb-1">
                                         <div class="col-md-4">
@@ -217,7 +490,7 @@
                                     </div>
                                     <hr>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

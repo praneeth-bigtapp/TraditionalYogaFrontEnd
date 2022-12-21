@@ -110,9 +110,10 @@ export class StudentProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.onselectCourse()
     this.searchStudentForm = this.formBuilder.group({
-      course: [null],
-      studentId: [null]
+      course:   [null, Validators.required],
+      studentId:[null, Validators.required],
     });
     this.searchStudentForm.controls['studentId'].disable();
 
@@ -213,6 +214,17 @@ updatePagination2() {
       }
     });
   }
+  onselectCourse(){
+    console.log("Enterning Select Course List");
+    this.studentService.getCourses().subscribe({
+      next: (response) => {
+        this.CourseList = response;
+      },
+      error: (error) => {
+
+      }
+    });
+  }
   onSelectStudent(studentDetails: any) {
     console.log("Enterning Select Student List");
     const data = {
@@ -230,15 +242,7 @@ updatePagination2() {
       }
     });
 
-    console.log("Enterning Select Course List");
-    this.studentService.getCourses().subscribe({
-      next: (response) => {
-        this.CourseList = response;
-      },
-      error: (error) => {
-
-      }
-    });
+ 
 
     console.log("Enterning Select Donation List");
     this.studentService.getDonationById(data).subscribe({
