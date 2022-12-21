@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { StudentService } from '../student.service';
 
 let COURSES_LIVE_DATA: any[] = [
@@ -59,17 +60,17 @@ export class StudentProfileComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator2!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort2!: MatSort;
   gridData2 = [];
-  volunteerForm=false
+  volunteerForm = false
   filterData: any;
   gridData = [];
-  purchaseform=false
+  purchaseform = false
   searchStudentForm!: FormGroup;
   courseForm!: FormGroup;
   AddPurchaseForm!: FormGroup;
   AddVolunteerForm!: FormGroup;
   StudentList: any = [];
   CourseList: any = [];
-  courseSelectStatus=false;
+  courseSelectStatus = false;
   dataSource!: MatTableDataSource<any>;
   donationsData: any;
   ePurchasesdata: any;
@@ -92,7 +93,7 @@ export class StudentProfileComponent implements OnInit {
   pageno: number = 1
   donations: any;
   filterData2: any
-   dataSource2:any;
+  dataSource2: any;
 
   onpaginatechange(event: any) {
     if (event.pageIndex === 0) {
@@ -106,19 +107,20 @@ export class StudentProfileComponent implements OnInit {
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
     private studentService: StudentService,
+    
   ) { }
 
 
   ngOnInit(): void {
     this.onselectCourse()
     this.searchStudentForm = this.formBuilder.group({
-      course:   [null, Validators.required],
-      studentId:[null, Validators.required],
+      course: [null, Validators.compose([Validators.required])],
+      studentId: [null, Validators.compose([Validators.required])]
     });
     this.searchStudentForm.controls['studentId'].disable();
 
     this.courseForm = this.formBuilder.group({
-      
+
     });
 
     this.AddPurchaseForm = this.formBuilder.group({
@@ -160,20 +162,20 @@ export class StudentProfileComponent implements OnInit {
       paginator: this.paginator,
       sort: this.sort
     };
-    
+
 
     this.getStudentList();
   }
   updatePagination() {
     this.filterData.dataSource.paginator = this.paginator;
-    this.filterData.dataSource.sort=this.sort
+    this.filterData.dataSource.sort = this.sort
 
-}
-updatePagination2() {
-  this.filterData2.dataSource2.paginator2 = this.paginator2;
-  this.filterData2.dataSource2.sort2=this.sort2
+  }
+  updatePagination2() {
+    this.filterData2.dataSource2.paginator2 = this.paginator2;
+    this.filterData2.dataSource2.sort2 = this.sort2
 
-}
+  }
   getStudentList() {
     this.studentService.getStudent().subscribe({
       next: (response) => {
@@ -187,18 +189,18 @@ updatePagination2() {
     });
 
   }
-  onAddVolunteer(){
-    this.volunteerForm=!this.volunteerForm
+  onAddVolunteer() {
+    this.volunteerForm = !this.volunteerForm
   }
-  onaddpurchase(){
-    this.purchaseform=true
+  onaddpurchase() {
+    this.purchaseform = true
   }
-  donationAPI(){
+  donationAPI() {
     this.studentService.getdonations().subscribe({
       next: (response) => {
         this.donations = response;
-        this.donations= this.donations.reverse()
-        
+        this.donations = this.donations.reverse()
+
         this.dataSource = new MatTableDataSource<any>(this.donations)
         this.filterData.gridData = this.donations;
         this.filterData.dataSource = this.dataSource;
@@ -214,7 +216,7 @@ updatePagination2() {
       }
     });
   }
-  onselectCourse(){
+  onselectCourse() {
     console.log("Enterning Select Course List");
     this.studentService.getCourses().subscribe({
       next: (response) => {
@@ -242,7 +244,7 @@ updatePagination2() {
       }
     });
 
- 
+
 
     console.log("Enterning Select Donation List");
     this.studentService.getDonationById(data).subscribe({
@@ -265,10 +267,10 @@ updatePagination2() {
     this.studentService.getPurchaseById(data).subscribe({
       next: (response) => {
         console.log(response);
-       
+
         this.ePurchasesdata = response;
-        this.ePurchasesdata= this.ePurchasesdata.reverse()
-        
+        this.ePurchasesdata = this.ePurchasesdata.reverse()
+
         this.dataSource2 = new MatTableDataSource<any>(this.ePurchasesdata)
         this.filterData2.gridData2 = this.ePurchasesdata;
         this.filterData2.dataSource2 = this.dataSource2;
@@ -285,8 +287,10 @@ updatePagination2() {
     });
   }
 
-  oncourseselect(){
-    this.courseSelectStatus=true
+  oncourseselect() {
+    if (this.searchStudentForm.invalid)
+      return this.searchStudentForm.markAllAsTouched()
+    this.courseSelectStatus = true
   }
   getVolunteer(data: any) {
     console.log("Enterning Select Volunteer List");
@@ -302,8 +306,38 @@ updatePagination2() {
     });
   }
 
+  changestatus(msg:any){
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Status Confirmation",
+        message: "Are You Sure You Want To Change the Statust to "+msg+" ?"
+      },
+      width: "30%"
+    })
+
+    dialogref.afterClosed().subscribe(data => {
+      // if (data) 
+      // {
+      //   this.AddCourseService.deletecourse(body).subscribe({
+      //     next: (response) => {
+      //       this.openSnackBar(response)
+      //       this.addCourseForm.reset()
+      //       this.getdata()
+      //     },
+      //     error: (error) => {
+      //       console.error(error.message);
+      //     }
+      //   })
+      //   return
+      // }
+
+    })
+
+
+  }
+
   onPurchaseSubmit() {
-   
+
     const data = {
       "studentId": this.studentProfile.studentId,
       "date": this.AddPurchaseForm.value.date,
@@ -318,7 +352,7 @@ updatePagination2() {
           "name": this.studentProfile.name
         }
         this.getPurchase(studentData);
-        
+
       },
       error: (error) => {
 
@@ -327,7 +361,7 @@ updatePagination2() {
   }
 
   onPurchaseClose() {
-    this.purchaseform=false
+    this.purchaseform = false
     this.AddPurchaseForm.reset();
   }
 

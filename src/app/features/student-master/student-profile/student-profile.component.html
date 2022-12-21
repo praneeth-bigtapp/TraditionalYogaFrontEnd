@@ -13,10 +13,10 @@
                 Student
             </div>
             
-            <form class=" d-flex card-body bg-white" [formGroup]="searchStudentForm" (submit)="oncourseselect()">
+            <form class=" d-flex card-body bg-white mb-3" [formGroup]="searchStudentForm" (submit)="oncourseselect()">
                 
               
-                <div class="col-md-3">
+                <div class="col-md-3 mb-3">
                     <label>Student</label>
 
                     <mat-form-field appearance="outline">
@@ -159,7 +159,7 @@
                                                 <div class="col-md-4  border-right py-0     text-center">
                                                     <div class="d-flex flex-row   py-3  align-items-center px-4  ">
                                                         <div>
-                                                            <p> <i class=" fa-solid fa-envelope-open-text me-4 "></i></p>
+                                                            <p> <i class="fa-solid fa-book-open me-4"></i></p>
                                                         </div>
                                                         <div>
                                                             <p class=""> Educational details : </p>
@@ -178,7 +178,7 @@
                                                 <div class="col-md-4  border-right py-0     text-center">
                                                     <div class="d-flex flex-row   py-3  align-items-center px-4  ">
                                                         <div>
-                                                            <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                                                            <p> <i class="fa-solid fa-transgender me-4"></i></p>
                                                         </div>
                                                         <div>
                                                             <p class=""> Gender : </p>
@@ -196,7 +196,7 @@
                                                 <div class="col-md-4  border-right py-0     text-center">
                                                     <div class="d-flex flex-row   py-3  align-items-center px-4  ">
                                                         <div>
-                                                            <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                                                            <p> <i class="fa-brands fa-pagelines me-4"></i></p>
                                                         </div>
                                                         <div>
                                                             <p class=""> Age : </p>
@@ -215,7 +215,7 @@
                                                 <div class="col-md-4  border-right py-0     text-center">
                                                     <div class="d-flex flex-row   py-3  align-items-center px-4  ">
                                                         <div>
-                                                            <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                                                            <p><i class="fa-regular fa-mobile me-4"></i></p>
                                                         </div>
                                                         <div>
                                                             <p class=""> Mobile : </p>
@@ -233,7 +233,7 @@
                                                 <div class="col-md-4  border-right py-0     text-center">
                                                     <div class="d-flex flex-row   py-3  align-items-center px-4  ">
                                                         <div>
-                                                            <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                                                            <p> <i class="fa-regular fa-address-book me-4"></i></p>
                                                         </div>
                                                         <div>
                                                             <p class=""> Address : </p>
@@ -251,7 +251,7 @@
                                                 <div class="col-md-4  border-right py-0     text-center">
                                                     <div class="d-flex flex-row   py-3  align-items-center px-4  ">
                                                         <div>
-                                                            <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                                                            <p><i class="fa-solid fa-envelope me-4"></i></p>
                                                         </div>
                                                         <div>
                                                             <p class=""> Email id: </p>
@@ -270,7 +270,7 @@
                                                 <div class="col-md-4  border-right py-0     text-center">
                                                     <div class="d-flex flex-row   py-3  align-items-center px-4  ">
                                                         <div>
-                                                            <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                                                            <p><i class="fa-solid fa-calendar-days me-4"></i></p>
                                                         </div>
                                                         <div>
                                                             <p class=""> Member registered on: </p>
@@ -289,7 +289,7 @@
                                                 <div class="col-md-4  border-right py-0     text-center">
                                                     <div class="d-flex flex-row   py-3  align-items-center px-4  ">
                                                         <div>
-                                                            <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                                                            <p><i class="fa-solid fa-map-pin me-4"></i></p>
                                                         </div>
                                                         <div>
                                                             <p class=""> Registered from IP address: </p>
@@ -307,7 +307,7 @@
                                                 <div class="col-md-4  border-right py-0     text-center">
                                                     <div class="d-flex flex-row   py-3  align-items-center px-4  ">
                                                         <div>
-                                                            <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                                                            <p><i class="fa-solid fa-temperature-three-quarters me-4"></i></p>
                                                         </div>
                                                         <div>
                                                             <p class=""> Change status: </p>
@@ -316,16 +316,16 @@
                             
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
-                                                    <mat-radio-group aria-label="Select an option" class="d-inline-block">
-                                                        <mat-radio-button value="1">Active </mat-radio-button> &nbsp; &nbsp;
+                                                    <mat-radio-group aria-label="Select an option" class="d-inline-block" >
+                                                        <mat-radio-button value="1" (click)=" changestatus('Active')">Active </mat-radio-button> &nbsp; &nbsp;
                                                         &nbsp;
-                                                        <mat-radio-button value="2">Mentor Removed </mat-radio-button>
+                                                        <mat-radio-button value="2" (click)=" changestatus('Mentor Removed')">Mentor Removed </mat-radio-button>
                                                         &nbsp; &nbsp; &nbsp;
-                                                        <mat-radio-button value="3">Withdrawn </mat-radio-button> &nbsp;
+                                                        <mat-radio-button value="3" (click)=" changestatus('Withdrawn')">Withdrawn </mat-radio-button> &nbsp;
                                                         &nbsp; &nbsp;
-                                                        <mat-radio-button value="4">System removed </mat-radio-button>
+                                                        <mat-radio-button value="4" (click)=" changestatus('System removed')">System removed </mat-radio-button>
                                                         &nbsp; &nbsp; &nbsp;
-                                                        <mat-radio-button value="5">Reprovisioned (Only for admin & chief
+                                                        <mat-radio-button value="5" (click)=" changestatus('Reprovisioned (Only for admin & chief mentor)')">Reprovisioned (Only for admin & chief
                                                             mentor)</mat-radio-button> &nbsp; &nbsp; &nbsp;
                                                     </mat-radio-group>
                                                 </div>
