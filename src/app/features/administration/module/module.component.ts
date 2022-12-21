@@ -139,6 +139,7 @@ export class ModuleComponent implements OnInit {
 
   onAddMenu() {
     this.isAddModuleForm = true;
+    this.editMode = false
   }
 
   getMenus() {

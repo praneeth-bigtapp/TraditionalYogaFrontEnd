@@ -1,6 +1,12 @@
 <div class="ConfigurationTypes_textpadding">
 
-    <!-- <h3 class="mb-3"> Role Permissions List </h3> -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/administration/roles">Admin Management</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Role Permissions</li>
+        </ol>
+    </nav>
 
     <div class="card border-light">
         <div class="card-header text-white bg-secondary">
@@ -13,8 +19,7 @@
                         <div class="mb-3">
                             <label>Role</label>
                             <mat-form-field appearance="outline">
-                                <mat-select placeholder="Select Role" formControlName="roleName" disableOptionCentering
-                                    required>
+                                <mat-select formControlName="roleName" disableOptionCentering required>
                                     <mat-option *ngFor="let role of RolesList" [value]="role.roleId"> {{role.roleName}}
                                     </mat-option>
                                 </mat-select>
@@ -40,8 +45,7 @@
                     </div>
                 </div>
                 <div *ngIf="errorMessage">
-                    <div *ngIf="errorMessage"
-                        class="notificationMessage text-danger">
+                    <div *ngIf="errorMessage" class="notificationMessage text-danger">
                         <span>{{Message}}</span>
                     </div><br>
                     <div class="notificationMessage" *ngIf="errorMessage">

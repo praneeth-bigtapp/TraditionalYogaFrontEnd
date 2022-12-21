@@ -1,8 +1,28 @@
 <div class="ConfigurationTypes_textpadding">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/administration/roles">Admin Management</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Menu</li>
+        </ol>
+    </nav>
+    <div class="">
+        <span class="float-end mb-2">
+            <button type="button" class="btn btn-outline-secondary btn-rounded"
+                *ngIf="!isAddModuleForm && pagePermissions.Add" (click)="onAddMenu()"> Add Menu </button>
+        </span>
+        <br />
+        <div style="height:10px">
+            <div *ngIf="errorMessage" [ngStyle]="{'color': errorType == 'Error' ? 'red':'green'}"
+                class="notificationMessage">{{Message}}</div>
+        </div>
+
+    </div>
+
 
     <div class="card border-light" *ngIf="isAddModuleForm">
         <div class="card-header text-white bg-secondary">
-            Add Menu
+            {{editMode ?"Update":"Add"}} Menu
         </div>
         <form [formGroup]="AddModuleForm" (ngSubmit)="onModuleSubmit()">
             <div class="card-body bg-white">
@@ -22,7 +42,7 @@
                     <div class="col-md-6 ">
                         <div class="mb-3 mt-1 pt-3">
                             <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
-                                Submit
+                                {{editMode ?"Update":"Add"}}
                             </button>
                             <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block m-2"
                                 (click)="onCancel()"> Cancel
@@ -31,72 +51,72 @@
                     </div>
                 </div>
             </div>
+            <br />
+
         </form>
     </div>
 
-    <h3> Menu List
-        <span class="float-end mb-2">
-            <button type="button" class="btn btn-outline-secondary btn-rounded"
-                *ngIf="!isAddModuleForm && pagePermissions.Add" (click)="onAddMenu()"> Add Menu </button>
-        </span>
-        <div style="height:10px">
-            <div *ngIf="errorMessage" [ngStyle]="{'color': errorType == 'Error' ? 'red':'green'}"
-                class="notificationMessage">{{Message}}</div>
+
+
+    <div class="card border-light w-100">
+        <div class="card-header text-white bg-secondary">
+            Menu list
         </div>
-    </h3>
-    <div class="clearfix"></div>
+        <div class="px-0 py-0">
+            <table mat-table [dataSource]="this.filterData.dataSource" matSort
+                class="mat-elevation-z8 mat-datagrid w-100" aria-label="menu">
 
-    <table mat-table [dataSource]="this.filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
-        aria-label="menu">
+                <ng-container matColumnDef="sno">
+                    <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
+                        <label mat-sort-header>
+                            S.No
+                        </label>
+                        <input type="text" (keyup)="updatePagination()"
+                            [(ngModel)]="filterData.filterColumnNames[0].Value" disabled [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
+                </ng-container>
 
-        <ng-container matColumnDef="sno">
-            <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
-                <label mat-sort-header>
-                    S.No
-                </label>
-                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value"
-                    [filter]="filterData" />
-            </th>
-            <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
-        </ng-container>
+                <ng-container matColumnDef="menuName">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Menu Name
+                        </label>
+                        <input type="text" (keyup)="updatePagination()"
+                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.moduleName}} </td>
+                </ng-container>
 
-        <ng-container matColumnDef="menuName">
-            <th mat-header-cell *matHeaderCellDef scope="col">
-                <label mat-sort-header>
-                    Menu Name
-                </label>
-                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
-                    [filter]="filterData" />
-            </th>
-            <td mat-cell *matCellDef="let element"> {{element.moduleName}} </td>
-        </ng-container>
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Actions
+                        </label>
+                        <input type="text" (keyup)="updatePagination()" disabled [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-slide-toggle [checked]="element.status == 'Y'? true : false"
+                            (change)="onActivateMenu(element,$event)">
+                        </mat-slide-toggle>
+                        <span matTooltip="Edit" *ngIf="!!pagePermissions.Edit" (click)="onEditModule(element)">
+                            <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                        </span>
+                        <span matTooltip="Delete" style="cursor: pointer;" *ngIf="!!pagePermissions.Delete"
+                            (click)="onModuleDelete(element)"> <i class="far fa-trash-alt" aria-hidden="true"></i>
+                        </span>
+                    </td>
+                </ng-container>
 
-        <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef scope="col">
-                <label mat-sort-header>
-                    Actions
-                </label>
-            </th>
-            <td mat-cell *matCellDef="let element">
-                <mat-slide-toggle [checked]="element.status == 'Y'? true : false"
-                    (change)="onActivateMenu(element,$event)">
-                </mat-slide-toggle>
-                <span matTooltip="Edit" *ngIf="!!pagePermissions.Edit" (click)="onEditModule(element)">
-                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                </span>
-                <span matTooltip="Delete" style="cursor: pointer;" *ngIf="!!pagePermissions.Delete"
-                    (click)="onModuleDelete(element)"> <i class="far fa-trash-alt" aria-hidden="true"></i>
-                </span>
-            </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    
-
-  <mat-paginator class="card-body" [pageSizeOptions]="[10,25, 50, 100,150,200]"
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator class="card-body" [pageSizeOptions]="[10,25, 50, 100,150,200]"
                 (page)="onpaginatechange($event)" aria-label="Select page">
             </mat-paginator>
-  
+        </div>
+    </div>
+
+
+
 </div>
