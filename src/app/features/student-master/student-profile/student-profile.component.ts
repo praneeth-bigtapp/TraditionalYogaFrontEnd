@@ -1,29 +1,51 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { StudentService } from '../student.service';
 
 let COURSES_LIVE_DATA: any[] = [
+
   { SNo: 1, date: '2022-12-10', type: 'type', totalScreen: '1 hours', attendedScreen: '2 hours', percentage: '20' },
+
   { SNo: 2, date: '2022-10-10', type: 'type', totalScreen: '3 hours', attendedScreen: '2 hours', percentage: '20' },
+
   { SNo: 3, date: '2022-11-11', type: 'type', totalScreen: '4 hours', attendedScreen: '2 hours', percentage: '20' },
+
   { SNo: 4, date: '2022-11-12', type: 'type', totalScreen: '5 hours', attendedScreen: '2 hours', percentage: '20' },
+
   { SNo: 5, date: '2022-11-13', type: 'type', totalScreen: '6 hours', attendedScreen: '2 hours', percentage: '20' },
+
 ];
+
+
 
 let PARTICES_LIBARY: any[] = [
+
   { SNo: 1, dateTime: '2022-12-10', description: 'description', section: '1 section', attendedTime: '2 hours' },
+
   { SNo: 2, dateTime: '2022-10-10', description: 'description', section: '3 section', attendedTime: '2 hours' },
+
   { SNo: 3, dateTime: '2022-11-11', description: 'description', section: '4 section', attendedTime: '2 hours' },
+
   { SNo: 4, dateTime: '2022-11-12', description: 'description', section: '5 section', attendedTime: '2 hours' },
+
   { SNo: 5, dateTime: '2022-11-13', description: 'description', section: '6 section', attendedTime: '2 hours' },
+
 ];
 
+
+
 let ELEMENT_DATA: any[] = [
+
   { SNo: 1, CourseName: 'RYIT 200', CourseDiscription: 'Free Online Traditional Meditation Teacher Training Based on Darashanas or sanathana Dharma For Yoga Teachers and Students to become a Yogi', CourseStartDate: '10-20-2022', CourseEndDate: '10-20-2022', AdmissionsStatus: "Admitted", CompletionStatus: 'Completed & Certified' },
+
   { SNo: 2, CourseName: 'RYIT 200', CourseDiscription: 'Free Online Traditional Meditation Teacher Training Based on Darashanas or sanathana Dharma For Yoga Teachers and Students to become a Yogi', CourseStartDate: '10-20-2022', CourseEndDate: '10-20-2022', AdmissionsStatus: "Admitted", CompletionStatus: 'Certified' },
+
   { SNo: 3, CourseName: 'RYIT 200', CourseDiscription: 'Free Online Traditional Meditation Teacher Training Based on Darashanas or sanathana Dharma For Yoga Teachers and Students to become a Yogi', CourseStartDate: '10-20-2022', CourseEndDate: '10-20-2022', AdmissionsStatus: "Admitted", CompletionStatus: 'Completed' },
+
 ];
 
 @Component({
@@ -32,13 +54,22 @@ let ELEMENT_DATA: any[] = [
   styleUrls: ['./student-profile.component.css']
 })
 export class StudentProfileComponent implements OnInit {
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort!: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator2!: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort2!: MatSort;
+  gridData2 = [];
+  volunteerForm=false
+  filterData: any;
+  gridData = [];
+  purchaseform=false
   searchStudentForm!: FormGroup;
   courseForm!: FormGroup;
   AddPurchaseForm!: FormGroup;
   AddVolunteerForm!: FormGroup;
   StudentList: any = [];
   CourseList: any = [];
-
+  courseSelectStatus=false;
   dataSource!: MatTableDataSource<any>;
   donationsData: any;
   ePurchasesdata: any;
@@ -47,7 +78,7 @@ export class StudentProfileComponent implements OnInit {
   studentProfile: any;
   studentSelectStatus: Boolean = false;
 
-  donationsColumns: string[] = ['SNo', 'Date', 'AmountDonated', 'Description', 'ModeofPayment'];
+  donationsColumns: string[] = ['SNo', 'Date', 'Discription', "ModeofPay", "amountDonated"];
   ePurchasesColumns: string[] = ['SNo', 'Date', 'PurchesedAmount', 'ProductName'];
   volunterColumns: string[] = ['SNo', 'Category', 'Courses', 'StartDate', 'EndDate', 'SeervedAs', 'noMembers'];
   coursesProfileColumns: string[] = ['SNo', 'CourseName', 'AdmissionsStatus', 'CompletionStatus'];
@@ -58,7 +89,19 @@ export class StudentProfileComponent implements OnInit {
   coureseLiveData = COURSES_LIVE_DATA;
   coureseShortData = COURSES_LIVE_DATA;
   practiceLibData = PARTICES_LIBARY;
+  pageno: number = 1
+  donations: any;
+  filterData2: any
+   dataSource2:any;
 
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
   constructor(
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
@@ -86,15 +129,50 @@ export class StudentProfileComponent implements OnInit {
     this.AddVolunteerForm = this.formBuilder.group({
       category: [null, Validators.required],
       Courses: [null, Validators.required],
-      startDate: [null],
+      startDate: [null,],
       endDate: [null],
       members: [null],
       servedAs: [null]
     });
 
+    this.filterData2 = {
+      filterColumnNames: this.ePurchasesColumns.map(ele => ({ "Key": ele, "Value": "" })),
+      gridData2: this.gridData2,
+      dataSource2: this.dataSource2,
+      paginator2: this.paginator2,
+      sort2: this.sort2
+    };
+    this.dataSource2 = new MatTableDataSource<any>(this.ePurchasesdata)
+    this.filterData2.gridData2 = this.ePurchasesdata;
+    this.filterData2.dataSource2 = this.dataSource2;
+    this.dataSource2.paginator2 = this.paginator2;
+    this.dataSource2.sort2 = this.sort2;
+    this.filterData2.sort2 = this.sort2;
+    for (let col of this.filterData2.filterColumnNames) {
+      col.Value = '';
+    }
+
+    this.filterData = {
+      filterColumnNames: this.donationsColumns.map(ele => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
+    };
+    
+
     this.getStudentList();
   }
+  updatePagination() {
+    this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort=this.sort
 
+}
+updatePagination2() {
+  this.filterData2.dataSource2.paginator2 = this.paginator2;
+  this.filterData2.dataSource2.sort2=this.sort2
+
+}
   getStudentList() {
     this.studentService.getStudent().subscribe({
       next: (response) => {
@@ -108,7 +186,33 @@ export class StudentProfileComponent implements OnInit {
     });
 
   }
+  onAddVolunteer(){
+    this.volunteerForm=!this.volunteerForm
+  }
+  onaddpurchase(){
+    this.purchaseform=true
+  }
+  donationAPI(){
+    this.studentService.getdonations().subscribe({
+      next: (response) => {
+        this.donations = response;
+        this.donations= this.donations.reverse()
+        
+        this.dataSource = new MatTableDataSource<any>(this.donations)
+        this.filterData.gridData = this.donations;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+      },
+      error: (error) => {
 
+      }
+    });
+  }
   onSelectStudent(studentDetails: any) {
     console.log("Enterning Select Student List");
     const data = {
@@ -118,6 +222,7 @@ export class StudentProfileComponent implements OnInit {
     this.studentService.getStudentById(data).subscribe({
       next: (response) => {
         this.studentProfile = response;
+        console.log(this.studentProfile)
         this.studentSelectStatus = true;
       },
       error: (error) => {
@@ -156,8 +261,19 @@ export class StudentProfileComponent implements OnInit {
     this.studentService.getPurchaseById(data).subscribe({
       next: (response) => {
         console.log(response);
-        this.dataSource = new MatTableDataSource(response);
-        this.ePurchasesdata = this.dataSource;
+       
+        this.ePurchasesdata = response;
+        this.ePurchasesdata= this.ePurchasesdata.reverse()
+        
+        this.dataSource2 = new MatTableDataSource<any>(this.ePurchasesdata)
+        this.filterData2.gridData2 = this.ePurchasesdata;
+        this.filterData2.dataSource2 = this.dataSource2;
+        this.dataSource2.paginator2 = this.paginator2;
+        this.dataSource2.sort2 = this.sort2;
+        this.filterData2.sort2 = this.sort2;
+        for (let col of this.filterData2.filterColumnNames) {
+          col.Value = '';
+        }
       },
       error: (error) => {
 
@@ -165,6 +281,9 @@ export class StudentProfileComponent implements OnInit {
     });
   }
 
+  oncourseselect(){
+    this.courseSelectStatus=true
+  }
   getVolunteer(data: any) {
     console.log("Enterning Select Volunteer List");
     this.studentService.getVolunteerById(data).subscribe({
@@ -204,6 +323,7 @@ export class StudentProfileComponent implements OnInit {
   }
 
   onPurchaseClose() {
+    this.purchaseform=false
     this.AddPurchaseForm.reset();
   }
 

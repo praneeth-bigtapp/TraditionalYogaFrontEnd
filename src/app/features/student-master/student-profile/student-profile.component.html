@@ -1,21 +1,35 @@
 <div class="ConfigurationTypes_textpadding">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/createpraticelibrary">User Management</a></li>
+
+            <li class="breadcrumb-item active" aria-current="page">Student</li>
+        </ol>
+    </nav>
     <div class="card border-light">
-        <div class="card-header border-0">
-            <form class="row" [formGroup]="searchStudentForm">
-                <h3 class="d-inline-block col-md-6"> View Student </h3>
-                <div class="col-md-3 float-end">
-                    <mat-form-field appearance="outline" *ngIf="studentSelectStatus">
-                        <mat-label>Select Course</mat-label>
-                        <mat-select formControlName="course" required>
-                            <mat-option *ngFor="let course of CourseList" [value]="course.courseId">
+        <div class=" border-0">
+            
+            <form class="d-flex justify-content-end " [formGroup]="searchStudentForm" >
+               
+                <div class="col-md-3" *ngIf="studentSelectStatus">
+                    <label> Course</label>
+                    <mat-form-field appearance="outline" >
+                        
+                        <mat-select formControlName="course" required (selectionChange)="oncourseselect()" >
+                            <mat-option *ngFor="let course of CourseList" [value]="course.courseId" >
                                 {{course.courseName}}
                             </mat-option>
                         </mat-select>
+                        <mat-error *ngIf="searchStudentForm.controls['course'].hasError('required')">
+                            Course is to be selected
+                        </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-md-3 float-end">
+                <div class="col-md-3">
+                    <label>Student</label>
+
                     <mat-form-field appearance="outline">
-                        <mat-label>Select Student</mat-label>
                         <mat-select placeholder="Select Student" formControlName="studentId" disableOptionCentering
                             required>
                             <mat-option *ngFor="let student of StudentList" [value]="student.studentId"
@@ -31,8 +45,10 @@
             </form>
         </div>
 
-        <div class="student-profile ty-tabs" *ngIf="studentSelectStatus" style="background:#f5f5f5;">
-
+        <div class="student-profile ty-tabs" *ngIf="courseSelectStatus" style="background:#f5f5f5;">
+            <div class="card-header text-white bg-secondary">
+                Student Details
+            </div>
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item ">
                     <a class="nav-link active px-5  fw-bold" data-toggle="tab" href="#tabs-1" role="tab">Profile</a>
@@ -58,17 +74,17 @@
                 <div class="tab-pane active" id="tabs-1" role="tabpanel">
                     <div class=" p-3">
                         <div class="row">
-                            <div class="col-md-3 ">
-                                <mat-card class="example-card border border-2">
+                            <div class="col-md-2" >
+                                <mat-card class=" border border-2" rows="4">
                                     <p class="text-center text-secondary mb-2 fw-bold">Student Image</p>
                                     <div class="profile-pic text-center rounded-circle bg-ty-profile">
                                         <!-- <img src="assets/images/user-profile.png" width="100"
                                             alt="user pic" /> -->
-                                            <i class="fa-solid fa-user fa-8x " style="opacity: .2;"></i>
+                                            <i class="fa-solid fa-user fa-8x " style="opacity: .2;font-size: 8em;" ></i>
                                     </div>
                                 </mat-card>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <div class="bg-white border border-2">
                                     <div class="row pt-4 pl-4 pb-1">
                                         <div class="col-md-4">
@@ -105,7 +121,7 @@
                                     <div class="row  pl-4 pb-1">
                                         <div class="col-md-4">
                                             <div class="icon-place d-inline-block align-top pr-3">
-                                                <img src="assets/images/profile-information.png"
+                                                <img src="assets/images/profile-information.png" 
                                                     width="30px" />
                                             </div>
                                             <div class="d-inline-block align-top">
@@ -194,7 +210,7 @@
                                                 <img src="assets/images/profile-note.png" width="30px" />
                                             </div>
                                             <div class="d-inline-block align-top">
-                                                <h6>{{studentProfile.courseName}}</h6>
+                                                <h6>{{studentProfile.courseId.courseName}}</h6>
                                                 <p>Map to a course</p>
                                             </div>
                                         </div>
@@ -408,60 +424,105 @@
                     </div>
                 </div>
 
-                <div class="tab-pane" id="tabs-3" role="tabpanel">
+                <div class="tab-pane" id="tabs-3" role="tabpanel" (click)="donationAPI()">
                     <div class=" p-3">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <mat-card class="example-card border border-2">
                                     <p class="text-center text-secondary mb-2 fw-bold">Student Image</p>
                                     <div class="profile-pic text-center rounded-circle bg-ty-profile">
                                         <!-- <img src="assets/images/user-profile.png" width="100"
                                             alt="user pic" /> -->
-                                            <i class="fa-solid fa-user fa-8x " style="opacity: .2;"></i>
+                                            <i class="fa-solid fa-user fa-8x " style="opacity: .2;font-size: 8em;"></i>
                                     </div>
                                 </mat-card>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <div class="bg-white border border-2 ">
                                     <h4 class=" text-secondary fw-bold mx-4 mb-4 mt-4" > Donations</h4>
                                     <div class="row  px-3 pb-5 ">
-                                        <table mat-table [dataSource]="donationsData"
-                                            class="mat-elevation-z8 mat-datagrid w-100">
-                                            <!-- Position Column -->
+                                        <table mat-table matSort [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid ">
+
+
                                             <ng-container matColumnDef="SNo">
-                                                <th mat-header-cell *matHeaderCellDef> S.No </th>
-                                                <td mat-cell *matCellDef="let i = index">
-                                                    {{i+1}}
-                                                </td>
+                                              <th mat-header-cell *matHeaderCellDef class="col-1"> <label mat-sort-header>
+                                                  S.No
+                                                </label>
+                                      
+                                                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value" disabled
+                                                  [filter]="filterData" disabled="true" />
+                                              </th>
+                                              <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
                                             </ng-container>
-
-                                            <!-- Name Column -->
+                                      
+                                      
                                             <ng-container matColumnDef="Date">
-                                                <th mat-header-cell *matHeaderCellDef> Date </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                                              <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
+                                                  Date
+                                                </label>
+                                      
+                                                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
+                                                  [filter]="filterData" />
+                                              </th>
+                                              <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.date |date:'dd-MM-YYYY'}} </td>
                                             </ng-container>
-
-                                            <!-- Weight Column -->
-                                            <ng-container matColumnDef="AmountDonated">
-                                                <th mat-header-cell *matHeaderCellDef> Amount donated </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.amountDonated}} </td>
+                                      
+                                      
+                                            <ng-container matColumnDef="Discription">
+                                              <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
+                                                  Discription
+                                                </label>
+                                      
+                                                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
+                                                  [filter]="filterData" />
+                                              </th>
+                                              <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.donarId.des}} </td>
                                             </ng-container>
-
-                                            <!-- Symbol Column -->
-                                            <ng-container matColumnDef="Description">
-                                                <th mat-header-cell *matHeaderCellDef> Description </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                                      
+                                      
+                                            <ng-container matColumnDef="ModeofPay">
+                                              <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
+                                                Mode of Payment
+                                                </label>
+                                      
+                                                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
+                                                  [filter]="filterData" />
+                                              </th>
+                                              <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.donarId.countryId.modeofpayment}} </td>
                                             </ng-container>
-
-                                            <!-- Symbol Column -->
-                                            <ng-container matColumnDef="ModeofPayment">
-                                                <th mat-header-cell *matHeaderCellDef> Mode of payment </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.modeOfPayment}} </td>
+                                            <!-- <ng-container matColumnDef="currency">
+                                              <th mat-header-cell *matHeaderCellDef class="col-1 text-center">  <label mat-sort-header>
+                                                Currency
+                                            </label>
+                                            
+                                            <input type="text" (keyup)="updatePagination()"
+                                                [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" /></th>
+                                              <td mat-cell *matCellDef="let element" class="col-1 text-center"> {{element.currency}} </td>
+                                            </ng-container> -->
+                                      
+                                            <ng-container matColumnDef="amountDonated">
+                                              <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
+                                                  Amount (Rs)
+                                                </label>
+                                                <!-- 
+                                                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[4].Value"
+                                                  [filter]="filterData" /> -->
+                                                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[4].Value"
+                                                [filter]="filterData"  />
+                                              </th>
+                                              <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.donarId.donationAmount}} </td>
                                             </ng-container>
-
+                                           
+                                      
+                                      
+                                          
+                                      
                                             <tr mat-header-row *matHeaderRowDef="donationsColumns"></tr>
                                             <tr mat-row *matRowDef="let row; columns: donationsColumns;"></tr>
-                                        </table>
+                                          </table>
+                                        <mat-paginator class="card-body" [pageSizeOptions]="[5,10,25, 50, 100,150,200]"
+                                                              (page)="onpaginatechange($event)" aria-label="Select page">
+                                                          </mat-paginator>
                                     </div>
                                    
                                 </div>
@@ -473,50 +534,114 @@
                 <div class="tab-pane" id="tabs-4" role="tabpanel">
                     <div class=" p-3">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <mat-card class="example-card border border-2">
                                     <p class="text-center text-secondary mb-2 fw-bold">Student Image</p>
                                     <div class="profile-pic text-center rounded-circle bg-ty-profile">
                                         <!-- <img src="assets/images/user-profile.png" width="100"
                                             alt="user pic" /> -->
-                                            <i class="fa-solid fa-user fa-8x " style="opacity: .2;"></i>
+                                            <i class="fa-solid fa-user fa-8x " style="opacity: .2; font-size: 8em;"></i>
                                     </div>
                                 </mat-card>
                             </div>
 
-                            <div class="col-md-9">
-                                <div class="bg-white">
-                                    <h5 class="pt-3 pl-4"> e-Purchases Information <span class="float-right">
-                                            <div class="btn btn-outline-secondary btn-rounded d-inline-block"
-                                                data-toggle="modal" data-target="#purchases"> Add Purchases</div>
-                                        </span></h5>
-                                    <div class="clearfix"></div>
-                                    <div class="row pt-4 pl-4 pb-1">
-                                        <table mat-table [dataSource]="ePurchasesdata"
-                                            class="mat-elevation-z8 mat-datagrid w-100">
+                            <div class="col-md-10">
+                                <div class="bg-white col-">
+                                    <!-- <div class="d-flex justify-content-end">
+                                            <div class="btn btn-outline-secondary btn-rounded d-inline-block "
+                                               *ngIf="!purchaseform" (click)="onaddpurchase()"> Add Purchases</div>
+                                    </div> -->
+                                       
+                                        <div class="card-body" *ngIf="purchaseform">
+                                            <form [formGroup]="AddPurchaseForm" (ngSubmit)="onPurchaseSubmit()">
+                                                <div class="card-header text-white bg-secondary">
+                                                   Add Purchases
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label>Date</label>
+                                                            <mat-form-field appearance="outline" class="">
+                                                                <input matInput type="date"  formControlName="date" placeholder="select Date"required>
+                                                                <mat-error *ngIf="AddPurchaseForm.controls['date'].hasError('required')">
+                                                                    date is to be selected
+                                                                </mat-error>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label>Purchese Amount</label>
+                                                            <mat-form-field  appearance="outline" class="" id="field">
+                                                                
+                                                                <input matInput type="number" autocomplete="off" formControlName="purcheseAmount"
+                                                                    required>
+                                                                    <mat-error *ngIf="AddPurchaseForm.controls['purcheseAmount'].hasError('required')">
+                                                                        purcheseAmount is to be selected
+                                                                    </mat-error>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                            
+                                                    <div class="row">
+                                                        <div class="col-md-12 mt-3">
+                                                            <label>List of Products </label>
+                                                            <mat-form-field appearance="outline">
+                                                               
+                                                                <textarea matInput formControlName="purcheseList" required></textarea>
+                                                                <mat-error *ngIf="AddPurchaseForm.controls['purcheseList'].hasError('required')">
+                                                                    purcheseList is to be selected
+                                                                </mat-error>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-secondary btn-rounded" 
+                                                        (click)="onPurchaseClose()">Close</button>
+                                                    <button type="submit" class="btn btn-outline-secondary btn-rounded">Save changes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    
+                                    <div class=" pt-4 pl-4 pb-1">
+                                        <div class="card-header text-white bg-secondary">
+                                            e-Purchases Information
+                                         </div>
+                                        <table mat-table matSort [dataSource]="filterData2.dataSource2"
+                                        class="mat-elevation-z8 mat-datagrid w-100">
 
                                             <!-- Position Column -->
                                             <ng-container matColumnDef="SNo">
-                                                <th mat-header-cell *matHeaderCellDef> SNo. </th>
-                                                <td mat-cell *matCellDef="let i = index"> {{i+1}} </td>
+                                                <th mat-header-cell *matHeaderCellDef > <label mat-sort-header >
+                                                    S.No
+                                                  </label></th>
+                                                <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
+
+
                                             </ng-container>
 
                                             <!-- Name Column -->
                                             <ng-container matColumnDef="Date">
-                                                <th mat-header-cell *matHeaderCellDef> Date </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                                                <th mat-header-cell *matHeaderCellDef><label mat-sort-header>
+                                                    Date
+                                                  </label></th>
+                                                <td mat-cell *matCellDef="let element"> {{element.date | date:'dd-MM-YYYY'}} </td>
                                             </ng-container>
 
                                             <!-- Weight Column -->
                                             <ng-container matColumnDef="PurchesedAmount">
-                                                <th mat-header-cell *matHeaderCellDef> PurchesedAmount </th>
+                                                <th mat-header-cell *matHeaderCellDef><label mat-sort-header>
+                                                    PurchesedAmount 
+                                                  </label> </th>
                                                 <td mat-cell *matCellDef="let element"> {{element.purchaseAmount}}
                                                 </td>
                                             </ng-container>
 
                                             <!-- Symbol Column -->
                                             <ng-container matColumnDef="ProductName">
-                                                <th mat-header-cell *matHeaderCellDef> ProductName </th>
+                                                <th mat-header-cell *matHeaderCellDef>
+                                                    <label mat-sort-header>
+                                                        ProductName
+                                                      </label>   </th>
                                                 <td mat-cell *matCellDef="let element"> {{element.productPurchase}}
                                                 </td>
                                             </ng-container>
@@ -524,6 +649,9 @@
                                             <tr mat-header-row *matHeaderRowDef="ePurchasesColumns"></tr>
                                             <tr mat-row *matRowDef="let row; columns: ePurchasesColumns;"></tr>
                                         </table>
+                                        <mat-paginator class="card-body" [pageSizeOptions]="[5,10,25, 50, 100,150,200]"
+                                        (page)="onpaginatechange($event)" aria-label="Select page">
+                                    </mat-paginator>
                                     </div>
                                     <hr>
                                 </div>
@@ -535,31 +663,123 @@
                 <div class="tab-pane" id="tabs-5" role="tabpanel">
                     <div class=" p-3">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <mat-card class="example-card border border-2">
                                     <p class="text-center text-secondary mb-2 fw-bold">Student Image</p>
                                     <div class="profile-pic text-center rounded-circle bg-ty-profile">
                                         <!-- <img src="assets/images/user-profile.png" width="100"
                                             alt="user pic" /> -->
-                                            <i class="fa-solid fa-user fa-8x " style="opacity: .2;"></i>
+                                            <i class="fa-solid fa-user fa-8x " style="opacity: .2;font-size: 8em;"></i>
                                     </div>
                                 </mat-card>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <div class="bg-white">
-                                    <h5 class="ml-3"> Category of Volunteering <span class="float-right">
+                                   <span class="d-flex justify-content-end">
                                             <div class="btn btn-outline-secondary btn-rounded d-inline-block"
-                                                data-toggle="modal" data-target="#Volunteer"> Add Volunteer</div>
-                                        </span> </h5>
-                                    <div class="clearfix"></div>
-                                    <div class="row pt-4 pl-4 pb-1">
+                                               (click)="onAddVolunteer()"  *ngIf="!volunteerForm"> Add Volunteer</div>
+                                        </span> 
+                                        
+                                    <div >
+                                        <form [formGroup]="AddVolunteerForm" (ngSubmit)="onVolunteerSubmit()" *ngIf="volunteerForm">
+                                            <div class="card-header text-white bg-secondary myt-2">
+                                                Add Volunteer
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row mb-3">
+                                                    <div class="col-md-4">
+                                                        <label>Catogory</label>
+                                                        <mat-form-field appearance="outline">
+                                                           
+                                                            <mat-select formControlName="category">
+                                                                <mat-option *ngFor="let course of CourseList" [value]="course.courseName">
+                                                                    {{course.courseName}}
+                                                                </mat-option>
+                                                            </mat-select>
+                                                            <mat-error *ngIf="AddVolunteerForm.controls['category'].hasError('required')">
+                                                                Category is to be selected
+                                                            </mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label>Courses</label>
+                                                        <mat-form-field appearance="outline">
+                                                          
+                                                            <!-- <input matInput autocomplete="off" formControlName="Courses"> -->
+                                                            <mat-select formControlName="Courses">
+                                                                <mat-option *ngFor="let course of CourseList" [value]="course.courseName">
+                                                                    {{course.courseName}}
+                                                                </mat-option>
+                                                            </mat-select>
+                                                            <mat-error *ngIf="AddVolunteerForm.controls['Courses'].hasError('required')">
+                                                                Courses is to be selected
+                                                            </mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-md-4">
+                                                        <label>Start Date</label>
+                                                        <mat-form-field appearance="outline">
+                                                        <input matInput type="date"  formControlName="startDate" placeholder="select Date"required>
+                                                        <mat-error *ngIf="AddVolunteerForm.controls['startDate'].hasError('required')">
+                                                            date is to be selected
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label>End Date</label>
+                                                        <mat-form-field appearance="outline">
+                                                        <input matInput type="date"  formControlName="endDate" placeholder="select Date"required>
+                                                        <mat-error *ngIf="AddVolunteerForm.controls['endDate'].hasError('required')">
+                                                            date is to be selected
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                    </div>
+                        
+                                                    <div class="col-md-4">
+                                                        <label>No of Members Managed</label>
+                                                        
+                                                        <mat-form-field class="example-full-width" appearance="outline" id="field">
+                                                            <input type="number" matInput formControlName="members">
+                                                            <mat-error *ngIf="AddVolunteerForm.controls['members'].hasError('required')">
+                                                                Type the no of memebers
+                                                            </mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                        
+                                                <div class="row mb-3">
+                                                    <div class="col-md-12">
+                                                        <label> Served as </label>
+
+                                                        <mat-form-field appearance="outline">
+                                                            <textarea matInput formControlName="servedAs"></textarea>
+                                                            <mat-error *ngIf="AddVolunteerForm.controls['servedAs'].hasError('required')">
+                                                               Please fill served As
+                                                            </mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-end">
+                                                <button type="button" class="btn btn-outline-secondary btn-rounded"
+                                                    data-dismiss="modal" (click)="onAddVolunteer()" >Close</button>
+                                                <button type="submit" class="btn btn-outline-secondary btn-rounded">Add</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="pt-4  pb-1">
+                                        <div class="card-header text-white bg-secondary">
+                                            Category of Volunteering
+                                         </div>
                                         <table mat-table [dataSource]="volunterData"
                                             class="mat-elevation-z8 mat-datagrid w-100">
 
                                             <!-- Position Column -->
                                             <ng-container matColumnDef="SNo">
                                                 <th mat-header-cell *matHeaderCellDef> SNo. </th>
-                                                <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
+                                                <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
                                             </ng-container>
 
                                             <!-- Name Column -->
@@ -577,13 +797,13 @@
                                             <!-- Symbol Column -->
                                             <ng-container matColumnDef="StartDate">
                                                 <th mat-header-cell *matHeaderCellDef> StartDate </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
+                                                <td mat-cell *matCellDef="let element"> {{element.startDate | date:'dd-MM-YYYY'}} </td>
                                             </ng-container>
 
                                             <!-- Symbol Column -->
                                             <ng-container matColumnDef="EndDate">
                                                 <th mat-header-cell *matHeaderCellDef> EndDate </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
+                                                <td mat-cell *matCellDef="let element"> {{element.endDate | date:'dd-MM-YYYY'}} </td>
                                             </ng-container>
 
                                             <!-- Symbol Column -->
@@ -601,6 +821,9 @@
                                             <tr mat-header-row *matHeaderRowDef="volunterColumns"></tr>
                                             <tr mat-row *matRowDef="let row; columns: volunterColumns;"></tr>
                                         </table>
+                                        <mat-paginator class="card-body" [pageSizeOptions]="[5,10,25, 50, 100,150,200]"
+                                        (page)="onpaginatechange($event)" aria-label="Select page">
+                                    </mat-paginator>
                                     </div>
                                     <hr>
                                 </div>
@@ -612,17 +835,17 @@
                 <div class="tab-pane " id="tabs-6" role="tabpanel">
                     <div class=" p-3">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <mat-card class="example-card border border-2">
                                     <p class="text-center text-secondary mb-2 fw-bold">Student Image</p>
                                     <div class="profile-pic text-center rounded-circle bg-ty-profile">
                                         <!-- <img src="assets/images/user-profile.png" width="100"
                                             alt="user pic" /> -->
-                                            <i class="fa-solid fa-user fa-8x " style="opacity: .2;"></i>
+                                            <i class="fa-solid fa-user fa-8x " style="opacity: .2;font-size: 8em;"></i>
                                     </div>
                                 </mat-card>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <div class="row pt-4 pl-3 pb-1 bg-white border border-2 mx-2 pr-3 pb-3">
                                     <h4 class="pb-2 text-secondary fw-bold" > Courses Profile </h4>
                                     <div class="col-12">
@@ -662,6 +885,9 @@
                                         <tr mat-header-row *matHeaderRowDef="coursesProfileColumns"></tr>
                                         <tr mat-row *matRowDef="let row; columns: coursesProfileColumns;"></tr>
                                     </table>
+                                    <mat-paginator class="card-body" [pageSizeOptions]="[5,10,25, 50, 100,150,200]"
+                                                              (page)="onpaginatechange($event)" aria-label="Select page">
+                                                          </mat-paginator>
                                 </div>
                             </div>
                         </div>
