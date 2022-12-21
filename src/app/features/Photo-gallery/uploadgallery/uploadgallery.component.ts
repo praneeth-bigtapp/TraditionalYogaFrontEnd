@@ -49,7 +49,7 @@ export class UploadgalleryComponent implements OnInit {
   constructor(
     private _snackBar: MatSnackBar,
     public router: Router,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
   }
@@ -89,11 +89,11 @@ export class UploadgalleryComponent implements OnInit {
   uploadimage() {
     console.log(this.uploadfile);
 
-    const finaldata = this.uploadfile
+    // const finaldata = this.uploadfile
 
-    this.uploadfile = []
+    // this.uploadfile = []
 
-    this.openSnackBar({ message: "Uploaded" })
+    // this.openSnackBar({ message: "Uploaded" })
 
   }
 

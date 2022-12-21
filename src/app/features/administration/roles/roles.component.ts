@@ -74,10 +74,9 @@ export class RolesComponent implements OnInit {
         response[i].sno = i + 1;
         rolesData.push(response[i]);
       }
-      console.log(rolesData);
-      this.RolesList = rolesData;
-      this.filterData.gridData = rolesData;
-      this.dataSource = new MatTableDataSource(rolesData);
+      this.RolesList = rolesData.reverse();
+      this.filterData.gridData = rolesData.reverse();
+      this.dataSource = new MatTableDataSource(rolesData.reverse());
       this.filterData.dataSource = this.dataSource;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -119,6 +118,8 @@ export class RolesComponent implements OnInit {
         });
       }
     }
+    else
+      this.AddRoleForm.markAllAsTouched()
   }
 
   onEditMode() {

@@ -135,7 +135,12 @@ export class RolePermissionsComponent implements OnInit {
   }
 
   onSelectRoleSubmit() {
+
+    if (this.AddRolePermissionForm.invalid)
+      return this.AddRolePermissionForm.markAllAsTouched()
+      
     const data = this.AddRolePermissionForm.value.roleName;
+
     this.rolePermissionsService.getRolePermissionsByRoleId(data).subscribe({
       next: (response) => {
         if (response.length != 0) {

@@ -179,6 +179,8 @@ export class PearlwidsomComponent implements OnInit {
     const body = {
       "quoteId": id
     }
+    console.log(id);
+    
     const yes = ["Yes", "Y", "yes", "y"]
     const no = ["No", "N", "no", "n"]
     this.data.map((element: any) => {

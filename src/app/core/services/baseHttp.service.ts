@@ -66,7 +66,7 @@ export abstract class BaseHttp {
 
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';
-    console.log(error, 'handleError');
+    // console.log(error, 'handleError');
     if (error.error instanceof Error) {
       // Get client-side error
       console.log(error.error, 'client-side error');

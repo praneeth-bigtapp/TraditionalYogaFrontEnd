@@ -21,7 +21,7 @@ export class SendReceiveService {
   confirmationDialog(messsage: any) {
     this.dialogRef = this.dialog.open(DialogPopupComponent);
 
-    this.dialogRef.componentInstance.message = messsage;
+    this.dialogRef.componentInstance.data = { message: messsage };
 
     return this.dialogRef.afterClosed().pipe(
       map((result) => {
