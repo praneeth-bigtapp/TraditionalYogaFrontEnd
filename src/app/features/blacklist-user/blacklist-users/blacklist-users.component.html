@@ -73,7 +73,7 @@
           S.No</label> 
           <input type="text" (keyup)="updatePagination()"
           [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" /></th>
-        <td mat-cell *matCellDef="let i=index" class="col-1"> {{i+1}} </td>
+          <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
       </ng-container>
 
       <ng-container matColumnDef="date" class="col-2">
@@ -118,8 +118,12 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <div class="bg-white d-flex  flex-row justify-content-end card-body">
-      <mat-paginator class=" " [pageSizeOptions]="[5,10,25, 50, 100]" aria-label="Select page">
-      </mat-paginator>
+      <mat-paginator class="card-body" [pageSizeOptions]="[10,25, 50, 100,150,200]"
+      (page)="onpaginatechange($event)" aria-label="Select page">
+  </mat-paginator>
+
+
+
   </div>
   </div>
 

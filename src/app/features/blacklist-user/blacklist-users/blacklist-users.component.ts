@@ -26,6 +26,19 @@ export class BlacklistUsersComponent implements OnInit {
   formdisplay=false
   filterData:any
   gridData:any
+
+
+  pageno: number = 1
+
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
+
   constructor(
     private blacklistUsersService: BlacklistUsersService,
     private formBuilder: FormBuilder,

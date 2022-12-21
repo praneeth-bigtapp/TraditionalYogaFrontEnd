@@ -19,10 +19,11 @@ import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.c
 export class AddCourseComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
+  gridData = [];
   filterData: any;
 
   pageno: number = 1
-  gridData = [];
+ 
   dataSource: any;
   displayedColumns: string[] = ['coursesId', 'category', 'coursesName', "courseDuration", "startDate", "endDate", "currentStatus", "Action"];
   data: any;

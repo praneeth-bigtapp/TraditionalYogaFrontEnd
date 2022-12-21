@@ -27,6 +27,16 @@ date:any
 DonorName='Donar1'
 pan="ABCD2574"
 
+pageno: number = 1
+
+onpaginatechange(event: any) {
+  if (event.pageIndex === 0) {
+    this.pageno = 1
+    return
+  }
+  this.pageno = (event.pageIndex * event.pageSize) + 1
+  return
+}
   disableSelect = new FormControl(false);
 data:any
   // data: any = [{ 'S_No': '1', 'Date': '12-11-2022', 'DonorName': "ajith", "Country": "India", "Amountdonated": "10500", "currency": "$", "pan": "741APO52" },
