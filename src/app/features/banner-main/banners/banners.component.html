@@ -126,12 +126,12 @@
         <table mat-table [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid w-100 " matSort>
 
             <ng-container matColumnDef="bannerId">
-                <th mat-header-cell class="col-md-1 pt-3 " *matHeaderCellDef>
+                <th mat-header-cell class="col-nd-1" *matHeaderCellDef>
                     <mat-checkbox class="ml-1" accent="secondary" (change)="$event ? masterToggle() : null"
                         [checked]="selection.hasValue() && isAllSelected()"
-                        [indeterminate]="selection.hasValue() && !isAllSelected()"></mat-checkbox>
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"></mat-checkbox><br><br>
                 </th>
-                <td class="col-md-1" *matCellDef="let element">
+                <td class="colmd-1" *matCellDef="let element">
                     <mat-checkbox type="checkbox" (click)="$event.stopPropagation()"
                         (change)="$event ? selection.toggle(element) : null"
                         [checked]="selection.isSelected(element)"></mat-checkbox>
@@ -139,9 +139,9 @@
             </ng-container>
 
             <ng-container matColumnDef="bannerName">
-                <th mat-header-cell class="col-md-3" *matHeaderCellDef mat-sort-header>
+                <th mat-header-cell class="col-md-3" *matHeaderCellDef >
                     <div class="">
-                        <label class=""> Banner Name</label>
+                        <label mat-sort-header class=""> Banner Name</label>
                         <input matInput type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData"
                              />
@@ -159,48 +159,48 @@
             </ng-container>
 
             <ng-container matColumnDef="categoryId">
-                <th mat-header-cell class=" col-md-1 pl-1" *matHeaderCellDef mat-sort-header>
-                    <div class="row">
-                        <label class="">Given By</label>
+                <th mat-header-cell class=" col-md-2" *matHeaderCellDef >
+                    <div class="">
+                        <label mat-sort-header class="">Given By</label>
                         <input matInput type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="  filterData"
                              />
                     </div>
 
                 </th>
-                <td mat-cell class="col-md-3 " *matCellDef="let element" style="margin-left: 40px;">
-                    {{element.GivenBy || "admin"}}
+                <td mat-cell class="col-md-2 " *matCellDef="let element" >
+                    <!-- {{element.GivenBy || "admin"}} -->
                 </td>
             </ng-container>
 
-            <ng-container matColumnDef="date">
-                <th mat-header-cell class="col-2" *matHeaderCellDef mat-sort-header>
+            <ng-container matColumnDef="dateOfAdd">
+                <th mat-header-cell class="col-md-2" *matHeaderCellDef >
                     <div class="">
-                        <label class="">Date of add </label>
+                        <label mat-sort-header class="">Date of add </label>
                         <input  type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="  filterData"
                              />
                     </div>
                 </th>
-                <td mat-cell class="col-2" *matCellDef="let element">
+                <td mat-cell class="col-md-2" *matCellDef="let element">
                     {{element.dateOfAdd || "Wed 2 2017"}}
                 </td>
             </ng-container>
             <ng-container matColumnDef="Status">
-                <th mat-header-cell class="col-1" *matHeaderCellDef mat-sort-header>
+                <th mat-header-cell class="col-md-2" *matHeaderCellDef >
                     <div class="">
-                        <label class="">Status </label>
+                        <label mat-sort-header class="">Status </label>
                         <input matInput type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="  filterData"
                              />
                     </div>
                 </th>
-                <td mat-cell class="col-1" *matCellDef="let element">
+                <td mat-cell class="col-md-2" *matCellDef="let element">
                     Published
                 </td>
             </ng-container>
             <ng-container matColumnDef="Action">
-                <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header>
+                <th mat-header-cell class="col" *matHeaderCellDef >
                     <div class="row">
                         <label class="">Action </label>
                         <input matInput type="text" (keyup)="updatePagination()"
@@ -224,11 +224,11 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
 
-        <div class="row">
-            <div class="col">
-                <mat-paginator [pageSizeOptions]="[2,10,20]" showFirstLastButtons="" aria-label="Select page">
+     
+            
+                <mat-paginator class="card-body" [pageSizeOptions]="[2,10,20]" showFirstLastButtons="" aria-label="Select page">
                 </mat-paginator>
-            </div>
-        </div>
+           
+      
     </div>
 </div>

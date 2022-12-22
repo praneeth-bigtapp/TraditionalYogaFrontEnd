@@ -14,7 +14,7 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./banners.component.css']
 })
 export class BannersComponent implements OnInit {
-  displayedColumns: string[] = ['bannerId', 'bannerName', 'categoryId', "date", "Status", "Action"];
+  displayedColumns: string[] = ['bannerId', 'bannerName', 'categoryId', "dateOfAdd", "Status", "Action"];
   issubmit: boolean = true
   iseditable: boolean = false
   dataSource: any;

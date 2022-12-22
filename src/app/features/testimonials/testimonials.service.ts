@@ -8,6 +8,7 @@ export class TestimonialsService extends BaseHttp{
   getTestmonial = "courseList/getAll?operation=testimonal";
   postTestimonial="courseList/testimonal?operation=add";
   updateTestimonial="courseList/testimonal?operation=update";
+  deleteURL="courseList/testimonal?operation=delete";
 
 
   getTestimonial() {
@@ -18,6 +19,10 @@ export class TestimonialsService extends BaseHttp{
   }
   updatetest(body: any){
     return this.post<any>(this. updateTestimonial, body)
+
+  }
+  deleteTestimonial(body: any){
+    return this.post<any>(this.deleteURL, body)
 
   }
 
