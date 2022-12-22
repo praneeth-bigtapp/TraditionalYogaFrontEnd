@@ -24,7 +24,7 @@ export class SubModuleComponent implements OnInit {
   permissionName: any;
   pagePermissions: any;
   pageno: number = 1
-
+  issubmit: boolean = true
 
   MenuList: any = [];
   SubMenuList: any = [];
@@ -219,22 +219,26 @@ export class SubModuleComponent implements OnInit {
       subMenu.active = 'N';
     }
 
-    const data = {
-      "subMenuId": subMenu.subModuleId,
-      "menuId": subMenu.moduleId,
-      "subMenuName": subMenu.subModuleName,
-      "status": subMenu.active
-    }
+    // const data = {
+    //   "subMenuId": subMenu.subModuleId,
+    //   "menuId": subMenu.moduleId,
+    //   "subMenuName": subMenu.subModuleName,
+    //   "status": subMenu.active
+    // }
 
 
-    this.subModuleService.activateSubMenu(data).subscribe({
-      next: (response) => {
-        this.getSubMenus();
-      },
-      error: (error) => {
+    // this.subModuleService.activateSubMenu(data).subscribe({
+    //   next: (response) => {
+    //     this.getSubMenus();
+    //   },
+    //   error: (error) => {
 
-      }
-    });
+    //   }
+    // });
+    this.subModuleService.activateSubMenu(subMenu).subscribe((response)=>{
+
+      this.getSubMenus();
+    })
   }
 
   onEditSubMenu(subMenu: any) {

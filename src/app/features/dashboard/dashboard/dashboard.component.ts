@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DashboardService } from '../dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,10 +12,23 @@ export class DashboardComponent implements OnInit {
   courseForm!: FormGroup;
   overallReport: any;
   coursesReport: any;
+  courses: any;
 
   constructor(
-    private formBuilder: FormBuilder,
-  ) { }
+    private formBuilder: FormBuilder, private dashboard:DashboardService
+  ) {
+    this.dashboard.getcourse().subscribe({
+      next: (response) => {
+
+        this.courses = response
+        console.log(this.courses);
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
+   }
 
   ngOnInit(): void {
     this.courseForm = this.formBuilder.group({

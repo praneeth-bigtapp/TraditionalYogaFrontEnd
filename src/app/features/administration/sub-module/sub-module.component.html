@@ -38,8 +38,10 @@
                     </div>
                     <div class="col-md-6 ">
                         <div class="mb-3 mt-1 pt-3">
-                            <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
-                                Submit
+                            <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2" *ngIf="issubmit">
+                                
+                       
+                        {{editMode  ? "Update" :"Submit " }}
                             </button>
                             <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block m-2"
                                 (click)="onCancel()"> Cancel
@@ -52,6 +54,7 @@
     </div>
 
     <h3> Sub Menu List
+        
         <span class="float-end mb-2">
             <button type="button" class="btn btn-outline-secondary btn-rounded"
                 *ngIf="!isAddSubModuleForm && pagePermissions.Add" (click)="onAddSubMenu()"> Add Sub Menu </button>
@@ -62,6 +65,9 @@
         </div>
     </h3>
     <div class="clearfix"></div>
+    <div class="card-header text-white bg-secondary">
+         Sub Menu list
+    </div>
 
     <table mat-table [dataSource]="this.filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
         aria-label="subMenu">

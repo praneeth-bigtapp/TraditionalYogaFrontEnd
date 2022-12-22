@@ -48,6 +48,7 @@ export class TestimonialsComponent implements OnInit {
     this.getTestimonial();
 
     this.testimonial = this.formbuilder.group({
+      id:[null],
 
       Content: [null, Validators.compose([Validators.required])],
       name: [null, Validators.compose([Validators.required])],
@@ -120,7 +121,8 @@ export class TestimonialsComponent implements OnInit {
   }
   viewdetails(element: any) {
     this.  testimonial.setValue({
-      content: element.content,
+      id:element.testimonalId,
+      Content: element.content,
       name: element.givenByName,
       link: element.videoLink,
       description:element.description,
@@ -139,6 +141,7 @@ export class TestimonialsComponent implements OnInit {
   }
   editdetails(element: any) {
     this.testimonial.setValue({
+      id:element.testimonalId,
       Content: element.content,
       name: element.givenByName,
       link: element.videoLink,
@@ -181,14 +184,14 @@ export class TestimonialsComponent implements OnInit {
     if (this.iseditable) {
       //editable
       // const name = this.data.filter((ele: any) => ele.content.content === Content)[0].givenByName.description
+const body={
+      "testimonalId": this.testimonial.value.id,
+      "content": this.testimonial.value.Content,
+      "givenByName": this.testimonial.value.name,
 
-      // const body = {
-      //   "content": this.testimonial.value.Content,
-      //   "givenByName": this.testimonial.value.name,
-  
-      //   "videoLink": this.testimonial.value.link,
-      //   "description": this.testimonial.value.description,
-      // }
+      "videoLink": this.testimonial.value.link,
+      "description": this.testimonial.value.description,
+  }
 
       console.log(body);
 

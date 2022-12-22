@@ -9,6 +9,7 @@ export class AudioService extends BaseHttp {
   getcategory="course/getAll?operation=audio";
 
     postaudioURL="course/audio?operation=add";
+    deleteaudio="course/audio?operation=delete";
 
   getcourse() {
     return this.get(this.getcourseURL)
@@ -19,6 +20,10 @@ return this.get(this.getcategory)
 }
 audiopost(body:any){
   return this.post<any>(this.postaudioURL, body)
+
+}
+delete(body:any){
+  return this.post<any>(this.deleteaudio, body)
 
 }
 

@@ -211,8 +211,11 @@
 <!-- 
                        (change)="onActivateRole(element,$event)" -->
                        <span  matTooltip="Edit" (click)="editdetails(element)"><i   aria-label="Button that displays a tooltip when focused or hovered over"
-                        class="fas fa-pencil-alt" aria-hidden="true" ></i> </span> &nbsp; <span (click)="viewdetails(element)"><i class="fa-solid fa-eye  " matTooltip="View"
-                        aria-label="Button that displays a tooltip when focused or hovered over"  ></i></span>
+                        class="fas fa-pencil-alt" aria-hidden="true" ></i> </span> &nbsp; <span (click)="viewdetails(element)"><i class="fa-solid fa-eye text-info " matTooltip="View"
+                        aria-label="Button that displays a tooltip when focused or hovered over"  ></i></span>&nbsp;&nbsp;&nbsp;
+                        <span matTooltip="Delete" style="cursor: pointer;" >
+                            <i class="far fa-trash-alt" aria-hidden="true"></i>
+                        </span>
 
                     </div>
                   

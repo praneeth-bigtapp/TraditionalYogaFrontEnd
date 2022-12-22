@@ -52,7 +52,7 @@
                                 <div class="tile bg-light">
                                     <h6 class="title mb-1 mr-5">{{overallReport.subscribers | number}}</h6>
                                     <p class="mr-5 lh-sm"><small><span>Total Number of Subscribers</span></small></p>
-                                    <div class="icon-place bg-light  rounded-circle">
+                                    <div class="icon-place rounded-circle ">
                                         <span class="float-right"> <i class="fa fa-users"> </i></span>
                                     </div>
                                 </div>
@@ -64,18 +64,18 @@
                 <div class="tab-pane" id="tabs-2" role="tabpanel">
                     <form class="row p-3" [formGroup]="courseForm">
                         <div class="col-md-4">
-                            <div class="mb-3 pl-3">
+                            <div class="mb-3 pl-3 pt-2">
                                 <mat-form-field appearance="outline" >
                                     <mat-label>Select Course</mat-label>
-                                    <mat-select formControlName="roleId" required>
-                                        <mat-option>Select Course</mat-option>
+                                    <mat-select formControlName="course"  required>
+                                        <mat-option *ngFor="let element of courses">{{element.coursesName}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
                         </div>
 
                         <div class="col-md-2">
-                            <div class="mb-3 mt-1 pt-1 float-end">
+                            <div class="mb-3 mt-1  float-end">
                                 <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
                                     Search
                                 </button>

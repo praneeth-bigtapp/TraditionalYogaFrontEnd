@@ -3,7 +3,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { AudioService } from '../audio.service';
+import { MatSnackBar, } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-audio',
@@ -30,6 +33,7 @@ export class AudioComponent implements OnInit {
   coursedata!:any
   audiocategory!:any;
   data:any;
+
 
   // this. Audiomanagement = this.formbuilder.group({
   //   course: [null, Validators.compose([Validators.required])],
@@ -73,8 +77,9 @@ export class AudioComponent implements OnInit {
   // ]
 
 
-  constructor(private formbuilder: FormBuilder, private audio: AudioService) {
+  constructor(private formbuilder: FormBuilder, private audio: AudioService,   private _snackBar: MatSnackBar, private dialog: MatDialog,) {
     this.Audiomanagement = this.formbuilder.group({
+      Id:[null],
       category: [null, Validators.compose([Validators.required])],
      
       file: [null, Validators.compose([Validators.required])],
@@ -149,6 +154,11 @@ export class AudioComponent implements OnInit {
 
     })
   }
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
+  }
   updatePagination() {
 
     this.filterData.dataSource.paginator = this.paginator;
@@ -164,16 +174,72 @@ export class AudioComponent implements OnInit {
   ChangeActive(_element:any){
 
   }
-  IsActiveorNot(_element:any){
+  IsActiveorNot(element:any){
     return true
   }
-  viewdetails(_element:any){
+  viewdetails(element:any){
+    this.displaycontent = true
+    this.issubmit = false
+    this.Audiomanagement.setValue({
+      Id:element.id,
+      category: element.uploadCategory,
+      upload: element.audioCategoryId,
+      file: element.audioFile,
+      title: element.audioTitle,
+      description: element.audioDesc,
+      duration: Number(element.audioDuration),
+      meta: element.metakey,
+    });
+
 
   }
-  editdetails(_element:any){
+  editdetails(element:any){
+    this.iseditable = true
+    this.displaycontent = true
+    this.issubmit = true
+    this.Audiomanagement.setValue({
+      Id:element.id,
+      category: element.uploadCategory,
+      upload: element.audioCategoryId,
+      file: element.audioFile,
+      title: element.audioTitle,
+      description: element.audioDesc,
+      duration: Number(element.audioDuration),
+      meta: element.metakey,
+    });
 
   }
-  deletedetails(_element:any){
+  deletedetails(Id:any){
+    console.log(Id);
+    const body = {
+      "id": Number(Id) 
+    }
+console.log(body);
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this Audio ?"
+      },
+      width: "30%"
+    })
+
+    dialogref.afterClosed().subscribe((Id: any) => {
+      if (Id) {
+        this.audio.delete(body).subscribe({
+          next: (response) => {
+           console.log(response);
+            this.Audiomanagement.reset()
+            this. getaudiocategory()
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
+
+    })
+
 
   }
   addcourse() {
