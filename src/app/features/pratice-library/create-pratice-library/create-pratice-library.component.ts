@@ -85,7 +85,6 @@ export class CreatePraticeLibraryComponent implements OnInit {
   }
 
   onpaginatechange(event: any) {
-    console.log(event);
 
     if (event.pageIndex === 0) {
       this.pageno = 1
@@ -224,7 +223,6 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
 
       if (this.iseditable) {
-        //editable
         const body = {
           "praticeLibaryId": praticelibraryId,
           "categoryId": category,
@@ -234,12 +232,10 @@ export class CreatePraticeLibraryComponent implements OnInit {
           "message": videodescription,
           "metaKeyword": vidoemetakeywords
         }
-        console.log(body);
 
         this.service.updatepraticelibrary(body, category)?.subscribe({
           next: (response) => {
             this.addmediaform.reset()
-            // this.opensnackBar(response)
             this.openSnackBar({ message: "Library Updated" })
             this.getdata()
 
@@ -256,9 +252,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
       this.service.postpraticelibrary(body, category)?.subscribe({
         next: (response) => {
-
           this.addmediaform.reset()
-          // this.opensnackBar(response)
           this.openSnackBar({ message: "Library Created" })
           this.getdata()
         },

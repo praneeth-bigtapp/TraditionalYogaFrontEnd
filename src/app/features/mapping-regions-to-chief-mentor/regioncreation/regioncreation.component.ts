@@ -31,6 +31,7 @@ export class RegioncreationComponent implements OnInit {
 
 
 
+  pageno: number = 1
 
   filterData: any;
   gridData = [];
@@ -89,11 +90,11 @@ export class RegioncreationComponent implements OnInit {
 
 
   getregiondata() {
-    this.service.getregion().subscribe({
+    this.service.getallregion().subscribe({
       next: (value) => {
         this.data = value
+
         this.data = this.data.reverse()
-        // this.countryList = [...new Set(this.data.map((ele: any) => ele.countryName))]
         this.statelist = [...new Set(this.data.map((ele: any) => ele.states))]
 
         const key = "partId"
@@ -111,16 +112,6 @@ export class RegioncreationComponent implements OnInit {
           startWith(''),
           map(value => this.statelist.filter((ele: any) => ele.toLowerCase().includes(value.state?.toLowerCase()))),
         )
-
-        const regionlist = [...new Set(this.data.map((ele: any) => ele.regionName))]
-
-
-
-        this.regionfilter = this.regionfilterform.valueChanges.pipe(
-          startWith(''),
-          map(value => regionlist.filter((ele: any) => ele.toLowerCase().includes(value.region?.toLowerCase()))),
-        )
-
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
@@ -174,16 +165,20 @@ export class RegioncreationComponent implements OnInit {
   }
 
   updatePagination(col: any) {
-    this.ngAfterViewInit()
+    this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
   }
   compareselect(obj1: any, obj2: any) {
     return obj1 && obj2 && obj1 === obj2
   }
 
-  ngAfterViewInit() {
-    this.filterData.dataSource.paginator = this.paginator;
-    this.filterData.dataSource.sort = this.sort;
-
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
   }
   addregion() {
     this.displaycontent = !this.displaycontent
@@ -206,7 +201,6 @@ export class RegioncreationComponent implements OnInit {
       "regionId": id,
     }
 
-    console.log(body);
 
     const dialogref = this.dialog.open(DialogPopupComponent, {
       data: {
@@ -281,7 +275,6 @@ export class RegioncreationComponent implements OnInit {
     }
 
     if (this.iseditable) {
-      //editable
 
       const partname = this.data.filter((ele: any) => ele.partId.partId === part)[0].partId.partName
       const body = {
@@ -295,7 +288,6 @@ export class RegioncreationComponent implements OnInit {
         "states": state
       }
 
-      console.log(body);
 
       this.service.updateregion(body).subscribe({
         next: (response) => {

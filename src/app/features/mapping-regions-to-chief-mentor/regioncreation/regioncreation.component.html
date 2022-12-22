@@ -9,7 +9,6 @@
     </nav>
 
     <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
-        <!-- <h3 class=" pl-2 text-secondary ">Regions creation</h3> -->
         <button type="button" (click)="addregion()" *ngIf="!displaycontent"
             class="btn btn-outline-secondary btn-rounded d-inline-block ">
             Add regions
@@ -126,7 +125,7 @@
                         <input type="text" (keyup)="updatePagination('courseId')"
                             [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" disabled />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let i= index"> {{i+1}} </td>
+                    <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="regionName">
@@ -190,15 +189,13 @@
 
                     </td>
                 </ng-container>
-
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
 
-            <mat-paginator class="card-body" [pageSizeOptions]="[25,50,75, 100]" aria-label="Select page">
+            <mat-paginator class="card-body" [pageSizeOptions]="[10,25, 50, 100,150,200]"
+                (page)="onpaginatechange($event)" aria-label="Select page">
             </mat-paginator>
         </div>
     </div>
-
-
 </div>

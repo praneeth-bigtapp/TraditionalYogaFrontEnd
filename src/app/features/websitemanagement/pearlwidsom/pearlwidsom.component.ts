@@ -132,7 +132,6 @@ export class PearlwidsomComponent implements OnInit {
     });
   }
   deletedetails(id: any) {
-    console.log(id);
     const body = {
       "quoteId": id
     }
@@ -179,13 +178,11 @@ export class PearlwidsomComponent implements OnInit {
     const body = {
       "quoteId": id
     }
-    console.log(id);
-    
+
     const yes = ["Yes", "Y", "yes", "y"]
     const no = ["No", "N", "no", "n"]
     this.data.map((element: any) => {
       if (element.quoteId === id)
-        // element.isActive = yes.includes(element.isActive) ? "N" : "Y"
         if (yes.includes(element.isActive)) {
           this.service.deactivepearlofwisdom(body).subscribe({
             next: (response) => {
@@ -231,8 +228,6 @@ export class PearlwidsomComponent implements OnInit {
 
     const { quoteId, quotetitle, quote, quotedate, quotetype } = this.wisdomform.value
 
-    console.log({ quoteId, quotetitle, quote, quotedate, quotetype });
-
     const body = {
       "quoteTitle": quotetitle,
       "quote": quote,
@@ -243,8 +238,6 @@ export class PearlwidsomComponent implements OnInit {
 
 
     if (this.isedit) {
-      console.log("editing");
-
       const body = {
         "quoteId": quoteId,
         "quoteTitle": quotetitle,
@@ -253,7 +246,6 @@ export class PearlwidsomComponent implements OnInit {
         "quoteType": quotetype
       }
 
-      console.log(body);
       this.service.updatepearlofwisdom(body).subscribe({
         next: (response) => {
           this.openSnackBar(response)
