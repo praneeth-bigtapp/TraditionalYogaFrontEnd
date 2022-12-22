@@ -119,8 +119,10 @@ export class ModuleComponent implements OnInit {
   }
 
   addMenu() {
-    console.log(this.AddModuleForm.value);
-    this.moduleService.addMenu(this.AddModuleForm.value).subscribe({
+    const data = {
+      "moduleName": this.AddModuleForm.value.menuName
+    }
+    this.moduleService.addMenu(data).subscribe({
       next: (response) => {
         this.onCancel();
         this.getMenus();

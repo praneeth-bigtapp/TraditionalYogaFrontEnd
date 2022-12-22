@@ -219,26 +219,24 @@ export class SubModuleComponent implements OnInit {
       subMenu.active = 'N';
     }
 
-    // const data = {
-    //   "subMenuId": subMenu.subModuleId,
-    //   "menuId": subMenu.moduleId,
-    //   "subMenuName": subMenu.subModuleName,
-    //   "status": subMenu.active
-    // }
+    const data = {
+      "subMenuId": subMenu.subModuleId,
+      "status": subMenu.active
+    }
 
 
-    // this.subModuleService.activateSubMenu(data).subscribe({
-    //   next: (response) => {
-    //     this.getSubMenus();
-    //   },
-    //   error: (error) => {
+    this.subModuleService.activateSubMenu(data).subscribe({
+      next: (response) => {
+        this.getSubMenus();
+      },
+      error: (error) => {
 
-    //   }
-    // });
-    this.subModuleService.activateSubMenu(subMenu).subscribe((response)=>{
+      }
+    });
+    // this.subModuleService.activateSubMenu(subMenu).subscribe((response)=>{
 
-      this.getSubMenus();
-    })
+    //   this.getSubMenus();
+    // })
   }
 
   onEditSubMenu(subMenu: any) {
