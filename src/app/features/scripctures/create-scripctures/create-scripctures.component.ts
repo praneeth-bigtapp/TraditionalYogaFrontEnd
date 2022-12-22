@@ -22,7 +22,7 @@ export class CreateScripcturesComponent implements OnInit {
   filterData: any;
   dataSource: any;
 
-
+  issubmit: boolean = true
   pageno: number = 1
   category!: string
   addmediaform!: any
@@ -120,6 +120,7 @@ export class CreateScripcturesComponent implements OnInit {
   reseteditable() {
     this.addmediaform.reset()
     this.iseditable = false
+    this.issubmit = true
     this.displaycontent = !this.displaycontent
   }
   onpaginatechange(event: any) {
@@ -133,11 +134,31 @@ export class CreateScripcturesComponent implements OnInit {
   }
 
   viewdetails(element: any) {
-
+    this.addmediaform.setValue({
+      coverimage: null,
+      covertitle: element.title,
+      coverdescription: element.description,
+      coverfile: null,
+      coverkeywords: element.metakeyword
+    })
+    this.iseditable = false
+    this.displaycontent = true
+    this.issubmit = false
   }
 
   editdetails(element: any) {
+    this.iseditable = true
+    this.displaycontent = true
+    this.issubmit = true
 
+
+    this.addmediaform.setValue({
+      coverimage: null,
+      covertitle: element.title,
+      coverdescription: element.description,
+      coverfile: null,
+      coverkeywords: element.metakeyword
+    })
   }
 
   deletedetails(id: any) {
