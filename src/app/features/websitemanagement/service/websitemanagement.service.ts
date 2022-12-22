@@ -16,8 +16,8 @@ export class WebsitemanagementService extends BaseHttp {
 
   updatepearlofwisdomURL = "webSite/wisdom?operation=update"
 
-  activepearlofwisdomURL = "/webSite/wisdom?operation=active"
-  deactivepearlofwisdomURL = "/webSite/wisdom?operation=deactive"
+  activepearlofwisdomURL = "webSite/wisdom?operation=active"
+  deactivepearlofwisdomURL = "webSite/wisdom?operation=deactive"
 
 
   getpearlofwisdom() {
