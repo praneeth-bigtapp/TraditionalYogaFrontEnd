@@ -37,7 +37,7 @@ export class UploadgalleryComponent implements OnInit {
         })
         this.filelist.push(currentvalue)
         if (Object.values(event.target.files).length - 1 === index) {
-          this.filelist = [...temp, ...this.filelist]
+          this.filelist = [...this.filelist, ...temp]
           this.filelist = this.filelist.filter(Boolean)
         }
       }

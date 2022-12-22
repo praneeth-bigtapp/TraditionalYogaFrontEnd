@@ -23,7 +23,7 @@ export class AddCourseComponent implements OnInit {
   filterData: any;
 
   pageno: number = 1
- 
+
   dataSource: any;
   displayedColumns: string[] = ['coursesId', 'category', 'coursesName', "courseDuration", "startDate", "endDate", "currentStatus", "Action"];
   data: any;
@@ -148,8 +148,8 @@ export class AddCourseComponent implements OnInit {
   }
 
   viewdetails(element: any) {
-    
-    
+
+
 
     this.addCourseForm.setValue({
       courseId: element.coursesId,
@@ -237,6 +237,10 @@ export class AddCourseComponent implements OnInit {
     this.issubmit = true
   }
 
+  getnoofdays(startdate: any, enddate: any) {
+    const Difference_In_Time = new Date(enddate).getTime() - new Date(startdate).getTime();
+    return Difference_In_Time / (1000 * 3600 * 24);
+  }
   onAddCourse() {
     this.paragraphchange()
     if (this.addCourseForm.invalid)

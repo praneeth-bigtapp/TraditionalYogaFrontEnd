@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { ScripcturesService } from '../service/scripctures.service';
@@ -12,7 +14,15 @@ import { ScripcturesService } from '../service/scripctures.service';
   styleUrls: ['./create-scripctures.component.css']
 })
 export class CreateScripcturesComponent implements OnInit {
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
+  gridData = [];
+  filterData: any;
+  dataSource: any;
+
+
+  pageno: number = 1
   category!: string
   addmediaform!: any
   timerror!: boolean
@@ -22,13 +32,24 @@ export class CreateScripcturesComponent implements OnInit {
   filedata!: any
   displaycontent: boolean = true
   iseditable: boolean = false
+  displayedColumns: string[] = ['sno', 'title', 'description', "metakeyword", "Action"];
+
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
     private service: ScripcturesService,
     private _snackBar: MatSnackBar,
     private dialog: MatDialog,
-  ) { }
+  ) {
+    this.filterData = {
+      filterColumnNames: this.displayedColumns.map((ele: any) => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
+    };
+
+  }
 
   ngOnInit(): void {
     this.addmediaform = this.formbuilder.group({
@@ -54,7 +75,10 @@ export class CreateScripcturesComponent implements OnInit {
   add() {
     this.displaycontent = !this.displaycontent
   }
-
+  updatePagination(col: any) {
+    this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort
+  }
   onfilechange(formname: string, event: any) {
 
     if (formname === 'backcover') {
@@ -79,9 +103,25 @@ export class CreateScripcturesComponent implements OnInit {
     this.iseditable = false
     this.displaycontent = !this.displaycontent
   }
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
 
+    return
+  }
 
-  deletedetails() {
+  viewdetails(element: any) {
+
+  }
+
+  editdetails(element: any) {
+
+  }
+
+  deletedetails(id: any) {
     const dialogref = this.dialog.open(DialogPopupComponent, {
       data: {
         title: "Delete Confirmation",
@@ -132,8 +172,6 @@ export class CreateScripcturesComponent implements OnInit {
 
     }
     else {
-      console.log("invalid");
-
       this.addmediaform.markAllAsTouched()
     }
 
