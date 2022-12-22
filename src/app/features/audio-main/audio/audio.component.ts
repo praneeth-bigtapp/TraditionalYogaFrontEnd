@@ -16,7 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class AudioComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
-  displayedColumns: string[] = ["audioTitle", "uploadCategory", "audioCategoryId", "audioDuration", "Actions"];
+  displayedColumns: string[] = ["id","audioTitle", "uploadCategory", "audioCategoryId", "audioDuration", "Actions"];
   dataSource: any;
   issubmit: boolean = true
   iseditable: boolean = false
@@ -24,6 +24,7 @@ export class AudioComponent implements OnInit {
   filerror!: boolean
   filerror2: boolean = false
   gridData: any;
+  pageno: number = 1
   filterData: any
   disableSelect = new FormControl(false);
   Audiomanagement!: FormGroup;
@@ -33,7 +34,7 @@ export class AudioComponent implements OnInit {
   coursedata!:any
   audiocategory!:any;
   data:any;
-  pageno:number=1;
+
   onpaginatechange(event: any) {
     if (event.pageIndex === 0) {
       this.pageno = 1

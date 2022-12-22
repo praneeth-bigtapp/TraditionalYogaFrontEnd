@@ -209,13 +209,17 @@
                     </div>
                 </th>
 
-                <td mat-cell *matCellDef="let element" class="col px-2 text-center text-muted">
+                <td mat-cell *matCellDef="let element" class="col px-2 ">
+                    <div class="text-center text-muted justify-content-evenly d-flex">
+
+                    
                     <i class="fa-solid fa-eye fs-5 text-info mr-2"  (click)="viewdetails(element)"
                     matTooltip="View Course Activity" matTooltip="View"></i>
                     <span matTooltip="Edit" (click)="editdetails(element)"> <i class="fas fa-pencil-alt" aria-hidden="true"></i> </span>
                     <span matTooltip="Delete" style="cursor: pointer;" class="mx-2"> <i class="far fa-trash-alt"
                         aria-hidden="true"></i> </span>
                     <span matTooltip="Draft" style="cursor: pointer;"> <i class="fa-solid fa-file-pen fa-lg"></i> </span>
+                    </div>
                   </td>
               
             </ng-container>
