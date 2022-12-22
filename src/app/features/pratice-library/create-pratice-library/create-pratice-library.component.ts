@@ -149,7 +149,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
     this.issubmit = false
     this.displaycontent = true
   }
-  deletedetails(id: any) {
+  deletedetails(id: any, category: any) {
 
     const body = {
       "praticeLibaryId": id,
@@ -158,14 +158,14 @@ export class CreatePraticeLibraryComponent implements OnInit {
     const dialogref = this.dialog.open(DialogPopupComponent, {
       data: {
         title: "Delete Confirmation",
-        message: "Are You Sure You Want To Delete this Course ?"
+        message: "Are You Sure You Want To Delete this library ?"
       },
       width: "30%"
     })
 
     dialogref.afterClosed().subscribe(data => {
       if (data) {
-        this.service.deletepraticelibrary(body, null)?.subscribe({
+        this.service.deletepraticelibrary(body, category)?.subscribe({
           next: (response) => {
             this.openSnackBar(response)
             this.addmediaform.reset()

@@ -14,15 +14,15 @@ export class CreatepraticelibraryService extends BaseHttp {
 
   postrecordsessionURL = "libary/praticeLibary?operation=add&type=recordSession"
   updaterecordessionURL = "libary/praticeLibary?operation=save&type=recordSession"
-  deleterecordessionURL = ""
+  deleterecordessionURL = "libary/praticeLibary?operation=delete&type=recordSession"
 
   postshortvideoURL = "libary/praticeLibary?operation=add&type=shortVideo"
   updateshortvideoURL = "libary/praticeLibary?operation=save&type=shortVideo"
-  deleteshortvideoURL = ""
+  deleteshortvideoURL = "libary/praticeLibary?operation=delete&type=shortVideo"
 
   postglimpseURL = "libary/praticeLibary?operation=add&type=glimpses"
   updateglimpseURL = "libary/praticeLibary?operation=save&type=glimpses"
-  deleteglimpseURL = ""
+  deleteglimpseURL = "libary/praticeLibary?operation=delete&type=glimpses"
 
   getpraticelibrary() {
     return this.get(this.praticelistURl)
