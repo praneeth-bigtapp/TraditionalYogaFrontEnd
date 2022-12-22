@@ -1,11 +1,13 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { filter } from 'rxjs';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 import { ServicesService } from '../services.service';
 
@@ -52,7 +54,7 @@ export class MediaComponent implements OnInit {
   iseditable: boolean = false
   // data: any;
 
-  constructor(private formbuilder: FormBuilder, private services: ServicesService, private _snackBar: MatSnackBar
+  constructor(private formbuilder: FormBuilder, private services: ServicesService, private _snackBar: MatSnackBar, private dialog: MatDialog,
   ) {
 
     this.dateForm = this.formbuilder.group({
@@ -337,7 +339,37 @@ export class MediaComponent implements OnInit {
   editdetails(element: any) {
 
   }
-  deletedetails(element: any) {
+  deletedetails(id: any) {
+
+    console.log(id);
+
+    const body = {
+      "classMediaId": id
+    }
+
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this media ?"
+      },
+      width: "30%"
+    })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.services.deleteclassmedia(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.getalldata()
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
+
+    })
 
   }
 

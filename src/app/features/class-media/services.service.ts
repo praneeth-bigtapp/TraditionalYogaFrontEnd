@@ -15,6 +15,7 @@ export class ServicesService extends BaseHttp {
   postshortvideoURL = "course/addCourseMedia?type=shortVideo"
   postglimpsevideoURL = "course/addCourseMedia?type=glimpses"
 
+  deleteclassmediaURL = "course/classMedia?operation=delete"
 
 
   getcoursemediacategory() {
@@ -36,5 +37,8 @@ export class ServicesService extends BaseHttp {
   }
   getcoursesdetails() {
     return this.get(this.getAllcoursesURL)
+  }
+  deleteclassmedia(body: any) {
+    return this.post(this.deleteclassmediaURL, body)
   }
 }
