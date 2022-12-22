@@ -6,14 +6,23 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 })
 export class CreatepraticelibraryService extends BaseHttp {
 
-  postrecordsessionURL = "libary/praticeLibary?operation=recordsession"
-  postshortvideoURL = "libary/praticeLibary?operation=shortvideo"
-  postglimpseURL = "libary/praticeLibary?operation=glimpses"
+  // postrecordsessionURL = "libary/praticeLibary?operation=recordsession"
+  // postshortvideoURL = "libary/praticeLibary?operation=shortvideo"
+  // postglimpseURL = "libary/praticeLibary?operation=glimpses"
   getcategoryURL = "libary/getAllLibary?operation=categorylibary"
   praticelistURl = "libary/getAllLibary?operation=praticelibary"
 
-  deletepraticeURL = ""
-  updatepraticeURL = ""
+  postrecordsessionURL = "libary/praticeLibary?operation=add&type=recordSession"
+  updaterecordessionURL = "libary/praticeLibary?operation=save&type=recordSession"
+  deleterecordessionURL = ""
+
+  postshortvideoURL = "libary/praticeLibary?operation=add&type=shortVideo"
+  updateshortvideoURL = "libary/praticeLibary?operation=save&type=shortVideo"
+  deleteshortvideoURL = ""
+
+  postglimpseURL = "libary/praticeLibary?operation=add&type=glimpses"
+  updateglimpseURL = "libary/praticeLibary?operation=save&type=glimpses"
+  deleteglimpseURL = ""
 
   getpraticelibrary() {
     return this.get(this.praticelistURl)
@@ -32,10 +41,32 @@ export class CreatepraticelibraryService extends BaseHttp {
     return
   }
 
-  deletelibrary(body: any) {
-    return this.post(this.deletepraticeURL, body)
+  updatepraticelibrary(body: any, type: any) {
+    if (type === 1)
+      return this.post(this.updaterecordessionURL, body)
+    if (type === 3)
+      return this.post(this.updateglimpseURL, body)
+    if (type === 4)
+      return this.post(this.updateshortvideoURL, body)
+
+    return
   }
-  updatelibrary(body: any) {
-    return this.post(this.updatepraticeURL, body)
+
+  deletepraticelibrary(body: any, type: any) {
+    if (type === 1)
+      return this.post(this.deleterecordessionURL, body)
+    if (type === 3)
+      return this.post(this.deleteglimpseURL, body)
+    if (type === 4)
+      return this.post(this.deleteshortvideoURL, body)
+
+    return
   }
+
+  // deletelibrary(body: any) {
+  //   return this.post(this.deletepraticeURL, body)
+  // }
+  // updatelibrary(body: any) {
+  //   return this.post(this.updatepraticeURL, body)
+  // }
 }

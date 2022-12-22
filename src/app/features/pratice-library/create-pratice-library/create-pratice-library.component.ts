@@ -66,7 +66,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
       next: (response) => {
         this.data = response
         this.data = this.data.reverse()
-        
+
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
@@ -86,12 +86,12 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
   onpaginatechange(event: any) {
     console.log(event);
-    
+
     if (event.pageIndex === 0) {
       this.pageno = 1
       return
     }
-    this.pageno = (event.pageIndex * event.pageSize) +1
+    this.pageno = (event.pageIndex * event.pageSize) + 1
     return
   }
   ngOnInit(): void {
@@ -113,7 +113,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
   updatePagination(col: any) {
     this.filterData.dataSource.paginator = this.paginator;
   }
- 
+
   openSnackBar(data: any) {
     this._snackBar.open(data.message, 'Close', {
       duration: 2 * 1000,
@@ -165,7 +165,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
     dialogref.afterClosed().subscribe(data => {
       if (data) {
-        this.service.deletelibrary(body).subscribe({
+        this.service.deletepraticelibrary(body, null)?.subscribe({
           next: (response) => {
             this.openSnackBar(response)
             this.addmediaform.reset()
@@ -227,6 +227,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
         //editable
         const body = {
           "praticeLibaryId": praticelibraryId,
+          "categoryId": category,
           "videoLink": videolink,
           "duration": videoduration,
           "title": videotitle,
@@ -235,11 +236,11 @@ export class CreatePraticeLibraryComponent implements OnInit {
         }
         console.log(body);
 
-        this.service.updatelibrary(body).subscribe({
+        this.service.updatepraticelibrary(body, category)?.subscribe({
           next: (response) => {
             this.addmediaform.reset()
             // this.opensnackBar(response)
-            this.openSnackBar({ message: "Library Created" })
+            this.openSnackBar({ message: "Library Updated" })
             this.getdata()
 
           },
