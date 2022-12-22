@@ -15,7 +15,7 @@ export class OnlineexamService extends BaseHttp {
   postonlinexamURL = "courseList/onlineexam?operation=add"
 
   getonlineexamURL = "courseList/getAll?operation=onlineexam"
- 
+
   updateonlineexamURL = ""
 
   deleteonlineexamURL = ""
@@ -24,7 +24,7 @@ export class OnlineexamService extends BaseHttp {
 
   posttaskURL = "courseList/task?operation=add"
 
-  updatetaskURL = ""
+  updatetaskURL = "courseList/task?operation=update"
 
   deletetaskURL = "courseList/task?operation=delete"
 

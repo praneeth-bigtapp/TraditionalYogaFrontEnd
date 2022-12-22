@@ -87,32 +87,13 @@ export class MediaComponent implements OnInit {
     })
 
     this.videoform = this.formbuilder.group({
+      courseMediaId: [null],
       videolink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
       date: [null, Validators.compose([Validators.required])],
       title: [null, Validators.compose([Validators.required])],
       description: [null, Validators.compose([Validators.required])],
 
     })
-
-    this.shortvideoform = this.formbuilder.group({
-      videolink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
-      date: [null, Validators.compose([Validators.required])],
-      duration: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.durationvalidation)])],
-      category: [null, Validators.compose([Validators.required])],
-      title: [null, Validators.compose([Validators.required])],
-      description: [null, Validators.compose([Validators.required])],
-      others: [null, Validators.compose([Validators.required])],
-      subcategory: [null, Validators.compose([Validators.required])],
-    })
-    this.glimpseform = this.formbuilder.group({
-
-      date: [null, Validators.compose([Validators.required])],
-      file: [null, Validators.compose([Validators.required])],
-
-
-    })
-
-
   }
 
   openSnackBar(data: any) {
@@ -238,18 +219,28 @@ export class MediaComponent implements OnInit {
     if (this.videoform.invalid)
       return this.videoform.markAllAsTouched()
 
+    const { courseMediaId, videolink, date, title, description } = this.videoform.value
 
-    const { videolink, date, title, description } = this.videoform.value
 
-    const body = {
-      "courseLink": videolink,
-      "date": date,
-      "title": title,
-      "description": description
+
+    if (this.iseditable) {
+      const body = {
+        courseMediaId: courseMediaId,
+        courseId: this.coursename,
+        courseLink: videolink,
+        date: date,
+        title: title,
+        description: description
+      }
     }
 
-    console.log(body);
-
+    const body = {
+      courseId: this.coursename,
+      courseLink: videolink,
+      date: date,
+      title: title,
+      description: description
+    }
 
     this.services.postvideo(body).subscribe({
       next: (response) => {
@@ -257,84 +248,13 @@ export class MediaComponent implements OnInit {
         this.videoform.reset()
 
         this.openSnackBar(response)
-
-
+        this.getalldata()
       },
       error: (error) => {
         console.error(error.message);
 
       }
     })
-
-  }
-
-  shortvideoformsubmit() {
-
-    if (this.shortvideoform.invalid)
-      return this.shortvideoform.markAllAsTouched()
-
-
-    const { videolink, date, duration, category, title, description } = this.shortvideoform.value
-
-    const body = {
-      "courseLink": videolink,
-      "date": date,
-      "duration": duration,
-      "title": title,
-      "categoryId": category,
-      "description": description
-
-    }
-
-
-    this.services.postshortvideo(body).subscribe({
-      next: (response) => {
-
-        this.shortvideoform.reset()
-
-        this.openSnackBar(response)
-
-
-      },
-      error: (error) => {
-        console.error(error.message);
-
-      }
-    })
-
-  }
-
-  glimpseformsubmit() {
-    this.filerror = this.glimpseform.value.file === null ? true : false
-
-    if (this.glimpseform.invalid)
-      return this.glimpseform.markAllAsTouched()
-
-
-    this.glimpseform.value.file = this.glimpsefile
-
-    const { date, file } = this.glimpseform.value
-
-    const body = {
-      "date": date,
-      "fileName": file
-    }
-
-    this.services.postglimpsevideo(body).subscribe({
-      next: (response) => {
-
-        this.glimpseform.reset()
-
-        this.openSnackBar(response)
-
-
-      },
-      error: (error) => {
-        console.error(error.message);
-
-      }
-    })
-
 
   }
 
