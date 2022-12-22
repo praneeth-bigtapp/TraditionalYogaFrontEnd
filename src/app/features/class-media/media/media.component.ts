@@ -9,7 +9,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { filter } from 'rxjs';
 import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
+import { GlimpemediaComponent } from '../glimpemedia/glimpemedia.component';
 import { ServicesService } from '../services.service';
+import { ShortvideomediaComponent } from '../shortvideomedia/shortvideomedia.component';
 
 @Component({
   selector: 'app-media',
@@ -101,9 +103,6 @@ export class MediaComponent implements OnInit {
       description: [null, Validators.compose([Validators.required])],
       others: [null, Validators.compose([Validators.required])],
       subcategory: [null, Validators.compose([Validators.required])],
-
-
-
     })
     this.glimpseform = this.formbuilder.group({
 
@@ -131,6 +130,42 @@ export class MediaComponent implements OnInit {
 
   }
 
+  openshortvideo() {
+
+
+    const dialogref = this.dialog.open(ShortvideomediaComponent, {
+      data: {
+        course: this.coursename
+      },
+      width: "100%"
+    })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+
+        return
+      }
+
+    })
+  }
+  openglimpse() {
+
+
+    const dialogref = this.dialog.open(GlimpemediaComponent, {
+      data: {
+        course: this.coursename
+      },
+      width: "100%"
+    })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+
+        return
+      }
+
+    })
+  }
   ngOnInit(): void {
 
 

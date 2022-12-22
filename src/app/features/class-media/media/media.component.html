@@ -35,14 +35,21 @@
                             Category is mandatory
                         </span>
                     </mat-form-field>
+
                 </div>
-                <!-- <div *ngIf="coursename && !displaycontent" (click)="gobutton()"
-                    class="col-md-6  d-flex flex-row flex-wrap justify-content-end    ">
-                    <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block mt-3  ">
-                        Add Media
+                <div class="col-md-4" *ngIf="coursename">
+                    <button type="button" (click)="openshortvideo()"
+                        class="btn btn-outline-secondary btn-rounded d-inline-block mt-4  ">
+                        Short Video
                     </button>
-                </div> -->
-                <br />
+                </div>
+                <div class="col-md-4" *ngIf="coursename">
+                    <button type="button" (click)="openglimpse()"
+                        class="btn btn-outline-secondary btn-rounded d-inline-block mt-4  ">
+                        Glimpse
+                    </button>
+                </div>
+
                 <div class="row" *ngIf="coursename">
                     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
                         <mat-tab label="Live">
@@ -131,7 +138,7 @@
 
                         <!-- Short Video -->
                         <mat-tab label="Short Video">
-                            <br />
+                            <!-- <br />
                             <h6 class="text-right">Number of short Video Added : {{shortvideolist.length}}</h6>
                             <br />
                             <form [formGroup]="shortvideoform" (ngSubmit)="shortvideoformsubmit()">
@@ -269,7 +276,7 @@
                                     </div>
                                 </div>
                             </form>
-                            <br />
+                            <br /> -->
                         </mat-tab>
 
                         <!-- Glimpse -->
@@ -364,90 +371,95 @@
 
         </div>
     </div>
-    <div class="rounded mat-elevation-z8">
-        <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
-            aria-label="users">
-            <ng-container matColumnDef="classMediaId">
-                <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
-                    <label mat-sort-header>
-                        S.No
-                    </label>
-                    <input type="text" (keyup)="updatePagination('courseId')"
-                        [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" disabled="true" />
-                </th>
-                <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
-            </ng-container>
-            <ng-container matColumnDef="date">
+    <div class="card ">
+        <div class="card-header text-white bg-secondary">
+            Class Media
+        </div>
+        <div class="card-body bg-transparent px-0 py-0">
+            <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
+                aria-label="users">
+                <ng-container matColumnDef="classMediaId">
+                    <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
+                        <label mat-sort-header>
+                            S.No
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseId')"
+                            [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" disabled="true" />
+                    </th>
+                    <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
+                </ng-container>
+                <ng-container matColumnDef="date">
 
-                <th mat-header-cell *matHeaderCellDef scope="col">
-                    <label mat-sort-header>
-                        Date
-                    </label>
-                    <input type="text" (keyup)="updatePagination('courseName')"
-                        [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
-                </th>
-                <td mat-cell class="text-center" *matCellDef="let element"> {{element.date | date:'dd-MM-YYYY'}} </td>
-            </ng-container>
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Date
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseName')"
+                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.date | date:'dd-MM-YYYY'}}
+                    </td>
+                </ng-container>
 
-            <ng-container matColumnDef="typeOfClass">
+                <ng-container matColumnDef="typeOfClass">
 
-                <th mat-header-cell *matHeaderCellDef scope="col">
-                    <label mat-sort-header>
-                        Type of Class
-                    </label>
-                    <input type="text" (keyup)="updatePagination('courseName')"
-                        [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
-                </th>
-                <td mat-cell class="text-center" *matCellDef="let element"> {{element.typeOfClass | titlecase}}
-                </td>
-            </ng-container>
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Type of Class
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseName')"
+                            [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.typeOfClass | titlecase}}
+                    </td>
+                </ng-container>
 
-            <ng-container matColumnDef="noOfMediaFiles">
-                <th mat-header-cell *matHeaderCellDef scope="col">
-                    <label mat-sort-header>
-                        Number Of Media File Added
-                    </label>
-                    <input type="text" (keyup)="updatePagination('courseDuration')"
-                        [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
-                </th>
-                <td mat-cell class="text-center" *matCellDef="let element"> {{element.noOfMediaFiles}} </td>
-            </ng-container>
+                <ng-container matColumnDef="noOfMediaFiles">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Number Of Media File Added
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseDuration')"
+                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.noOfMediaFiles}} </td>
+                </ng-container>
 
-            <ng-container matColumnDef="Action">
-                <th mat-header-cell *matHeaderCellDef scope="col">
-                    <label mat-sort-header>
-                        Actions
-                    </label>
-                    <input type="text" (keyup)="updatePagination('courseDuration')" disabled="true" />
+                <ng-container matColumnDef="Action">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Actions
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseDuration')" disabled="true" />
 
-                </th>
-                <td mat-cell class="text-center" *matCellDef="let element">
-                    <div class="row">
-                        <div class="col">
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element">
+                        <div class="row">
+                            <div class="col">
 
-                            <i class="fa-solid fa-eye fs-5 text-info" (click)="viewDetails(element)"
-                                matTooltip="View Course Activity" matTooltip="View"></i>
-                            <span matTooltip="Edit" (click)="editdetails(element)">
-                                <i class="fas fa-pencil-alt mx-4" aria-hidden="true"></i>
-                            </span>
-                            <span matTooltip="Delete" style="cursor: pointer;"
-                                (click)="deletedetails(element.classMediaId)">
-                                <i class="far fa-trash-alt" aria-hidden="true"></i>
-                            </span>
+                                <i class="fa-solid fa-eye fs-5 text-info" (click)="viewDetails(element)"
+                                    matTooltip="View Course Activity" matTooltip="View"></i>
+                                <span matTooltip="Edit" (click)="editdetails(element)">
+                                    <i class="fas fa-pencil-alt mx-4" aria-hidden="true"></i>
+                                </span>
+                                <span matTooltip="Delete" style="cursor: pointer;"
+                                    (click)="deletedetails(element.classMediaId)">
+                                    <i class="far fa-trash-alt" aria-hidden="true"></i>
+                                </span>
 
+                            </div>
                         </div>
-                    </div>
 
-                </td>
-            </ng-container>
+                    </td>
+                </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <mat-paginator class="card-body" [pageSizeOptions]="[10,25, 50, 100,150,200]" (page)="onpaginatechange($event)"
-            aria-label="Select page">
-        </mat-paginator>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator class="card-body" [pageSizeOptions]="[10,25, 50, 100,150,200]"
+                (page)="onpaginatechange($event)" aria-label="Select page">
+            </mat-paginator>
+        </div>
+
+
     </div>
-
-
-</div>
