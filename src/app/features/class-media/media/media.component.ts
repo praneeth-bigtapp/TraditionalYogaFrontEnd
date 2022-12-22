@@ -25,7 +25,7 @@ export class MediaComponent implements OnInit {
 
   pageno: number = 1
   isothers: boolean = false
-
+  displayform: boolean = false
   courselist!: any
   categorylist!: any
   displayedColumns: string[] = ['classMediaId', 'date', 'typeOfClass', "noOfMediaFiles", "Action"];
@@ -128,6 +128,14 @@ export class MediaComponent implements OnInit {
 
     this.displaycontent = true
 
+  }
+
+  openliveclass() {
+    this.displayform = true
+  }
+
+  closeliveform() {
+    this.displayform = false
   }
 
   openshortvideo() {
@@ -332,9 +340,7 @@ export class MediaComponent implements OnInit {
 
   filechange(event: any) {
     this.filerror = this.glimpseform.value.file === null ? true : false
-
     this.glimpsefile = event.target.files[0].name
-
   }
 
   datefilter() {

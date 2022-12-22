@@ -129,12 +129,14 @@
                         </div>
                     </div>
                     <div class="col-md-6 d-flex flex-row justify-content-end align-items-center  ">
-                        <button type="submit" *ngIf="issubmit" class="btn btn-outline-secondary btn-rounded d-inline-block mt-2   ">
-                            Add
+                        <button type="submit" *ngIf="issubmit"
+                            class="btn btn-outline-secondary btn-rounded d-inline-block mt-2   ">
+                            {{iseditable ? "Update":"Add"}}
+
                         </button>
                         <button type="button" (click)="reseteditable()"
                             class="btn btn-outline-secondary btn-rounded d-inline-block mt-2   ">
-                            cancel
+                            Cancel
                         </button>
                     </div>
                 </div>
