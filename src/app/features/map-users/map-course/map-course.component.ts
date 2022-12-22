@@ -38,7 +38,7 @@ export class MapCourseComponent implements OnInit {
   filterData: any;
   gridData: any;
   displaycontent: boolean = false
-
+  pageno:number=1
  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

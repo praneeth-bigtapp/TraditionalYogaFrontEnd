@@ -16,6 +16,7 @@ import { BannerMainRoutingModule } from '../banner-main/banner-main-routing.modu
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MatButtonModule,
     FormsModule,
     SharedModule,
+    MatSortModule,
     ReactiveFormsModule,
     BannerMainRoutingModule,
     MatTableModule,
