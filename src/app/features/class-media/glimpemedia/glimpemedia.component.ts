@@ -52,7 +52,7 @@ export class GlimpemediaComponent implements OnInit {
       sort: this.sort
     }
     this.glimpseform = this.formbuilder.group({
-
+      courseMediaId: [null],
       date: [null, Validators.compose([Validators.required])],
       file: [null, Validators.compose([Validators.required])],
 
@@ -133,7 +133,7 @@ export class GlimpemediaComponent implements OnInit {
 
     dialogref.afterClosed().subscribe(data => {
       if (data) {
-        this.services.deleteclassmedia(body).subscribe({
+        this.services.deleteglimpse(body).subscribe({
           next: (response) => {
             this.openSnackBar(response)
             this.getalldata()
@@ -161,7 +161,29 @@ export class GlimpemediaComponent implements OnInit {
 
     this.glimpseform.value.file = this.glimpsefile
 
-    const { date, file } = this.glimpseform.value
+    const { courseMediaId, date, file } = this.glimpseform.value
+
+    if (this.iseditable) {
+      const body = {
+        "courseMediaId": courseMediaId,
+        "date": date,
+        "fileName": file
+      }
+      this.services.updateglimpse(body).subscribe({
+        next: (response) => {
+
+          this.glimpseform.reset()
+
+          this.openSnackBar(response)
+        },
+        error: (error) => {
+          console.error(error.message);
+
+        }
+      })
+
+    }
+
 
     const body = {
       "date": date,

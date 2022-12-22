@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 import { ServicesService } from '../services.service';
@@ -49,14 +50,15 @@ export class ShortvideomediaComponent implements OnInit {
       sort: this.sort
     }
     this.shortvideoform = this.formbuilder.group({
+      courseMediaId: [null],
       videolink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
       date: [null, Validators.compose([Validators.required])],
       duration: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.durationvalidation)])],
       category: [null, Validators.compose([Validators.required])],
       title: [null, Validators.compose([Validators.required])],
       description: [null, Validators.compose([Validators.required])],
-      others: [null, Validators.compose([Validators.required])],
-      subcategory: [null, Validators.compose([Validators.required])],
+      // others: [null, Validators.compose([Validators.required])],
+      // subcategory: [null, Validators.compose([Validators.required])],
     })
     services.getcoursemediacategory().subscribe({
       next: (response) => {
@@ -69,12 +71,33 @@ export class ShortvideomediaComponent implements OnInit {
 
       }
     })
+    // this.getalldata()
   }
 
   ngOnInit(): void {
   }
 
   getalldata() {
+    this.services.getMediadetails().subscribe({
+      next: (response) => {
+        this.data = response;
+        console.log(this.data);
+
+        this.dataSource = new MatTableDataSource<any>(this.data)
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
 
   }
   updatePagination(col: any) {
@@ -110,9 +133,34 @@ export class ShortvideomediaComponent implements OnInit {
 
 
   viewDetails(element: any) {
+    this.shortvideoform.setValue({
+      courseMediaId: null,
+      videolink: null,
+      date: null,
+      duration: null,
+      category: null,
+      title: null,
+      description: null,
+    })
+
+    this.issubmit = false
+    this.displaycontent = true
 
   }
   editdetails(element: any) {
+    this.shortvideoform.setValue({
+      courseMediaId: null,
+      videolink: null,
+      date: null,
+      duration: null,
+      category: null,
+      title: null,
+      description: null,
+    })
+    this.iseditable = true
+    this.issubmit = true
+    this.displaycontent = true
+
 
   }
   deletedetails(id: any) {
@@ -120,7 +168,7 @@ export class ShortvideomediaComponent implements OnInit {
     console.log(id);
 
     const body = {
-      "classMediaId": id
+      "courseMediaId": 1
     }
 
     const dialogref = this.dialog.open(DialogPopupComponent, {
@@ -133,7 +181,7 @@ export class ShortvideomediaComponent implements OnInit {
 
     dialogref.afterClosed().subscribe(data => {
       if (data) {
-        this.services.deleteclassmedia(body).subscribe({
+        this.services.deleteshortvideo(body).subscribe({
           next: (response) => {
             this.openSnackBar(response)
             this.getalldata()
@@ -149,22 +197,53 @@ export class ShortvideomediaComponent implements OnInit {
 
   }
 
+  convertH2M(timeInHour: string) {
+    var timeParts = timeInHour.split(":");
+    return Number(timeParts[0]) * 60 + Number(timeParts[1]);
+  }
+
   shortvideoformsubmit() {
 
     if (this.shortvideoform.invalid)
       return this.shortvideoform.markAllAsTouched()
 
 
-    const { videolink, date, duration, category, title, description } = this.shortvideoform.value
+    const { courseMediaId, videolink, date, duration, category, title, description } = this.shortvideoform.value
+
+
+    if (this.iseditable) {
+      const body = {
+        "courseMediaId": courseMediaId,
+        "courseLink": videolink,
+        "date": date,
+        "duration": this.convertH2M(duration),
+        "title": title,
+        "categoryId": category,
+        "description": description
+      }
+      this.services.updateshortvideo(body).subscribe({
+        next: (response) => {
+
+          this.shortvideoform.reset()
+
+          this.openSnackBar(response)
+        },
+        error: (error) => {
+          console.error(error.message);
+
+        }
+      })
+
+    }
 
     const body = {
       "courseLink": videolink,
+      "courseId": this.data.course,
       "date": date,
-      "duration": duration,
+      "duration": this.convertH2M(duration),
       "title": title,
-      "categoryId": category,
+      "catgoryId": category,
       "description": description
-
     }
 
 
