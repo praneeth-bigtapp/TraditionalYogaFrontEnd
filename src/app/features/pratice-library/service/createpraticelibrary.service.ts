@@ -9,8 +9,8 @@ export class CreatepraticelibraryService extends BaseHttp {
   // postrecordsessionURL = "libary/praticeLibary?operation=recordsession"
   // postshortvideoURL = "libary/praticeLibary?operation=shortvideo"
   // postglimpseURL = "libary/praticeLibary?operation=glimpses"
-  getcategoryURL = "libary/getAllLibary?operation=categorylibary"
-  praticelistURl = "libary/getAllLibary?operation=praticelibary"
+  getcategoryURL = "libary/getAllLibary?operation=categoryLibary"
+  praticelistURl = "libary/getAllLibary?operation=praticeLibary"
 
   postrecordsessionURL = "libary/praticeLibary?operation=add&type=recordSession"
   updaterecordessionURL = "libary/praticeLibary?operation=save&type=recordSession"
