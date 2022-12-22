@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { ScripcturesService } from '../service/scripctures.service';
@@ -34,6 +35,11 @@ export class CreateScripcturesComponent implements OnInit {
   iseditable: boolean = false
   displayedColumns: string[] = ['sno', 'title', 'description', "metakeyword", "Action"];
 
+  data: any = [{
+    "title": "Title",
+    "description": "Description",
+    "metakeyword": "metakeyword"
+  }]
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
@@ -48,6 +54,8 @@ export class CreateScripcturesComponent implements OnInit {
       paginator: this.paginator,
       sort: this.sort
     };
+
+    this.getdata()
 
   }
 
@@ -72,6 +80,17 @@ export class CreateScripcturesComponent implements OnInit {
     });
   }
 
+  getdata() {
+    this.dataSource = new MatTableDataSource<any>(this.data)
+    this.filterData.gridData = this.data;
+    this.filterData.dataSource = this.dataSource;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.filterData.sort = this.sort;
+    for (let col of this.filterData.filterColumnNames) {
+      col.Value = '';
+    }
+  }
   add() {
     this.displaycontent = !this.displaycontent
   }
