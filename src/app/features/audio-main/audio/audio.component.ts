@@ -16,7 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class AudioComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
-  displayedColumns: string[] = ["Title", "Caregory", "FileType", "Duration", "Actions"];
+  displayedColumns: string[] = ["audioTitle", "uploadCategory", "audioCategoryId", "audioDuration", "Actions"];
   dataSource: any;
   issubmit: boolean = true
   iseditable: boolean = false
@@ -33,6 +33,15 @@ export class AudioComponent implements OnInit {
   coursedata!:any
   audiocategory!:any;
   data:any;
+  pageno:number=1;
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
 
 
   // this. Audiomanagement = this.formbuilder.group({
@@ -79,6 +88,8 @@ export class AudioComponent implements OnInit {
 
   constructor(private formbuilder: FormBuilder, private audio: AudioService,   private _snackBar: MatSnackBar, private dialog: MatDialog,) {
     this.Audiomanagement = this.formbuilder.group({
+
+    
       Id:[null],
       category: [null, Validators.compose([Validators.required])],
      
@@ -89,6 +100,13 @@ export class AudioComponent implements OnInit {
       duration: [null, Validators.compose([Validators.required])],
       meta: [null, Validators.compose([Validators.required])],
     })
+    this.filterData = {
+      filterColumnNames: this.displayedColumns.map((ele: any) => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
+    };
     this.audio.getcourse().subscribe({
       next: (response) => {
 
@@ -218,7 +236,7 @@ console.log(body);
     const dialogref = this.dialog.open(DialogPopupComponent, {
       data: {
         title: "Delete Confirmation",
-        message: "Are You Sure You Want To Delete this Audio ?"
+        message: "Are You Sure You Want To testimonial ?"
       },
       width: "30%"
     })

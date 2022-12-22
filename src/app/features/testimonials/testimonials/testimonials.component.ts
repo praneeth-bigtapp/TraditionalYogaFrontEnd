@@ -2,10 +2,12 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { formatDate } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { TestimonialsService } from '../testimonials.service';
 
 @Component({
@@ -34,7 +36,7 @@ export class TestimonialsComponent implements OnInit {
 
 
 
-  constructor(private formbuilder: FormBuilder, private test: TestimonialsService) { }
+  constructor(private formbuilder: FormBuilder, private test: TestimonialsService,private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -152,6 +154,38 @@ export class TestimonialsComponent implements OnInit {
     this.iseditable = true
     this.displaycontent = true
     this.issubmit = true
+  }
+  deletedetails(id:any){ 
+    console.log(id);
+    const body = {
+      "testimonalId": Number(id) 
+    }
+console.log(body);
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this Audio ?"
+      },
+      width: "30%"
+    })
+
+    dialogref.afterClosed().subscribe((id: any) => {
+      if (id) {
+        this.test. deleteTestimonial(body).subscribe({
+          next: (response) => {
+           console.log(response);
+            this.testimonial.reset()
+            this. getTestimonial()
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
+
+    })
+
   }
 
   addtestimonial() {
