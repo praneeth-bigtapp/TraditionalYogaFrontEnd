@@ -66,8 +66,8 @@ data:any
     this.getallcountry()
     this.dateForm = this.formbuilder.group({
 
-      fromdate: [null, Validators.compose([Validators.required])],
-      todate: [null, Validators.compose([Validators.required])],
+      fromdate: [null, Validators.compose([])],
+      todate: [null, Validators.compose([])],
       countrydropdown: null,
       regiondropdown: null,
 
@@ -278,7 +278,7 @@ data:any
   }
 
   filterDate() {
-    this.getallData('full')
+    // this.getallData('full')
 
     const fromdate = this.dateForm.value.fromdate
     const region=this.dateForm.value.regiondropdown
@@ -288,10 +288,12 @@ data:any
     console.log(fromdate, todate)
     console.log(this.data)
     console.log(region);
-    
-    let filters = this.data.filter((ele: any) => new Date(ele.date) >= new Date(fromdate) && new Date(ele.date) <= new Date(todate))
+    let filters =this.data
+    if(fromdate !== null && todate !== null) {
+     filters = this.data.filter((ele: any) => new Date(ele.date) >= new Date(fromdate) && new Date(ele.date) <= new Date(todate))
+    }
     console.log(filters)
-    if (fromdate !== null && todate !== null) {
+    // if (fromdate !== null && todate !== null) {
       if(region!==null){
         filters=this.regionfilter(filters)
       }
@@ -303,7 +305,7 @@ data:any
       this.filterData.dataSource.sort = this.sort;
       this.filterData.dataSource.sub = this.subtotal
       this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.donarId.donationAmount)))
-    }
+    // }
     this.updatePagination()
 
   }
@@ -312,7 +314,7 @@ data:any
     return reg
   }
   countryfilter(element:any){
-    let reg=element.filter((ele:any)=>ele.countryName===this.dateForm.value.countrydropdown)
+    let reg=element.filter((ele:any)=>ele.donarId.countryId.countryName===this.dateForm.value.countrydropdown)
     return reg
   }
   
