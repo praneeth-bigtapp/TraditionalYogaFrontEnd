@@ -20,7 +20,7 @@ export class ShortvideomediaComponent implements OnInit {
   displaycontent: boolean = false
   pageno: number = 1
   isothers: boolean = false
-  displayedColumns: string[] = ['classMediaId', 'date', 'typeOfClass', "noOfMediaFiles", "Action"];
+  displayedColumns: string[] = ['classMediaId', 'title', 'category', 'videolink', "classdate", "duration", "Action"];
   shortvideoform!: any
   filterData: any;
   categoryerror: boolean = false
@@ -31,6 +31,50 @@ export class ShortvideomediaComponent implements OnInit {
   dataSource!: any
   categorylist: any;
   issubmit: boolean = true
+
+  tabledata: any = [{
+    "classMediaId": 1,
+    "title": "Yoga",
+    "category": "student",
+    "videolink": "www.google.com",
+    "classdate": "23-12-2022",
+    "duration": 25
+  },
+  {
+    "classMediaId": 2,
+    "title": "Testing",
+    "category": "student",
+    "videolink": "www.google.com",
+    "classdate": "25-12-2022",
+    "duration": 30
+  },
+
+  {
+    "classMediaId": 3,
+    "title": "RYO Short Video",
+    "category": "resources",
+    "videolink": "www.google.com",
+    "classdate": "25-12-2022",
+    "duration": 30
+  },
+
+  {
+    "classMediaId": 4,
+    "title": "RYO Short Video",
+    "category": "pratice library",
+    "videolink": "www.google.com",
+    "classdate": "28-12-2022",
+    "duration": 15
+  },
+  {
+    "classMediaId": 5,
+    "title": "Short Meditation Short Video",
+    "category": "pratice library",
+    "videolink": "www.google.com",
+    "classdate": "29-12-2022",
+    "duration": 15
+  },
+  ]
 
   constructor(
     private formbuilder: FormBuilder,
@@ -72,6 +116,16 @@ export class ShortvideomediaComponent implements OnInit {
       }
     })
     // this.getalldata()
+
+    this.dataSource = new MatTableDataSource<any>(this.tabledata)
+    this.filterData.gridData = this.tabledata;
+    this.filterData.dataSource = this.dataSource;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.filterData.sort = this.sort;
+    for (let col of this.filterData.filterColumnNames) {
+      col.Value = '';
+    }
   }
 
   ngOnInit(): void {

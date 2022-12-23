@@ -24,7 +24,7 @@
         </div>
         <div class="card-body bg-white  py-2">
             <div class="row">
-                <div class="col-md-3">
+                <!-- <div class="col-md-3">
                     <label>Course</label>
                     <mat-form-field appearance="outline">
                         <mat-select [(ngModel)]="coursename" (ngModelChange)="coursechange()">
@@ -36,20 +36,20 @@
                         </span>
                     </mat-form-field>
 
-                </div>
-                <div class="col-md-3 mx-auto" *ngIf="coursename">
+                </div> -->
+                <div class="col-md-3 mx-auto" *ngIf="!displayform">
                     <button type="button" *ngIf="!displayform" (click)="openliveclass()"
                         class="btn btn-outline-secondary btn-rounded d-inline-block mt-4  ">
                         Live Class
                     </button>
                 </div>
-                <div class="col-md-3 mx-auto" *ngIf="coursename">
+                <div class="col-md-3 mx-auto" *ngIf="displaycontent">
                     <button type="button" (click)="openshortvideo()"
                         class="btn btn-outline-secondary btn-rounded d-inline-block mt-4  ">
                         Short Video
                     </button>
                 </div>
-                <div class="col-md-3 mx-auto" *ngIf="coursename">
+                <div class="col-md-3 mx-auto" *ngIf="displaycontent">
                     <button type="button" (click)="openglimpse()"
                         class="btn btn-outline-secondary btn-rounded d-inline-block mt-4  ">
                         Glimpse
@@ -57,13 +57,29 @@
                 </div>
 
             </div>
-            <br />
+            <hr />
             <div class="row" *ngIf="displayform">
 
                 <form [formGroup]="videoform" (ngSubmit)="videoformsubmit()">
 
                     <div class="row">
-                        <div class="row col-md-4">
+                        <div class="col-md-3">
+                            <label>Course</label>
+                            <mat-form-field appearance="outline">
+                                <mat-select formControlName="course">
+                                    <mat-option *ngFor="let course of courses" [value]="course.coursesId">
+                                        {{course.coursesName}}</mat-option>
+                                </mat-select>
+
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="videoform.controls['course'].invalid && (videoform.controls['course'].dirty || videoform.controls['course'].touched)">
+                                <mat-error [hidden]=" !videoform.get('course')?.hasError('required')  ">
+                                    Course is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                        <div class="row col-md-3">
                             <label>Class link</label>
                             <div class="col">
                                 <mat-form-field class="example-full-width" appearance="outline" id="field">
@@ -81,7 +97,7 @@
                             </div>
                         </div>
 
-                        <div class="row col-md-4">
+                        <div class="row col-md-3">
                             <label>Class Date</label>
                             <div class="col">
                                 <mat-form-field class="example-full-width" appearance="outline">
@@ -95,7 +111,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row col-md-4">
+                        <div class="row col-md-3">
                             <label>Title</label>
                             <div class="">
                                 <mat-form-field class="example-full-width" appearance="outline">

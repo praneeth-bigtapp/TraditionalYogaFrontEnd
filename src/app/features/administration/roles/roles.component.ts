@@ -158,6 +158,7 @@ export class RolesComponent implements OnInit {
 
   onAddRole() {
     this.isAddRoleForm = true;
+    this.editMode = false
     this.AddRoleForm.reset();
   }
 

@@ -160,41 +160,67 @@
                     </th>
                     <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
                 </ng-container>
-                <ng-container matColumnDef="date">
+                <ng-container matColumnDef="title">
 
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
-                            Date
+                            Title
                         </label>
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.date | date:'dd-MM-YYYY'}}
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.title | titlecase}}
                     </td>
                 </ng-container>
-
-                <ng-container matColumnDef="typeOfClass">
+                <ng-container matColumnDef="category">
 
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
-                            Type of Class
+                            Category
                         </label>
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.typeOfClass | titlecase}}
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.category | titlecase }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="videolink">
+
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Video
+                        </label>
+                        <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
+                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> <a href={{element.videolink}}
+                            class="text-primary "><u>Open</u></a>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="classdate">
+
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Class Date
+                        </label>
+                        <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
+                            [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.classdate}}
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="noOfMediaFiles">
+                <ng-container matColumnDef="duration">
+
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
-                            Number Of Media File Added
+                            Duration <small>(mins)</small>
                         </label>
-                        <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseDuration')"
-                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
+                        <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
+                            [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.noOfMediaFiles}} </td>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.duration}}
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="Action">

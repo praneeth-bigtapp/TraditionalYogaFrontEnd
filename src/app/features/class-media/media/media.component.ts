@@ -88,6 +88,8 @@ export class MediaComponent implements OnInit {
 
     this.videoform = this.formbuilder.group({
       courseMediaId: [null],
+      course: [null, Validators.compose([Validators.required])],
+
       videolink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
       date: [null, Validators.compose([Validators.required])],
       title: [null, Validators.compose([Validators.required])],
@@ -108,6 +110,7 @@ export class MediaComponent implements OnInit {
   gobutton() {
 
     this.displaycontent = true
+    this.displayform = true
 
   }
 
@@ -219,14 +222,14 @@ export class MediaComponent implements OnInit {
     if (this.videoform.invalid)
       return this.videoform.markAllAsTouched()
 
-    const { courseMediaId, videolink, date, title, description } = this.videoform.value
+    const { course, courseMediaId, videolink, date, title, description } = this.videoform.value
 
 
 
     if (this.iseditable) {
       const body = {
         courseMediaId: courseMediaId,
-        courseId: this.coursename,
+        courseId: course,
         courseLink: videolink,
         date: date,
         title: title,
@@ -235,7 +238,7 @@ export class MediaComponent implements OnInit {
     }
 
     const body = {
-      courseId: this.coursename,
+      courseId: course,
       courseLink: videolink,
       date: date,
       title: title,

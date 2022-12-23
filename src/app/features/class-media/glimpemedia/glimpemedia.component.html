@@ -16,7 +16,7 @@
         <div class="card-body  bg-white py-2" *ngIf="displaycontent">
             <form [formGroup]="glimpseform" (ngSubmit)="glimpseformsubmit()">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label>Class Date</label>
                         <div class="col px-0">
                             <mat-form-field class="example-full-width" appearance="outline">
@@ -30,8 +30,7 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label>Upload File</label>
                         <div class="col px-0">
                             <input type="file" class="border" id="file" (change)="filechange($event)"
@@ -40,12 +39,36 @@
 
                         </div>
                     </div>
-                    <div class="col-md-4 d-flex flex-row justify-content-end align-items-center">
-                        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block   ">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label>Language</label>
+                            <div class="col">
+                                <mat-form-field appearance="outline">
+                                    <input type="text" aria-label="Country" matInput formControlName="language"
+                                        [matAutocomplete]="language">
+                                    <mat-autocomplete autoActiveFirstOption #language="matAutocomplete">
+                                        <mat-option *ngFor="let country of languagefilter |async " [value]="country">
+                                            {{country}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="glimpseform.controls['language'].invalid && (glimpseform.controls['language'].dirty || glimpseform.controls['language'].touched)">
+                                    <mat-error [hidden]=" !glimpseform.get('language')?.hasError('required')  ">
+                                        Language is mandatory
+                                    </mat-error>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3 d-flex flex-row justify-content-end align-items-center">
+                        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block  mt-3  ">
                             {{iseditable ? "Update":"Add"}}
                         </button>
                         <button type="button" (click)="reseteditable()"
-                            class="btn btn-outline-secondary btn-rounded d-inline-block mt-2   ">
+                            class="btn btn-outline-secondary btn-rounded d-inline-block mt-3  ">
                             Cancel
                         </button>
                     </div>
@@ -74,7 +97,7 @@
 
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
-                            Date
+                            Class Date
                         </label>
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
@@ -83,28 +106,30 @@
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="typeOfClass">
+                <ng-container matColumnDef="glimpse">
 
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
-                            Type of Class
+                            Glimpse
                         </label>
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.typeOfClass | titlecase}}
+                    <td mat-cell class="text-center" *matCellDef="let element"> <a href={{element.glimpse}}
+                            class="text-primary "><u>Open</u></a>
                     </td>
+
                 </ng-container>
 
-                <ng-container matColumnDef="noOfMediaFiles">
+                <ng-container matColumnDef="language">
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
-                            Number Of Media File Added
+                            Language
                         </label>
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseDuration')"
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.noOfMediaFiles}} </td>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.language | titlecase}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="Action">
