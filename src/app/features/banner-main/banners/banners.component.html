@@ -31,7 +31,7 @@
                 <!-- <hr /> -->
 
 
-                <form class="" [formGroup]="coursebanner" class="mr-1 w-100" (ngSubmit)="bannersubmit()">
+                <form class="" [formGroup]="coursebanner" class="mr-1 w-100" (ngSubmit)=" addbaners()">
 
 
                     <div class="row ">
@@ -49,11 +49,12 @@
                         </div>
                         <div class="col-md-6">
                             <label>Upload Image  </label>
+                           
                             <input type="file" id="file" class="border" formControlName="coursebannerimage"
                                 accept=" image/*" (change)="onfilechange($event)" required="true" />
                             <br />
                             <mat-error *ngIf="filerror2">File is mandatory</mat-error>
-
+                        
                         </div>
 
                         <!-- <h6 class="text-md-right col-md-4">From date : </h6> -->
@@ -183,7 +184,7 @@
                     </div>
                 </th>
                 <td mat-cell class="col-md-2" *matCellDef="let element">
-                    {{element.dateOfAdd || "Wed 2 2017"}}
+                    {{element.dateOfAdd}}
                 </td>
             </ng-container>
             <ng-container matColumnDef="Status">
@@ -216,7 +217,7 @@
                     <i class="fa-solid fa-eye fs-5 text-info mr-2"  (click)="viewdetails(element)"
                     matTooltip="View Course Activity" matTooltip="View"></i>
                     <span matTooltip="Edit" (click)="editdetails(element)"> <i class="fas fa-pencil-alt" aria-hidden="true"></i> </span>
-                    <span matTooltip="Delete" style="cursor: pointer;" class="mx-2"> <i class="far fa-trash-alt"
+                    <span matTooltip="Delete" style="cursor: pointer;" class="mx-2" (click)=" deletedetails(element.bannerId)"> <i  class="far fa-trash-alt"
                         aria-hidden="true"></i> </span>
                     <span matTooltip="Draft" style="cursor: pointer;"> <i class="fa-solid fa-file-pen fa-lg"></i> </span>
                     </div>

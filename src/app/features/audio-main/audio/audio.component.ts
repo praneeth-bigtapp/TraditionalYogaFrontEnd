@@ -134,7 +134,8 @@ export class AudioComponent implements OnInit {
     // })
     this.audio.getaudio().subscribe({
       next:(Response:any)=>{
-        this. audiocategory = Response
+      this. audiocategory = Response
+      console.log(Response)
         
 
       },

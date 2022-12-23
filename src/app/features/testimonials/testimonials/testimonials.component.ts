@@ -260,6 +260,26 @@ const body={
     })
 
   }
- 
+
+  onActivateMenu(menu: any, event: MatSlideToggleChange) {
+    console.log(menu);
+    if (event.checked) {
+      menu.status = 'Y';
+    } else {
+      menu.status = 'N';
+    }
+    const body={
+     
+        "testimonalId": this.testimonial.value.id
+    }
+    this.test.postavtive(body).subscribe((response) => {
+      this.getTestimonial()
+    });
+    
   }
+    
+   
+  }
+ 
+  
 

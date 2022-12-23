@@ -207,14 +207,14 @@
                 </th>
                 <td mat-cell *matCellDef="let element" class="col-md-3 px-2  align-items-center">
                     <div class=" d-flex justify-content-evenly align-items-center ">
-                        <mat-slide-toggle [checked]="element.active == 'Y'? true : false"
-                       ></mat-slide-toggle>&nbsp;
+                        <mat-slide-toggle (change)=" onActivateMenu(element,$event)" [checked]="element.active == 'Y'? true : false"
+                       ></mat-slide-toggle> <span>{{element.active == 'Y'? "Enable" : "Disable"}}</span>&nbsp;
 <!-- 
                        (change)="onActivateRole(element,$event)" -->
                        <span  matTooltip="Edit" (click)="editdetails(element)"><i   aria-label="Button that displays a tooltip when focused or hovered over"
                         class="fas fa-pencil-alt" aria-hidden="true" ></i> </span> &nbsp; <span (click)="viewdetails(element)"><i class="fa-solid fa-eye text-info " matTooltip="View"
                         aria-label="Button that displays a tooltip when focused or hovered over"  ></i></span>&nbsp;&nbsp;&nbsp;
-                        <span matTooltip="Delete" style="cursor: pointer;"  (click)="deletedetails(element.id)">
+                        <span matTooltip="Delete" style="cursor: pointer;"  (click)="deletedetails(element.testimonalId)">
                             <i class="far fa-trash-alt" aria-hidden="true"></i>
                         </span>
 

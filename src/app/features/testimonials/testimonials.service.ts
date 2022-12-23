@@ -9,6 +9,8 @@ export class TestimonialsService extends BaseHttp{
   postTestimonial="courseList/testimonal?operation=add";
   updateTestimonial="courseList/testimonal?operation=update";
   deleteURL="courseList/testimonal?operation=delete";
+  active="CourseList/testimonal?operation=active";
+  deactivate="courseList/testimonal?operation=deactive"
 
 
   getTestimonial() {
@@ -23,6 +25,14 @@ export class TestimonialsService extends BaseHttp{
   }
   deleteTestimonial(body: any){
     return this.post<any>(this.deleteURL, body)
+
+  }
+  postavtive(body: any){
+    return this.post<any>(this.active, body)
+
+  }
+  postdeactivate(body: any){
+    return this.post<any>(this.deactivate, body)
 
   }
 

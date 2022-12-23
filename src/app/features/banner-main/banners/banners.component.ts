@@ -7,6 +7,8 @@ import { BannerviewService } from '../service/bannerview.service';
 import { Router } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
 import { formatDate } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 
 @Component({
   selector: 'app-banners',
@@ -22,7 +24,7 @@ export class BannersComponent implements OnInit {
   gridData: any;
   data!: any;
   checks = false;
-  headerbannerform!: FormGroup
+  // headerbannerform!: FormGroup
   coursebanner!: FormGroup
   filerror!: boolean
   filerror2: boolean = false
@@ -67,6 +69,7 @@ export class BannersComponent implements OnInit {
     private router: Router,
 
     private formBuilder: FormBuilder,
+    private dialog: MatDialog,
 
 
   ) { }
@@ -88,6 +91,11 @@ export class BannersComponent implements OnInit {
 
 
     this.coursebanner = this.formBuilder.group({
+      Id:[null],
+      categoryId:[null],
+      bannername:[null],
+      
+      
       coursebannerimage: [
         null,
         Validators.compose([Validators.required])
@@ -107,7 +115,14 @@ export class BannersComponent implements OnInit {
       todate: [
         null,
         Validators.compose([Validators.required])
-      ]
+      ],
+      dateofadd:[null],
+      createdby:[null],
+      createddate:[null],
+      updateby:[null],
+      updatedate:[null],
+      isactive:[null]
+   
     })
   }
 
@@ -176,26 +191,43 @@ export class BannersComponent implements OnInit {
 
   viewdetails(element: any) {
     this.coursebanner.setValue({
+      dateofadd:element.dateOfAdd,
+      createdby:element.createdBy,
+      createddate:element.createdDate,
+      updateby:element.updateBy,
+      updatedate:element.updateDate,
+      isactive:element.isActive,
+      Id:element.bannerId,
       coursetitle: element.courseTitle,
       coursebannerimage: element.imagePath,
-
+      bannername:element.bannerName,
 
       fromdate: formatDate(element.fromDate, "yyyy-MM-dd", 'en'),
       todate: formatDate(element.toDate, "yyyy-MM-dd", 'en'),
       description: element.description,
+      categoryId:element.categoryId
     });
     this.issubmit = false
     this.displaycontent = true
   }
   editdetails(element: any) {
+    console.log(element)
     this.coursebanner.setValue({
+      dateofadd:element.dateOfAdd,
+      createdby:element.createdBy,
+      createddate:element.createdDate,
+      updateby:element.updateBy,
+      updatedate:element.updateDate,
+      isactive:element.isActive,
+      Id:element.bannerId,
       coursetitle: element.courseTitle,
       coursebannerimage: element.imagePath,
 
-
+      bannername:element.bannerName,
       fromdate: formatDate(element.fromDate, "yyyy-MM-dd", 'en'),
       todate: formatDate(element.toDate, "yyyy-MM-dd", 'en'),
       description: element.description,
+      categoryId:element.categoryId
 
       
     });
@@ -210,5 +242,127 @@ export class BannersComponent implements OnInit {
     if (this.coursebanner.invalid)
       return this.coursebanner.markAllAsTouched()
   }
+
+
+  addbaners() {
+
+    if (this.coursebanner.invalid)
+      return this.coursebanner.markAllAsTouched()
+
+    const body = {
+    
+      "bannerName":"",
+      "courseTitle": this.coursebanner.value.coursetitle,
+      "imagePath": this.coursebanner.value.coursebannerimage,
+
+      "fromDate": formatDate(this.coursebanner.value.fromdate,"yyyy-MM-dd", 'en'),
+      "toDate":formatDate (this.coursebanner.value.todate,"yyyy-MM-dd", 'en'),
+      "description": this.coursebanner.value.description,
+      "categoryId": 1
+    }
+      if (this.iseditable) {
+        //editable
+        // const name = this.data.filter((ele: any) => ele.content.content === Content)[0].givenByName.description
+  const body={
+    // "bannerId":  "",
+    // "bannerName": this.coursebanner.value.coursename,
+    // "courseTitle": this.coursebanner.value.coursetitle,
+    // "imagePath":  this.coursebanner.value.coursebannerimage,
+    // "fromDate":  formatDate(this.coursebanner.value.fromdate,"yyyy-MM-dd", 'en'),
+    // "toDate": formatDate (this.coursebanner.value.todate,"yyyy-MM-dd", 'en'),
+    // "description":  this.coursebanner.value.description,
+    // "categoryId": 1
+    //
+    "bannerId": this.coursebanner.value.Id,
+    "bannerName": this.coursebanner.value.bannername,
+    "courseTitle":  this.coursebanner.value.coursetitle,
+    "imagePath":this.coursebanner.value.coursebannerimage,
+    "fromDate": formatDate(this.coursebanner.value.fromdate,"yyyy-MM-dd", 'en'),
+    "toDate": formatDate (this.coursebanner.value.todate,"yyyy-MM-dd", 'en'),
+    "description": this.coursebanner.value.description,
+    "categoryId": 1,
+    "dateOfAdd": this.coursebanner.value.dateOfadd,
+    "createdBy":  this.coursebanner.value.createdby,
+    "createdDate": this.coursebanner.value.createddate,
+    "updateBy":  this.coursebanner.value.updateby,
+    "updateDate":  this.coursebanner.value.updatedate,
+    "isActive":  this.coursebanner.value.isactive,
+    // dateofadd:element.dateOfAdd,
+    // createdby:element.createdBy,
+    // createddate:element.createdDate,
+    // updateby:element.updateBy,
+    // updatedate:element.updateDate,
+    // isactive:element.isActive,
+  }
+  
+        console.log(body);
+  
+        this.banner. updatebanner(body).subscribe({
+          next: (response) => {
+            console.log(response)
+            this.coursebanner.reset()
+            this.getBanner()
+          },
+          error: (error) => {
+            console.error(error.message);
+  
+          }
+        }) 
+        return
+     
+    }
+    console.log(this.coursebanner);
+    console.log(body)
+
+    this.banner.postbanner(body).subscribe({
+      next: (response) => {
+        console.log(response)
+        this.coursebanner.reset()
+
+        this.getBanner()
+
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
+
+  }
+  deletedetails(Id:any){
+    console.log(Id);
+    const body = {
+      "bannerId": Number(Id) 
+    
+    }
+console.log(body);
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Banners ?"
+      },
+      width: "30%"
+    })
+
+    dialogref.afterClosed().subscribe((Id: any) => {
+      if (Id) {
+        this.banner.deletebanners(body).subscribe({
+          next: (response) => {
+           console.log(response);
+            this.coursebanner.reset()
+             this.getBanner()
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
+
+    })
+
+
+  }
+
 
 }
