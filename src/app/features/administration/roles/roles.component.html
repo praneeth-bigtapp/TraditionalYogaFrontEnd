@@ -107,15 +107,4 @@
             </mat-paginator>
         </div>
     </div>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <!-- <mat-paginator [pageSizeOptions]="[ 25,50,100]" aria-label="Select page">
-    </mat-paginator> -->
-    <mat-paginator [length]="100"
-    [pageSize]="10"
-    [pageSizeOptions]="[5, 10, 25, 100]"
-    aria-label="Select page">
-</mat-paginator>
 </div>
