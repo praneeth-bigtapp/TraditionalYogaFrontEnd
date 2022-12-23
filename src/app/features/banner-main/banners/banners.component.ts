@@ -98,7 +98,7 @@ export class BannersComponent implements OnInit {
       
       coursebannerimage: [
         null,
-        Validators.compose([])
+        Validators.compose([Validators.required])
       ],
       coursetitle: [
         null,
@@ -199,9 +199,9 @@ export class BannersComponent implements OnInit {
       isactive:element.isActive,
       Id:element.bannerId,
       coursetitle: element.courseTitle,
-      coursebannerimage: '',
-
+      coursebannerimage: element.imagePath,
       bannername:element.bannerName,
+
       fromdate: formatDate(element.fromDate, "yyyy-MM-dd", 'en'),
       todate: formatDate(element.toDate, "yyyy-MM-dd", 'en'),
       description: element.description,
@@ -211,8 +211,6 @@ export class BannersComponent implements OnInit {
     this.displaycontent = true
   }
   editdetails(element: any) {
-  
-   
     console.log(element)
     this.coursebanner.setValue({
       dateofadd:element.dateOfAdd,
@@ -223,7 +221,7 @@ export class BannersComponent implements OnInit {
       isactive:element.isActive,
       Id:element.bannerId,
       coursetitle: element.courseTitle,
-      coursebannerimage:'',
+      coursebannerimage: element.imagePath,
 
       bannername:element.bannerName,
       fromdate: formatDate(element.fromDate, "yyyy-MM-dd", 'en'),
@@ -275,8 +273,8 @@ export class BannersComponent implements OnInit {
     // "description":  this.coursebanner.value.description,
     // "categoryId": 1
     //
-    "bannerId": this.coursebanner.value.Id,
-    "bannerName": this.coursebanner.value.bannername,
+    "bannerId": this.coursebanner.value,
+    "bannerName": this.coursebanner.value.coursename,
     "courseTitle":  this.coursebanner.value.coursetitle,
     "imagePath":this.coursebanner.value.coursebannerimage,
     "fromDate": formatDate(this.coursebanner.value.fromdate,"yyyy-MM-dd", 'en'),
