@@ -91,7 +91,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/Photo-gallery/photo-gallery.module').then((m) => m.PhotoGalleryModule)
   },
-  
+
   {
     path: '',
     loadChildren: () =>
@@ -118,6 +118,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/add-course-main/add-course-main.module').then((m) => m.AddCourseMainModule)
   },
+
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/registration/registration.module').then((m) => m.RegistrationModule)
+  },
+
   {
     path: '',
     loadChildren: () =>

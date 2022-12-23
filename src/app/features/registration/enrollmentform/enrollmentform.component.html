@@ -1,0 +1,271 @@
+<div class="ConfigurationTypes_textpadding">
+    <!-- <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/administration/roles">Admin Management</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Role</li>
+        </ol>
+    </nav> -->
+    <!-- <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
+
+        <button type="button" class="btn btn-outline-secondary btn-rounded" (click)="onAddRole()"> Add Role </button>
+    </div> -->
+    <div class="card border-light">
+        <div class="card-header text-white bg-secondary">
+            <!-- {{iseditable ? "Update":"Add"}} Enrollment -->
+            Enrollment
+        </div>
+        <div class="card-body bg-white py-2">
+            <form [formGroup]="formdetails" (ngSubmit)="enrollmentsubmit()">
+
+                <div class="row text-align-center">
+                    <div class="col-md-4">
+                        <label>Full Name</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="name" required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="formdetails.controls['name'].invalid && (formdetails.controls['name'].dirty || formdetails.controls['name'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('name')?.hasError('required')  ">
+                                    Full Name is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Email</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="email" required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="formdetails.controls['email'].invalid && (formdetails.controls['email'].dirty || formdetails.controls['email'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('email')?.hasError('required')  ">
+                                    Email is mandatory
+                                </mat-error>
+                                <mat-error [hidden]=" !formdetails.get('email')?.hasError('email')  ">
+                                    Invalid Email
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Mobile</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="mobile" required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="formdetails.controls['mobile'].invalid && (formdetails.controls['mobile'].dirty || formdetails.controls['mobile'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('mobile')?.hasError('required')  ">
+                                    Mobile is mandatory
+                                </mat-error>
+                                <mat-error [hidden]=" !formdetails.get('mobile')?.hasError('pattern')  ">
+                                    Invalid Mobile
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Date of Birth</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput type="date" autocomplete="off" formControlName="dateofbirth" required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="formdetails.controls['dateofbirth'].invalid && (formdetails.controls['dateofbirth'].dirty || formdetails.controls['dateofbirth'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('dateofbirth')?.hasError('required')  ">
+                                    Date of Birth is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Gender</label>
+                        <div class="col px-0">
+                            <mat-radio-group formControlName="gender" aria-label="Select an option">
+                                <mat-radio-button class=" mt-md-2 mr-md-4" *ngFor="let gender of genderlist"
+                                    [value]="gender">{{gender}}</mat-radio-button>
+
+                            </mat-radio-group>
+                            <div class="error-message"
+                                *ngIf="formdetails.controls['gender'].invalid && (formdetails.controls['gender'].dirty || formdetails.controls['gender'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('gender')?.hasError('required')  ">
+                                    Gender is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>House Number</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="houseno" required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="formdetails.controls['houseno'].invalid && (formdetails.controls['houseno'].dirty || formdetails.controls['houseno'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('houseno')?.hasError('required')  ">
+                                    House No is mandatory
+                                </mat-error>
+                                <mat-error [hidden]=" !formdetails.get('houseno')?.hasError('pattern')  ">
+                                    Invalid House number
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Street Name</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="street" required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="formdetails.controls['street'].invalid && (formdetails.controls['street'].dirty || formdetails.controls['street'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('street')?.hasError('required')  ">
+                                    Street is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>State</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="state" required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="formdetails.controls['state'].invalid && (formdetails.controls['state'].dirty || formdetails.controls['state'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('state')?.hasError('required')  ">
+                                    Street is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label> Country</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input type="text" aria-label="Country" matInput formControlName="country"
+                                    [matAutocomplete]="country">
+                                <mat-autocomplete autoActiveFirstOption #country="matAutocomplete">
+                                    <mat-option *ngFor="let country of countryfilter |async " [value]="country">
+                                        {{country}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="formdetails.controls['country'].invalid && (formdetails.controls['country'].dirty || formdetails.controls['country'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('country')?.hasError('required')  ">
+                                    Country is mandatory
+                                </mat-error>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Pin code</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="pincode" required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="formdetails.controls['pincode'].invalid && (formdetails.controls['pincode'].dirty || formdetails.controls['pincode'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('pincode')?.hasError('required')  ">
+                                    Pincode is mandatory
+                                </mat-error>
+                                <mat-error [hidden]=" !formdetails.get('pincode')?.hasError('pattern')  ">
+                                    Invalid Pincode
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Mother Tongue</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="mothertounge" required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="formdetails.controls['mothertounge'].invalid && (formdetails.controls['mothertounge'].dirty || formdetails.controls['mothertounge'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('mothertounge')?.hasError('required')  ">
+                                    Mother Tongue is mandatory
+                                </mat-error>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Can you communicate in English?</label>
+                        <div class="col px-0">
+                            <mat-radio-group formControlName="isenglishspoken" aria-label="Select an option">
+                                <mat-radio-button value="true" class=" mt-md-2 mr-md-4">Yes</mat-radio-button>
+                                <mat-radio-button value="false" class=" mt-md-2 mr-md-4">No</mat-radio-button>
+
+                            </mat-radio-group>
+                            <div class="error-message"
+                                *ngIf="formdetails.controls['isenglishspoken'].invalid && (formdetails.controls['isenglishspoken'].dirty || formdetails.controls['isenglishspoken'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('isenglishspoken')?.hasError('required')  ">
+                                    Field is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>How did you hear about us?</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <mat-select formControlName="refferal" [compareWith]="compareselect"
+                                    [disabled]="iseditable">
+                                    <mat-option *ngFor="let category of refferallist" [value]="category"
+                                        aria-placeholder="Select Course Category">
+                                        {{category | titlecase}}</mat-option>
+                                </mat-select>
+
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="formdetails.controls['refferal'].invalid && (formdetails.controls['refferal'].dirty || formdetails.controls['refferal'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('refferal')?.hasError('required')  ">
+                                    Refferal is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <label>Passport Photo <small>(51 x 51 mm)</small></label>
+                        <div class="col px-0">
+                            <input type="file" class="border" id="file" formControlName="photo" accept=" */*"
+                                (change)="photoupload($event)" required="true" />
+                            <mat-error *ngIf="photoerror">Photo is mandatory</mat-error>
+                        </div>
+                        <div class="mx-auto" *ngIf="photo">
+                            <img [src]="photourl" class="img-fluid mx-auto w-50" alt="passportphoto" />
+                        </div>
+                    </div>
+
+
+                    <div class=" col d-flex flex-row flex-wrap justify-content-end">
+                        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block mt-4">
+                            {{iseditable ? "Update" :"Submit " }}
+                        </button>
+                        <button type="reset" class="btn btn-outline-secondary btn-rounded d-inline-block mt-4 ">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
