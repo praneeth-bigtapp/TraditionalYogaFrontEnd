@@ -257,13 +257,20 @@ export class GalleryComponent implements OnInit {
         "photoGalleryId": element.photoGalleryId,
         "active": element.active
     }
+    console.log('ca,me');
+   
     
 
     const yes = ["Yes", "Y", "yes", "y"]
     const no = ["No", "N", "no", "n"]
-    this.data.map((elements: any) => {
-      if (elements.photoGalleryId === element.photoGalleryId)
-        if (yes.includes(elements.active)) {
+    if(yes.includes(element.active))
+    {
+      body.active='N'
+    }
+    else{
+      body.active='Y'
+    }
+   
           this.service.VisitList(body).subscribe({
             next: (response) => {
               this.openSnackBar(response)
@@ -274,10 +281,8 @@ export class GalleryComponent implements OnInit {
 
             }
           })
-        }
-       
-
-    })
+        
+      
   }
 
 
