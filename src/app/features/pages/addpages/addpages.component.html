@@ -10,7 +10,7 @@
     </nav>
     <div class="row d-flex flex-wrap mb-3">
       <div class="col-7">
-        <h4> Pages </h4>
+        <h3> Pages </h3>
       </div>
   
 
@@ -24,9 +24,10 @@
       </div>
     </div>
    
-  <form class=" card bg-white "  *ngIf="displaycontent">
-    <h4 class="card-header text-white card bg-secondary"> Add Pages </h4>
-    <div class="row">
+  <form   *ngIf="displaycontent">
+    <div class=" card bg-white ">
+    <div class="card-header text-white card bg-secondary"> Add Pages </div>
+    <div class="row pl-4 pr-4">
 
     
       <div class="mb-3  col-md-6">
@@ -129,14 +130,14 @@
       </button>
   </div>
 
-
+</div>
   </form>
 
   <br>
  <div class="card">
-  <div class="card-header text-white bg-secondary" >
+  <!-- <div class="card-header text-white bg-secondary" >
     Pages
-</div>
+</div> -->
 
   <table mat-table matSort [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid ">
 

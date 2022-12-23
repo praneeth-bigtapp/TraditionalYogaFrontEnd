@@ -777,10 +777,25 @@ input.mat-input-element {
     margin-top: 1.75rem !important; 
 }
 .mat-paginator .mat-form-field-infix {
-    padding: 15px !important;
+    padding: 15px 0px !important;
+}
+.mat-paginator-page-size-select {
+    margin: 6px 4px 0 4px;
+    width: 56px !important;
 }
 .signup-content { padding-top: 5rem;}
-/* Shake animation */
+.mat-paginator-page-size .mat-select {
+    height: 30px;
+    border: 1px solid #989898;
+}
+.mat-paginator-page-size .mat-select-trigger {
+    top: 7px;
+    padding: 5px;
+}
+
+/* .mat-paginator-container .mat-paginator .mat-form-field-infix { padding: 0px !important;}
+.mat-paginator-container .mat-select {border: 1px solid #ddd !important;}  */
+/* Shake animation  */
 
 @keyframes shake {
     0% {
