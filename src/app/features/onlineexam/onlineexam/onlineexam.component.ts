@@ -147,6 +147,7 @@ export class OnlineexamComponent implements OnInit {
     this.iseditable = false
     this.displaycontent = !this.displaycontent
     this.issubmit = true
+    this.filerror = false
   }
 
   onfilechange(event: any) {
@@ -242,7 +243,7 @@ export class OnlineexamComponent implements OnInit {
     const formData = new FormData()
 
     console.log(this.filedata);
-    
+
 
     formData.append("file", this.filedata)
 

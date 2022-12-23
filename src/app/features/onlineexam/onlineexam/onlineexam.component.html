@@ -26,10 +26,10 @@
             <form class="" [formGroup]="onlineexamform" (ngSubmit)="onlineexamsubmit()">
                 <div class="row">
                     <div class="col-md-5">
-                        <label>Select Courses</label>
+                        <label>Courses</label>
 
                         <mat-form-field appearance="outline">
-                            <mat-select formControlName="course" [compareWith]="compareselect">
+                            <mat-select formControlName="course" [compareWith]="compareselect" [disabled]="iseditable">
                                 <mat-option *ngFor="let type of courselist" [value]="type.coursesId">
                                     {{type.coursesName | titlecase}}</mat-option>
                             </mat-select>
@@ -46,7 +46,8 @@
                         <label>Test type</label>
 
                         <mat-form-field appearance="outline">
-                            <mat-select formControlName="testtype" [compareWith]="compareselect">
+                            <mat-select formControlName="testtype" [compareWith]="compareselect"
+                                [disabled]="iseditable">
                                 <mat-option *ngFor="let type of typetestlist" [value]="type.testId">
                                     {{type.testname | titlecase}}</mat-option>
                             </mat-select>
@@ -99,7 +100,8 @@
                         <label>Level of test</label>
 
                         <mat-form-field appearance="outline">
-                            <mat-select formControlName="leveltest" [compareWith]="compareselect">
+                            <mat-select formControlName="leveltest" [compareWith]="compareselect"
+                                [disabled]="iseditable">
                                 <mat-option *ngFor="let type of testlevel" [value]="type.testId">
                                     {{type.testname | titlecase}}</mat-option>
                             </mat-select>
@@ -152,7 +154,8 @@
                         <input type="text" (keyup)="updatePagination('courseId')" disabled
                             [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>                </ng-container>
+                    <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
+                </ng-container>
                 <ng-container matColumnDef="nameofTest">
                     <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
                         <label mat-sort-header>
@@ -218,7 +221,8 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
-            <mat-paginator class="card-body"  (page)="onpaginatechange($event)" [pageSizeOptions]="[10,25, 50, 100,150,200]" aria-label="Select page">
+            <mat-paginator class="card-body" (page)="onpaginatechange($event)"
+                [pageSizeOptions]="[10,25, 50, 100,150,200]" aria-label="Select page">
             </mat-paginator>
         </div>
     </div>

@@ -20,7 +20,7 @@ export class ShortvideomediaComponent implements OnInit {
   displaycontent: boolean = false
   pageno: number = 1
   isothers: boolean = false
-  displayedColumns: string[] = ['classMediaId', 'title', 'category', 'videolink', "classdate", "duration", "Action"];
+  displayedColumns: string[] = ['classMediaId', 'title', 'course', "classdate", 'category', 'videolink', "duration", "Action"];
   shortvideoform!: any
   filterData: any;
   categoryerror: boolean = false
@@ -31,6 +31,7 @@ export class ShortvideomediaComponent implements OnInit {
   dataSource!: any
   categorylist: any;
   issubmit: boolean = true
+  courses: any
 
   tabledata: any = [{
     "classMediaId": 1,
@@ -38,7 +39,9 @@ export class ShortvideomediaComponent implements OnInit {
     "category": "student",
     "videolink": "www.google.com",
     "classdate": "23-12-2022",
-    "duration": 25
+    "duration": 25,
+    "course": "RYO 355",
+
   },
   {
     "classMediaId": 2,
@@ -46,7 +49,9 @@ export class ShortvideomediaComponent implements OnInit {
     "category": "student",
     "videolink": "www.google.com",
     "classdate": "25-12-2022",
-    "duration": 30
+    "duration": 30,
+    "course": "Meditation",
+
   },
 
   {
@@ -55,7 +60,9 @@ export class ShortvideomediaComponent implements OnInit {
     "category": "resources",
     "videolink": "www.google.com",
     "classdate": "25-12-2022",
-    "duration": 30
+    "duration": 30,
+    "course": "Short Meditation",
+
   },
 
   {
@@ -64,7 +71,9 @@ export class ShortvideomediaComponent implements OnInit {
     "category": "pratice library",
     "videolink": "www.google.com",
     "classdate": "28-12-2022",
-    "duration": 15
+    "duration": 15,
+    "course": "RYO 500",
+
   },
   {
     "classMediaId": 5,
@@ -72,7 +81,9 @@ export class ShortvideomediaComponent implements OnInit {
     "category": "pratice library",
     "videolink": "www.google.com",
     "classdate": "29-12-2022",
-    "duration": 15
+    "duration": 15,
+    "course": "RYO 50",
+
   },
   ]
 
@@ -95,6 +106,7 @@ export class ShortvideomediaComponent implements OnInit {
     }
     this.shortvideoform = this.formbuilder.group({
       courseMediaId: [null],
+      course: [null, Validators.compose([Validators.required])],
       videolink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
       date: [null, Validators.compose([Validators.required])],
       duration: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.durationvalidation)])],
@@ -126,9 +138,23 @@ export class ShortvideomediaComponent implements OnInit {
     for (let col of this.filterData.filterColumnNames) {
       col.Value = '';
     }
+    this.getallcourse()
   }
 
   ngOnInit(): void {
+  }
+  getallcourse() {
+    this.services.getcoursesdetails().subscribe({
+      next: (response) => {
+
+        this.courses = response
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
+
   }
 
   getalldata() {
@@ -262,7 +288,7 @@ export class ShortvideomediaComponent implements OnInit {
       return this.shortvideoform.markAllAsTouched()
 
 
-    const { courseMediaId, videolink, date, duration, category, title, description } = this.shortvideoform.value
+    const { courses, courseMediaId, videolink, date, duration, category, title, description } = this.shortvideoform.value
 
 
     if (this.iseditable) {

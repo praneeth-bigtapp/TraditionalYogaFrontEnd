@@ -17,6 +17,22 @@
             <form [formGroup]="glimpseform" (ngSubmit)="glimpseformsubmit()">
                 <div class="row">
                     <div class="col-md-3">
+                        <label>Course</label>
+                        <mat-form-field appearance="outline">
+                            <mat-select formControlName="course">
+                                <mat-option *ngFor="let course1 of courses" [value]="course1.coursesId">
+                                    {{course1.coursesName}}</mat-option>
+                            </mat-select>
+
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="glimpseform.controls['course'].invalid && (glimpseform.controls['course'].dirty || glimpseform.controls['course'].touched)">
+                            <mat-error [hidden]=" !glimpseform.get('course')?.hasError('required')  ">
+                                Course is mandatory
+                            </mat-error>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
                         <label>Class Date</label>
                         <div class="col px-0">
                             <mat-form-field class="example-full-width" appearance="outline">
@@ -63,7 +79,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-3 d-flex flex-row justify-content-end align-items-center">
+                    <div class="col-md-12 d-flex flex-row justify-content-end align-items-center">
                         <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block  mt-3  ">
                             {{iseditable ? "Update":"Add"}}
                         </button>
@@ -93,6 +109,18 @@
                     </th>
                     <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
                 </ng-container>
+                <ng-container matColumnDef="course">
+
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Course
+                        </label>
+                        <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
+                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.course}}
+                    </td>
+                </ng-container>
                 <ng-container matColumnDef="date">
 
                     <th mat-header-cell *matHeaderCellDef scope="col">
@@ -100,7 +128,7 @@
                             Class Date
                         </label>
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
-                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+                            [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell class="text-center" *matCellDef="let element"> {{element.date | date:'dd-MM-YYYY'}}
                     </td>
@@ -113,7 +141,7 @@
                             Glimpse
                         </label>
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
-                            [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
+                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell class="text-center" *matCellDef="let element"> <a href={{element.glimpse}}
                             class="text-primary "><u>Open</u></a>
@@ -127,7 +155,7 @@
                             Language
                         </label>
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseDuration')"
-                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
+                            [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell class="text-center" *matCellDef="let element"> {{element.language | titlecase}} </td>
                 </ng-container>
