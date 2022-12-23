@@ -98,7 +98,7 @@ export class BannersComponent implements OnInit {
       
       coursebannerimage: [
         null,
-        Validators.compose([Validators.required])
+        Validators.compose([])
       ],
       coursetitle: [
         null,
@@ -199,9 +199,9 @@ export class BannersComponent implements OnInit {
       isactive:element.isActive,
       Id:element.bannerId,
       coursetitle: element.courseTitle,
-      coursebannerimage: element.imagePath,
-      bannername:element.bannerName,
+      coursebannerimage: '',
 
+      bannername:element.bannerName,
       fromdate: formatDate(element.fromDate, "yyyy-MM-dd", 'en'),
       todate: formatDate(element.toDate, "yyyy-MM-dd", 'en'),
       description: element.description,
@@ -211,6 +211,8 @@ export class BannersComponent implements OnInit {
     this.displaycontent = true
   }
   editdetails(element: any) {
+  
+   
     console.log(element)
     this.coursebanner.setValue({
       dateofadd:element.dateOfAdd,
@@ -221,7 +223,7 @@ export class BannersComponent implements OnInit {
       isactive:element.isActive,
       Id:element.bannerId,
       coursetitle: element.courseTitle,
-      coursebannerimage: element.imagePath,
+      coursebannerimage:'',
 
       bannername:element.bannerName,
       fromdate: formatDate(element.fromDate, "yyyy-MM-dd", 'en'),

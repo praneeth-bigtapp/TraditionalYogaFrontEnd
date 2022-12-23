@@ -53,7 +53,9 @@
                             <input type="file" id="file" class="border" formControlName="coursebannerimage"
                                 accept=" image/*" (change)="onfilechange($event)" required="true" />
                             <br />
-                            <mat-error *ngIf="filerror2">File is mandatory</mat-error>
+                            <mat-error *ngIf="coursebanner.controls['coursebannerimage'].hasError('required')">
+                               image is mandatory
+                            </mat-error>
                         
                         </div>
 
