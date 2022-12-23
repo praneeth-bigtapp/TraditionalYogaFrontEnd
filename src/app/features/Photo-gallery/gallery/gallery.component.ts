@@ -149,17 +149,23 @@ export class GalleryComponent implements OnInit {
     const body={
       "photoGalleryId": 3,
       "galleryName":this.createalbum.value.albumname,
-      "galleryDescription": this.createalbum.value.description
+      "galleryDescription": this.createalbum.value.description,
+    
+      "fromDate":this.createalbum.value.fromdate,
+    "toDate": this.createalbum.value.todate
+
       }
     this.service.updateList(body).subscribe({
       next: (response) => {
        console.log(response)
+       this.createalbum.reset()
        this.openSnackBar(response)
        this.getAlldata()
       
       },
       error: (error) => {
         console.error(error.message);
+        this.openSnackBar(error.message);
       }
     })
 
@@ -202,17 +208,22 @@ export class GalleryComponent implements OnInit {
     const body=
       {
         "galleryName":this.createalbum.value.albumname,
-        "galleryDescription": this.createalbum.value.description
+        "galleryDescription": this.createalbum.value.description,
+        "fromDate":this.createalbum.value.fromdate,
+    "toDate": this.createalbum.value.todate
+
     }
     
     this.service.addList(body).subscribe({
       next: (response) => {
+        this.createalbum.reset()
         this.openSnackBar(response)
-        this.getAlldata
+        this.getAlldata()
       
       },
       error: (error) => {
         console.error(error.message);
+        this.openSnackBar(error.message)
       }
     })
   }
