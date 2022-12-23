@@ -26,7 +26,7 @@ export class BlacklistUsersComponent implements OnInit {
   formdisplay=false
   filterData:any
   gridData:any
-
+currentID:any
 
   pageno: number = 1
   today: any;
@@ -139,7 +139,7 @@ saveList() {
     if (this.blacklistForm.valid) {
       this.datevalue()
       const data = {
-        "blacklistUserId": 1,
+        "blacklistUserId": this.currentID,
         "date": this.today,
        
         "blacklistUserEmail": this.blacklistForm.value.emailId,
@@ -167,6 +167,7 @@ saveList() {
    
   }
   editdetails(element:any){
+    this.currentID=element.blacklistUserId
     this.formdisplay=true 
     this.blacklistForm.setValue({emailId:element.blacklistUserEmail,
     comments:element.comments

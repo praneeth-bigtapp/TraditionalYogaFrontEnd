@@ -121,9 +121,9 @@ export class GalleryComponent implements OnInit {
 
       albumname:element.galleryName,
       description: element.galleryDescription,
-      fromdate: '',
-      // duration: [null, Validators.compose([Validators.required])],
-      todate: '',
+      fromdate: element.fromDate,
+      
+      todate: element.toDate,
 
     });
    
@@ -137,9 +137,9 @@ export class GalleryComponent implements OnInit {
 
       albumname:element.galleryName,
       description: element.galleryDescription,
-      fromdate: '',
-      // duration: [null, Validators.compose([Validators.required])],
-      todate: '',
+      fromdate: element.fromDate,
+      
+      todate: element.toDate,
 
     });
   }

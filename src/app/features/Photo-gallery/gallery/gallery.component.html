@@ -28,7 +28,9 @@
   </div>
 
   <div class="" *ngIf="displaycontent">
-    <h5 class="card-header text-white bg-secondary">Create Album</h5>
+    <div class="card-header text-white bg-secondary mt-2">
+      Create Album
+    </div>
     <form class="card bg-white  p-3" [formGroup]="createalbum" (submit)="addAlbum()">
       <div class="row">
         <div class="col-md-6"><label>Album Name</label>
