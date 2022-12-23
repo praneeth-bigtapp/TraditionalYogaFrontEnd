@@ -205,7 +205,7 @@
                 <ng-container matColumnDef="courseDuration">
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
-                            Duration
+                            Duration <small>(days)</small>
                         </label>
                         <input type="text" (keyup)="updatePagination('courseDuration')"
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />

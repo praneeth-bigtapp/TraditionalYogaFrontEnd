@@ -2,13 +2,13 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#/createpraticelibrary">Pratice library</a></li>
+            <li class="breadcrumb-item"><a href="#/createpraticelibrary">Practice library</a></li>
 
-            <li class="breadcrumb-item active" aria-current="page">Pratice library</li>
+            <li class="breadcrumb-item active" aria-current="page">Practice library</li>
         </ol>
     </nav>
     <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
-        <!-- <h3 class=" pl-2 text-secondary ">Pratice library</h3> -->
+        <!-- <h3 class=" pl-2 text-secondary ">Practice library</h3> -->
         <button type="button" *ngIf="!displaycontent" (click)="addlibrary()"
             class="btn btn-outline-secondary btn-rounded d-inline-block ">
             Add Library
@@ -16,7 +16,7 @@
     </div>
     <div class="card  bg-secondary" *ngIf="displaycontent">
         <div class="card-header text-white bg-secondary">
-            {{iseditable ? "Update" :"Add" }} Pratice library
+            {{iseditable ? "Update" :"Add" }} Practice library
         </div>
         <div class="card-body bg-white  py-2">
             <!-- <hr /> -->
@@ -175,7 +175,7 @@
 
     <div class="card ">
         <div class="card-header text-white bg-secondary">
-            Pratice library
+            Practice library
         </div>
         <div class="card-body bg-transparent px-0 py-2">
             <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
