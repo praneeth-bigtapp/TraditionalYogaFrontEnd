@@ -110,7 +110,7 @@ export class AudioComponent implements OnInit {
     };
     this.audio.getcourse().subscribe({
       next: (response) => {
-
+        console.log('hi');
         this.courses = response
         console.log(this.courses);
 
@@ -134,7 +134,9 @@ export class AudioComponent implements OnInit {
     // })
     this.audio.getaudio().subscribe({
       next:(Response:any)=>{
-        this. audiocategory = Response
+        this.audiocategory = Response
+       
+        console.log( this.audiocategory);
         
 
       },
@@ -155,6 +157,8 @@ export class AudioComponent implements OnInit {
           data.check = false;
         }
         // this. audiocategory = response
+        
+        
         console.log(this. audiocategory);
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
@@ -376,6 +380,7 @@ console.log(body);
 
     this.audio.audiopost(body).subscribe({
       next: (response) => {
+        
         console.log(response)
         this.Audiomanagement.reset()
 

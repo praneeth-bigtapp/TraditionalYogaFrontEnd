@@ -44,8 +44,8 @@
         type="submit">BlackList
       </button>
       <div class="d-flex justify-content-end mr-1 mt-2" *ngIf="updatebtn">
-        <button mat-button  class="btn   btn-outline-secondary btn-rounded d-inline-block border border-dark col-1 text-center"
-        (click)="onupdate()">Update
+        <button mat-button  class="btn   btn-outline-secondary btn-rounded d-inline-block border border-dark col-1 text-center" type="button"
+        (click)="saveList()">Update
       </button> 
       <button mat-button  (click)="oncancel()" class="btn btn-outline-secondary btn-rounded d-inline-block border border-dark col-1 text-center"
       >Cancel

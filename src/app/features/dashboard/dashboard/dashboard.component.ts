@@ -14,9 +14,7 @@ export class DashboardComponent implements OnInit {
   coursesReport: any;
   courses: any;
 
-  constructor(
-    private formBuilder: FormBuilder, private dashboard:DashboardService
-  ) {
+  constructor( private formBuilder: FormBuilder, private dashboard:DashboardService  ) {
     this.dashboard.getcourse().subscribe({
       next: (response) => {
 

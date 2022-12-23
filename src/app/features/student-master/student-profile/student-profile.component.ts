@@ -113,6 +113,7 @@ export class StudentProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.onselectCourse()
+    
     this.searchStudentForm = this.formBuilder.group({
       course: [null, Validators.compose([Validators.required])],
       studentId: [null, Validators.compose([Validators.required])]
@@ -195,12 +196,15 @@ export class StudentProfileComponent implements OnInit {
   onaddpurchase() {
     this.purchaseform = true
   }
-  donationAPI() {
-    this.studentService.getdonations().subscribe({
+  donationAPI(id:any) {
+    this.studentService.getDonationById(id).subscribe({
       next: (response) => {
         this.donations = response;
         this.donations = this.donations.reverse()
-
+        console.log("donations");
+        
+        console.log(this.donations);
+        
         this.dataSource = new MatTableDataSource<any>(this.donations)
         this.filterData.gridData = this.donations;
         this.filterData.dataSource = this.dataSource;
@@ -221,6 +225,7 @@ export class StudentProfileComponent implements OnInit {
     this.studentService.getCourses().subscribe({
       next: (response) => {
         this.CourseList = response;
+        console.log(this.CourseList)
       },
       error: (error) => {
 
@@ -243,20 +248,23 @@ export class StudentProfileComponent implements OnInit {
 
       }
     });
-
+    const body={
+      "Id":data.studentId
+    }
+this.donationAPI(data)
 
 
     console.log("Enterning Select Donation List");
-    this.studentService.getDonationById(data).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.dataSource = new MatTableDataSource(response);
-        this.donationsData = this.dataSource;
-      },
-      error: (error) => {
+    // this.studentService.getDonationById(data).subscribe({
+    //   next: (response) => {
+    //     console.log(response);
+    //     this.dataSource = new MatTableDataSource(response);
+    //     this.donationsData = this.dataSource;
+    //   },
+    //   error: (error) => {
 
-      }
-    });
+    //   }
+    // });
 
     this.getPurchase(data);
     this.getVolunteer(data);
