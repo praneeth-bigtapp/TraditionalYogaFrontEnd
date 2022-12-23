@@ -1,14 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { map, startWith } from 'rxjs/operators';
+import { filter, map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { DonationserviceService } from '../service/donationservice.service';
-import { log } from 'console';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
+import { getLocaleMonthNames } from '@angular/common';
 
 @Component({
   selector: 'app-donation-management',
@@ -19,88 +21,254 @@ export class DonationManagementComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   dateForm!: FormGroup
-  filterData:any
-  gridData:any
-  
+  filterData: any
+  gridData: any
+date:any
+DonorName='Donar1'
+pan="ABCD2574"
+
+pageno: number = 1
+
+onpaginatechange(event: any) {
+  if (event.pageIndex === 0) {
+    this.pageno = 1
+    return
+  }
+  this.pageno = (event.pageIndex * event.pageSize) + 1
+  return
+}
   disableSelect = new FormControl(false);
-  data: any = [{ 'S_No': '1', 'Date': '12-11-2022', 'DonorName': "ajith", "Country": "India", "Amountdonated": "10,500.00" ,"currency":"$","pan":"741APO52"},
-  { 'S_No': '1', 'Date': '11-1-2022', 'DonorName': "ajith", "Country": "India", "Amountdonated": "10,500.00","currency":"#","pan":"741APO52" },
-  { 'S_No': '1', 'Date': '12-10-2022', 'DonorName': "ajith", "Country": "USA", "Amountdonated": "10,500.00","currency":"%","pan":"741APO52" },
-  { 'S_No': '1', 'Date': '12-12-2022', 'DonorName': "ajith", "Country": "Australia", "Amountdonated": "10,500.00","currency":"$","pan":"741APO52" },
-  { 'S_No': '1', 'Date': '12-11-2023', 'DonorName': "ajith", "Country": "India", "Amountdonated": "10,500.00","currency":"$","pan":"741APO52" },
-  { 'S_No': '1', 'Date': '11-11-2022', 'DonorName': "ajith", "Country": "India", "Amountdonated": "10,500.00","currency":"$","pan":"741APO52" },
-  { 'S_No': '1', 'Date': '12-10-2022', 'DonorName': "ajith", "Country": "USA", "Amountdonated": "10,500.00","currency":"$","pan":"741APO52" },
-  { 'S_No': '1', 'Date': '10-10-2022', 'DonorName': "ajith", "Country": "Australia", "Amountdonated": "10,500.00","currency":"$","pan":"741APO52" }]
-  displayedColumns: string[] = ['S_No', 'Date', 'DonorName', "Country", "Amountdonated","pan", "ViewDetails"];
+data:any
+  // data: any = [{ 'S_No': '1', 'Date': '12-11-2022', 'DonorName': "ajith", "Country": "India", "Amountdonated": "10500", "currency": "$", "pan": "741APO52" },
+  // { 'S_No': '1', 'Date': '11-1-2022', 'DonorName': "ajith", "Country": "India", "Amountdonated": "10500", "currency": "#", "pan": "741APO52" },
+  // { 'S_No': '1', 'Date': '12-10-2022', 'DonorName': "ajith", "Country": "USA", "Amountdonated": "10000", "currency": "%", "pan": "741APO52" },
+  // { 'S_No': '1', 'Date': '12-12-2022', 'DonorName': "ajith", "Country": "Australia", "Amountdonated": "9000", "currency": "$", "pan": "741APO52" },
+  // { 'S_No': '1', 'Date': '12-11-2023', 'DonorName': "ajith", "Country": "India", "Amountdonated": "2000", "currency": "$", "pan": "741APO52" },
+  // { 'S_No': '1', 'Date': '11-11-2022', 'DonorName': "ajith", "Country": "India", "Amountdonated": "1000", "currency": "$", "pan": "741APO52" },
+  // { 'S_No': '1', 'Date': '12-10-2022', 'DonorName': "ajith", "Country": "USA", "Amountdonated": "1000", "currency": "$", "pan": "741APO52" },
+  // { 'S_No': '1', 'Date': '10-10-2022', 'DonorName': "ajith", "Country": "Australia", "Amountdonated": "2500", "currency": "$", "pan": "741APO59" }]
+
+
+
+  displayedColumns: string[] = ['S_No', 'date', 'DonorName', "country", "amountDonated", "panNumber", "ViewDetails"];
+
   total = 0;
-  countryList = ["Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas (the)", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia (Plurinational State of)", "Bonaire, Sint Eustatius and Saba", "Bosnia and Herzegovina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory (the)", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Cayman Islands (the)", "Central African Republic (the)", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands (the)", "Colombia", "Comoros (the)", "Congo (the Democratic Republic of the)", "Congo (the)", "Cook Islands (the)", "Costa Rica", "Croatia", "Cuba", "Cura\xe7ao", "Cyprus", "Czechia", "C\xf4te d'Ivoire", "Denmark", "Djibouti", "Dominica", "Dominican Republic (the)", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Falkland Islands (the) [Malvinas]", "Faroe Islands (the)", "Fiji", "Finland", "France", "French Guiana", "French Polynesia", "French Southern Territories (the)", "Gabon", "Gambia (the)", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard Island and McDonald Islands", "Holy See (the)", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran (Islamic Republic of)", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea (the Democratic People's Republic of)", "Korea (the Republic of)", "Kuwait", "Kyrgyzstan", "Lao People's Democratic Republic (the)", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macao", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands (the)", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia (Federated States of)", "Moldova (the Republic of)", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands (the)", "New Caledonia", "New Zealand", "Nicaragua", "Niger (the)", "Nigeria", "Niue", "Norfolk Island", "Northern Mariana Islands (the)", "Norway", "Oman", "Pakistan", "Palau", "Palestine, State of", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines (the)", "Pitcairn", "Poland", "Portugal", "Puerto Rico", "Qatar", "Republic of North Macedonia", "Romania", "Russian Federation (the)", "Rwanda", "R\xe9union", "Saint Barth\xe9lemy", "Saint Helena, Ascension and Tristan da Cunha", "Saint Kitts and Nevis", "Saint Lucia", "Saint Martin (French part)", "Saint Pierre and Miquelon", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Sint Maarten (Dutch part)", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Georgia and the South Sandwich Islands", "South Sudan", "Spain", "Sri Lanka", "Sudan (the)", "Suriname", "Svalbard and Jan Mayen", "Sweden", "Switzerland", "Syrian Arab Republic", "Taiwan", "Tajikistan", "Tanzania, United Republic of", "Thailand", "Timor-Leste", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands (the)", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates (the)", "United Kingdom of Great Britain and Northern Ireland (the)", "United States Minor Outlying Islands (the)", "United States of America (the)", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela (Bolivarian Republic of)", "Viet Nam", "Virgin Islands (British)", "Virgin Islands (U.S.)", "Wallis and Futuna", "Western Sahara", "Yemen", "Zambia", "Zimbabwe", "\xc5land Islands"];
-  dataSource: any;
-  // data: any;
-  constructor(private formbuilder: FormBuilder, private router: Router, private service: DonationserviceService) { }
-  countryfilter !: Observable<any>
+  subtotal: number = 0
+  countryList:any
+   dataSource: any;
+  region: any;
+  constructor(private formbuilder: FormBuilder, private router: Router, private service: DonationserviceService, private _snackBar: MatSnackBar, private dialog: MatDialog) { }
+  
   ngOnInit(): void {
    
+    this.getallregions()
+    this.getallData('')
+    this.getallcountry()
     this.dateForm = this.formbuilder.group({
 
       fromdate: [null, Validators.compose([Validators.required])],
       todate: [null, Validators.compose([Validators.required])],
-      countrydropdown: [null, Validators.compose([Validators.required])],
-      regiondropdown: [null, Validators.compose([Validators.required])],
+      countrydropdown: null,
+      regiondropdown: null,
 
 
     })
+   
+    // this.dataSource = new MatTableDataSource<any>(this.data)
+
+
     this.filterData = {
-      filterColumnNames : this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
+      filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
       gridData: this.gridData,
       dataSource: this.dataSource,
       paginator: this.paginator,
       sort: this.sort,
-      total:this.total
+      total: this.total,
+      sub: this.subtotal
     }
+    
 
-    this.dataSource = new MatTableDataSource<any>(this.data)
-    this.filterData.gridData = this.data;
+
+
+
+  }
+
+  updatePagination() {
+
+
+    this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.donarId.donationAmount)))
+
+
+    this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
+    this.filterData.dataSource.sub = this.subtotal
+
+
+
+
+  }
+  editdetails(element: any) {
+
+  }
+
+
+  viewDetails(id: any) {
+   
+    this.router.navigate(["viewdonation",id]);
+    // this.getallData()
+  }
+  getdate(){
+    let today=new Date()
+
+    this.date=today.getDate()+'-'+today.getMonth()+'-'+today.getFullYear()
+    console.log(this.date);
+    
+  }
+  getallData(variable:any) {
+
+    if(variable!='full'){
+      this.getdate()
+    }
+    this.service.getdonationdetails().subscribe({
+      next: (response) => {
+        this.data = response;
+        this.data=this.data.reverse()
+        this.dataSource = new MatTableDataSource<any>(this.data);
+        console.log(this.data)
+        this.total = this.sum(this.data.map((ele: any) => Number(ele.donarId.donationAmount)))
+        this.subtotal = this.sum(this.data.map((ele: any) => Number(ele.donarId.donationAmount)))
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        this.filterData.total = this.total;
+        this.filterData.sub = this.subtotal;
+    
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+       
+
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
+  }
+
+  sum(data: any) {
+    return data.reduce((previousValue: any, currentValue: any) => Number(previousValue) + Number(currentValue),0)
+  }
+
+  basicfilter(filtervalues:any){
+    this.filterData.gridData = filtervalues;
     this.filterData.dataSource = this.dataSource;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.filterData.sort = this.sort;
-    this.filterData.total=this.total;
-    
-    for (let col of this.filterData.filterColumnNames) {
-      col.Value = '';
-    }
-    this.countryfilter = this.dateForm.valueChanges.pipe(
-      startWith(''),
-      map(value => this.countryList.filter(ele => ele.toLowerCase().includes(value.countrydropdown?.toLowerCase()))),
-    )
+    this.filterData.total = this.total;
+    this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
+    this.filterData.dataSource.sub = this.subtotal
+  }
+
+  
+
+  manualcompare(event: any) {
+    let filterdata=  this.filterData.dataSource.filteredData && this.data
+    let [symbol, value] = [event.target.value[0], event.target.value.slice(1, event.target.value.length)]
 
     
    
-  }
-  ngAfterViewInit() {
-    this.filterData.dataSource.paginator = this.paginator;
-    this.filterData.dataSource.sort = this.sort;
-
-  }
-  updatePagination() {
-
-    this.filterData.dataSource.paginator = this.paginator;
+    if(event.target.value[1]=='=')
+    {
+       [symbol, value] = [event.target.value.slice(0,2), event.target.value.slice(2, event.target.value.length)]
+    }
     
-  }
+ console.log(symbol);
+ console.log(value);
+ 
+    
 
 
-  viewDetails(name: any) {
-    alert("click");
-    this.router.navigateByUrl("viewdonation");
-    this.getallData()
+    if (event.target.value.length === 0) {
+      
+      this.dataSource = new MatTableDataSource<any>(filterdata)
+     this.basicfilter(filterdata)
+      this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.donarId.donationAmount)))
+
+      return
+    }
+
+    if (![">", "<","=",'<=',">=","=="].includes(symbol)) {
+
+      
+      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) === Number(event.target.value))
+      this.dataSource = new MatTableDataSource<any>(filterdata)
+      this.basicfilter(filterdata)
+      this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.donarId.donationAmount)))
+
+
+      return
+    }
+
+     if (symbol === "==") {
+      
+      
+      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) == value)
+    }
+    else if (symbol === "=") {
+      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) == value)
+    }
+    else if (symbol === ">=") {
+      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) >= value)
+    }
+
+    else if (symbol === "<=") {
+      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) <= value)
+    }
+    else if (symbol === "<") {
+      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) < value )
+    }
+    else if (symbol === ">") {
+      
+      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) > value)
+    }
+   
+    console.log(filterdata);
+    
+    this.dataSource = new MatTableDataSource<any>(filterdata)
+    this.basicfilter(filterdata)
+    this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.donarId.donationAmount)))
+
   }
-  getallData() {
-    this.service.getdonationdetails().subscribe({
+
+  getallregions() {
+    this.service.getregions().subscribe({
       next: (response) => {
-        this.data = response;
-        this.dataSource = new MatTableDataSource<any>(this.data);
-        console.log(this.data);
-        
+        this.region = response;
+        // this.dataSource = new MatTableDataSource<any>(this.data);
+        console.log(this.region);
+
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
+  }
+  getallcountry() {
+    this.service.getcountrys().subscribe({
+      next: (response) => {
+        this.countryList= response;
+        // this.dataSource = new MatTableDataSource<any>(this.data);
+        if(this.dateForm.value.regiondropdown!=null){
+          this.countryList=this.countryList.filter((ele:any)=>ele.regionId.regionId===this.dateForm.value.regiondropdown)
+        }
+        console.log(this.countryList);
+
 
       },
       error: (error) => {
@@ -110,17 +278,82 @@ export class DonationManagementComponent implements OnInit {
   }
 
   filterDate() {
+    this.getallData('full')
+
     const fromdate = this.dateForm.value.fromdate
+    const region=this.dateForm.value.regiondropdown
+    const country=this.dateForm.value.countrydropdown
 
     const todate = this.dateForm.value.todate
-    console.log(fromdate,todate)
+    console.log(fromdate, todate)
     console.log(this.data)
-    let filters = this.data.filter((ele: any) => new Date(ele.Date) >= new Date(fromdate) && new Date(ele.Date) <= new Date(todate))
+    console.log(region);
+    
+    let filters = this.data.filter((ele: any) => new Date(ele.date) >= new Date(fromdate) && new Date(ele.date) <= new Date(todate))
     console.log(filters)
     if (fromdate !== null && todate !== null) {
-      this.dataSource = new MatTableDataSource<any>(filters);
+      if(region!==null){
+        filters=this.regionfilter(filters)
+      }
+      if(country!==null){
+        filters=this.countryfilter(filters)
+      }
+      this.dataSource = new MatTableDataSource<any>(filters)
+      this.basicfilter(filters)
+      this.filterData.dataSource.sort = this.sort;
+      this.filterData.dataSource.sub = this.subtotal
+      this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.donarId.donationAmount)))
     }
-   this.updatePagination()
-    
+    this.updatePagination()
+
+  }
+  regionfilter(element:any){
+    let reg=element.filter((ele:any)=>ele.donarId.countryId.regionId.regionId===this.dateForm.value.regiondropdown)
+    return reg
+  }
+  countryfilter(element:any){
+    let reg=element.filter((ele:any)=>ele.countryName===this.dateForm.value.countrydropdown)
+    return reg
+  }
+  
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
+  }
+  
+  deletedetails(id: any) {
+
+    // const body = {
+    //   "coursesId": id
+    // }
+
+    // const dialogref = this.dialog.open(DialogPopupComponent, {
+    //   data: {
+    //     title: "Delete Confirmation",
+    //     message: "Are You Sure You Want To Delete this Course ?"
+    //   },
+    //   width: "30%"
+    // })
+
+    // dialogref.afterClosed().subscribe(data => {
+    //   if (data) {
+    //     this.AddCourseService.deletecourse(body).subscribe({
+    //       next: (response) => {
+    //         this.openSnackBar(response)
+    //         this.addCourseForm.reset()
+    //         this.getdata()
+    //       },
+    //       error: (error) => {
+    //         console.error(error.message);
+    //       }
+    //     })
+    //     return
+    //   }
+
+    // })
+
+
+
   }
 }

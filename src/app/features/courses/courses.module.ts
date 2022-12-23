@@ -20,6 +20,7 @@ import { CourseMediaPraticeComponent } from './course-media-pratice/course-media
 import { MatSelectModule } from '@angular/material/select';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MyCourseMatriealsComponent } from './my-course-matrieals/my-course-matrieals.component';
+import { ViewMycourseMatriealsComponent } from './view-mycourse-matrieals/view-mycourse-matrieals.component';
 
 
 
@@ -27,7 +28,8 @@ import { MyCourseMatriealsComponent } from './my-course-matrieals/my-course-matr
   declarations: [
     CourseMainComponent,
     CourseMediaPraticeComponent,
-    MyCourseMatriealsComponent
+    MyCourseMatriealsComponent,
+    ViewMycourseMatriealsComponent
   ],
   imports: [
     CommonModule,
@@ -49,6 +51,7 @@ import { MyCourseMatriealsComponent } from './my-course-matrieals/my-course-matr
     MatSlideToggleModule,
     MatSelectModule,
     AngularEditorModule,
+  
 
 
   ]

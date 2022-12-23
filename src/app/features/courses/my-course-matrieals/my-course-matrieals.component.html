@@ -1,214 +1,284 @@
-<div class="ConfigurationTypes_textpadding p-5">
+<div class="ConfigurationTypes_textpadding ">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item"><a href="#/addCourse">Course Management</a></li>          
-          <li class="breadcrumb-item active" aria-current="page">  Add Course Matrieals </li>
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/addCourse">Course Management</a></li>
+            <li class="breadcrumb-item active" aria-current="page">  Course Matrieals </li>
         </ol>
-      </nav>
+    </nav>
 
-
-<div class="card mt-5">
-        <div class="card-header text-white bg-secondary" >
-            Add Course Matrieals 
-      </div>
-   <div class="bg-white">
-  
-    <div class="card-body bg-white pb-2">
-        <form [formGroup]="FormDeatils" (submit)="onsubmit()">
-            <div class="row pt-2">
-                <div class="col-4 ml-4">
-                    <label>Select Course:</label>
-
-                    <mat-form-field appearance="outline" >
-                        <select matNativeControl  formControlName="courses" >
-                            <option value="" selected></option>
-                            <option *ngFor="let item of courses" [value]="item.coursesId">{{item.coursesName}}
-                            </option>
-                        </select>
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class=" pt-5 row ">
-                <div class="col-4 text-end pt-3 fw-bolder">
-                    Course Material Category:
-                </div>
-                <div class="col-4">
-                    <label>Course Material Category:</label>
-                    <mat-form-field class="pe-4"appearance="outline" >
-                       
-                           
-                            <select matNativeControl  formControlName="catogery" (change)="newOthers()" [(ngModel)]="othervalue">
-                                <option value="" selected></option>
-                                <option *ngFor="let item of catogeries" [value]="item.materialCategoryId">{{item.categoryName}}
-                                </option>
-                            </select>
-                        
-                    
-                    </mat-form-field>
-                </div>
-                <!-- <div class="col-2">
-                    <p>Technical/Scientific information Festival/Day specials </p>
-                </div> --> 
-            </div>
-            <div class=" pt-2 row " *ngIf="newcatogeries">
-                <div class="col-4 text-end pt-3 text-dark fw-bolder">
-                    Others Category:
-                </div>
-                <div class="col-4">
-                    <label>Others Category:</label>
-                    <mat-form-field class="pe-4"appearance="outline" >
-                       
-                        <input matInput formControlName="others"  
-                            type="text" />
-                    
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class=" pt-2 row ">
-                <div class="col-4 text-end pt-3 text-dark fw-bolder">
-                    Course Material Title:
-                </div>
-                <div class="col-8">
-                    <label>Course Material Title:</label>
-
-                    <mat-form-field class="pe-4"appearance="outline" >
-                       
-                        <input matInput formControlName="coursetitle"  
-                            type="text" />
-                    
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class=" pt-2 row ">
-                <div class="col-4 text-end pt-3 text-dark fw-bolder">
-                    Add Media:
-                </div>
-                <div class="col-4">
-                    <label>Add Media:</label>
-                    
-                    <mat-form-field class="pe-4"appearance="outline" >
-                       
-                            
-                            <select matNativeControl  formControlName="addMedia">
-                                <option value="" selected></option>
-                                <option *ngFor="let item of media" [value]="item.mediaId">{{item.mediaType}}
-                                </option>
-                            </select>
-                        
-                    
-                    </mat-form-field>
-                </div>
-                
-            </div>
-            <div class=" pt-2 row ">
-                <div class="col-4 text-end pt-3 ">
-                    Video Link:
-                </div>
-                <div class="col-8">
-                    <label>Video Link:</label>
-
-                    <mat-form-field class="pe-4"appearance="outline" >
-                       
-                        <input matInput formControlName="videoLink"  
-                            type="text">
-                    
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class=" pt-2 row ">
-                <div class="col-4 text-end pt-3 ">
-                    Upload:
-                </div>
-                <div class="col-7 mb-3">
-                    <label>Upload:</label>
-
-                        <input class="border" type="file" id="formFile" formControlName="upload" required="true"  (change)="onfilechange()"/>
-                        <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
-                    
-                   
-                </div>
-            </div>
-            <div class=" pt-2 row ">
-                <div class="col-4 text-end pt-3">
-                    Message:
-                </div>
-                <div class="col-8">
-                    <label>Message:</label>
-
-                    <mat-form-field class="pe-4"appearance="outline" >
-                       
-                        <textarea matInput formControlName="message" rows="8" 
-                            type="text" ></textarea>
-                    
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="d-flex justify-content-end mb-3">
-                <button  class=" btn btn-outline-secondary  btn-rounded d-inline-block m-2" type="submit">Add</button>
-        
-            </div>
-            </form>
+    <div class="d-flex  flex-wrap  justify-content-end align-items-center">
+        <button class="btn   btn-outline-secondary btn-rounded d-inline-block border border-dark"
+            (click)="addcoursematerial()" *ngIf="!displayform">
+            <!-- <mat-icon>add</mat-icon> -->
+            Add Course Material
+        </button>
     </div>
-   </div>
-   </div>
-   <div  class=" rounded mt-3 mat-elevation-z8 mt-4 table-responsive">
-    <table mat-table matSort [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid " >
+    <br />
+    <div class="card mt-5" *ngIf="displayform">
+        <div class="card-header text-white bg-secondary">
+            {{iseditable? "Update" :"Add"}} Course Matrieals
+        </div>
+        <div class="card-body bg-white">
+
+            <div class="card-body bg-white pb-2">
+                <form [formGroup]="FormDeatils" (ngSubmit)="onsubmit()">
+                    <div class=" mt-3 row ">
+                        <div class="col-4">
+                            <label>Course</label>
+
+                            <mat-form-field class="pe-4" appearance="outline">
+                                <mat-select matNativeControl formControlName="courses" [disabled]="iseditable">
+                                    <mat-option *ngFor="let item of courses"
+                                        [value]="item.coursesId">{{item.coursesName}}
+                                    </mat-option>
+                                </mat-select>
+
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="FormDeatils.controls['courses'].invalid && (FormDeatils.controls['courses'].dirty || FormDeatils.controls['courses'].touched)">
+                                <mat-error [hidden]=" !FormDeatils.get('courses')?.hasError('required')  ">
+                                    Course is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" mt-3 row ">
+                        <div class="col-4">
+                            <label>Course Material Category</label>
+                            <mat-form-field class="pe-4" appearance="outline">
 
 
-     
-        <ng-container matColumnDef="S_No" >
-            <th mat-header-cell *matHeaderCellDef class="col-2 text-center pb-3" > <label  mat-sort-header>S_No</label>
-                <input matInput type="text" (keyup)="updatePagination()" 
-                [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;width: 90%;"  /></th>
-          <!-- <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
-            <label mat-sort-header>
-                S.No
-            </label>
-            <input type="text" (keyup)="updatePagination('courseId')"
-                [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
-        </th> -->
-          <td mat-cell *matCellDef="let element" class="col-2 mx-2 text-center"> {{element.S_No}} </td>
-        </ng-container>
-      
-      
-        <ng-container matColumnDef="title">
-          <th mat-header-cell *matHeaderCellDef class="col-3 text-center pb-3"><label  mat-sort-header>Title</label>
-            <input matInput type="text" (keyup)="updatePagination()" 
-            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;width: 90%;" class="mx-2"  /></th>
-          <td mat-cell *matCellDef="let element" class="col-3 px-2 text-center"> {{element.title}} </td>
-        </ng-container>
-      
-       
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef class="col-3 text-center pb-3">  <label  mat-sort-header>Date</label>
-            <input matInput type="text" (keyup)="updatePagination()" 
-            [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2"   /></th>
-          <td mat-cell *matCellDef="let element" class="col-3 px-2 text-center"> {{element.date}} </td>
-        </ng-container>
-      
-       
-        <ng-container matColumnDef="mtype">
-          <th mat-header-cell *matHeaderCellDef class=" text-center col-2 pb-3">  <label  mat-sort-header> Media type</label>
-            <input matInput type="text" (keyup)="updatePagination()" 
-            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;width: 90%;" class="mx-2"   /></th>
-          <td mat-cell *matCellDef="let element" class="text-center col-2 px-2"> {{element.mtype}} </td>
-        </ng-container>
+                                <mat-select matNativeControl formControlName="catogery" (selectionChange)="newOthers()"
+                                    [disabled]="iseditable" [(ngModel)]="othervalue">
+                                    <mat-option *ngFor="let item of catogeries" [value]="item.materialCategoryId">
+                                        {{item.categoryName}}
+                                    </mat-option>
+                                </mat-select>
 
-      
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="FormDeatils.controls['catogery'].invalid && (FormDeatils.controls['catogery'].dirty || FormDeatils.controls['catogery'].touched)">
+                                <mat-error [hidden]=" !FormDeatils.get('catogery')?.hasError('required')  ">
+                                    Category is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                        <div class="col-4" *ngIf="newcatogeries">
+                            <label>Others Category</label>
+                            <mat-form-field class="pe-4" appearance="outline">
 
-        <ng-container  matColumnDef="Details">
-          <th mat-header-cell *matHeaderCellDef class=" text-center col-2 pb-3"> <label  mat-sort-header> Action</label>
-            <!-- <input matInput type="text" (keyup)="updatePagination()" 
-            [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;"   /></th> -->
-          
-          <td mat-cell *matCellDef="let element" class="text-center col-2 my-4  "> <i class="fa fa-eye " (click)="viewDetails(element.blacklistuserId)" style="color:purple"></i> </td>
-        </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-</div>
-</div>
+                                <input matInput formControlName="others" type="text" />
+
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="FormDeatils.controls['others'].invalid && (FormDeatils.controls['others'].dirty || FormDeatils.controls['others'].touched)">
+                                <mat-error [hidden]=" !FormDeatils.get('others')?.hasError('required')  ">
+                                    Others is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <label>Add Media</label>
+
+                            <mat-form-field class="pe-4" appearance="outline">
 
 
+                                <mat-select matNativeControl formControlName="addMedia" [disabled]="iseditable">
+                                    <mat-option *ngFor="let item of media" [value]="item.mediaId">{{item.mediaType}}
+                                    </mat-option>
+                                </mat-select>
+
+
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="FormDeatils.controls['addMedia'].invalid && (FormDeatils.controls['addMedia'].dirty || FormDeatils.controls['addMedia'].touched)">
+                                <mat-error [hidden]=" !FormDeatils.get('courses')?.hasError('required')  ">
+                                    Media is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class=" pt-3 row ">
+                        <!-- <div class="col-4">
+                        <label>Course Material Title:</label>
+    
+                        <mat-form-field class="pe-4"appearance="outline" >
+                           
+                            <input matInput formControlName="coursetitle"  
+                                type="text" />
+                                <mat-error *ngIf="FormDeatils.controls['coursetitle'].hasError('required')">
+                                    Please select any course
+                                  </mat-error>
+                        
+                        </mat-form-field>
+                    </div> -->
+                    </div>
+                    <div class="pt-3 row">
+                        <div class="col-4">
+                            <label>Course Material Title</label>
+
+                            <mat-form-field class="pe-4" appearance="outline">
+
+                                <input matInput formControlName="coursetitle" type="text" />
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="FormDeatils.controls['coursetitle'].invalid && (FormDeatils.controls['coursetitle'].dirty || FormDeatils.controls['coursetitle'].touched)">
+                                <mat-error [hidden]=" !FormDeatils.get('coursetitle')?.hasError('required')  ">
+                                    Title is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <label>Video Link</label>
+
+                            <mat-form-field class="pe-4" appearance="outline">
+
+                                <input matInput formControlName="videoLink" type="text">
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="FormDeatils.controls['videoLink'].invalid && (FormDeatils.controls['videoLink'].dirty || FormDeatils.controls['videoLink'].touched)">
+                                <mat-error [hidden]=" !FormDeatils.get('courses')?.hasError('required')  ">
+                                    Link is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                        <div class="col-4 ">
+                            <label>Upload</label>
+
+                            <input class="border" type="file" id="formFile" formControlName="upload" required="true"
+                                (change)="onfilechange($event)" />
+                            <mat-error *ngIf="filerror" class="ms-3">File is mandatory</mat-error>
+                            <!-- <mat-error *ngIf="FormDeatils.controls['upload'].hasError('required')">
+                                Please Upload the File
+                              </mat-error> -->
+
+
+                        </div>
+                    </div>
+                    <div class="pt-3 row ">
+
+                        <div class="col">
+                            <label>Message</label>
+
+                            <mat-form-field class="pe-4" appearance="outline">
+
+                                <textarea matInput formControlName="message" rows="5" type="text" ></textarea>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="FormDeatils.controls['message'].invalid && (FormDeatils.controls['message'].dirty || FormDeatils.controls['message'].touched)">
+                                <mat-error [hidden]=" !FormDeatils.get('message')?.hasError('required')  ">
+                                    Message is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="pt-3 d-flex justify-content-end">
+                        
+                            <button class=" btn btn-outline-secondary  btn-rounded d-inline-block " type="submit"
+                                *ngIf="issubmit">{{iseditable ? "Update":"Add"}}</button>
+                       
+                            <button class=" btn btn-outline-secondary  btn-rounded d-inline-block "
+                                (click)="reseteditable()" type="button">Cancel</button>
+                        
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card ">
+        <div class="card-header text-white bg-secondary">
+             Course Materials
+        </div>
+        <div class="bg-transparent px-0 py-0">
+            <table mat-table matSort [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid "
+                aria-label="users">
+
+                <ng-container matColumnDef="S_No">
+                    <th mat-header-cell *matHeaderCellDef class="col-2 text-center pb-3"> <label
+                            mat-sort-header>S.No</label>
+                        <input matInput type="text" (keyup)="updatePagination()"
+                            [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" disabled="true"
+                            style="border-style: solid;border-radius: 5px;width: 90%;" />
+                    </th>
+                    <!-- <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
+        <label mat-sort-header>
+            S.No
+        </label>
+        <input type="text" (keyup)="updatePagination('courseId')"
+            [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
+    </th> -->
+                <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="title">
+                    <th mat-header-cell *matHeaderCellDef class="col-3 text-center pb-3"><label
+                            mat-sort-header>Title</label>
+                        <input matInput type="text" (keyup)="updatePagination()"
+                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData"
+                            style="border-style: solid;border-radius: 5px;width: 90%;" class="mx-2" />
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="col-3 px-2 text-center"> {{element.title}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef class="col-3 text-center pb-3"> <label
+                            mat-sort-header>Date</label>
+                        <input matInput type="text" (keyup)="updatePagination()"
+                            [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData"
+                            style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="col-3 px-2 text-center"> {{element.date}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="mtype">
+                    <th mat-header-cell *matHeaderCellDef class=" text-center col-2 pb-3"> <label mat-sort-header> Media
+                            type</label>
+                        <input matInput type="text" (keyup)="updatePagination()"
+                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData"
+                            style="border-style: solid;border-radius: 5px;width: 90%;" class="mx-2" />
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="text-center col-2 px-2"> {{element.mtype}} </td>
+                </ng-container>
+
+
+
+                <ng-container matColumnDef="Details">
+                    <th mat-header-cell *matHeaderCellDef class=" text-center col-2 pb-3"> <label mat-sort-header>
+                            Action</label>
+                        <input matInput type="text" (keyup)="updatePagination()" disabled="true"
+                            style="border-style: solid;border-radius: 5px;" />
+                    </th>
+
+                    <td mat-cell *matCellDef="let element" class="text-center col-2 my-4  ">
+                        <i class="fa-solid fa-eye fs-5 text-info " (click)="viewDetails(element.S_No)"
+                            matTooltip="View Course Activity" matTooltip="View"></i>
+                        <span matTooltip="Edit" (click)="editdetails(element)">
+                            <i class="fas fa-pencil-alt mx-4 " aria-hidden="true"></i>
+                        </span>
+                        <span matTooltip="Delete" style="cursor: pointer;"
+                            (click)="deletedetails(element.praticeLibaryId)">
+                            <i class="far fa-trash-alt" aria-hidden="true"></i>
+                        </span>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+           
+
+  <mat-paginator class="card-body" [pageSizeOptions]="[10,25, 50, 100,150,200]"
+                (page)="onpaginatechange($event)" aria-label="Select page">
+            </mat-paginator>
+        </div>
+    </div>

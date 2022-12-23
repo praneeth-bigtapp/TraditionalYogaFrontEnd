@@ -6,12 +6,16 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 })
 export class AlertService extends BaseHttp {
 
-  alertgetURL = "webSite/getAll?operation=alert"
+  alertgetURL = "webSite/getAll?operation=alerts"
 
   getrolebyID = "rolePermissions?roleId="
   getroles = "getAll?operation=roles"
 
   alertpostURL = 'webSite/alerts?operation=add'
+
+  updatealertURL = "webSite/alerts?operation=update"
+
+  deletealertURL = "webSite/alerts?operation=delete"
 
   getAllAlerts() {
     return this.get<any>(this.alertgetURL)
@@ -20,9 +24,16 @@ export class AlertService extends BaseHttp {
     return this.get<any>(this.getroles)
   }
 
-
   setalert(body: any) {
     return this.post<any>(this.alertpostURL, body)
+  }
+
+  updatealert(body: any) {
+    return this.post<any>(this.updatealertURL, body)
+  }
+
+  deletealert(body: any) {
+    return this.post<any>(this.deletealertURL, body)
   }
 
 

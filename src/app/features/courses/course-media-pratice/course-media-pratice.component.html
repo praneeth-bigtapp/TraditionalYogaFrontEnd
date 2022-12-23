@@ -1,244 +1,300 @@
 <div class="ConfigurationTypes_textpadding ">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item"><a href="#/addCourse">Course Management</a></li>          
-          <li class="breadcrumb-item active" aria-current="page"> Course Media Pratice sessions</li>
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/addCourse">Course Management</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> Course Media Pratice sessions</li>
         </ol>
-      </nav>
-   
+    </nav>
+
 
     <div class="card mt-5">
-        <div class="card-header text-white bg-secondary" >
+        <div class="card-header text-white bg-secondary">
             Course Media Pratice sessions
-      </div>
-    <div class="card border-light bg-white pt-3 ">
-        <div class="pl-3   d-flex flex-row flex-wrap pb-2 ">
-            <div class="w-25 me-5">
-                <label>Select type: </label>
+        </div>
+        <div class="card border-light bg-white pt-3 ">
+            <div class="  d-flex flex-row flex-wrap pb-2 ">
+                <div class="col-3">
+                    <label>Type </label>
 
-                <mat-form-field appearance="outline">
-                    <mat-select [(ngModel)]="classtype" (ngModelChange)="typechange()">
-                        <mat-option value="live">Live</mat-option>
-                        <mat-option value="recording">Recording</mat-option>
-                    </mat-select>
-                    <span class="text-danger" *ngIf="categoryerror">
-                        Please Select Category
+                    <mat-form-field appearance="outline">
+                        <mat-select [(ngModel)]="classtype" (ngModelChange)="typechange()">
+                            <mat-option value="live">Live</mat-option>
+                            <mat-option value="recording">Recording</mat-option>
+                        </mat-select>
+
+                    </mat-form-field>
+                    <span class="error-message" *ngIf="categoryerror">
+                        Category is mandatory
                     </span>
-                </mat-form-field>
-            </div>
-            <div>
+                </div>
+                <!-- <div>
                 <button type="button" (click)="gobutton()"
                     class="btn btn-outline-secondary mt-4 btn-rounded d-inline-block m-2">
                     Submit
                 </button>
 
+            </div> -->
+
             </div>
 
-        </div>
-    </div>
 
-        <div class="card-body" *ngIf="displaycontent">
+            <div *ngIf="displaycontent">
 
 
-            <form [formGroup]="addmediaform" class="me-5" (ngSubmit)="addmedia()">
+                <form [formGroup]="addmediaform" (ngSubmit)="addmedia()">
+                    <div class="card-body mt-2">
+                        <hr>
+                        <h3 class="ml-3 mb-1">Add Media</h3>
+                        <div class="card-body border-light bg-white pt-3 pb-4">
+                            <div class=" row pb-4">
+                                <div class="col-4 pl-3">
+                                    <label>Video Link</label>
+                                    <mat-form-field appearance="outline">
+                                        <input matInput autocomplete="off" class="" formControlName="videolink"
+                                            required>
+                                    </mat-form-field>
+                                    <div class="error-message"
+                                        *ngIf="addmediaform.controls['videolink'].invalid && (addmediaform.controls['videolink'].dirty || addmediaform.controls['videolink'].touched)">
+                                        <mat-error [hidden]=" !addmediaform.get('videolink')?.hasError('required')  ">
+                                            Link is mandatory
+                                        </mat-error>
+                                        <mat-error [hidden]=" !addmediaform.get('videolink')?.hasError('pattern')  ">
+                                            Invalid link
+                                        </mat-error>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label>Title</label>
 
-                <h4 class="ml-5">Add Media</h4>
+                                    <mat-form-field appearance="outline">
+                                        <input matInput autocomplete="off" class="" formControlName="videotitle"
+                                            required>
+                                    </mat-form-field>
+                                    <div class="error-message"
+                                        *ngIf="addmediaform.controls['videotitle'].invalid && (addmediaform.controls['videotitle'].dirty || addmediaform.controls['videotitle'].touched)">
+                                        <mat-error [hidden]=" !addmediaform.get('videotitle')?.hasError('required')  ">
+                                            Title is mandatory
+                                        </mat-error>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label>Duration of Video</label>
 
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Video Link : </h6>
+                                    <mat-form-field appearance="outline">
+                                        <input matInput autocomplete="off" class="" formControlName="videoduration"
+                                            required>
+                                    </mat-form-field>
+                                    <div class="error-message"
+                                        *ngIf="addmediaform.controls['videoduration'].invalid && (addmediaform.controls['videoduration'].dirty || addmediaform.controls['videoduration'].touched)">
+                                        <mat-error
+                                            [hidden]=" !addmediaform.get('videoduration')?.hasError('required')  ">
+                                            Duration is mandatory
+                                        </mat-error>
+                                        <mat-error
+                                            [hidden]=" !addmediaform.get('videoduration')?.hasError('pattern')  ">
+                                            Invalid duration
+                                        </mat-error>
+                                    </div>
+                                </div>
 
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Video Link</mat-label>
-                            <input matInput autocomplete="off" class="" formControlName="videolink" required>
-                            <mat-error [hidden]="!addmediaform.get('videolink')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <br />
+                            </div>
+                            <div class="row">
 
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Title : </h6>
 
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Title</mat-label>
-                            <input matInput autocomplete="off" class="" formControlName="videotitle" required>
-                            <mat-error [hidden]="!addmediaform.get('videotitle')?.hasError('required')">
-                                Please Add Link
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <br />
+                                <div class="col-4">
+                                    <label>Meta keywords</label>
 
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Description : </h6>
+                                    <mat-form-field appearance="outline">
+                                        <input matInput autocomplete="off" class="" formControlName="vidoemetakeywords"
+                                            required>
+                                    </mat-form-field>
+                                    <div class="error-message"
+                                        *ngIf="addmediaform.controls['vidoemetakeywords'].invalid && (addmediaform.controls['vidoemetakeywords'].dirty || addmediaform.controls['vidoemetakeywords'].touched)">
+                                        <mat-error
+                                            [hidden]=" !addmediaform.get('vidoemetakeywords')?.hasError('required')  ">
+                                            keywords is mandatory
+                                        </mat-error>
+                                        <mat-error
+                                            [hidden]=" !addmediaform.get('vidoemetakeywords')?.hasError('pattern')  ">
+                                            Invalid keywords
+                                        </mat-error>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <label>Description</label>
 
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Description</mat-label>
-                            <textarea matInput autocomplete="off" class="" rows="5" formControlName="videodescription"
-                                required></textarea>
-                            <mat-error [hidden]="!addmediaform.get('videodescription')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <br />
+                                    <mat-form-field appearance="outline">
+                                        <textarea rows="5" matInput autocomplete="off" class=""
+                                            formControlName="videodescription" required></textarea>
 
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Duration of Video : </h6>
+                                    </mat-form-field>
+                                    <div class="error-message"
+                                        *ngIf="addmediaform.controls['videodescription'].invalid && (addmediaform.controls['videodescription'].dirty || addmediaform.controls['videodescription'].touched)">
+                                        <mat-error
+                                            [hidden]=" !addmediaform.get('videodescription')?.hasError('required')  ">
+                                            Description is mandatory
+                                        </mat-error>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Duration of Video</mat-label>
-                            <input matInput autocomplete="off" class="" formControlName="videoduration" required>
-                            <mat-error [hidden]="!addmediaform.get('videoduration')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <br />
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Meta keywords : </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Meta keywords</mat-label>
-                            <input matInput autocomplete="off" class="" formControlName="vidoemetakeywords" required>
-                            <mat-error [hidden]="!addmediaform.get('vidoemetakeywords')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <br />
-                <h4 class="ml-5">Text with images</h4>
-                <br />
-
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Title : </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Video Link</mat-label>
-                            <input matInput autocomplete="off" class="" formControlName="imagetitle" required>
-                            <mat-error [hidden]="!addmediaform.get('imagetitle')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <br />
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Paragraph : </h6>
-
-                    <div class="col">
-                        <div class="w-100 ">
-                            <angular-editor formControlName="paragraph" [placeholder]="'Enter text here...'"
-                                [config]="editorConfig" required [(ngModel)]="description"
-                                (keypress)="paragraphchange()">
-                            </angular-editor>
-                            <mat-error *ngIf="paragrapherror ">
-                                Please Type Words
-                            </mat-error>
                         </div>
                     </div>
-                </div>
-                <br />
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Meta keywords : </h6>
 
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Video Link</mat-label>
-                            <input matInput autocomplete="off" class="" formControlName="imagekeywords" required>
-                            <mat-error [hidden]="!addmediaform.get('imagekeywords')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
+                    <div class="card-body mt-2">
+                        <hr>
+                        <h3 class="ml-3 mb-1">Text with images</h3>
+
+                        <div class="card-body border-light bg-white pt-3 pb-4">
+                            <div class=" row pb-4">
+                                <div class="col-4 pl-3">
+                                    <label>Video Link</label>
+                                    <mat-form-field appearance="outline">
+                                        <input matInput autocomplete="off" class="" formControlName="imagetitle"
+                                            required>
+
+                                    </mat-form-field>
+                                    <div class="error-message"
+                                        *ngIf="addmediaform.controls['imagetitle'].invalid && (addmediaform.controls['imagetitle'].dirty || addmediaform.controls['imagetitle'].touched)">
+                                        <mat-error [hidden]=" !addmediaform.get('imagetitle')?.hasError('required')  ">
+                                            Link is mandatory
+                                        </mat-error>
+                                        <mat-error [hidden]=" !addmediaform.get('imagetitle')?.hasError('pattern')  ">
+                                            Invalid link
+                                        </mat-error>
+                                    </div>
+                                </div>
+
+                                <div class="col-4">
+                                    <label>Meta keywords</label>
+
+                                    <mat-form-field appearance="outline">
+                                        <input matInput autocomplete="off" class="" formControlName="imagekeywords"
+                                            required>
+
+                                    </mat-form-field>
+                                    <div class="error-message"
+                                        *ngIf="addmediaform.controls['imagekeywords'].invalid && (addmediaform.controls['imagekeywords'].dirty || addmediaform.controls['imagekeywords'].touched)">
+                                        <mat-error
+                                            [hidden]=" !addmediaform.get('imagekeywords')?.hasError('required')  ">
+                                            Keywords is mandatory
+                                        </mat-error>
+                                        <mat-error
+                                            [hidden]=" !addmediaform.get('imagekeywords')?.hasError('pattern')  ">
+                                            Invalid keywords
+                                        </mat-error>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label>Upload:</label>
+                                    <input type="file" id="file" class="border" formControlName="mediafile"
+                                        accept=" */*" (change)="onfilechange($event)" required="true" />
+
+                                    <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label>Paragraph:</label>
+                                    <mat-form-field appearance="outline">
+                                        <textarea rows="5" matInput autocomplete="off" class=""
+                                            formControlName="paragraph" equired></textarea>
+
+                                    </mat-form-field>
+                                    <div class="error-message"
+                                        *ngIf="addmediaform.controls['paragraph'].invalid && (addmediaform.controls['paragraph'].dirty || addmediaform.controls['paragraph'].touched)">
+                                        <mat-error [hidden]=" !addmediaform.get('paragraph')?.hasError('required')  ">
+                                            Paragraph is mandatory
+                                        </mat-error>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
                     </div>
-                </div>
-                <br />
 
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Upload Media file : </h6>
 
-                    <div class="col">
-                        <input type="file" id="file" class="border" formControlName="mediafile" accept=" */*"
-                            (change)="onfilechange($event)" required="true" />
-                        <br />
-                        <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
+                    <div class="card-body mt-2">
+                        <hr>
+                        <h3 class="ml-3 mb-1">Media</h3>
 
+                        <div class="card-body border-light bg-white pt-3 pb-4">
+                            <div class=" row pb-4">
+                                <div class="col-4">
+
+                                    <label>Title</label>
+                                    <mat-form-field appearance="outline">
+
+                                        <input matInput autocomplete="off" class="" formControlName="mediatitle"
+                                            required>
+                                    </mat-form-field>
+                                    <div class="error-message"
+                                        *ngIf="addmediaform.controls['mediatitle'].invalid && (addmediaform.controls['mediatitle'].dirty || addmediaform.controls['mediatitle'].touched)">
+                                        <mat-error [hidden]=" !addmediaform.get('mediatitle')?.hasError('required')  ">
+                                            Title is mandatory
+                                        </mat-error>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label>Meta keywords</label>
+
+                                    <mat-form-field appearance="outline">
+                                        <input matInput autocomplete="off" class="" formControlName="mediametakeywords"
+                                            rquired>
+
+                                    </mat-form-field>
+                                    <div class="error-message"
+                                        *ngIf="addmediaform.controls['mediametakeywords'].invalid && (addmediaform.controls['mediametakeywords'].dirty || addmediaform.controls['mediametakeywords'].touched)">
+                                        <mat-error
+                                            [hidden]=" !addmediaform.get('mediametakeywords')?.hasError('required')  ">
+                                            Keywords is mandatory
+                                        </mat-error>
+                                    </div>
+                                    <mat-error
+                                        [hidden]=" !addmediaform.get('mediametakeywords')?.hasError('pattern')  ">
+                                        Keywords is mandatory
+                                    </mat-error>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label>Description</label>
+
+                                    <mat-form-field appearance="outline">
+                                        <textarea rows="5" matInput autocomplete="off" class=""
+                                            formControlName="mediadescription" required></textarea>
+                                    </mat-form-field>
+                                    <div class="error-message"
+                                        *ngIf="addmediaform.controls['mediadescription'].invalid && (addmediaform.controls['mediadescription'].dirty || addmediaform.controls['mediadescription'].touched)">
+                                        <mat-error
+                                            [hidden]=" !addmediaform.get('mediadescription')?.hasError('required')  ">
+                                            Description is mandatory
+                                        </mat-error>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row  d-flex justify-content-end">
+                                <button type="submit" class="col-2 btn btn-outline-secondary btn-rounded  m-2">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <br />
-
-                <h4 class="ml-5">Media</h4>
-
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Title : </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Title</mat-label>
-                            <input matInput autocomplete="off" class="" formControlName="mediatitle" required>
-                            <mat-error [hidden]="!addmediaform.get('mediatitle')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <br />
-
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Description </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Video Link</mat-label>
-                            <textarea rows="5" matInput autocomplete="off" class="" formControlName="mediadescription"
-                                equired></textarea>
-                            <mat-error [hidden]="!addmediaform.get('mediadescription')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <br />
-
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Meta keywords : </h6>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="ms-3 ">
-                            <mat-label>Meta keywords</mat-label>
-                            <input matInput autocomplete="off" class="" formControlName="mediametakeywords" rquired>
-                            <mat-error [hidden]="!addmediaform.get('mediametakeywords')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <br />
-                
+                </form>
 
 
-                <button type="submit" class=" float-md-right btn btn-outline-secondary btn-rounded d-inline-block m-2">
-                    Submit
-                </button>
-            </form>
+            </div>
         </div>
-
     </div>
 
-   
+
 
     <table mat-table [dataSource]="this.filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
         aria-label="users">
@@ -248,9 +304,9 @@
                     S.No
                 </label>
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value"
-                    [filter]="filterData" />
+                    [filter]="filterData" disabled="true" />
             </th>
-            <td mat-cell *matCellDef="let element" class="text-center"> {{element.id}} </td>
+            <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
         </ng-container>
 
         <ng-container matColumnDef="title">
@@ -313,14 +369,20 @@
         <ng-container matColumnDef="buttons">
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
-                    View/Manage
+                    Actions
                 </label>
+                <input type="text" (keyup)="updatePagination()" disabled="true" />
             </th>
             <td mat-cell *matCellDef="let element " class="text-center">
-              
-                <i class="fa-solid fa-eye fs-5 text-info"(click)="viewmanage(element)" 
-          matTooltip="View Course Activity" matTooltip="View"></i>
 
+                <i class="fa-solid fa-eye fs-5 text-info" (click)="viewDetails(element)"
+                    matTooltip="View Course Activity" matTooltip="View"></i>
+                <span matTooltip="Edit" (click)="editdetails(element)">
+                    <i class="fas fa-pencil-alt mx-4" aria-hidden="true"></i>
+                </span>
+                <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.praticeLibaryId)">
+                    <i class="far fa-trash-alt" aria-hidden="true"></i>
+                </span>
 
             </td>
         </ng-container>
@@ -329,7 +391,8 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator class="" [pageSizeOptions]="[5,10,25, 50,75, 100]" aria-label="Select page">
+    <mat-paginator class="card-body" [pageSizeOptions]="[10,25, 50, 100,150,200]" (page)="onpaginatechange($event)"
+        aria-label="Select page">
     </mat-paginator>
 
 

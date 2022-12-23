@@ -20,8 +20,7 @@ export class ListOfPracticeLibrarysComponent implements OnInit {
   displayedColumns: string[] = ['praticeLibaryId', 'videoLink', "duration", "title", "message", "metaKeyword"];
   data: any;
   constructor(
-    private service: ListpraticelibraryService
-  ) {
+    private service: ListpraticelibraryService) {
     this.dataSource = new MatTableDataSource<any>(this.data)
     this.filterData = {
       filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),

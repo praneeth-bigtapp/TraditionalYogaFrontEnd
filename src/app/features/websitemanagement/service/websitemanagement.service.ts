@@ -16,6 +16,9 @@ export class WebsitemanagementService extends BaseHttp {
 
   updatepearlofwisdomURL = "webSite/wisdom?operation=update"
 
+  activepearlofwisdomURL = "webSite/wisdom?operation=active"
+  deactivepearlofwisdomURL = "webSite/wisdom?operation=deactive"
+
 
   getpearlofwisdom() {
     return this.get(this.getpearlofwisdomURL)
@@ -32,5 +35,13 @@ export class WebsitemanagementService extends BaseHttp {
   updatepearlofwisdom(body: any) {
     return this.post(this.updatepearlofwisdomURL, body)
   }
+
+  activepearlofwisdom(body: any) {
+    return this.post(this.activepearlofwisdomURL, body)
+  }
+  deactivepearlofwisdom(body: any) {
+    return this.post(this.deactivepearlofwisdomURL, body)
+  }
+
 
 }

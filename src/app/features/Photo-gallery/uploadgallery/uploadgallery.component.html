@@ -1,61 +1,86 @@
 <div class="ConfigurationTypes_textpadding ">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/addpages">Website Management</a></li>
+            <li class="breadcrumb-item"><a href="#/gallery">Photo Album</a></li>
+
+            <li class="breadcrumb-item active" aria-current="page">Upload image to album</li>
+        </ol>
+    </nav>
+
     <div class="mb-4 pl-2 text-secondary d-flex flex-row flex-wrap justify-content-between align-items-center">
-        <h3 class=" "> Upload Images to gallery</h3>
         <br />
         <div class="d-flex flex-row flex-wrap">
-            <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block border border-dark "
+            <!-- <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block border border-dark "
                 (click)="creategallery()">
-                <!-- <i class="fa-solid fa-camera"></i> -->
-                Create Gallery
+                Create Album
             </button>
-            <br /><br />
+            <br /><br /> -->
             <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block border border-dark "
                 (click)="manageGallery()">
-                <!-- <i class="fa-solid fa-photo-film"></i> -->
-                Mange gallery
+                Mange Albums
             </button>
         </div>
     </div>
-    <div class="p-2">
-        <h6>Wholesome Quarantine Series</h6>
-        <p>Gallery Name</p>
-        <app-upload-file [inputSubModuleId]="inputSubModuleId"></app-upload-file>
-        <br />
-        <br /><br /><br />
+    <div class="card  bg-secondary">
+        <div class="card-header text-white bg-secondary">
+            Add Photo to Album
+        </div>
+        <div class="card-body text-center bg-white px-0 py-0">
 
-        <div class="row mt-2 w-100 ">
-
-            <div class="col-md-4 border border d-flex flex-column  bg-white py-2  mr-md-0 "
-                *ngFor="let file of uploadfile">
-
-                <div class="p-2 w-50 mx-auto" style="position: relative; height: 75%; ">
-                    <img mat-card-image class="mx-auto  w-100" [src]="file.path" [alt]="file.name">
-
-                    <span class="bg-dark w-100 text-center opacity-25"
-                        style="cursor: pointer;position: absolute; left: 0; bottom: 0; z-index: 2; "
-                        (click)="removeimage(file.name)">
-                        <mat-icon class="text-white opacity-100 ">delete_sweep</mat-icon>
-                    </span>
+            <div id="upload py-0">
+                <div class="drag-riles border-none " appDnd (fileDropped)="onFileChange($event)">
+                    <!-- <input type="file" #fileDropRef id="fileDropRef" (click)="$event.target.value=null" -->
+                    <input type="file" #fileDropRef id="fileDropRef" (change)="onFileChange($event)" accept="images/*"
+                        multiple />
+                    <img src="assets/images/UploadImg.jpeg" alt="Upload Image" width="80" height="64">
+                    <h3>Drag and drop image here</h3>
+                    <h3>or</h3>
+                    <label for="fileDropRef" class="btn btn-outline-secondary btn-rounded">Browse image</label>
+                    <p class="ConfigurationTypes_noteInfo">Note: Only image files allowed.</p>
                 </div>
-                <br />
-                <mat-card-content>
-                    <textarea class="border w-100 p-2" (change)="detectchange()" [(ngModel)]="file.description" rows="3"
-                        placeholder="Description"></textarea>
-                </mat-card-content>
-                <mat-card-actions>
-                </mat-card-actions>
-                <br />
+
             </div>
-
         </div>
-
-        <br />
-        <div class="w-100  d-flex flex-row justify-content-center flex-wrap">
-            <button type="button" (click)="uploadimage()"
-                class="  btn btn-outline-secondary btn-rounded d-inline-block m-2">
-                Upload images
-            </button>
-        </div>
-
     </div>
+
+    <div class="card  bg-secondary" [hidden]="!filelist.length">
+        <div class="card-header text-white bg-secondary">
+            Manage Album
+        </div>
+        <div class="card-body bg-white  py-2">
+            <div class="row">
+                <div class="col-md-4  d-flex flex-column  bg-white py-2  mr-md-0 " *ngFor="let file of filelist">
+
+                    <div class="p-2 w-75 mx-auto" style="position: relative; height: 100%; ">
+                        <img mat-card-image class="mx-auto  w-100"  [src]="file?.path" [alt]="file.name">
+
+                        <span class="bg-dark w-100 text-center opacity-25"
+                            style="cursor: pointer;position: absolute; left: 0; bottom: 0; z-index: 2; "
+                            (click)="removeimage(file.name)">
+                            <mat-icon class="text-white opacity-100 ">delete_sweep</mat-icon>
+                        </span>
+                    </div>
+                    <br />
+                    <mat-card-content>
+                        <textarea class="border w-100 p-2" (change)="detectchange()" [(ngModel)]="file.description"
+                            rows="3" placeholder="Description"></textarea>
+                    </mat-card-content>
+                    <mat-card-actions>
+                    </mat-card-actions>
+                    <br />
+                </div>
+            </div>
+            <br />
+            <div class="w-100  d-flex flex-row justify-content-center flex-wrap">
+                <button type="button" (click)="uploadimage()"
+                    class="  btn btn-outline-secondary btn-rounded d-inline-block m-2">
+                    Upload
+                </button>
+            </div>
+        </div>
+    </div>
+
 </div>

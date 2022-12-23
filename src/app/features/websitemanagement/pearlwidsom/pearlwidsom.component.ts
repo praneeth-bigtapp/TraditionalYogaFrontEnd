@@ -6,6 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { WebsitemanagementService } from '../service/websitemanagement.service';
 import { formatDate } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 
 @Component({
   selector: 'app-pearlwidsom',
@@ -17,12 +19,13 @@ export class PearlwidsomComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
 
-
+  pageno: number = 1
   wisdomform!: FormGroup
 
   isedit: boolean = false
 
   displaycontent: boolean = false
+  issubmit: boolean = true
 
   filterData: any;
   gridData = [];
@@ -35,6 +38,7 @@ export class PearlwidsomComponent implements OnInit {
     private service: WebsitemanagementService,
     private formbuilder: FormBuilder,
     private _snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {
 
     this.filterData = {
@@ -83,8 +87,19 @@ export class PearlwidsomComponent implements OnInit {
     })
   }
 
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
+
   openSnackBar(data: any) {
-    this._snackBar.open(data.message, 'Close');
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
   }
 
   updatePagination(col: any) {
@@ -92,14 +107,22 @@ export class PearlwidsomComponent implements OnInit {
   }
 
   viewdetails(element: any) {
-    console.log(element);
+    this.issubmit = false
+    this.displaycontent = true
+    this.wisdomform.setValue({
+      quoteId: element.quoteId,
+      quotetitle: element.quoteTitle,
+      quote: element.quote,
+      quotedate: formatDate(element.quoteDate, "yyyy-MM-dd", 'en'),
+      quotetype: element.quoteType,
+    });
   }
   editdetails(element: any) {
     this.isedit = true
     this.displaycontent = true
+    this.issubmit = true
 
-    console.log(element);
-    
+
     this.wisdomform.setValue({
       quoteId: element.quoteId,
       quotetitle: element.quoteTitle,
@@ -109,20 +132,36 @@ export class PearlwidsomComponent implements OnInit {
     });
   }
   deletedetails(id: any) {
-    console.log(id);
     const body = {
       "quoteId": id
     }
 
-    this.service.deletepearlofwisdom(body).subscribe({
-      next: (response) => {
-        this.openSnackBar(response)
-        this.getListofwisdom()
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this quote ?"
       },
-      error: (error) => {
-        console.error(error.message);
-      }
+      width: "30%"
     })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.service.deletepearlofwisdom(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.getListofwisdom()
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
+
+    })
+
+
+
   }
 
   IsActiveorNot(id: any) {
@@ -136,11 +175,39 @@ export class PearlwidsomComponent implements OnInit {
 
   ChangeActive(id: any) {
 
+    const body = {
+      "quoteId": id
+    }
+
     const yes = ["Yes", "Y", "yes", "y"]
     const no = ["No", "N", "no", "n"]
     this.data.map((element: any) => {
       if (element.quoteId === id)
-        element.isActive = yes.includes(element.isActive) ? "N" : "Y"
+        if (yes.includes(element.isActive)) {
+          this.service.deactivepearlofwisdom(body).subscribe({
+            next: (response) => {
+              this.openSnackBar(response)
+              this.getListofwisdom()
+            },
+            error: (error) => {
+              console.error(error.message);
+
+            }
+          })
+        }
+        else {
+          this.service.activepearlofwisdom(body).subscribe({
+            next: (response) => {
+              this.openSnackBar(response)
+              this.getListofwisdom()
+            },
+            error: (error) => {
+              console.error(error.message);
+
+            }
+          })
+        }
+
     })
   }
 
@@ -161,8 +228,6 @@ export class PearlwidsomComponent implements OnInit {
 
     const { quoteId, quotetitle, quote, quotedate, quotetype } = this.wisdomform.value
 
-    console.log({ quoteId, quotetitle, quote, quotedate, quotetype });
-
     const body = {
       "quoteTitle": quotetitle,
       "quote": quote,
@@ -173,8 +238,6 @@ export class PearlwidsomComponent implements OnInit {
 
 
     if (this.isedit) {
-      console.log("editing");
-
       const body = {
         "quoteId": quoteId,
         "quoteTitle": quotetitle,
@@ -183,7 +246,6 @@ export class PearlwidsomComponent implements OnInit {
         "quoteType": quotetype
       }
 
-      console.log(body);
       this.service.updatepearlofwisdom(body).subscribe({
         next: (response) => {
           this.openSnackBar(response)

@@ -5,9 +5,10 @@ import { AddCourseService } from './../add-course.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { CoursesService } from '../../courses/courses.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { formatDate } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 
 
 @Component({
@@ -18,8 +19,11 @@ import { formatDate } from '@angular/common';
 export class AddCourseComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
-  filterData: any;
   gridData = [];
+  filterData: any;
+
+  pageno: number = 1
+
   dataSource: any;
   displayedColumns: string[] = ['coursesId', 'category', 'coursesName', "courseDuration", "startDate", "endDate", "currentStatus", "Action"];
   data: any;
@@ -30,6 +34,7 @@ export class AddCourseComponent implements OnInit {
   addCourseForm!: FormGroup
   paragrapherror: boolean = false
   categoryList!: any
+  issubmit: boolean = true
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -71,10 +76,8 @@ export class AddCourseComponent implements OnInit {
       ['fontSize']
     ]
   };
-  openSnackBar(data: any) {
-    this._snackBar.open(data.message, 'Close');
-  }
-  constructor(private AddCourseService: AddCourseService, private formbuilder: FormBuilder, private _snackBar: MatSnackBar) {
+
+  constructor(private AddCourseService: AddCourseService, private formbuilder: FormBuilder, private _snackBar: MatSnackBar, private dialog: MatDialog) {
     this.addCourseForm = this.formbuilder.group({
       courseId: [null],
       courseName: [null, Validators.compose([Validators.required])],
@@ -102,6 +105,7 @@ export class AddCourseComponent implements OnInit {
         console.warn(error.message);
       }
     })
+
   }
   addcourse() {
     this.displaycontent = !this.displaycontent
@@ -113,11 +117,14 @@ export class AddCourseComponent implements OnInit {
   ngOnInit(): void {
     this.getdata()
   }
+
+
   getdata() {
     this.AddCourseService.getCourse().subscribe({
       next: (response) => {
         this.data = response
         this.data = this.data.reverse()
+
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
@@ -142,23 +149,70 @@ export class AddCourseComponent implements OnInit {
 
   viewdetails(element: any) {
 
+
+
+    this.addCourseForm.setValue({
+      courseId: element.coursesId,
+      courseName: element.coursesName,
+      coursecategory: element.categorieId.categoriesId,
+      applicationclosuredate: formatDate(element.applicationClouserDate, "yyyy-MM-dd", 'en'),
+      startDate: formatDate(element.startDate, "yyyy-MM-dd", 'en'),
+      endDate: formatDate(element.endDate, "yyyy-MM-dd", 'en'),
+      description: element.description,
+    });
+    this.issubmit = false
+    this.displaycontent = true
+
   }
+
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
+  }
+
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+
+    return
+  }
+
   deletedetails(id: any) {
 
     const body = {
-      "coursesId": id,
+      "coursesId": id
     }
 
-    this.AddCourseService.deletecourse(body).subscribe({
-      next: (response) => {
-        this.openSnackBar(response)
-        this.addCourseForm.reset()
-        this.getdata()
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this Course ?"
       },
-      error: (error) => {
-        console.error(error.message);
-      }
+      width: "30%"
     })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.AddCourseService.deletecourse(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.addCourseForm.reset()
+            this.getdata()
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
+
+    })
+
+
 
   }
   editdetails(element: any) {
@@ -173,14 +227,20 @@ export class AddCourseComponent implements OnInit {
     });
     this.iseditable = true
     this.displaycontent = true
+    this.issubmit = true
   }
 
   reseteditable() {
     this.addCourseForm.reset()
     this.iseditable = false
     this.displaycontent = !this.displaycontent
+    this.issubmit = true
   }
 
+  getnoofdays(startdate: any, enddate: any) {
+    const Difference_In_Time = new Date(enddate).getTime() - new Date(startdate).getTime();
+    return Difference_In_Time / (1000 * 3600 * 24);
+  }
   onAddCourse() {
     this.paragraphchange()
     if (this.addCourseForm.invalid)
@@ -201,19 +261,22 @@ export class AddCourseComponent implements OnInit {
 
 
     if (this.iseditable) {
-      // edit
+
+
       const body = {
-        // "coursesId": this.addCourseForm.value.courseId,
+        "applicationClouserDate": this.addCourseForm.value.applicationclosuredate,
         "categorieId": {
-          "categoriesId": this.addCourseForm.value.coursecategory.categoriesId,
-          "categoriesName": this.addCourseForm.value.coursecategory.categoriesName,
+          "categoriesId": this.addCourseForm.value.coursecategory,
+          "categoriesName": this.categoryList.filter((ele: any) => ele.categoriesId === this.addCourseForm.value.coursecategory)[0].categoriesName
         },
+        "coursesId": this.addCourseForm.value.courseId,
         "coursesName": this.addCourseForm.value.courseName,
         "description": this.addCourseForm.value.description,
-        "startDate": this.addCourseForm.value.startDate,
         "endDate": this.addCourseForm.value.endDate,
-        "applicationClouserDate": this.addCourseForm.value.applicationclosuredate
+        "startDate": this.addCourseForm.value.startDate
       }
+
+      console.log(body);
 
       this.AddCourseService.updatecourse(body).subscribe({
         next: (response) => {

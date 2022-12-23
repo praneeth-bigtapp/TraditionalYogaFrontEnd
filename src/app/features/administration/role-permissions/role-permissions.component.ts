@@ -39,6 +39,8 @@ export class RolePermissionsComponent implements OnInit {
   errorMessage: any;
   Message: any;
   errorType: any;
+  pageno: number = 1
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -74,6 +76,15 @@ export class RolePermissionsComponent implements OnInit {
 
   updatePagination() {
     this.filterData.dataSource.paginator = this.paginator;
+  }
+
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
   }
 
   getRoles() {
@@ -124,7 +135,12 @@ export class RolePermissionsComponent implements OnInit {
   }
 
   onSelectRoleSubmit() {
+
+    if (this.AddRolePermissionForm.invalid)
+      return this.AddRolePermissionForm.markAllAsTouched()
+      
     const data = this.AddRolePermissionForm.value.roleName;
+
     this.rolePermissionsService.getRolePermissionsByRoleId(data).subscribe({
       next: (response) => {
         if (response.length != 0) {
@@ -180,6 +196,8 @@ export class RolePermissionsComponent implements OnInit {
       col.Value = '';
     }
   }
+
+
 
 
   assignDetailsUsingID(rolePermission: any) {

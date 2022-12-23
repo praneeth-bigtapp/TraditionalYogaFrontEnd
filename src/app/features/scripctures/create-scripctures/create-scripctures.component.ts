@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { ScripcturesService } from '../service/scripctures.service';
 
 @Component({
@@ -10,7 +15,15 @@ import { ScripcturesService } from '../service/scripctures.service';
   styleUrls: ['./create-scripctures.component.css']
 })
 export class CreateScripcturesComponent implements OnInit {
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
+  gridData = [];
+  filterData: any;
+  dataSource: any;
+
+  issubmit: boolean = true
+  pageno: number = 1
   category!: string
   addmediaform!: any
   timerror!: boolean
@@ -18,12 +31,33 @@ export class CreateScripcturesComponent implements OnInit {
   filerror2!: boolean
   backcoverdata!: any
   filedata!: any
+  displaycontent: boolean = true
+  iseditable: boolean = false
+  displayedColumns: string[] = ['sno', 'title', 'description', "metakeyword", "Action"];
+
+  data: any = [{
+    "title": "Title",
+    "description": "Description",
+    "metakeyword": "metakeyword"
+  }]
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
     private service: ScripcturesService,
-    private _snackBar: MatSnackBar
-  ) { }
+    private _snackBar: MatSnackBar,
+    private dialog: MatDialog,
+  ) {
+    this.filterData = {
+      filterColumnNames: this.displayedColumns.map((ele: any) => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
+    };
+
+    this.getdata()
+
+  }
 
   ngOnInit(): void {
     this.addmediaform = this.formbuilder.group({
@@ -41,7 +75,28 @@ export class CreateScripcturesComponent implements OnInit {
 
   }
   openSnackBar(data: any) {
-    this._snackBar.open(data.message, 'Close');
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
+  }
+
+  getdata() {
+    this.dataSource = new MatTableDataSource<any>(this.data)
+    this.filterData.gridData = this.data;
+    this.filterData.dataSource = this.dataSource;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.filterData.sort = this.sort;
+    for (let col of this.filterData.filterColumnNames) {
+      col.Value = '';
+    }
+  }
+  add() {
+    this.displaycontent = !this.displaycontent
+  }
+  updatePagination(col: any) {
+    this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort
   }
   onfilechange(formname: string, event: any) {
 
@@ -49,18 +104,12 @@ export class CreateScripcturesComponent implements OnInit {
       this.filerror = this.addmediaform.value.coverimage === null ? true : false
 
       this.backcoverdata = event && event.target.files[0].name
-
       console.log(this.backcoverdata);
-
-
-
     }
     if (formname === 'file') {
       this.filerror2 = this.addmediaform.value.coverfile === null ? true : false
       this.filedata = event && event.target.files[0].name
       console.log(this.filedata);
-
-
     }
 
   }
@@ -68,6 +117,68 @@ export class CreateScripcturesComponent implements OnInit {
     this.timerror = this.addmediaform.value.videoduration === null ? true : false
 
   }
+  reseteditable() {
+    this.addmediaform.reset()
+    this.iseditable = false
+    this.issubmit = true
+    this.displaycontent = !this.displaycontent
+  }
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+
+    return
+  }
+
+  viewdetails(element: any) {
+    this.addmediaform.setValue({
+      coverimage: null,
+      covertitle: element.title,
+      coverdescription: element.description,
+      coverfile: null,
+      coverkeywords: element.metakeyword
+    })
+    this.iseditable = false
+    this.displaycontent = true
+    this.issubmit = false
+  }
+
+  editdetails(element: any) {
+    this.iseditable = true
+    this.displaycontent = true
+    this.issubmit = true
+
+
+    this.addmediaform.setValue({
+      coverimage: null,
+      covertitle: element.title,
+      coverdescription: element.description,
+      coverfile: null,
+      coverkeywords: element.metakeyword
+    })
+  }
+
+  deletedetails(id: any) {
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this scripctures ?"
+      },
+      width: "25%"
+    })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        //delete API 
+        return
+      }
+
+    })
+  }
+
   addmedia() {
 
     this.filerror = this.addmediaform.value.coverimage === null ? true : false
@@ -101,8 +212,6 @@ export class CreateScripcturesComponent implements OnInit {
 
     }
     else {
-      console.log("invalid");
-
       this.addmediaform.markAllAsTouched()
     }
 

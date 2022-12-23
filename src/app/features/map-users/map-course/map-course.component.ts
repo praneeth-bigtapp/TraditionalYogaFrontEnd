@@ -19,22 +19,26 @@ export class MapCourseComponent implements OnInit {
   ]
   displayedColumns: string[] = ['sno', 'image', 'name',"emailId","country","Gender","usersince","status", "view", "select"];
   dataSource :any;
+  iseditable: boolean = false
   disableSelect = new FormControl(false);
-  nameerror = new FormControl('', [Validators.required ]);
-  mailerror = new FormControl('', [Validators.required ]);
-  selectMob = new FormControl('', [Validators.required ]);
-  selectRegion = new FormControl('', [Validators.required ]);
-  country = new FormControl('', [Validators.required ]);
-  status = new FormControl('', [Validators.required ]);
-  agefrom = new FormControl('', [Validators.required ]);
-  ageto = new FormControl('', [Validators.required ]);
+  // nameerror = new FormControl('', [Validators.required ]);
+  // mailerror = new FormControl('', [Validators.required ]);
+  // selectMob = new FormControl('', [Validators.required ]);
+  // selectRegion = new FormControl('', [Validators.required ]);
+  // country = new FormControl('', [Validators.required ]);
+  // status = new FormControl('', [Validators.required ]);
+  // agefrom = new FormControl('', [Validators.required ]);
+  // ageto = new FormControl('', [Validators.required ]);
   selection = new SelectionModel<any>(true, []);
- 
+  Mapusers!: FormGroup 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
   sort!: MatSort;
   filterData: any;
+  gridData: any;
+  displaycontent: boolean = false
+  pageno:number=1
  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -42,7 +46,21 @@ export class MapCourseComponent implements OnInit {
   }
   
 
-  constructor() {
+  constructor( private formbuilder:FormBuilder) {
+    this.Mapusers = this.formbuilder.group({
+      courseId: [null],
+      nameerror: [null, Validators.compose([Validators.required])],
+      mailerror: [null, Validators.compose([Validators.required])],
+      country: [null, Validators.compose([Validators.required])],
+      // duration: [null, Validators.compose([Validators.required])],
+      selectMob: [null, Validators.compose([Validators.required])],
+      selectRegion: [null, Validators.compose([Validators.required])],
+      agefrom: [null, Validators.compose([Validators.required])],
+      ageto: [null, Validators.compose([Validators.required])],
+      status: [null, Validators.compose([Validators.required])],
+      course: [null, Validators.compose([Validators.required])],
+      gender: [null, Validators.compose([Validators.required])],
+    });
    
   
    
@@ -52,6 +70,22 @@ export class MapCourseComponent implements OnInit {
     this.dataSource=new MatTableDataSource<any>(this.data)
     // this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.filterData = {
+      filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
+    }
+    this.dataSource = new MatTableDataSource<any>(this.data)
+    this.filterData.gridData = this.data;
+    this.filterData.dataSource = this.dataSource;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.filterData.sort = this.sort;
+    for (let col of this.filterData.filterColumnNames) {
+      col.Value = '';
+    }
    
   
 
@@ -61,6 +95,9 @@ export class MapCourseComponent implements OnInit {
   ngAfterViewInit() {
     this.filterData.dataSource.paginator = this.paginator;
 
+  }
+  mapCourse(){
+    this.displaycontent = !this.displaycontent
   }
   updatePagination() {
 
@@ -77,6 +114,11 @@ export class MapCourseComponent implements OnInit {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach((row: any) => this.selection.select(row));
+  }
+  reseteditable() {
+    // this.addCourseForm.reset()
+    this.iseditable = false
+    this.displaycontent = !this.displaycontent
   }
   
 

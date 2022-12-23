@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
@@ -7,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 import { CoursesService } from '../courses.service';
 
 
@@ -34,6 +36,8 @@ export class CourseMediaPraticeComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
+  pageno: number = 1
+
   title = ''
   keyword = ''
   description = ''
@@ -52,56 +56,22 @@ export class CourseMediaPraticeComponent implements OnInit {
 
   displaycontent: boolean = false
 
-  editorConfig: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: '15rem',
-    minHeight: '0',
-    maxHeight: 'auto',
-    width: 'auto',
-    minWidth: '0',
-    translate: 'yes',
-    enableToolbar: true,
-    showToolbar: true,
-    placeholder: 'Enter text here...',
-    defaultParagraphSeparator: '',
-    defaultFontName: '',
-    defaultFontSize: '',
-    fonts: [
-      { class: 'arial', name: 'Arial' },
-      { class: 'times-new-roman', name: 'Times New Roman' },
-      { class: 'calibri', name: 'Calibri' },
-      { class: 'comic-sans-ms', name: 'Comic Sans MS' }
-    ],
-    customClasses: [
-      {
-        name: 'quote',
-        class: 'quote',
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1',
-      },
-    ],
-    // uploadUrl: 'v1/image',
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
 
-    toolbarHiddenButtons: [
-      ['bold', 'italic'],
-      ['fontSize']
-    ]
-  };
 
   displayedColumns = ['id', 'title', 'description', 'uploadMediaFile', 'duration', 'metaKeyword', 'buttons']
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
     private service: CoursesService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar, private dialog: MatDialog
   ) {
 
 
@@ -147,29 +117,25 @@ export class CourseMediaPraticeComponent implements OnInit {
     this.addmediaform = this.formbuilder.group({
 
 
-      videolink: [null, Validators.compose([Validators.required])],
+      videolink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
       videotitle: [null, Validators.compose([Validators.required])],
       videodescription: [null, Validators.compose([Validators.required])],
-      videoduration: [null, Validators.compose([Validators.required])],
-      vidoemetakeywords: [null, Validators.compose([Validators.required])],
+      videoduration: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.durationvalidation)])],
+      vidoemetakeywords: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])],
       imagetitle: [null, Validators.compose([Validators.required])],
       paragraph: [null, Validators.compose([Validators.required])],
-      imagekeywords: [null, Validators.compose([Validators.required])],
+      imagekeywords: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])],
       mediafile: [null, Validators.compose([Validators.required])],
       mediatitle: [null, Validators.compose([Validators.required])],
       mediadescription: [null, Validators.compose([Validators.required])],
-      mediametakeywords: [null, Validators.compose([Validators.required])],
+      mediametakeywords: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])],
     })
   }
 
-  openSnackBar(data: any) {
 
-    this._snackBar.open(data.message, "Close");
-
-  }
   paragraphchange() {
 
-    this.paragrapherror = this.addmediaform.value.paragraph.length === 0 ? true : false
+    this.paragrapherror = this.addmediaform.value.paragraph === null ? true : false
 
   }
 
@@ -185,6 +151,8 @@ export class CourseMediaPraticeComponent implements OnInit {
       this.categoryerror = true
       return
     }
+
+    this.gobutton()
   }
   gobutton() {
     if (!this.classtype) {
@@ -221,6 +189,9 @@ export class CourseMediaPraticeComponent implements OnInit {
     this.filerror = this.addmediaform.value.mediafile === null ? true : false
 
     this.paragraphchange()
+
+    console.log(this.addmediaform.valid);
+
 
     if (this.addmediaform.valid) {
 
@@ -260,6 +231,53 @@ export class CourseMediaPraticeComponent implements OnInit {
     else {
       this.addmediaform.markAllAsTouched()
     }
+
+  }
+
+  viewDetails(element: any) {
+
+  }
+  editdetails(element: any) {
+
+  }
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
+  }
+
+  deletedetails(id: any) {
+
+    // const body = {
+    //   "coursesId": id
+    // }
+
+    // const dialogref = this.dialog.open(DialogPopupComponent, {
+    //   data: {
+    //     title: "Delete Confirmation",
+    //     message: "Are You Sure You Want To Delete this Course ?"
+    //   },
+    //   width: "30%"
+    // })
+
+    // dialogref.afterClosed().subscribe(data => {
+    //   if (data) {
+    //     this.AddCourseService.deletecourse(body).subscribe({
+    //       next: (response) => {
+    //         this.openSnackBar(response)
+    //         this.addCourseForm.reset()
+    //         this.getdata()
+    //       },
+    //       error: (error) => {
+    //         console.error(error.message);
+    //       }
+    //     })
+    //     return
+    //   }
+
+    // })
+
+
 
   }
 

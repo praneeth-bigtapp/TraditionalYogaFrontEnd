@@ -69,7 +69,9 @@ export class BannerAddComponent implements OnInit {
 
 
   openSnackBar(data: any) {
-    this._snackBar.open(data.message, 'Close');
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
   }
   onfilechange(event: any, formname: string) {
 

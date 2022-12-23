@@ -5,7 +5,7 @@ import { DonationviewdetailsComponent } from './donationviewdetails/donationview
 
 const routes: Routes = [
   { path: 'donationManagement', component: DonationManagementComponent },
-  { path: "viewdonation", component: DonationviewdetailsComponent }
+  { path: "viewdonation/:id", component: DonationviewdetailsComponent }
 ];
 
 @NgModule({

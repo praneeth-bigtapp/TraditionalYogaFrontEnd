@@ -18,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NotificationComponent } from './notification/notification.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     FormsModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTooltipModule,
   ],
   exports: [DialogPopupComponent, FilterDirective, InvalidRecordsComponent, UploadFileComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

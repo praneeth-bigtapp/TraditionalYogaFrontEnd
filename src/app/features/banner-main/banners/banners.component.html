@@ -1,121 +1,241 @@
 <div class="ConfigurationTypes_textpadding">
-    <div class="row">
-        <div class="col-md-10 ">
-            <!-- <h4>Banners</h4> -->
-            <h3 class="mb-4 pl-2 text-secondary">Banners</h3>
+  
 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/addpages">Website Management</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Banners</li>
+        </ol>
+    </nav>
+
+
+    <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
+        <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block" (click)="addcourse()"
+            *ngIf="!displaycontent">
+            Add banner
+        </button>
+    </div>
+
+    <div class="ConfigurationTypes_textpadding p-2 pb-0" *ngIf="displaycontent">
+
+        <div class="card bg-white mt-3">
+
+            <h3 class="mb-3 pl-2 card-header text-white card bg-secondary"> Add Banner </h3>
+            <div class="card-body bg-white pl-3">
+
+                <!-- <div class="pl-3 ">
+                    <h4> Home Page Course Banner </h4>
+                </div> -->
+
+                <!-- <hr /> -->
+
+
+                <form class="" [formGroup]="coursebanner" class="mr-1 w-100" (ngSubmit)=" addbaners()">
+
+
+                    <div class="row ">
+                        <!-- <h6 class="text-md-right col-md-4">Course title : </h6> -->
+
+
+                        <div class="col-md-6">
+                            <label>Course title  </label>
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" class="" formControlName="coursetitle" required>
+                                <mat-error [hidden]="!coursebanner.get('coursetitle')?.hasError('required')">
+                                    Title is mandatory
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Upload Image  </label>
+                           
+                            <input type="file" id="file" class="border" formControlName="coursebannerimage"
+                                accept=" image/*" (change)="onfilechange($event)" required="true" />
+                            <br />
+                            <mat-error *ngIf="coursebanner.controls['coursebannerimage'].hasError('required')">
+                               image is mandatory
+                            </mat-error>
+                        
+                        </div>
+
+                        <!-- <h6 class="text-md-right col-md-4">From date : </h6> -->
+
+
+                        <div class="col-md-6">
+                            <label>From date </label>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <!-- <mat-label>From date</mat-label> -->
+                                <input matInput formControlName="fromdate" placeholder="Ex. Pizza" value="Sushi"
+                                    type="date">
+                                <mat-error [hidden]=" !coursebanner.get('fromdate')?.hasError('required')  ">
+                                    Date is mandatory
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <!--                 
+                        <h6 class="text-md-right col-md-4">To date : </h6> -->
+
+                        <div class="col-md-6">
+                            <label>To date </label>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <!-- <mat-label>From date</mat-label> -->
+                                <input matInput formControlName="todate" placeholder="Ex. Pizza" value="Sushi"
+                                    type="date">
+                                <mat-error [hidden]=" !coursebanner.get('todate')?.hasError('required')  ">
+                                    Date is mandatory
+                                </mat-error>
+                            </mat-form-field>
+                        </div><br>&nbsp;
+
+                        <!-- <h6 class="text-md-right col-md-4">Description : </h6> -->
+
+                        <div class="col-md-12">
+                            <label>Description </label>
+                            <mat-form-field appearance="outline">
+
+                                <textarea matInput class="p-2" formControlName="description" rows="5"
+                                    placeholder="Description"></textarea>
+                                <mat-error [hidden]=" !coursebanner.get('description')?.hasError('required')  ">
+                                    Description is mandatory
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-wrap justify-content-end">
+                        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 "
+                            *ngIf="issubmit">
+                            {{iseditable ? "Update" :"Add" }}
+                        </button>
+                        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 "
+                            (click)="reseteditable()">
+                            cancel
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
         </div>
 
-        <div class="col-md-2 pt-2 justify-content-end ">
-            <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 mt-4"
-                (click)="onAddBanner()">
-             Add banner
-            </button>
+    </div>
+
+    <div class="m-2">
+
+        <div class="card-header text-white bg-secondary">
+            Banners
         </div>
-        <div class="col-md-3 pt-4">
-            <!-- <input type="search" id="search" (keyup)="applyFilter($event)" formControlName="" required="true"
-                placeholder="search" /> -->
-            <!-- <mat-form-field appearance="outline">
-                <mat-label class="text-white "  >Search</mat-label>
-                <input matInput autocomplete="off" (keyup)="applyFilter($event) "  class="text-white" formControlName="" required appearance="outline">
-             
-            </mat-form-field> -->
-        </div>
-    </div><br>
+        <table mat-table [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid w-100 " matSort>
 
-    <table mat-table [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid w-100" matSort>
+            <ng-container matColumnDef="bannerId">
+                <th mat-header-cell class="col-nd-1" *matHeaderCellDef>
+                    <mat-checkbox class="ml-1" accent="secondary" (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"></mat-checkbox><br><br>
+                </th>
+                <td class="colmd-1" *matCellDef="let element">
+                    <mat-checkbox type="checkbox" (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(element) : null"
+                        [checked]="selection.isSelected(element)"></mat-checkbox>
+                </td>
+            </ng-container>
 
-        <ng-container matColumnDef="bannerId">
-            <th mat-header-cell class="col-md-1 pt-5 " *matHeaderCellDef>
-                <mat-checkbox class="ml-1"  accent="secondary" (change)="$event ? masterToggle() : null"
-                [checked]="selection.hasValue() && isAllSelected()"
-                [indeterminate]="selection.hasValue() && !isAllSelected()"></mat-checkbox>
-            </th>
-            <td class="col-md-1" *matCellDef="let element">
-                <mat-checkbox  type="checkbox"(click)="$event.stopPropagation()"
-                (change)="$event ? selection.toggle(element) : null" [checked]="selection.isSelected(element)"></mat-checkbox>
-            </td>
-        </ng-container>
+            <ng-container matColumnDef="bannerName">
+                <th mat-header-cell class="col-md-3" *matHeaderCellDef >
+                    <div class="">
+                        <label mat-sort-header class=""> Banner Name</label>
+                        <input matInput type="text" (keyup)="updatePagination()"
+                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData"
+                             />
+                    </div>
 
-        <ng-container matColumnDef="bannerName">
-            <th mat-header-cell class="col-md-4" *matHeaderCellDef mat-sort-header>
-                <div class="row">
-                    <label class="text-start"> Banner Name</label>
-                    <input matInput type="text" (keyup)="updatePagination()" 
-                    [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData"  style="border-style: solid;border-radius: 5px;width: 70%;"  />
-                </div>
-                
-               
 
-                 </th>
-            <td class="row col-md-6" *matCellDef="let element">
-                <div style="display: flex ;">
-                    <div> {{element.bannerName}} - <span class="text-success"> Published </span></div>
-                </div>
 
-            </td>
-        </ng-container>
+                </th>
+                <td class=" col-md-3" *matCellDef="let element">
+                    <div >
+                        <div> {{element.bannerName}} </div>
+                    </div>
 
-        <ng-container matColumnDef="categoryId">
-            <th mat-header-cell class=" col-md-1 pl-1" *matHeaderCellDef mat-sort-header>
-                <div class="row">
-                    <label class="text-start">Given By</label>
-                    <input matInput type="text" (keyup)="updatePagination()" 
-                    [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="  filterData"  style="border-style: solid;border-radius: 5px;width: 70%;"  />
-                </div>
-                
-            </th>
-            <td mat-cell class="col-md-3 " *matCellDef="let element" style="margin-left: 40px;">
-                {{element.GivenBy || "admin"}}
-            </td>
-        </ng-container>
+                </td>
+            </ng-container>
 
-        <ng-container matColumnDef="date">
-            <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header>
-                <div class="row">
-                    <label class="text-start">Date of add </label>
-                    <input matInput type="text" (keyup)="updatePagination()" 
-                    [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="  filterData"  style="border-style: solid;border-radius: 5px;width: 70%;"  />
-                </div>
-                 </th>
-            <td mat-cell class="col" *matCellDef="let element">
-                Last Modified<br> {{element.Comments || "at Wed 2 2017"}}
-            </td>
-        </ng-container>
-        <ng-container matColumnDef="Action">
-            <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header>Action </th>
-            <td mat-cell class="col" *matCellDef="let element">
-                <div style="display: flex ; ">
-                    <a class="nav-link active text-blue" aria-current="page" href="#">
-                        <span matTooltip="Edit">  <i
-                        class="fas fa-pencil-alt" matTooltip="Info about the action"
-                        aria-label="Button that displays a tooltip when focused or hovered over"></i></span> 
-                    </a>
-                    <a class="nav-link active text-danger " aria-current="page" href="#">
-                      <span  matTooltip="Delete"> <i class="far fa-trash-alt"
-                            aria-label="Button that displays a tooltip when focused or hovered over"></i></span> 
-                    </a>
-                    <a class="nav-link active text-primary" aria-current="page" href="#">
-                        <i class="fa-solid fa-eye  " matTooltip="View"
-                            aria-label="Button that displays a tooltip when focused or hovered over"></i>
-                    </a>
-                    <a class="nav-link active " aria-current="page" href="#">
-                        <i class="fa-sharp fa-solid fa-floppy-disk" matTooltip="Draft"
-                            aria-label="Button that displays a tooltip when focused or hovered over"></i>
-                    </a>
-                </div>
+            <ng-container matColumnDef="categoryId">
+                <th mat-header-cell class=" col-md-2" *matHeaderCellDef >
+                    <div class="">
+                        <label mat-sort-header class="">Given By</label>
+                        <input matInput type="text" (keyup)="updatePagination()"
+                            [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="  filterData"
+                             />
+                    </div>
 
-            </td>
-        </ng-container>
+                </th>
+                <td mat-cell class="col-md-2 " *matCellDef="let element" >
+                    <!-- {{element.GivenBy || "admin"}} -->
+                </td>
+            </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table><br>
+            <ng-container matColumnDef="dateOfAdd">
+                <th mat-header-cell class="col-md-2" *matHeaderCellDef >
+                    <div class="">
+                        <label mat-sort-header class="">Date of add </label>
+                        <input  type="text" (keyup)="updatePagination()"
+                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="  filterData"
+                             />
+                    </div>
+                </th>
+                <td mat-cell class="col-md-2" *matCellDef="let element">
+                    {{element.dateOfAdd}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="Status">
+                <th mat-header-cell class="col-md-2" *matHeaderCellDef >
+                    <div class="">
+                        <label mat-sort-header class="">Status </label>
+                        <input matInput type="text" (keyup)="updatePagination()"
+                            [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="  filterData"
+                             />
+                    </div>
+                </th>
+                <td mat-cell class="col-md-2" *matCellDef="let element">
+                    Published
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="Action">
+                <th mat-header-cell class="col" *matHeaderCellDef >
+                    <div class="row">
+                        <label class="">Action </label>
+                        <input matInput type="text" (keyup)="updatePagination()"
+                            [(ngModel)]="filterData.filterColumnNames[5].Value" disabled [filter]="  filterData"
+                             />
+                    </div>
+                </th>
 
-    <div class="row">
-        <div class="col">
-            <mat-paginator [pageSizeOptions]="[2,10,20]" showFirstLastButtons="" aria-label="Select page">
-            </mat-paginator>
-        </div>
+                <td mat-cell *matCellDef="let element" class="col px-2 ">
+                    <div class="text-center text-muted justify-content-evenly d-flex">
+
+                    
+                    <i class="fa-solid fa-eye fs-5 text-info mr-2"  (click)="viewdetails(element)"
+                    matTooltip="View Course Activity" matTooltip="View"></i>
+                    <span matTooltip="Edit" (click)="editdetails(element)"> <i class="fas fa-pencil-alt" aria-hidden="true"></i> </span>
+                    <span matTooltip="Delete" style="cursor: pointer;" class="mx-2" (click)=" deletedetails(element.bannerId)"> <i  class="far fa-trash-alt"
+                        aria-hidden="true"></i> </span>
+                    <span matTooltip="Draft" style="cursor: pointer;"> <i class="fa-solid fa-file-pen fa-lg"></i> </span>
+                    </div>
+                  </td>
+              
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+     
+            
+                <mat-paginator class="card-body" [pageSizeOptions]="[2,10,20]" showFirstLastButtons="" aria-label="Select page">
+                </mat-paginator>
+           
+      
     </div>
 </div>

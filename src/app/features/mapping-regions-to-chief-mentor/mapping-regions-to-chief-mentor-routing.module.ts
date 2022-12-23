@@ -4,7 +4,7 @@ import { MappingRegionsToChiefMentorComponent } from './mapping-regions-to-chief
 import { RegioncreationComponent } from './regioncreation/regioncreation.component';
 
 const routes: Routes = [
-  { path: 'mappingregionstoCM', component: MappingRegionsToChiefMentorComponent },
+  { path: 'mappingregionstoCheifMentor', component: MappingRegionsToChiefMentorComponent },
   { path: "regioncreation", component: RegioncreationComponent }
 
 ];

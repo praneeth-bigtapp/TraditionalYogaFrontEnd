@@ -1,78 +1,231 @@
 <div class="ConfigurationTypes_textpadding ">
-    <h3 class="mb-4 pl-2 text-secondary ">Online Exams</h3>
-    <div class="bg-white  border p-4">
-        <form class="" [formGroup]="onlineexamform" (ngSubmit)="onlineexamsubmit()">
-            <div class="row">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/addCourse">Course Management</a></li>
 
-                <div class="col">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Select Courses</mat-label>
-                        <mat-select formControlName="course">
-                            <mat-option *ngFor="let type of courselist" [value]="type.coursesId">
-                                {{type.coursesName | titlecase}}</mat-option>
-                        </mat-select>
-                        <mat-error [hidden]="!onlineexamform.get('course')?.hasError('required')">
-                            Please Select Course
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Test type</mat-label>
-                        <mat-select formControlName="testtype">
-                            <mat-option *ngFor="let type of typetestlist" [value]="type.testId">
-                                {{type.testname | titlecase}}</mat-option>
-                        </mat-select>
-                        <mat-error [hidden]="!onlineexamform.get('testtype')?.hasError('required')">
-                            Please Select Type
-                        </mat-error>
-                    </mat-form-field>
-                </div>
+            <li class="breadcrumb-item active" aria-current="page">Online Exam</li>
+        </ol>
+    </nav>
+    <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
 
-                <div class="col">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Test Name</mat-label>
-                        <input matInput autocomplete="off" formControlName="testname" required>
-                        <mat-error [hidden]="!onlineexamform.get('testname')?.hasError('required')">
-                            Please Type Few Words
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Level of test</mat-label>
-                        <mat-select formControlName="leveltest">
-                            <mat-option *ngFor="let type of testlevel" [value]="type.testId">
-                                {{type.testname | titlecase}}</mat-option>
-                        </mat-select>
-                        <mat-error [hidden]="!onlineexamform.get('leveltest')?.hasError('required')">
-                            Please select test level
-                        </mat-error>
-                    </mat-form-field>
-                </div>
 
-            </div>
-            <div class="">
-                <label class="" for="file">Upload Excel file</label>
-                <input type="file" id="file" formControlName="file" class="border" accept=" application/*"
-                    (change)="onfilechange($event)" required="true" />
-                <br />
-                <mat-error *ngIf="filerror">Please Upload Valid File</mat-error>
-
-            </div>
-            <div class="">
-                <mat-form-field appearance="outline">
-                    <mat-label>Description</mat-label>
-                    <textarea matInput class="p-2" formControlName="description" rows="3"
-                        placeholder="Description"></textarea>
-                    <mat-error [hidden]="!onlineexamform.get('description')?.hasError('required')">
-                        Please Type Few Words
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block"> Submit
-            </button>
-        </form>
-
+        <button type="button" (click)="addexam()" *ngIf="!displaycontent"
+            class="btn btn-outline-secondary btn-rounded d-inline-block ">
+            Add Exam
+        </button>
     </div>
+
+
+    <div class="card  bg-secondary" *ngIf="displaycontent">
+        <div class="card-header text-white bg-secondary">
+            {{iseditable ? "Update" :"Add" }} Exam
+
+        </div>
+        <div class="card-body bg-white  py-2">
+            <form class="" [formGroup]="onlineexamform" (ngSubmit)="onlineexamsubmit()">
+                <div class="row">
+                    <div class="col-md-5">
+                        <label>Courses</label>
+
+                        <mat-form-field appearance="outline">
+                            <mat-select formControlName="course" [compareWith]="compareselect" [disabled]="iseditable">
+                                <mat-option *ngFor="let type of courselist" [value]="type.coursesId">
+                                    {{type.coursesName | titlecase}}</mat-option>
+                            </mat-select>
+
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="onlineexamform.controls['course'].invalid && (onlineexamform.controls['course'].dirty || onlineexamform.controls['course'].touched)">
+                            <mat-error [hidden]=" !onlineexamform.get('course')?.hasError('required')  ">
+                                Course is mandatory
+                            </mat-error>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Test type</label>
+
+                        <mat-form-field appearance="outline">
+                            <mat-select formControlName="testtype" [compareWith]="compareselect"
+                                [disabled]="iseditable">
+                                <mat-option *ngFor="let type of typetestlist" [value]="type.testId">
+                                    {{type.testname | titlecase}}</mat-option>
+                            </mat-select>
+
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="onlineexamform.controls['testtype'].invalid && (onlineexamform.controls['testtype'].dirty || onlineexamform.controls['testtype'].touched)">
+                            <mat-error [hidden]=" !onlineexamform.get('testtype')?.hasError('required')  ">
+                                Type is mandatory
+                            </mat-error>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <label>Test Name</label>
+                        <mat-form-field appearance="outline">
+                            <input matInput autocomplete="off" formControlName="testname" required>
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="onlineexamform.controls['testname'].invalid && (onlineexamform.controls['testname'].dirty || onlineexamform.controls['testname'].touched)">
+                            <mat-error [hidden]=" !onlineexamform.get('testname')?.hasError('required')  ">
+                                Test is mandatory
+                            </mat-error>
+                        </div>
+                    </div>
+
+
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Description</label>
+
+                        <mat-form-field appearance="outline">
+                            <textarea matInput class="p-2" formControlName="description" rows="3"
+                                placeholder="Description"></textarea>
+
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="onlineexamform.controls['description'].invalid && (onlineexamform.controls['description'].dirty || onlineexamform.controls['description'].touched)">
+                            <mat-error [hidden]=" !onlineexamform.get('description')?.hasError('required')  ">
+                                Description is mandatory
+                            </mat-error>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <label>Level of test</label>
+
+                        <mat-form-field appearance="outline">
+                            <mat-select formControlName="leveltest" [compareWith]="compareselect"
+                                [disabled]="iseditable">
+                                <mat-option *ngFor="let type of testlevel" [value]="type.testId">
+                                    {{type.testname | titlecase}}</mat-option>
+                            </mat-select>
+
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="onlineexamform.controls['leveltest'].invalid && (onlineexamform.controls['leveltest'].dirty || onlineexamform.controls['leveltest'].touched)">
+                            <mat-error [hidden]=" !onlineexamform.get('leveltest')?.hasError('required')  ">
+                                Level is mandatory
+                            </mat-error>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="" for="file">Upload Excel file</label>
+                        <input type="file" id="file" formControlName="file" class="border" accept=" application/*"
+                            (change)="onfilechange($event)" required="true" />
+                        <span class="mat-error" *ngIf="filerror">Please Upload Valid File</span>
+                    </div>
+                    <div class="col-md-3" *ngIf="issubmit">
+                        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                            {{iseditable ? "Update" :"Add" }}
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" (click)="reseteditable()"
+                            class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+                <br />
+            </form>
+        </div>
+    </div>
+
+
+    <div class="card ">
+        <div class="card-header text-white bg-secondary">
+            Online Exam
+        </div>
+        <div class="card-body bg-transparent px-0 py-0">
+            <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
+                aria-label="users">
+                <ng-container matColumnDef="examsId">
+                    <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
+                        <label mat-sort-header>
+                            S.No
+                        </label>
+
+                        <input type="text" (keyup)="updatePagination('courseId')" disabled
+                            [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
+                </ng-container>
+                <ng-container matColumnDef="nameofTest">
+                    <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
+                        <label mat-sort-header>
+                            Name
+                        </label>
+                        <input type="text" (keyup)="updatePagination('category')"
+                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nameofTest}} </td>
+                </ng-container>
+                <ng-container matColumnDef="courseId">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Course
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseName')"
+                            [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.courseId.coursesName}} </td>
+                </ng-container>
+                <ng-container matColumnDef="levelId">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Level
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseDuration')"
+                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.levelId.testname | titlecase}} </td>
+                </ng-container>
+                <ng-container matColumnDef="testId">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Type
+                        </label>
+                        <input type="text" (keyup)="updatePagination('startDate')"
+                            [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.testId.testname | titlecase}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Action">
+                    <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
+                        <label mat-sort-header>
+                            Actions
+                        </label>
+                        <input type="text" (keyup)="updatePagination('currentStatus')" disabled
+                            [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let element ">
+                        <div class="d-flex flex-wrap justify-content-evenly align-items-center">
+                            <i class="fa-solid fa-eye fs-5 text-info" (click)="viewdetails(element)"
+                                matTooltip="View Course Activity" matTooltip="View"></i>
+                            <span matTooltip="Edit" (click)="editdetails(element)">
+                                <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                            </span>
+                            <span matTooltip="Delete" style="cursor: pointer;"
+                                (click)="deletedetails(element.courseId)"> <i class="far fa-trash-alt"
+                                    aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator class="card-body" (page)="onpaginatechange($event)"
+                [pageSizeOptions]="[10,25, 50, 100,150,200]" aria-label="Select page">
+            </mat-paginator>
+        </div>
+    </div>
+
+
 </div>

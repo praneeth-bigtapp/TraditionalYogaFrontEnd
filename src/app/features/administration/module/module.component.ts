@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { data } from 'jquery';
 import { NotifierService } from 'src/app/notifier.service';
@@ -14,9 +15,25 @@ import { ModuleService } from './service/module.service';
   styleUrls: ['./module.component.css']
 })
 export class ModuleComponent implements OnInit {
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort!: MatSort;
+  gridData = [];
   isAddModuleForm: boolean = false;
   AddModuleForm!: FormGroup;
   dataSource!: MatTableDataSource<any>;
+
+
+  pageno: number = 1
+
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
+
 
   loginData: any;
   navList: any = [];
@@ -32,7 +49,6 @@ export class ModuleComponent implements OnInit {
   errorType: any;
 
   displayedColumns: string[] = ['sno', 'menuName', 'actions'];
-  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,11 +59,11 @@ export class ModuleComponent implements OnInit {
 
   ngOnInit(): void {
     this.filterData = {
-      filterColumnNames: [
-        { "Key": 'sno', "Value": "" },
-        { "Key": 'menuName', "Value": "" },
-      ],
+      filterColumnNames: this.displayedColumns.map((ele: any) => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
       dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
     };
     this.AddModuleForm = this.formBuilder.group({
       menuName: [null, Validators.required]
@@ -103,8 +119,10 @@ export class ModuleComponent implements OnInit {
   }
 
   addMenu() {
-    console.log(this.AddModuleForm.value);
-    this.moduleService.addMenu(this.AddModuleForm.value).subscribe({
+    const data = {
+      "moduleName": this.AddModuleForm.value.menuName
+    }
+    this.moduleService.addMenu(data).subscribe({
       next: (response) => {
         this.onCancel();
         this.getMenus();
@@ -123,6 +141,7 @@ export class ModuleComponent implements OnInit {
 
   onAddMenu() {
     this.isAddModuleForm = true;
+    this.editMode = false
   }
 
   getMenus() {
@@ -133,8 +152,15 @@ export class ModuleComponent implements OnInit {
         // }
         this.MenuList = data;
         console.log(this.MenuList);
-        this.dataSource = new MatTableDataSource(this.MenuList);
+        this.dataSource = new MatTableDataSource<any>(this.MenuList)
+        this.filterData.gridData = this.MenuList;
         this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
       },
       error: (error) => {
         this.errorType = "Error";

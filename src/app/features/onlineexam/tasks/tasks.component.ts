@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { OnlineexamService } from '../service/onlineexam.service';
 
 @Component({
@@ -27,7 +28,7 @@ export class TasksComponent implements OnInit {
   course!: string
   courserror: boolean = false
   courseList!: any
-
+  issubmit: boolean = true
   filterData: any;
   gridData = [];
   dataSource: any;
@@ -43,6 +44,7 @@ export class TasksComponent implements OnInit {
     private service: OnlineexamService,
     private formbuilder: FormBuilder,
     private _snackbar: MatSnackBar,
+    private dialog: MatDialog,
   ) {
 
     this.taskform = this.formbuilder.group({
@@ -91,8 +93,10 @@ export class TasksComponent implements OnInit {
     this.filterData.dataSource.sort = this.sort;
   }
 
-  opensnackBar(data: any) {
-    this._snackbar.open(data.message, "Close")
+  openSnackBar(data: any) {
+    this._snackbar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
   }
 
   gettask(course: string) {
@@ -155,9 +159,19 @@ export class TasksComponent implements OnInit {
     this.displayform = !this.displayform
 
   }
-  viewdetails(data: any) {
-    console.log(data);
+  viewdetails(element: any) {
 
+
+    this.taskform.setValue({
+      taskid: element.taskId,
+      name: element.taskName,
+      description: element.description,
+      mediafile: null,
+      duedate: formatDate(element.dueDate, "yyyy-MM-dd", "en"),
+
+    });
+    this.displayform = true
+    this.issubmit = false
   }
 
   deletedetails(id: any) {
@@ -166,20 +180,35 @@ export class TasksComponent implements OnInit {
       "taskId": id,
     }
 
-    this.service.deletetask(body).subscribe({
-      next: (response) => {
-        this.opensnackBar(response)
-        this.taskform.reset()
-        this.gettask(this.course)
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this Task ?"
       },
-      error: (error) => {
-        console.error(error.message);
-      }
+      width: "30%"
     })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.service.deletetask(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.taskform.reset()
+            this.gettask(this.course)
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
+
+    })
+
+
 
   }
   editdetails(element: any) {
-    console.log(element.dueDate);
 
     this.taskform.setValue({
       taskid: element.taskId,
@@ -191,12 +220,14 @@ export class TasksComponent implements OnInit {
     });
     this.isedit = true
     this.displayform = true
+    this.issubmit = true
   }
 
   reseteditable() {
     this.taskform.reset()
     this.isedit = false
     this.displayform = !this.displayform
+    this.issubmit = true
   }
 
 
@@ -242,7 +273,7 @@ export class TasksComponent implements OnInit {
 
       this.service.updatetask(body).subscribe({
         next: (response) => {
-          this.opensnackBar(response)
+          this.openSnackBar(response)
           this.taskform.reset()
           this.gettask(this.course)
         },
@@ -258,7 +289,7 @@ export class TasksComponent implements OnInit {
 
     this.service.posttask(body).subscribe({
       next: (response) => {
-        this.opensnackBar(response)
+        this.openSnackBar(response)
         this.taskform.reset()
         this.gettask(this.course)
       },

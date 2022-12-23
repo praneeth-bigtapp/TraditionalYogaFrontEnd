@@ -21,7 +21,7 @@ export class SendReceiveService {
   confirmationDialog(messsage: any) {
     this.dialogRef = this.dialog.open(DialogPopupComponent);
 
-    this.dialogRef.componentInstance.message = messsage;
+    this.dialogRef.componentInstance.data = { message: messsage };
 
     return this.dialogRef.afterClosed().pipe(
       map((result) => {
@@ -114,7 +114,7 @@ export class SendReceiveService {
       this.router.navigateByUrl("blacklistuser");
     }
     else if (subMenuId == 17) {
-      this.router.navigateByUrl("mapuCourse");
+      this.router.navigateByUrl("mapCourse");
     }
     else if (subMenuId == 18) {
       this.router.navigateByUrl("administration/parameters");
@@ -163,6 +163,18 @@ export class SendReceiveService {
     }
     else if (subMenuId == 33) {
       this.router.navigateByUrl("hidemenuoption");
+    }
+    else if (subMenuId == 35) {
+      this.router.navigateByUrl("pearlofwidsom");
+    }
+    else if (subMenuId == 36) {
+      this.router.navigateByUrl("courseMatrieals");
+    }
+    else if (subMenuId == 37) {
+      this.router.navigateByUrl("onlineexam");
+    }
+    else if (subMenuId == 38) {
+      this.router.navigateByUrl("mappingregionstoCheifMentor");
     }
     else {
       console.log(" Sub Menu is not Mapped ")

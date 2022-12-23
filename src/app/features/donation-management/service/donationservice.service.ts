@@ -9,6 +9,8 @@ export class DonationserviceService extends BaseHttp {
 
   getAllURL = "student/getAll?operation=donation";
   postURL = 'student/donationView'
+  regionURL='webSite/getAll?operation=regionsList'
+  countryURL='webSite/getAll?operation=country'
 
 
   getdonationdetails() {
@@ -16,5 +18,11 @@ export class DonationserviceService extends BaseHttp {
   }
   postdonationdetails(data: any) {
     return this.post(this.postURL, data)
+  }
+  getregions() {
+    return this.get(this.regionURL)
+  }
+  getcountrys() {
+    return this.get(this.countryURL)
   }
 }

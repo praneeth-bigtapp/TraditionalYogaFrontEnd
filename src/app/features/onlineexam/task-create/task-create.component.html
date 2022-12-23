@@ -7,20 +7,24 @@
             <mat-icon>close</mat-icon>
         </div>
     </div>
-    <br />
+
     <form class="" [formGroup]="taskform" (ngSubmit)="tasksubmit()">
 
         <div class="w-50 ">
             <mat-form-field appearance="outline">
                 <mat-label>Task Name</mat-label>
                 <input matInput autocomplete="off" formControlName="name" required>
-                <mat-error [hidden]=" !taskform.get('name')?.hasError('required')  ">
-                    Please Type Few Words
-                </mat-error>
+
             </mat-form-field>
+            <div class="error-message"
+                *ngIf="taskform.controls['name'].invalid && (taskform.controls['name'].dirty || taskform.controls['name'].touched)">
+                <mat-error [hidden]=" !taskform.get('name')?.hasError('required')  ">
+                    Name is mandatory
+                </mat-error>
+            </div>
         </div>
 
-        
+
 
         <h6>Upload Media file</h6>
         <br />
@@ -35,10 +39,13 @@
             <mat-form-field class="example-full-width" class="w-25" appearance="outline">
                 <mat-label>Due Date for submission</mat-label>
                 <input matInput formControlName="duedate" type="date">
-                <mat-error [hidden]="!taskform.get('duedate')?.hasError('required')  ">
-                    Please Select Date
-                </mat-error>
             </mat-form-field>
+            <div class="error-message"
+                *ngIf="taskform.controls['duedate'].invalid && (taskform.controls['duedate'].dirty || taskform.controls['duedate'].touched)">
+                <mat-error [hidden]=" !taskform.get('duedate')?.hasError('required')  ">
+                    Due Date is mandatory
+                </mat-error>
+            </div>
         </div>
 
         <div class="d-flex flex-wrap justify-content-end">

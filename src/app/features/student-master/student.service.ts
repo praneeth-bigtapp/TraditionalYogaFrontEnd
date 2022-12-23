@@ -6,7 +6,7 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 })
 export class StudentService extends BaseHttp {
   getStudentUrl = "student/getAll?operation=student";
-  getCourseUrl = "student/getAll?operation=course";
+  getCourseUrl = 'courseList/getAll?operation=coursesList';
   getStudentByIdUrl = "student/profile";
   getDonationByIdUrl = "student/donation";
   getPurchaseByIdUrl = "student/purchase";
@@ -14,6 +14,13 @@ export class StudentService extends BaseHttp {
   getVolunteerByIdUrl = "student/volunteer";
   addVolunteerByIdUrl = "student/volunteer/add";
   getCourseProfileByIdUrl = "";
+  getAlldonationsURL = "student/getAll?operation=donation";
+  
+
+  getdonations(){
+    return this.get<any>(this. getAlldonationsURL);
+
+  }
 
   getStudent() {
     return this.get<any>(this.getStudentUrl);

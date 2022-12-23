@@ -34,6 +34,8 @@ export class RolesComponent implements OnInit {
   Message: any;
   errorType: any;
   validt: any;
+  pageno: number = 1
+
 
   constructor(
     private rolesService: RolesService,
@@ -72,10 +74,9 @@ export class RolesComponent implements OnInit {
         response[i].sno = i + 1;
         rolesData.push(response[i]);
       }
-      console.log(rolesData);
-      this.RolesList = rolesData;
-      this.filterData.gridData = rolesData;
-      this.dataSource = new MatTableDataSource(rolesData);
+      this.RolesList = rolesData.reverse();
+      this.filterData.gridData = rolesData.reverse();
+      this.dataSource = new MatTableDataSource(rolesData.reverse());
       this.filterData.dataSource = this.dataSource;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -85,6 +86,16 @@ export class RolesComponent implements OnInit {
       }
     });
   }
+
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
+
 
   onAddRoleSubmit() {
     if (this.AddRoleForm.valid) {
@@ -107,6 +118,8 @@ export class RolesComponent implements OnInit {
         });
       }
     }
+    else
+      this.AddRoleForm.markAllAsTouched()
   }
 
   onEditMode() {
@@ -126,7 +139,15 @@ export class RolesComponent implements OnInit {
       }
     }
     if (this.validt != 1) {
-      this.rolesService.saveRole(role).subscribe((response) => {
+      console.log(role);
+
+      const body = {
+        "roleId": role.roleId,
+        "roleName": role.roleName,
+        "active": "Y"
+      }
+
+      this.rolesService.saveRole(body).subscribe((response) => {
         if (response.statusCode == 200) {
           this.isAddRoleForm = false;
           this.editMode = false;
@@ -145,6 +166,7 @@ export class RolesComponent implements OnInit {
 
   onAddRole() {
     this.isAddRoleForm = true;
+    this.editMode = false
     this.AddRoleForm.reset();
   }
 

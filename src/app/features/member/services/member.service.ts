@@ -14,7 +14,16 @@ export class MemberService extends BaseHttp {
   getmentorURL = "student/getAllByCourse?type=mentor&courseId=1"
 
   getcheifmentorURL = "student/getAllByCourse?type=chiefMentor&courseId=1"
+  getcountryURL = "webSite/getAll?operation=country"
 
+  getregionlistURL = "webSite/getAll?operation=regionsList"
+
+  getcountry() {
+    return this.get(this.getcountryURL)
+  }
+  getregionlist() {
+    return this.get(this.getregionlistURL)
+  }
 
   getallcourses() {
     return this.get(this.getallcourseURL)

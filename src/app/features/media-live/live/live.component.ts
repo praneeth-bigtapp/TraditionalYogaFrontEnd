@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LiveclassService } from '../service/liveclass.service';
 import { MatSnackBar, } from '@angular/material/snack-bar';
+import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class LiveComponent implements OnInit {
   categoryerror2: boolean = false
   filerror!: boolean
 
+  shortvideolist: any[] = []
+
   glimpsefile!: any
 
   glimpseform !: FormGroup
@@ -28,6 +31,7 @@ export class LiveComponent implements OnInit {
 
   typecategory!: any
   displaycontent: boolean = false
+  iseditable: boolean = false
 
 
   constructor(
@@ -45,7 +49,7 @@ export class LiveComponent implements OnInit {
         this.courselist = response
 
         console.log(this.courselist);
-        
+
 
       },
       error: (error) => {
@@ -66,7 +70,7 @@ export class LiveComponent implements OnInit {
       }
     })
     this.videoform = this.formbuilder.group({
-      videolink: [null, Validators.compose([Validators.required])],
+      videolink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
       date: [null, Validators.compose([Validators.required])],
       title: [null, Validators.compose([Validators.required])],
       description: [null, Validators.compose([Validators.required])],
@@ -74,9 +78,9 @@ export class LiveComponent implements OnInit {
     })
 
     this.shortvideoform = this.formbuilder.group({
-      videolink: [null, Validators.compose([Validators.required])],
+      videolink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
       date: [null, Validators.compose([Validators.required])],
-      duration: [null, Validators.compose([Validators.required])],
+      duration: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.durationvalidation)])],
       category: [null, Validators.compose([Validators.required])],
       title: [null, Validators.compose([Validators.required])],
       description: [null, Validators.compose([Validators.required])],
@@ -96,35 +100,19 @@ export class LiveComponent implements OnInit {
   }
 
   openSnackBar(data: any) {
-    this._snackBar.open(data.message, 'Close');
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
   }
 
   coursechange() {
-
     this.displaycontent = false
-    this.categoryerror = false
-    if (this.coursename == undefined || this.coursename == null) {
-      this.categoryerror = true
-    }
-
-  }
-
-
-  typechange() {
-
-    this.displaycontent = false
-    this.categoryerror2 = false
-    if (this.categoryname == undefined || this.categoryname == null) {
-      this.categoryerror2 = true
-    }
-
+    this.gobutton()
   }
 
   gobutton() {
-    this.typechange()
-    this.coursechange()
-    if (this.categoryname && this.coursename)
-      this.displaycontent = true
+
+    this.displaycontent = !this.displaycontent
 
   }
 
@@ -149,6 +137,8 @@ export class LiveComponent implements OnInit {
       "description": description
     }
 
+    console.log(body);
+    
 
     this.service.postvideo(body).subscribe({
       next: (response) => {

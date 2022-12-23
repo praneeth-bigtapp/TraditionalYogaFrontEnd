@@ -1,159 +1,220 @@
-<div class="ConfigurationTypes_textpadding ">
-    <h5>Map Users to Course</h5>
-    <form class="card bg-white pl-4 ">
+<div class="ConfigurationTypes_textpadding   ">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="#/addpages">Website Management</a></li>
+          <li class="breadcrumb-item active" aria-current="page">mapusers</li>
+        </ol>
+      </nav>
+    <div class="row justify-content-end" style="margin-left:900px ;">
+
+    
+    <div class=" justify-content-end">
+        <button class="btn btn-outline-secondary btn-rounded d-inline-block" (click)="   mapCourse() " *ngIf="!displaycontent">Search Users</button>
+    </div>
+</div><br>
+
+           
+       
+<div class="map" *ngIf="displaycontent">
+
+
+ 
+   
+    <h5 class="card-header text-white bg-secondary">Search Users</h5>
+    <div class="card bg-white pl-4">
+    
         <div class="col-sm-7 d-flex ">
-            <div class=" pt-4">
-                <button mat-stroked-button>Search Filter</button>
+         
+                <button class="btn btn-outline-secondary btn-rounded d-inline-block m-2">Search Filter</button>
+                <mat-form-field class="example-full-width pt-2" appearance="outline"id="field">
+               
+
+                    <!-- <mat-label>Search Suspicious user</mat-label> -->
+                    <input type="search" matInput>
+    
+                </mat-form-field>
 
 
-            </div>
+            </div><hr>
 
 
-            <mat-form-field class="example-full-width" appearance="fill"id="field">
-
-                <mat-label>Search Suspicious user</mat-label>
-                <input type="search" matInput>
-
-            </mat-form-field>
-        </div>
+            <form class="" [formGroup]="Mapusers">
+      
         <div class="row g-3 d-flex">
-            <div class="col-sm-2 ">
+            <div class="col-md-4 ">
+                <label>Name</label>
                 <mat-form-field class="example-full-width"appearance="outline" id="field">
 
-                    <mat-label>Enter Name</mat-label>
-                    <input type="text" matInput [formControl]="nameerror" matInput>
-                    <mat-error *ngIf="nameerror.hasError('required')">
+                    <!-- <mat-label>Enter Name</mat-label> -->
+                    <input type="text" matInput formControlName="nameerror" matInput>
+                    <mat-error class="error-message"
+                    [hidden]=" !Mapusers.get('nameerror')?.hasError('required')  ">
                         name is<strong>required</strong>
                     </mat-error>
 
 
                 </mat-form-field>
             </div>
-            <div class="col-md-2 ">
+            <div class="col-md-4 ">
+                <label>Email</label>
                 <mat-form-field class="example-full-width" appearance="outline" id="field">
 
-                    <mat-label>Enter email id</mat-label>
-                    <input matInput [formControl]="mailerror">
-                    <mat-error *ngIf="mailerror.hasError('required')">
+                    <!-- <mat-label>Enter email id</mat-label> -->
+                    <input matInput formControlName="mailerror">
+                    <mat-error class="error-message"
+                    [hidden]=" !Mapusers.get('mailerror')?.hasError('required')  ">
                         mail is<strong>required</strong>
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-2 ">
+            <div class="col-md-4 ">
+                <label>Country</label>
                 <mat-form-field appearance="outline">
 
-                    <mat-label>Select Country</mat-label>
-                    <select matNativeControl [disabled]="disableSelect.value"  [formControl]="country">
+                    <!-- <mat-label>Select Country</mat-label> -->
+                    <select matNativeControl [disabled]="disableSelect.value"formControlName="country">
               <option value="" selected></option>
               <option value="volvo">Volvo</option>
               <option value="saab" disabled>Saab</option>
               <option value="mercedes">Mercedes</option>
               <option value="audi">Audi</option>
             </select>
-            <mat-error *ngIf="country.hasError('required')">
+            <mat-error class="error-message"
+            [hidden]=" !Mapusers.get('country')?.hasError('required')  ">
                country is<strong>required</strong>
             </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-2 ">
+            <div class="col-md-4 ">
+                <label>Mobile</label>
                 <mat-form-field class="example-full-width"appearance="outline"id="field">
 
-                    <mat-label>Select Mobile</mat-label>
-                    <input matInput [formControl]="selectMob">
-                    <mat-error *ngIf="selectMob.hasError('required')">
+                    <!-- <mat-label>Select Mobile</mat-label> -->
+                    <input matInput formControlName="selectMob">
+                    <mat-error class="error-message"
+                    [hidden]=" !Mapusers.get('selectMob')?.hasError('required')  ">
                         Mobile<strong>required</strong>
                     </mat-error>
                 </mat-form-field>
             </div>
-        </div>
-
-        <div class="row g-4 d-flex">
-            <div class="col-md-2  ">
+       
+            <div class="col-md-4  ">
+                <label>Region</label>
                 <mat-form-field class="example-full-width" appearance="outline" id="field">
 
-                    <mat-label>Select Region</mat-label>
-                    <input matInput [formControl]="selectRegion">
-                    <mat-error *ngIf="selectRegion.hasError('required')">
+                    <!-- <mat-label>Select Region</mat-label> -->
+                    <input matInput formControlName="selectRegion">
+                    <mat-error class="error-message"
+                    [hidden]=" !Mapusers.get('selectRegion')?.hasError('required')  ">
                         Region<strong>required</strong>
                     </mat-error>
                 </mat-form-field>
             </div>
 
-            <div class="col-sm-1 ">
+            <div class="col-md-4 ">
+                <label>Age Form</label>
                 <mat-form-field appearance="outline">
 
-                    <mat-label>Age Form</mat-label>
-                    <select matNativeControl [disabled]="disableSelect.value" [formControl]="agefrom">
+                    <!-- <mat-label>Age Form</mat-label> -->
+                    <select matNativeControl [disabled]="disableSelect.value"formControlName="agefrom">
               <option value="" selected></option>
               <option value="volvo">Volvo</option>
               <option value="saab" disabled>Saab</option>
               <option value="mercedes">Mercedes</option>
               <option value="audi">Audi</option>
             </select>
-            <mat-error *ngIf="agefrom.hasError('required')">
+            <mat-error class="error-message"
+            [hidden]=" !Mapusers.get('agefrom')?.hasError('required')  ">
                 age<strong>required</strong>
             </mat-error>
                 </mat-form-field>
             </div>
 
-            <div class="col-sm-1 ">
+            <div class="col-md-4 ">
+                <label>Age To</label>
                 <mat-form-field appearance="outline">
 
-                    <mat-label>Age to</mat-label>
-                    <select matNativeControl [disabled]="disableSelect.value" formControl]="ageto">
+                    <!-- <mat-label>Age to</mat-label> -->
+                    <select matNativeControl [disabled]="disableSelect.value" formControlName="ageto">
               <option value="" selected></option>
               <option value="volvo">Volvo</option>
               <option value="saab" disabled>Saab</option>
               <option value="mercedes">Mercedes</option>
               <option value="audi">Audi</option>
             </select>
-            <mat-error *ngIf="ageto.hasError('required')">
+            <mat-error class="error-message"
+            [hidden]=" !Mapusers.get('ageto')?.hasError('required')  ">
                 age<strong>required</strong>
             </mat-error>
                 </mat-form-field>
               
             </div>
-            <div class="col-sm-2 ">
+            <div class="col-md-4 ">
+                <label>Gender</label>
                 <mat-form-field appearance="outline">
 
-                    <mat-label>Gender</mat-label>
-                    <select matNativeControl [disabled]="disableSelect.value">
+                    <!-- <mat-label>Gender</mat-label> -->
+                    <select matNativeControl [disabled]="disableSelect.value" formControlName="gender">
               <option value="" selected></option>
               <option value="volvo">Volvo</option>
               <option value="saab" disabled>Saab</option>
               <option value="mercedes">Mercedes</option>
               <option value="audi">Audi</option>
             </select>
+            <mat-error class="error-message"
+            [hidden]=" !Mapusers.get('gender')?.hasError('required')  ">
+                age<strong>required</strong>
+            </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-sm-2">
+            <div class="col-md-4">
+                <label>Status</label>
                 <mat-form-field class="example-full-width" appearance="outline" id="field">
 
-                    <mat-label>Status</mat-label>
-                    <input matInput [formControl]="status">
-                    <mat-error *ngIf="status.hasError('required')">
+                    <!-- <mat-label>Status</mat-label> -->
+                    <input matInput formControlName="status">
+                    <mat-error class="error-message"
+                    [hidden]=" !Mapusers.get('status')?.hasError('required')  ">
                         Status<strong>required</strong>
                     </mat-error>
                 </mat-form-field>
             </div>
-        </div>
-        <div class="row g-3 ">
-            <div class="col-md-2  ">
+      
+            <div class="col-md-4 ">
+                <label>Course</label>
                 <mat-form-field appearance="outline">
 
-                    <mat-label>Users of a course</mat-label>
-                    <select matNativeControl [disabled]="disableSelect.value">
+                    <!-- <mat-label>Users of a course</mat-label> -->
+                    <select matNativeControl [disabled]="disableSelect.value" formControlName="course">
               <option value="" selected></option>
               <option value="volvo">Volvo</option>
               <option value="saab" disabled>Saab</option>
               <option value="mercedes">Mercedes</option>
               <option value="audi">Audi</option>
             </select>
+            <mat-error class="error-message"
+            [hidden]=" !Mapusers.get('course')?.hasError('required')  ">
+                Status<strong>required</strong>
+            </mat-error>
                 </mat-form-field>
             </div>
+            
 
         </div>
-        <div class="row float-right">
+        <div class="row justify-content-end">
+
+        
+        <div class=" col-md-5">
+            <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
+                search Users
+            </button>
+            <button  class="btn btn-outline-secondary btn-rounded d-inline-block m-2 "(click)="reseteditable()">
+                Cancel
+            </button>
+        </div>
+    </div>
+        <!-- <div class="row float-right">
             <div class="col pl-4  ">
                 <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
                     search Users
@@ -162,14 +223,16 @@
 
             </div>
 
-        </div>
+        </div> -->
 
 
 
 
 
     </form>
-    <div class="row float-md-right">
+</div>
+</div>
+    <!-- <div class="row float-md-right">
         <div class="col-sm-6 md-4 ">
             <mat-form-field class="example-full-width" appearance="fill" id="field">
 
@@ -178,85 +241,146 @@
 
             </mat-form-field>
         </div>
-    </div>
+    </div> -->
 
-
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-datagrid w-100" aria-label="subMenu" matSort>
+    <h5 class="card-header text-white bg-secondary">Map Users to Course</h5>
+    <table mat-table [dataSource]="filterData.dataSource"class="mat-elevation-z8 mat-datagrid w-100 " aria-label="subMenu" matSort>
 
         <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
         <!-- Position Column -->
         <ng-container matColumnDef="sno">
-            <th mat-header-cell class="col-md-1" *matHeaderCellDef mat-sort-header> sno </th>
-            <td class="col-md-1" *matCellDef="let element">
+            <th mat-header-cell class="col-md-1 " *matHeaderCellDef >
+                <div class="row">
+                 <label mat-sort-header  class="">Sno</label>
+                <input matInput type="text" (keyup)="updatePagination()" 
+                [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="  filterData"   />
+            </div>
 
-                {{element.sno}}
+            </th>
+            <td class="col-md-1" *matCellDef="let i =index">
+
+                {{pageno +i }}
 
             </td>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="image">
-            <th mat-header-cell class="col-md-2" *matHeaderCellDef mat-sort-header> Image </th>
-            <td class="col-md-2" *matCellDef="let element">
+            <th mat-header-cell class="col-md-1" *matHeaderCellDef > 
+                <div class="row">
+                    <label mat-sort-header class=""> Image</label>
+                   <input matInput type="text" (keyup)="updatePagination()" 
+                   [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="  filterData"   />
+               </div>
+            </th>
+            <td class="col-md-1" *matCellDef="let element">
 
-                <i class="fa-solid fa-image"></i>
+              image
 
             </td>
         </ng-container>
 
         <!-- Weight Column -->
         <ng-container matColumnDef="name">
-            <th mat-header-cell class="col-md-3" *matHeaderCellDef mat-sort-header> Name</th>
-            <td mat-cell class="col-md-3" *matCellDef="let element"> {{element.name}} </td>
+            <th mat-header-cell class="col-md-2" *matHeaderCellDef>
+                <div class="row">
+                    <label mat-sort-header class="">  Name</label>
+                   <input matInput type="text" (keyup)="updatePagination()" 
+                   [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="  filterData"    />
+               </div>
+            </th>
+            <td mat-cell class="col-md-2" *matCellDef="let element"> {{element.name}} </td>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="emailId">
-            <th mat-header-cell class="col-md-2" *matHeaderCellDef mat-sort-header>Email id</th>
-            <td class="col-md-2" *matCellDef="let element">
+            <th mat-header-cell class="col-md-3" *matHeaderCellDef >
+                <div class="row">
+                    <label mat-sort-header class=""> Email id</label>
+                   <input matInput type="text" (keyup)="updatePagination()" 
+                   [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="  filterData"   />
+               </div>
+            </th>
+            <td class="col-md-3" *matCellDef="let element">
                 {{element.emailId}} </td>
 
         </ng-container>
         <ng-container matColumnDef="country">
-            <th mat-header-cell class="col-md-1" *matHeaderCellDef mat-sort-header>Country</th>
-            <td class="col-md-1" *matCellDef="let element">
+            <th mat-header-cell class="col-md-2" *matHeaderCellDef >
+                <div class="row">
+                    <label mat-sort-header  class=""> Country</label>
+                   <input matInput type="text" (keyup)="updatePagination()" 
+                   [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="  filterData"   />
+               </div>
+            </th>
+            <td class="col-md-2" *matCellDef="let element">
                 {{element.country}} </td>
 
         </ng-container>
         <ng-container matColumnDef="Gender">
-            <th mat-header-cell class="col-md-1" *matHeaderCellDef mat-sort-header>Gender</th>
+            <th mat-header-cell class="col-md-1" *matHeaderCellDef >
+                <div class="row">
+                    <label mat-sort-header class="text-start">Gender</label>
+                   <input matInput type="text" (keyup)="updatePagination()" 
+                   [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="  filterData"    />
+               </div>
+            </th>
             <td mat-cell class="col-md-1" *matCellDef="let element">
                 {{element.Gender}}
             </td>
 
         </ng-container>
         <ng-container matColumnDef="usersince">
-            <th mat-header-cell class="col-md-3" *matHeaderCellDef mat-sort-header>User since</th>
+            <th mat-header-cell class="col-md-3" *matHeaderCellDef >
+                <div class="row">
+                    <label mat-sort-header class="text-start">User since</label>
+                   <input matInput type="text" (keyup)="updatePagination()" 
+                   [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="  filterData"    />
+               </div>
+            </th>
             <td mat-cell class="col-md-3" *matCellDef="let element">
                 {{element.usersince}}
             </td>
 
         </ng-container>
         <ng-container matColumnDef="status">
-            <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header>status</th>
+            <th mat-header-cell class="col" *matHeaderCellDef >
+                <div class="row">
+                    <label mat-sort-header  class="text-start">status</label>
+                   <input matInput type="text" (keyup)="updatePagination()" 
+                   [(ngModel)]="filterData.filterColumnNames[7].Value" [filter]="  filterData"    />
+               </div>
+            </th>
             <td mat-cell class="col" *matCellDef="let element">
                 Activate
             </td>
 
         </ng-container>
         <ng-container matColumnDef="view">
-            <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header>View</th>
+            <th mat-header-cell class="col" *matHeaderCellDef >
+                <label mat-sort-header>Actions</label>
+                <input matInput type="text" (keyup)="updatePagination()" 
+                [(ngModel)]="filterData.filterColumnNames[8].Value" [filter]="  filterData" disabled   /></th>
             <td mat-cell class="col" *matCellDef="let element">
-                <i class="fa-solid fa-eye"></i>
+                <div class=" d-flex justify-content-evenly align-items-center ">
+                  
+                   <span  matTooltip="Edit" ><i   aria-label="Button that displays a tooltip when focused or hovered over"
+                    class="fas fa-pencil-alt" aria-hidden="true" ></i> </span> &nbsp; <span ><i class="fa-solid fa-eye text-info " matTooltip="View"
+                    aria-label="Button that displays a tooltip when focused or hovered over"  ></i></span>&nbsp;&nbsp;&nbsp;
+                    <span matTooltip="Delete" style="cursor: pointer;"  >
+                        <i class="far fa-trash-alt" aria-hidden="true"></i>
+                    </span>
+
+                </div>
             </td>
 
         </ng-container>
         <ng-container matColumnDef="select">
-            <th mat-header-cell class="col" *matHeaderCellDef mat-sort-header><mat-checkbox class="example-margin" (change)="$event ? masterToggle() : null"
+            <th mat-header-cell class="col" *matHeaderCellDef ><mat-checkbox class="example-margin" (change)="$event ? masterToggle() : null"
                 [checked]="selection.hasValue() && isAllSelected()"
-                [indeterminate]="selection.hasValue() && !isAllSelected()"></mat-checkbox></th>
+                [indeterminate]="selection.hasValue() && !isAllSelected()"></mat-checkbox><br><br></th>
             <td mat-cell class="col" *matCellDef="let element">
                 <mat-checkbox class="example-margin"(click)="$event.stopPropagation()" (change)="$event ? selection.toggle(element) : null"
                 [checked]="selection.isSelected(element)"></mat-checkbox>
@@ -268,19 +392,15 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 
-    </table><br>
-    <div class="row  d-flex">
-        <div class="col">
-            <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons="" aria-label="Select page">
-            </mat-paginator>
-
-        </div>
-    </div>
+    </table>
+    <mat-paginator class="card-body" [pageSizeOptions]="[2,10,20]" showFirstLastButtons="" aria-label="Select page">
+    </mat-paginator>
+   
 
     <div class="row">
         <div class="col">
-            <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 "><i class="fa-solid fa-table"></i>
-       download excel
+            <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
+       Download excel
     </button>
         </div>
     </div><br>
@@ -335,7 +455,7 @@
             </div>
 
         </div>
-        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 "><i class="fa-sharp fa-solid fa-circle-check"></i>
+        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
             Map
          </button>
 

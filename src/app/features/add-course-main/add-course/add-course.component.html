@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="ConfigurationTypes_textpadding">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -16,6 +16,7 @@
             Add Course
         </button>
     </div>
+
     <div class="card  bg-secondary" *ngIf="displaycontent">
         <div class="card-header text-white bg-secondary">
             {{iseditable ? "Update" :"Add" }} Course
@@ -28,36 +29,43 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class=" align-items-center  ">
-                            <label>Course category : </label>
+                            <label>Course category</label>
 
                             <div class="col px-0">
                                 <mat-form-field appearance="outline">
-                                    <mat-select formControlName="coursecategory" [compareWith]="compareselect">
+                                    <mat-select formControlName="coursecategory" [compareWith]="compareselect"
+                                        [disabled]="iseditable">
 
                                         <mat-option *ngFor="let category of categoryList" [value]="category"
                                             aria-placeholder="Select Course Category">
                                             {{category.categoriesName}}</mat-option>
                                     </mat-select>
-                                    <mat-error class="error-message"
-                                        [hidden]=" !addCourseForm.get('coursecategory')?.hasError('required')  ">
+
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="addCourseForm.controls['coursecategory'].invalid && (addCourseForm.controls['coursecategory'].dirty || addCourseForm.controls['coursecategory'].touched)">
+                                    <mat-error [hidden]=" !addCourseForm.get('coursecategory')?.hasError('required')  ">
                                         Category is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class=" align-items-center ">
-                            <label>Course name : </label>
+                            <label>Course name</label>
                             <div class="col px-0">
                                 <mat-form-field appearance="outline">
                                     <!-- <mat-label>Select Course Category</mat-label> -->
                                     <input matInput autocomplete="off" formControlName="courseName" required>
-                                    <mat-error class="error-message"
-                                        [hidden]=" !addCourseForm.get('courseName')?.hasError('required')  ">
+
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="addCourseForm.controls['courseName'].invalid && (addCourseForm.controls['courseName'].dirty || addCourseForm.controls['courseName'].touched)">
+                                    <mat-error [hidden]=" !addCourseForm.get('courseName')?.hasError('required')  ">
                                         Name is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
 
                         </div>
@@ -67,47 +75,54 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="">
-                            <label>Start date : </label>
+                            <label>Start date</label>
 
                             <div class="col px-0">
                                 <mat-form-field appearance="outline">
                                     <!-- <mat-label>Start date</mat-label> -->
-                                    <input matInput formControlName="startDate" type="date">
-                                    <mat-error class="error-message"
-                                        [hidden]=" !addCourseForm.get('startDate')?.hasError('required')  ">
+                                    <input matInput formControlName="startDate" placeholder="dd-mm-yyyy" type="date">
+
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="addCourseForm.controls['startDate'].invalid && (addCourseForm.controls['startDate'].dirty || addCourseForm.controls['startDate'].touched)">
+                                    <mat-error [hidden]=" !addCourseForm.get('startDate')?.hasError('required')  ">
                                         Date is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="">
-                            <label>End date : </label>
+                            <label>End date</label>
                             <div class="col px-0">
                                 <mat-form-field appearance="outline">
                                     <!-- <mat-label>End date</mat-label> -->
                                     <input matInput formControlName="endDate" type="date">
-                                    <mat-error class="error-message"
-                                        [hidden]=" !addCourseForm.get('endDate')?.hasError('required')  ">
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="addCourseForm.controls['endDate'].invalid && (addCourseForm.controls['endDate'].dirty || addCourseForm.controls['endDate'].touched)">
+                                    <mat-error [hidden]=" !addCourseForm.get('endDate')?.hasError('required')  ">
                                         Date is mandatory
                                     </mat-error>
-                                </mat-form-field>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="">
-                            <label class="">Application closure date : </label>
+                            <label class="">Application closure date</label>
                             <div class="col px-0">
                                 <mat-form-field appearance="outline">
-                                    <!-- <mat-label>Application closure date</mat-label> -->
                                     <input matInput formControlName="applicationclosuredate" type="date">
-                                    <mat-error class="error-message"
-                                        [hidden]=" !addCourseForm.get('applicationclosuredate')?.hasError('required')  ">
-                                        Date is mandatory
-                                    </mat-error>
                                 </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="addCourseForm.controls['applicationclosuredate'].invalid && (addCourseForm.controls['applicationclosuredate'].dirty || addCourseForm.controls['applicationclosuredate'].touched)">
+                                    <mat-error
+                                        [hidden]=" !addCourseForm.get('applicationclosuredate')?.hasError('required')  ">
+                                        Application closure date is mandatory
+                                    </mat-error>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -117,22 +132,28 @@
 
                     <div class="col">
                         <div class=" ">
-                            <label class="mb-1">Description : </label>
+                            <label class="mb-1">Description</label>
                             <div class="col px-0">
-                                <angular-editor [placeholder]="'Enter text here...'" (keypress)="paragraphchange()"
-                                    [config]="editorConfig" required formControlName="description">
-                                </angular-editor>
-                                <mat-error class="error-message" *ngIf="paragrapherror ">
-                                    Description is mandatory
-                                </mat-error>
+                                <mat-form-field appearance="outline">
+                                    <textarea matInput formControlName="description" rows="5" type="text"></textarea>
+
+                                </mat-form-field>
+                                <div
+                                    *ngIf="addCourseForm.controls['description'].invalid && (addCourseForm.controls['description'].dirty || addCourseForm.controls['description'].touched)">
+                                    <mat-error [hidden]=" !addCourseForm.get('description')?.hasError('required')  ">
+                                        Description is mandatory
+                                    </mat-error>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
                 <br />
                 <div class="d-flex flex-row flex-wrap justify-content-end">
-                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block ">
-                        {{iseditable ? "Update" :"Submit" }}
+                    <button type="submit" *ngIf="issubmit"
+                        class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                        {{iseditable ? "Update" :"Add " }}
                     </button>
                     <button type="button" (click)="reseteditable()"
                         class="btn btn-outline-secondary btn-rounded d-inline-block ">
@@ -142,12 +163,12 @@
             </form>
         </div>
     </div>
-    <br />
+
     <div class="card ">
         <div class="card-header text-white bg-secondary">
             Courses
         </div>
-        <div class="card-body bg-transparent px-0 py-2">
+        <div class="bg-transparent px-0 py-0">
             <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid"
                 aria-label="users">
                 <ng-container matColumnDef="coursesId">
@@ -155,30 +176,31 @@
                         <label mat-sort-header>
                             S.No
                         </label>
-                        <!-- <input type="text" (keyup)="updatePagination('courseId')"
-                    [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" /> -->
+                        <input type="text" (keyup)="updatePagination('courseId')"
+                            [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" disabled />
                     </th>
-                    <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
+                    <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
                 </ng-container>
                 <ng-container matColumnDef="category">
                     <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
                         <label mat-sort-header>
                             Category
                         </label>
-                        <!-- <input type="text" (keyup)="updatePagination('category')"
-                    [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" /> -->
+                        <input type="text" (keyup)="updatePagination('category')"
+                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let element"> {{element.categorieId.categoriesName}} </td>
+                    <td mat-cell *matCellDef="let element" class="text-justify"> {{element.categorieId.categoriesName}}
+                    </td>
                 </ng-container>
                 <ng-container matColumnDef="coursesName">
-                    <th mat-header-cell *matHeaderCellDef scope="col">
+                    <th mat-header-cell *matHeaderCellDef scope="col-2">
                         <label mat-sort-header>
                             Course Name
                         </label>
                         <input type="text" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let element"> {{element.coursesName}} </td>
+                    <td mat-cell *matCellDef="let element" class="col-3 text-justify"> {{element.coursesName}} </td>
                 </ng-container>
                 <ng-container matColumnDef="courseDuration">
                     <th mat-header-cell *matHeaderCellDef scope="col">
@@ -188,7 +210,7 @@
                         <input type="text" (keyup)="updatePagination('courseDuration')"
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let element"> {{element.courseDuration }} </td>
+                    <td mat-cell *matCellDef="let element"> {{getnoofdays(element.startDate,element.endDate) }} </td>
                 </ng-container>
                 <ng-container matColumnDef="startDate">
                     <th mat-header-cell *matHeaderCellDef scope="col">
@@ -198,7 +220,7 @@
                         <input type="text" (keyup)="updatePagination('startDate')"
                             [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.startDate | date:'dd-MM-YYYY'}} </td>
                 </ng-container>
                 <ng-container matColumnDef="endDate">
                     <th mat-header-cell *matHeaderCellDef scope="col">
@@ -208,7 +230,7 @@
                         <input type="text" (keyup)="updatePagination('endDate')"
                             [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let element "> {{element.endDate}} </td>
+                    <td mat-cell *matCellDef="let element "> {{element.endDate | date:'dd-MM-YYYY'}} </td>
                 </ng-container>
                 <ng-container matColumnDef="currentStatus">
                     <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
@@ -225,8 +247,8 @@
                         <label mat-sort-header>
                             Actions
                         </label>
-                        <!-- <input type="text" (keyup)="updatePagination('currentStatus')"
-                    [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" /> -->
+                        <input type="text" (keyup)="updatePagination('currentStatus')"
+                            [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" disabled />
                     </th>
                     <td mat-cell *matCellDef="let element ">
                         <div class="d-flex flex-wrap justify-content-evenly align-items-center">
@@ -236,7 +258,7 @@
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                             </span>
                             <span matTooltip="Delete" style="cursor: pointer;"
-                                (click)="deletedetails(element.courseId)"> <i class="far fa-trash-alt"
+                                (click)="deletedetails(element.coursesId)"> <i class="far fa-trash-alt"
                                     aria-hidden="true"></i>
                             </span>
                         </div>
@@ -245,7 +267,8 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
-            <mat-paginator class="bg-transparent" [pageSizeOptions]="[10,25, 50, 100,150,200]" aria-label="Select page">
+            <mat-paginator class="card-body" [pageSizeOptions]="[25, 50, 100,150,200]" (page)="onpaginatechange($event)"
+                aria-label="Select page">
             </mat-paginator>
         </div>
     </div>

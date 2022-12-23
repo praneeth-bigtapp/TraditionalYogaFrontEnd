@@ -1,313 +1,257 @@
 <div class="ConfigurationTypes_textpadding ">
-    <h3 class="mb-4 pl-2 text-secondary "> View Details</h3>
-    <div class="d-flex  flex-column  ">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/donationManagement">Donation Management</a></li>
 
-        <!--one row  -->
-        <div class="row   w-100 bg-white ">
-
-            <div class="col-md-4 border-top border-left border-bottom  py-4  text-center">
-                <!-- add icon -->
-                <h1 class="text-muted  pt-3"><i class="fas fa-rupee-sign "></i></h1>
-
-            </div>
-            <div class="col-md-8  border-top border-right border-bottom py-4 ps-4 my-auto">
-                <h1> {{ details.amount | currency:"INR" }}</h1>
-                <p class="fw-lighter">Amount Donated</p>
-            </div>
-
+            <li class="breadcrumb-item active" aria-current="page">View Donation</li>
+        </ol>
+    </nav>
+    <br />
+    <div class="card ">
+        <div class="card-header text-white bg-secondary">
+            View donation
         </div>
+        <div class="card-body bg-white px-0 py-0">
+            <div class=" ">
+                <div class="row  ">
+                    <div class="col-md-4   py-4  text-center">
+                        <!-- add icon -->
+                        <h1 class="text-muted  pt-3"><i class="fas fa-rupee-sign "></i></h1>
 
-        <!--one row  -->
-        <div class="row  w-100 bg-white">
-
-            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
-                <!-- add icon -->
-
-                <div class="d-flex flex-row  align-items-center px-4  ">
-                    <div>
-                        <p> <i class=" fa-solid fa-user me-4 "></i></p>
                     </div>
-                    <div>
-                        <p class=""> Donor Name : </p>
+                    <div class="col-md-8  py-4 ps-4 my-auto">
+                        <h1> {{ details.amount | currency:"INR" }}</h1>
+                        <p class="fw-lighter">Amount Donated</p>
+                    </div>
+                </div>
+                <hr class="my-0" />
+                <div class="row">
+                    <div class="col-md-4  border-right py-0     text-center">
+                        <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                            <div>
+                                <p> <i class=" fa-solid fa-user me-4 "></i></p>
+                            </div>
+                            <div>
+                                <p class=""> Donor Name : </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8  py-3  ps-4 my-auto">
+                        <h6>{{ details.donorname |titlecase }}</h6>
                     </div>
                 </div>
 
-            </div>
-            <div class="col-md-8  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
-                <h4>{{ details.donorname |titlecase }}</h4>
+                <hr class="my-0" />
+                <div class="row">
+                    <div class="col-md-4  border-right py-0     text-center">
+                        <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                            <div>
+                                <p> <i class=" fa-solid fa-address-card me-4 "></i></p>
+                            </div>
+                            <div>
+                                <p class=""> Address : </p>
+                            </div>
+                        </div>
 
-            </div>
-
-        </div>
-
-        <!--one row  -->
-        <div class="row  w-100 bg-white">
-
-            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
-                <!-- add icon -->
-
-                <div class="d-flex flex-row  align-items-center  px-4 ">
-                    <div>
-                        <p> <i class=" fa-solid fa-address-card me-4 "></i></p>
                     </div>
-                    <div>
-                        <p class=""> Address : </p>
+                    <div class="col-md-8  py-3  ps-4 my-auto">
+                        <h6>{{ details.address |titlecase }}</h6>
                     </div>
                 </div>
-            </div>
-            <div
-                class="col-md-8 text-truncate  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
-                <h4>{{ details.address }}</h4>
+                <hr class="my-0" />
+                <div class="row">
+                    <div class="col-md-4  border-right py-0     text-center">
+                        <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                            <div>
+                                <p> <i class=" fa-solid fa-envelope-open-text me-4 "></i></p>
+                            </div>
+                            <div>
+                                <p class=""> Email id : </p>
+                            </div>
+                        </div>
 
-            </div>
-
-        </div>
-
-        <!--one row  -->
-
-
-
-        <!--one row  -->
-        <div class="row  w-100 bg-white">
-
-            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
-                <!-- add icon -->
-
-                <div class="d-flex flex-row  align-items-center  px-4 ">
-                    <div>
-                        <p> <i class=" fa-solid fa-envelope-open-text me-4 "></i></p>
                     </div>
-                    <div>
-                        <p class=""> Email id : </p>
+                    <div class="col-md-8  py-3  ps-4 my-auto">
+                        <h6>{{ details.email }}</h6>
                     </div>
                 </div>
-            </div>
-            <div
-                class="col-md-8 text-truncate  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
-                <h4>{{ details.email }}</h4>
 
-            </div>
+                <hr class="my-0" />
+                <div class="row">
+                    <div class="col-md-4  border-right py-0     text-center">
+                        <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                            <div>
+                                <p> <i class=" fa-solid fa-envelope-open-text me-4 "></i></p>
+                            </div>
+                            <div>
+                                <p class=""> Mobile Number : </p>
+                            </div>
+                        </div>
 
-        </div>
-        <!--one row  -->
-        <div class="row  w-100 bg-white">
-
-            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
-                <!-- add icon -->
-
-                <div class="d-flex flex-row  align-items-center  px-4 ">
-                    <div>
-                        <p> <i class="fa-solid fa-mobile me-4"></i> </p>
                     </div>
-                    <div>
-                        <p class=""> Mobile Number : </p>
+                    <div class="col-md-8  py-3  ps-4 my-auto">
+                        <h6>{{ details.mobile }}</h6>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-8  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
-                <h4>{{ details.mobile }}</h4>
 
-            </div>
-        </div>
 
-        <div class="row  w-100 bg-white">
+                <hr class="my-0" />
+                <div class="row">
+                    <div class="col-md-4  border-right py-0     text-center">
+                        <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                            <div>
+                                <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                            </div>
+                            <div>
+                                <p class=""> Are you Indian Citizen ? </p>
+                            </div>
+                        </div>
 
-            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
-                <!-- add icon -->
-
-                <div class="d-flex flex-row  align-items-center  px-4 ">
-                    <div>
-                        <p> <i class=" fa-solid fa-passport me-4 "></i></p>
                     </div>
-                    <div>
-                        <p class=""> Are you Indian Citizen ? </p>
-                    </div>
-                </div>
-            </div>
-            <div
-                class="col-md-8 text-truncate  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
-                <h4>{{ details.isIndian | titlecase }}</h4>
-
-            </div>
-
-        </div>
-
-        <!-- one row -->
-        <div class="row  w-100 bg-white">
-
-            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
-                <!-- add icon -->
-
-                <div class="d-flex flex-row  align-items-center  px-4 ">
-                    <div>
-                        <p> <i class=" fa-sharp fa-solid fa-indian-rupee-sign me-4 "></i></p>
-                    </div>
-                    <div>
-                        <p class=""> Do you want 80G tax benefits ? </p>
+                    <div class="col-md-8  py-3  ps-4 my-auto">
+                        <h6>{{ details.isIndian }}</h6>
                     </div>
                 </div>
-            </div>
-            <div
-                class="col-md-8 text-truncate  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
-                <h4>{{ details.taxbenefits | titlecase }}</h4>
 
-            </div>
+                <hr class="my-0" />
+                <div class="row">
+                    <div class="col-md-4  border-right py-0     text-center">
+                        <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                            <div>
+                                <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                            </div>
+                            <div>
+                                <p class="">
+                                    Do you want 80G tax benefits ? </p>
+                            </div>
+                        </div>
 
-        </div>
-
-        <div class="row  w-100 bg-white">
-
-            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
-                <!-- add icon -->
-
-                <div class="d-flex flex-row  align-items-center  px-4 ">
-                    <div>
-                        <p> <i class="fa-solid fa-id-card me-4"></i> </p>
                     </div>
-                    <div>
-                        <p class=""> Identity Type : </p>
+                    <div class="col-md-8  py-3  ps-4 my-auto">
+                        <h6>{{ details.taxbenefits }}</h6>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-8  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
-                <h4>{{ details.identityproof |titlecase }}</h4>
 
-            </div>
-        </div>
+                <hr class="my-0" />
+                <div class="row">
+                    <div class="col-md-4  border-right py-0     text-center">
+                        <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                            <div>
+                                <p> <i class=" fa-solid fa-id-card me-4  "></i></p>
+                            </div>
+                            <div>
+                                <p class="">
+                                    Identity Type : </p>
+                            </div>
+                        </div>
 
-        <div class="row  w-100 bg-white">
-
-            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
-                <!-- add icon -->
-
-                <div class="d-flex flex-row  align-items-center  px-4 ">
-                    <div>
-                        <p> <i class="fa-solid fa-id-card  me-4 "></i></p>
                     </div>
-                    <div>
-                        <p class=""> Identity ID : </p>
-                    </div>
-                </div>
-            </div>
-            <div
-                class="col-md-8 text-truncate  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
-                <h4>{{ details.identitynumber }}</h4>
-
-            </div>
-
-        </div>
-
-
-
-        <!--one row  -->
-        <div class="row  w-100 bg-white">
-
-            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
-                <!-- add icon -->
-
-                <div class="d-flex flex-row  align-items-center  px-4 ">
-                    <div>
-                        <p> <i class="fa-brands fa-wpforms me-4"></i> </p>
-                    </div>
-                    <div>
-                        <p class=""> Is a registered member? </p>
+                    <div class="col-md-8  py-3  ps-4 my-auto">
+                        <h6>{{ details.identityproof |titlecase }}</h6>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-8  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
-                <h4>{{ details.isregisteredmember |titlecase }}</h4>
+                <hr class="my-0" />
+                <div class="row">
+                    <div class="col-md-4  border-right py-0     text-center">
+                        <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                            <div>
+                                <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                            </div>
+                            <div>
+                                <p class="">
+                                    Is a registered member? </p>
+                            </div>
+                        </div>
 
-            </div>
-        </div>
-
-
-
-
-        <!--one row  -->
-        <div class="row  w-100 bg-white">
-
-            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
-                <!-- add icon -->
-
-                <div class="d-flex flex-row  align-items-center  px-4 ">
-                    <div>
-                        <p> <i class="fa-sharp fa-solid fa-flag me-4"></i> </p>
                     </div>
-                    <div>
-                        <p class=""> Country : </p>
+                    <div class="col-md-8  py-3  ps-4 my-auto">
+                        <h6>{{ details.isregisteredmember }}</h6>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-8  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
-                <h4>{{ details.country |titlecase }}</h4>
 
-            </div>
-        </div>
+                <hr class="my-0" />
+                <div class="row">
+                    <div class="col-md-4  border-right py-0     text-center">
+                        <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                            <div>
+                                <p> <i class=" fa-sharp fa-solid fa-flag me-4  "></i></p>
+                            </div>
+                            <div>
+                                <p class="">
+                                    Country : </p>
+                            </div>
+                        </div>
 
-        <!--one row  -->
-        <div class="row  w-100 bg-white">
-
-            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
-                <!-- add icon -->
-
-                <div class="d-flex flex-row  align-items-center  px-4 ">
-                    <div>
-                        <p> <i class="fa-sharp fa-solid fa-wallet me-4"></i> </p>
                     </div>
-                    <div>
-                        <p class=""> Mode of Payment : </p>
+                    <div class="col-md-8  py-3  ps-4 my-auto">
+                        <h6>{{ details.country | titlecase }}</h6>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-8  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
-                <h4>{{ details.modeofpayment }}</h4>
 
-            </div>
-        </div>
+                <hr class="my-0" />
+                <div class="row">
+                    <div class="col-md-4  border-right py-0     text-center">
+                        <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                            <div>
+                                <p> <i class=" fa-sharp fa-solid fa-wallet me-4  "></i></p>
+                            </div>
+                            <div>
+                                <p class="">
 
+                                    Mode of Payment : </p>
+                            </div>
+                        </div>
 
-        <!-- one row -->
-        <div class="row  w-100 bg-white">
-
-            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
-                <!-- add icon -->
-
-                <div class="d-flex flex-row  align-items-center  px-4 ">
-                    <div>
-                        <p> <i class="fa-sharp fa-solid fa-wallet me-4 "></i></p>
                     </div>
-                    <div>
-                        <p class=""> Card Name : </p>
+                    <div class="col-md-8  py-3  ps-4 my-auto">
+                        <h6>{{ details.modeofpayment }}</h6>
                     </div>
                 </div>
-            </div>
-            <div
-                class="col-md-8 text-truncate  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
-                <h4>{{ details.cardname | titlecase }}</h4>
 
-            </div>
+                <hr class="my-0" />
+                <div class="row">
+                    <div class="col-md-4  border-right py-0     text-center">
+                        <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                            <div>
+                                <p> <i class=" fa-sharp fa-solid fa-wallet me-4  "></i></p>
+                            </div>
+                            <div>
+                                <p class="">
 
-        </div>
 
-        <!--one row  -->
-        <div class="row  w-100 bg-white">
+                                    Card Name : </p>
+                            </div>
+                        </div>
 
-            <div class="col-md-4  py-3 border-left border-right  border-bottom    text-center">
-                <!-- add icon -->
-
-                <div class="d-flex flex-row  align-items-center  px-4 ">
-                    <div>
-                        <p> <i class="fa-sharp fa-solid fa-comment-dots me-4"></i> </p>
                     </div>
-                    <div>
-                        <p class=""> Message : </p>
+                    <div class="col-md-8  py-3  ps-4 my-auto">
+                        <h6>{{ details.cardname | titlecase }}</h6>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-8  py-3 border-left border-right   border-right border-bottom  ps-4 my-auto">
-                <p>{{ details.message }}</p>
+
+                <hr class="my-0" />
+                <div class="row">
+                    <div class="col-md-4  border-right py-0     text-center">
+                        <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                            <div>
+                                <p> <i class=" fa-sharp fa-solid fa-comment-dots me-4  "></i></p>
+                            </div>
+                            <div>
+                                <p class="">
+                                    Message : </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8  py-3  ps-4 my-auto">
+                        <h6>{{ details.message | titlecase }}</h6>
+                    </div>
+                </div>
 
             </div>
         </div>
     </div>
+
 </div>

@@ -8,9 +8,9 @@ export class AddCourseService extends BaseHttp {
   getURL = 'student/getAll?operation=course';
   getCoursePost = 'courseList/coursesList?operation=add';
 
-  updatecourseURL = ""
+  updatecourseURL = "courseList/coursesList?operation=update"
 
-  deleteCourseURL = ""
+  deleteCourseURL = "courseList/coursesList?operation=delete"
   getcategorylist = "courseList/getAll?operation=categoryList"
   getAllcoursesURL = 'courseList/getAll?operation=coursesList'
 

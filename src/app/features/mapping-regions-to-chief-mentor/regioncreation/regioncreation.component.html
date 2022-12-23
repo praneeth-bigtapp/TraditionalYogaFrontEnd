@@ -9,7 +9,6 @@
     </nav>
 
     <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
-        <!-- <h3 class=" pl-2 text-secondary ">Regions creation</h3> -->
         <button type="button" (click)="addregion()" *ngIf="!displaycontent"
             class="btn btn-outline-secondary btn-rounded d-inline-block ">
             Add regions
@@ -27,38 +26,49 @@
                         <label>Enter Region</label>
                         <mat-form-field appearance="outline">
                             <input type="text" formControlName="region" aria-label="Country" matInput>
-                            <mat-error [hidden]="!regionfilterform.get('region')?.hasError('required')">
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="regionfilterform.controls['region'].invalid && (regionfilterform.controls['region'].dirty || regionfilterform.controls['region'].touched)">
+                            <mat-error [hidden]=" !regionfilterform.get('region')?.hasError('required')  ">
                                 Region is mandatory
                             </mat-error>
-                        </mat-form-field>
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <label>Country</label>
                         <mat-form-field appearance="outline">
                             <input type="text" placeholder="Pick one" aria-label="Country" matInput
-                                formControlName="country" (keyup)="countrychange($event)"
+                                [readonly]="iseditable" formControlName="country" (keyup)="countrychange($event)"
                                 (change)="countrychange($event)" [matAutocomplete]="country">
                             <mat-autocomplete autoActiveFirstOption #country="matAutocomplete">
                                 <mat-option *ngFor="let country of countryfilter |async " [value]="country">
                                     {{country}}
                                 </mat-option>
                             </mat-autocomplete>
-                            <mat-error [hidden]="!regionfilterform.get('country')?.hasError('required')">
+
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="regionfilterform.controls['country'].invalid && (regionfilterform.controls['country'].dirty || regionfilterform.controls['country'].touched)">
+                            <mat-error [hidden]=" !regionfilterform.get('country')?.hasError('required')  ">
                                 Country is mandatory
                             </mat-error>
-                        </mat-form-field>
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <label>Part</label>
                         <mat-form-field appearance="outline">
-                            <mat-select formControlName="part" [compareWith]="compareselect">
+                            <mat-select formControlName="part" [compareWith]="compareselect" [disabled]="iseditable">
                                 <mat-option *ngFor="let part of partList" [value]="part.partId">
                                     {{part.partName}}</mat-option>
                             </mat-select>
-                            <mat-error [hidden]="!regionfilterform.get('part')?.hasError('required')">
+
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="regionfilterform.controls['part'].invalid && (regionfilterform.controls['part'].dirty || regionfilterform.controls['part'].touched)">
+                            <mat-error [hidden]=" !regionfilterform.get('part')?.hasError('required')  ">
                                 Part is mandatory
                             </mat-error>
-                        </mat-form-field>
+                        </div>
                     </div>
                 </div>
                 <br />
@@ -67,20 +77,26 @@
                         <label>States</label>
                         <mat-form-field appearance="outline">
                             <input type="text" placeholder="Pick one" aria-label="Country" matInput
-                                formControlName="state" [matAutocomplete]="states">
+                                [readonly]="iseditable" [disabled]="iseditable" formControlName="state"
+                                [matAutocomplete]="states">
                             <mat-autocomplete autoActiveFirstOption #states="matAutocomplete">
                                 <mat-option *ngFor="let country of statefilter |async " [value]="country">
                                     {{country}}
                                 </mat-option>
                             </mat-autocomplete>
-                            <mat-error [hidden]="!regionfilterform.get('state')?.hasError('required')">
-                                State is mandatory
-                            </mat-error>
+
                         </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="regionfilterform.controls['state'].invalid && (regionfilterform.controls['state'].dirty || regionfilterform.controls['state'].touched)">
+                            <mat-error [hidden]=" !regionfilterform.get('state')?.hasError('required')  ">
+                                States is mandatory
+                            </mat-error>
+                        </div>
                     </div>
                     <div class="col d-flex flex-row flex-wrap mt-4">
-                        <button type="submit" class="btn btn-outline-secondary btn-rounded  d-inline-block ">
-                            Add
+                        <button type="submit" *ngIf="issubmit"
+                            class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                            {{iseditable ? "Update" :"Add " }}
                         </button>
                         <button type="button" (click)="reseteditable()"
                             class="btn btn-outline-secondary btn-rounded d-inline-block ">
@@ -98,7 +114,7 @@
         <div class="card-header text-white bg-secondary">
             Region Creations
         </div>
-        <div class="card-body bg-transparent px-0 py-2">
+        <div class="card-body bg-transparent px-0 py-0">
             <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
                 aria-label="users">
                 <ng-container matColumnDef="regionId">
@@ -106,10 +122,10 @@
                         <label mat-sort-header>
                             S.No
                         </label>
-                        <!-- <input type="text" (keyup)="updatePagination('courseId')"
-                        [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" /> -->
+                        <input type="text" (keyup)="updatePagination('courseId')"
+                            [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" disabled />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let i= index"> {{i+1}} </td>
+                    <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="regionName">
@@ -155,6 +171,8 @@
                         <label mat-sort-header>
                             Actions
                         </label>
+                        <input type="text" (keyup)="updatePagination('State')"
+                            [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" disabled />
                     </th>
                     <td mat-cell *matCellDef="let element" class="col-2">
                         <div class="d-flex flex-wrap justify-content-evenly align-items-center">
@@ -164,22 +182,20 @@
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                             </span>
                             <span matTooltip="Delete" style="cursor: pointer;"
-                                (click)="deletedetails(element.praticeLibaryId)">
+                                (click)="deletedetails(element.regionId)">
                                 <i class="far fa-trash-alt" aria-hidden="true"></i>
                             </span>
                         </div>
 
                     </td>
                 </ng-container>
-
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
 
-            <mat-paginator class="bg-transparent" [pageSizeOptions]="[25,50,75, 100]" aria-label="Select page">
+            <mat-paginator class="card-body" [pageSizeOptions]="[10,25, 50, 100,150,200]"
+                (page)="onpaginatechange($event)" aria-label="Select page">
             </mat-paginator>
         </div>
     </div>
-
-
 </div>

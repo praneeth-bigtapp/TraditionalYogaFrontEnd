@@ -44,6 +44,9 @@ export class RegisterComponent implements OnInit {
 
   onUserSubmit() {
 
+    if (this.RegisterForm.invalid)
+      return this.RegisterForm.markAllAsTouched()
+
   }
 
   getRoles() {

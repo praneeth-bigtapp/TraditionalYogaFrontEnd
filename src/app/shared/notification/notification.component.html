@@ -1,52 +1,75 @@
 <div class="ConfigurationTypes_textpadding ">
-    <h3 class="mb-5 pl-2"> Notifications </h3>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/addpages">Website Management</a></li>
 
-    <div class="card border-light pt-3 ">
+            <li class="breadcrumb-item active" aria-current="page">Notification</li>
+        </ol>
+    </nav>
+    <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
+        <!-- <h3 class=" pl-2 text-secondary "> Add Courses/View Course Details</h3> -->
+        <!-- <h3 class=" pl-2 text-secondary ">Courses</h3> -->
 
-        <div class="card-body bg-white">
+        <button type="button" *ngIf="!displaycontent" (click)="addnotification()"
+            class="btn btn-outline-secondary btn-rounded d-inline-block ">
+            Add Notification
+        </button>
+    </div>
 
 
+    <div class="card  bg-secondary" *ngIf="displaycontent">
+        <div class="card-header text-white bg-secondary">
+            {{iseditable ? "Update" :"Add" }} Notification
+
+        </div>
+        <div class="card-body bg-white  py-2">
             <form [formGroup]="notificationform" class=" me-5" (ngSubmit)="addmedia()">
 
-                <!-- Back Cover -->
-                <div class=" row align-items-center  ">
-                    <h6 class="text-md-right col-md-4 ">Select Category</h6>
-                    <div class="col ">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Select Category</mat-label>
-                            <mat-select formControlName="category">
-                                <mat-option *ngFor="let notification of notificationtypes" [value]="notification">
-                                    {{notification}}</mat-option>
-                            </mat-select>
-                            <mat-error [hidden]="!notificationform.get('category')?.hasError('required')">
-                                Please Select Category
-                            </mat-error>
-                        </mat-form-field>
+                <div class="row">
+                    <div class=" col-md-4 row align-items-center  ">
+                        <label>Category</label>
+                        <div class="col ">
+                            <mat-form-field appearance="outline">
+                                <mat-select formControlName="category" [compareWith]="compareselect"
+                                    [disabled]="iseditable">
+                                    <mat-option *ngFor="let notification of notificationtypes"
+                                        [value]="notification.categoryId">
+                                        {{notification.categoryName}}</mat-option>
+                                </mat-select>
 
-                    </div>
-                </div>
-                <!-- Title -->
-                <div class="row align-items-center ">
-                    <h6 class="text-md-right col-md-4">Title </h6>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="notificationform.controls['category'].invalid && (notificationform.controls['category'].dirty || notificationform.controls['category'].touched)">
+                                <mat-error [hidden]=" !notificationform.get('category')?.hasError('required')  ">
+                                    Category is mandatory
+                                </mat-error>
+                            </div>
 
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="">
-                            <mat-label>Title</mat-label>
-                            <input matInput autocomplete="off" formControlName="title" required>
-                            <mat-error [hidden]="!notificationform.get('title')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
+                        </div>
                     </div>
 
-                </div>
+                    <div class=" col-md-4 row align-items-center ">
+                        <label>Title </label>
 
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="">
+                                <input matInput autocomplete="off" formControlName="title" required>
 
-                <!-- Image -->
-                <div class="row align-items-center align-items-center ">
-                    <h6 class="text-md-right col-md-4">Upload file </h6>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="notificationform.controls['title'].invalid && (notificationform.controls['title'].dirty || notificationform.controls['title'].touched)">
+                                <mat-error [hidden]=" !notificationform.get('title')?.hasError('required')  ">
+                                    Title is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
 
-                    <div class="col-md ">
+                    </div>
+
+                    <div class=" col-md-4 row align-items-center ">
+                        <label>Upload file </label>
+
                         <input type="file" class="border" id="file" formControlName="file"
                             (change)="onfilechange($event)" accept="image/*" required="true" /> <br />
 
@@ -55,32 +78,127 @@
 
                 </div>
 
-                <!-- Descriptions  -->
-                <div class="row align-items-center">
-                    <h6 class="text-md-right col-md-4">Message </h6>
+                <br />
 
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="">
-                            <mat-label>Message</mat-label>
-                            <textarea matInput class="p-2" formControlName="description" rows="3"
-                                placeholder="Description"></textarea>
-                            <mat-error [hidden]="!notificationform.get('description')?.hasError('required')">
-                                Please Type Few Words
-                            </mat-error>
-                        </mat-form-field>
+                <div class="row align-items-center ">
+                    <div class="col-md-6">
+                        <div class="row align-items-center">
+                            <label>Message </label>
+
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="">
+                                    <textarea matInput class="p-2" formControlName="description" rows="3"
+                                        placeholder="Description"></textarea>
+
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="notificationform.controls['description'].invalid && (notificationform.controls['description'].dirty || notificationform.controls['description'].touched)">
+                                    <mat-error [hidden]=" !notificationform.get('description')?.hasError('required')  ">
+                                        Category is mandatory
+                                    </mat-error>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
+                    <div class="col-md-3">
+                        <button type="submit" *ngIf="issubmit"
+                            class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                            {{iseditable ? "Update" :"Add" }}
+                        </button>
 
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" (click)="reseteditable()"
+                            class="btn btn-outline-secondary btn-rounded d-inline-block ">
+                            Cancel
+                        </button>
+                    </div>
                 </div>
-
-
-                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block float-md-right">
-                    Upload
-                </button>
-
+                <br />
             </form>
         </div>
-
     </div>
+
+    <div class="card ">
+        <div class="card-header text-white bg-secondary">
+            Notifications
+        </div>
+        <div class="bg-transparent px-0 py-0">
+            <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
+                aria-label="users">
+
+                <ng-container matColumnDef="notificationId">
+                    <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
+                        <label mat-sort-header>
+                            S.No
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseDuration')"
+                            [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
+                </ng-container>
+                <ng-container matColumnDef="title">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Title
+                        </label>
+                        <input type="text" (keyup)="updatePagination('startDate')"
+                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.title || "Nil" | titlecase}} </td>
+                </ng-container>
+                <ng-container matColumnDef="categoryId">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Category
+                        </label>
+                        <input type="text" (keyup)="updatePagination('endDate')"
+                            [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let element "> {{element.categoryId.categoryName || "Nil" }} </td>
+                </ng-container>
+                <ng-container matColumnDef="uploadFile">
+                    <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
+                        <label mat-sort-header>
+                            File
+                        </label>
+                        <input type="text" (keyup)="updatePagination('currentStatus')" disabled
+                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let element "> {{element.uploadFile }} </td>
+                </ng-container>
+                <ng-container matColumnDef="Action">
+                    <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
+                        <label mat-sort-header>
+                            Actions
+                        </label>
+                        <input type="text" (keyup)="updatePagination('currentStatus')" disabled
+                            [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let element ">
+                        <div class="d-flex flex-wrap justify-content-evenly align-items-center">
+                            <i class="fa-solid fa-eye fs-5 text-info" (click)="viewdetails(element)"
+                                matTooltip="View Course Activity" matTooltip="View"></i>
+                            <span matTooltip="Edit" (click)="editdetails(element)">
+                                <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                            </span>
+                            <span matTooltip="Delete" style="cursor: pointer;"
+                                (click)="deletedetails(element.courseId)"> <i class="far fa-trash-alt"
+                                    aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator class="card-body" (page)="onpaginatechange($event)"
+                [pageSizeOptions]="[10,25, 50, 100,150,200]" aria-label="Select page">
+            </mat-paginator>
+        </div>
+    </div>
+
 
 
 

@@ -264,6 +264,7 @@ table.table-bordered.dataTable tbody th,
 table.table-bordered.dataTable tbody td {
     border-bottom-width: 0;
     vertical-align: baseline;
+    
 }
 
 .btn-warning {
@@ -388,10 +389,10 @@ textarea:focus {
     padding: 0 !important;
 } */
 
-/* .mat-error {
-    color: #212529 !important;
+.mat-error {
+    /* color: #212529 !important; */
     font-size: 12px !important;
-} */
+}
 
 /* mat-paginator.mat-paginator.table-responsive {
     border-radius: 10px;
@@ -447,7 +448,9 @@ textarea:focus {
     padding: 5px 10px !important;
     margin-bottom: 5px !important;
     vertical-align: bottom !important;
+    text-align: center;
 }
+
 .mat-table {
     font-family: 'Poppins', sans-serif !important;
 }
@@ -511,7 +514,7 @@ app-login {
     height: 250px;
     padding: 2rem;
     text-align: center;
-    border: dashed 1px #979797;
+    /* border: dashed 1px #979797; */
     position: relative;
     margin: 0 auto;
     background: #fff;
@@ -760,11 +763,16 @@ width: calc(100% - 150px) !important;
 .mat-form-field-appearance-outline .mat-form-field-outline-end {
     border-radius: 0 10px 10px 0 !important;
 }
-.mat-form-field-infix { padding: 0px !important;}
-.mat-form-field-appearance-outline .mat-form-field-infix{
+
+.mat-form-field-infix {
+    padding: 0px !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
     padding: 0.30em 0 0.55em 0 !important;
     /* padding: 0px !important; */
 }
+
 input.mat-input-element {
     margin-top: -0.0625em;
     /* height: 38px !important; */
@@ -773,9 +781,11 @@ input.mat-input-element {
 .mat-form-field-wrapper {
     padding-bottom: 0em !important;
 }
-.mat-form-field-subscript-wrapper{
-    margin-top: 1.75rem !important; 
+
+.mat-form-field-subscript-wrapper {
+    margin-top: 1.75rem !important;
 }
+
 .mat-paginator .mat-form-field-infix {
     padding: 15px 0px !important;
 }
@@ -796,6 +806,12 @@ input.mat-input-element {
 /* .mat-paginator-container .mat-paginator .mat-form-field-infix { padding: 0px !important;}
 .mat-paginator-container .mat-select {border: 1px solid #ddd !important;}  */
 /* Shake animation  */
+
+.signup-content {
+    padding-top: 5rem;
+}
+
+/* Shake animation */
 
 @keyframes shake {
     0% {
@@ -865,19 +881,26 @@ input.mat-input-element {
     .desktop-view {
         display: none;
     }
-    .signup-content { padding-top: 0rem;}
-    .signup-image{
+
+    .signup-content {
+        padding-top: 0rem;
+    }
+
+    .signup-image {
         text-align: center;
     }
+
     .signup-image img {
         width: 50%;
     }
+
     .signup-form {
-    margin-left: 10%;
-    margin-right: 10%;
-    padding-left: 0px;
-    width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+        padding-left: 0px;
+        width: 80%;
     }
+
     .btn-rounded {
         padding: 7px 25px;
         min-width: auto !important;

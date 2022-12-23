@@ -5,89 +5,91 @@
       <li class="breadcrumb-item active" aria-current="page">Donations Management </li>
     </ol>
   </nav>
-  <div class="card mt-5">
-    <div class="card-header text-white bg-secondary" >
+  <div class="card mt-3">
+    <div class="card-header text-white bg-secondary">
       Donations Management
-  </div>
-  <div class="card-body bg-white">
-  <div class="bg-white   ">
-    <form class="col mt-3 d-flex  flex-wrap" [formGroup]="dateForm" (submit)="filterDate()">
+    </div>
+    <div class="card-body bg-white">
+      <div class="bg-white   ">
+        <form class="col mt-3 d-flex  flex-wrap" [formGroup]="dateForm" (submit)="filterDate()">
+          <div class="row ">
+            <div class="col-md-4 mb-3">
+              <label>From date</label>
+              <mat-form-field class="" appearance="outline">
+
+                <input matInput formControlName="fromdate" placeholder="From date" type="date">
+                <mat-error *ngIf="dateForm.controls['fromdate'].hasError('required')">
+                  From date is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <label>To date</label>
+              <mat-form-field class="" appearance="outline">
+
+                <input matInput formControlName="todate" placeholder="To date" type="date">
+                <mat-error *ngIf="dateForm.controls['todate'].hasError('required')">
+                  To date is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+
+
+            <div class="col-md-4">
+
+              <label>Region</label>
+
+              <mat-form-field appearance="outline">
+                <mat-select matNativeControl formControlName="regiondropdown" (selectionChange)="getallcountry()">
+                  <mat-option *ngFor="let item of region" [value]="item.regionId">{{item.regionName | titlecase}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+            </div>
+
+            <div class="col-md-4">
+
+
+              <label>Country</label>
+
+              <mat-form-field appearance="outline">
+                <mat-select matNativeControl formControlName="countrydropdown">
+                  <mat-option *ngFor="let item of countryList" [value]="item.countryName">{{item.countryName |
+                    titlecase}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </div>
+
+            <div class=" col-md-4 mt-2">
+              <button type="submit" class="btn btn-outline-secondary mt-3  btn-rounded d-inline-block "> Submit
+              </button>
+            </div>
+          </div>
+
+
+        </form>
+
+
+      </div>
+      <hr />
+
       <div class="row">
-        <div class="col-md-4">
-          <label>From date:</label>
-          <mat-form-field class="" appearance="outline">
-            
-            <input matInput formControlName="fromdate" placeholder="From date" type="date">
-
-          </mat-form-field>
+        <div class="col-md-6 text-center">
+          <p class="fw-lighter">Total Amount of Donations Received</p>
+          <h3> {{ total | currency:"INR"}}</h3>
         </div>
-        <div class="col-md-4">
-          <label>To date:</label>
-          <mat-form-field class="" appearance="outline">
-           
-            <input matInput formControlName="todate" placeholder="To date" type="date">
-
-          </mat-form-field>
-        </div>
-
-
-
-        <div class="col-md-4">
-          <label>Region:</label>
-          <mat-form-field appearance="outline" class="">
-            
-            <!-- <input type="text" placeholder="Pick one" aria-label="Region" matInput
-          formControlName="regiondropdown" (valueChange)="updatePagination()"
-          [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" [matAutocomplete]="auto">
-          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-              <mat-option *ngFor="let country of countryfilter |async " [value]="country">
-                  {{country}}
-              </mat-option>
-          </mat-autocomplete> -->
-            <input matInput type="text" formControlName="regiondropdown">
-          </mat-form-field>
-        </div>
-
-        <div class="col-md-4">
-          <label>Country:</label>
-          <mat-form-field appearance="outline" class="">
-            
-            <input type="text" placeholder="Pick one" aria-label="Country" matInput formControlName="countrydropdown"
-              (valueChange)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
-              [filter]="filterData" [matAutocomplete]="auto">
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-              <mat-option *ngFor="let country of countryfilter |async " [value]="country">
-                {{country}}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-        </div>
-
-        <div class=" col-md-4 mt-2">
-          <button type="button" class="btn btn-outline-secondary mt-3  btn-rounded d-inline-block "> Submit
-          </button>
+        <div class="col-md-6 text-center">
+          <p class="fw-lighter">SubTotal Amount of Donations Received</p>
+          <h3> {{ subtotal | currency:"INR"}}</h3>
         </div>
       </div>
 
-
-    </form>
-
-
-  </div>
-  <div class="  bg-white pt-4  d-flex flex-wrap">
-
-    <div class="col-md-4 border-top border-left border-bottom  py-4  text-center">
-      <!-- add icon -->
-      <h1 class="text-muted  pt-4"><i class="fas fa-rupee-sign"></i></h1>
     </div>
-    <div class="col-md-8  border-top border-right border-bottom py-5 ps-4  my-auto">
-      <p class="fw-lighter">Total Amount of Donations Received</p>
-      <h3> {{ total | currency:"INR"}}</h3>
-
-    </div>
-
-  </div>
-</div>
   </div>
 
 
@@ -100,14 +102,14 @@
             S.No
           </label>
 
-          <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value"
-            [filter]="filterData" />
+          <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value" disabled
+            [filter]="filterData" disabled="true" />
         </th>
-        <td mat-cell *matCellDef="let i=index" class="col-1 text-center"> {{i+1}} </td>
+        <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
       </ng-container>
 
 
-      <ng-container matColumnDef="Date">
+      <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
             Date
           </label>
@@ -115,7 +117,7 @@
           <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
             [filter]="filterData" />
         </th>
-        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.Date}} </td>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.date |date:'dd-MM-YYYY'}} </td>
       </ng-container>
 
 
@@ -127,11 +129,11 @@
           <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
             [filter]="filterData" />
         </th>
-        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.DonorName}} </td>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.donarId.donarName}} </td>
       </ng-container>
 
 
-      <ng-container matColumnDef="Country">
+      <ng-container matColumnDef="country">
         <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
             Country
           </label>
@@ -139,7 +141,7 @@
           <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
             [filter]="filterData" />
         </th>
-        <td mat-cell *matCellDef="let element" class="col- text-center"> {{element.Country}} </td>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.donarId.countryId.countryName}} </td>
       </ng-container>
       <!-- <ng-container matColumnDef="currency">
         <th mat-header-cell *matHeaderCellDef class="col-1 text-center">  <label mat-sort-header>
@@ -151,17 +153,18 @@
         <td mat-cell *matCellDef="let element" class="col-1 text-center"> {{element.currency}} </td>
       </ng-container> -->
 
-      <ng-container matColumnDef="Amountdonated">
+      <ng-container matColumnDef="amountDonated">
         <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
-            Amount donated in Rs
+            Amount (Rs)
           </label>
-
-          <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[5].Value"
-            [filter]="filterData" />
+          <!-- 
+          <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[4].Value"
+            [filter]="filterData" /> -->
+          <input type="text" (keyup)="manualcompare($event)" />
         </th>
-        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.Amountdonated}} </td>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.donarId.donationAmount}} </td>
       </ng-container>
-      <ng-container matColumnDef="pan">
+      <ng-container matColumnDef="panNumber">
         <th mat-header-cell *matHeaderCellDef class="col-2 text-center"><label mat-sort-header>
             PAN
           </label>
@@ -169,23 +172,41 @@
           <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[5].Value"
             [filter]="filterData" />
         </th>
-        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.pan}} </td>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.donarId.panNumber}} </td>
       </ng-container>
 
 
       <ng-container matColumnDef="ViewDetails">
-        <th mat-header-cell *matHeaderCellDef class=" text-center col"> View Details</th>
+        <th mat-header-cell *matHeaderCellDef class=" text-center col">
+          <label mat-sort-header>
+            Actions
+          </label>
+          <input type="text" (keyup)="updatePagination()" disabled [(ngModel)]="filterData.filterColumnNames[6].Value"
+            [filter]="filterData" disabled="true" />
+        </th>
+
+
         <td mat-cell *matCellDef="let element" class="text-center col-1 ml-5 mt-3">
-            <i class="fa-solid fa-eye fs-5 text-info" (click)="viewDetails('')"
-          matTooltip="View Course Activity" matTooltip="View"></i> </td>
+          <i class="fa-solid fa-eye fs-5 text-info" (click)="viewDetails(element.donationId)"
+            matTooltip="View Course Activity" matTooltip="View"></i>
+          <!-- <span matTooltip="Edit" (click)="editdetails(element)">
+            <i class="fas fa-pencil-alt mx-4" aria-hidden="true"></i>
+          </span>
+          <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.praticeLibaryId)">
+            <i class="far fa-trash-alt" aria-hidden="true"></i>
+          </span> -->
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
-  <div class="bg-white d-flex  flex-row justify-content-end ">
-    <mat-paginator class="" [pageSizeOptions]="[5,10,25, 50, 100]" aria-label="Select page">
-    </mat-paginator>
+  <div class="bg-white d-flex  flex-row justify-content-end card-body">
+    
+
+  <mat-paginator class="card-body" [pageSizeOptions]="[10,25, 50, 100,150,200]"
+                (page)="onpaginatechange($event)" aria-label="Select page">
+            </mat-paginator>
   </div>
 </div>

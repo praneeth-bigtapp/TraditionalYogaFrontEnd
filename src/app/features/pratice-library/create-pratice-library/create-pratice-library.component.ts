@@ -5,6 +5,9 @@ import { CreatepraticelibraryService } from '../service/createpraticelibrary.ser
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
+import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 
 @Component({
   selector: 'app-create-pratice-library',
@@ -14,12 +17,15 @@ import { MatTableDataSource } from '@angular/material/table';
 export class CreatePraticeLibraryComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
+
+
+  pageno: number = 1
   category!: string
   addmediaform!: any
   timerror!: boolean
   categoryerror: boolean = false
   displaycontent: boolean = false
-
+  issubmit: boolean = true
   filterData: any;
   gridData = [];
   dataSource: any;
@@ -31,7 +37,9 @@ export class CreatePraticeLibraryComponent implements OnInit {
   constructor(
     private formbuilder: FormBuilder,
     private service: CreatepraticelibraryService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    
+    private dialog: MatDialog,
   ) {
 
     this.filterData = {
@@ -59,6 +67,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
       next: (response) => {
         this.data = response
         this.data = this.data.reverse()
+
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
@@ -76,16 +85,24 @@ export class CreatePraticeLibraryComponent implements OnInit {
     })
   }
 
+  onpaginatechange(event: any) {
+
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
   ngOnInit(): void {
     this.addmediaform = this.formbuilder.group({
       praticelibraryId: [null],
-
       category: [null, Validators.compose([Validators.required])],
-      videolink: [null, Validators.compose([Validators.required])],
+      videolink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
       videotitle: [null, Validators.compose([Validators.required])],
       videodescription: [null, Validators.compose([Validators.required])],
-      videoduration: [null, Validators.compose([Validators.required])],
-      vidoemetakeywords: [null, Validators.compose([Validators.required])]
+      videoduration: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.durationvalidation)])],
+      vidoemetakeywords: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])]
     })
   }
 
@@ -97,8 +114,10 @@ export class CreatePraticeLibraryComponent implements OnInit {
     this.filterData.dataSource.paginator = this.paginator;
   }
 
-  opensnackBar(data: any) {
-    this._snackBar.open(data.message, 'Close')
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
   }
 
   coursechange() {
@@ -117,28 +136,54 @@ export class CreatePraticeLibraryComponent implements OnInit {
   }
 
   viewdetails(element: any) {
+    this.addmediaform.setValue({
+      praticelibraryId: element.praticeLibaryId,
+      category: element.categoryId,
+      videolink: element.videoLink,
+      videotitle: element.title,
+      videodescription: element.message,
+      videoduration: element.duration,
+      vidoemetakeywords: element.metaKeyword,
+    });
 
+    this.issubmit = false
+    this.displaycontent = true
   }
-  deletedetails(id: any) {
+  deletedetails(id: any, category: any) {
 
     const body = {
       "praticeLibaryId": id,
     }
 
-    this.service.deletelibrary(body).subscribe({
-      next: (response) => {
-        this.opensnackBar(response)
-        this.addmediaform.reset()
-        this.getdata()
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this library ?"
       },
-      error: (error) => {
-        console.error(error.message);
-      }
+      width: "30%"
     })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.service.deletepraticelibrary(body, category)?.subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.addmediaform.reset()
+            this.getdata()
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
+
+    })
+
+
 
   }
   editdetails(element: any) {
-    console.log(element);
 
     this.addmediaform.setValue({
       praticelibraryId: element.praticeLibaryId,
@@ -150,7 +195,9 @@ export class CreatePraticeLibraryComponent implements OnInit {
       vidoemetakeywords: element.metaKeyword,
     });
     this.iseditable = true
+    this.issubmit = true
     this.displaycontent = true
+
   }
 
   reseteditable() {
@@ -177,22 +224,20 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
 
       if (this.iseditable) {
-        //editable
         const body = {
           "praticeLibaryId": praticelibraryId,
+          "categoryId": category,
           "videoLink": videolink,
           "duration": videoduration,
           "title": videotitle,
           "message": videodescription,
           "metaKeyword": vidoemetakeywords
         }
-        console.log(body);
 
-        this.service.updatelibrary(body).subscribe({
+        this.service.updatepraticelibrary(body, category)?.subscribe({
           next: (response) => {
             this.addmediaform.reset()
-            // this.opensnackBar(response)
-            this.opensnackBar({ message: "Library Created" })
+            this.openSnackBar({ message: "Library Updated" })
             this.getdata()
 
           },
@@ -208,10 +253,8 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
       this.service.postpraticelibrary(body, category)?.subscribe({
         next: (response) => {
-
           this.addmediaform.reset()
-          // this.opensnackBar(response)
-          this.opensnackBar({ message: "Library Created" })
+          this.openSnackBar({ message: "Library Created" })
           this.getdata()
         },
         error: (error) => {

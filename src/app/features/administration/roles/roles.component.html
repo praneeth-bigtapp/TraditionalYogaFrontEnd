@@ -1,8 +1,20 @@
 <div class="ConfigurationTypes_textpadding">
 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/administration/roles">Admin Management</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Role</li>
+        </ol>
+    </nav>
+    <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
+
+        <button type="button" class="btn btn-outline-secondary btn-rounded"
+            *ngIf="!isAddRoleForm && pagePermissions.Add" (click)="onAddRole()"> Add Role </button>
+    </div>
     <div class="card border-light" *ngIf="isAddRoleForm">
         <div class="card-header text-white bg-secondary">
-            Add Role
+            {{editMode ? "Update":"Add"}} Role
         </div>
         <form [formGroup]="AddRoleForm" (ngSubmit)="onAddRoleSubmit()">
             <div class="card-body bg-white">
@@ -10,19 +22,21 @@
                     <div class="col-md-4">
                         <div class="mb-3">
                             <label>Role name</label>
-                            <mat-form-field  appearance="outline">
-                                <!-- <mat-label>Role name</mat-label> -->
+                            <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" formControlName="roleName" required>
-                                <mat-error *ngIf="AddRoleForm.controls['roleName'].hasError('required')">Role name is
-                                    required
-                                </mat-error>
                             </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="AddRoleForm.controls['roleName'].invalid && (AddRoleForm.controls['roleName'].dirty || AddRoleForm.controls['roleName'].touched)">
+                                <mat-error *ngIf="AddRoleForm.controls['roleName'].hasError('required')">
+                                    Role Name is mandatory
+                                </mat-error>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6 ">
                         <div class="mb-3 mt-1 pt-3">
                             <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
-                                Submit
+                                {{editMode ? "Update":"Add"}}
                             </button>
                             <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block m-2"
                                 (click)="onCancel()"> Cancel
@@ -32,60 +46,67 @@
                 </div>
             </div>
         </form>
-    </div>
-
-    <h3 class="mb-3"> Roles List
-        <span class="float-end mb-2">
-            <button type="button" class="btn btn-outline-secondary btn-rounded"
-                *ngIf="!isAddRoleForm && pagePermissions.Add" (click)="onAddRole()"> Add Role </button>
-        </span>
+        <br *ngIf="errorMessage" />
         <div style="height:10px">
             <div *ngIf="errorMessage" [ngStyle]="{'color': errorType == 'Error' ? 'red':'green'}"
                 class="notificationMessage">{{Message}}</div>
         </div>
-    </h3>
-    <div class="clearfix"></div>
+    </div>
+    <div class="card border-light">
+        <div class="card-header text-white bg-secondary">
+            Roles List
+        </div>
+        <div class="bg-transparent px-0 py-0">
+            <table mat-table [dataSource]="this.filterData.dataSource" matSort
+                class="mat-elevation-z8 mat-datagrid w-100" aria-label="roles">
 
-    <table mat-table [dataSource]="this.filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
-        aria-label="roles">
+                <ng-container matColumnDef="sno">
+                    <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
+                        <label mat-sort-header>
+                            S.No
+                        </label>
+                        <input type="text" (keyup)="updatePagination()"
+                            [(ngModel)]="filterData.filterColumnNames[0].Value" disabled [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
+                </ng-container>
 
-        <ng-container matColumnDef="sno">
-            <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
-                <label mat-sort-header>
-                    S.No
-                </label>
-                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value"
-                    [filter]="filterData" />
-            </th>
-            <td mat-cell *matCellDef="let element"> {{element.sno}} </td>
-        </ng-container>
+                <ng-container matColumnDef="roleName">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Role Name
+                        </label>
+                        <input type="text" (keyup)="updatePagination()"
+                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.roleName}} </td>
+                </ng-container>
 
-        <ng-container matColumnDef="roleName">
-            <th mat-header-cell *matHeaderCellDef scope="col">
-                <label mat-sort-header>
-                    Role Name
-                </label>
-                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
-                    [filter]="filterData" />
-            </th>
-            <td mat-cell *matCellDef="let element"> {{element.roleName}} </td>
-        </ng-container>
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Actions
+                        </label>
+                        <input type="text" (keyup)="updatePagination()" [filter]="filterData" disabled />
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-slide-toggle [checked]="element.active == 'Y'? true : false"
+                            (change)="onActivateRole(element,$event)"></mat-slide-toggle>
+                        <span matTooltip="Edit" *ngIf="!!pagePermissions.Edit" (click)="onEditRole(element)">
+                            <i class="fas fa-pencil-alt" aria-hidden="true"></i> </span>
+                        <span matTooltip="Delete" style="cursor: pointer;" *ngIf="!!pagePermissions.Delete"
+                            (click)="onRoleDelete(element)"> <i class="far fa-trash-alt" aria-hidden="true"></i> </span>
+                    </td>
+                </ng-container>
 
-        <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef scope="col">
-                <label mat-sort-header>
-                    Actions
-                </label>
-            </th>
-            <td mat-cell *matCellDef="let element">
-                <mat-slide-toggle [checked]="element.active == 'Y'? true : false"
-                    (change)="onActivateRole(element,$event)"></mat-slide-toggle>
-                <span matTooltip="Edit" *ngIf="!!pagePermissions.Edit" (click)="onEditRole(element)">
-                     <i  class="fas fa-pencil-alt" aria-hidden="true"></i> </span>
-                <span matTooltip="Delete" style="cursor: pointer;" *ngIf="!!pagePermissions.Delete"
-                    (click)="onRoleDelete(element)"> <i class="far fa-trash-alt" aria-hidden="true"></i> </span>
-            </td>
-        </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator class="card-body" [pageSizeOptions]="[5,10,25, 50, 100,150,200]"
+                (page)="onpaginatechange($event)" aria-label="Select page">
+            </mat-paginator>
+        </div>
+    </div>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

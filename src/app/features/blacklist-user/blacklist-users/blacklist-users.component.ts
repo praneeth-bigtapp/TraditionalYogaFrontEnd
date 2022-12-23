@@ -1,9 +1,11 @@
 import { Component, OnInit, AfterViewChecked, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, } from '@angular/material/table';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { BlacklistUsersService } from '../blacklist-users.service';
 
 
@@ -19,12 +21,29 @@ export class BlacklistUsersComponent implements OnInit {
   displayedColumns: string[] = ['SNo', 'date', 'blacklistUserEmail', "comments", "action"];
   dataSource: any;
   blacklistData: any;
+  updatebtn=false
+  blackbtn=true
+  formdisplay=false
   filterData:any
   gridData:any
+
+
+  pageno: number = 1
+  today: any;
+
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
+
   constructor(
     private blacklistUsersService: BlacklistUsersService,
     private formBuilder: FormBuilder,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar, private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -41,13 +60,17 @@ export class BlacklistUsersComponent implements OnInit {
     };
 
     this.getBlackListUser();
+    
   }
-
+  formtoggle(){
+    this.formdisplay=!this.formdisplay
+  }
   getBlackListUser() {
     this.blacklistUsersService.getBlacklist().subscribe({
       next: (response) => {
 
         this.blacklistData = response;
+        this.blacklistData=this.blacklistData.reverse()
         console.log(this.blacklistData)
         this.dataSource = new MatTableDataSource<any>(this.blacklistData);
        
@@ -67,12 +90,11 @@ export class BlacklistUsersComponent implements OnInit {
   }
 
   unBlockUser(blacklist: any) {
-    const data = {
-      "blacklistuserId": blacklist.blacklistuserId,
-      "blacklistUserEmail": blacklist.blacklistUserEmail,
-      "date": blacklist.date,
-      "comments": blacklist.comments
-    }
+    const data =
+    {
+      "blacklistUserId": blacklist.blacklistuserId
+  }
+    console.log(data)
     this.blacklistUsersService.removeBlacklist(data).subscribe({
       next: (response) => {
         this.openSnackBar("Unblocked user Sucessfully");
@@ -81,15 +103,19 @@ export class BlacklistUsersComponent implements OnInit {
       },
       error: (error) => {
         this.openSnackBar(error.error.message);
+       
       }
     });
   }
 
   onBlockUser() {
+
     if (this.blacklistForm.valid) {
+      this.datevalue()
       const data = {
         "blacklistUserEmail": this.blacklistForm.value.emailId,
-        "comments": this.blacklistForm.value.comments
+        "comments": this.blacklistForm.value.comments,
+        "date": this.today,
       }
       this.blacklistUsersService.addBlacklist(data).subscribe({
         next: (response) => {
@@ -99,19 +125,94 @@ export class BlacklistUsersComponent implements OnInit {
         },
         error: (error) => {
           this.openSnackBar(error.error.message);
+          // this.openSnackBar("No user Found")
+        }
+      });
+    }
+  }
+  datevalue(){
+    const today=new Date()
+    this.today=today.getFullYear()+'-'+today.getMonth()+'-'+today.getDate()
+  }
+
+saveList() {
+    if (this.blacklistForm.valid) {
+      this.datevalue()
+      const data = {
+        "blacklistUserId": 1,
+        "date": this.today,
+       
+        "blacklistUserEmail": this.blacklistForm.value.emailId,
+        "comments": this.blacklistForm.value.comments
+      }
+      this.blacklistUsersService.saveBlacklist(data).subscribe({
+        next: (response) => {
+          this.openSnackBar(" Updated Sucessfully");
+          this.getBlackListUser();
+          this.blacklistForm.reset();
+        },
+        error: (error) => {
+          this.openSnackBar(error.error.message);
+          this.openSnackBar("error Found")
         }
       });
     }
   }
 
-  openSnackBar(message: string) {
-    this._snackBar.open(message);
-    setTimeout(() => {this._snackBar.dismiss()},3000);
-  }
+
   updatePagination() {
     this.filterData.dataSource.paginator = this.paginator;
     this.filterData.dataSource.sort=this.sort
 
    
   }
+  editdetails(element:any){
+    this.formdisplay=true 
+    this.blacklistForm.setValue({emailId:element.blacklistUserEmail,
+    comments:element.comments
+    })
+    this.blackbtn=false
+    this.updatebtn=true
+
+
+  }
+  onupdate(){
+    this.blackbtn=true
+    this.updatebtn=false
+    this.blacklistForm.reset()
+  }
+  oncancel(){
+    this.blacklistForm.reset()
+    this.blackbtn=true
+    this.updatebtn=false
+    this.formtoggle()
+
+  }
+  
+  openSnackBar(data: any) {
+    this._snackBar.open(data, 'Close', {
+      duration: 2 * 1000,
+    });
+  }
+  
+  deletedetails(element: any) {
+
+
+
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To UnBlack the user ?"
+      },
+      width: "30%"
+    })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+       this.unBlockUser(element)
+          }
+        })
+        return
+      }
+
 }

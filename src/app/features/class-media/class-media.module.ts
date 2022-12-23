@@ -18,12 +18,18 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ShortvideomediaComponent } from './shortvideomedia/shortvideomedia.component';
+import { GlimpemediaComponent } from './glimpemedia/glimpemedia.component';
+import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 
 @NgModule({
   declarations: [
-    MediaComponent
+    MediaComponent,
+    ShortvideomediaComponent,
+    GlimpemediaComponent
   ],
   imports: [
     CommonModule,
@@ -49,6 +55,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MatSlideToggleModule,
     SharedModule,
     MatSortModule,
+    MatTabsModule,
+    MatAutocompleteModule,
 
   ]
 })

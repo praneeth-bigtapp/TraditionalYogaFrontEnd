@@ -1,11 +1,17 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { filter } from 'rxjs';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
+import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
+import { GlimpemediaComponent } from '../glimpemedia/glimpemedia.component';
 import { ServicesService } from '../services.service';
+import { ShortvideomediaComponent } from '../shortvideomedia/shortvideomedia.component';
 
 @Component({
   selector: 'app-media',
@@ -17,23 +23,41 @@ export class MediaComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   selection = new SelectionModel<any>(true, []);
 
+  pageno: number = 1
+  isothers: boolean = false
+  displayform: boolean = false
+  courselist!: any
+  categorylist!: any
   displayedColumns: string[] = ['classMediaId', 'date', 'typeOfClass', "noOfMediaFiles", "Action"];
   dataSource: any;
   disableSelect = new FormControl(false);
   dataForm!: FormGroup
   dateForm!: FormGroup
   data: any
+  coursename!: any
   courses: any
-  id:any
+  id: any
   filterData: any;
   categoryerror: boolean = false
   gridData = [];
   selectedmember!: any
-  formtype: string = "Members"
-  // data: any;
-  displaycontent: boolean = false
+  filerror!: boolean
 
-  constructor(private formbuilder: FormBuilder, private services: ServicesService) {
+  shortvideolist: any[] = []
+
+  glimpsefile!: any
+
+  glimpseform !: FormGroup
+  videoform!: FormGroup
+  shortvideoform!: FormGroup
+
+  typecategory!: any
+  displaycontent: boolean = false
+  iseditable: boolean = false
+  // data: any;
+
+  constructor(private formbuilder: FormBuilder, private services: ServicesService, private _snackBar: MatSnackBar, private dialog: MatDialog,
+  ) {
 
     this.dateForm = this.formbuilder.group({
 
@@ -50,9 +74,90 @@ export class MediaComponent implements OnInit {
       sort: this.sort
     }
 
- 
+    services.getcoursemediacategory().subscribe({
+      next: (response) => {
+
+        this.categorylist = response
+
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
+
+    this.videoform = this.formbuilder.group({
+      courseMediaId: [null],
+      course: [null, Validators.compose([Validators.required])],
+
+      videolink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
+      date: [null, Validators.compose([Validators.required])],
+      title: [null, Validators.compose([Validators.required])],
+      description: [null, Validators.compose([Validators.required])],
+
+    })
   }
 
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
+  }
+  coursechange() {
+    this.displaycontent = true
+  }
+
+  gobutton() {
+
+    this.displaycontent = true
+    this.displayform = true
+
+  }
+
+  openliveclass() {
+    this.displayform = true
+  }
+
+  closeliveform() {
+    this.displayform = false
+  }
+
+  openshortvideo() {
+
+
+    const dialogref = this.dialog.open(ShortvideomediaComponent, {
+      data: {
+        course: this.coursename
+      },
+      width: "100%"
+    })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+
+        return
+      }
+
+    })
+  }
+  openglimpse() {
+
+
+    const dialogref = this.dialog.open(GlimpemediaComponent, {
+      data: {
+        course: this.coursename
+      },
+      width: "100%"
+    })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+
+        return
+      }
+
+    })
+  }
   ngOnInit(): void {
 
 
@@ -73,6 +178,15 @@ export class MediaComponent implements OnInit {
       next: (response) => {
         this.data = response;
         console.log(this.data);
+        this.dataSource = new MatTableDataSource<any>(this.data)
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
 
       },
       error: (error) => {
@@ -80,13 +194,21 @@ export class MediaComponent implements OnInit {
       }
     });
 
+  }
+
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
   }
   getallcourse() {
     this.services.getcoursesdetails().subscribe({
       next: (response) => {
 
         this.courses = response
-        console.log(this.courses);
 
       },
       error: (error) => {
@@ -95,32 +217,69 @@ export class MediaComponent implements OnInit {
     });
 
   }
+
+  videoformsubmit() {
+    if (this.videoform.invalid)
+      return this.videoform.markAllAsTouched()
+
+    const { course, courseMediaId, videolink, date, title, description } = this.videoform.value
+
+
+
+    if (this.iseditable) {
+      const body = {
+        courseMediaId: courseMediaId,
+        courseId: course,
+        courseLink: videolink,
+        date: date,
+        title: title,
+        description: description
+      }
+    }
+
+    const body = {
+      courseId: course,
+      courseLink: videolink,
+      date: date,
+      title: title,
+      description: description
+    }
+
+    this.services.postvideo(body).subscribe({
+      next: (response) => {
+
+        this.videoform.reset()
+
+        this.openSnackBar(response)
+        this.getalldata()
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
+
+  }
+
+  filechange(event: any) {
+    this.filerror = this.glimpseform.value.file === null ? true : false
+    this.glimpsefile = event.target.files[0].name
+  }
+
   datefilter() {
     const { date, courseslist } = this.dateForm.value
-    // const courseslist=this.dataForm.value.courseslist
 
     let filterData = this.data
-    let filterData2=this.courses
-    
-    console.log({ date, courseslist });
 
-    if (courseslist)
-      
-     {
-      // this.id = filterData2.filter((ele: any) => {if(ele.coursesName === courseslist){
-      //   return ele.coursesId
+    if (courseslist) {
 
-      // }})
-      filterData = filterData.filter((ele: any) => ele.courseId.courseId=== courseslist)
-     }
+      filterData = filterData.filter((ele: any) => ele.courseId.courseId === courseslist)
+    }
 
-
-    if (date)
-     {
+    if (date) {
       filterData = filterData.filter((ele: any) => ele.date === date)
 
-     }
-    
+    }
 
     this.dataSource = new MatTableDataSource<any>(filterData)
     this.filterData.gridData = filterData;
@@ -138,12 +297,43 @@ export class MediaComponent implements OnInit {
     this.filterData.dataSource.paginator = this.paginator;
   }
 
-  viewclassmedia(element: any) {
-    console.log(element);
+  viewDetails(element: any) {
 
   }
-  editmedia(element: any) {
-    console.log(element);
+  editdetails(element: any) {
+
+  }
+  deletedetails(id: any) {
+
+    console.log(id);
+
+    const body = {
+      "classMediaId": id
+    }
+
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this media ?"
+      },
+      width: "30%"
+    })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.services.deleteclassmedia(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.getalldata()
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
+
+    })
 
   }
 
