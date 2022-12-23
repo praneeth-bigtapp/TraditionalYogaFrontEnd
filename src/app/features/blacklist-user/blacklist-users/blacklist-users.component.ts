@@ -29,6 +29,7 @@ export class BlacklistUsersComponent implements OnInit {
 
 
   pageno: number = 1
+  today: any;
 
   onpaginatechange(event: any) {
     if (event.pageIndex === 0) {
@@ -89,12 +90,11 @@ export class BlacklistUsersComponent implements OnInit {
   }
 
   unBlockUser(blacklist: any) {
-    const data = {
-      "blacklistuserId": blacklist.blacklistuserId,
-      "blacklistUserEmail": blacklist.blacklistUserEmail,
-      "date": blacklist.date,
-      "comments": blacklist.comments
-    }
+    const data =
+    {
+      "blacklistUserId": blacklist.blacklistuserId
+  }
+    console.log(data)
     this.blacklistUsersService.removeBlacklist(data).subscribe({
       next: (response) => {
         this.openSnackBar("Unblocked user Sucessfully");
@@ -103,15 +103,19 @@ export class BlacklistUsersComponent implements OnInit {
       },
       error: (error) => {
         this.openSnackBar(error.error.message);
+       
       }
     });
   }
 
   onBlockUser() {
+
     if (this.blacklistForm.valid) {
+      this.datevalue()
       const data = {
         "blacklistUserEmail": this.blacklistForm.value.emailId,
-        "comments": this.blacklistForm.value.comments
+        "comments": this.blacklistForm.value.comments,
+        "date": this.today,
       }
       this.blacklistUsersService.addBlacklist(data).subscribe({
         next: (response) => {
@@ -121,6 +125,35 @@ export class BlacklistUsersComponent implements OnInit {
         },
         error: (error) => {
           this.openSnackBar(error.error.message);
+          // this.openSnackBar("No user Found")
+        }
+      });
+    }
+  }
+  datevalue(){
+    const today=new Date()
+    this.today=today.getFullYear()+'-'+today.getMonth()+'-'+today.getDate()
+  }
+
+saveList() {
+    if (this.blacklistForm.valid) {
+      this.datevalue()
+      const data = {
+        "blacklistUserId": 1,
+        "date": this.today,
+       
+        "blacklistUserEmail": this.blacklistForm.value.emailId,
+        "comments": this.blacklistForm.value.comments
+      }
+      this.blacklistUsersService.saveBlacklist(data).subscribe({
+        next: (response) => {
+          this.openSnackBar(" Updated Sucessfully");
+          this.getBlackListUser();
+          this.blacklistForm.reset();
+        },
+        error: (error) => {
+          this.openSnackBar(error.error.message);
+          this.openSnackBar("error Found")
         }
       });
     }

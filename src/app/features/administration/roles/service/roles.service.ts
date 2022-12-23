@@ -10,6 +10,7 @@ export class RolesService extends BaseHttp {
     saveRoleUrl: string = 'role?operation=save';
     activateRoleUrl: string = 'role?operation=active';
     deleteRoleUrl: string = 'role?operation=delete';
+    deactiveRoleUrl: string = "role?operation=deactive"
 
     getRolesList() {
         return this.get<any>(this.getRoles);
@@ -25,6 +26,9 @@ export class RolesService extends BaseHttp {
 
     activateRole(Role: any) {
         return this.post<any>(this.activateRoleUrl, Role);
+    }
+    deactivateRole(Role: any) {
+        return this.post<any>(this.deactiveRoleUrl, Role);
     }
 
     deleteRole(role: any) {

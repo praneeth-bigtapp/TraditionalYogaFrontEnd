@@ -21,6 +21,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ShortvideomediaComponent } from './shortvideomedia/shortvideomedia.component';
 import { GlimpemediaComponent } from './glimpemedia/glimpemedia.component';
+import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 
@@ -54,7 +55,8 @@ import { GlimpemediaComponent } from './glimpemedia/glimpemedia.component';
     MatSlideToggleModule,
     SharedModule,
     MatSortModule,
-    MatTabsModule
+    MatTabsModule,
+    MatAutocompleteModule,
 
   ]
 })

@@ -139,7 +139,15 @@ export class RolesComponent implements OnInit {
       }
     }
     if (this.validt != 1) {
-      this.rolesService.saveRole(role).subscribe((response) => {
+      console.log(role);
+
+      const body = {
+        "roleId": role.roleId,
+        "roleName": role.roleName,
+        "active": "Y"
+      }
+
+      this.rolesService.saveRole(body).subscribe((response) => {
         if (response.statusCode == 200) {
           this.isAddRoleForm = false;
           this.editMode = false;
@@ -158,6 +166,7 @@ export class RolesComponent implements OnInit {
 
   onAddRole() {
     this.isAddRoleForm = true;
+    this.editMode = false
     this.AddRoleForm.reset();
   }
 

@@ -21,6 +21,7 @@ export class NotificationComponent implements OnInit {
   dataSource: any;
   displayedColumns: string[] = ['notificationId', 'title', 'categoryId', "uploadFile", "Action"];
   data: any;
+  issubmit = true
 
   category!: string
   notificationform!: any
@@ -121,14 +122,27 @@ export class NotificationComponent implements OnInit {
 
   addnotification() {
     this.displaycontent = !this.displaycontent
+    this.issubmit = true
   }
   reseteditable() {
     this.notificationform.reset()
     this.iseditable = false
     this.displaycontent = !this.displaycontent
+    this.issubmit = true
   }
 
   viewdetails(element: any) {
+
+    this.notificationform.setValue({
+      notificationId: element.notificationId,
+      category: element.categoryId.categoryId,
+      title: element.title,
+      description: element.message,
+      file: null,
+    });
+    this.iseditable = false
+    this.issubmit = false
+    this.displaycontent = true
 
   }
   deletedetails(id: any) {
@@ -172,6 +186,7 @@ export class NotificationComponent implements OnInit {
       file: null,
     });
     this.iseditable = true
+    this.issubmit = true
     this.displaycontent = true
   }
 
