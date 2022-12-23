@@ -59,9 +59,15 @@ export class StudentProfileComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator2!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort2!: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator3!: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort3!: MatSort;
   gridData2 = [];
+  filterData2:any
+  gridData3 = [];
+  filterData3:any
   volunteerForm = false
   filterData: any;
+ 
   gridData = [];
   purchaseform = false
   searchStudentForm!: FormGroup;
@@ -79,8 +85,8 @@ export class StudentProfileComponent implements OnInit {
   studentProfile: any;
   studentSelectStatus: Boolean = false;
 
-  donationsColumns: string[] = ['SNo', 'Date', 'Discription', "ModeofPay", "amountDonated"];
-  ePurchasesColumns: string[] = ['SNo', 'Date', 'PurchesedAmount', 'ProductName'];
+  donationsColumns: string[] = ['SNo', 'date', 'description', "modeOfPayment", "donationAmount"];
+  ePurchasesColumns: string[] = ['SNo', 'date', 'purchaseAmount', 'productPurchase'];
   volunterColumns: string[] = ['SNo', 'Category', 'Courses', 'StartDate', 'EndDate', 'SeervedAs', 'noMembers'];
   coursesProfileColumns: string[] = ['SNo', 'CourseName', 'AdmissionsStatus', 'CompletionStatus'];
   courseLiveColumns: string[] = ['SNo', 'date', 'type', 'totalScreen', 'attendedScreen', 'percentage'];
@@ -92,8 +98,9 @@ export class StudentProfileComponent implements OnInit {
   practiceLibData = PARTICES_LIBARY;
   pageno: number = 1
   donations: any;
-  filterData2: any
+  
   dataSource2: any;
+  dataSource3:any
 
   onpaginatechange(event: any) {
     if (event.pageIndex === 0) {
@@ -155,6 +162,7 @@ export class StudentProfileComponent implements OnInit {
     for (let col of this.filterData2.filterColumnNames) {
       col.Value = '';
     }
+   
 
     this.filterData = {
       filterColumnNames: this.donationsColumns.map(ele => ({ "Key": ele, "Value": "" })),
@@ -163,13 +171,51 @@ export class StudentProfileComponent implements OnInit {
       paginator: this.paginator,
       sort: this.sort
     };
+    this.dataSource = new MatTableDataSource<any>(this.donations)
+        this.filterData.gridData = this.donations;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+
+        this.filterData3 = {
+          filterColumnNames: this.volunterColumns.map(ele => ({ "Key": ele, "Value": "" })),
+          gridData3: this.gridData3,
+          dataSource3: this.dataSource3,
+          paginator3: this.paginator3,
+          sort3: this.sort3
+        };
+        this.dataSource = new MatTableDataSource<any>(this.donations)
+            this.filterData.gridData = this.donations;
+            this.filterData.dataSource = this.dataSource;
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+            this.filterData.sort = this.sort;
+            for (let col of this.filterData.filterColumnNames) {
+              col.Value = '';
+            }
 
 
     this.getStudentList();
   }
+  ngAfterViewInit() {
+    // this.filterData2.dataSource2.paginator2 = this.paginator2;
+    // this.filterData2.dataSource2.sort2 = this.sort2
+    // this.filterData.dataSource.paginator = this.paginator;
+    // this.filterData.dataSource.sort = this.sort
+  }
+
   updatePagination() {
     this.filterData.dataSource.paginator = this.paginator;
     this.filterData.dataSource.sort = this.sort
+
+  }
+  updatePagination3() {
+    this.filterData3.dataSource3.paginator3 = this.paginator3;
+    this.filterData3.dataSource3.sort3 = this.sort3
 
   }
   updatePagination2() {

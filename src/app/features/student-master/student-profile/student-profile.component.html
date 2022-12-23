@@ -115,7 +115,7 @@
                             
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
-                                                    <h4>{{ studentProfile.roleId  }}</h4>
+                                                    <h4>{{ studentProfile.studentId}}</h4>
                                                 </div>
                                             </div>
                             
@@ -150,7 +150,7 @@
                             
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
-                                                    <h4>{{studentProfile.professionId }}</h4>
+                                                    <h4>{{studentProfile.profession }}</h4>
                                                 </div>
                                             </div>
                             
@@ -168,7 +168,7 @@
                             
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
-                                                    <h4>{{ studentProfile.qulificationId }}</h4>
+                                                    <h4>{{ studentProfile.qualification}}</h4>
                                                 </div>
                                             </div>
                             
@@ -187,7 +187,7 @@
                             
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
-                                                    <h4>{{ studentProfile.genderId }}</h4>
+                                                    <h4>{{ studentProfile.gender }}</h4>
                                                 </div>
                                             </div>
                             
@@ -346,7 +346,7 @@
                             
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
-                                                    <h4>{{ studentProfile.courseId.courseName }}</h4>
+                                                    <h4>{{ studentProfile.course.courseName }}</h4>
                                                 </div>
                                             </div>
 
@@ -711,10 +711,14 @@
                                 </mat-card>
                             </div>
                             <div class="col-md-10">
-                                <div class="bg-white border border-2 ">
-                                    <h4 class=" text-secondary fw-bold mx-4 mb-4 mt-4" > Donations</h4>
-                                    <div class="row  px-3 pb-5 ">
-                                        <table mat-table matSort [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid ">
+                                <div class=" ">
+                                   
+                                    <div class="">
+                                        <div class="card-header text-white bg-secondary">
+                                            Donations
+                                         </div>
+                                        <table mat-table matSort [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid w-100"
+                                        aria-label="users">
 
 
                                             <ng-container matColumnDef="SNo">
@@ -729,7 +733,7 @@
                                             </ng-container>
                                       
                                       
-                                            <ng-container matColumnDef="Date">
+                                            <ng-container matColumnDef="date">
                                               <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
                                                   Date
                                                 </label>
@@ -741,19 +745,19 @@
                                             </ng-container>
                                       
                                       
-                                            <ng-container matColumnDef="Discription">
+                                            <ng-container matColumnDef="description">
                                               <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
-                                                  Discription
+                                                  Dsscription
                                                 </label>
                                       
                                                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
                                                   [filter]="filterData" />
                                               </th>
-                                              <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.donarId.des}} </td>
+                                              <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.description}} </td>
                                             </ng-container>
                                       
                                       
-                                            <ng-container matColumnDef="ModeofPay">
+                                            <ng-container matColumnDef="modeOfPayment">
                                               <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
                                                 Mode of Payment
                                                 </label>
@@ -761,7 +765,7 @@
                                                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
                                                   [filter]="filterData" />
                                               </th>
-                                              <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.donarId.countryId.modeofpayment}} </td>
+                                              <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.modeOfPayment}} </td>
                                             </ng-container>
                                             <!-- <ng-container matColumnDef="currency">
                                               <th mat-header-cell *matHeaderCellDef class="col-1 text-center">  <label mat-sort-header>
@@ -773,7 +777,7 @@
                                               <td mat-cell *matCellDef="let element" class="col-1 text-center"> {{element.currency}} </td>
                                             </ng-container> -->
                                       
-                                            <ng-container matColumnDef="amountDonated">
+                                            <ng-container matColumnDef="donationAmount">
                                               <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
                                                   Amount (Rs)
                                                 </label>
@@ -819,7 +823,7 @@
                             </div>
 
                             <div class="col-md-10">
-                                <div class="bg-white col-">
+                                <div class="col">
                                     <!-- <div class="d-flex justify-content-end">
                                             <div class="btn btn-outline-secondary btn-rounded d-inline-block "
                                                *ngIf="!purchaseform" (click)="onaddpurchase()"> Add Purchases</div>
@@ -875,46 +879,56 @@
                                             </form>
                                         </div>
                                     
-                                    <div class=" pt-4 pl-4 pb-1">
+                                    <div class=" ">
                                         <div class="card-header text-white bg-secondary">
                                             e-Purchases Information
                                          </div>
                                         <table mat-table matSort [dataSource]="filterData2.dataSource2"
-                                        class="mat-elevation-z8 mat-datagrid w-100">
+                                        class="mat-elevation-z8 mat-datagrid w-100"   aria-label="users">
 
                                             <!-- Position Column -->
                                             <ng-container matColumnDef="SNo">
                                                 <th mat-header-cell *matHeaderCellDef > <label mat-sort-header >
                                                     S.No
-                                                  </label></th>
+                                                  </label>
+                                                  <input type="text" (keyup)="updatePagination2()" [(ngModel)]="filterData2.filterColumnNames[0].Value" disabled
+                                                  [filter]="filterData" disabled="true" />
+                                                </th>
                                                 <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
 
 
                                             </ng-container>
 
                                             <!-- Name Column -->
-                                            <ng-container matColumnDef="Date">
+                                            <ng-container matColumnDef="date">
                                                 <th mat-header-cell *matHeaderCellDef><label mat-sort-header>
                                                     Date
-                                                  </label></th>
+                                                  </label>
+                                                  <input type="text" (keyup)="updatePagination2()" [(ngModel)]="filterData2.filterColumnNames[1].Value" 
+                                                  [filter]="filterData" /></th>
                                                 <td mat-cell *matCellDef="let element"> {{element.date | date:'dd-MM-YYYY'}} </td>
                                             </ng-container>
 
                                             <!-- Weight Column -->
-                                            <ng-container matColumnDef="PurchesedAmount">
+                                            <ng-container matColumnDef="purchaseAmount">
                                                 <th mat-header-cell *matHeaderCellDef><label mat-sort-header>
-                                                    PurchesedAmount 
-                                                  </label> </th>
+                                                    PurchasedAmount 
+                                                  </label> 
+                                                  <input type="text" (keyup)="updatePagination2()" [(ngModel)]="filterData2.filterColumnNames[2].Value" 
+                                                  [filter]="filterData"  />
+                                                </th>
                                                 <td mat-cell *matCellDef="let element"> {{element.purchaseAmount}}
                                                 </td>
                                             </ng-container>
 
                                             <!-- Symbol Column -->
-                                            <ng-container matColumnDef="ProductName">
+                                            <ng-container matColumnDef="productPurchase">
                                                 <th mat-header-cell *matHeaderCellDef>
                                                     <label mat-sort-header>
                                                         ProductName
-                                                      </label>   </th>
+                                                      </label> 
+                                                      <input type="text" (keyup)="updatePagination2()" [(ngModel)]="filterData2.filterColumnNames[3].Value"
+                                                  [filter]="filterData"  />  </th>
                                                 <td mat-cell *matCellDef="let element"> {{element.productPurchase}}
                                                 </td>
                                             </ng-container>
@@ -1047,7 +1061,8 @@
                                             Category of Volunteering
                                          </div>
                                         <table mat-table [dataSource]="volunterData"
-                                            class="mat-elevation-z8 mat-datagrid w-100">
+                                        class="mat-elevation-z8 mat-datagrid w-100"
+                                        aria-label="users">
 
                                             <!-- Position Column -->
                                             <ng-container matColumnDef="SNo">
@@ -1119,13 +1134,14 @@
                                 </mat-card>
                             </div>
                             <div class="col-md-10">
-                                <div class="row pt-4 pl-3 pb-1 bg-white border border-2 mx-2 pr-3 pb-3">
-                                    <h4 class="pb-2 text-secondary fw-bold" > Courses Profile </h4>
-                                    <div class="col-12">
-                                        <hr>
-                                    </div>
+                                <div class="">
+                                    
+                                    <div class="card-header text-white bg-secondary">
+                                        Courses Profile
+                                     </div>
                                     <table mat-table [dataSource]="coursesProfileData"
-                                        class="mat-elevation-z8 mat-datagrid w-100 mr-3">
+                                    class="mat-elevation-z8 mat-datagrid w-100"
+                                    aria-label="users">
 
                                         <ng-container matColumnDef="SNo">
                                             <th mat-header-cell *matHeaderCellDef> S.No </th>

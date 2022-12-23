@@ -245,47 +245,39 @@ export class GalleryComponent implements OnInit {
     const yes = ["Yes", "Y", "yes", "y"]
     const no = ["No", "N", "no", "n"]
 
-    const filterdata = this.data.filter((ele: any) => ele.quoteId === id)[0].isActive
+    const filterdata = this.data.filter((ele: any) => ele.photoGalleryId === id)[0].active
 
     return yes.includes(filterdata)
   };
 
-  ChangeActive(id: any) {
+  ChangeActive(element: any) {
 
-    const body = {
-      "quoteId": id
+    const body = 
+      {
+        "photoGalleryId": element.photoGalleryId,
+        "active": element.active
     }
+    
 
-    // const yes = ["Yes", "Y", "yes", "y"]
-    // const no = ["No", "N", "no", "n"]
-    // this.data.map((element: any) => {
-    //   if (element.quoteId === id)
-    //     if (yes.includes(element.isActive)) {
-    //       this.service.deactivepearlofwisdom(body).subscribe({
-    //         next: (response) => {
-    //           this.openSnackBar(response)
-    //           this.getListofwisdom()
-    //         },
-    //         error: (error) => {
-    //           console.error(error.message);
+    const yes = ["Yes", "Y", "yes", "y"]
+    const no = ["No", "N", "no", "n"]
+    this.data.map((elements: any) => {
+      if (elements.photoGalleryId === element.photoGalleryId)
+        if (yes.includes(elements.active)) {
+          this.service.VisitList(body).subscribe({
+            next: (response) => {
+              this.openSnackBar(response)
+             this.getAlldata()
+            },
+            error: (error) => {
+              console.error(error.message);
 
-    //         }
-    //       })
-    //     }
-    //     else {
-    //       this.service.activepearlofwisdom(body).subscribe({
-    //         next: (response) => {
-    //           this.openSnackBar(response)
-    //           this.getListofwisdom()
-    //         },
-    //         error: (error) => {
-    //           console.error(error.message);
+            }
+          })
+        }
+       
 
-    //         }
-    //       })
-    //     }
-
-    // })
+    })
   }
 
 

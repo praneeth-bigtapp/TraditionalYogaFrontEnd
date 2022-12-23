@@ -137,8 +137,9 @@
             <div class="d-flex flex-wrap justify-content-evenly align-items-center">
 
 
-              <mat-slide-toggle matTooltip="Visiblity" [checked]="element.active"
-                (change)="ChangeActive(element)" [matTooltip]="element.active"></mat-slide-toggle>
+              <mat-slide-toggle [checked]="IsActiveorNot(element.photoGalleryId)"
+                                (change)="ChangeActive(element)"
+                                [matTooltip]="element.active"></mat-slide-toggle>
               <!-- <p>Disable</p> -->
               <i class="fa-solid fa-eye fs-5 text-info" (click)="viewdetails(element)" matTooltip="View Course Activity"
                 matTooltip="View"></i>
