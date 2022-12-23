@@ -164,30 +164,18 @@ export class SendReceiveService {
     else if (subMenuId == 33) {
       this.router.navigateByUrl("hidemenuoption");
     }
-
-
     else if (subMenuId == 35) {
       this.router.navigateByUrl("pearlofwidsom");
     }
     else if (subMenuId == 36) {
-
       this.router.navigateByUrl("courseMatrieals");
-
     }
-
     else if (subMenuId == 37) {
-
       this.router.navigateByUrl("onlineexam");
-
-
     }
     else if (subMenuId == 38) {
-
       this.router.navigateByUrl("mappingregionstoCheifMentor");
-
-
     }
-
     else {
       console.log(" Sub Menu is not Mapped ")
       this.router.navigateByUrl("blank")
