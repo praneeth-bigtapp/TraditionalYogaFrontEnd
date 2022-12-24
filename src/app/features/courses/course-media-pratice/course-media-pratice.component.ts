@@ -161,23 +161,22 @@ export class CourseMediaPraticeComponent implements OnInit {
       }
     });
   }
-  typechange() {
+  // typechange() {
 
-    this.displaycontent = false
-    this.categoryerror = false
-    if (!this.classtype) {
-      this.categoryerror = true
-      return
-    }
+  //   this.displaycontent = false
+  //   this.categoryerror = false
+  //   if (!this.classtype) {
+  //     this.categoryerror = true
+  //     return
+  //   }
 
-    this.gobutton()
+  //   this.gobutton()
+  // }
+  cancelbt(){
+    
   }
   gobutton() {
-    if (!this.classtype) {
-      this.displaycontent = false
-      this.categoryerror = true
-      return
-    }
+    
 
     this.displaycontent = true
     this.categoryerror = false
