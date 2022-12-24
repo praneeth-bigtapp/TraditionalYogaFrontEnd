@@ -9,8 +9,12 @@ export class ScripcturesService extends BaseHttp {
   postscripcturesAPI = "webSite/scripctures?operation=add"
   updatescripcturesAPI = "webSite/scripctures?operation=save"
   deletescripcturesAPI = "webSite/scripctures?operation=delete"
+  getscripcturesAPI = "webSite/getAll?operation=scripctures"
 
 
+  getscripctures() {
+    return this.get(this.getscripcturesAPI)
+  }
   postscripctures(body: any) {
     return this.post(this.postscripcturesAPI, body)
   }

@@ -34,22 +34,9 @@ export class CreateScripcturesComponent implements OnInit {
   filedata!: any
   displaycontent: boolean = false
   iseditable: boolean = false
-  displayedColumns: string[] = ['sno', 'title', 'description', "metakeyword", "Action"];
+  displayedColumns: string[] = ['sno', 'title', 'description', "metaKeyWords", "Action"];
 
-  data: any = [{
-    "title": "Title",
-    "description": "Description",
-    "metakeyword": "metakeyword"
-  },
-  {
-    "title": "Title",
-    "description": "Description",
-    "metakeyword": "metakeyword"
-  }, {
-    "title": "Title",
-    "description": "Description",
-    "metakeyword": "metakeyword"
-  }]
+  data: any
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
@@ -83,7 +70,6 @@ export class CreateScripcturesComponent implements OnInit {
 
   gobutton() {
     const classtype = this.category
-    console.log(classtype);
 
   }
   openSnackBar(data: any) {
@@ -93,17 +79,28 @@ export class CreateScripcturesComponent implements OnInit {
   }
 
   getdata() {
-    console.log(this.data);
 
-    this.dataSource = new MatTableDataSource<any>(this.data)
-    this.filterData.gridData = this.data;
-    this.filterData.dataSource = this.dataSource;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.filterData.sort = this.sort;
-    for (let col of this.filterData.filterColumnNames) {
-      col.Value = '';
-    }
+    this.service.getscripctures().subscribe({
+      next: (response) => {
+        this.data = response
+        this.data = this.data.reverse()
+        this.dataSource = new MatTableDataSource<any>(this.data)
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
+
+
   }
   add() {
     this.displaycontent = !this.displaycontent
@@ -122,12 +119,10 @@ export class CreateScripcturesComponent implements OnInit {
       this.filerror = this.addmediaform.value.coverimage === null ? true : false
 
       this.backcoverdata = event && event.target.files[0].name
-      console.log(this.backcoverdata);
     }
     if (formname === 'file') {
       this.filerror2 = this.addmediaform.value.coverfile === null ? true : false
       this.filedata = event && event.target.files[0].name
-      console.log(this.filedata);
     }
 
   }
@@ -155,11 +150,13 @@ export class CreateScripcturesComponent implements OnInit {
 
   viewdetails(element: any) {
     this.addmediaform.setValue({
+      Id: element.scripcturesId,
       coverimage: null,
       covertitle: element.title,
       coverdescription: element.description,
       coverfile: null,
-      coverkeywords: element.metakeyword
+      coverkeywords: element.metaKeyWords
+
     })
     this.iseditable = false
     this.displaycontent = true
@@ -173,12 +170,12 @@ export class CreateScripcturesComponent implements OnInit {
 
 
     this.addmediaform.setValue({
-      Id: element.id,
+      Id: element.scripcturesId,
       coverimage: null,
       covertitle: element.title,
       coverdescription: element.description,
       coverfile: null,
-      coverkeywords: element.metakeyword
+      coverkeywords: element.metaKeyWords
     })
   }
 
@@ -227,7 +224,6 @@ export class CreateScripcturesComponent implements OnInit {
 
 
       const { Id, coverimage, covertitle, coverdescription, coverfile, coverkeywords } = this.addmediaform.value
-      console.log({ Id, coverimage, covertitle, coverdescription, coverfile, coverkeywords })
 
 
       if (this.iseditable) {
@@ -237,9 +233,18 @@ export class CreateScripcturesComponent implements OnInit {
           "uploadFile": coverfile,
           "title": covertitle,
           "description": coverdescription,
-          "metaKeywords": coverkeywords
+          "metaKeyWords": coverkeywords
         }
+        this.service.updatescripctures(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.getdata()
+          },
+          error: (error) => {
+            console.error(error.message);
 
+          }
+        })
         return
       }
 
@@ -248,13 +253,13 @@ export class CreateScripcturesComponent implements OnInit {
         "uploadFile": coverfile,
         "title": covertitle,
         "description": coverdescription,
-        "metaKeywords": coverkeywords
+        "metaKeyWords": coverkeywords
       }
 
       this.service.postscripctures(body).subscribe({
         next: (response) => {
-          console.log(response);
           this.openSnackBar(response)
+          this.getdata()
         },
         error: (error) => {
           console.error(error.message);
