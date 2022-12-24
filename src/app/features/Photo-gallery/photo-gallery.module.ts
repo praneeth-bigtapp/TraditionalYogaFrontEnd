@@ -19,13 +19,15 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ViewgalleryComponent } from './viewgallery/viewgallery.component';
 
 
 @NgModule({
   declarations: [
     GalleryComponent,
     UploadgalleryComponent,
-    CreateGalleryComponent
+    CreateGalleryComponent,
+    ViewgalleryComponent
   ],
   entryComponents: [CreateGalleryComponent],
   imports: [

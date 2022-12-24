@@ -32,7 +32,7 @@ export class CreateScripcturesComponent implements OnInit {
   filerror2!: boolean
   backcoverdata!: any
   filedata!: any
-  displaycontent: boolean = true
+  displaycontent: boolean = false
   iseditable: boolean = false
   displayedColumns: string[] = ['sno', 'title', 'description', "metakeyword", "Action"];
 
@@ -140,6 +140,8 @@ export class CreateScripcturesComponent implements OnInit {
     this.iseditable = false
     this.issubmit = true
     this.displaycontent = !this.displaycontent
+    this.filerror = false
+    this.filerror2 = false
   }
   onpaginatechange(event: any) {
     if (event.pageIndex === 0) {

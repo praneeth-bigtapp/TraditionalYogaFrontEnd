@@ -148,7 +148,7 @@ export class NotificationComponent implements OnInit {
   deletedetails(id: any) {
 
     const body = {
-      "coursesId": id,
+      "notificationId": id,
     }
 
     const dialogref = this.dialog.open(DialogPopupComponent, {
@@ -161,6 +161,8 @@ export class NotificationComponent implements OnInit {
 
     dialogref.afterClosed().subscribe(data => {
       if (data) {
+        console.log(body);
+
         this.service.deletenotification(body).subscribe({
           next: (response) => {
             this.openSnackBar(response)
@@ -179,7 +181,7 @@ export class NotificationComponent implements OnInit {
   }
   editdetails(element: any) {
     console.log(element);
-    
+
     this.notificationform.setValue({
       notificationId: element.notificationId,
       category: element.categoryId.categoryId,
@@ -207,7 +209,9 @@ export class NotificationComponent implements OnInit {
       console.log({ notificationId, category, title, description, file });
 
       const body = {
-        "categoryId": category,
+        "categoryId": {
+          "categoryId": category,
+        },
         "title": title,
         "uploadFile": file,
         "message": description
@@ -215,7 +219,16 @@ export class NotificationComponent implements OnInit {
 
 
       if (this.iseditable) {
-        //editable
+
+        const body = {
+          "notificationId": notificationId,
+          "categoryId": {
+            "categoryId": category,
+          },
+          "title": title,
+          "uploadFile": file,
+          "message": description
+        }
         this.service.updatenotification(body).subscribe({
           next: (response) => {
             this.openSnackBar(response)

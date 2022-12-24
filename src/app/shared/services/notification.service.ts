@@ -10,9 +10,9 @@ export class NotificationService extends BaseHttp {
   postnotificationURL = "webSite/notifcation?operation=add"
   getnotificationURL = "webSite/getAll?operation=notication"
 
-  updatenotificationURL = ""
+  updatenotificationURL = "webSite/notifcation?operation=save"
 
-  deletenotificationURL = ""
+  deletenotificationURL = "webSite/notifcation?operation=delete"
 
 
   getnotificationcategory() {
