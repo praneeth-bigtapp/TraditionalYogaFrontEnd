@@ -27,6 +27,12 @@
                     <mat-form-field class="example-full-width" appearance="outline" id="field">
                         <!-- <mat-label>Health is wealth</mat-label> -->
                         <textarea matInput formControlName="Content"></textarea></mat-form-field>
+                    <div
+                        *ngIf="testimonial.controls['Content'].invalid && (testimonial.controls['Content'].dirty || testimonial.controls['Content'].touched)">
+                        <mat-error [hidden]=" !testimonial.get('Content')?.hasError('required')  ">
+                            Content is mandatory
+                        </mat-error>
+                    </div>
 
                 </div>
                 <div class="col-md-6">
@@ -34,6 +40,12 @@
                     <mat-form-field class="example-full-width" appearance="outline" id="field">
                         <!-- <mat-label>Health is wealth</mat-label> -->
                         <input matInput formControlName="name"></mat-form-field>
+                    <div
+                        *ngIf="testimonial.controls['name'].invalid && (testimonial.controls['name'].dirty || testimonial.controls['name'].touched)">
+                        <mat-error [hidden]=" !testimonial.get('name')?.hasError('required')  ">
+                            Name is mandatory
+                        </mat-error>
+                    </div>
 
                 </div>
                 <div class="col-md-6">
@@ -41,11 +53,26 @@
                     <mat-form-field class="example-full-width" appearance="outline" id="field">
 
                         <input matInput formControlName="link"></mat-form-field>
+                    <div
+                        *ngIf="testimonial.controls['link'].invalid && (testimonial.controls['link'].dirty || testimonial.controls['link'].touched)">
+                        <mat-error [hidden]=" !testimonial.get('link')?.hasError('required')  ">
+                            Video link is mandatory
+                        </mat-error>
+                        <mat-error [hidden]=" !testimonial.get('link')?.hasError('pattern')  ">
+                            Invalid Link
+                        </mat-error>
+                    </div>
                 </div>
                 <div class="col-md-12">
                     <label>Description</label>
                     <mat-form-field class="example-full-width" appearance="outline">
                         <textarea matInput formControlName="description"></textarea></mat-form-field>
+                    <div
+                        *ngIf="testimonial.controls['description'].invalid && (testimonial.controls['description'].dirty || testimonial.controls['description'].touched)">
+                        <mat-error [hidden]=" !testimonial.get('description')?.hasError('required')  ">
+                            Description is mandatory
+                        </mat-error>
+                    </div>
                 </div>
 
 
@@ -94,8 +121,8 @@
         <div class="card-header text-white bg-secondary">
             Testimonial
         </div>
-        <table mat-table [dataSource]="
-        filterData.dataSource" class="mat-elevation-z8 mat-datagrid w-100" matSort>
+        <table mat-table [dataSource]="        filterData.dataSource" class="mat-elevation-z8 mat-datagrid w-100"
+            matSort>
 
 
             <ng-container matColumnDef="Checkbox">
@@ -113,6 +140,8 @@
                     <mat-checkbox (click)="$event.stopPropagation()"
                         (change)="$event ? selection.toggle(element) : null" [checked]="selection.isSelected(element)">
                     </mat-checkbox>
+                    <!-- <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td> -->
+
                 </td>
 
             </ng-container>
@@ -124,46 +153,13 @@
                         <label mat-sort-header class="">Content</label>
                         <input matInput type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
-
                     </div>
-                    <div class="row">
-
-
-                    </div>
-
-
-
-
                 </th>
 
                 <td mat-cell *matCellDef="let element" class="col-3 mx-2 ">
-                    <div class="">
-                        <!-- <div class="col-md-6">
-                            <div class="d-flex text-center ">
-                                <p class=" mr-2" style="color:blue ;">Edit</p>| <p class="text-danger mx-2">Delete</p>
-                            </div>
-
-                        </div> -->
-                        <div class="col">
-                            {{element.content}}
-
-                        </div>
-                        <div class="col-md-6 ">
-                            <!-- <mat-radio-group aria-label="Select an option">
-                                <mat-radio-button value="1">Visible</mat-radio-button>&nbsp;
-                                <mat-radio-button value="2">invisible</mat-radio-button>
-                            </mat-radio-group> -->
-
-                        </div>
-
-
-
-
-                    </div>
+                    {{element.content | titlecase}}
 
                 </td>
-
-
             </ng-container>
 
 
@@ -178,7 +174,7 @@
 
                 </th>
                 <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted">
-                    {{element.givenByName}} </td>
+                    {{element.givenByName| titlecase}} </td>
             </ng-container>
 
 
@@ -188,13 +184,9 @@
                         <label mat-sort-header class="">Date Of Add</label>
                         <input matInput type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
-
-
                     </div>
-
-
                 </th>
-                <td mat-cell *matCellDef="let element" class="col-md-2 px-2 text-left py-2">
+                <td mat-cell *matCellDef="let element" class="col-md-2">
                     {{element.createdDate | date:"dd-MM-YYYY"}}
                 </td>
             </ng-container>
@@ -203,13 +195,10 @@
                         type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[4].Value"
                         [filter]="filterData" disabled />
                 </th>
-                <td mat-cell *matCellDef="let element" class="col-md-3 px-2  align-items-center">
-                    <div class=" d-flex justify-content-evenly align-items-center ">
+                <td mat-cell *matCellDef="let element" class="col-md-3   align-items-center">
+                    <div class=" d-flex flex-row justify-content-center align-items-center ">
                         <mat-slide-toggle (change)=" onActivateMenu(element,$event)"
                             [checked]="IsActiveorNot(element.testimonalId)"></mat-slide-toggle>
-                        <!-- <span>{{element.active == 'Y'? "Enable" : "Disable"}}</span>&nbsp; -->
-                        <!-- 
-                       (change)="onActivateRole(element,$event)" -->
                         <span matTooltip="Edit" (click)="editdetails(element)"><i
                                 aria-label="Button that displays a tooltip when focused or hovered over"
                                 class="fas fa-pencil-alt" aria-hidden="true"></i> </span> &nbsp; <span
@@ -219,19 +208,15 @@
                             (click)="deletedetails(element.testimonalId)">
                             <i class="far fa-trash-alt" aria-hidden="true"></i>
                         </span>
-
                     </div>
-
                 </td>
             </ng-container>
-
-
-
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
 
-        <mat-paginator class="card-body" [pageSizeOptions]="[10,25, 50, 100]" aria-label="Select page"></mat-paginator>
+        <mat-paginator class="card-body" [pageSizeOptions]="[10,25, 50, 100]" (page)="onpaginatechange($event)"
+            aria-label="Select page"></mat-paginator>
 
     </div>
 </div>

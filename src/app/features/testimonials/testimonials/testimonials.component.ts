@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
+import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 import { TestimonialsService } from '../testimonials.service';
 
 @Component({
@@ -29,6 +30,7 @@ export class TestimonialsComponent implements OnInit {
   data!: any;
   filterData: any
   gridData: any;
+  pageno: number = 1
 
 
   selection = new SelectionModel<any>(true, []);
@@ -53,11 +55,9 @@ export class TestimonialsComponent implements OnInit {
 
     this.testimonial = this.formbuilder.group({
       id: [null],
-
       Content: [null, Validators.compose([Validators.required])],
       name: [null, Validators.compose([Validators.required])],
-      link: [null, Validators.compose([Validators.required])],
-
+      link: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
       description: [null, Validators.compose([Validators.required])],
 
     });
@@ -72,14 +72,7 @@ export class TestimonialsComponent implements OnInit {
       next: (response) => {
         this.data = response
         this.data = this.data.reverse()
-        for (let data of this.data) {
-          data.check = false;
-        }
-        console.log(this.data);
 
-        // this.dataSource = new MatTableDataSource<any>(this.data)
-        // this.dataSource.sort = this.sort;
-        // this.dataSource.paginator = this.paginator;
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
@@ -89,8 +82,6 @@ export class TestimonialsComponent implements OnInit {
         for (let col of this.filterData.filterColumnNames) {
           col.Value = '';
         }
-
-
       }
     });
   }
@@ -99,13 +90,24 @@ export class TestimonialsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   reseteditable() {
-    // this.addCourseForm.reset()
+    this.testimonial.reset()
     this.iseditable = false
     this.displaycontent = !this.displaycontent
   }
   viewDetails(element: any) {
 
   }
+
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+
+    return
+  }
+
   updatePagination() {
 
     this.filterData.dataSource.paginator = this.paginator;
@@ -130,15 +132,6 @@ export class TestimonialsComponent implements OnInit {
       name: element.givenByName,
       link: element.videoLink,
       description: element.description,
-      // "content": "this is the testing content-2",
-      // "description": "This is the testing Files ",
-      // "video_link": "https://youtu.be/4CDe-8ngRmkKKKEEd",
-      // "givenByName": "karthik"
-
-
-      // fromdate: formatDate(element.fromDate, "yyyy-MM-dd", 'en'),
-      // todate: formatDate(element.toDate, "yyyy-MM-dd", 'en'),
-
     });
     this.issubmit = false
     this.displaycontent = true
@@ -208,7 +201,6 @@ export class TestimonialsComponent implements OnInit {
     }
     if (this.iseditable) {
       //editable
-      // const name = this.data.filter((ele: any) => ele.content.content === Content)[0].givenByName.description
       const body = {
         "testimonalId": this.testimonial.value.id,
         "content": this.testimonial.value.Content,
@@ -217,9 +209,6 @@ export class TestimonialsComponent implements OnInit {
         "videoLink": this.testimonial.value.link,
         "description": this.testimonial.value.description,
       }
-
-      console.log(body);
-
       this.test.updatetest(body).subscribe({
         next: (response) => {
           this.openSnackBar(response)
@@ -233,9 +222,6 @@ export class TestimonialsComponent implements OnInit {
       })
       return
     }
-
-    console.log(this.testimonial);
-
     this.test.posttestimonial(body).subscribe({
       next: (response) => {
         this.openSnackBar(response)
@@ -276,9 +262,6 @@ export class TestimonialsComponent implements OnInit {
       "testimonalId": element.testimonalId
     }
     const isActive = element.isActive
-    console.log(yes.includes(isActive));
-
-
     if (!yes.includes(isActive)) {
       this.test.postavtive(body).subscribe({
         next: (response) => {
@@ -306,23 +289,6 @@ export class TestimonialsComponent implements OnInit {
       })
 
     }
-
-
-
-    // console.log(menu);
-    // if (event.checked) {
-    //   menu.status = 'Y';
-    // } else {
-    //   menu.status = 'N';
-    // }
-    // const body={
-
-    //     "testimonalId": this.testimonial.value.id
-    // }
-    // this.test.postavtive(body).subscribe((response) => {
-    //   this.getTestimonial()
-    // });
-
   }
 
 
