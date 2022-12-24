@@ -10,7 +10,7 @@
     <!-- <h4>Audio Management- Audio dharanas</h4> -->
     <div class="row justify-content-end p-3">
         <div class="col-md-2">
-            <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block" (click)="addcourse()"
+            <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block" 
             *ngIf="!displaycontent">
           Create Audio
         </button>
@@ -30,7 +30,7 @@
              
                 <mat-form-field appearance="outline">
                 
-                    <mat-select  >
+                    <mat-select  (selectionChange)="addcourse()">
                        
                         <mat-option value="categoryName" *ngFor="let element of courses">{{element.coursesName}}</mat-option>
                     </mat-select> 
@@ -39,12 +39,12 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-md pt-2">
+            <!-- <div class="col-md pt-2">
                 <button type="submit" class="btn btn-outline-secondary btn-go btn-rounded d-inline-block ">
                    Submit
                 </button>
 
-            </div>
+            </div> -->
 
 
 

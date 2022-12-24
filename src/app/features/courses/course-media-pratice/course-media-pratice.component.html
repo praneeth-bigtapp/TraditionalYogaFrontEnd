@@ -13,21 +13,28 @@
             Course Media Pratice sessions
         </div>
         <div class="card border-light bg-white pt-3 ">
+            <form [formGroup]="courseform">
             <div class="  d-flex flex-row flex-wrap pb-2 ">
-                <div class="col-3">
-                    <label>Type </label>
+               
+                <div class="col-4">
+                    <label>Course</label>
 
-                    <mat-form-field appearance="outline">
-                        <mat-select [(ngModel)]="classtype" (ngModelChange)="typechange()">
-                            <mat-option value="live">Live</mat-option>
-                            <mat-option value="recording">Recording</mat-option>
+                    <mat-form-field class="pe-4" appearance="outline">
+                        <mat-select matNativeControl formControlName="courses" (selectionChange)="gobutton()">
+                            <mat-option *ngFor="let item of courseList"
+                                [value]="item.coursesId">{{item.coursesName}}
+                            </mat-option>
                         </mat-select>
 
                     </mat-form-field>
-                    <span class="error-message" *ngIf="categoryerror">
-                        Category is mandatory
-                    </span>
+                    <div class="error-message"
+                        *ngIf="courseform.controls['courses'].invalid && (courseform.controls['courses'].dirty || courseform.controls['courses'].touched)">
+                        <mat-error [hidden]=" !courseform.get('courses')?.hasError('required')  ">
+                            Course is mandatory
+                        </mat-error>
+                    </div>
                 </div>
+         
                 <!-- <div>
                 <button type="button" (click)="gobutton()"
                     class="btn btn-outline-secondary mt-4 btn-rounded d-inline-block m-2">
@@ -37,6 +44,7 @@
             </div> -->
 
             </div>
+        </form>
 
 
             <div *ngIf="displaycontent">

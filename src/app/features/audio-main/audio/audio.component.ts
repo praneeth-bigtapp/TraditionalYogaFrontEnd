@@ -185,6 +185,7 @@ export class AudioComponent implements OnInit {
     this.audio.getCategory().subscribe({
       next:(response:any)=>{
         this.data=response
+        console.log('data');
         
         console.log(response)
       },
@@ -200,7 +201,7 @@ export class AudioComponent implements OnInit {
         for (let AllaudioCategory of this.AllaudioCategory) {
           AllaudioCategory.check = false;
            this.dataSource = new MatTableDataSource<any>(this.AllaudioCategory)
-        this.filterData.gridData = this.data;
+        this.filterData.gridData = this.AllaudioCategory;
         this.filterData.dataSource = this.dataSource;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -268,12 +269,18 @@ export class AudioComponent implements OnInit {
     this.iseditable = true
     this.displaycontent = true
     this.issubmit = true
+    // let catogerieId=this.data.filter((ele:any)=>{if(ele.audioCategoryId===
+    //   ){
+    //   return this.data.audioName
+    // }})
+    console.log("catoger:"+element.audioCategoryId.audioName);
+    
     this.Audiomanagement.setValue({
       audiocategoryid:element.audioCategoryId,
       
       courseid:element.courseId,
       Id:element.id,
-      category: element.uploadCategory,
+      category: element.audioCategoryId.audioName,
       upload: element.audioType,
       file:"",
       title: element.audioTitle,
@@ -286,6 +293,7 @@ export class AudioComponent implements OnInit {
       updateby:element.updatedBy,
       active:element.isActive
     });
+    this.Audiomanagement.value.category= element.audioCategoryId.audioName
 
   }
   deletedetails(Id:any){
@@ -336,7 +344,6 @@ console.log(body);
     this.getaudiocategory()
 
   
-    this.dataSource = new MatTableDataSource<any>(this.data)
     this.filterData = {
       filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
       gridData: this.gridData,
@@ -345,8 +352,9 @@ console.log(body);
       sort: this.sort
     };
 
+    this.dataSource = new MatTableDataSource<any>(this.AllaudioCategory)
    
-    this.filterData.gridData = this.data;
+    this.filterData.gridData = this.AllaudioCategory;
     this.filterData.dataSource = this.dataSource;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -428,6 +436,8 @@ console.log(body);
   
       
       }
+      console.log("editing");
+      
       this.audio.updateaudio(body).subscribe({
         next:(response)=>{
           console.log(response)
@@ -439,7 +449,7 @@ console.log(body);
           console.error(error.message)
         }
       })
-
+      return
     }
     console.log(this.Audiomanagement);
     console.log(body)

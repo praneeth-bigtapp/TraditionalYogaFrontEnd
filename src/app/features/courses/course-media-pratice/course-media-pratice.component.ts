@@ -55,6 +55,8 @@ export class CourseMediaPraticeComponent implements OnInit {
   filerror!: boolean
 
   displaycontent: boolean = false
+  courseform!: FormGroup;
+  courseList:any
 
   onpaginatechange(event: any) {
     if (event.pageIndex === 0) {
@@ -114,6 +116,8 @@ export class CourseMediaPraticeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getcourseslist()
+    this.courseform = this.formbuilder.group({courses: [null, Validators.compose([Validators.required])],})
     this.addmediaform = this.formbuilder.group({
 
 
@@ -142,6 +146,20 @@ export class CourseMediaPraticeComponent implements OnInit {
   updatePagination() {
     this.filterData.dataSource.paginator = this.paginator;
     this.filterData.dataSource.sort = this.sort;
+  }
+  getcourseslist() {
+    this.service.getCourse().subscribe({
+      next: (response) => {
+        this.courseList = response;
+
+        console.log(this.courseList);
+
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
   }
   typechange() {
 
