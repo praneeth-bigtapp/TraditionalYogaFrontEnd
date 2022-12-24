@@ -42,6 +42,8 @@ export class CourseMediaPraticeComponent implements OnInit {
   keyword = ''
   description = ''
   filedata!: any
+  filedata1!: any
+  filedata2!: any
   paragrapherror: boolean = false
   filterData: any;
   gridData = [];
@@ -52,7 +54,7 @@ export class CourseMediaPraticeComponent implements OnInit {
   data!: any
 
   classtype!: string
-  filerror!: boolean
+
 
   displaycontent: boolean = false
   courseform!: FormGroup;
@@ -126,13 +128,13 @@ export class CourseMediaPraticeComponent implements OnInit {
       videodescription: [null, Validators.compose([Validators.required])],
       videoduration: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.durationvalidation)])],
       vidoemetakeywords: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])],
+      videofile: [null, Validators.compose([])],
       imagetitle: [null, Validators.compose([Validators.required])],
+      mediafile: [null, Validators.compose([])],
       paragraph: [null, Validators.compose([Validators.required])],
-      imagekeywords: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])],
-      mediafile: [null, Validators.compose([Validators.required])],
+      docfile: [null, Validators.compose([])],
       mediatitle: [null, Validators.compose([Validators.required])],
       mediadescription: [null, Validators.compose([Validators.required])],
-      mediametakeywords: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])],
     })
   }
 
@@ -173,7 +175,7 @@ export class CourseMediaPraticeComponent implements OnInit {
   //   this.gobutton()
   // }
   cancelbt(){
-    
+
   }
   gobutton() {
     
@@ -186,11 +188,20 @@ export class CourseMediaPraticeComponent implements OnInit {
   }
 
   onfilechange(event: any) {
-    this.filerror = this.addmediaform.value.mediafile === null ? true : false
+   
 
     this.filedata = event.target.files[0].name
   }
+  onfilechange1(event: any) {
 
+
+    this.filedata1 = event.target.files[0].name
+  }  
+  onfilechange2(event: any) {
+
+
+    this.filedata2 = event.target.files[0].name
+  }
   viewmanage(data: any) {
     console.log(data);
 
@@ -203,7 +214,7 @@ export class CourseMediaPraticeComponent implements OnInit {
   }
   addmedia() {
 
-    this.filerror = this.addmediaform.value.mediafile === null ? true : false
+    
 
     this.paragraphchange()
 
@@ -213,6 +224,10 @@ export class CourseMediaPraticeComponent implements OnInit {
     if (this.addmediaform.valid) {
 
       this.addmediaform.value.mediafile = this.filedata
+      this.addmediaform.value.videofile = this.filedata1
+
+      this.addmediaform.value.socfile = this.filedata2
+
 
       const body = {
 
