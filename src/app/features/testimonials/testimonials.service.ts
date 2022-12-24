@@ -9,7 +9,7 @@ export class TestimonialsService extends BaseHttp{
   postTestimonial="courseList/testimonal?operation=add";
   updateTestimonial="courseList/testimonal?operation=update";
   deleteURL="courseList/testimonal?operation=delete";
-  active="CourseList/testimonal?operation=active";
+  active="courseList/testimonal?operation=active";
   deactivate="courseList/testimonal?operation=deactive"
 
 

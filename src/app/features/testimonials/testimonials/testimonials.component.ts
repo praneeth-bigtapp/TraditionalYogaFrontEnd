@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
@@ -36,7 +37,8 @@ export class TestimonialsComponent implements OnInit {
 
 
 
-  constructor(private formbuilder: FormBuilder, private test: TestimonialsService,private dialog: MatDialog) { }
+  constructor(private formbuilder: FormBuilder, private test: TestimonialsService, private dialog: MatDialog, private _snackBar: MatSnackBar,
+  ) { }
 
   ngOnInit(): void {
 
@@ -50,7 +52,7 @@ export class TestimonialsComponent implements OnInit {
     this.getTestimonial();
 
     this.testimonial = this.formbuilder.group({
-      id:[null],
+      id: [null],
 
       Content: [null, Validators.compose([Validators.required])],
       name: [null, Validators.compose([Validators.required])],
@@ -69,7 +71,7 @@ export class TestimonialsComponent implements OnInit {
     this.test.getTestimonial().subscribe({
       next: (response) => {
         this.data = response
-        this.data=this.data.reverse()
+        this.data = this.data.reverse()
         for (let data of this.data) {
           data.check = false;
         }
@@ -122,12 +124,12 @@ export class TestimonialsComponent implements OnInit {
       this.dataSource.data.forEach((row: any) => this.selection.select(row));
   }
   viewdetails(element: any) {
-    this.  testimonial.setValue({
-      id:element.testimonalId,
+    this.testimonial.setValue({
+      id: element.testimonalId,
       Content: element.content,
       name: element.givenByName,
       link: element.videoLink,
-      description:element.description,
+      description: element.description,
       // "content": "this is the testing content-2",
       // "description": "This is the testing Files ",
       // "video_link": "https://youtu.be/4CDe-8ngRmkKKKEEd",
@@ -136,31 +138,31 @@ export class TestimonialsComponent implements OnInit {
 
       // fromdate: formatDate(element.fromDate, "yyyy-MM-dd", 'en'),
       // todate: formatDate(element.toDate, "yyyy-MM-dd", 'en'),
-      
+
     });
     this.issubmit = false
     this.displaycontent = true
   }
   editdetails(element: any) {
     this.testimonial.setValue({
-      id:element.testimonalId,
+      id: element.testimonalId,
       Content: element.content,
       name: element.givenByName,
       link: element.videoLink,
-      description:element.description,
+      description: element.description,
 
-      
+
     });
     this.iseditable = true
     this.displaycontent = true
     this.issubmit = true
   }
-  deletedetails(id:any){ 
+  deletedetails(id: any) {
     console.log(id);
     const body = {
-      "testimonalId": Number(id) 
+      "testimonalId": Number(id)
     }
-console.log(body);
+    console.log(body);
     const dialogref = this.dialog.open(DialogPopupComponent, {
       data: {
         title: "Delete Confirmation",
@@ -171,11 +173,10 @@ console.log(body);
 
     dialogref.afterClosed().subscribe((id: any) => {
       if (id) {
-        this.test. deleteTestimonial(body).subscribe({
+        this.test.deleteTestimonial(body).subscribe({
           next: (response) => {
-           console.log(response);
-            this.testimonial.reset()
-            this. getTestimonial()
+            this.openSnackBar(response)
+            this.getTestimonial()
           },
           error: (error) => {
             console.error(error.message);
@@ -192,17 +193,7 @@ console.log(body);
     this.displaycontent = !this.displaycontent
 
   }
-  // onActivateRole(role: any, event: MatSlideToggleChange) {
-  //   console.log(role);
-  //   if (event.checked) {
-  //     role.active = 'Y';
-  //   } else {
-  //     role.active = 'N';
-  //   }
-    // this.rolesService.activateRole(role).subscribe((response) => {
-    //   this.getRoles();
-    // });
-  // }
+
   addTestdata() {
 
     if (this.testimonial.invalid)
@@ -218,20 +209,20 @@ console.log(body);
     if (this.iseditable) {
       //editable
       // const name = this.data.filter((ele: any) => ele.content.content === Content)[0].givenByName.description
-const body={
-      "testimonalId": this.testimonial.value.id,
-      "content": this.testimonial.value.Content,
-      "givenByName": this.testimonial.value.name,
+      const body = {
+        "testimonalId": this.testimonial.value.id,
+        "content": this.testimonial.value.Content,
+        "givenByName": this.testimonial.value.name,
 
-      "videoLink": this.testimonial.value.link,
-      "description": this.testimonial.value.description,
-  }
+        "videoLink": this.testimonial.value.link,
+        "description": this.testimonial.value.description,
+      }
 
       console.log(body);
 
       this.test.updatetest(body).subscribe({
         next: (response) => {
-          console.log(response)
+          this.openSnackBar(response)
           this.testimonial.reset()
           this.getTestimonial()
         },
@@ -239,15 +230,15 @@ const body={
           console.error(error.message);
 
         }
-      }) 
+      })
       return
     }
-    
+
     console.log(this.testimonial);
 
     this.test.posttestimonial(body).subscribe({
       next: (response) => {
-        console.log(response)
+        this.openSnackBar(response)
         this.testimonial.reset()
 
         this.getTestimonial()
@@ -261,25 +252,81 @@ const body={
 
   }
 
-  onActivateMenu(menu: any, event: MatSlideToggleChange) {
-    console.log(menu);
-    if (event.checked) {
-      menu.status = 'Y';
-    } else {
-      menu.status = 'N';
-    }
-    const body={
-     
-        "testimonalId": this.testimonial.value.id
-    }
-    this.test.postavtive(body).subscribe((response) => {
-      this.getTestimonial()
+  IsActiveorNot(id: any) {
+    const yes = ["Yes", "Y", "yes", "y"]
+    const no = ["No", "N", "no", "n"]
+
+    const filterdata = this.data.filter((ele: any) => ele.testimonalId === id)[0].isActive
+
+    return yes.includes(filterdata)
+  }
+
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
     });
-    
   }
-    
-   
+
+  onActivateMenu(element: any, event: MatSlideToggleChange) {
+    console.log(element);
+    const yes = ["Yes", "Y", "yes", "y"]
+    const no = ["No", "N", "no", "n"]
+
+    const body = {
+      "testimonalId": element.testimonalId
+    }
+    const isActive = element.isActive
+    console.log(yes.includes(isActive));
+
+
+    if (!yes.includes(isActive)) {
+      this.test.postavtive(body).subscribe({
+        next: (response) => {
+          this.openSnackBar(response)
+          this.getTestimonial()
+        },
+        error: (error) => {
+          console.error(error.message);
+
+        }
+      })
+      return
+    }
+    else {
+
+      this.test.postdeactivate(body).subscribe({
+        next: (response) => {
+          this.openSnackBar(response)
+          this.getTestimonial()
+        },
+        error: (error) => {
+          console.error(error.message);
+
+        }
+      })
+
+    }
+
+
+
+    // console.log(menu);
+    // if (event.checked) {
+    //   menu.status = 'Y';
+    // } else {
+    //   menu.status = 'N';
+    // }
+    // const body={
+
+    //     "testimonalId": this.testimonial.value.id
+    // }
+    // this.test.postavtive(body).subscribe((response) => {
+    //   this.getTestimonial()
+    // });
+
   }
- 
-  
+
+
+}
+
+
 

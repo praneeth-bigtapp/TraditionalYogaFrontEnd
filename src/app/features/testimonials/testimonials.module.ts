@@ -17,7 +17,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     TestimonialsComponent
@@ -41,6 +42,7 @@ import {MatRadioModule} from '@angular/material/radio';
     SharedModule,
     MatTooltipModule,
     MatIconModule,
+    MatSnackBarModule,
   ]
 })
 export class TestimonialsModule { }
