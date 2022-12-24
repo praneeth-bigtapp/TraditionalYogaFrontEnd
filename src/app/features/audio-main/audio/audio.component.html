@@ -79,9 +79,9 @@
                     <mat-form-field appearance="outline">
                         
                         <mat-select  formControlName="category">
-                            <mat-option [value]="element.categorieId.categoriesName"  *ngFor="let element of courses">{{element.categorieId.categoriesName}}</mat-option>
+                            <!-- <mat-option [value]="element.categorieId.categoriesName"  *ngFor="let element of courses">{{element.categorieId.categoriesName}}</mat-option> -->
                       
-                         
+                            <mat-option [value]="element.audioCategoryId"  *ngFor="let element of data">{{element.audioName}}</mat-option>
                         </mat-select>
                         <mat-error [hidden]=" !Audiomanagement.get('category')?.hasError('required')  ">
                             Category is mandatory
@@ -101,7 +101,8 @@
                         <!-- <mat-label>Audio file</mat-label> -->
                         <mat-select  formControlName="upload">
                           
-                            <mat-option [value]="element.courseId"  *ngFor="let element of audiocategory">{{element.audioCategoryId}}</mat-option></mat-select>
+                            <!-- <mat-option [value]="element.courseId"  *ngFor="let element of audiocategory">{{element.audioCategoryId}}</mat-option></mat-select> -->
+                            <mat-option [value]="element.audioType"  *ngFor="let element of Audiodata">{{element.audioName}}</mat-option></mat-select>
                             
                         <mat-error [hidden]=" !Audiomanagement.get('upload')?.hasError('required')  ">
                             Audio is mandatory
@@ -233,7 +234,7 @@
         <ng-container matColumnDef="audioTitle">
           <th mat-header-cell *matHeaderCellDef class="col-2 text-center ">
              <label mat-sort-header>Title</label>
-            <input  type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value"
+            <input  type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
               [filter]="filterData"  />
           </th>
   
@@ -245,25 +246,25 @@
   
         <ng-container matColumnDef="uploadCategory">
           <th mat-header-cell *matHeaderCellDef class="col-2 text-center"><label mat-sort-header>Category</label>
-            <input  type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
+            <input  type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
               [filter]="filterData"  class="mx-2" />
           </th>
-          <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted"> {{element.uploadCategory}}
+          <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted"> {{element.audioCategoryId.audioName}}
           </td>
         </ng-container>
   
   
         <ng-container matColumnDef="audioCategoryId">
           <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>File Type</label>
-            <input  type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
+            <input  type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
               [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
           </th>
-          <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center py-2"> {{element.audioCategoryId}} </td>
+          <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center py-2"> {{element.audioType.audioName}} </td>
         </ng-container>
   
         <ng-container matColumnDef="audioDuration">
           <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>Duration </label>
-            <input  type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
+            <input  type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[4].Value"
               [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
           </th>
           <td mat-cell *matCellDef="let element" class="col-2 text-center py-2"> {{element.audioDuration}} </td>
