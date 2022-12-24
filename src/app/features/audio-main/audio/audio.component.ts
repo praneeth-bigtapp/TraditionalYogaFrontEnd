@@ -274,6 +274,27 @@ export class AudioComponent implements OnInit {
     //   return this.data.audioName
     // }})
     console.log("catoger:"+element.audioCategoryId.audioName);
+
+
+
+      
+      
+    // this.Audiomanagement.value.category=element.audioCategoryId.audioName ,
+      
+       
+    // this.Audiomanagement.value.file='' ,
+    // this.Audiomanagement.value.title=element.audioTitle ,
+    // this.Audiomanagement.value.upload= element.audioType,
+    // this.Audiomanagement.value.description=  element.audioDesc,
+    // this.Audiomanagement.value.duration=Number(element.audioDuration),
+    // this.Audiomanagement.value.meta= element.metakey,
+       
+        
+      
+
+      
+
+
     
     this.Audiomanagement.setValue({
       audiocategoryid:element.audioCategoryId,
