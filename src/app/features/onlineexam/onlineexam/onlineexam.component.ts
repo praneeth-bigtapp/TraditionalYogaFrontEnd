@@ -169,6 +169,7 @@ export class OnlineexamComponent implements OnInit {
 
     });
     this.issubmit = false
+    this.iseditable = false
     this.displaycontent = true
 
   }
