@@ -178,6 +178,8 @@ export class NotificationComponent implements OnInit {
 
   }
   editdetails(element: any) {
+    console.log(element);
+    
     this.notificationform.setValue({
       notificationId: element.notificationId,
       category: element.categoryId.categoryId,

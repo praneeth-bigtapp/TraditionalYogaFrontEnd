@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
+import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 import { ScripcturesService } from '../service/scripctures.service';
 
 @Component({
@@ -39,6 +40,15 @@ export class CreateScripcturesComponent implements OnInit {
     "title": "Title",
     "description": "Description",
     "metakeyword": "metakeyword"
+  },
+  {
+    "title": "Title",
+    "description": "Description",
+    "metakeyword": "metakeyword"
+  }, {
+    "title": "Title",
+    "description": "Description",
+    "metakeyword": "metakeyword"
   }]
   constructor(
     private router: Router,
@@ -61,11 +71,13 @@ export class CreateScripcturesComponent implements OnInit {
 
   ngOnInit(): void {
     this.addmediaform = this.formbuilder.group({
+      Id: [null],
+
       coverimage: [null, Validators.compose([Validators.required])],
       covertitle: [null, Validators.compose([Validators.required])],
       coverdescription: [null, Validators.compose([Validators.required])],
       coverfile: [null, Validators.compose([Validators.required])],
-      coverkeywords: [null, Validators.compose([Validators.required])]
+      coverkeywords: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])]
     })
   }
 
@@ -81,6 +93,8 @@ export class CreateScripcturesComponent implements OnInit {
   }
 
   getdata() {
+    console.log(this.data);
+
     this.dataSource = new MatTableDataSource<any>(this.data)
     this.filterData.gridData = this.data;
     this.filterData.dataSource = this.dataSource;
@@ -93,6 +107,10 @@ export class CreateScripcturesComponent implements OnInit {
   }
   add() {
     this.displaycontent = !this.displaycontent
+  }
+  ngAfterViewInit() {
+    this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort
   }
   updatePagination(col: any) {
     this.filterData.dataSource.paginator = this.paginator;
@@ -153,6 +171,7 @@ export class CreateScripcturesComponent implements OnInit {
 
 
     this.addmediaform.setValue({
+      Id: element.id,
       coverimage: null,
       covertitle: element.title,
       coverdescription: element.description,
@@ -162,17 +181,32 @@ export class CreateScripcturesComponent implements OnInit {
   }
 
   deletedetails(id: any) {
+
+    const body = {
+      "scripcturesId": id
+    }
     const dialogref = this.dialog.open(DialogPopupComponent, {
       data: {
         title: "Delete Confirmation",
         message: "Are You Sure You Want To Delete this scripctures ?"
       },
-      width: "25%"
+      width: "30%"
     })
 
     dialogref.afterClosed().subscribe(data => {
       if (data) {
         //delete API 
+        this.service.deletescripctures(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.getdata()
+
+          },
+          error: (error) => {
+            console.error(error.message);
+
+          }
+        })
         return
       }
 
@@ -190,12 +224,29 @@ export class CreateScripcturesComponent implements OnInit {
       this.addmediaform.value.coverfile = this.filedata
 
 
-      const { coverimage, covertitle, coverdescription, coverfile, coverkeywords } = this.addmediaform.value
-      console.log({ coverimage, covertitle, coverdescription, coverfile, coverkeywords })
+      const { Id, coverimage, covertitle, coverdescription, coverfile, coverkeywords } = this.addmediaform.value
+      console.log({ Id, coverimage, covertitle, coverdescription, coverfile, coverkeywords })
 
+
+      if (this.iseditable) {
+        const body = {
+          "scripcturesId": Id,
+          "coverImage": coverimage,
+          "uploadFile": coverfile,
+          "title": covertitle,
+          "description": coverdescription,
+          "metaKeywords": coverkeywords
+        }
+
+        return
+      }
 
       const body = {
-
+        "coverImage": coverimage,
+        "uploadFile": coverfile,
+        "title": covertitle,
+        "description": coverdescription,
+        "metaKeywords": coverkeywords
       }
 
       this.service.postscripctures(body).subscribe({

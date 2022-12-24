@@ -71,6 +71,9 @@
                                 <mat-error [hidden]=" !addmediaform.get('coverkeywords')?.hasError('required')  ">
                                     Keyword is mandatory
                                 </mat-error>
+                                <mat-error [hidden]=" !addmediaform.get('coverkeywords')?.hasError('pattern')  ">
+                                    Invalid Keywords
+                                </mat-error>
                             </div>
                         </div>
 
