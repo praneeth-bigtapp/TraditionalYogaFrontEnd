@@ -78,14 +78,23 @@ export class EnrollmentformComponent implements OnInit {
     })
     this.service.getgender().subscribe({
       next: (response) => {
-
         this.genderlist = response
-        this.genderlist = this.genderlist.map((ele: any) => ele.genderName)
-
       },
       error: (error) => {
         console.error(error.message);
-        this.genderlist = ["Male", "Female", "Transgender"]
+
+
+      }
+    })
+    this.service.getaboutus().subscribe({
+      next: (response) => {
+        console.log(response);
+
+        this.refferallist = response
+      },
+      error: (error) => {
+        console.error(error.message);
+        // this.genderlist = ["Male", "Female", "Transgender"]
 
 
       }

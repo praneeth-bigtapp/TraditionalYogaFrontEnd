@@ -90,7 +90,7 @@
                         <div class="col px-0">
                             <mat-radio-group formControlName="gender" aria-label="Select an option">
                                 <mat-radio-button class=" mt-md-2 mr-md-4" *ngFor="let gender of genderlist"
-                                    [value]="gender">{{gender}}</mat-radio-button>
+                                    [value]="gender.genderId">{{gender.genderName}}</mat-radio-button>
 
                             </mat-radio-group>
                             <div class="error-message"
@@ -226,9 +226,9 @@
                             <mat-form-field appearance="outline">
                                 <mat-select formControlName="refferal" [compareWith]="compareselect"
                                     [disabled]="iseditable">
-                                    <mat-option *ngFor="let category of refferallist" [value]="category"
+                                    <mat-option *ngFor="let category of refferallist" [value]="category.aboutUsId"
                                         aria-placeholder="Select Course Category">
-                                        {{category | titlecase}}</mat-option>
+                                        {{category.aboutusName | titlecase}}</mat-option>
                                 </mat-select>
 
                             </mat-form-field>
@@ -257,7 +257,7 @@
 
                     <div class=" col d-flex flex-row flex-wrap justify-content-end">
                         <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block mt-4">
-                            {{iseditable ? "Update" :"Submit " }}
+                            {{iseditable ? "Update" :"Register " }}
                         </button>
                         <button type="reset" class="btn btn-outline-secondary btn-rounded d-inline-block mt-4 ">
                             Cancel
