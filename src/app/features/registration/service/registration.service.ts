@@ -11,6 +11,7 @@ export class RegistrationService extends BaseHttp {
   getaboutusURL = "register/getAll?operation=aboutus"
 
   postenrollmentURL = ""
+  postdetailsenrollmentURL = ""
   genderURL = "student/getAll?operation=gender"
 
   getgender() {
@@ -25,5 +26,8 @@ export class RegistrationService extends BaseHttp {
 
   postenrollment(body: any) {
     return this.post(this.postenrollmentURL, body)
+  }
+  postdetailsenrollment(body: any) {
+    return this.post(this.postdetailsenrollmentURL, body)
   }
 }

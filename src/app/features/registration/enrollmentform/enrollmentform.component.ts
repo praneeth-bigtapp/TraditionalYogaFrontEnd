@@ -14,6 +14,7 @@ export class EnrollmentformComponent implements OnInit {
 
   iseditable: boolean = false
   formdetails!: FormGroup
+  detailsinformation!: FormGroup
   countryList: any
   genderlist: any
   countryfilter !: Observable<any>
@@ -28,7 +29,10 @@ export class EnrollmentformComponent implements OnInit {
 
   ) {
     this.formdetails = this.formbuilder.group({
-      name: [null, Validators.compose([Validators.required])],
+      firstname: [null, Validators.compose([Validators.required])],
+      middlename: [null, Validators.compose([])],
+      lastname: [null, Validators.compose([Validators.required])],
+      // name: [null, Validators.compose([Validators.required])],
       email: [null, Validators.compose([Validators.required, Validators.email])],
       mobile: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.mobile)])],
       mothertounge: [null, Validators.compose([Validators.required])],
@@ -43,6 +47,11 @@ export class EnrollmentformComponent implements OnInit {
       pincode: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.isnumbers)])],
       refferal: [null, Validators.compose([Validators.required])],
       termscondition: [null, Validators.compose([Validators.required])],
+
+    })
+
+
+    this.detailsinformation = this.formbuilder.group({
       photo: [null, Validators.compose([Validators.required])],
       job: [null, Validators.compose([Validators.required])],
       workinghours: [null, Validators.compose([Validators.required])],
@@ -78,6 +87,7 @@ export class EnrollmentformComponent implements OnInit {
     })
     this.service.getgender().subscribe({
       next: (response) => {
+
         this.genderlist = response
       },
       error: (error) => {
@@ -88,15 +98,10 @@ export class EnrollmentformComponent implements OnInit {
     })
     this.service.getaboutus().subscribe({
       next: (response) => {
-        console.log(response);
-
         this.refferallist = response
       },
       error: (error) => {
         console.error(error.message);
-        // this.genderlist = ["Male", "Female", "Transgender"]
-
-
       }
     })
   }
@@ -151,6 +156,26 @@ export class EnrollmentformComponent implements OnInit {
 
       }
     })
+  }
+
+  detailedsubmit() {
+    if (this.detailsinformation.invalid)
+      return this.detailsinformation.markAllAsTouched()
+
+
+      const body = {}
+
+
+      this.service.postenrollment(body).subscribe({
+        next: (response) => {
+          this.openSnackBar(response)
+        },
+        error: (error) => {
+          console.error(error.message);
+  
+        }
+      })
+
   }
 
 }

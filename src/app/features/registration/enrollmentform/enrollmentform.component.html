@@ -20,15 +20,43 @@
 
                 <div class="row text-align-center">
                     <div class="col-md-4">
-                        <label>Full Name</label>
+                        <label>First name</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" formControlName="name" required>
+                                <input matInput autocomplete="off" formControlName="firstname" required>
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="formdetails.controls['name'].invalid && (formdetails.controls['name'].dirty || formdetails.controls['name'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('name')?.hasError('required')  ">
-                                    Full Name is mandatory
+                                *ngIf="formdetails.controls['firstname'].invalid && (formdetails.controls['firstname'].dirty || formdetails.controls['firstname'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('firstname')?.hasError('required')  ">
+                                    First name is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Middle name</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="middlename" required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="formdetails.controls['middlename'].invalid && (formdetails.controls['middlename'].dirty || formdetails.controls['middlename'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('middlename')?.hasError('required')  ">
+                                    Middle name is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Last name</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="lastname" required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="formdetails.controls['lastname'].invalid && (formdetails.controls['lastname'].dirty || formdetails.controls['lastname'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('lastname')?.hasError('required')  ">
+                                    Last name is mandatory
                                 </mat-error>
                             </div>
                         </div>
@@ -120,7 +148,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label>Street Name</label>
+                        <label>Street lastname</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" formControlName="street" required>
@@ -240,8 +268,29 @@
                             </div>
                         </div>
                     </div>
+                    <div class=" col d-flex flex-row flex-wrap justify-content-end">
+                        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block mt-4">
+                            {{iseditable ? "Update" :"Register" }}
+                        </button>
+                        <button type="reset" class="btn btn-outline-secondary btn-rounded d-inline-block mt-4 ">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
 
+            </form>
 
+        </div>
+    </div>
+
+    <div class="card border-light">
+        <div class="card-header text-white bg-secondary">
+            <!-- {{iseditable ? "Update":"Add"}} Enrollment -->
+            Detailed Information
+        </div>
+        <div class="card-body bg-white py-2">
+            <form [formGroup]="detailsinformation" (ngSubmit)="detailedsubmit()">
+                <div class="row align-items-center">
                     <div class="col-md-4">
                         <label>Passport Photo <small>(51 x 51 mm)</small></label>
                         <div class="col px-0">
@@ -253,19 +302,44 @@
                             <img [src]="photourl" class="img-fluid mx-auto w-50" alt="passportphoto" />
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <label>Profession</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="job" required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="detailsinformation.controls['job'].invalid && (detailsinformation.controls['job'].dirty || detailsinformation.controls['job'].touched)">
+                                <mat-error [hidden]=" !detailsinformation.get('job')?.hasError('required')  ">
+                                    Profession is mandatory
+                                </mat-error>
 
-
-                    <div class=" col d-flex flex-row flex-wrap justify-content-end">
-                        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block mt-4">
-                            {{iseditable ? "Update" :"Register " }}
-                        </button>
-                        <button type="reset" class="btn btn-outline-secondary btn-rounded d-inline-block mt-4 ">
-                            Cancel
-                        </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
+
+                    <div class="col-md-4">
+                        <label>How many working hours your profession demands?</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="workinghours" required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="detailsinformation.controls['workinghours'].invalid && (detailsinformation.controls['workinghours'].dirty || detailsinformation.controls['workinghours'].touched)">
+                                <mat-error [hidden]=" !detailsinformation.get('workinghourse')?.hasError('required')  ">
+                                    Working hours is mandatory
+                                </mat-error>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
             </form>
+
         </div>
     </div>
 </div>
