@@ -35,7 +35,7 @@ export class TestimonialsComponent implements OnInit {
 
   selection = new SelectionModel<any>(true, []);
 
-  displayedColumns: string[] = ["Checkbox", "content", "givenByName", 'createDate', 'action'];
+  displayedColumns: string[] = ["Checkbox", "content", "givenByName", 'createdDate', 'action'];
 
 
 

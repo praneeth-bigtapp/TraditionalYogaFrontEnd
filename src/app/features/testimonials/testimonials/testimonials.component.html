@@ -151,7 +151,7 @@
                 <th mat-header-cell *matHeaderCellDef class="col-md-3  ">
                     <div class="">
                         <label mat-sort-header class="">Content</label>
-                        <input matInput type="text" (keyup)="updatePagination()"
+                        <input  type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                     </div>
                 </th>
@@ -167,7 +167,7 @@
                 <th mat-header-cell *matHeaderCellDef class="col-2 ">
                     <div class="">
                         <label mat-sort-header class="">Given by</label>
-                        <input matInput type="text" (keyup)="updatePagination()"
+                        <input  type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
 
                     </div>
@@ -178,11 +178,11 @@
             </ng-container>
 
 
-            <ng-container matColumnDef="createDate">
+            <ng-container matColumnDef="createdDate">
                 <th mat-header-cell *matHeaderCellDef class="col-md-2 ">
                     <div class=" ">
                         <label mat-sort-header class="">Date Of Add</label>
-                        <input matInput type="text" (keyup)="updatePagination()"
+                        <input  type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
                     </div>
                 </th>
@@ -191,7 +191,7 @@
                 </td>
             </ng-container>
             <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef class="col-md-3 "> <label> Action</label><input matInput
+                <th mat-header-cell *matHeaderCellDef class="col-md-3 "> <label> Action</label><input 
                         type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[4].Value"
                         [filter]="filterData" disabled />
                 </th>
