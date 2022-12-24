@@ -154,7 +154,7 @@ export class OnlineexamComponent implements OnInit {
 
     this.filerror = this.onlineexamform.value.file === null ? true : false
 
-    this.filedata = event.target.files[0]
+    this.filedata = event.target.files[0].name
   }
 
   viewdetails(element: any) {
@@ -175,7 +175,7 @@ export class OnlineexamComponent implements OnInit {
   deletedetails(id: any) {
 
     const body = {
-      "coursesId": id,
+      "examsId": id,
     }
 
     const dialogref = this.dialog.open(DialogPopupComponent, {
@@ -247,19 +247,28 @@ export class OnlineexamComponent implements OnInit {
 
     formData.append("file", this.filedata)
 
-    const body = {
+    const { categorieId, coursesName } = this.courselist.filter((ele: any) => ele.coursesId === course)[0]
+
+
+    const body =
+    {
       "courseId": {
-        "coursesId": Number(course)
+        "coursesId": Number(course),
+        "categorieId": {
+          "categoriesId": categorieId.categoriesId
+        },
+        "coursesName": coursesName,
       },
       "testId": {
-        "testId": Number(testtype)
+        "testId": Number(testtype),
       },
       "nameofTest": testname,
       "levelId": {
         "testId": Number(leveltest)
       },
-      "fileUpload": formData,
+      "fileUpload": file,
       "description": description
+
     }
 
     console.log(body);
@@ -267,6 +276,27 @@ export class OnlineexamComponent implements OnInit {
 
     if (this.iseditable) {
       //editable
+      const body =
+      {
+        "examsId": examsId,
+        "courseId": {
+          "coursesId": Number(course),
+          "categorieId": {
+            "categoriesId": categorieId.categoriesId
+          },
+          "coursesName": coursesName,
+        },
+        "testId": {
+          "testId": Number(testtype),
+        },
+        "nameofTest": testname,
+        "levelId": {
+          "testId": Number(leveltest)
+        },
+        "fileUpload": file,
+        "description": description
+
+      }
       this.service.updateonlineexam(body).subscribe({
         next: (response) => {
           this.openSnackBar(response)

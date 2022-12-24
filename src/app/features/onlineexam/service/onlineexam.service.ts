@@ -12,13 +12,13 @@ export class OnlineexamService extends BaseHttp {
 
   gettypeoftestURL = "courseList/getAll?operation=typeoftest"
 
-  postonlinexamURL = "courseList/onlineexam?operation=add"
+  postonlinexamURL = "courseList/onlineExam?operation=add"
 
   getonlineexamURL = "courseList/getAll?operation=onlineexam"
 
-  updateonlineexamURL = ""
+  updateonlineexamURL = "courseList/onlineExam?operation=save"
 
-  deleteonlineexamURL = ""
+  deleteonlineexamURL = "courseList/onlineExam?operation=delete"
 
   gettaskURL = "courseList/getAll?operation=task"
 
