@@ -31,8 +31,8 @@ export class AudioComponent implements OnInit {
  
   audiodata!: any
   courses!: any;
-  coursedata!:any
-  audiocategory!:any;
+  Audiodata!:any
+  AllaudioCategory!:any;
   data:any;
 
   onpaginatechange(event: any) {
@@ -90,9 +90,14 @@ export class AudioComponent implements OnInit {
   constructor(private formbuilder: FormBuilder, private audio: AudioService,   private _snackBar: MatSnackBar, private dialog: MatDialog,) {
     this.Audiomanagement = this.formbuilder.group({
 
-    
+    courseid:[null],
       Id:[null],
       category: [null, Validators.compose([Validators.required])],
+      audiocategoryid:[null],
+      createdate:[null],
+      createdby:[null],
+      updatedate:[null],
+      updateby:[null],
      
       file: [null, Validators.compose([Validators.required])],
       title: [null, Validators.compose([Validators.required])],
@@ -100,6 +105,8 @@ export class AudioComponent implements OnInit {
       description: [null, Validators.compose([Validators.required])],
       duration: [null, Validators.compose([Validators.required])],
       meta: [null, Validators.compose([Validators.required])],
+      // audioType:[null],
+      active:[null],
     })
     this.filterData = {
       filterColumnNames: this.displayedColumns.map((ele: any) => ({ "Key": ele, "Value": "" })),
@@ -132,32 +139,67 @@ export class AudioComponent implements OnInit {
     //   }
 
     // })
-    this.audio.getaudio().subscribe({
-      next:(Response:any)=>{
-      this. audiocategory = Response
-      console.log(Response)
+    // this.audio.getaudio().subscribe({
+    //   next:(Response:any)=>{
+    //   this. audiocategory = Response
+    //   console.log(Response)
         
 
-      },
-      error: (error: { message: any; }) => {
-        console.error(error.message);
-      }
+    //   },
+    //   error: (error: { message: any; }) => {
+    //     console.error(error.message);
+    //   }
       
-    })
+    // })
 
   }
   getaudiocategory(){
     this.audio.getaudio().subscribe({
       next: (response: any) => {
-        this.data= response
+        this.Audiodata= response
 
-        this.data=this.data.reverse()
-        for (let data of this.data) {
-          data.check = false;
-        }
+        // this.data=this.data.reverse()
+        // for (let data of this.data) {
+        //   data.check = false;
+        // }
+
+        
         // this. audiocategory = response
-        console.log(this. audiocategory);
-        this.dataSource = new MatTableDataSource<any>(this.data)
+        // console.log(this. audiocategory);
+        // this.dataSource = new MatTableDataSource<any>(this.data)
+        // this.filterData.gridData = this.data;
+        // this.filterData.dataSource = this.dataSource;
+        // this.dataSource.paginator = this.paginator;
+        // this.dataSource.sort = this.sort;
+        // this.filterData.sort = this.sort;
+        // for (let col of this.filterData.filterColumnNames) {
+        //   col.Value = '';
+        // }
+
+      },
+      error: (error: { message: any; }) => {
+        console.error(error.message);
+      }
+
+    })
+    this.audio.getCategory().subscribe({
+      next:(response:any)=>{
+        this.data=response
+        
+        console.log(response)
+      },
+      error:(error:{message:any;})=>{
+        console.error(error.message);
+      }
+    })
+    this.audio.getAllAudio().subscribe({
+      next:(response:any)=>{
+        this.AllaudioCategory=response
+        console.log(response)
+        this.AllaudioCategory=this.AllaudioCategory.reverse()
+        for (let AllaudioCategory of this.AllaudioCategory) {
+          AllaudioCategory.check = false;
+           this.dataSource = new MatTableDataSource<any>(this.AllaudioCategory)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
         this.dataSource.paginator = this.paginator;
@@ -166,13 +208,14 @@ export class AudioComponent implements OnInit {
         for (let col of this.filterData.filterColumnNames) {
           col.Value = '';
         }
-
+        }
       },
-      error: (error: { message: any; }) => {
-        console.error(error.message);
+      error:(error:{message:any;})=>{
+        console.error(error.message)
       }
-
     })
+
+
   }
   openSnackBar(data: any) {
     this._snackBar.open(data.message, 'Close', {
@@ -201,14 +244,22 @@ export class AudioComponent implements OnInit {
     this.displaycontent = true
     this.issubmit = false
     this.Audiomanagement.setValue({
+      audiocategoryid:element.audioCategoryId,
+      
+      courseid:element.courseId,
       Id:element.id,
       category: element.uploadCategory,
-      upload: element.audioCategoryId,
-      file: element.audioFile,
+      upload: element.audioType,
+      file:"",
       title: element.audioTitle,
       description: element.audioDesc,
       duration: Number(element.audioDuration),
       meta: element.metakey,
+      createdate:element.createdDate,
+      createdby:element.createdBy,
+      updatedate:element.updatedDate,
+      updateby:element.updatedBy,
+      active:element.isActive
     });
 
 
@@ -218,14 +269,22 @@ export class AudioComponent implements OnInit {
     this.displaycontent = true
     this.issubmit = true
     this.Audiomanagement.setValue({
+      audiocategoryid:element.audioCategoryId,
+      
+      courseid:element.courseId,
       Id:element.id,
       category: element.uploadCategory,
-      upload: element.audioCategoryId,
-      file: element.audioFile,
+      upload: element.audioType,
+      file:"",
       title: element.audioTitle,
       description: element.audioDesc,
       duration: Number(element.audioDuration),
       meta: element.metakey,
+      createdate:element.createdDate,
+      createdby:element.createdBy,
+      updatedate:element.updatedDate,
+      updateby:element.updatedBy,
+      active:element.isActive
     });
 
   }
@@ -276,16 +335,7 @@ console.log(body);
   ngOnInit(): void {
     this.getaudiocategory()
 
-    // this. Audiomanagement = this.formbuilder.group({
-    //   category: [null, Validators.compose([Validators.required])],
-    //   outline: [null, Validators.compose([Validators.required])],
-    //   file: [null, Validators.compose([Validators.required])],
-    //   title: [null, Validators.compose([Validators.required])],
-    //   file: [null, Validators.compose([Validators.required])],
-    //   description: [null, Validators.compose([Validators.required])],
-    //   duration: [null, Validators.compose([Validators.required])],
-    //   meta: [null, Validators.compose([Validators.required])],
-    // }
+  
     this.dataSource = new MatTableDataSource<any>(this.data)
     this.filterData = {
       filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
@@ -317,31 +367,7 @@ console.log(body);
 
     this.audiodata = event.target.files[0]
   }
-  // audiosubmit() {
-  //   this.filerror = this.Audiomanagement.value.file === null ? true : false
-
-  //   if (this.Audiomanagement.invalid)
-  //     return this.Audiomanagement.markAllAsTouched()
-
-  //   this.Audiomanagement.value.file = this.audiodata
-
-  // }
-
-  // getcoursedata(){
-  //   this.course.getcourse().subscribe({
-  //     next: (response) => {
-
-  //       this.courses = response
-  //       console.log(this.courses);
-
-  //     },
-  //     error: (error) => {
-  //       console.error(error.message);
-  //     }
-  //   });
-
-
-  // }
+  
 
   addAudiocategory() {
 
@@ -349,31 +375,74 @@ console.log(body);
       return this.Audiomanagement.markAllAsTouched()
 
     const body = {
-      "courseId": "",
-      "uploadCategory": this.Audiomanagement.value.category,
-      "audioCategoryId": this.Audiomanagement.value.upload,
-      "audioFile": this.Audiomanagement.value.file,
+   
+      "courseId": 0,
+        "audioCategoryId": {
+            "audioCategoryId": 2
+            
+        },
+        "uploadCategory": this.Audiomanagement.value.category ,
+        "audioType": {
+            "audioType": this.Audiomanagement.value.upload,
+            
+        },
+        "audioFile": this.Audiomanagement.value.file,
+        "audioTitle": this.Audiomanagement.value.title,
+        "audioDesc": this.Audiomanagement.value.description,
+        "audioDuration": this.Audiomanagement.value.duration,
+        "metakey": this.Audiomanagement.value.meta,
+        "createdDate": "",
+        "createdBy": "",
+        "updatedDate": "",
+        "updatedBy": "",
+        "isActive": ""
+    
 
-      "audioTitle": this.Audiomanagement.value.title,
-      "audioDesc": this.Audiomanagement.value.description,
-      "audioDuration": this.Audiomanagement.value.duration,
-      "metakey": this.Audiomanagement.value.meta,
-      "active": ""
+    
+    }
+    if (this.iseditable){
+      const body = {
+   "id":2,
+    "courseId": 0,
+   "audioCategoryId": {
+    "audioCategoryId": 3
+    
+},
+"uploadCategory": this.Audiomanagement.value.category ,
+"audioType": {
+    "audioType": this.Audiomanagement.value.upload,
+    
+},
+"audioFile": this.Audiomanagement.value.file,
+"audioTitle": this.Audiomanagement.value.title,
+"audioDesc": this.Audiomanagement.value.description,
+"audioDuration": this.Audiomanagement.value.duration,
+"metakey": this.Audiomanagement.value.meta,
+"createdDate": "",
+"createdBy": "",
+"updatedDate": "",
+"updatedBy": "",
+"isActive": ""
+      
+      
+  
+      
+      }
+      this.audio.updateaudio(body).subscribe({
+        next:(response)=>{
+          console.log(response)
+          this.Audiomanagement.reset()
+          this.getaudiocategory()
 
-    //   {
-    //     "courseId": 1,
-    //     "audioCategoryId": 1,
-    //     "uploadCategory": "File link",
-    //     "audioFile": "audio/audio2.mp3",
-    //     "audioTitle": "dharanas 2",
-    //     "audioDesc": "Audio audioDesc",
-    //     "audioDuration": 18,
-    //     "metakey": "meta 2",
-    //     "active": "Y"
-    // }
-      // "audioCategoryId":this.Audiomanagement.value.meta,
+        },
+        error:(error)=>{
+          console.error(error.message)
+        }
+      })
+
     }
     console.log(this.Audiomanagement);
+    console.log(body)
 
     this.audio.audiopost(body).subscribe({
       next: (response) => {
