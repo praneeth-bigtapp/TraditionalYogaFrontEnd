@@ -28,6 +28,25 @@
 
             <form [formGroup]="addmediaform" (ngSubmit)="addmedia()">
                 <div >
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Course</label>
+        
+                            <mat-form-field class="pe-4" appearance="outline">
+                                <mat-select matNativeControl formControlName="courses1"  >
+                                    <mat-option *ngFor="let item of courseList"
+                                        [value]="item.coursesId">{{item.coursesName}}
+                                    </mat-option>
+                                </mat-select>
+        
+                            </mat-form-field>
+                            <div *ngIf="addmediaform.controls['courses1'].touched">
+                                <mat-error [hidden]=" !addmediaform.get('courses1')?.hasError('required')  ">
+                                    Select the course
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
                    
                   
                     <div class="border-light bg-white pt-3 pb-4 ">
