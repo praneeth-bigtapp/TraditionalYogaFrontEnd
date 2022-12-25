@@ -10,31 +10,34 @@
     <!-- <h4>Audio Management- Audio dharanas</h4> -->
     <div class="row justify-content-end p-3">
         <div class="col-md-2">
-            <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block" 
-            *ngIf="!displaycontent">
-          Create Audio
-        </button>
+            <button type="button" class="btn btn-outline-secondary btn-rounded d-inline-block" *ngIf="!displaycontent"
+                (click)="addcourse()">
+                Create Audio
+            </button>
 
         </div>
     </div>
 
-  
-    <div class=" card bg-white mt-3" *ngIf="displaycontent">
+    
+    <form [formGroup]="Audiomanagement" (ngSubmit)=" addAudiocategory()" class=" card bg-white mt-3" *ngIf="displaycontent">
+        
         <h3 class="card-header text-white card bg-secondary">Add Audio</h3>
         
+
         <div class="row d-flex m-2">
 
             <label>Course:</label>
 
-            <div class="col-md-3 d-flex pt-2 " >
-             
-                <mat-form-field appearance="outline">
-                
-                    <mat-select  (selectionChange)="addcourse()">
-                       
-                        <mat-option value="categoryName" *ngFor="let element of courses">{{element.coursesName}}</mat-option>
-                    </mat-select> 
-                
+            <div class="col-md-3 d-flex pt-2 ">
+
+                <mat-form-field appearance="outline" >
+
+                    <mat-select [(ngModel)]="courseId" (selectionChange)="coursevalue()" formControlName="course">
+
+                        <mat-option *ngFor="let element of courses" [value]="element.coursesId">{{element.coursesName}}
+                        </mat-option>
+                    </mat-select>
+
 
                 </mat-form-field>
             </div>
@@ -50,15 +53,14 @@
 
 
 
-            <div class="col-md text-end ">
 
-                <!-- <button mat-raised-button style="margin-left: 700px;"></button> -->
-                <!-- <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 "> -->
-                    <!-- <i class="fa-solid fa-circle-plus"></i> -->
-                    <!-- create a category for audio
+
+            <!-- <button mat-raised-button style="margin-left: 700px;"></button> -->
+            <!-- <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 " (click)="addcourse()" *ngIf="!displaycontent">
+                  Create Audio
                 </button> -->
 
-            </div>
+
 
 
 
@@ -66,71 +68,74 @@
 
         </div>
         <hr>
-        <form [formGroup]="Audiomanagement" (ngSubmit)=" addAudiocategory()">
-            
+      
+        <!-- <form [formGroup]="Audiomanagement" (ngSubmit)=" addAudiocategory()" > -->
 
 
-            <div class="row m-4" >
+            <div class="row m-4">
                 <!-- <h6 class="text-md-right col-md-4">Select Category:</h6> -->
-                
+
 
                 <div class="col-md-6">
                     <label>Category:</label>
                     <mat-form-field appearance="outline">
-                        
-                        <mat-select  formControlName="category">
+
+                        <mat-select formControlName="category">
                             <!-- <mat-option [value]="element.categorieId.categoriesName"  *ngFor="let element of courses">{{element.categorieId.categoriesName}}</mat-option> -->
-                      
-                            <mat-option [value]="element.audioCategoryId"  *ngFor="let element of data">{{element.audioName}}</mat-option>
+
+                            <mat-option [value]="element.audioCategoryId" *ngFor="let element of data">
+                                {{element.audioName}}</mat-option>
                         </mat-select>
                         <mat-error [hidden]=" !Audiomanagement.get('category')?.hasError('required')  ">
                             Category is mandatory
                         </mat-error>
                     </mat-form-field>
-                       
-                  
+
+
                 </div>
 
-     
+
                 <!-- <h6 class="text-md-right col-md-4"></h6> -->
-            
+
 
                 <div class="col-md-6">
                     <label>Audio File Type</label>
                     <mat-form-field appearance="outline">
                         <!-- <mat-label>Audio file</mat-label> -->
-                        <mat-select  formControlName="upload">
-                          
+                        <mat-select formControlName="upload">
+
                             <!-- <mat-option [value]="element.courseId"  *ngFor="let element of audiocategory">{{element.audioCategoryId}}</mat-option></mat-select> -->
-                            <mat-option [value]="element.audioType"  *ngFor="let element of Audiodata">{{element.audioName}}</mat-option></mat-select>
-                            
+                            <mat-option [value]="element.audioType" *ngFor="let element of Audiodata">
+                                {{element.audioName}}</mat-option>
+                        </mat-select>
+
                         <mat-error [hidden]=" !Audiomanagement.get('upload')?.hasError('required')  ">
                             Audio is mandatory
                         </mat-error>
                     </mat-form-field>
                 </div><br><br>
 
-<!--          
+                <!--          
                 <h6 class="text-md-right col-md-4">Select Audio File:</h6> -->
 
                 <div class="col-md-6">
-                    <br/>
+                    <br />
 
                     <label>Upload Audio File:</label>
                     <!-- <mat-form-field appearance="outline" class="ms-3 "> -->
-                    <input type="file"  (change)="filechange($event)" accept=" image/*" class="border"
-                        required="true" formControlName="file" />
+                    <input type="file" (change)="filechange($event)" accept=" image/*" class="border" required="true"
+                        formControlName="file" />
 
                     <!-- </mat-form-field> -->
                     <mat-error *ngIf="filerror ">
-                            Audio is mandatory
+                        Audio is mandatory
                     </mat-error>
                 </div>
 
                 <!-- <h6 class="text-md-right col-md-4">Title:</h6> -->
 
                 <div class="col-md-6">
-                    <br/>
+                    <br />
 
                     <label>Title:</label>
                     <mat-form-field appearance="outline">
@@ -142,29 +147,28 @@
                     </mat-form-field>
                 </div><br>
 
-        
+
                 <!-- <h6 class="text-md-right col-md-4">Description:</h6> -->
 
                 <div class="col-md-12">
-                    <br/>
+                    <br />
 
                     <label>Description:</label>
                     <mat-form-field class="example-full-width" appearance="outline" id="field">
                         <!-- <mat-label>Health is wealth</mat-label> -->
-                        <textarea matInput 
-                            formControlName="description"></textarea>
+                        <textarea matInput formControlName="description"></textarea>
                         <mat-error [hidden]=" !Audiomanagement.get('description')?.hasError('required')  ">
                             Description is mandatory
                         </mat-error>
                     </mat-form-field>
                 </div><br>
 
-       
+
                 <!-- <h6 class="text-md-right col-md-4">Duration Of the
                     File:</h6> -->
-                    
+
                 <div class="col-md-6">
-                    <br/>
+                    <br />
                     <label>Duration Of the
                         File:</label>
                     <mat-form-field class="example-full-width" appearance="outline" id="field">
@@ -176,12 +180,12 @@
                     </mat-form-field>
                 </div>
 
-           
+
                 <!-- <h6 class="text-md-right col-md-4">Meta Keyword:
                 </h6> -->
 
                 <div class="col">
-                    <br/>
+                    <br />
 
                     <label>Meta Keyword:</label>
                     <mat-form-field class="example-full-width" appearance="outline" id="field">
@@ -196,21 +200,24 @@
             </div>
             <br />
             <div class="col text-end  pl-4">
-                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2" [hidden]="!issubmit">
+                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2"
+                    [hidden]="!issubmit">
                     {{iseditable ? "Update" :"Create Audio" }}
                 </button>
-                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2" (click)="reseteditable()">
+                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2"
+                    (click)="reseteditable()">
                     cancel
-                 </button>
+                </button>
             </div>
 
-
-        </form>
+        <!-- </form> -->
+       
 
 
         <!-- </div> -->
 
-    </div>
+        </form>
+
 
 
     <div class="m-2">
@@ -218,95 +225,99 @@
         <div class="card-header text-white bg-secondary">
             Audio Management- Audio dharanas
         </div>
-        <table mat-table [dataSource]="filterData.dataSource"  class="mat-elevation-z8 mat-datagrid w-100"
-        aria-label="id" matSort>
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
-                <label mat-sort-header>
-                    S.No
-                </label>
-                <input type="text" (keyup)="updatePagination()"
-                    [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" disabled />
-            </th>
-            <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
-        </ng-container>
-  
-        <ng-container matColumnDef="audioTitle">
-          <th mat-header-cell *matHeaderCellDef class="col-2 text-center ">
-             <label mat-sort-header>Title</label>
-            <input  type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
-              [filter]="filterData"  />
-          </th>
-  
-          <td mat-cell *matCellDef="let element" class="col-2  text-center ">{{element.audioTitle}}
-  
-          </td>
-        </ng-container>
-  
-  
-        <ng-container matColumnDef="uploadCategory">
-          <th mat-header-cell *matHeaderCellDef class="col-2 text-center"><label mat-sort-header>Category</label>
-            <input  type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
-              [filter]="filterData"  class="mx-2" />
-          </th>
-          <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted"> {{element.audioCategoryId.audioName}}
-          </td>
-        </ng-container>
-  
-  
-        <ng-container matColumnDef="audioCategoryId">
-          <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>File Type</label>
-            <input  type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
-              [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
-          </th>
-          <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center py-2"> {{element.audioType.audioName}} </td>
-        </ng-container>
-  
-        <ng-container matColumnDef="audioDuration">
-          <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>Duration </label>
-            <input  type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[4].Value"
-              [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
-          </th>
-          <td mat-cell *matCellDef="let element" class="col-2 text-center py-2"> {{element.audioDuration}} </td>
-        </ng-container>
-  
-      
-        <ng-container matColumnDef="Actions">
-          <th mat-header-cell *matHeaderCellDef class="col text-center"><label mat-sort-header>Actions</label>
-            <input  type="text" (keyup)="updatePagination()"
-              [filter]="filterData"  class="mx-2" disabled="true"/>
-          </th>
-          <td mat-cell *matCellDef="let element" class="col text-center py-2">
-          <div class="d-flex flex-wrap justify-content-evenly align-items-center">
-  
-  
-            <mat-slide-toggle matTooltip="Visiblity"
-                (change)="ChangeActive(element.quoteId)"
-                [matTooltip]="element.isActive"></mat-slide-toggle>
-            <!-- <p>Disable</p> -->
-            <i class="fa-solid fa-eye fs-5 text-info" (click)="viewdetails(element)"
-                matTooltip="View Course Activity" matTooltip="View"></i>
-  
-            <span matTooltip="Edit" (click)="editdetails(element)">
-                <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-            </span>
-            <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.id)">
-                <i class="far fa-trash-alt" aria-hidden="true"></i>
-            </span>
-            </div>
-          </td>
-        </ng-container>
-        <!-- <i class="fa-sharp fa-solid fa-floppy-disks"></i> -->
-  
-  
-  
-  
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  
-      </table>
-     
-        <mat-paginator class="card-body" (page)="onpaginatechange($event)" [pageSizeOptions]="[ 5,10, 50, 100]" aria-label="Select page"></mat-paginator>
-      
+        <table mat-table [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid w-100"
+            aria-label="id" matSort>
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
+                    <label mat-sort-header>
+                        S.No
+                    </label>
+                    <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value"
+                        [filter]="filterData" disabled />
+                </th>
+                <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="audioTitle">
+                <th mat-header-cell *matHeaderCellDef class="col-2 text-center ">
+                    <label mat-sort-header>Title</label>
+                    <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
+                        [filter]="filterData" />
+                </th>
+
+                <td mat-cell *matCellDef="let element" class="col-2  text-center ">{{element.audioTitle}}
+
+                </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="uploadCategory">
+                <th mat-header-cell *matHeaderCellDef class="col-2 text-center"><label mat-sort-header>Category</label>
+                    <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
+                        [filter]="filterData" class="mx-2" />
+                </th>
+                <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted">
+                    {{element.audioCategoryId.audioName}}
+                </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="audioCategoryId">
+                <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>File
+                        Type</label>
+                    <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
+                        [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
+                </th>
+                <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center py-2">
+                    {{element.audioType.audioName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="audioDuration">
+                <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>Duration
+                    </label>
+                    <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[4].Value"
+                        [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
+                </th>
+                <td mat-cell *matCellDef="let element" class="col-2 text-center py-2"> {{element.audioDuration}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="Actions">
+                <th mat-header-cell *matHeaderCellDef class="col text-center"><label mat-sort-header>Actions</label>
+                    <input type="text" (keyup)="updatePagination()" [filter]="filterData" class="mx-2"
+                        disabled="true" />
+                </th>
+                <td mat-cell *matCellDef="let element" class="col text-center py-2">
+                    <div class="d-flex flex-wrap justify-content-evenly align-items-center">
+
+
+                        <mat-slide-toggle matTooltip="Visiblity" (change)="ChangeActive(element.quoteId)"
+                            [matTooltip]="element.isActive"></mat-slide-toggle>
+                        <!-- <p>Disable</p> -->
+                        <span matTooltip="View" (click)="viewdetails(element)">
+                            <i class="fa-solid fa-eye fs-5 text-info" matTooltip="View Course Activity"></i></span>
+
+                        <span matTooltip="Edit" (click)="editdetails(element)">
+                            <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                        </span>
+                        <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.id)">
+                            <i class="far fa-trash-alt" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </td>
+            </ng-container>
+            <!-- <i class="fa-sharp fa-solid fa-floppy-disks"></i> -->
+
+
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+
+        <mat-paginator class="card-body" (page)="onpaginatechange($event)" [pageSizeOptions]="[ 5,10, 50, 100]"
+            aria-label="Select page"></mat-paginator>
+
     </div>
-    </div>
+</div>
