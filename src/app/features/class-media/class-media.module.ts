@@ -22,6 +22,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { ShortvideomediaComponent } from './shortvideomedia/shortvideomedia.component';
 import { GlimpemediaComponent } from './glimpemedia/glimpemedia.component';
 import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete';
+import { AddCourseimageComponent } from '../courses/add-courseimage/add-courseimage.component';
+import { AddCoursedocumentComponent } from '../courses/add-coursedocument/add-coursedocument.component';
 
 
 
@@ -29,7 +31,10 @@ import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autoco
   declarations: [
     MediaComponent,
     ShortvideomediaComponent,
-    GlimpemediaComponent
+    GlimpemediaComponent,
+ 
+    AddCourseimageComponent,
+    AddCoursedocumentComponent
   ],
   imports: [
     CommonModule,

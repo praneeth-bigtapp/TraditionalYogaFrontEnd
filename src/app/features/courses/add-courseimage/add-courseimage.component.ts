@@ -9,9 +9,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
-import { AddCoursedocumentComponent } from '../add-coursedocument/add-coursedocument.component';
-import { AddCourseimageComponent } from '../add-courseimage/add-courseimage.component';
 import { CoursesService } from '../courses.service';
+
 
 
 export interface CourseData {
@@ -24,16 +23,13 @@ export interface CourseData {
 
 }
 
-
 @Component({
-  selector: 'app-course-media-pratice',
-  templateUrl: './course-media-pratice.component.html',
-  styleUrls: ['./course-media-pratice.component.css']
+  selector: 'app-add-courseimage',
+  templateUrl: './add-courseimage.component.html',
+  styleUrls: ['./add-courseimage.component.css']
 })
+export class AddCourseimageComponent implements OnInit {
 
-
-
-export class CourseMediaPraticeComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
@@ -125,52 +121,11 @@ export class CourseMediaPraticeComponent implements OnInit {
     this.addmediaform = this.formbuilder.group({
 
 
-      videolink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
-      videotitle: [null, Validators.compose([Validators.required])],
-      videodescription: [null, Validators.compose([Validators.required])],
-      videoduration: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.durationvalidation)])],
-      vidoemetakeywords: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])],
-      videofile: [null, Validators.compose([])],
-     
-    })
-  }
+      courses1:[null, Validators.compose([Validators.required])],
 
-
-  openImages() {
-
-
-    const dialogref = this.dialog.open(AddCourseimageComponent, {
-      data: {
-        // course: this.coursename
-      },
-      width: "80%"
-    })
-
-    dialogref.afterClosed().subscribe(data => {
-      if (data) {
-
-        return
-      }
-
-    })
-  }
-
-  openDocument() {
-
-
-    const dialogref = this.dialog.open(AddCoursedocumentComponent, {
-      data: {
-        // course: this.coursename
-      },
-      width: "80%"
-    })
-
-    dialogref.afterClosed().subscribe(data => {
-      if (data) {
-
-        return
-      }
-
+      imagetitle:[null, Validators.compose([Validators.required])],
+      mediafile: [null, Validators.compose([])],
+      paragraph: [null, Validators.compose([Validators.required])],
     })
   }
 
@@ -230,7 +185,7 @@ export class CourseMediaPraticeComponent implements OnInit {
 
     this.filedata = event.target.files[0].name
   }
- 
+
   viewmanage(data: any) {
     console.log(data);
 
