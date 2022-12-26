@@ -32,13 +32,14 @@ export class CreatePraticeLibraryComponent implements OnInit {
   displayedColumns: string[] = ['praticeLibaryId', 'videoLink', "duration", "title", "message", "metaKeyword", "Action"];
   data: any;
   iseditable: boolean = false
+  issubcategory: boolean = false
 
   categoryList!: any
   constructor(
     private formbuilder: FormBuilder,
     private service: CreatepraticelibraryService,
     private _snackBar: MatSnackBar,
-    
+
     private dialog: MatDialog,
   ) {
 
@@ -98,6 +99,8 @@ export class CreatePraticeLibraryComponent implements OnInit {
     this.addmediaform = this.formbuilder.group({
       praticelibraryId: [null],
       category: [null, Validators.compose([Validators.required])],
+      subcategory: [null],
+
       videolink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
       videotitle: [null, Validators.compose([Validators.required])],
       videodescription: [null, Validators.compose([Validators.required])],
@@ -125,6 +128,25 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
     if (this.category)
       this.categoryerror = false
+  }
+
+  categorychange(event: any) {
+    console.log(event.value);
+
+
+    if (event.value === 3) {
+      this.issubcategory = true
+      this.addmediaform.get('subcategory').addValidators(Validators.required);
+
+      return
+    }
+    this.addmediaform.get('subcategory').removeValidators(Validators.required);
+    this.addmediaform.controls.subcategory.status = "VALID"
+    console.log(this.addmediaform.get("subcategory").hasValidator(Validators.required));
+
+
+    this.issubcategory = false
+
   }
 
   addlibrary() {
@@ -208,6 +230,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
   addmedia() {
 
+    console.log(this.addmediaform.get("subcategory").hasValidator(Validators.required));
 
     if (this.addmediaform.valid) {
 
@@ -266,6 +289,9 @@ export class CreatePraticeLibraryComponent implements OnInit {
     }
     else {
       this.addmediaform.markAllAsTouched()
+      console.log(this.addmediaform.controls.subcategory.status);
+
+
     }
 
   }
