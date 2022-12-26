@@ -81,6 +81,7 @@ export class StudentProfileComponent implements OnInit {
   donationsData: any;
   ePurchasesdata: any;
   volunterData: any;
+  catogeriesList:any
 
   studentProfile: any;
   studentSelectStatus: Boolean = false;
@@ -188,12 +189,12 @@ export class StudentProfileComponent implements OnInit {
           paginator3: this.paginator3,
           sort3: this.sort3
         };
-        this.dataSource = new MatTableDataSource<any>(this.donations)
-            this.filterData.gridData = this.donations;
-            this.filterData.dataSource = this.dataSource;
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
-            this.filterData.sort = this.sort;
+        this.dataSource3 = new MatTableDataSource<any>(this.volunterData)
+            this.filterData3.gridData3 = this.volunterData;
+            this.filterData3.dataSource3 = this.dataSource3;
+            this.dataSource3.paginator3 = this.paginator3;
+            this.dataSource3.sort3 = this.sort3;
+            this.filterData3.sort3 = this.sort3;
             for (let col of this.filterData.filterColumnNames) {
               col.Value = '';
             }
@@ -229,6 +230,21 @@ export class StudentProfileComponent implements OnInit {
         console.log(response);
         this.StudentList = response;
         this.searchStudentForm.controls['studentId'].enable();
+      },
+      error: (error) => {
+
+      }
+    });
+
+  }
+  getCategoriesList() {
+    this.studentService.getcatogeries().subscribe({
+      next: (response) => {
+        console.log('catogeries');
+
+        console.log(response);
+        this.catogeriesList = response;
+        
       },
       error: (error) => {
 
@@ -345,14 +361,19 @@ this.donationAPI(data)
     if (this.searchStudentForm.invalid)
       return this.searchStudentForm.markAllAsTouched()
     this.courseSelectStatus = true
+    this.getCategoriesList()
   }
+
   getVolunteer(data: any) {
     console.log("Enterning Select Volunteer List");
     this.studentService.getVolunteerById(data).subscribe({
       next: (response) => {
         console.log(response);
-        this.dataSource = new MatTableDataSource(response);
-        this.volunterData = this.dataSource;
+        this.volunterData = response;
+        this.volunterData = this.volunterData.reverse();
+
+        this.dataSource = new MatTableDataSource(this.volunterData);
+
       },
       error: (error) => {
 

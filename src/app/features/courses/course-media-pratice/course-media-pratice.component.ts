@@ -131,7 +131,11 @@ export class CourseMediaPraticeComponent implements OnInit {
       videoduration: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.durationvalidation)])],
       vidoemetakeywords: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])],
       videofile: [null, Validators.compose([])],
-      courses1: [null, Validators.compose([Validators.required])]
+      courses1: [null, Validators.compose([Validators.required])],
+      practiceTime:['5PM', Validators.compose([Validators.required])],
+      practiceDate:[null, Validators.compose([Validators.required])],
+      Instructions:[null, Validators.compose([Validators.required])],
+
       
      
     })
