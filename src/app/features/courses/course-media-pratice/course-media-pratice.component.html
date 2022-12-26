@@ -46,6 +46,34 @@
                                 </mat-error>
                             </div>
                         </div>
+                        <div class="col-4">
+                            <label>Practice Date</label>
+
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" class="" formControlName="practiceDate"
+                                    required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="addmediaform.controls['practiceDate'].invalid && (addmediaform.controls['practiceDate'].dirty || addmediaform.controls['practiceDate'].touched)">
+                                <mat-error [hidden]=" !addmediaform.get('practiceDate')?.hasError('required')  ">
+                                    Date is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <label>Practice Time</label>
+
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" class="" formControlName="practiceTime" 
+                                    required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="addmediaform.controls['practiceTime'].invalid && (addmediaform.controls['practiceTime'].dirty || addmediaform.controls['practiceTime'].touched)">
+                                <mat-error [hidden]=" !addmediaform.get('practiceTime')?.hasError('required')  ">
+                                    Time is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
                     </div>
                    
                   
@@ -147,6 +175,24 @@
                                     <mat-error
                                         [hidden]=" !addmediaform.get('videodescription')?.hasError('required')  ">
                                         Description is mandatory
+                                    </mat-error>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label>Instructions:</label>
+    
+                                <mat-form-field appearance="outline">
+                                    <textarea rows="5" matInput autocomplete="off" class=""
+                                        formControlName="videodescription" required></textarea>
+    
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="addmediaform.controls['Instructions'].invalid && (addmediaform.controls['Instructions'].dirty || addmediaform.controls['Instructions'].touched)">
+                                    <mat-error
+                                        [hidden]=" !addmediaform.get('Instructions')?.hasError('required')  ">
+                                        Instructions is mandatory
                                     </mat-error>
                                 </div>
                             </div>

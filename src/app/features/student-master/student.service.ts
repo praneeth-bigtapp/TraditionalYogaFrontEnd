@@ -15,13 +15,17 @@ export class StudentService extends BaseHttp {
   addVolunteerByIdUrl = "student/volunteer/add";
   getCourseProfileByIdUrl = "";
   getAlldonationsURL = "student/getAll?operation=donation";
+  getCatogeriesURL='student/getAll?operation=VolunteerCategory'
   
 
   getdonations(){
-    return this.get<any>(this. getAlldonationsURL);
+    return this.get<any>(this.getAlldonationsURL);
 
   }
+  getcatogeries(){
+    return this.get<any>(this.getCatogeriesURL);
 
+  }
   getStudent() {
     return this.get<any>(this.getStudentUrl);
   }
