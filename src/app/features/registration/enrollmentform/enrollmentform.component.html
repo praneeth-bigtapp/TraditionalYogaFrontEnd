@@ -37,14 +37,14 @@
                         <label>Middle name</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" formControlName="middlename" required>
+                                <input matInput autocomplete="off" formControlName="middlename">
                             </mat-form-field>
-                            <div class="error-message"
+                            <!-- <div class="error-message"
                                 *ngIf="formdetails.controls['middlename'].invalid && (formdetails.controls['middlename'].dirty || formdetails.controls['middlename'].touched)">
                                 <mat-error [hidden]=" !formdetails.get('middlename')?.hasError('required')  ">
                                     Middle name is mandatory
                                 </mat-error>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -63,7 +63,7 @@
                     </div>
 
                     <div class="col-md-4">
-                        <label>Email</label>
+                        <label>Email Id</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" formControlName="email" required>
@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="col-md-4">
-                        <label>Mobile</label>
+                        <label>Mobile Number</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" formControlName="mobile" required>
@@ -148,7 +148,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label>Street lastname</label>
+                        <label>Street</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" formControlName="street" required>
@@ -157,6 +157,21 @@
                                 *ngIf="formdetails.controls['street'].invalid && (formdetails.controls['street'].dirty || formdetails.controls['street'].touched)">
                                 <mat-error [hidden]=" !formdetails.get('street')?.hasError('required')  ">
                                     Street is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Town/City</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="town" required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="formdetails.controls['town'].invalid && (formdetails.controls['town'].dirty || formdetails.controls['town'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('town')?.hasError('required')  ">
+                                    Town/City is mandatory
                                 </mat-error>
                             </div>
                         </div>
@@ -236,8 +251,8 @@
                         <label>Can you communicate in English?</label>
                         <div class="col px-0">
                             <mat-radio-group formControlName="isenglishspoken" aria-label="Select an option">
-                                <mat-radio-button value="true" class=" mt-md-2 mr-md-4">Yes</mat-radio-button>
-                                <mat-radio-button value="false" class=" mt-md-2 mr-md-4">No</mat-radio-button>
+                                <mat-radio-button [value]="true" class=" mt-md-2 mr-md-4">Yes</mat-radio-button>
+                                <mat-radio-button [value]="false" class=" mt-md-2 mr-md-4">No</mat-radio-button>
 
                             </mat-radio-group>
                             <div class="error-message"
@@ -264,6 +279,20 @@
                                 *ngIf="formdetails.controls['refferal'].invalid && (formdetails.controls['refferal'].dirty || formdetails.controls['refferal'].touched)">
                                 <mat-error [hidden]=" !formdetails.get('refferal')?.hasError('required')  ">
                                     Refferal is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label>&nbsp;</label>
+                        <div class="col">
+                            <mat-checkbox class="example-margin" (change)="termsandcondition($event)"
+                                formControlName="termscondition">Terms and
+                                Condition</mat-checkbox>
+                            <div class="error-message"
+                                *ngIf="formdetails.controls['termscondition'].invalid && (formdetails.controls['termscondition'].dirty || formdetails.controls['termscondition'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('termscondition')?.hasError('required')  ">
+                                    Terms and condition is mandatory
                                 </mat-error>
                             </div>
                         </div>
@@ -327,8 +356,11 @@
                             </mat-form-field>
                             <div class="error-message"
                                 *ngIf="detailsinformation.controls['workinghours'].invalid && (detailsinformation.controls['workinghours'].dirty || detailsinformation.controls['workinghours'].touched)">
-                                <mat-error [hidden]=" !detailsinformation.get('workinghourse')?.hasError('required')  ">
+                                <mat-error [hidden]=" !detailsinformation.get('workinghours')?.hasError('required')  ">
                                     Working hours is mandatory
+                                </mat-error>
+                                <mat-error [hidden]=" !detailsinformation.get('workinghours')?.hasError('pattern')  ">
+                                    Invalid hours
                                 </mat-error>
 
                             </div>
@@ -336,7 +368,297 @@
                     </div>
 
 
+                    <div class="col-md-4">
+                        <label>Educational details</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <mat-select formControlName="educationdetails"
+                                    (selectionChange)="educationchange($event)">
+                                    <mat-option *ngFor="let food of eduationallist" [value]="food">
+                                        {{food}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="detailsinformation.controls['educationdetails'].invalid && (detailsinformation.controls['educationdetails'].dirty || detailsinformation.controls['educationdetails'].touched)">
+                                <mat-error
+                                    [hidden]=" !detailsinformation.get('educationdetails')?.hasError('required')  ">
+                                    Educational Details is mandatory
+                                </mat-error>
 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" *ngIf="iseduationother">
+                        <label>Other educational details</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="othereducationdetails"
+                                    [required]="iseduationother">
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="detailsinformation.controls['othereducationdetails'].invalid && (detailsinformation.controls['othereducationdetails'].dirty || detailsinformation.controls['othereducationdetails'].touched)">
+                                <mat-error
+                                    [hidden]=" !detailsinformation.get('othereducationdetails')?.hasError('required')  ">
+                                    Other Educational Details is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Do you take pride in your qualification ? </label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <textarea rows="5" matInput autocomplete="off" formControlName="prideinqualification"
+                                    placeholder=" Are you ready to dump if your knowledge is not correct with open mind or do you think you know everything ? "
+                                    required>
+                                    </textarea>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="detailsinformation.controls['prideinqualification'].invalid && (detailsinformation.controls['prideinqualification'].dirty || detailsinformation.controls['prideinqualification'].touched)">
+                                <mat-error
+                                    [hidden]=" !detailsinformation.get('prideinqualification')?.hasError('required')  ">
+                                    Field is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Martial status</label>
+                        <div class="col px-0">
+                            <mat-radio-group formControlName="matrialstatus" aria-label="Select an option">
+                                <mat-radio-button class=" mt-md-2 mr-md-4" *ngFor="let gender of martialstatus"
+                                    [value]="gender">{{gender}}</mat-radio-button>
+                            </mat-radio-group>
+                            <div class="error-message"
+                                *ngIf="detailsinformation.controls['matrialstatus'].invalid && (detailsinformation.controls['matrialstatus'].dirty || detailsinformation.controls['matrialstatus'].touched)">
+                                <mat-error [hidden]=" !detailsinformation.get('matrialstatus')?.hasError('required')  ">
+                                    Martial status is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Family Details <small>(parents/ spouse/ children)</small></label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="familydetails" required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="detailsinformation.controls['familydetails'].invalid && (detailsinformation.controls['familydetails'].dirty || detailsinformation.controls['familydetails'].touched)">
+                                <mat-error [hidden]=" !detailsinformation.get('familydetails')?.hasError('required')  ">
+                                    Family Details is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Do you have consent of family members to do this course? </label>
+                        <div class="col px-0">
+                            <mat-radio-group formControlName="familymemberconsent" aria-label="Select an option">
+                                <mat-radio-button [value]="true" class=" mt-md-2 mr-md-4">Yes</mat-radio-button>
+                                <mat-radio-button [value]="false" class=" mt-md-2 mr-md-4">No</mat-radio-button>
+
+                            </mat-radio-group>
+                            <div class="error-message"
+                                *ngIf="detailsinformation.controls['familymemberconsent'].invalid && (detailsinformation.controls['familymemberconsent'].dirty || detailsinformation.controls['familymemberconsent'].touched)">
+                                <mat-error
+                                    [hidden]=" !detailsinformation.get('familymemberconsent')?.hasError('required')  ">
+                                    Field is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Does your family members co-operate or you dont need their support to continue the
+                            course, though certain conflicts might arise about opinions, practices will you be able to
+                            sustain your interest despite any resistance from your family!? </label>
+                        <div class="col px-0">
+                            <mat-radio-group formControlName="familycooperation" aria-label="Select an option">
+                                <mat-radio-button [value]="true" class=" mt-md-2 mr-md-4">Yes</mat-radio-button>
+                                <mat-radio-button [value]="false" class=" mt-md-2 mr-md-4">No</mat-radio-button>
+
+                            </mat-radio-group>
+                            <div class="error-message"
+                                *ngIf="detailsinformation.controls['familycooperation'].invalid && (detailsinformation.controls['familycooperation'].dirty || detailsinformation.controls['familycooperation'].touched)">
+                                <mat-error
+                                    [hidden]=" !detailsinformation.get('familycooperation')?.hasError('required')  ">
+                                    Field is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Is anyone from the family or friends participating on the course ? </label>
+                        <div class="col px-0">
+                            <mat-radio-group formControlName="friendparticipation" (change)="isfriendjoin($event)"
+                                aria-label="Select an option">
+                                <mat-radio-button [value]="true" class=" mt-md-2 mr-md-4">Yes</mat-radio-button>
+                                <mat-radio-button [value]=false class=" mt-md-2 mr-md-4">No</mat-radio-button>
+
+                            </mat-radio-group>
+                            <div class="error-message"
+                                *ngIf="detailsinformation.controls['friendparticipation'].invalid && (detailsinformation.controls['friendparticipation'].dirty || detailsinformation.controls['friendparticipation'].touched)">
+                                <mat-error
+                                    [hidden]=" !detailsinformation.get('friendparticipation')?.hasError('required')  ">
+                                    Field is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" *ngIf="isfriendname">
+                        <label>Friend Name</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="friendname"
+                                    [required]="isfriendname">
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="detailsinformation.controls['friendname'].invalid && (detailsinformation.controls['friendname'].dirty || detailsinformation.controls['friendname'].touched)">
+                                <mat-error [hidden]=" !detailsinformation.get('friendname')?.hasError('required')  ">
+                                    Friend Name is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>What yoga traditions did you practice in the past?</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <textarea matInput autocomplete="off" rows="5" formControlName="pastyogapratice"
+                                    placeholder="Previous background in yoga and meditation  in most cases unless it's your profession, we advise you to practice and surrender to present practices and course curriculum ">
+                                </textarea>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="detailsinformation.controls['pastyogapratice'].invalid && (detailsinformation.controls['pastyogapratice'].dirty || detailsinformation.controls['pastyogapratice'].touched)">
+                                <mat-error
+                                    [hidden]=" !detailsinformation.get('pastyogapratice')?.hasError('required')  ">
+                                    Field is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>What are your hobbies and how much time you spend on them in a day?</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <textarea matInput autocomplete="off" rows="5" formControlName="hobbies"></textarea>
+
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="detailsinformation.controls['hobbies'].invalid && (detailsinformation.controls['hobbies'].dirty || detailsinformation.controls['hobbies'].touched)">
+                                <mat-error [hidden]=" !detailsinformation.get('hobbies')?.hasError('required')  ">
+                                    Hobbies is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <label>To dedicate your time for doing this course, would you like to keep your hobbies aside?
+                        </label>
+                        <div class="col px-0">
+                            <mat-radio-group formControlName="isdedicated" aria-label="Select an option">
+                                <mat-radio-button [value]="true" class=" mt-md-2 mr-md-4">Yes</mat-radio-button>
+                                <mat-radio-button [value]=false class=" mt-md-2 mr-md-4">No</mat-radio-button>
+
+                            </mat-radio-group>
+                            <div class="error-message"
+                                *ngIf="detailsinformation.controls['isdedicated'].invalid && (detailsinformation.controls['isdedicated'].dirty || detailsinformation.controls['isdedicated'].touched)">
+                                <mat-error [hidden]=" !detailsinformation.get('isdedicated')?.hasError('required')  ">
+                                    Field is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Reference Name</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="familyfullname">
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="detailsinformation.controls['familyfullname'].invalid && (detailsinformation.controls['familyfullname'].dirty || detailsinformation.controls['familyfullname'].touched)">
+                                <mat-error
+                                    [hidden]=" !detailsinformation.get('familyfullname')?.hasError('required')  ">
+                                    Reference Name is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Reference Relationship</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="familyrelationship">
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="detailsinformation.controls['familyrelationship'].invalid && (detailsinformation.controls['familyrelationship'].dirty || detailsinformation.controls['familyrelationship'].touched)">
+                                <mat-error
+                                    [hidden]=" !detailsinformation.get('familyrelationship')?.hasError('required')  ">
+                                    Reference Realtionship is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Reference mobile number</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <input matInput autocomplete="off" formControlName="familycontactno">
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="detailsinformation.controls['familycontactno'].invalid && (detailsinformation.controls['familycontactno'].dirty || detailsinformation.controls['familycontactno'].touched)">
+                                <mat-error
+                                    [hidden]=" !detailsinformation.get('familycontactno')?.hasError('required')  ">
+                                    Reference Realtionship is mandatory
+                                </mat-error>
+                                <mat-error
+                                    [hidden]=" !detailsinformation.get('familycontactno')?.hasError('pattern')  ">
+                                    Invalid Mobile Number
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Why do you want to do this course, write briefly?</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <textarea matInput autocomplete="off" rows="5" formControlName="whythiscourse"
+                                    placeholder="how serious you are about persuing this course?">
+                                </textarea>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="detailsinformation.controls['whythiscourse'].invalid && (detailsinformation.controls['whythiscourse'].dirty || detailsinformation.controls['whythiscourse'].touched)">
+                                <mat-error [hidden]=" !detailsinformation.get('whythiscourse')?.hasError('required')  ">
+                                    Field is mandatory
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" col d-flex flex-row flex-wrap justify-content-end">
+                        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block mt-4">
+                            {{iseditable ? "Update" :"Register" }}
+                        </button>
+                        <button type="reset" class="btn btn-outline-secondary btn-rounded d-inline-block mt-4 ">
+                            Cancel
+                        </button>
+                    </div>
                 </div>
             </form>
 

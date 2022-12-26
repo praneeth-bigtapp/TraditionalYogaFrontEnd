@@ -30,6 +30,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatAutocompleteModule,
     MatSnackBarModule,
     
+    
   ]
 })
 export class RegistrationModule { }
