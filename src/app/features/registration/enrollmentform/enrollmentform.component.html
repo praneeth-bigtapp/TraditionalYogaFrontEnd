@@ -374,8 +374,8 @@
                             <mat-form-field appearance="outline">
                                 <mat-select formControlName="educationdetails"
                                     (selectionChange)="educationchange($event)">
-                                    <mat-option *ngFor="let food of eduationallist" [value]="food">
-                                        {{food}}
+                                    <mat-option *ngFor="let food of eduationallist" [value]="food.qualificationId">
+                                        {{food.qualificationName}}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>

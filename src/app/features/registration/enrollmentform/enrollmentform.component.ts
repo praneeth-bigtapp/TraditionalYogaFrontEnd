@@ -118,6 +118,8 @@ export class EnrollmentformComponent implements OnInit {
     this.service.getqualification().subscribe({
       next: (response) => {
         this.eduationallist = response
+        console.log(this.eduationallist);
+        
       },
       error: (error) => {
         console.error(error.message);
