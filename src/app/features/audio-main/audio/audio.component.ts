@@ -81,7 +81,6 @@ export class AudioComponent implements OnInit {
       next: (response) => {
 
         this.courses = response
-        console.log(this.courses);
 
       },
       error: (error) => {
@@ -108,9 +107,7 @@ export class AudioComponent implements OnInit {
     this.audio.getCategory().subscribe({
       next: (response: any) => {
         this.data = response
-        console.log('data');
 
-        console.log(response)
       },
       error: (error: { message: any; }) => {
         console.error(error.message);
@@ -119,7 +116,6 @@ export class AudioComponent implements OnInit {
     this.audio.getAllAudio().subscribe({
       next: (response: any) => {
         this.AllaudioCategory = response
-        console.log(response)
         this.AllaudioCategory = this.AllaudioCategory.reverse()
         for (let AllaudioCategory of this.AllaudioCategory) {
           AllaudioCategory.check = false;
@@ -166,9 +162,15 @@ export class AudioComponent implements OnInit {
   }
   compareselect(obj1: any, obj2: any) {
     if (obj2.audioCategoryId) {
-      console.log({ obj1, obj2 });
+
       return obj1 && obj2 && obj1 === obj2.audioCategoryId.audioCategoryId
     }
+
+    return obj1 && obj2 && obj1 === obj2
+  }
+  coursecompare(obj1: any, obj2: any) {
+   
+    console.log({ obj1, obj2 });
 
     return obj1 && obj2 && obj1 === obj2
   }
@@ -231,7 +233,6 @@ export class AudioComponent implements OnInit {
     const body = {
       "id": Number(Id)
     }
-    console.log(body);
     const dialogref = this.dialog.open(DialogPopupComponent, {
       data: {
         title: "Delete Confirmation",
@@ -244,7 +245,6 @@ export class AudioComponent implements OnInit {
       if (Id) {
         this.audio.delete(body).subscribe({
           next: (response) => {
-            console.log(response);
             this.Audiomanagement.reset()
             this.getaudiocategory()
           },
@@ -373,11 +373,9 @@ export class AudioComponent implements OnInit {
 
 
       }
-      console.log("editing");
 
       this.audio.updateaudio(body).subscribe({
         next: (response) => {
-          console.log(response)
           this.Audiomanagement.reset()
           this.getaudiocategory()
 
@@ -388,12 +386,10 @@ export class AudioComponent implements OnInit {
       })
       return
     }
-    console.log(this.Audiomanagement);
-    console.log(body)
+
 
     this.audio.audiopost(body).subscribe({
       next: (response) => {
-        console.log(response)
         this.Audiomanagement.reset()
 
         this.getaudiocategory()
