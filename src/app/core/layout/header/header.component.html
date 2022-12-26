@@ -3,18 +3,20 @@
         <div class="container-fluid">
             <div class="row w-100">
                 <div class="col-md-4 col-sm-4">
-                    <div class="user-profile pt-3">
+                    <div class="user-profile pt-1">
                         <div class="btn-group">
-                            <div type="button" class="btn dropdown-toggle text-warning pt-2 text-grey"
+                            <div type="button" class="btn dropdown-toggle text-warning text-grey"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <!-- <img src="assets/images/icon-login-orange.svg" alt="user icon" /> -->
 
-                                <span class="text-grey"> <img src="assets/images/login-icon.png" width="30"
+                                <span class="text-grey" style="line-height:0px; vertical-align: top;"> <img src="assets/images/login-icon.png" style="position:relative; top:7px" width="40"
                                         alt="usericon" />
-                                    {{loginData.userId}}
-                                    ({{loginData.userRole}})
-                                </span>
+                                   <span style="font-size:16px;"> {{loginData.userId}} </span> <br>
+                                    <span style="line-height:0px; margin-left: 35px;"> ({{loginData.userRole}}) </span> &nbsp;
+                                </span><br>
+                             
                             </div>
+                            
                             <div class="dropdown-menu">
                                 <button class="dropdown-item" type="button" [routerLink]="['/changepassword']">Change
                                     Password</button>

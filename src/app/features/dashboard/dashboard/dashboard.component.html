@@ -10,7 +10,7 @@
         <h3 class="mb-3"> Dashboard </h3>
 
 
-        <div class="dashboard-reports" style="background:#f5f5f5;">
+        <div class="dashboard-reports" style="background:#f5f5f5; border-radius: 14px 14px 0px 0px;">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active fw-bolder" data-toggle="tab" href="#tabs-1" role="tab" >Overall Report</a>
@@ -20,7 +20,7 @@
                 </li>
             </ul>
 
-            <div class="tab-content" style="background:#f5f5f5;">
+            <div class="tab-content" style="background:#fff;">
                 <div class="tab-pane active" id="tabs-1" role="tabpanel">
                     <div class=" p-3">
                         <div class="row p-3 dashboard-tails">
@@ -28,17 +28,17 @@
                                 <div class="tile bg-white">
                                     <h6 class="title mb-2 mr-5">{{overallReport.registeredUsers | number}}</h6>
                                     <p class="mr-5 lh-sm"><small><span> Total Number of Registered users </span></small></p>
-                                    <div class="icon-place bg-white ">
+                                    <div class="icon-place ">
                                         <span class="float-right"> <i class="fa fa-users"> </i> </span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-sm-4">
-                                <div class="tile  bg-light">
+                                <div class="tile  bg-white">
                                     <h6 class="title mb-1 pb-2 mr-5">{{overallReport.donationRecieved | number:'.2'}}</h6>
                                     <p class="mr-5 lh-sm"><small><span>Total Donations Received</span></small></p>
-                                    <div class="icon-place bg-light  rounded-circle">
+                                    <div class="icon-place  rounded-circle">
                                         <span class="float-right"><i class="fas fa-rupee-sign"></i></span>
                                     </div>
                                 </div>
@@ -48,14 +48,14 @@
                                 <div class="tile bg-white">
                                     <h6 class="title mb-1 mr-5"> {{overallReport.courses | number}} </h6>
                                     <p><small><span> Total Number of courses </span></small><br></p>
-                                    <div class="icon-place bg-white  rounded-circle">
+                                    <div class="icon-place  rounded-circle">
                                         <span class="float-right"> <i class="fa fa-film"> </i></span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-sm-4">
-                                <div class="tile bg-light">
+                                <div class="tile bg-white">
                                     <h6 class="title mb-1 mr-5">{{overallReport.subscribers | number}}</h6>
                                     <p class="mr-5 lh-sm"><small><span>Total Number of Subscribers</span></small></p>
                                     <div class="icon-place rounded-circle ">
@@ -70,22 +70,21 @@
                 <div class="tab-pane" id="tabs-2" role="tabpanel">
                     <form class="row p-3" [formGroup]="courseForm">
                         <div class="col-md-4">
-                            <div class="mb-3 pl-3 pt-2">
-                                <mat-form-field appearance="outline" >
-                                    <mat-label>Select Course</mat-label>
+                            <label>Course category</label>
+                                 <mat-form-field appearance="outline" >
+                                    <!-- <mat-label formControlName="course" >Select Course</mat-label> -->
                                     <mat-select formControlName="course"  required>
-                                        <mat-option *ngFor="let element of courses">{{element.coursesName}}</mat-option>
+                                        <mat-option *ngFor="let element of courses"  aria-placeholder="Select Course">{{element.coursesName}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
-                            </div>
+
                         </div>
 
                         <div class="col-md-2">
-                            <div class="mb-3 mt-1  float-end">
-                                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
+                            <label> &nbsp; </label>
+                                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block">
                                     Search
                                 </button>
-                            </div>
                         </div>
                     </form>
 
@@ -97,17 +96,17 @@
                                 <div class="tile bg-white">
                                     <h6 class="title mb-1"> {{coursesReport.enrolledUsers | number}} </h6>
                                     <p><small><span>Number of Enrolled Users</span></small><br></p>
-                                    <div class="icon-place bg-white  rounded-circle">
+                                    <div class="icon-place  rounded-circle">
                                         <span class="float-right"> <i class="fa fa-users"> </i> </span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-sm-3">
-                                <div class="tile  bg-light">
+                                <div class="tile  bg-white">
                                     <h6 class="title mb-1">{{coursesReport.activeUser | number}} </h6>
                                     <p><small><span> Active users </span></small></p>
-                                    <div class="icon-place bg-light  rounded-circle">
+                                    <div class="icon-place  rounded-circle">
                                         <span class="float-right"> <i class="fa fa-user-check"> </i></span>
                                     </div>
                                 </div>
@@ -117,27 +116,27 @@
                                 <div class="tile bg-white">
                                     <h6 class="title mb-1">{{coursesReport.droppedUsers | number}}  </h6>
                                     <p><small><span>Dropped users </span></small><br></p>
-                                    <div class="icon-place bg-white rounded-circle">
+                                    <div class="icon-place  rounded-circle">
                                         <span class="float-right"> <i class="fa fa-users"> </i></span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-sm-3">
-                                <div class="tile bg-light">
+                                <div class="tile bg-white">
                                     <h6 class="title mb-1">{{coursesReport.mentor | number}}</h6>
                                     <p><small><span> Mentors </span></small><br></p>
-                                    <div class="icon-place bg-light  rounded-circle">
+                                    <div class="icon-place  rounded-circle">
                                         <span class="float-right"> <i class="fa fa-user"> </i></span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-sm-3">
-                                <div class="tile bg-light">
+                                <div class="tile bg-white">
                                     <h6 class="title mb-1">{{coursesReport.cheifMentor | number}}</h6>
                                     <p><small><span> Cheif Mentors </span></small><br></p>
-                                    <div class="icon-place bg-light  rounded-circle">
+                                    <div class="icon-place  rounded-circle">
                                         <span class="float-right"> <i class="fa fa-user-tie"> </i></span>
                                     </div>
                                 </div>
