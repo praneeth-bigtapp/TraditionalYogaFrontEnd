@@ -61,6 +61,10 @@ export class StudentProfileComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort2!: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator3!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort3!: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator4!: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort4!: MatSort;
+  gridData4 = [];
+  filterData4:any
   gridData2 = [];
   filterData2:any
   gridData3 = [];
@@ -102,6 +106,7 @@ export class StudentProfileComponent implements OnInit {
   
   dataSource2: any;
   dataSource3:any
+  dataSource4:any
 
   onpaginatechange(event: any) {
     if (event.pageIndex === 0) {
@@ -163,6 +168,23 @@ export class StudentProfileComponent implements OnInit {
     for (let col of this.filterData2.filterColumnNames) {
       col.Value = '';
     }
+
+    this.filterData4 = {
+      filterColumnNames: this.ePurchasesColumns.map(ele => ({ "Key": ele, "Value": "" })),
+      gridData4: this.gridData4,
+      dataSource4: this.dataSource4,
+      paginator4: this.paginator4,
+      sort4: this.sort4
+    };
+    this.dataSource4 = new MatTableDataSource<any>(this.coursesProfileData)
+    this.filterData4.gridData4 = this.coursesProfileData;
+    this.filterData4.dataSource4 = this.dataSource4;
+    this.dataSource2.paginator4 = this.paginator4;
+    this.dataSource2.sort4 = this.sort4;
+    this.filterData2.sort4 = this.sort4;
+    for (let col of this.filterData4.filterColumnNames) {
+      col.Value = '';
+    }
    
 
     this.filterData = {
@@ -212,6 +234,12 @@ export class StudentProfileComponent implements OnInit {
   updatePagination() {
     this.filterData.dataSource.paginator = this.paginator;
     this.filterData.dataSource.sort = this.sort
+
+  }
+  
+  updatePagination4() {
+    this.filterData4.dataSource4.paginator4 = this.paginator4;
+    this.filterData4.dataSource4.sort4 = this.sort4
 
   }
   updatePagination3() {

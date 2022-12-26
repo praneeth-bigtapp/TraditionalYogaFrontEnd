@@ -10,17 +10,12 @@
         <button  class="col-2 btn btn-outline-secondary btn-rounded  " (click)=" gobutton()" *ngIf="!displaycontent">
             Add Media
         </button>
-        <button  class="col-2 btn btn-outline-secondary btn-rounded  " (click)=" openImages()">
-            Add Image
-        </button>
-        <button  class="col-2 btn btn-outline-secondary btn-rounded  " (click)="openDocument()">
-            Add Document
-        </button>
+      
         
     </div>
     <div class="card border-light bg-white  mt-3"  *ngIf="displaycontent">
         <div class="card-header text-white bg-secondary">
-            Add Media
+            {{updatebtn ? "Update" :submitbtn ?"Add":'' }} Media
         </div>
         <div class="card-body " >
   
@@ -28,6 +23,17 @@
 
             <form [formGroup]="addmediaform" (ngSubmit)="addmedia()">
                 <div >
+                    <div class="row  d-flex justify-content-end mb-2" *ngIf="addbtns">
+                     
+                        <button  class="col-2 btn btn-outline-secondary btn-rounded  " (click)=" openImages()">
+                            Add Image
+                        </button>
+                        <button  class="col-2 btn btn-outline-secondary btn-rounded  " (click)="openDocument()">
+                            Add Document
+                        </button>
+                        
+                    </div>
+                    <hr>
                     <div class="row">
                         <div class="col-4">
                             <label>Course</label>
@@ -198,8 +204,11 @@
                             </div>
                         </div>
                         <div class="row  d-flex justify-content-end">
-                            <button type="submit" class="col-2 btn btn-outline-secondary btn-rounded  ">
+                            <button type="submit" class="col-2 btn btn-outline-secondary btn-rounded  " *ngIf="submitbtn">
                                 Submit
+                            </button>
+                            <button  class="col-2 btn btn-outline-secondary btn-rounded  " *ngIf="updatebtn" (click)="saveData()">
+                               Update
                             </button>
                             <button  class="col-2 btn btn-outline-secondary btn-rounded  " (click)="cancelbt()">
                                 Cancel
@@ -300,12 +309,22 @@
             </td>
         </ng-container>
 
-        <ng-container matColumnDef="uploadMediaFile">
+        <ng-container matColumnDef='PracticeDate'>
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
-                    Media type
+                    Practice Date
                 </label>
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
+                    [filter]="filterData" />
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-center"> {{element.uploadMediaFile}} </td>
+        </ng-container>
+        <ng-container matColumnDef='PracticeTime'>
+            <th mat-header-cell *matHeaderCellDef scope="col">
+                <label mat-sort-header>
+                    Practice Time
+                </label>
+                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[4].Value"
                     [filter]="filterData" />
             </th>
             <td mat-cell *matCellDef="let element" class="text-center"> {{element.uploadMediaFile}} </td>
@@ -316,7 +335,7 @@
                 <label mat-sort-header>
                     Time added
                 </label>
-                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[4].Value"
+                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[5].Value"
                     [filter]="filterData" />
             </th>
             <td mat-cell *matCellDef="let element" class="text-center"> {{element.duration }} </td>
@@ -327,7 +346,7 @@
                 <label mat-sort-header>
                     Keywords
                 </label>
-                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[5].Value"
+                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[6].Value"
                     [filter]="filterData" />
             </th>
             <td mat-cell *matCellDef="let element " class="text-center"> {{element.metaKeyword }} </td>

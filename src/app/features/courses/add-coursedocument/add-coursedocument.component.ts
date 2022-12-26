@@ -35,7 +35,8 @@ export class AddCoursedocumentComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
   pageno: number = 1
-
+  updatebtn=false
+  submitbtn=true
   title = ''
   keyword = ''
   description = ''
@@ -68,7 +69,7 @@ export class AddCoursedocumentComponent implements OnInit {
   }
 
 
-  displayedColumns = ['id', 'title', 'description', 'uploadMediaFile', 'duration', 'metaKeyword', 'buttons']
+  displayedColumns = ['id', 'title', 'description','course', 'buttons']
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
@@ -168,6 +169,8 @@ export class AddCoursedocumentComponent implements OnInit {
   cancelbt(){
     this.displaycontent = false
     this.addmediaform.reset()
+    this.updatebtn=false
+    this.submitbtn=true
 
   }
   gobutton() {
@@ -251,9 +254,29 @@ export class AddCoursedocumentComponent implements OnInit {
   }
 
   viewDetails(element: any) {
+    this.submitbtn=false
+    this.updatebtn=false
+    this.displaycontent=true
+
+    this.addmediaform.setValue({
+      courses1:'',
+      mediatitle:'',
+      docfile: '',
+      mediadescription:'',
+    })
 
   }
   editdetails(element: any) {
+    this.submitbtn=false
+    this.updatebtn=true
+    this.displaycontent=true
+
+    this.addmediaform.setValue({
+      courses1:'',
+      mediatitle:'',
+      docfile: '',
+      mediadescription:'',
+    })
 
   }
   openSnackBar(data: any) {
@@ -261,7 +284,14 @@ export class AddCoursedocumentComponent implements OnInit {
       duration: 2 * 1000,
     });
   }
-
+  saveData(){
+    this.updatebtn=false
+    this.submitbtn=true
+    let data={
+      message:'Data updated Successfully'
+    }
+    this.openSnackBar(data)
+  }
   deletedetails(id: any) {
 
     // const body = {

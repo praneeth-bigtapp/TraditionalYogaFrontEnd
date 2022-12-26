@@ -39,7 +39,9 @@ export class CourseMediaPraticeComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
   pageno: number = 1
-
+  addbtns=false
+  updatebtn=false
+  submitbtn=true
   title = ''
   keyword = ''
   description = ''
@@ -72,7 +74,7 @@ export class CourseMediaPraticeComponent implements OnInit {
   }
 
 
-  displayedColumns = ['id', 'title', 'description', 'uploadMediaFile', 'duration', 'metaKeyword', 'buttons']
+  displayedColumns = ['id', 'title', 'description', 'PracticeDate','PracticeTime', 'duration', 'metaKeyword', 'buttons']
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
@@ -149,7 +151,8 @@ export class CourseMediaPraticeComponent implements OnInit {
       data: {
         // course: this.coursename
       },
-      width: "80%"
+      width: "80%",
+      // overflow: 'scroll';
     })
 
     dialogref.afterClosed().subscribe(data => {
@@ -219,6 +222,8 @@ export class CourseMediaPraticeComponent implements OnInit {
   cancelbt(){
     this.displaycontent = false
     this.addmediaform.reset()
+    this.updatebtn=false
+    this.submitbtn=true
 
   }
   gobutton() {
@@ -248,7 +253,7 @@ export class CourseMediaPraticeComponent implements OnInit {
     return Number(`${hours}.${minutes}`)
   }
   addmedia() {
-
+    
     
 
     this.paragraphchange()
@@ -257,6 +262,7 @@ export class CourseMediaPraticeComponent implements OnInit {
 
 
     if (this.addmediaform.valid) {
+      this.addbtns=true
 
       this.addmediaform.value.mediafile = this.filedata
       this.addmediaform.value.videofile = this.filedata1
@@ -302,15 +308,58 @@ export class CourseMediaPraticeComponent implements OnInit {
   }
 
   viewDetails(element: any) {
+this.updatebtn=false
+this.submitbtn=false
+this.addbtns=false
+this.displaycontent=true
+this.addmediaform .setValue({
+  videolink: '',
+  videotitle: '',
+  videodescription: '',
+  videoduration: '',
+  vidoemetakeywords:'',
+  videofile: '',
+  courses1: '',
+  practiceTime:'',
+  practiceDate:'',
+  Instructions:'', 
+ 
+})
 
   }
   editdetails(element: any) {
+    this.addbtns=true
+    this.updatebtn=true
+    this.submitbtn=false
+    this.displaycontent=true
+    this.addmediaform .setValue({
+      videolink: '',
+      videotitle: '',
+      videodescription: '',
+      videoduration: '',
+      vidoemetakeywords:'',
+      videofile: '',
+      courses1: '',
+      practiceTime:'',
+      practiceDate:'',
+      Instructions:'', 
+     
+    })
 
   }
   openSnackBar(data: any) {
     this._snackBar.open(data.message, 'Close', {
       duration: 2 * 1000,
     });
+  }
+
+  saveData(){
+    this.updatebtn=false
+    this.submitbtn=true
+    let data={
+      message:'Data updated Successfully'
+    }
+    this.openSnackBar(data)
   }
 
   deletedetails(id: any) {

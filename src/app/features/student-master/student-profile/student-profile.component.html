@@ -1036,17 +1036,29 @@
                                     <div class="card-header text-white bg-secondary">
                                         Courses Profile
                                      </div>
-                                    <table mat-table [dataSource]="coursesProfileData"
+                                    <table mat-table [dataSource]="filterData4.dataSource4" matSort
                                     class="mat-elevation-z8 mat-datagrid w-100"
                                     aria-label="users">
 
                                         <ng-container matColumnDef="SNo">
-                                            <th mat-header-cell *matHeaderCellDef> S.No </th>
+                                            <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>
+                                               S.No
+                                                </label>
+                                      
+                                                <input type="text" (keyup)="updatePagination4()" [(ngModel)]="filterData4.filterColumnNames[0].Value"
+                                                  [filter]="filterData4" disabled="true"/>
+                                              </th>
                                             <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
                                         </ng-container>
 
                                         <ng-container matColumnDef="CourseName" >
-                                            <th mat-header-cell *matHeaderCellDef> Course Name </th>
+                                            <th mat-header-cell *matHeaderCellDef class="col-3 text-center"> <label mat-sort-header>
+                                                Course Name
+                                                 </label>
+                                       
+                                                 <input type="text" (keyup)="updatePagination4()" [(ngModel)]="filterData4.filterColumnNames[0].Value"
+                                                   [filter]="filterData4" />
+                                               </th>
                                             <td mat-cell *matCellDef="let element">
                                                 ({{element.CourseName}})
                                                 {{element.CourseDiscription}}
@@ -1059,12 +1071,24 @@
                                         </ng-container>
 
                                         <ng-container matColumnDef="AdmissionsStatus">
-                                            <th mat-header-cell *matHeaderCellDef> Admission Status </th>
+                                            <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
+                                                Admission Status
+                                                 </label>
+                                       
+                                                 <input type="text" (keyup)="updatePagination4()" [(ngModel)]="filterData4.filterColumnNames[0].Value"
+                                                   [filter]="filterData4" />
+                                               </th>
                                             <td mat-cell *matCellDef="let element"> {{element.AdmissionsStatus}} </td>
                                         </ng-container>
 
                                         <ng-container matColumnDef="CompletionStatus">
-                                            <th mat-header-cell *matHeaderCellDef> Completion Status </th>
+                                            <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
+                                                Completion Status
+                                                 </label>
+                                       
+                                                 <input type="text" (keyup)="updatePagination4()" [(ngModel)]="filterData4.filterColumnNames[0].Value"
+                                                   [filter]="filterData4" />
+                                               </th>
                                             <td mat-cell *matCellDef="let element"> {{element.CompletionStatus}} </td>
                                         </ng-container>
 
