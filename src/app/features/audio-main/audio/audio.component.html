@@ -18,205 +18,203 @@
         </div>
     </div>
 
-    
-    <form [formGroup]="Audiomanagement" (ngSubmit)=" addAudiocategory()" class=" card bg-white mt-3" *ngIf="displaycontent">
-        
+
+    <form [formGroup]="Audiomanagement" (ngSubmit)=" addAudiocategory()" class=" card bg-white mt-3"
+        *ngIf="displaycontent">
+
         <h3 class="card-header text-white card bg-secondary">Add Audio</h3>
-        
+
 
         <div class="row d-flex m-2">
 
             <label>Course:</label>
 
             <div class="col-md-3 d-flex pt-2 ">
-
-                <mat-form-field appearance="outline" >
-
+                <mat-form-field appearance="outline">
                     <mat-select [(ngModel)]="courseId" (selectionChange)="coursevalue()" formControlName="course">
-
                         <mat-option *ngFor="let element of courses" [value]="element.coursesId">{{element.coursesName}}
                         </mat-option>
                     </mat-select>
-
-
                 </mat-form-field>
+                <div class="error-message"
+                    *ngIf="Audiomanagement.controls['course'].invalid && (Audiomanagement.controls['course'].dirty || Audiomanagement.controls['course'].touched)">
+                    <mat-error [hidden]=" !Audiomanagement.get('course')?.hasError('required')  ">
+                        Course is mandatory
+                    </mat-error>
+                </div>
             </div>
-
-            <!-- <div class="col-md pt-2">
-                <button type="submit" class="btn btn-outline-secondary btn-go btn-rounded d-inline-block ">
-                   Submit
-                </button>
-
-            </div> -->
-
-
-
-
-
-
-
-            <!-- <button mat-raised-button style="margin-left: 700px;"></button> -->
-            <!-- <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 " (click)="addcourse()" *ngIf="!displaycontent">
-                  Create Audio
-                </button> -->
-
-
-
-
-
-
 
         </div>
         <hr>
-      
+
         <!-- <form [formGroup]="Audiomanagement" (ngSubmit)=" addAudiocategory()" > -->
 
 
-            <div class="row m-4">
-                <!-- <h6 class="text-md-right col-md-4">Select Category:</h6> -->
+        <div class="row m-4">
+            <!-- <h6 class="text-md-right col-md-4">Select Category:</h6> -->
 
 
-                <div class="col-md-6">
-                    <label>Category:</label>
-                    <mat-form-field appearance="outline">
+            <div class="col-md-6">
+                <label>Category:</label>
+                <mat-form-field appearance="outline">
 
-                        <mat-select formControlName="category">
-                            <!-- <mat-option [value]="element.categorieId.categoriesName"  *ngFor="let element of courses">{{element.categorieId.categoriesName}}</mat-option> -->
+                    <mat-select formControlName="category" [compareWith]="compareselect">
+                        <!-- <mat-option [value]="element.categorieId.categoriesName"  *ngFor="let element of courses">{{element.categorieId.categoriesName}}</mat-option> -->
 
-                            <mat-option [value]="element.audioCategoryId" *ngFor="let element of data">
-                                {{element.audioName}}</mat-option>
-                        </mat-select>
-                        <mat-error [hidden]=" !Audiomanagement.get('category')?.hasError('required')  ">
-                            Category is mandatory
-                        </mat-error>
-                    </mat-form-field>
+                        <mat-option [value]="element.audioCategoryId" *ngFor="let element of data">
+                            {{element.audioName}}</mat-option>
+                    </mat-select>
 
-
-                </div>
-
-
-                <!-- <h6 class="text-md-right col-md-4"></h6> -->
-
-
-                <div class="col-md-6">
-                    <label>Audio File Type</label>
-                    <mat-form-field appearance="outline">
-                        <!-- <mat-label>Audio file</mat-label> -->
-                        <mat-select formControlName="upload">
-
-                            <!-- <mat-option [value]="element.courseId"  *ngFor="let element of audiocategory">{{element.audioCategoryId}}</mat-option></mat-select> -->
-                            <mat-option [value]="element.audioType" *ngFor="let element of Audiodata">
-                                {{element.audioName}}</mat-option>
-                        </mat-select>
-
-                        <mat-error [hidden]=" !Audiomanagement.get('upload')?.hasError('required')  ">
-                            Audio is mandatory
-                        </mat-error>
-                    </mat-form-field>
-                </div><br><br>
-
-                <!--          
-                <h6 class="text-md-right col-md-4">Select Audio File:</h6> -->
-
-                <div class="col-md-6">
-                    <br />
-
-                    <label>Upload Audio File:</label>
-                    <!-- <mat-form-field appearance="outline" class="ms-3 "> -->
-                    <input type="file" (change)="filechange($event)" accept=" image/*" class="border" required="true"
-                        formControlName="file" />
-
-                    <!-- </mat-form-field> -->
-                    <mat-error *ngIf="filerror ">
-                        Audio is mandatory
+                </mat-form-field>
+                <div class="error-message"
+                    *ngIf="Audiomanagement.controls['category'].invalid && (Audiomanagement.controls['category'].dirty || Audiomanagement.controls['category'].touched)">
+                    <mat-error [hidden]=" !Audiomanagement.get('category')?.hasError('required')  ">
+                        Category is mandatory
                     </mat-error>
                 </div>
 
-                <!-- <h6 class="text-md-right col-md-4">Title:</h6> -->
 
-                <div class="col-md-6">
-                    <br />
-
-                    <label>Title:</label>
-                    <mat-form-field appearance="outline">
-                        <!-- <mat-label>title here</mat-label> -->
-                        <input matInput formControlName="title">
-                        <mat-error [hidden]=" !Audiomanagement.get('title')?.hasError('required')  ">
-                            Title is mandatory
-                        </mat-error>
-                    </mat-form-field>
-                </div><br>
+            </div>
 
 
-                <!-- <h6 class="text-md-right col-md-4">Description:</h6> -->
-
-                <div class="col-md-12">
-                    <br />
-
-                    <label>Description:</label>
-                    <mat-form-field class="example-full-width" appearance="outline" id="field">
-                        <!-- <mat-label>Health is wealth</mat-label> -->
-                        <textarea matInput formControlName="description"></textarea>
-                        <mat-error [hidden]=" !Audiomanagement.get('description')?.hasError('required')  ">
-                            Description is mandatory
-                        </mat-error>
-                    </mat-form-field>
-                </div><br>
+            <!-- <h6 class="text-md-right col-md-4"></h6> -->
 
 
-                <!-- <h6 class="text-md-right col-md-4">Duration Of the
+            <div class="col-md-6">
+                <label>Audio File Type</label>
+                <mat-form-field appearance="outline">
+                    <mat-select formControlName="upload" [compareWith]="compareselect">
+                        <mat-option [value]="element.audioType" *ngFor="let element of Audiodata">
+                            {{element.audioName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="error-message"
+                    *ngIf="Audiomanagement.controls['upload'].invalid && (Audiomanagement.controls['upload'].dirty || Audiomanagement.controls['upload'].touched)">
+                    <mat-error [hidden]=" !Audiomanagement.get('upload')?.hasError('required')  ">
+                        Type is mandatory
+                    </mat-error>
+                </div>
+            </div><br><br>
+
+            <!--          
+                <h6 class="text-md-right col-md-4">Select Audio File:</h6> -->
+
+            <div class="col-md-6">
+                <br />
+
+                <label>Upload Audio File:</label>
+                <!-- <mat-form-field appearance="outline" class="ms-3 "> -->
+                <input type="file" (change)="filechange($event)" accept=" image/*" class="border" required="true"
+                    formControlName="file" />
+
+                <!-- </mat-form-field> -->
+                <mat-error *ngIf="filerror ">
+                    Audio is mandatory
+                </mat-error>
+            </div>
+
+            <!-- <h6 class="text-md-right col-md-4">Title:</h6> -->
+
+            <div class="col-md-6">
+                <br />
+
+                <label>Title:</label>
+                <mat-form-field appearance="outline">
+                    <!-- <mat-label>title here</mat-label> -->
+                    <input matInput formControlName="title">
+                </mat-form-field>
+                <div class="error-message"
+                    *ngIf="Audiomanagement.controls['title'].invalid && (Audiomanagement.controls['title'].dirty || Audiomanagement.controls['title'].touched)">
+                    <mat-error [hidden]=" !Audiomanagement.get('title')?.hasError('required')  ">
+                        Title is mandatory
+                    </mat-error>
+                </div>
+            </div><br>
+
+
+            <!-- <h6 class="text-md-right col-md-4">Description:</h6> -->
+
+            <div class="col-md-12">
+                <br />
+
+                <label>Description:</label>
+                <mat-form-field class="example-full-width" appearance="outline" id="field">
+                    <!-- <mat-label>Health is wealth</mat-label> -->
+                    <textarea matInput formControlName="description"></textarea>
+                </mat-form-field>
+                <div class="error-message"
+                    *ngIf="Audiomanagement.controls['description'].invalid && (Audiomanagement.controls['description'].dirty || Audiomanagement.controls['description'].touched)">
+                    <mat-error [hidden]=" !Audiomanagement.get('description')?.hasError('required')  ">
+                        Description is mandatory
+                    </mat-error>
+                </div>
+            </div><br>
+
+
+            <!-- <h6 class="text-md-right col-md-4">Duration Of the
                     File:</h6> -->
 
-                <div class="col-md-6">
-                    <br />
-                    <label>Duration Of the
-                        File:</label>
-                    <mat-form-field class="example-full-width" appearance="outline" id="field">
-                        <!-- <mat-label>30:12</mat-label> -->
-                        <input matInput formControlName="duration" type="number">
-                        <mat-error [hidden]=" !Audiomanagement.get('duration')?.hasError('required')  ">
-                            File is mandatory
-                        </mat-error>
-                    </mat-form-field>
+            <div class="col-md-6">
+                <br />
+                <label>Duration Of the File:</label>
+                <mat-form-field class="example-full-width" appearance="outline" id="field">
+                    <!-- <mat-label>30:12</mat-label> -->
+                    <input matInput formControlName="duration" type="number">
+
+                </mat-form-field>
+                <div class="error-message"
+                    *ngIf="Audiomanagement.controls['duration'].invalid && (Audiomanagement.controls['duration'].dirty || Audiomanagement.controls['duration'].touched)">
+                    <mat-error [hidden]=" !Audiomanagement.get('duration')?.hasError('required')  ">
+                        Duration is mandatory
+                    </mat-error>
+                    <mat-error [hidden]=" !Audiomanagement.get('duration')?.hasError('pattern')  ">
+                        Duration is mandatory
+                    </mat-error>
                 </div>
+            </div>
 
 
-                <!-- <h6 class="text-md-right col-md-4">Meta Keyword:
+            <!-- <h6 class="text-md-right col-md-4">Meta Keyword:
                 </h6> -->
 
-                <div class="col">
-                    <br />
+            <div class="col">
+                <br />
 
-                    <label>Meta Keyword:</label>
-                    <mat-form-field class="example-full-width" appearance="outline" id="field">
-                        <!-- <mat-label>meta keyword</mat-label> -->
-                        <input matInput formControlName="meta">
-                        <mat-error [hidden]=" !Audiomanagement.get('meta')?.hasError('required')  ">
-                            keywords is mandatory
-                        </mat-error>
-                    </mat-form-field>
+                <label>Meta Keyword:</label>
+                <mat-form-field class="example-full-width" appearance="outline" id="field">
+                    <!-- <mat-label>meta keyword</mat-label> -->
+                    <input matInput formControlName="meta">
+                </mat-form-field>
+                <div class="error-message"
+                    *ngIf="Audiomanagement.controls['meta'].invalid && (Audiomanagement.controls['meta'].dirty || Audiomanagement.controls['meta'].touched)">
+                    <mat-error [hidden]=" !Audiomanagement.get('meta')?.hasError('required')  ">
+                        keywords is mandatory
+                    </mat-error>
+                    <mat-error [hidden]=" !Audiomanagement.get('meta')?.hasError('pattern')  ">
+                        Invalid keyword
+                    </mat-error>
                 </div>
+            </div>
 
-            </div>
-            <br />
-            <div class="col text-end  pl-4">
-                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2"
-                    [hidden]="!issubmit">
-                    {{iseditable ? "Update" :"Create Audio" }}
-                </button>
-                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2"
-                    (click)="reseteditable()">
-                    cancel
-                </button>
-            </div>
+        </div>
+        <br />
+        <div class="col text-end  pl-4">
+            <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2" [hidden]="!issubmit">
+                {{iseditable ? "Update" :"Create Audio" }}
+            </button>
+            <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2"
+                (click)="reseteditable()">
+                cancel
+            </button>
+        </div>
 
         <!-- </form> -->
-       
+
 
 
         <!-- </div> -->
 
-        </form>
+    </form>
 
 
 

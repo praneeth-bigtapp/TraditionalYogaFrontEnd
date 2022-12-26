@@ -51,7 +51,7 @@ export class AudioComponent implements OnInit {
 
   constructor(private formbuilder: FormBuilder, private audio: AudioService, private _snackBar: MatSnackBar, private dialog: MatDialog,) {
     this.Audiomanagement = this.formbuilder.group({
-course:[null,Validators.compose([Validators.required])],
+      course: [null, Validators.compose([Validators.required])],
       courseid: [null],
       Id: [null],
       category: [null, Validators.compose([Validators.required])],
@@ -164,16 +164,27 @@ course:[null,Validators.compose([Validators.required])],
   IsActiveorNot(element: any) {
     return true
   }
+  compareselect(obj1: any, obj2: any) {
+    if (obj2.audioCategoryId) {
+      console.log({ obj1, obj2 });
+      return obj1 && obj2 && obj1 === obj2.audioCategoryId.audioCategoryId
+    }
+
+    return obj1 && obj2 && obj1 === obj2
+  }
   viewdetails(element: any) {
     this.displaycontent = true
     this.issubmit = false
+    console.log(element);
+
     this.Audiomanagement.setValue({
       audiocategoryid: element.audioCategoryId,
 
       courseid: element.courseId,
+      course: element.courseId,
       Id: element.id,
-      category: element.uploadCategory,
-      upload: element.audioType,
+      category: element.audioCategoryId.audioCategoryId,
+      upload: element.audioType.audioType,
       file: "",
       title: element.audioTitle,
       description: element.audioDesc,
@@ -192,41 +203,15 @@ course:[null,Validators.compose([Validators.required])],
     this.iseditable = true
     this.displaycontent = true
     this.issubmit = true
-    // let catogerieId=this.data.filter((ele:any)=>{if(ele.audioCategoryId===
-    //   ){
-    //   return this.data.audioName
-    // }})
-    console.log("catoger:" + element.audioCategoryId.audioName);
-
-
-
-
-
-    // this.Audiomanagement.value.category=element.audioCategoryId.audioName ,
-
-
-    // this.Audiomanagement.value.file='' ,
-    // this.Audiomanagement.value.title=element.audioTitle ,
-    // this.Audiomanagement.value.upload= element.audioType,
-    // this.Audiomanagement.value.description=  element.audioDesc,
-    // this.Audiomanagement.value.duration=Number(element.audioDuration),
-    // this.Audiomanagement.value.meta= element.metakey,
-
-
-
-
-
-
-
 
     this.Audiomanagement.setValue({
-      audiocategoryid: "",
+      audiocategoryid: element.audioCategoryId,
 
       courseid: element.courseId,
+      course: element.courseId,
       Id: element.id,
-      course:"",
-      category: element.audioCategoryId.audioName,
-      upload: element.audioType,
+      category: element.audioCategoryId.audioCategoryId,
+      upload: element.audioType.audioType,
       file: "",
       title: element.audioTitle,
       description: element.audioDesc,
@@ -361,12 +346,12 @@ course:[null,Validators.compose([Validators.required])],
     }
     if (this.iseditable) {
       const body = {
-        "id":  this.Audiomanagement.value.Id,
+        "id": this.Audiomanagement.value.Id,
         // "courseId": this.courseId,
         "courseId": this.Audiomanagement.value.course,
         "audioCategoryId": {
           "audioCategoryId":
- Number(this.Audiomanagement.value.category),
+            Number(this.Audiomanagement.value.category),
         },
         "uploadCategory": this.Audiomanagement.value.category,
         "audioType": {
