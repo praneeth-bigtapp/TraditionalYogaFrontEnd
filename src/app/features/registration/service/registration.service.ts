@@ -9,13 +9,18 @@ export class RegistrationService extends BaseHttp {
   getcountryURL = "webSite/getAll?operation=country"
 
   getaboutusURL = "register/getAll?operation=aboutus"
+  getqualificationURL = "student/getAll?operation=qualification"
+  genderURL = "student/getAll?operation=gender"
+
 
   postenrollmentURL = ""
   postdetailsenrollmentURL = ""
-  genderURL = "student/getAll?operation=gender"
 
   getgender() {
     return this.get(this.genderURL)
+  }
+  getqualification() {
+    return this.get(this.getqualificationURL)
   }
   getcountry() {
     return this.get(this.getcountryURL)

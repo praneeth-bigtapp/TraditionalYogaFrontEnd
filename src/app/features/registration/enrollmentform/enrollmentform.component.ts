@@ -84,7 +84,6 @@ export class EnrollmentformComponent implements OnInit {
 
     // this.refferallist = ["I am old student", "Friends and family", "Facebook", "Instagram", "Youtube", "TV Media", "Others"]
     this.martialstatus = ["Single", "Married"]
-    this.eduationallist = ["dummy", "other"]
     this.service.getcountry().subscribe({
       next: (response) => {
 
@@ -114,6 +113,16 @@ export class EnrollmentformComponent implements OnInit {
       },
       error: (error) => {
         console.error(error.message);
+      }
+    })
+    this.service.getqualification().subscribe({
+      next: (response) => {
+        this.eduationallist = response
+      },
+      error: (error) => {
+        console.error(error.message);
+        this.eduationallist = ["dummy", "other"]
+
       }
     })
   }
