@@ -22,7 +22,7 @@ export class MediaComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   selection = new SelectionModel<any>(true, []);
-
+  submitbtn=true
   pageno: number = 1
   isothers: boolean = false
   displayform: boolean = false
@@ -299,10 +299,34 @@ export class MediaComponent implements OnInit {
   }
 
   viewDetails(element: any) {
+    this.iseditable=false
+    this.submitbtn=false
+    this.videoform.setValue({
+      courseMediaId: '',
+      course:'',
 
+      videolink: '',
+      date: '',
+      title: '',
+      description: '',
+
+    })
   }
   editdetails(element: any) {
+    this.gobutton()
+    this.iseditable=true
+    this.submitbtn=false
 
+    this.videoform.setValue({
+      courseMediaId: '',
+      course:'',
+
+      videolink: '',
+      date: '',
+      title: '',
+      description: '',
+
+    })
   }
   deletedetails(id: any) {
 

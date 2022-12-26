@@ -19,6 +19,7 @@ export class ShortvideomediaComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   displaycontent: boolean = false
   pageno: number = 1
+  submitbtn=true
   isothers: boolean = false
   displayedColumns: string[] = ['classMediaId', 'title', 'course', "classdate", 'category', 'videolink', "duration", "Action"];
   shortvideoform!: any
@@ -213,6 +214,9 @@ export class ShortvideomediaComponent implements OnInit {
 
 
   viewDetails(element: any) {
+    this.iseditable = false
+    this.submitbtn = false
+    this.displaycontent = true
     this.shortvideoform.setValue({
       courseMediaId: null,
       videolink: null,
@@ -222,12 +226,14 @@ export class ShortvideomediaComponent implements OnInit {
       title: null,
       description: null,
     })
-
-    this.issubmit = false
-    this.displaycontent = true
+  
 
   }
   editdetails(element: any) {
+    this.iseditable = true
+    this.submitbtn = false
+    this.displaycontent = true
+
     this.shortvideoform.setValue({
       courseMediaId: null,
       videolink: null,
@@ -237,9 +243,8 @@ export class ShortvideomediaComponent implements OnInit {
       title: null,
       description: null,
     })
-    this.iseditable = true
-    this.issubmit = true
-    this.displaycontent = true
+    
+    
 
 
   }
