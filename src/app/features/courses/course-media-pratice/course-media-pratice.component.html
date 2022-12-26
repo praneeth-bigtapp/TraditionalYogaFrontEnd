@@ -54,6 +54,20 @@
                         </div>
                         <div class="col-4">
                             <label>Practice Date</label>
+        
+                            <mat-form-field class="pe-4" appearance="outline">
+                                <input matInput formControlName="practiceDate" 
+                                type="date">
+        
+                            </mat-form-field>
+                            <div *ngIf="addmediaform.controls['practiceDate'].touched">
+                                <mat-error [hidden]=" !addmediaform.get('practiceDate')?.hasError('practiceDate')  ">
+                                    Select the Date
+                                </mat-error>
+                            </div>
+                        </div>
+                        <!-- <div class="col-4">
+                            <label>Practice Date</label>
 
                             <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" class="" formControlName="practiceDate"
@@ -65,8 +79,23 @@
                                     Date is mandatory
                                 </mat-error>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-4">
+                            <label>Practice Time</label>
+        
+                            <mat-form-field class="pe-4" appearance="outline">
+                                <input matInput formControlName="practiceTime"  
+                                type="time">
+                                
+        
+                            </mat-form-field>
+                            <div *ngIf="addmediaform.controls['practiceTime'].touched">
+                                <mat-error [hidden]=" !addmediaform.get('practiceTime')?.hasError('practiceTime')  ">
+                                    Select the Date
+                                </mat-error>
+                            </div>
+                        </div>
+                        <!-- <div class="col-4">
                             <label>Practice Time</label>
 
                             <mat-form-field appearance="outline">
@@ -79,7 +108,7 @@
                                     Time is mandatory
                                 </mat-error>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                    
                   

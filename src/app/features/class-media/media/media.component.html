@@ -37,24 +37,26 @@
                     </mat-form-field>
 
                 </div> -->
-                <div class="col-md-3 mx-auto" *ngIf="!displayform">
+                <!-- <div class="col-md-3 mx-auto" *ngIf="!displayform">
                     <button type="button" *ngIf="!displayform" (click)="openliveclass()"
                         class="btn btn-outline-secondary btn-rounded d-inline-block mt-4  ">
                         Live Class
                     </button>
-                </div>
-                <div class="col-md-3 mx-auto" *ngIf="displaycontent">
+                </div> -->
+               <div class="d-flex justify-content-end">
+                <div >
                     <button type="button" (click)="openshortvideo()"
                         class="btn btn-outline-secondary btn-rounded d-inline-block mt-4  ">
                         Short Video
                     </button>
                 </div>
-                <div class="col-md-3 mx-auto" *ngIf="displaycontent">
+                <div >
                     <button type="button" (click)="openglimpse()"
                         class="btn btn-outline-secondary btn-rounded d-inline-block mt-4  ">
                         Glimpse
                     </button>
                 </div>
+               </div>
 
             </div>
             <hr />
@@ -128,8 +130,8 @@
 
                     </div>
                     <br />
-                    <div class="row align-items-center ">
-                        <div class="col-md-6">
+                    <div class="row  ">
+                        <div class="col">
                             <label>Description</label>
                             <div class="col px-0">
                                 <mat-form-field class="example-full-width" appearance="outline">
@@ -144,7 +146,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
+                        </div>
+                        <div class="d-flex justify-content-end">
+                        <div>
                             <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block   ">
                                 {{iseditable ? "Update":"Add"}}
                             </button>

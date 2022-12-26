@@ -123,6 +123,7 @@ export class CourseMediaPraticeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getcourseslist()
+   
     this.courseform = this.formbuilder.group({courses: [null, Validators.compose([Validators.required])],})
     this.addmediaform = this.formbuilder.group({
 
@@ -134,7 +135,7 @@ export class CourseMediaPraticeComponent implements OnInit {
       vidoemetakeywords: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])],
       videofile: [null, Validators.compose([])],
       courses1: [null, Validators.compose([Validators.required])],
-      practiceTime:['5PM', Validators.compose([Validators.required])],
+      practiceTime:['05:PM', Validators.compose([Validators.required])],
       practiceDate:[null, Validators.compose([Validators.required])],
       Instructions:[null, Validators.compose([Validators.required])],
 

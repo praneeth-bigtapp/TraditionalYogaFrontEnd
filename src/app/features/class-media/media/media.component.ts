@@ -119,7 +119,8 @@ export class MediaComponent implements OnInit {
   }
 
   closeliveform() {
-    this.displayform = false
+    this.displaycontent = false
+    this.videoform.reset()
   }
 
   openshortvideo() {
