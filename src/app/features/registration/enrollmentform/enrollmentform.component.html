@@ -317,7 +317,7 @@
             <!-- {{iseditable ? "Update":"Add"}} Enrollment -->
             Detailed Information
         </div>
-        <div class="card-body bg-white py-2">
+        <div class="card-body bg-white py-2 text-justify">
             <form [formGroup]="detailsinformation" (ngSubmit)="detailedsubmit()">
                 <div class="row align-items-center">
                     <div class="col-md-4">
@@ -583,7 +583,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label>Reference Name</label>
+                        <label>Family Reference Name</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" formControlName="familyfullname">
@@ -599,7 +599,7 @@
                     </div>
 
                     <div class="col-md-4">
-                        <label>Reference Relationship</label>
+                        <label>Family Reference Relationship</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" formControlName="familyrelationship">
@@ -615,7 +615,7 @@
                     </div>
 
                     <div class="col-md-4">
-                        <label>Reference mobile number</label>
+                        <label>Family Reference mobile number</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" formControlName="familycontactno">
@@ -651,7 +651,7 @@
                         </div>
                     </div>
 
-                    <div class=" col d-flex flex-row flex-wrap justify-content-end">
+                    <div class=" col d-flex flex-row  justify-content-end">
                         <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block mt-4">
                             {{iseditable ? "Update" :"Register" }}
                         </button>
