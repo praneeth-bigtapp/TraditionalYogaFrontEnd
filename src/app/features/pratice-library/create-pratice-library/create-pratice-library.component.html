@@ -90,12 +90,13 @@
                         </div>
                     </div>
                     <div class="col-md-4" *ngIf="issubcategory">
-                        <div class="row align-items-center " >
+                        <div class="row align-items-center ">
                             <label>SubCategory</label>
                             <div class="col">
                                 <mat-form-field appearance="outline">
                                     <mat-select formControlName="subcategory" [disabled]="iseditable">
-                                        <mat-option *ngFor="let category of categoryList" [value]="category.categoryId">
+                                        <mat-option *ngFor="let category of subcategorylist"
+                                            [value]="category.categoryId">
                                             {{category.categoryName}}</mat-option>
                                     </mat-select>
 

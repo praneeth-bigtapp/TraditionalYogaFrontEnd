@@ -33,6 +33,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
   data: any;
   iseditable: boolean = false
   issubcategory: boolean = false
+  subcategorylist: any
 
   categoryList!: any
   constructor(
@@ -60,6 +61,15 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
       }
     })
+    // this.service.getsubcategory().subscribe({
+    //   next: (response) => {
+    //     this.subcategorylist = response
+    //   },
+    //   error: (error) => {
+    //     console.error(error.message);
+
+    //   }
+    // })
     this.getdata()
   }
 
@@ -109,10 +119,10 @@ export class CreatePraticeLibraryComponent implements OnInit {
     })
   }
 
-  ngAfterViewInit() {
-    this.filterData.dataSource.paginator = this.paginator;
+  // ngAfterViewInit() {
+  //   this.filterData.dataSource.paginator = this.paginator;
 
-  }
+  // }
   updatePagination(col: any) {
     this.filterData.dataSource.paginator = this.paginator;
   }
@@ -131,13 +141,10 @@ export class CreatePraticeLibraryComponent implements OnInit {
   }
 
   categorychange(event: any) {
-    console.log(event.value);
-
-
     if (event.value === 3) {
       this.issubcategory = true
       this.addmediaform.get('subcategory').addValidators(Validators.required);
-
+      this.addmediaform.controls.subcategory.status = "INVALID"
       return
     }
     this.addmediaform.get('subcategory').removeValidators(Validators.required);
@@ -161,12 +168,16 @@ export class CreatePraticeLibraryComponent implements OnInit {
     this.addmediaform.setValue({
       praticelibraryId: element.praticeLibaryId,
       category: element.categoryId,
+      subcategory: null,
+
       videolink: element.videoLink,
       videotitle: element.title,
       videodescription: element.message,
       videoduration: element.duration,
       vidoemetakeywords: element.metaKeyword,
     });
+    // if (element.subcategory)
+    // this.issubcategory = true
 
     this.issubmit = false
     this.displaycontent = true
@@ -211,11 +222,16 @@ export class CreatePraticeLibraryComponent implements OnInit {
       praticelibraryId: element.praticeLibaryId,
       category: element.categoryId,
       videolink: element.videoLink,
+      subcategory: null,
       videotitle: element.title,
       videodescription: element.message,
       videoduration: element.duration,
       vidoemetakeywords: element.metaKeyword,
     });
+
+    // if (element.subcategory)
+    //   this.issubcategory = true
+
     this.iseditable = true
     this.issubmit = true
     this.displaycontent = true
