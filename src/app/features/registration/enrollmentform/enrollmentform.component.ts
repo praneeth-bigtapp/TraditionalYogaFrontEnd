@@ -4,6 +4,8 @@ import { InputvalidationService } from 'src/app/shared/services/inputvalidation.
 import { RegistrationService } from '../service/registration.service';
 import { map, Observable, startWith } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 
 @Component({
   selector: 'app-enrollmentform',
@@ -22,15 +24,22 @@ export class EnrollmentformComponent implements OnInit {
   photoerror: boolean = false
   photo!: any
   photourl: any
+  termschecked = false
+  eduationallist: any
+  martialstatus: any
+  isfriendname: boolean = false
+  iseduationother: boolean = false
+
   constructor(
     private formbuilder: FormBuilder,
     private service: RegistrationService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private dialog: MatDialog
 
   ) {
     this.formdetails = this.formbuilder.group({
       firstname: [null, Validators.compose([Validators.required])],
-      middlename: [null, Validators.compose([])],
+      middlename: [null],
       lastname: [null, Validators.compose([Validators.required])],
       // name: [null, Validators.compose([Validators.required])],
       email: [null, Validators.compose([Validators.required, Validators.email])],
@@ -54,25 +63,27 @@ export class EnrollmentformComponent implements OnInit {
     this.detailsinformation = this.formbuilder.group({
       photo: [null, Validators.compose([Validators.required])],
       job: [null, Validators.compose([Validators.required])],
-      workinghours: [null, Validators.compose([Validators.required])],
+      workinghours: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.isnumbers)])],
       educationdetails: [null, Validators.compose([Validators.required])],
+      othereducationdetails: [null],
       prideinqualification: [null, Validators.compose([Validators.required])],
       matrialstatus: [null, Validators.compose([Validators.required])],
       familydetails: [null, Validators.compose([Validators.required])],
       familymemberconsent: [null, Validators.compose([Validators.required])],
       familycooperation: [null, Validators.compose([Validators.required])],
       friendparticipation: [null, Validators.compose([Validators.required])],
+      friendname: [null],
       pastyogapratice: [null, Validators.compose([Validators.required])],
       hobbies: [null, Validators.compose([Validators.required])],
       isdedicated: [null, Validators.compose([Validators.required])],
       familyfullname: [null, Validators.compose([Validators.required])],
       familyrelationship: [null, Validators.compose([Validators.required])],
-      familycontactno: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.isnumbers)])],
+      familycontactno: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.mobile)])],
       whythiscourse: [null, Validators.compose([Validators.required])],
     })
 
-    this.refferallist = ["I am old student", "Friends and family", "Facebook", "Instagram", "Youtube", "TV Media", "Others"]
-
+    // this.refferallist = ["I am old student", "Friends and family", "Facebook", "Instagram", "Youtube", "TV Media", "Others"]
+    this.martialstatus = ["Single", "Married"]
     this.service.getcountry().subscribe({
       next: (response) => {
 
@@ -104,6 +115,18 @@ export class EnrollmentformComponent implements OnInit {
         console.error(error.message);
       }
     })
+    this.service.getqualification().subscribe({
+      next: (response) => {
+        this.eduationallist = response
+        console.log(this.eduationallist);
+        
+      },
+      error: (error) => {
+        console.error(error.message);
+        this.eduationallist = ["dummy", "other"]
+
+      }
+    })
   }
 
 
@@ -125,23 +148,51 @@ export class EnrollmentformComponent implements OnInit {
 
 
   photoupload(event: any) {
+    this.photoerror = this.detailsinformation.value.photo === null ? true : false
+    this.photo = event.target.files[0].name
+    // const reader = new FileReader();
+    // reader.readAsDataURL(this.photo);
+    // reader.onload = (_event) => {
+    //   this.photourl = reader.result
+    // }
+  }
+  termsandcondition(event: any) {
 
-    this.photoerror = this.formdetails.value.photo === null ? true : false
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Terms&Condition",
+        message: "Read Terms and condition"
+      },
+      width: "100%"
+    })
+
+    dialogref.afterClosed().subscribe(data => {
+      this.termschecked = data
+      console.log(this.termschecked);
+
+      return
+    })
 
 
-    this.photo = event.target.files[0]
-    const reader = new FileReader();
-    reader.readAsDataURL(this.photo);
-    reader.onload = (_event) => {
-      this.photourl = reader.result
+  }
+
+  educationchange(event: any) {
+    if (event.value === "other") {
+      this.iseduationother = true
+      return
     }
+    this.iseduationother = false
+  }
+  isfriendjoin(event: any) {
+    this.isfriendname = event.value
   }
   enrollmentsubmit() {
+
     if (this.formdetails.invalid)
       return this.formdetails.markAllAsTouched()
 
     const { name, email, mobile, mothertounge, isenglishspoken, dateofbirth, gender, houseno, street, town, state, country, pincode } = this.formdetails.value
-    console.log({ name, email, mobile, mothertounge, isenglishspoken, dateofbirth, gender, houseno, street, town, state, country, pincode });
+    // console.log({ name, email, mobile, mothertounge, isenglishspoken, dateofbirth, gender, houseno, street, town, state, country, pincode });
 
 
     const body = {}
@@ -158,23 +209,29 @@ export class EnrollmentformComponent implements OnInit {
     })
   }
 
+
   detailedsubmit() {
+    this.photoerror = this.detailsinformation.value.photo === null ? true : false
+    this.formdetails.value.photo = this.photo
+
+    console.log(this.detailsinformation.value);
+
     if (this.detailsinformation.invalid)
       return this.detailsinformation.markAllAsTouched()
 
 
-      const body = {}
+    const body = {}
 
 
-      this.service.postenrollment(body).subscribe({
-        next: (response) => {
-          this.openSnackBar(response)
-        },
-        error: (error) => {
-          console.error(error.message);
-  
-        }
-      })
+    this.service.postenrollment(body).subscribe({
+      next: (response) => {
+        this.openSnackBar(response)
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
 
   }
 

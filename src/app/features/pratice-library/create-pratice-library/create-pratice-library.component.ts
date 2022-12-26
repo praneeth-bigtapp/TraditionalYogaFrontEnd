@@ -32,13 +32,15 @@ export class CreatePraticeLibraryComponent implements OnInit {
   displayedColumns: string[] = ['praticeLibaryId', 'videoLink', "duration", "title", "message", "metaKeyword", "Action"];
   data: any;
   iseditable: boolean = false
+  issubcategory: boolean = false
+  subcategorylist: any
 
   categoryList!: any
   constructor(
     private formbuilder: FormBuilder,
     private service: CreatepraticelibraryService,
     private _snackBar: MatSnackBar,
-    
+
     private dialog: MatDialog,
   ) {
 
@@ -59,6 +61,15 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
       }
     })
+    // this.service.getsubcategory().subscribe({
+    //   next: (response) => {
+    //     this.subcategorylist = response
+    //   },
+    //   error: (error) => {
+    //     console.error(error.message);
+
+    //   }
+    // })
     this.getdata()
   }
 
@@ -98,6 +109,8 @@ export class CreatePraticeLibraryComponent implements OnInit {
     this.addmediaform = this.formbuilder.group({
       praticelibraryId: [null],
       category: [null, Validators.compose([Validators.required])],
+      subcategory: [null],
+
       videolink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
       videotitle: [null, Validators.compose([Validators.required])],
       videodescription: [null, Validators.compose([Validators.required])],
@@ -106,10 +119,10 @@ export class CreatePraticeLibraryComponent implements OnInit {
     })
   }
 
-  ngAfterViewInit() {
-    this.filterData.dataSource.paginator = this.paginator;
+  // ngAfterViewInit() {
+  //   this.filterData.dataSource.paginator = this.paginator;
 
-  }
+  // }
   updatePagination(col: any) {
     this.filterData.dataSource.paginator = this.paginator;
   }
@@ -127,6 +140,22 @@ export class CreatePraticeLibraryComponent implements OnInit {
       this.categoryerror = false
   }
 
+  categorychange(event: any) {
+    if (event.value === 3) {
+      this.issubcategory = true
+      this.addmediaform.get('subcategory').addValidators(Validators.required);
+      this.addmediaform.controls.subcategory.status = "INVALID"
+      return
+    }
+    this.addmediaform.get('subcategory').removeValidators(Validators.required);
+    this.addmediaform.controls.subcategory.status = "VALID"
+    console.log(this.addmediaform.get("subcategory").hasValidator(Validators.required));
+
+
+    this.issubcategory = false
+
+  }
+
   addlibrary() {
     this.displaycontent = !this.displaycontent
   }
@@ -139,12 +168,16 @@ export class CreatePraticeLibraryComponent implements OnInit {
     this.addmediaform.setValue({
       praticelibraryId: element.praticeLibaryId,
       category: element.categoryId,
+      subcategory: null,
+
       videolink: element.videoLink,
       videotitle: element.title,
       videodescription: element.message,
       videoduration: element.duration,
       vidoemetakeywords: element.metaKeyword,
     });
+    // if (element.subcategory)
+    // this.issubcategory = true
 
     this.issubmit = false
     this.displaycontent = true
@@ -189,11 +222,16 @@ export class CreatePraticeLibraryComponent implements OnInit {
       praticelibraryId: element.praticeLibaryId,
       category: element.categoryId,
       videolink: element.videoLink,
+      subcategory: null,
       videotitle: element.title,
       videodescription: element.message,
       videoduration: element.duration,
       vidoemetakeywords: element.metaKeyword,
     });
+
+    // if (element.subcategory)
+    //   this.issubcategory = true
+
     this.iseditable = true
     this.issubmit = true
     this.displaycontent = true
@@ -208,6 +246,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
   addmedia() {
 
+    console.log(this.addmediaform.get("subcategory").hasValidator(Validators.required));
 
     if (this.addmediaform.valid) {
 
@@ -266,6 +305,9 @@ export class CreatePraticeLibraryComponent implements OnInit {
     }
     else {
       this.addmediaform.markAllAsTouched()
+      console.log(this.addmediaform.controls.subcategory.status);
+
+
     }
 
   }

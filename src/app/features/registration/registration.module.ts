@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RegistrationRoutingModule } from './registration-routing.module';
-import { EnrollmentformComponent } from './enrollmentform/enrollmentform.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -11,11 +10,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { EnrollmentformComponent } from './enrollmentForm/enrollmentform.component';
 
 
 @NgModule({
   declarations: [
-    EnrollmentformComponent
+    EnrollmentformComponent,
   ],
   imports: [
     CommonModule,
@@ -29,7 +29,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatRadioModule,
     MatAutocompleteModule,
     MatSnackBarModule,
+    MatAutocompleteModule
     
+
+
   ]
 })
 export class RegistrationModule { }

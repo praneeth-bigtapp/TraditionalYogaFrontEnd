@@ -16,7 +16,7 @@
     </div>
     <div class="card  bg-secondary" *ngIf="displaycontent">
         <div class="card-header text-white bg-secondary">
-            {{iseditable ? "Update" :"Add" }} e library
+            {{iseditable ? "Update" :"Add" }} Practice library
         </div>
         <div class="card-body bg-white  py-2">
             <!-- <hr /> -->
@@ -73,7 +73,8 @@
                             <label>Category</label>
                             <div class="col">
                                 <mat-form-field appearance="outline">
-                                    <mat-select formControlName="category" [disabled]="iseditable">
+                                    <mat-select formControlName="category" (selectionChange)="categorychange($event)"
+                                        [disabled]="iseditable">
                                         <mat-option *ngFor="let category of categoryList" [value]="category.categoryId">
                                             {{category.categoryName}}</mat-option>
                                     </mat-select>
@@ -83,6 +84,27 @@
                                     *ngIf="addmediaform.controls['category'].invalid && (addmediaform.controls['category'].dirty || addmediaform.controls['category'].touched)">
                                     <mat-error [hidden]=" !addmediaform.get('category')?.hasError('required')  ">
                                         Category is mandatory
+                                    </mat-error>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" *ngIf="issubcategory">
+                        <div class="row align-items-center ">
+                            <label>SubCategory</label>
+                            <div class="col">
+                                <mat-form-field appearance="outline">
+                                    <mat-select formControlName="subcategory" [disabled]="iseditable">
+                                        <mat-option *ngFor="let category of subcategorylist"
+                                            [value]="category.categoryId">
+                                            {{category.categoryName}}</mat-option>
+                                    </mat-select>
+
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="addmediaform.controls['subcategory'].invalid && (addmediaform.controls['subcategory'].dirty || addmediaform.controls['subcategory'].touched)">
+                                    <mat-error [hidden]=" !addmediaform.get('subcategory')?.hasError('required')  ">
+                                        Subcategory is mandatory
                                     </mat-error>
                                 </div>
                             </div>

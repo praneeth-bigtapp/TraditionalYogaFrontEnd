@@ -53,6 +53,7 @@ export class TasksComponent implements OnInit {
       description: [null, Validators.compose([Validators.required])],
       mediafile: [null, Validators.compose([Validators.required])],
       duedate: [null, Validators.compose([Validators.required])],
+      assignmentdate: [null, Validators.compose([Validators.required])]
     })
     this.filterData = {
       filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),

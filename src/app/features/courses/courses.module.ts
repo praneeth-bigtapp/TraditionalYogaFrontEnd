@@ -21,6 +21,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MyCourseMatriealsComponent } from './my-course-matrieals/my-course-matrieals.component';
 import { ViewMycourseMatriealsComponent } from './view-mycourse-matrieals/view-mycourse-matrieals.component';
+import { AddCoursedocumentComponent } from './add-coursedocument/add-coursedocument.component';
+import { AddCourseimageComponent } from './add-courseimage/add-courseimage.component';
 
 
 
@@ -29,7 +31,8 @@ import { ViewMycourseMatriealsComponent } from './view-mycourse-matrieals/view-m
     CourseMainComponent,
     CourseMediaPraticeComponent,
     MyCourseMatriealsComponent,
-    ViewMycourseMatriealsComponent
+    ViewMycourseMatriealsComponent,
+   
   ],
   imports: [
     CommonModule,

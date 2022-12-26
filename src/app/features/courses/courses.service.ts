@@ -9,7 +9,7 @@ export class CoursesService extends BaseHttp {
  
   // getURL = 'student/getAll?operation=course';
 
- 
+
 
   getAllcoursesURL = 'courseList/getAll?operation=coursesList'
 

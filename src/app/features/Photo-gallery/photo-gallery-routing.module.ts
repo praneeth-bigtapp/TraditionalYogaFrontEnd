@@ -7,7 +7,7 @@ import { ViewgalleryComponent } from './viewgallery/viewgallery.component';
 const routes: Routes = [
   { path: 'gallery', component: GalleryComponent },
   { path: "uploadGallery", component: UploadgalleryComponent },
-  { path: "viewgallery", component: ViewgalleryComponent }
+  { path: "viewgallery/:id", component: ViewgalleryComponent }
 ];
 
 @NgModule({

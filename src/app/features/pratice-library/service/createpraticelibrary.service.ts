@@ -10,6 +10,8 @@ export class CreatepraticelibraryService extends BaseHttp {
   // postshortvideoURL = "libary/praticeLibary?operation=shortvideo"
   // postglimpseURL = "libary/praticeLibary?operation=glimpses"
   getcategoryURL = "libary/getAllLibary?operation=categoryLibary"
+  getsubcategoryURL = ""
+
   praticelistURl = "libary/getAllLibary?operation=praticeLibary"
 
   postrecordsessionURL = "libary/praticeLibary?operation=add&type=recordSession"
@@ -29,6 +31,10 @@ export class CreatepraticelibraryService extends BaseHttp {
   }
   getcategory() {
     return this.get(this.getcategoryURL)
+  }
+
+  getsubcategory() {
+    return this.get(this.getsubcategoryURL)
   }
   postpraticelibrary(body: any, type: any) {
     if (type === 1)

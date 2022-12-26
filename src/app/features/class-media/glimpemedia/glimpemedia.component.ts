@@ -197,10 +197,35 @@ export class GlimpemediaComponent implements OnInit {
 
 
   viewDetails(element: any) {
+    this.iseditable = false
+    this.issubmit = false
+    this.displaycontent = true
 
+    this.glimpseform.setValue({
+      courseMediaId:null,
+      course: null,
+
+      date: null,
+      file: null,
+      language: null,
+
+
+    })
   }
   editdetails(element: any) {
+    this.iseditable = true
+    this.issubmit = false
+    this.displaycontent = true
+    this.glimpseform.setValue({
+      courseMediaId:null,
+      course: null,
 
+      date: null,
+      file: null,
+      language: null,
+
+
+    })
   }
   deletedetails(id: any) {
 

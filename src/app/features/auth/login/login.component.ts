@@ -132,7 +132,7 @@ export class LoginComponent implements OnInit {
   }
 
   validateScode(scode: any) {
-    console.log(scode);
+    // console.log(scode);
     this.errorFlag = false;
     this.loginService.getLoginDetails(scode).subscribe((response) => {
       if (response.roleStatus == "N") {
@@ -162,17 +162,15 @@ export class LoginComponent implements OnInit {
       let tempSubMenuName = [];
       let totalMenus = this.loginData.permissions;
       for (let menu of totalMenus) {
-        console.log(menu);
+        // console.log(menu);
         for (let subModule of menu.subModules) {
-          console.log(subModule.subModuleId);
+          // console.log(subModule.subModuleId);
           if (menu.subModules.permissionId !== 6) {
             tempSubMenuName.push(subModule.subModuleId);
           }
         }
       }
-      // let subMenuName = tempSubMenuName[0];
-      let subMenuName = 6;
-      this.sendReceiveService.navigateToMenu(subMenuName);
+      this.router.navigateByUrl("/dashboard");
     }
   }
 
@@ -191,10 +189,7 @@ export class LoginComponent implements OnInit {
         }
       }
     }
-    // let subMenuName = tempSubMenuName[0];
-    let subMenuName = 6;
-    this.sendReceiveService.navigateToMenu(subMenuName);
-
+    this.router.navigateByUrl("/dashboard");
   }
 
   onSuccessfullLogin(response: any) {

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EnrollmentformComponent } from './enrollmentform/enrollmentform.component';
+import { EnrollmentformComponent } from './enrollmentForm/enrollmentform.component';
 
 const routes: Routes = [
-  {path:"createenrollment",component:EnrollmentformComponent}
+  { path: "createEnrollment", component: EnrollmentformComponent }
 ];
 
 @NgModule({

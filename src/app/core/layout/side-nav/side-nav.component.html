@@ -24,8 +24,18 @@
                         [ngClass]="{'active': m.subModuleId == menuId }">
                         <!-- <i [(ngclass)]="subMenuIcon(m)"></i> -->
 
+<<<<<<< HEAD
                         <a (click)="navigateToSubMenu(m)">
                             <!-- <i [ngClass]="subMenuIcon(m)" class=""></i> -->
+=======
+                        <!-- <a (click)="navigateToSubMenu(m)">
+                            <i [ngClass]="subMenuIcon(m)" class=""></i>
+>>>>>>> b2998f43649b81d973330228daf2862e5c03c7d0
+                            <span>{{m.subModuleName}}</span>
+                        </a> -->
+                        <a [routerLink]="m.routingLink" (click)="navigateToSubMenu(m)">
+                            <!-- <i [ngClass]="subMenuIcon(m)"></i> -->
+                            <i [ngClass]="m.icon"></i>
                             <span>{{m.subModuleName}}</span>
                         </a>
                         <!-- <a

@@ -91,6 +91,20 @@
 
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <label>Date for assignment</label>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <input matInput formControlName="assignmentdate" type="date">
+
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="taskform.controls['assignmentdate'].invalid && (taskform.controls['assignmentdate'].dirty || taskform.controls['assignmentdate'].touched)">
+                            <mat-error [hidden]=" !taskform.get('assignmentdate')?.hasError('required')  ">
+                                Date is mandatory
+                            </mat-error>
+                        </div>
+
+                    </div>
 
                     <div class="col-md-4">
                         <label>Due Date for submission</label>
@@ -185,7 +199,7 @@
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell class="text-center" *matCellDef="let element">
-                        {{element.dueDate  | date:'dd-MM-YYY'}}
+                        {{element.dueDate | date:'dd-MM-YYY'}}
                     </td>
                 </ng-container>
 
@@ -211,7 +225,8 @@
                         <input type="text" (keyup)="updatePagination('State')"
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.dueDate |date:'dd-MM-YYY'}} </td>
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.dueDate |date:'dd-MM-YYY'}}
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="action">

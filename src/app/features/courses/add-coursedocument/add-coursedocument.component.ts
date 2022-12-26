@@ -9,9 +9,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
-import { AddCoursedocumentComponent } from '../add-coursedocument/add-coursedocument.component';
-import { AddCourseimageComponent } from '../add-courseimage/add-courseimage.component';
 import { CoursesService } from '../courses.service';
+
 
 
 export interface CourseData {
@@ -24,22 +23,18 @@ export interface CourseData {
 
 }
 
-
 @Component({
-  selector: 'app-course-media-pratice',
-  templateUrl: './course-media-pratice.component.html',
-  styleUrls: ['./course-media-pratice.component.css']
+  selector: 'app-add-coursedocument',
+  templateUrl: './add-coursedocument.component.html',
+  styleUrls: ['./add-coursedocument.component.css']
 })
+export class AddCoursedocumentComponent implements OnInit {
 
-
-
-export class CourseMediaPraticeComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
   pageno: number = 1
-  addbtns=false
   updatebtn=false
   submitbtn=true
   title = ''
@@ -74,7 +69,7 @@ export class CourseMediaPraticeComponent implements OnInit {
   }
 
 
-  displayedColumns = ['id', 'title', 'description', 'PracticeDate','PracticeTime', 'duration', 'metaKeyword', 'buttons']
+  displayedColumns = ['id', 'title', 'description','course', 'buttons']
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
@@ -123,64 +118,15 @@ export class CourseMediaPraticeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getcourseslist()
-   
     this.courseform = this.formbuilder.group({courses: [null, Validators.compose([Validators.required])],})
     this.addmediaform = this.formbuilder.group({
 
 
-      videolink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
-      videotitle: [null, Validators.compose([Validators.required])],
-      videodescription: [null, Validators.compose([Validators.required])],
-      videoduration: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.durationvalidation)])],
-      vidoemetakeywords: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])],
-      videofile: [null, Validators.compose([])],
-      courses1: [null, Validators.compose([Validators.required])],
-      practiceTime:['05:PM', Validators.compose([Validators.required])],
-      practiceDate:[null, Validators.compose([Validators.required])],
-      Instructions:[null, Validators.compose([Validators.required])],
+      courses1:[null, Validators.compose([Validators.required])],
 
-      
-     
-    })
-  }
-
-
-  openImages() {
-
-
-    const dialogref = this.dialog.open(AddCourseimageComponent, {
-      data: {
-        // course: this.coursename
-      },
-      width: "80%",
-      // overflow: 'scroll';
-    })
-
-    dialogref.afterClosed().subscribe(data => {
-      if (data) {
-
-        return
-      }
-
-    })
-  }
-
-  openDocument() {
-
-
-    const dialogref = this.dialog.open(AddCoursedocumentComponent, {
-      data: {
-        // course: this.coursename
-      },
-      width: "80%"
-    })
-
-    dialogref.afterClosed().subscribe(data => {
-      if (data) {
-
-        return
-      }
-
+      mediatitle:[null, Validators.compose([Validators.required])],
+      docfile: [null, Validators.compose([])],
+      mediadescription: [null, Validators.compose([Validators.required])],
     })
   }
 
@@ -242,7 +188,7 @@ export class CourseMediaPraticeComponent implements OnInit {
 
     this.filedata = event.target.files[0].name
   }
- 
+
   viewmanage(data: any) {
     console.log(data);
 
@@ -254,7 +200,7 @@ export class CourseMediaPraticeComponent implements OnInit {
     return Number(`${hours}.${minutes}`)
   }
   addmedia() {
-    
+
     
 
     this.paragraphchange()
@@ -263,7 +209,6 @@ export class CourseMediaPraticeComponent implements OnInit {
 
 
     if (this.addmediaform.valid) {
-      this.addbtns=true
 
       this.addmediaform.value.mediafile = this.filedata
       this.addmediaform.value.videofile = this.filedata1
@@ -309,42 +254,28 @@ export class CourseMediaPraticeComponent implements OnInit {
   }
 
   viewDetails(element: any) {
-this.updatebtn=false
-this.submitbtn=false
-this.addbtns=false
-this.displaycontent=true
-this.addmediaform .setValue({
-  videolink: '',
-  videotitle: '',
-  videodescription: '',
-  videoduration: '',
-  vidoemetakeywords:'',
-  videofile: '',
-  courses1: '',
-  practiceTime:'',
-  practiceDate:'',
-  Instructions:'', 
- 
-})
+    this.submitbtn=false
+    this.updatebtn=false
+    this.displaycontent=true
+
+    this.addmediaform.setValue({
+      courses1:'',
+      mediatitle:'',
+      docfile: '',
+      mediadescription:'',
+    })
 
   }
   editdetails(element: any) {
-    this.addbtns=true
-    this.updatebtn=true
     this.submitbtn=false
+    this.updatebtn=true
     this.displaycontent=true
-    this.addmediaform .setValue({
-      videolink: '',
-      videotitle: '',
-      videodescription: '',
-      videoduration: '',
-      vidoemetakeywords:'',
-      videofile: '',
-      courses1: '',
-      practiceTime:'',
-      practiceDate:'',
-      Instructions:'', 
-     
+
+    this.addmediaform.setValue({
+      courses1:'',
+      mediatitle:'',
+      docfile: '',
+      mediadescription:'',
     })
 
   }
@@ -353,7 +284,6 @@ this.addmediaform .setValue({
       duration: 2 * 1000,
     });
   }
-
   saveData(){
     this.updatebtn=false
     this.submitbtn=true
@@ -362,7 +292,6 @@ this.addmediaform .setValue({
     }
     this.openSnackBar(data)
   }
-
   deletedetails(id: any) {
 
     // const body = {

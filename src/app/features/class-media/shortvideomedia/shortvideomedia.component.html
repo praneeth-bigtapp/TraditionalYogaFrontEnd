@@ -10,7 +10,7 @@
     </div>
     <div class="card  bg-secondary" *ngIf="displaycontent">
         <div class="card-header text-white bg-secondary">
-            {{iseditable ? "Update" :"Add" }} Short video
+            {{iseditable ? "Update" :submitbtn?"Add":'' }} Short video
 
         </div>
         <div class="card-body  bg-white py-2" *ngIf="displaycontent">
@@ -144,17 +144,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 d-flex flex-row justify-content-end align-items-center  ">
-                        <button type="submit" *ngIf="issubmit"
-                            class="btn btn-outline-secondary btn-rounded d-inline-block mt-2   ">
-                            {{iseditable ? "Update":"Add"}}
-
-                        </button>
-                        <button type="button" (click)="reseteditable()"
-                            class="btn btn-outline-secondary btn-rounded d-inline-block mt-2   ">
-                            Cancel
-                        </button>
-                    </div>
+                    
+                </div>
+                <div class=" d-flex flex-row justify-content-end  ">
+                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block   " *ngIf="submitbtn">
+                        Add
+                    </button>
+                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block   "*ngIf="iseditable">
+                       Update
+                    </button>
+                    <button type="button" (click)="reseteditable()"
+                        class="btn btn-outline-secondary btn-rounded d-inline-block    ">
+                        Cancel
+                    </button>
                 </div>
             </form>
         </div>
