@@ -330,8 +330,8 @@ this.submitbtn=false
 this.addbtns=false
 this.displaycontent=true
 console.log(element);
-let date=new Date(element.practiceDate)
-let date2=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
+// let date=new Date(element.practiceDate)
+// let date2=date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()
 this.addmediaform .setValue({
   videolink: element.videoLink,
   videotitle: element.videoTitle,
@@ -339,9 +339,9 @@ this.addmediaform .setValue({
   videoduration:element.durationVideo,
   vidoemetakeywords:element.metaKeyword,
   videofile: '',
-  courses1: element.courseId.coursesName,
+  courses1: element.courseId.coursesId,
   practiceTime:element.praticeTime,
-  practiceDate:date2,
+  practiceDate:element.praticeDate,
   Instructions:element.instruction, 
  
 })
@@ -358,8 +358,8 @@ this.addmediaform .setValue({
     this.updatebtn=true
     this.submitbtn=false
     this.displaycontent=true
-    let date=new Date(element.practiceDate)
-let date2=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
+//     let date=new Date(element.practiceDate)
+// let date2=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
     this.addmediaform .setValue({
       videolink: element.videoLink,
       videotitle: element.videoTitle,
@@ -367,9 +367,9 @@ let date2=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
       videoduration:element.durationVideo,
       vidoemetakeywords:element.metaKeyword,
       videofile: '',
-      courses1: element.courseId.coursesName,
+      courses1: element.courseId.coursesId,
       practiceTime:element.praticeTime,
-      practiceDate:date2,
+      practiceDate:element.praticeDate,
       Instructions:element.instruction, 
      
     })

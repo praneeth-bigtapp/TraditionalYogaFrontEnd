@@ -70,7 +70,7 @@ submitbtn=true
   }
 
 
-  displayedColumns = ['id', 'title', 'description', 'course', 'buttons']
+  displayedColumns = ['id', 'imageTitle', 'description', 'coursesName', 'buttons']
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
@@ -108,7 +108,7 @@ submitbtn=true
       courses1:[null, Validators.compose([Validators.required])],
 
       imagetitle:[null, Validators.compose([Validators.required])],
-      mediafile: [null, Validators.compose([])],
+      mediafile: null,
       paragraph: [null, Validators.compose([Validators.required])],
     })
   }
@@ -266,11 +266,11 @@ submitbtn=true
     this.addmediaform.setValue({
 
 
-      courses1:'',
+      courses1:element.courseId.coursesId,
 
-      imagetitle:'',
+      imagetitle:element.imageTitle,
       mediafile: '',
-      paragraph: ''
+      paragraph: element.description
     })
 
   }
@@ -282,11 +282,11 @@ submitbtn=true
     this.addmediaform.setValue({
 
 
-      courses1:'',
+      courses1:element.courseId.coursesId,
 
-      imagetitle:'',
+      imagetitle:element.imageTitle,
       mediafile: '',
-      paragraph: ''
+      paragraph: element.description
     })
 
   }
@@ -314,6 +314,9 @@ submitbtn=true
       "updateDate": null,
       "isActive": "Y"
   }
+
+  console.log(body);
+  
     this.service.postcourseimagesave(body).subscribe({
       next: (response) => {
         this.courseList = response;

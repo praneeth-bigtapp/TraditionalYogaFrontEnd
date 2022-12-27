@@ -19,27 +19,27 @@
         </div>
         <div class="card-body " >
   
-          
+            <div class="row  d-flex justify-content-end mb-2" *ngIf="addbtns">
+                     
+                <button  class="col-2 btn btn-outline-secondary btn-rounded  " (click)=" openImages()">
+                    Add Image
+                </button>
+                <button  class="col-2 btn btn-outline-secondary btn-rounded  " (click)="openDocument()">
+                    Add Document
+                </button>
+                
+            </div>
 
             <form [formGroup]="addmediaform" (ngSubmit)="addmedia()">
                 <div >
-                    <div class="row  d-flex justify-content-end mb-2" *ngIf="addbtns">
-                     
-                        <button  class="col-2 btn btn-outline-secondary btn-rounded  " (click)=" openImages()">
-                            Add Image
-                        </button>
-                        <button  class="col-2 btn btn-outline-secondary btn-rounded  " (click)="openDocument()">
-                            Add Document
-                        </button>
-                        
-                    </div>
+                   
                     <hr>
                     <div class="row">
                         <div class="col-4">
                             <label>Course</label>
         
                             <mat-form-field class="pe-4" appearance="outline">
-                                <mat-select matNativeControl formControlName="courses1"  [disabled]="updatebtn"  [compareWith]="compareselect">
+                                <mat-select matNativeControl formControlName="courses1"  [disabled]="updatebtn"  >
                                     <mat-option *ngFor="let item of courseList" 
                                         [value]="item.coursesId">{{item.coursesName}}
                                     </mat-option>
@@ -346,7 +346,7 @@
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
                     [filter]="filterData" />
             </th>
-            <td mat-cell *matCellDef="let element" class="text-center"> {{element.praticeDate}} </td>
+            <td mat-cell *matCellDef="let element" class="text-center"> {{element.praticeDate | date:"dd-MMM-YYYY"}} </td>
         </ng-container>
         <ng-container matColumnDef='praticeTime'>
             <th mat-header-cell *matHeaderCellDef scope="col">

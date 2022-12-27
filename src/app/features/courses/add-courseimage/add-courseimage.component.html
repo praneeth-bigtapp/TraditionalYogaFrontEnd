@@ -174,7 +174,7 @@
             <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
         </ng-container>
 
-        <ng-container matColumnDef="title">
+        <ng-container matColumnDef="imageTitle">
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
                     Title
@@ -182,7 +182,7 @@
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
                     [filter]="filterData" />
             </th>
-            <td mat-cell *matCellDef="let element2" class="text-center"> {{element2.title | titlecase}} </td>
+            <td mat-cell *matCellDef="let element2" class="text-center"> {{element2.imageTitle | titlecase}} </td>
         </ng-container>
 
         <ng-container matColumnDef="description">
@@ -198,7 +198,7 @@
             </td>
         </ng-container>
 
-        <ng-container matColumnDef="course">
+        <ng-container matColumnDef="coursesName">
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
                     Course
@@ -206,7 +206,7 @@
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
                     [filter]="filterData" />
             </th>
-            <td mat-cell *matCellDef="let element" class="text-center"> {{element.uploadMediaFile}} </td>
+            <td mat-cell *matCellDef="let element" class="text-center"> {{element.courseId.coursesName}} </td>
         </ng-container>
 
       
@@ -227,7 +227,7 @@
                 <span matTooltip="Edit" (click)="editdetails(element)">
                     <i class="fas fa-pencil-alt mx-4" aria-hidden="true"></i>
                 </span>
-                <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.praticeLibaryId)">
+                <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.imageId)">
                     <i class="far fa-trash-alt" aria-hidden="true"></i>
                 </span>
 
