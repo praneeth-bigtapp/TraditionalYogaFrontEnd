@@ -80,7 +80,7 @@
                             <div class="col px-0">
                                 <mat-form-field appearance="outline">
                                     <!-- <mat-label>Start date</mat-label> -->
-                                    <input matInput formControlName="startDate" placeholder="dd-MMM-YYYY" type="date">
+                                    <input matInput formControlName="startDate" placeholder="dd-mm-yyyy" type="date">
 
                                 </mat-form-field>
                                 <div class="error-message"
@@ -220,7 +220,7 @@
                         <input type="text" (keyup)="updatePagination('startDate')"
                             [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let element"> {{element.startDate | date:'dd-MMM-YYYY'}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.startDate | date:'dd-MM-YYYY'}} </td>
                 </ng-container>
                 <ng-container matColumnDef="endDate">
                     <th mat-header-cell *matHeaderCellDef scope="col">
@@ -230,7 +230,7 @@
                         <input type="text" (keyup)="updatePagination('endDate')"
                             [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let element "> {{element.endDate | date:'dd-MMM-YYYY'}} </td>
+                    <td mat-cell *matCellDef="let element "> {{element.endDate | date:'dd-MM-YYYY'}} </td>
                 </ng-container>
                 <ng-container matColumnDef="currentStatus">
                     <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
@@ -252,7 +252,7 @@
                     </th>
                     <td mat-cell *matCellDef="let element ">
                         <div class="d-flex flex-wrap justify-content-evenly align-items-center">
-                            <i class="fa-solid fa-eye fs-5 text-info" (click)="viewdetails(element)"
+                            <i class="fa fa-eye  text-info" (click)="viewdetails(element)"
                                 matTooltip="View Course Activity" matTooltip="View"></i>
                             <span matTooltip="Edit" (click)="editdetails(element)">
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>

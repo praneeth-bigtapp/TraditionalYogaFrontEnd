@@ -61,15 +61,17 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
       }
     })
-    // this.service.getsubcategory().subscribe({
-    //   next: (response) => {
-    //     this.subcategorylist = response
-    //   },
-    //   error: (error) => {
-    //     console.error(error.message);
+    this.service.getsubcategory().subscribe({
+      next: (response) => {
+        this.subcategorylist = response
+        console.log(response);
 
-    //   }
-    // })
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
     this.getdata()
   }
 
@@ -204,7 +206,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
     dialogref.afterClosed().subscribe(data => {
       if (data) {
-        this.service.deletepraticelibrary(body, category)?.subscribe({
+        this.service.deleteLibrary(body)?.subscribe({
           next: (response) => {
             this.openSnackBar(response)
             this.addmediaform.reset()
@@ -281,7 +283,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
           "metaKeyword": vidoemetakeywords
         }
 
-        this.service.updatepraticelibrary(body, category)?.subscribe({
+        this.service.updateLibrary(body)?.subscribe({
           next: (response) => {
             this.addmediaform.reset()
             this.openSnackBar({ message: "Library Updated" })
@@ -298,7 +300,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
 
 
-      this.service.postpraticelibrary(body, category)?.subscribe({
+      this.service.postLibrary(body)?.subscribe({
         next: (response) => {
           this.addmediaform.reset()
           this.openSnackBar({ message: "Library Created" })
