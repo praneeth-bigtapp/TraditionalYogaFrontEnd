@@ -171,6 +171,11 @@ export class OnlineexamComponent implements OnInit {
     this.issubmit = false
     this.iseditable = false
     this.displaycontent = true
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
 
   }
   deletedetails(id: any) {
@@ -220,6 +225,11 @@ export class OnlineexamComponent implements OnInit {
     this.iseditable = true
     this.displaycontent = true
     this.issubmit = true
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   addexam() {

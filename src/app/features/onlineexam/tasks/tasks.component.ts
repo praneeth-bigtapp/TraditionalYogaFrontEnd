@@ -186,6 +186,11 @@ export class TasksComponent implements OnInit {
     });
     this.displayform = true
     this.issubmit = false
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   deletedetails(id: any) {
@@ -237,6 +242,11 @@ export class TasksComponent implements OnInit {
     this.isedit = true
     this.displayform = true
     this.issubmit = true
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   reseteditable() {

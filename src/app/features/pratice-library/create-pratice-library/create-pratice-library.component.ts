@@ -141,7 +141,8 @@ export class CreatePraticeLibraryComponent implements OnInit {
   }
 
   categorychange(event: any) {
-    if (event.value === 3) {
+
+    if (event.value === 12) {
       this.issubcategory = true
       this.addmediaform.get('subcategory').addValidators(Validators.required);
       this.addmediaform.controls.subcategory.status = "INVALID"
@@ -181,6 +182,11 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
     this.issubmit = false
     this.displaycontent = true
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
   deletedetails(id: any, category: any) {
 
@@ -235,6 +241,11 @@ export class CreatePraticeLibraryComponent implements OnInit {
     this.iseditable = true
     this.issubmit = true
     this.displaycontent = true
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
 
   }
 

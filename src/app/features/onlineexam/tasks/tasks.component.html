@@ -139,19 +139,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row col-md-6">
-                        <div class="col-md-6" *ngIf="issubmit">
-                            <button type="submit"
+                    <div class=" col-md d-flex flex-row flex-wrap justify-content-end align-items-center      ">
+                        <div class="">
+                            <button type="submit" *ngIf="issubmit"
                                 class="btn btn-outline-secondary btn-rounded d-inline-block mt-3 ml-md-1">
-                                {{isedit ?"Update":"Submit"}}
+                                {{isedit ?"Update":"Add"}}
                             </button>
                         </div>
-                        <div class="col-md-6">
+                        <div class="">
                             <button type="button" (click)="reseteditable()"
                                 class="btn btn-outline-secondary btn-rounded d-inline-block mt-3 ml-md-1">
                                 Cancel
                             </button>
                         </div>
+
                     </div>
                 </div>
             </form>
