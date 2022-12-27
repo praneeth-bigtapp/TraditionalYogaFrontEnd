@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Moderrat';
+    src: url('../fonts/Moderrat.eot');
+    src: url('../fonts/Moderrat.eot') format('embedded-opentype'),
+         url('../fonts/Moderrat.woff2') format('woff2'),
+         url('../fonts/Moderrat.woff') format('woff'),
+         url('../fonts/Moderrat.ttf') format('truetype'),
+         url('../fonts/Moderrat.svg#Moderrat') format('svg');
+}
