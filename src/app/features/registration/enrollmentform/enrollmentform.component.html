@@ -64,7 +64,7 @@
 
                     <div class="col-md-4  row align-items-center    ">
                         <div class="col-md-10">
-                            <label>Email Id - <span class="text-success fw-bolder">Verified</span></label>
+                            <label>Email Id  <span *ngIf="isemailverified" class="text-success fw-bolder"> - Verified</span></label>
                             <div class="col px-0">
                                 <mat-form-field appearance="outline">
                                     <input matInput autocomplete="off" formControlName="email" required>
@@ -81,12 +81,28 @@
                             </div>
                         </div>
                         <div class="col-md-2   pl-0">
+                            <button type="button" (ngclick)="sendemail()"
+                                class="btn btn-outline-secondary btn-rounded btn-go d-inline-block mt-4 ">
+                                Send
+                            </button>
+                        </div>
+                        <div class="col-md-10" *ngIf="isemailsended">
+                            <label>OTP</label>
+                            <div class="col px-0">
+                                <mat-form-field appearance="outline">
+                                    <input matInput autocomplete="off" [(ngModel)]="otp"
+                                        [ngModelOptions]="{standalone: true}" required>
+                                </mat-form-field>
+                                <mat-error *ngIf="otperror">Invalid OTP</mat-error>
+                            </div>
+                        </div>
+                        <div class="col-md-2 pl-0" *ngIf="isemailsended">
                             <button type="button" (ngclick)="verifyemail()"
                                 class="btn btn-outline-secondary btn-rounded btn-go d-inline-block mt-4 ">
                                 Verify
                             </button>
-
                         </div>
+
                     </div>
 
                     <div class="col-md-4">

@@ -34,6 +34,10 @@ export class EnrollmentformComponent implements OnInit {
   iseduationother: boolean = false
   isIndia: boolean = false
   isemailverified: boolean = false
+  isemailsended: boolean = false
+  otp: any
+  otperror: boolean = false
+
 
   constructor(
     private formbuilder: FormBuilder,
@@ -180,12 +184,27 @@ export class EnrollmentformComponent implements OnInit {
     console.log(this.isIndia);
 
   }
+  sendemail() {
+    this.otperror = false
+    this.isemailsended = true
+    this.isemailverified = false
+  }
 
   verifyemail() {
-    alert("verifued")
 
+    if (this.otp.length === 0 || !this.otp.test(InputvalidationService.inputvalidation.isnumbers)) {
+      this.otperror = true
+      return
+    }
+
+
+    console.log(this.otp);
+    this.otperror = false
+
+    this.isemailsended = false
     this.isemailverified = true
   }
+
 
   photoupload(event: any) {
     this.photoerror = this.detailsinformation.value.photo === null ? true : false
