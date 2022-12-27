@@ -11,13 +11,13 @@
     <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
         <button type="button" (click)="addregion()" *ngIf="!displaycontent"
             class="btn btn-outline-secondary btn-rounded d-inline-block ">
-            Add regions
+            Add region
         </button>
     </div>
 
     <div class="card  bg-secondary" *ngIf="displaycontent">
         <div class="card-header text-white bg-secondary">
-            {{iseditable ? "Update" :"Add" }} regions
+            {{iseditable ? "Update" :"Add" }} Region
         </div>
         <div class="card-body bg-white  py-2">
             <form class="" [formGroup]="regionfilterform" (ngSubmit)="filtersubmit()">
@@ -37,8 +37,8 @@
                     <div class="col-md-4">
                         <label>Country</label>
                         <mat-form-field appearance="outline">
-                            <input type="text" placeholder="Pick one" aria-label="Country" matInput
-                                [readonly]="iseditable" formControlName="country" (keyup)="countrychange($event)"
+                            <input type="text" aria-label="Country" matInput [readonly]="iseditable"
+                                formControlName="country" (keyup)="countrychange($event)"
                                 (change)="countrychange($event)" [matAutocomplete]="country">
                             <mat-autocomplete autoActiveFirstOption #country="matAutocomplete">
                                 <mat-option *ngFor="let country of countryfilter |async " [value]="country">
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label>Part</label>
+                        <label>Part of Country</label>
                         <mat-form-field appearance="outline">
                             <mat-select formControlName="part" [compareWith]="compareselect" [disabled]="iseditable">
                                 <mat-option *ngFor="let part of partList" [value]="part.partId">
@@ -76,9 +76,8 @@
                     <div class="col-md-4">
                         <label>States</label>
                         <mat-form-field appearance="outline">
-                            <input type="text" placeholder="Pick one" aria-label="Country" matInput
-                                [readonly]="iseditable" [disabled]="iseditable" formControlName="state"
-                                [matAutocomplete]="states">
+                            <input type="text" aria-label="Country" matInput [readonly]="iseditable"
+                                [disabled]="iseditable" formControlName="state" [matAutocomplete]="states">
                             <mat-autocomplete autoActiveFirstOption #states="matAutocomplete">
                                 <mat-option *ngFor="let country of statefilter |async " [value]="country">
                                     {{country}}
