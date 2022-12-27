@@ -144,12 +144,12 @@ export class StudentProfileComponent implements OnInit {
     });
 
     this.AddVolunteerForm = this.formBuilder.group({
-      category: [null, Validators.required],
-      Courses: [null, Validators.required],
-      startDate: [null,],
-      endDate: [null],
-      members: [null],
-      servedAs: [null]
+      category: [null, Validators.compose([Validators.required])],
+      Courses: [null, Validators.compose([Validators.required])],
+      startDate: [null, Validators.compose([Validators.required])],
+      endDate: [null, Validators.compose([Validators.required])],
+      members: [null, Validators.compose([Validators.required])],
+      servedAs: [null, Validators.compose([Validators.required])]
     });
 
     this.filterData2 = {

@@ -205,6 +205,10 @@ export class GalleryComponent implements OnInit {
     this.filerror2 = false
   }
   addAlbum(){
+
+    if(this.createalbum.invalid){
+      return 
+    }
     const body=
       {
         "galleryName":this.createalbum.value.albumname,
