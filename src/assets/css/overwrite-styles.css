@@ -30,7 +30,7 @@ hr {
     border-bottom: 3px solid #dee2e600;
 }
 
-.nav-tabs .nav-link:hover,
+/* .nav-tabs .nav-link:hover, */
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
     border: none;
@@ -696,12 +696,12 @@ width: calc(100% - 150px) !important;
 
 .dashboard-reports .nav-tabs .nav-link {
     text-align: center;
-    border-radius: 14px 0px 0px 0px;
+    border-radius: 14px 14px 0px 0px;
 }
 .dashboard-reports .nav-tabs .nav-link:first-child {
     /* border-radius: 14px 0px 0px 0px; */
 }
-.dashboard-reports .nav-tabs .nav-link:hover,
+/* .dashboard-reports .nav-tabs .nav-link:hover, */
 .dashboard-reports .nav-tabs .nav-link.active {
     background: #2c3e50;
     color: #fff;

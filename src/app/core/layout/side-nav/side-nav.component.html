@@ -30,7 +30,8 @@
                         </a> -->
                         <a [routerLink]="m.routingLink" (click)="navigateToSubMenu(m)">
                             <!-- <i [ngClass]="subMenuIcon(m)"></i> -->
-                            <i [ngClass]="m.icon"></i>
+                            <!-- <i [ngClass]="m.icon"></i> -->
+                            <i class="fa fa-circle" aria-hidden="true" style="font-size:8px"></i>
                             <span>{{m.subModuleName}}</span>
                         </a>
                         <!-- <a
