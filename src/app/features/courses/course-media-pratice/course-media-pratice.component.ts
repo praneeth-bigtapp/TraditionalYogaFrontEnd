@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 import { AddCoursedocumentComponent } from '../add-coursedocument/add-coursedocument.component';
 import { AddCourseimageComponent } from '../add-courseimage/add-courseimage.component';
@@ -53,6 +54,7 @@ export class CourseMediaPraticeComponent implements OnInit {
   gridData = [];
   dataSource: any
   categoryerror: boolean = false
+  mediaId:any
 
   addmediaform!: FormGroup
   data!: any
@@ -270,10 +272,10 @@ export class CourseMediaPraticeComponent implements OnInit {
     if (this.addmediaform.valid) {
       this.addbtns=true
 
-      this.addmediaform.value.mediafile = this.filedata
-      this.addmediaform.value.videofile = this.filedata1
+      
+      this.addmediaform.value.videofile = this.filedata1 || ''
 
-      this.addmediaform.value.socfile = this.filedata2
+  
 
       let date=new Date()
       // let date2=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
@@ -290,11 +292,10 @@ export class CourseMediaPraticeComponent implements OnInit {
         "videoTitle": this.addmediaform.value.videotitle,
         "durationVideo": this.addmediaform.value.videoduration,
         "metaKeyword": this.addmediaform.value.vidoemetakeywords,
-        "fileUpload": '',
+        "fileUpload": this.addmediaform.value.videofile,
         "description":this.addmediaform.value.videodescription,
         "instruction": this.addmediaform.value.Instructions,
         "createdBy": null,
-        "createdDate": date,
         "updateBy": null,
         "updateDate": null,
         "isActive": "Y"
@@ -347,6 +348,7 @@ this.addmediaform .setValue({
 
   }
   editdetails(element: any) {
+    this.mediaId=element.mediaId
     this.addbtns=true
     this.updatebtn=true
     this.submitbtn=false
@@ -378,9 +380,9 @@ let date2=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
   saveData(){
     this.updatebtn=false
     this.submitbtn=true
-    let date=new Date()
+    this.addmediaform.value.videofile = this.filedata1 || ''
     const body = {
-       
+      "mediaId": this.mediaId,
       "courseId": {
           "coursesId": this.addmediaform.value.courses1
           
@@ -391,15 +393,17 @@ let date2=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
       "videoTitle": this.addmediaform.value.videotitle,
       "durationVideo": this.addmediaform.value.videoduration,
       "metaKeyword": this.addmediaform.value.vidoemetakeywords,
-      "fileUpload": '',
+      "fileUpload": this.addmediaform.value.videofile,
       "description":this.addmediaform.value.videodescription,
       "instruction": this.addmediaform.value.Instructions,
       "createdBy": null,
-      "createdDate": date,
+      "createdDate": null,
       "updateBy": null,
       "updateDate": null,
       "isActive": "Y"
   }
+  console.log(body);
+  
   this.service.postcoursemediasave(body).subscribe({
     next: (response) => {
       this.addmediaform.reset()
@@ -417,34 +421,36 @@ let date2=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
 
   deletedetails(id: any) {
 
-    // const body = {
-    //   "coursesId": id
-    // }
+    const body = {
+      "mediaId": id
+  }
 
-    // const dialogref = this.dialog.open(DialogPopupComponent, {
-    //   data: {
-    //     title: "Delete Confirmation",
-    //     message: "Are You Sure You Want To Delete this Course ?"
-    //   },
-    //   width: "30%"
-    // })
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this Course ?"
+      },
+      width: "30%"
+    })
 
-    // dialogref.afterClosed().subscribe(data => {
-    //   if (data) {
-    //     this.AddCourseService.deletecourse(body).subscribe({
-    //       next: (response) => {
-    //         this.openSnackBar(response)
-    //         this.addCourseForm.reset()
-    //         this.getdata()
-    //       },
-    //       error: (error) => {
-    //         console.error(error.message);
-    //       }
-    //     })
-    //     return
-    //   }
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.service.postcoursemediadelete(body).subscribe({
+          next: (response) => {
+            this.addmediaform.reset()
+            this.openSnackBar(response)
+            this.getALLtabledata()
+            
+      
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
 
-    // })
+    })
 
 
 
