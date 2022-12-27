@@ -38,8 +38,10 @@
         <div class="">
             <div style="text-align: center">
                 <button mat-button class="btn btn-outline-secondary btn-rounded d-inline-block m-2 " type="button"
-                    ng-transclude="" (click)="dialogRef.close(true)"><span class="ng-scope">Yes</span></button> &nbsp;
-                <button *ngIf="data.title !== 'Terms&Condition'    " mat-button
+                    ng-transclude="" (click)="dialogRef.close(true)"><span class="ng-scope">
+                        {{data.title !== 'Terms&Condition' && data.title !== 'Email not Verified' ?
+                        "Yes":"Ok"}}</span></button> &nbsp;
+                <button *ngIf="data.title !== 'Terms&Condition' && data.title !== 'Email not Verified'    " mat-button
                     class="btn btn-outline-secondary btn-rounded d-inline-block m-2" type="button" ng-transclude=""
                     (click)="dialogRef.close(false)"><span class="ng-scope">No</span></button>
             </div>

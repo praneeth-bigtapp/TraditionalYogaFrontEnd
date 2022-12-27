@@ -37,6 +37,7 @@ export class EnrollmentformComponent implements OnInit {
   isemailsended: boolean = false
   otp: any
   otperror: boolean = false
+  isemailvalid: boolean = false
 
 
   constructor(
@@ -139,16 +140,16 @@ export class EnrollmentformComponent implements OnInit {
       }
     })
 
-    this.service.getindiastates().subscribe({
-      next: (response) => {
-        this.statelist = response
-        console.log(this.statelist);
+    // this.service.getindiastates().subscribe({
+    //   next: (response) => {
+    //     this.statelist = response
+    //     console.log(this.statelist);
 
-      },
-      error: (error) => {
-        console.error(error.message);
-      }
-    })
+    //   },
+    //   error: (error) => {
+    //     console.error(error.message);
+    //   }
+    // })
   }
 
 
@@ -194,15 +195,24 @@ export class EnrollmentformComponent implements OnInit {
     return
 
   }
+
+
+  emailchange() {
+    this.isemailvalid = this.formdetails.controls["email"].valid
+  }
   sendemail() {
+
     this.otperror = false
     this.isemailsended = true
     this.isemailverified = false
+
+
   }
 
   verifyemail() {
 
-    if (this.otp.length === 0 || !this.otp.test(InputvalidationService.inputvalidation.isnumbers)) {
+
+    if (this.otp?.length === 0 || !InputvalidationService.inputvalidation.isnumbers.test(this.otp)) {
       this.otperror = true
       return
     }
@@ -210,7 +220,6 @@ export class EnrollmentformComponent implements OnInit {
 
     console.log(this.otp);
     this.otperror = false
-
     this.isemailsended = false
     this.isemailverified = true
   }
@@ -257,6 +266,19 @@ export class EnrollmentformComponent implements OnInit {
   }
   enrollmentsubmit() {
 
+    if (!this.isemailverified) {
+      const dialogref = this.dialog.open(DialogPopupComponent, {
+        data: {
+          title: "Email not Verified",
+          message: "Email not Verified"
+        },
+        width: "30%"
+      })
+
+      dialogref.afterClosed().subscribe(data => {
+        return
+      })
+    }
     if (this.formdetails.invalid)
       return this.formdetails.markAllAsTouched()
 

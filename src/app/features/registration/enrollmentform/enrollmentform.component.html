@@ -65,10 +65,11 @@
                     <div class="col-md-4  row align-items-center    ">
                         <div class="col-md-10">
                             <label>Email Id <span *ngIf="isemailverified" class="text-success fw-bolder"> -
-                                    Verified</span></label>
+                                    Verified</span> </label>
                             <div class="col px-0">
                                 <mat-form-field appearance="outline">
-                                    <input matInput autocomplete="off" formControlName="email" required>
+                                    <input matInput autocomplete="off" (keyup)="emailchange()" formControlName="email"
+                                        required>
                                 </mat-form-field>
                                 <div class="error-message"
                                     *ngIf="formdetails.controls['email'].invalid && (formdetails.controls['email'].dirty || formdetails.controls['email'].touched)">
@@ -81,9 +82,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2   pl-0">
-                            <button type="button" (ngclick)="sendemail()"
-                                class="btn btn-outline-secondary btn-rounded btn-go d-inline-block mt-4 ">
+                        <div class="col-md-2   pl-0" *ngIf="isemailvalid">
+                            <button type="button" (click)="sendemail()"
+                                class="btn btn-outline-secondary btn-rounded btn-go d-inline-block mt-3 ">
                                 Send
                             </button>
                         </div>
@@ -98,8 +99,8 @@
                             </div>
                         </div>
                         <div class="col-md-2 pl-0" *ngIf="isemailsended">
-                            <button type="button" (ngclick)="verifyemail()"
-                                class="btn btn-outline-secondary btn-rounded btn-go d-inline-block mt-4 ">
+                            <button type="button" (click)="verifyemail()"
+                                class="btn btn-outline-secondary btn-rounded btn-go d-inline-block mt-3 ">
                                 Verify
                             </button>
                         </div>
@@ -334,7 +335,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 ">
-                            <button type="button" (ngclick)="termsandcondition()"
+                            <button type="button" (click)="termsandcondition()"
                                 class="btn btn-outline-secondary btn-rounded btn-go d-inline-block mt-4 ">
                                 View
                             </button>
