@@ -7,6 +7,7 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 export class RegistrationService extends BaseHttp {
 
   getcountryURL = "webSite/getAll?operation=country"
+  getindiastatesURL = ""
 
   getaboutusURL = "register/getAll?operation=aboutus"
   getqualificationURL = "student/getAll?operation=qualification"
@@ -15,6 +16,8 @@ export class RegistrationService extends BaseHttp {
 
   postenrollmentURL = ""
   postdetailsenrollmentURL = ""
+
+
 
   getgender() {
     return this.get(this.genderURL)
@@ -25,6 +28,10 @@ export class RegistrationService extends BaseHttp {
   getcountry() {
     return this.get(this.getcountryURL)
   }
+  getindiastates() {
+    return this.get(this.getindiastatesURL)
+  }
+
   getaboutus() {
     return this.get(this.getaboutusURL)
   }
