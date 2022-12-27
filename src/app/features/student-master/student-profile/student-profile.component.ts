@@ -396,6 +396,8 @@ this.donationAPI(data)
     console.log("Enterning Select Volunteer List");
     this.studentService.getVolunteerById(data).subscribe({
       next: (response) => {
+        console.log('volunteer table');
+        
         console.log(response);
         this.volunterData = response;
         this.volunterData = this.volunterData.reverse();
@@ -477,15 +479,21 @@ this.donationAPI(data)
   }
 
   onVolunteerSubmit() {
-    const data = {
+    const data = 
+    {
       "studentId": this.studentProfile.studentId,
-      "categoryName": this.AddVolunteerForm.value.category,
-      "courseId": this.AddVolunteerForm.value.Courses,
-      "startDate": this.AddVolunteerForm.value.startDate,
+      "categoryName": {
+          "volunteeringCategoryId": this.AddVolunteerForm.value.category
+      },
+      "courseId": {
+          "coursesId": this.AddVolunteerForm.value.Courses
+      },
+      "startDate":this.AddVolunteerForm.value.startDate,
       "endDate": this.AddVolunteerForm.value.endDate,
       "servedAs": this.AddVolunteerForm.value.servedAs,
       "noOfMembers": this.AddVolunteerForm.value.members
-    }
+  }
+
     this.studentService.addVolunteerById(data).subscribe({
       next: (response) => {
         this.onVolunteerClose();

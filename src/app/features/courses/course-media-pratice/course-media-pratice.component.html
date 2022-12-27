@@ -190,7 +190,7 @@
                             <div class="col-4">
                                 <label>Upload:</label>
                                 <input type="file" id="file" class="border" formControlName="videofile"
-                                    accept=" */*" (change)="onfilechange($event)" required="true" />
+                                    accept=" */*" (change)="onfilechange($event)"  />
     
                                 
     
@@ -220,7 +220,7 @@
     
                                 <mat-form-field appearance="outline">
                                     <textarea rows="5" matInput autocomplete="off" class=""
-                                        formControlName="videodescription" required></textarea>
+                                        formControlName="Instructions" required></textarea>
     
                                 </mat-form-field>
                                 <div class="error-message"
