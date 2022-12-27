@@ -7,13 +7,16 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 export class GalleryService extends BaseHttp {
 
   uploadimageURL = "upload/photoGallery"
-  allURL='webSite/photoGallary?operation=add'
-  updateURL='webSite/photoGallary?operation=save'
-  toggleURL='webSite/photoGallary?operation=active'
-  deleteURL='webSite/photoGallary?operation=delete'
-  FullURL='webSite/getAll?operation=photoGallery'
+  allURL = 'webSite/photoGallary?operation=add'
+  updateURL = 'webSite/photoGallary?operation=save'
+  toggleURL = 'webSite/photoGallary?operation=active'
+  deleteURL = 'webSite/photoGallary?operation=delete'
+  FullURL = 'webSite/getAll?operation=photoGallery'
 
-  getAll(){
+
+  uploadimagesURL = ""
+
+  getAll() {
     return this.get(this.FullURL)
   }
   postuploadimage(body: any) {
@@ -30,5 +33,9 @@ export class GalleryService extends BaseHttp {
   }
   DeleteLit(body: any) {
     return this.post(this.deleteURL, body)
+  }
+
+  getuploadimages(body: any) {
+    return this.post(this.uploadimagesURL, body)
   }
 }

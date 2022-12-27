@@ -20,6 +20,8 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ViewgalleryComponent } from './viewgallery/viewgallery.component';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -48,7 +50,10 @@ import { ViewgalleryComponent } from './viewgallery/viewgallery.component';
     MatSortModule,
     MatSlideToggleModule,
     MatTooltipModule,
-    
+    MatOptionModule,
+    MatFormFieldModule,
+    MatSelectModule,
+
   ]
 })
 export class PhotoGalleryModule { }

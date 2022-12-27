@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { GalleryService } from '../service/gallery.service';
 @Component({
   selector: 'app-uploadgallery',
   templateUrl: './uploadgallery.component.html',
@@ -12,11 +13,28 @@ export class UploadgalleryComponent implements OnInit {
   filelist: any = []
 
   formdata = new FormData()
+  albumlist: any
+  album: any
 
   constructor(
     private _snackBar: MatSnackBar,
     public router: Router,
-  ) { }
+    private service: GalleryService,
+  ) {
+
+    this.service.getAll().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.albumlist = response
+
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
+
+  }
 
   ngOnInit(): void {
   }
@@ -50,6 +68,8 @@ export class UploadgalleryComponent implements OnInit {
     });
   }
 
+  albumchange() {
+  }
 
   creategallery() {
 
@@ -75,6 +95,20 @@ export class UploadgalleryComponent implements OnInit {
   uploadimage() {
     const files = this.filelist.map((ele: any) => ele.file)
     console.log(files);
+
+    const body = {
+
+    }
+    this.service.getuploadimages(body).subscribe({
+      next: (response) => {
+        this.openSnackBar(response)
+        this.filelist.length = 0
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
 
   }
 

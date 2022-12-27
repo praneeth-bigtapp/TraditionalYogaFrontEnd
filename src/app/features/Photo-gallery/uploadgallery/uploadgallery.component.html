@@ -24,7 +24,26 @@
             </button>
         </div>
     </div>
-    <div class="card  bg-secondary">
+    <div class="card bg-secondary">
+        <div class="card-header text-white bg-secondary">
+            Album
+        </div>
+        <div class="card-body  bg-white py-2">
+            <div class="row align-items-center px-0">
+                <div class="col-md-4">
+                    <label>Album</label>
+                    <mat-form-field appearance="outline">
+                        <mat-select [(ngModel)]="album" (selectionChange)="albumchange()">
+                            <mat-option *ngFor="let album of albumlist" [value]="album.photoGalleryId">
+                                {{album.galleryName | titlecase}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="card  bg-secondary" *ngIf="album">
         <div class="card-header text-white bg-secondary">
             Add Photo to Album
         </div>
@@ -32,7 +51,6 @@
 
             <div id="upload py-0">
                 <div class="drag-riles border-none " appDnd (fileDropped)="onFileChange($event)">
-                    <!-- <input type="file" #fileDropRef id="fileDropRef" (click)="$event.target.value=null" -->
                     <input type="file" #fileDropRef id="fileDropRef" (change)="onFileChange($event)" accept="images/*"
                         multiple />
                     <img src="assets/images/UploadImg.jpeg" alt="Upload Image" width="80" height="64">
@@ -55,7 +73,7 @@
                 <div class="col-md-4  d-flex flex-column  bg-white py-2  mr-md-0 " *ngFor="let file of filelist">
 
                     <div class="p-2 w-75 mx-auto" style="position: relative; height: 100%; ">
-                        <img mat-card-image class="mx-auto  w-100"  [src]="file?.path" [alt]="file.name">
+                        <img mat-card-image class="mx-auto  w-100" [src]="file?.path" [alt]="file.name">
 
                         <span class="bg-dark w-100 text-center opacity-25"
                             style="cursor: pointer;position: absolute; left: 0; bottom: 0; z-index: 2; "
