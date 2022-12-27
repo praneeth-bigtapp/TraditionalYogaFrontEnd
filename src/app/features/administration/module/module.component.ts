@@ -194,6 +194,11 @@ export class ModuleComponent implements OnInit {
       menuName: menu.moduleName
     });
     this.isAddModuleForm = true;
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   onModuleDelete(menu: any) {

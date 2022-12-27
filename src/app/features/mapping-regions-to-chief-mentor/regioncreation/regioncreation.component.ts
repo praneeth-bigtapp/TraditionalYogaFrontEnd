@@ -194,6 +194,11 @@ export class RegioncreationComponent implements OnInit {
     });
     this.displaycontent = true
     this.issubmit = false
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
   deletedetails(id: any) {
 
@@ -245,6 +250,11 @@ export class RegioncreationComponent implements OnInit {
     this.iseditable = true
     this.displaycontent = true
     this.issubmit = true
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   reseteditable() {

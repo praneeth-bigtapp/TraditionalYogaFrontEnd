@@ -20,6 +20,8 @@ export class TasksComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
+  pageno: number = 1
+
   selection = new SelectionModel<any>(true, []);
   selectedmember!: any
   taskform!: FormGroup
@@ -32,7 +34,7 @@ export class TasksComponent implements OnInit {
   filterData: any;
   gridData = [];
   dataSource: any;
-  displayedColumns: string[] = ['taskName', "createDate", "type", "dueDate", "action"];
+  displayedColumns: string[] = ['sno', 'taskName', "dateOfAssigement", "type", "dueDate", "action"];
 
   isedit: boolean = false
   data!: any
@@ -98,6 +100,16 @@ export class TasksComponent implements OnInit {
     this._snackbar.open(data.message, 'Close', {
       duration: 2 * 1000,
     });
+  }
+
+
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
   }
 
   gettask(course: string) {
@@ -169,10 +181,16 @@ export class TasksComponent implements OnInit {
       description: element.description,
       mediafile: null,
       duedate: formatDate(element.dueDate, "yyyy-MM-dd", "en"),
+      assignmentdate: formatDate(element.dateOfAssigement, "yyyy-MM-dd", "en")
 
     });
     this.displayform = true
     this.issubmit = false
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   deletedetails(id: any) {
@@ -217,11 +235,18 @@ export class TasksComponent implements OnInit {
       description: element.description,
       mediafile: null,
       duedate: formatDate(element.dueDate, "yyyy-MM-dd", "en"),
+      assignmentdate: formatDate(element.dateOfAssigement, "yyyy-MM-dd", "en")
+
 
     });
     this.isedit = true
     this.displayform = true
     this.issubmit = true
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   reseteditable() {
@@ -238,10 +263,10 @@ export class TasksComponent implements OnInit {
     if (this.taskform.invalid)
       return this.taskform.markAllAsTouched()
 
-    this.taskform.value.mediafile = this.filedata
+    this.taskform.value.mediafile = this.filedata || ""
 
 
-    const { taskid, name, description, mediafile, duedate } = this.taskform.value
+    const { taskid, assignmentdate, name, description, mediafile, duedate } = this.taskform.value
     console.log({ taskid, name, description, mediafile, duedate });
 
 
@@ -252,13 +277,17 @@ export class TasksComponent implements OnInit {
       },
       "description": description,
       "mediafile": mediafile,
-      "dueDate": duedate
+      "dueDate": duedate,
+      "dateOfAssigement": assignmentdate,
+      "createdBy": null,
+      "createDate": null,
+      "updateBy": null,
+      "updateDate": null,
+      "isActive": "Y",
     }
 
     if (this.isedit) {
-
       //editable
-
       const body = {
         "taskId": taskid,
         "taskName": name,
@@ -267,10 +296,15 @@ export class TasksComponent implements OnInit {
         },
         "description": description,
         "mediafile": mediafile,
-        "dueDate": duedate
+        "dueDate": duedate,
+        "dateOfAssigement": assignmentdate,
+        "createdBy": null,
+        "createDate": null,
+        "updateBy": null,
+        "updateDate": null,
+        "isActive": "Y",
       }
 
-      console.log(body);
 
       this.service.updatetask(body).subscribe({
         next: (response) => {

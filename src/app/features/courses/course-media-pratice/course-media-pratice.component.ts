@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -330,8 +331,8 @@ this.submitbtn=false
 this.addbtns=false
 this.displaycontent=true
 console.log(element);
-let date=new Date(element.practiceDate)
-let date2=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
+// let date=new Date(element.practiceDate)
+// let date2=date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()
 this.addmediaform .setValue({
   videolink: element.videoLink,
   videotitle: element.videoTitle,
@@ -339,13 +340,18 @@ this.addmediaform .setValue({
   videoduration:element.durationVideo,
   vidoemetakeywords:element.metaKeyword,
   videofile: '',
-  courses1: element.courseId.coursesName,
+  courses1: element.courseId.coursesId,
   practiceTime:element.praticeTime,
-  practiceDate:date2,
+  practiceDate:formatDate(element.praticeDate, "yyyy-MM-dd", 'en'),
   Instructions:element.instruction, 
  
 })
 
+  }
+  compareselect(obj1: any, obj2: any) {
+    
+    
+    return obj1 && obj2 && obj1 === obj2
   }
   editdetails(element: any) {
     this.mediaId=element.mediaId
@@ -353,8 +359,8 @@ this.addmediaform .setValue({
     this.updatebtn=true
     this.submitbtn=false
     this.displaycontent=true
-    let date=new Date(element.practiceDate)
-let date2=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
+//     let date=new Date(element.practiceDate)
+// let date2=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
     this.addmediaform .setValue({
       videolink: element.videoLink,
       videotitle: element.videoTitle,
@@ -362,9 +368,9 @@ let date2=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
       videoduration:element.durationVideo,
       vidoemetakeywords:element.metaKeyword,
       videofile: '',
-      courses1: element.courseId.coursesName,
+      courses1: element.courseId.coursesId,
       practiceTime:element.praticeTime,
-      practiceDate:date2,
+      practiceDate:formatDate(element.praticeDate, "yyyy-MM-dd", 'en'),
       Instructions:element.instruction, 
      
     })

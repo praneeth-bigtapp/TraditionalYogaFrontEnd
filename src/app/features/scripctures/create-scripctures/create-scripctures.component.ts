@@ -161,6 +161,11 @@ export class CreateScripcturesComponent implements OnInit {
     this.iseditable = false
     this.displaycontent = true
     this.issubmit = false
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   editdetails(element: any) {
@@ -177,6 +182,11 @@ export class CreateScripcturesComponent implements OnInit {
       coverfile: null,
       coverkeywords: element.metaKeyWords
     })
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   deletedetails(id: any) {

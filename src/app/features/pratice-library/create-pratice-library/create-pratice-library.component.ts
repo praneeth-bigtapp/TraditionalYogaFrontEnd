@@ -141,7 +141,8 @@ export class CreatePraticeLibraryComponent implements OnInit {
   }
 
   categorychange(event: any) {
-    if (event.value === 3) {
+
+    if (event.value === 12) {
       this.issubcategory = true
       this.addmediaform.get('subcategory').addValidators(Validators.required);
       this.addmediaform.controls.subcategory.status = "INVALID"
@@ -176,11 +177,16 @@ export class CreatePraticeLibraryComponent implements OnInit {
       videoduration: element.duration,
       vidoemetakeywords: element.metaKeyword,
     });
-    // if (element.subcategory)
-    // this.issubcategory = true
+    if (element.subCategoryId)
+      this.issubcategory = true
 
     this.issubmit = false
     this.displaycontent = true
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
   deletedetails(id: any, category: any) {
 
@@ -229,12 +235,17 @@ export class CreatePraticeLibraryComponent implements OnInit {
       vidoemetakeywords: element.metaKeyword,
     });
 
-    // if (element.subcategory)
-    //   this.issubcategory = true
+    if (element.subCategoryId)
+      this.issubcategory = true
 
     this.iseditable = true
     this.issubmit = true
     this.displaycontent = true
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
 
   }
 
@@ -245,12 +256,9 @@ export class CreatePraticeLibraryComponent implements OnInit {
   }
 
   addmedia() {
-
-    console.log(this.addmediaform.get("subcategory").hasValidator(Validators.required));
-
     if (this.addmediaform.valid) {
 
-      const { praticelibraryId, category, videolink, videotitle, videodescription, videoduration, vidoemetakeywords } = this.addmediaform.value
+      const { praticelibraryId, category, subcategory, videolink, videotitle, videodescription, videoduration, vidoemetakeywords } = this.addmediaform.value
 
 
       const body = {

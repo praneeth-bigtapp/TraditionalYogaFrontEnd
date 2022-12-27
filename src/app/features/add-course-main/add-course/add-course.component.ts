@@ -162,6 +162,11 @@ export class AddCourseComponent implements OnInit {
     });
     this.issubmit = false
     this.displaycontent = true
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
 
   }
 
@@ -228,6 +233,11 @@ export class AddCourseComponent implements OnInit {
     this.iseditable = true
     this.displaycontent = true
     this.issubmit = true
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   reseteditable() {

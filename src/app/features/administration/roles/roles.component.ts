@@ -200,6 +200,11 @@ export class RolesComponent implements OnInit {
       roleName: role.roleName
     });
     this.isAddRoleForm = true;
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   onActivateRole(role: any, event: MatSlideToggleChange) {

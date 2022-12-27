@@ -183,6 +183,16 @@ export class EnrollmentformComponent implements OnInit {
     this.isIndia = value.toLowerCase() === "india"
     console.log(this.isIndia);
 
+    if (this.isIndia) {
+      this.formdetails.get('state')?.addValidators(Validators.required);
+      // this.formdetails.controls.state.status = "INVALID"
+      return
+    }
+    this.formdetails.get('state')?.removeValidators(Validators.required);
+    // this.formdetails.controls.state.status = "VALID"
+
+    return
+
   }
   sendemail() {
     this.otperror = false
