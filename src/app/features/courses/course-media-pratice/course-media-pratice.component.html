@@ -40,7 +40,7 @@
         
                             <mat-form-field class="pe-4" appearance="outline">
                                 <mat-select matNativeControl formControlName="courses1"  >
-                                    <mat-option *ngFor="let item of courseList"
+                                    <mat-option *ngFor="let item of courseList" 
                                         [value]="item.coursesId">{{item.coursesName}}
                                     </mat-option>
                                 </mat-select>
@@ -80,7 +80,7 @@
                                 </mat-error>
                             </div>
                         </div> -->
-                        <div class="col-4">
+                        <!-- <div class="col-4">
                             <label>Practice Time</label>
         
                             <mat-form-field class="pe-4" appearance="outline">
@@ -94,8 +94,8 @@
                                     Select the Date
                                 </mat-error>
                             </div>
-                        </div>
-                        <!-- <div class="col-4">
+                        </div> -->
+                        <div class="col-4">
                             <label>Practice Time</label>
 
                             <mat-form-field appearance="outline">
@@ -108,7 +108,7 @@
                                     Time is mandatory
                                 </mat-error>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                    
                   
@@ -190,7 +190,7 @@
                             <div class="col-4">
                                 <label>Upload:</label>
                                 <input type="file" id="file" class="border" formControlName="videofile"
-                                    accept=" */*" (change)="onfilechange($event)" required="true" />
+                                    accept=" */*" (change)="onfilechange($event)"  />
     
                                 
     
@@ -220,7 +220,7 @@
     
                                 <mat-form-field appearance="outline">
                                     <textarea rows="5" matInput autocomplete="off" class=""
-                                        formControlName="videodescription" required></textarea>
+                                        formControlName="Instructions" required></textarea>
     
                                 </mat-form-field>
                                 <div class="error-message"
@@ -314,7 +314,7 @@
             <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
         </ng-container>
 
-        <ng-container matColumnDef="title">
+        <ng-container matColumnDef="videoTitle">
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
                     Title
@@ -322,7 +322,7 @@
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
                     [filter]="filterData" />
             </th>
-            <td mat-cell *matCellDef="let element2" class="text-center"> {{element2.title | titlecase}} </td>
+            <td mat-cell *matCellDef="let element2" class="text-center"> {{element2.videoTitle | titlecase}} </td>
         </ng-container>
 
         <ng-container matColumnDef="description">
@@ -338,7 +338,7 @@
             </td>
         </ng-container>
 
-        <ng-container matColumnDef='PracticeDate'>
+        <ng-container matColumnDef='praticeDate'>
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
                     Practice Date
@@ -346,9 +346,9 @@
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
                     [filter]="filterData" />
             </th>
-            <td mat-cell *matCellDef="let element" class="text-center"> {{element.uploadMediaFile}} </td>
+            <td mat-cell *matCellDef="let element" class="text-center"> {{element.praticeDate}} </td>
         </ng-container>
-        <ng-container matColumnDef='PracticeTime'>
+        <ng-container matColumnDef='praticeTime'>
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
                     Practice Time
@@ -356,10 +356,10 @@
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[4].Value"
                     [filter]="filterData" />
             </th>
-            <td mat-cell *matCellDef="let element" class="text-center"> {{element.uploadMediaFile}} </td>
+            <td mat-cell *matCellDef="let element" class="text-center"> {{element.praticeTime}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="duration">
+        <ng-container matColumnDef="createdDate">
             <th mat-header-cell *matHeaderCellDef scope="col">
                 <label mat-sort-header>
                     Time added
@@ -367,7 +367,7 @@
                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[5].Value"
                     [filter]="filterData" />
             </th>
-            <td mat-cell *matCellDef="let element" class="text-center"> {{element.duration }} </td>
+            <td mat-cell *matCellDef="let element" class="text-center"> {{element.createdDate}} </td>
         </ng-container>
 
         <ng-container matColumnDef="metaKeyword">
@@ -395,7 +395,7 @@
                 <span matTooltip="Edit" (click)="editdetails(element)">
                     <i class="fas fa-pencil-alt mx-4" aria-hidden="true"></i>
                 </span>
-                <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.praticeLibaryId)">
+                <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.mediaId)">
                     <i class="far fa-trash-alt" aria-hidden="true"></i>
                 </span>
 

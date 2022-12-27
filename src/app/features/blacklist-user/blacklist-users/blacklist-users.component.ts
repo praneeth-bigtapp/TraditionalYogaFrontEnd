@@ -136,6 +136,9 @@ currentID:any
   }
 
 saveList() {
+  this.updatebtn=false
+  this.blackbtn=true
+  
     if (this.blacklistForm.valid) {
       this.datevalue()
       const data = {
@@ -145,6 +148,9 @@ saveList() {
         "blacklistUserEmail": this.blacklistForm.value.emailId,
         "comments": this.blacklistForm.value.comments
       }
+
+      console.log(data);
+      
       this.blacklistUsersService.saveBlacklist(data).subscribe({
         next: (response) => {
           this.openSnackBar(" Updated Sucessfully");
@@ -167,8 +173,12 @@ saveList() {
    
   }
   editdetails(element:any){
-    this.currentID=element.blacklistUserId
+    this.currentID=element.blacklistuserId
     this.formdisplay=true 
+    console.log(element);
+    
+    console.log(this.currentID);
+    
     this.blacklistForm.setValue({emailId:element.blacklistUserEmail,
     comments:element.comments
     })

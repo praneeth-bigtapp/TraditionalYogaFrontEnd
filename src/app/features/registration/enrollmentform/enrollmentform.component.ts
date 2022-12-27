@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 import { RegistrationService } from '../service/registration.service';
-import { map, Observable, startWith } from 'rxjs';
+import { catchError, map, Observable, startWith } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-enrollmentform',
@@ -20,6 +21,8 @@ export class EnrollmentformComponent implements OnInit {
   countryList: any
   genderlist: any
   countryfilter !: Observable<any>
+  statefilter !: Observable<any>
+  statelist: any
   refferallist!: any
   photoerror: boolean = false
   photo!: any
@@ -29,12 +32,19 @@ export class EnrollmentformComponent implements OnInit {
   martialstatus: any
   isfriendname: boolean = false
   iseduationother: boolean = false
+  isIndia: boolean = false
+  isemailverified: boolean = false
+  isemailsended: boolean = false
+  otp: any
+  otperror: boolean = false
+
 
   constructor(
     private formbuilder: FormBuilder,
     private service: RegistrationService,
     private _snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private http: HttpClient,
 
   ) {
     this.formdetails = this.formbuilder.group({
@@ -48,12 +58,12 @@ export class EnrollmentformComponent implements OnInit {
       isenglishspoken: [null, Validators.compose([Validators.required])],
       dateofbirth: [null, Validators.compose([Validators.required])],
       gender: [null, Validators.compose([Validators.required])],
-      houseno: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.isnumbers)])],
-      street: [null, Validators.compose([Validators.required])],
-      town: [null, Validators.compose([Validators.required])],
-      state: [null, Validators.compose([Validators.required])],
-      country: [null, Validators.compose([Validators.required])],
-      pincode: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.isnumbers)])],
+      houseno: [null, Validators.compose([Validators.pattern(InputvalidationService.inputvalidation.isnumbers)])],
+      street: [null, Validators.compose([])],
+      town: [null, Validators.compose([])],
+      state: [null, Validators.compose([])],
+      country: [null, Validators.compose([])],
+      pincode: [null, Validators.compose([Validators.pattern(InputvalidationService.inputvalidation.isnumbers)])],
       refferal: [null, Validators.compose([Validators.required])],
       termscondition: [null, Validators.compose([Validators.required])],
 
@@ -61,26 +71,28 @@ export class EnrollmentformComponent implements OnInit {
 
 
     this.detailsinformation = this.formbuilder.group({
-      photo: [null, Validators.compose([Validators.required])],
-      job: [null, Validators.compose([Validators.required])],
-      workinghours: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.isnumbers)])],
-      educationdetails: [null, Validators.compose([Validators.required])],
+      photo: [null, Validators.compose([])],
+      job: [null, Validators.compose([])],
+      workinghours: [null, Validators.compose([Validators.pattern(InputvalidationService.inputvalidation.isnumbers)])],
+      educationdetails: [null, Validators.compose([])],
       othereducationdetails: [null],
-      prideinqualification: [null, Validators.compose([Validators.required])],
-      matrialstatus: [null, Validators.compose([Validators.required])],
-      familydetails: [null, Validators.compose([Validators.required])],
-      familymemberconsent: [null, Validators.compose([Validators.required])],
-      familycooperation: [null, Validators.compose([Validators.required])],
-      friendparticipation: [null, Validators.compose([Validators.required])],
+      prideinqualification: [null, Validators.compose([])],
+      matrialstatus: [null, Validators.compose([])],
+      familydetails: [null, Validators.compose([])],
+      familymemberconsent: [null, Validators.compose([])],
+      familycooperation: [null, Validators.compose([])],
+      friendparticipation: [null, Validators.compose([])],
       friendname: [null],
-      pastyogapratice: [null, Validators.compose([Validators.required])],
-      hobbies: [null, Validators.compose([Validators.required])],
-      isdedicated: [null, Validators.compose([Validators.required])],
-      familyfullname: [null, Validators.compose([Validators.required])],
-      familyrelationship: [null, Validators.compose([Validators.required])],
-      familycontactno: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.mobile)])],
-      whythiscourse: [null, Validators.compose([Validators.required])],
+      pastyogapratice: [null, Validators.compose([])],
+      hobbies: [null, Validators.compose([])],
+      isdedicated: [null, Validators.compose([])],
+      familyfullname: [null, Validators.compose([])],
+      familyrelationship: [null, Validators.compose([])],
+      familycontactno: [null, Validators.compose([, Validators.pattern(InputvalidationService.inputvalidation.mobile)])],
+      whythiscourse: [null, Validators.compose([])],
     })
+    this.getIPAddress()
+
 
     // this.refferallist = ["I am old student", "Friends and family", "Facebook", "Instagram", "Youtube", "TV Media", "Others"]
     this.martialstatus = ["Single", "Married"]
@@ -118,13 +130,23 @@ export class EnrollmentformComponent implements OnInit {
     this.service.getqualification().subscribe({
       next: (response) => {
         this.eduationallist = response
-        console.log(this.eduationallist);
-        
+
       },
       error: (error) => {
         console.error(error.message);
         this.eduationallist = ["dummy", "other"]
 
+      }
+    })
+
+    this.service.getindiastates().subscribe({
+      next: (response) => {
+        this.statelist = response
+        console.log(this.statelist);
+
+      },
+      error: (error) => {
+        console.error(error.message);
       }
     })
   }
@@ -136,6 +158,15 @@ export class EnrollmentformComponent implements OnInit {
       map(value => this.countryList?.filter((ele: any) => ele.toLowerCase().includes(value.country?.toLowerCase()))),
     )
 
+    this.statefilter = this.formdetails.valueChanges.pipe(
+      startWith(''),
+      map(value => this.statelist?.filter((ele: any) => ele.toLowerCase().includes(value.state?.toLowerCase()))),
+    )
+
+  }
+
+  getIPAddress() {
+
   }
   openSnackBar(data: any) {
     this._snackBar.open(data.message, 'Close', {
@@ -144,6 +175,34 @@ export class EnrollmentformComponent implements OnInit {
   }
   compareselect(obj1: any, obj2: any) {
     return obj1 && obj2 && obj1.categoriesId === obj2
+  }
+
+  countrychange(event: any) {
+    const value = event?.option?.value || event?.target?.value
+
+    this.isIndia = value.toLowerCase() === "india"
+    console.log(this.isIndia);
+
+  }
+  sendemail() {
+    this.otperror = false
+    this.isemailsended = true
+    this.isemailverified = false
+  }
+
+  verifyemail() {
+
+    if (this.otp.length === 0 || !this.otp.test(InputvalidationService.inputvalidation.isnumbers)) {
+      this.otperror = true
+      return
+    }
+
+
+    console.log(this.otp);
+    this.otperror = false
+
+    this.isemailsended = false
+    this.isemailverified = true
   }
 
 
@@ -156,7 +215,7 @@ export class EnrollmentformComponent implements OnInit {
     //   this.photourl = reader.result
     // }
   }
-  termsandcondition(event: any) {
+  termsandcondition() {
 
     const dialogref = this.dialog.open(DialogPopupComponent, {
       data: {
@@ -167,8 +226,8 @@ export class EnrollmentformComponent implements OnInit {
     })
 
     dialogref.afterClosed().subscribe(data => {
-      this.termschecked = data
-      console.log(this.termschecked);
+      // this.termschecked = data
+      // console.log(this.termschecked);
 
       return
     })

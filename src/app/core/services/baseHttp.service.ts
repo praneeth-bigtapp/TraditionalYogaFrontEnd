@@ -43,6 +43,20 @@ export abstract class BaseHttp {
       );
   }
 
+  postImg<T>(url: string, body: any): Observable<T> {
+    let bearer: any = localStorage.getItem('userToken');
+    const header = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': bearer
+    });
+    return this.http
+      .post<T>(environment.url + url, body, { headers: header })
+      .pipe(
+        map((response) => response),
+        catchError(this.handleError)
+      );
+  }
+
   login<T>(url: string, body: any): Observable<T> {
     const header = new HttpHeaders({
       'Content-Type': 'application/json',

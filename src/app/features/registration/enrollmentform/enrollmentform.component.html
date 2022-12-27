@@ -62,22 +62,47 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4">
-                        <label>Email Id</label>
-                        <div class="col px-0">
-                            <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" formControlName="email" required>
-                            </mat-form-field>
-                            <div class="error-message"
-                                *ngIf="formdetails.controls['email'].invalid && (formdetails.controls['email'].dirty || formdetails.controls['email'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('email')?.hasError('required')  ">
-                                    Email is mandatory
-                                </mat-error>
-                                <mat-error [hidden]=" !formdetails.get('email')?.hasError('email')  ">
-                                    Invalid Email
-                                </mat-error>
+                    <div class="col-md-4  row align-items-center    ">
+                        <div class="col-md-10">
+                            <label>Email Id  <span *ngIf="isemailverified" class="text-success fw-bolder"> - Verified</span></label>
+                            <div class="col px-0">
+                                <mat-form-field appearance="outline">
+                                    <input matInput autocomplete="off" formControlName="email" required>
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="formdetails.controls['email'].invalid && (formdetails.controls['email'].dirty || formdetails.controls['email'].touched)">
+                                    <mat-error [hidden]=" !formdetails.get('email')?.hasError('required')  ">
+                                        Email is mandatory
+                                    </mat-error>
+                                    <mat-error [hidden]=" !formdetails.get('email')?.hasError('email')  ">
+                                        Invalid Email
+                                    </mat-error>
+                                </div>
                             </div>
                         </div>
+                        <div class="col-md-2   pl-0">
+                            <button type="button" (ngclick)="sendemail()"
+                                class="btn btn-outline-secondary btn-rounded btn-go d-inline-block mt-4 ">
+                                Send
+                            </button>
+                        </div>
+                        <div class="col-md-10" *ngIf="isemailsended">
+                            <label>OTP</label>
+                            <div class="col px-0">
+                                <mat-form-field appearance="outline">
+                                    <input matInput autocomplete="off" [(ngModel)]="otp"
+                                        [ngModelOptions]="{standalone: true}" required>
+                                </mat-form-field>
+                                <mat-error *ngIf="otperror">Invalid OTP</mat-error>
+                            </div>
+                        </div>
+                        <div class="col-md-2 pl-0" *ngIf="isemailsended">
+                            <button type="button" (ngclick)="verifyemail()"
+                                class="btn btn-outline-secondary btn-rounded btn-go d-inline-block mt-4 ">
+                                Verify
+                            </button>
+                        </div>
+
                     </div>
 
                     <div class="col-md-4">
@@ -134,7 +159,7 @@
                         <label>House Number</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" formControlName="houseno" required>
+                                <input matInput autocomplete="off" formControlName="houseno">
                             </mat-form-field>
                             <div class="error-message"
                                 *ngIf="formdetails.controls['houseno'].invalid && (formdetails.controls['houseno'].dirty || formdetails.controls['houseno'].touched)">
@@ -151,7 +176,7 @@
                         <label>Street</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" formControlName="street" required>
+                                <input matInput autocomplete="off" formControlName="street">
                             </mat-form-field>
                             <div class="error-message"
                                 *ngIf="formdetails.controls['street'].invalid && (formdetails.controls['street'].dirty || formdetails.controls['street'].touched)">
@@ -166,7 +191,7 @@
                         <label>Town/City</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" formControlName="town" required>
+                                <input matInput autocomplete="off" formControlName="town">
                             </mat-form-field>
                             <div class="error-message"
                                 *ngIf="formdetails.controls['town'].invalid && (formdetails.controls['town'].dirty || formdetails.controls['town'].touched)">
@@ -176,28 +201,14 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-4">
-                        <label>State</label>
-                        <div class="col px-0">
-                            <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" formControlName="state" required>
-                            </mat-form-field>
-                            <div class="error-message"
-                                *ngIf="formdetails.controls['state'].invalid && (formdetails.controls['state'].dirty || formdetails.controls['state'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('state')?.hasError('required')  ">
-                                    Street is mandatory
-                                </mat-error>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-md-4">
                         <label> Country</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <input type="text" aria-label="Country" matInput formControlName="country"
-                                    [matAutocomplete]="country">
-                                <mat-autocomplete autoActiveFirstOption #country="matAutocomplete">
+                                    (change)="countrychange($event)" [matAutocomplete]="country">
+                                <mat-autocomplete autoActiveFirstOption #country="matAutocomplete"
+                                    (optionSelected)="countrychange($event)">
                                     <mat-option *ngFor="let country of countryfilter |async " [value]="country">
                                         {{country}}
                                     </mat-option>
@@ -210,6 +221,30 @@
                                 </mat-error>
                             </div>
 
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>State</label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline" *ngIf="!isIndia">
+                                <input matInput autocomplete="off" formControlName="state">
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" *ngIf="isIndia">
+                                <input type="text" aria-label="Country" matInput formControlName="state"
+                                    (change)="countrychange($event)" [matAutocomplete]="state">
+                                <mat-autocomplete autoActiveFirstOption #state="matAutocomplete">
+                                    <mat-option *ngFor="let country of statefilter |async " [value]="country">
+                                        {{country}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="formdetails.controls['state'].invalid && (formdetails.controls['state'].dirty || formdetails.controls['state'].touched)">
+                                <mat-error [hidden]=" !formdetails.get('state')?.hasError('required')  ">
+                                    State is mandatory
+                                </mat-error>
+                            </div>
                         </div>
                     </div>
 
@@ -283,18 +318,25 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <label>&nbsp;</label>
-                        <div class="col">
-                            <mat-checkbox class="example-margin" (change)="termsandcondition($event)"
-                                formControlName="termscondition">Terms and
-                                Condition</mat-checkbox>
-                            <div class="error-message"
-                                *ngIf="formdetails.controls['termscondition'].invalid && (formdetails.controls['termscondition'].dirty || formdetails.controls['termscondition'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('termscondition')?.hasError('required')  ">
-                                    Terms and condition is mandatory
-                                </mat-error>
+                    <div class="col-md-3 row align-items-center ">
+                        <div class="col-md-8">
+                            <label>&nbsp;</label>
+                            <div class="col">
+                                <mat-checkbox class="example-margin" formControlName="termscondition">Terms and
+                                    Condition</mat-checkbox>
+                                <div class="error-message"
+                                    *ngIf="formdetails.controls['termscondition'].invalid && (formdetails.controls['termscondition'].dirty || formdetails.controls['termscondition'].touched)">
+                                    <mat-error [hidden]=" !formdetails.get('termscondition')?.hasError('required')  ">
+                                        Terms and condition is mandatory
+                                    </mat-error>
+                                </div>
                             </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <button type="button" (ngclick)="termsandcondition()"
+                                class="btn btn-outline-secondary btn-rounded btn-go d-inline-block mt-4 ">
+                                View
+                            </button>
                         </div>
                     </div>
                     <div class=" col d-flex flex-row flex-wrap justify-content-end">
@@ -335,7 +377,7 @@
                         <label>Profession</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" formControlName="job" required>
+                                <input matInput autocomplete="off" formControlName="job">
                             </mat-form-field>
                             <div class="error-message"
                                 *ngIf="detailsinformation.controls['job'].invalid && (detailsinformation.controls['job'].dirty || detailsinformation.controls['job'].touched)">
@@ -352,7 +394,7 @@
                         <label>How many working hours your profession demands?</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" formControlName="workinghours" required>
+                                <input matInput autocomplete="off" formControlName="workinghours">
                             </mat-form-field>
                             <div class="error-message"
                                 *ngIf="detailsinformation.controls['workinghours'].invalid && (detailsinformation.controls['workinghours'].dirty || detailsinformation.controls['workinghours'].touched)">
@@ -394,8 +436,7 @@
                         <label>Other educational details</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" formControlName="othereducationdetails"
-                                    [required]="iseduationother">
+                                <input matInput autocomplete="off" formControlName="othereducationdetails">
                             </mat-form-field>
                             <div class="error-message"
                                 *ngIf="detailsinformation.controls['othereducationdetails'].invalid && (detailsinformation.controls['othereducationdetails'].dirty || detailsinformation.controls['othereducationdetails'].touched)">
@@ -412,8 +453,7 @@
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <textarea rows="5" matInput autocomplete="off" formControlName="prideinqualification"
-                                    placeholder=" Are you ready to dump if your knowledge is not correct with open mind or do you think you know everything ? "
-                                    required>
+                                    placeholder=" Are you ready to dump if your knowledge is not correct with open mind or do you think you know everything ? ">
                                     </textarea>
                             </mat-form-field>
                             <div class="error-message"
@@ -446,7 +486,7 @@
                         <label>Family Details <small>(parents/ spouse/ children)</small></label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" formControlName="familydetails" required>
+                                <input matInput autocomplete="off" formControlName="familydetails">
                             </mat-form-field>
                             <div class="error-message"
                                 *ngIf="detailsinformation.controls['familydetails'].invalid && (detailsinformation.controls['familydetails'].dirty || detailsinformation.controls['familydetails'].touched)">
@@ -518,8 +558,7 @@
                         <label>Friend Name</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" formControlName="friendname"
-                                    [required]="isfriendname">
+                                <input matInput autocomplete="off" formControlName="friendname">
                             </mat-form-field>
                             <div class="error-message"
                                 *ngIf="detailsinformation.controls['friendname'].invalid && (detailsinformation.controls['friendname'].dirty || detailsinformation.controls['friendname'].touched)">
@@ -653,7 +692,7 @@
 
                     <div class=" col d-flex flex-row  justify-content-end">
                         <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block mt-4">
-                            {{iseditable ? "Update" :"Register" }}
+                            {{iseditable ? "Update" :"Update" }}
                         </button>
                         <button type="reset" class="btn btn-outline-secondary btn-rounded d-inline-block mt-4 ">
                             Cancel

@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 import { CoursesService } from '../courses.service';
 
@@ -35,8 +36,8 @@ export class AddCoursedocumentComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
   pageno: number = 1
-  updatebtn=false
-  submitbtn=true
+  updatebtn: boolean = false
+  submitbtn = true
   title = ''
   keyword = ''
   description = ''
@@ -57,7 +58,7 @@ export class AddCoursedocumentComponent implements OnInit {
 
   displaycontent: boolean = false
   courseform!: FormGroup;
-  courseList:any
+  courseList: any
 
   onpaginatechange(event: any) {
     if (event.pageIndex === 0) {
@@ -69,7 +70,7 @@ export class AddCoursedocumentComponent implements OnInit {
   }
 
 
-  displayedColumns = ['id', 'title', 'description','course', 'buttons']
+  displayedColumns = ['id', 'documentTitle', 'description', 'buttons']
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
@@ -77,11 +78,23 @@ export class AddCoursedocumentComponent implements OnInit {
     private _snackBar: MatSnackBar, private dialog: MatDialog
   ) {
 
+    this.filterData = {
+      filterColumnNames: this.displayedColumns.map((ele: any) => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
+    };
 
-    this.service.getcoursemedia().subscribe({
+    this.getdata()
+  }
+
+  getdata() {
+    this.service.getcoursedoc().subscribe({
       next: (response) => {
         console.log(response);
         this.data = response
+        this.data = this.data.reverse()
 
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
@@ -99,33 +112,18 @@ export class AddCoursedocumentComponent implements OnInit {
 
       }
     })
-
-    this.filterData = {
-      filterColumnNames: this.displayedColumns.map((ele: any) => ({ "Key": ele, "Value": "" })),
-      gridData: this.gridData,
-      dataSource: this.dataSource,
-      paginator: this.paginator,
-      sort: this.sort
-    };
-
-
-    console.log(this.filterData);
-
-
-
-
   }
 
   ngOnInit(): void {
     this.getcourseslist()
-    this.courseform = this.formbuilder.group({courses: [null, Validators.compose([Validators.required])],})
+    this.courseform = this.formbuilder.group({ courses: [null, Validators.compose([Validators.required])], })
     this.addmediaform = this.formbuilder.group({
+      documentId: [null],
 
+      courses1: [null, Validators.compose([Validators.required])],
 
-      courses1:[null, Validators.compose([Validators.required])],
-
-      mediatitle:[null, Validators.compose([Validators.required])],
-      docfile: [null, Validators.compose([])],
+      mediatitle: [null, Validators.compose([Validators.required])],
+      docfile: [null],
       mediadescription: [null, Validators.compose([Validators.required])],
     })
   }
@@ -166,15 +164,15 @@ export class AddCoursedocumentComponent implements OnInit {
 
   //   this.gobutton()
   // }
-  cancelbt(){
+  cancelbt() {
     this.displaycontent = false
     this.addmediaform.reset()
-    this.updatebtn=false
-    this.submitbtn=true
+    this.updatebtn = false
+    this.submitbtn = true
 
   }
   gobutton() {
-    
+
 
     this.displaycontent = true
     this.categoryerror = false
@@ -184,7 +182,7 @@ export class AddCoursedocumentComponent implements OnInit {
   }
 
   onfilechange(event: any) {
-   
+
 
     this.filedata = event.target.files[0].name
   }
@@ -201,7 +199,7 @@ export class AddCoursedocumentComponent implements OnInit {
   }
   addmedia() {
 
-    
+
 
     this.paragraphchange()
 
@@ -210,34 +208,41 @@ export class AddCoursedocumentComponent implements OnInit {
 
     if (this.addmediaform.valid) {
 
-      this.addmediaform.value.mediafile = this.filedata
-      this.addmediaform.value.videofile = this.filedata1
+      this.addmediaform.value.docfile = this.filedata || ""
+      this.addmediaform.value.videofile = this.filedata1 || ""
 
-      this.addmediaform.value.socfile = this.filedata2
+      this.addmediaform.value.socfile = this.filedata2 || ""
 
+      if (this.updatebtn) {
+        console.log("editing");
+
+        this.saveData()
+        return
+      }
+      console.log("added");
 
       const body = {
+        "courseId": {
+          "coursesId": this.addmediaform.value.courses1
+        },
+        "documentTitle": this.addmediaform.value.mediatitle,
+        "uploadFile": this.addmediaform.value.docfile,
+        "description": this.addmediaform.value.mediadescription,
+        "createdBy": null,
+        "createdDate": null,
+        "updateBy": null,
 
-        "uploadMediaFile": this.addmediaform.value.mediafile,
-
-        "videoLink": this.addmediaform.value.videolink,
-
-        "title": this.addmediaform.value.videotitle,
-
-        "description": this.addmediaform.value.videodescription,
-
-        "duration": this.toHoursAndMinutes(Number(this.addmediaform.value.videoduration)),
-
-        "metaKeyword": this.addmediaform.value.vidoemetakeywords,
-
+        "updateDate": null,
+        "isActive": "Y",
       }
 
       console.log(body);
 
-      this.service.postcoursemedia(body).subscribe({
+      this.service.postcoursedocAdd(body).subscribe({
         next: (response) => {
           this.addmediaform.reset()
           this.openSnackBar(response)
+          this.getdata()
 
         },
         error: (error) => {
@@ -254,29 +259,35 @@ export class AddCoursedocumentComponent implements OnInit {
   }
 
   viewDetails(element: any) {
-    this.submitbtn=false
-    this.updatebtn=false
-    this.displaycontent=true
+    this.submitbtn = false
+    this.updatebtn = false
+    this.displaycontent = true
+    console.log(element);
+
 
     this.addmediaform.setValue({
-      courses1:'',
-      mediatitle:'',
-      docfile: '',
-      mediadescription:'',
+      documentId: element.documentId,
+      courses1: element.courseId.coursesId,
+      mediatitle: element.documentTitle,
+      docfile: null,
+      mediadescription: element.description,
     })
 
   }
   editdetails(element: any) {
-    this.submitbtn=false
-    this.updatebtn=true
-    this.displaycontent=true
 
     this.addmediaform.setValue({
-      courses1:'',
-      mediatitle:'',
-      docfile: '',
-      mediadescription:'',
+      documentId: element.documentId,
+      courses1: element.courseId.coursesId,
+      mediatitle: element.documentTitle,
+      docfile: null,
+      mediadescription: element.description,
     })
+    this.submitbtn = true
+    this.updatebtn = true
+    this.displaycontent = true
+    console.log(this.updatebtn);
+
 
   }
   openSnackBar(data: any) {
@@ -284,44 +295,70 @@ export class AddCoursedocumentComponent implements OnInit {
       duration: 2 * 1000,
     });
   }
-  saveData(){
-    this.updatebtn=false
-    this.submitbtn=true
-    let data={
-      message:'Data updated Successfully'
+  saveData() {
+    console.log(this.addmediaform.value.docfile);
+
+    const body = {
+      "documentId": this.addmediaform.value.documentId,
+      "courseId": {
+        "coursesId": this.addmediaform.value.courses1
+      },
+      "documentTitle": this.addmediaform.value.mediatitle,
+      "uploadFile": this.addmediaform.value.docfile,
+      "description": this.addmediaform.value.mediadescription,
+      "createdBy": null,
+      "createdDate": null,
+      "updateBy": null,
+      "updateDate": null,
+      "isActive": "Y",
     }
-    this.openSnackBar(data)
+    console.log(body);
+
+    this.service.postcoursedocsave(body).subscribe({
+      next: (response) => {
+        this.addmediaform.reset()
+        this.openSnackBar(response)
+        this.getdata()
+        this.updatebtn = false
+        this.submitbtn = true
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    })
+    return
+
   }
   deletedetails(id: any) {
 
-    // const body = {
-    //   "coursesId": id
-    // }
+    const body = {
+      "documentId": id
+    }
 
-    // const dialogref = this.dialog.open(DialogPopupComponent, {
-    //   data: {
-    //     title: "Delete Confirmation",
-    //     message: "Are You Sure You Want To Delete this Course ?"
-    //   },
-    //   width: "30%"
-    // })
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this document ?"
+      },
+      width: "30%"
+    })
 
-    // dialogref.afterClosed().subscribe(data => {
-    //   if (data) {
-    //     this.AddCourseService.deletecourse(body).subscribe({
-    //       next: (response) => {
-    //         this.openSnackBar(response)
-    //         this.addCourseForm.reset()
-    //         this.getdata()
-    //       },
-    //       error: (error) => {
-    //         console.error(error.message);
-    //       }
-    //     })
-    //     return
-    //   }
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.service.postcoursedocdelete(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.getdata()
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
 
-    // })
+    })
 
 
 
