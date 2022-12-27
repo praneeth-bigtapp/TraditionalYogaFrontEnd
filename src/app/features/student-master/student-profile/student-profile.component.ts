@@ -479,6 +479,11 @@ this.donationAPI(data)
   }
 
   onVolunteerSubmit() {
+
+    if(this.AddVolunteerForm.invalid)
+    {
+      return this.AddVolunteerForm.markAllAsTouched()
+    }
     const data = 
     {
       "studentId": this.studentProfile.studentId,

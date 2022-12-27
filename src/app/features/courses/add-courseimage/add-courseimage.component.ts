@@ -77,7 +77,8 @@ submitbtn=true
     private service: CoursesService,
     private _snackBar: MatSnackBar, private dialog: MatDialog
   ) {
-
+    this.getAllData()
+    this.getcourseslist()
 
  
 
@@ -99,8 +100,7 @@ submitbtn=true
 
 
   ngOnInit(): void {
-    this.getAllData()
-    this.getcourseslist()
+  
     this.courseform = this.formbuilder.group({courses: [null, Validators.compose([Validators.required])],})
     this.addmediaform = this.formbuilder.group({
 
@@ -210,7 +210,10 @@ submitbtn=true
 
     this.paragraphchange()
 
-    console.log(this.addmediaform.valid);
+    if(this.addmediaform.invalid)
+    {
+      return this.addmediaform.markAllAsTouched()
+    }
 
 
     if (this.addmediaform.valid) {
@@ -238,11 +241,11 @@ submitbtn=true
 
       this.service.postcourseimageAdd(body).subscribe({
         next: (response) => {
-          this.courseList = response;
+          
           this.addmediaform.reset()
           this.openSnackBar(response)
           this.getAllData()
-          console.log(this.courseList);
+         
   
   
         },
@@ -299,6 +302,7 @@ submitbtn=true
     this.updatebtn=false
     this.submitbtn=true
     this.addmediaform.value.mediafile = this.filedata || ''
+   
 
     let body={
       "imageId": this.imageID,
@@ -319,12 +323,12 @@ submitbtn=true
   
     this.service.postcourseimagesave(body).subscribe({
       next: (response) => {
-        this.courseList = response;
+        
         this.updatebtn=false
         this.addmediaform.reset()
         this.openSnackBar(response)
         this.getAllData()
-        console.log(this.courseList);
+      
 
 
       },
@@ -352,11 +356,11 @@ submitbtn=true
       if (data) {
         this.service.postcourseimagedelete(body).subscribe({
           next: (response) => {
-            this.courseList = response;
+            
             this.addmediaform.reset()
             this.openSnackBar(response)
             this.getAllData()
-            console.log(this.courseList);
+           
     
     
           },

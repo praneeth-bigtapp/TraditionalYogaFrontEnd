@@ -840,7 +840,7 @@
                                                           
                                                         </mat-form-field>
                                                         <div class="error-message"
-                                                        *ngIf=" AddVolunteerForm.controls['category'].touched">
+                                                        *ngIf=" AddVolunteerForm.controls['category'].invalid && ( AddVolunteerForm.controls['category'].dirty || AddVolunteerForm.controls['category'].touched)">
                                                         <mat-error [hidden]=" !AddVolunteerForm.get('category')?.hasError('required')  ">
                                                             Catogory is mandatory
                                                         </mat-error>
@@ -860,7 +860,7 @@
                                                             
                                                         </mat-form-field>
                                                         <div class="error-message"
-                                                        *ngIf=" AddVolunteerForm.controls['Courses'].touched">
+                                                        *ngIf=" AddVolunteerForm.controls['Courses'].invalid && ( AddVolunteerForm.controls['Courses'].dirty || AddVolunteerForm.controls['Courses'].touched)">
                                                         <mat-error [hidden]=" !AddVolunteerForm.get('Courses')?.hasError('required')  ">
                                                             Courses is to be selected
                                                         </mat-error>
@@ -876,7 +876,7 @@
                                                        
                                                     </mat-form-field>
                                                     <div class="error-message"
-                                                    *ngIf=" AddVolunteerForm.controls['startDate'].touched">
+                                                    *ngIf=" AddVolunteerForm.controls['startDate'].invalid && ( AddVolunteerForm.controls['startDate'].dirty || AddVolunteerForm.controls['startDate'].touched)">
                                                     <mat-error [hidden]=" !AddVolunteerForm.get('startDate')?.hasError('required')  ">
                                                         date is to be selected
                                                     </mat-error>
@@ -889,7 +889,7 @@
                                                    
                                                     </mat-form-field>
                                                     <div class="error-message"
-                                                    *ngIf=" AddVolunteerForm.controls['endDate'].touched">
+                                                    *ngIf=" AddVolunteerForm.controls['endDate'].invalid && ( AddVolunteerForm.controls['endDate'].dirty || AddVolunteerForm.controls['endDate'].touched)">
                                                     <mat-error [hidden]=" !AddVolunteerForm.get('endDate')?.hasError('required')  ">
                                                         date is to be selected
                                                     </mat-error>
@@ -904,7 +904,7 @@
                                                            
                                                         </mat-form-field>
                                                         <div class="error-message"
-                                                    *ngIf=" AddVolunteerForm.controls['members'].touched">
+                                                    *ngIf="  AddVolunteerForm.controls['members'].invalid && ( AddVolunteerForm.controls['members'].dirty || AddVolunteerForm.controls['members'].touched)">
                                                     <mat-error [hidden]=" !AddVolunteerForm.get('members')?.hasError('required')  ">
                                                         Type the no of memebers
                                                     </mat-error>
@@ -932,9 +932,10 @@
                                                 </div>
                                             </div>
                                             <div class="d-flex justify-content-end">
+                                                
+                                                <button type="submit" class="btn btn-outline-secondary btn-rounded">Add</button>
                                                 <button type="button" class="btn btn-outline-secondary btn-rounded"
                                                     data-dismiss="modal" (click)="onAddVolunteer()" >Close</button>
-                                                <button type="submit" class="btn btn-outline-secondary btn-rounded">Add</button>
                                             </div>
                                         </form>
                                     </div>

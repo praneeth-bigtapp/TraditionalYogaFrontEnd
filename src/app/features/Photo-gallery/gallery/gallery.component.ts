@@ -207,7 +207,7 @@ export class GalleryComponent implements OnInit {
   addAlbum(){
 
     if(this.createalbum.invalid){
-      return 
+      return this.createalbum.markAllAsTouched()
     }
     const body=
       {

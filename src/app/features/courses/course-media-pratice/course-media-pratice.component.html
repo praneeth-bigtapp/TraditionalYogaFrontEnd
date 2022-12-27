@@ -35,10 +35,10 @@
                    
                     <hr>
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-4 ">
                             <label>Course</label>
         
-                            <mat-form-field class="pe-4" appearance="outline">
+                            <mat-form-field class="" appearance="outline">
                                 <mat-select matNativeControl formControlName="courses1"  [disabled]="updatebtn"  >
                                     <mat-option *ngFor="let item of courseList" 
                                         [value]="item.coursesId">{{item.coursesName}}
@@ -55,7 +55,7 @@
                         <div class="col-4">
                             <label>Practice Date</label>
         
-                            <mat-form-field class="pe-4" appearance="outline">
+                            <mat-form-field class="" appearance="outline">
                                 <input matInput formControlName="practiceDate" 
                                 type="date">
         
