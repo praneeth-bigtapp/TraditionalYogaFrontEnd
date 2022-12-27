@@ -39,7 +39,7 @@
                             <label>Course</label>
         
                             <mat-form-field class="pe-4" appearance="outline">
-                                <mat-select matNativeControl formControlName="courses1"  >
+                                <mat-select matNativeControl formControlName="courses1"  [disabled]="updatebtn"  [compareWith]="compareselect">
                                     <mat-option *ngFor="let item of courseList" 
                                         [value]="item.coursesId">{{item.coursesName}}
                                     </mat-option>

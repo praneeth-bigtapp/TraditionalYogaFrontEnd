@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 import { CoursesService } from '../courses.service';
 
@@ -35,8 +36,8 @@ export class AddCourseimageComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
   pageno: number = 1
-  updatebtn = false
-  submitbtn = true
+updatebtn=false
+submitbtn=true
   title = ''
   keyword = ''
   description = ''
@@ -51,13 +52,13 @@ export class AddCourseimageComponent implements OnInit {
 
   addmediaform!: FormGroup
   data!: any
-
+  imageID:any
   classtype!: string
 
 
   displaycontent: boolean = false
   courseform!: FormGroup;
-  courseList: any
+  courseList:any
 
   onpaginatechange(event: any) {
     if (event.pageIndex === 0) {
@@ -78,7 +79,7 @@ export class AddCourseimageComponent implements OnInit {
   ) {
 
 
-   
+ 
 
     this.filterData = {
       filterColumnNames: this.displayedColumns.map((ele: any) => ({ "Key": ele, "Value": "" })),
@@ -96,13 +97,26 @@ export class AddCourseimageComponent implements OnInit {
 
   }
 
-  getdata()
-  {
+
+  ngOnInit(): void {
+    this.getAllData()
+    this.getcourseslist()
+    this.courseform = this.formbuilder.group({courses: [null, Validators.compose([Validators.required])],})
+    this.addmediaform = this.formbuilder.group({
+
+
+      courses1:[null, Validators.compose([Validators.required])],
+
+      imagetitle:[null, Validators.compose([Validators.required])],
+      mediafile: [null, Validators.compose([])],
+      paragraph: [null, Validators.compose([Validators.required])],
+    })
+  }
+  getAllData(){
     this.service.getcourseimage().subscribe({
       next: (response) => {
         console.log(response);
         this.data = response
-        
 
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
@@ -121,21 +135,6 @@ export class AddCourseimageComponent implements OnInit {
       }
     })
   }
-
-  ngOnInit(): void {
-    this.getcourseslist()
-    this.courseform = this.formbuilder.group({ courses: [null, Validators.compose([Validators.required])], })
-    this.addmediaform = this.formbuilder.group({
-
-
-      courses1: [null, Validators.compose([Validators.required])],
-
-      imagetitle: [null, Validators.compose([Validators.required])],
-      mediafile: [null, Validators.compose([])],
-      paragraph: [null, Validators.compose([Validators.required])],
-    })
-  }
-
 
   paragraphchange() {
 
@@ -172,15 +171,15 @@ export class AddCourseimageComponent implements OnInit {
 
   //   this.gobutton()
   // }
-  cancelbt() {
+  cancelbt(){
     this.displaycontent = false
     this.addmediaform.reset()
-    this.updatebtn = false
-    this.submitbtn = true
+    this.updatebtn=false
+    this.submitbtn=true
 
   }
   gobutton() {
-
+    
 
     this.displaycontent = true
     this.categoryerror = false
@@ -190,7 +189,7 @@ export class AddCourseimageComponent implements OnInit {
   }
 
   onfilechange(event: any) {
-
+   
 
     this.filedata = event.target.files[0].name
   }
@@ -207,7 +206,7 @@ export class AddCourseimageComponent implements OnInit {
   }
   addmedia() {
 
-
+    
 
     this.paragraphchange()
 
@@ -216,44 +215,41 @@ export class AddCourseimageComponent implements OnInit {
 
     if (this.addmediaform.valid) {
 
-      this.addmediaform.value.mediafile = this.filedata || ""
-      this.addmediaform.value.videofile = this.filedata1 || ""
+      this.addmediaform.value.mediafile = this.filedata || ''
+      
 
-      this.addmediaform.value.socfile = this.filedata2 || ""
 
-      if (this.updatebtn) {
-        this.saveData()
-        return
-      }
-
-      const body = {
-
-        "uploadMediaFile": this.addmediaform.value.mediafile,
-
-        "videoLink": this.addmediaform.value.videolink,
-
-        "title": this.addmediaform.value.videotitle,
-
-        "description": this.addmediaform.value.videodescription,
-
-        "duration": this.toHoursAndMinutes(Number(this.addmediaform.value.videoduration)),
-
-        "metaKeyword": this.addmediaform.value.vidoemetakeywords,
-
-      }
+      let body={
+        
+        "courseId": {
+          "coursesId":  this.addmediaform.value.courses1
+      },
+      "imageTitle":  this.addmediaform.value.imagetitle,
+      "uploadFile":  this.addmediaform.value.mediafile,
+      "description":  this.addmediaform.value.paragraph,
+        "createdBy": null,
+        "createdDate": null,
+        "updateBy": null,
+        "updateDate": null,
+        "isActive": "Y"
+    }
 
       console.log(body);
 
-      this.service.postcoursemedia(body).subscribe({
+      this.service.postcourseimageAdd(body).subscribe({
         next: (response) => {
+          this.courseList = response;
           this.addmediaform.reset()
           this.openSnackBar(response)
-
+          this.getAllData()
+          console.log(this.courseList);
+  
+  
         },
         error: (error) => {
           console.error(error.message);
         }
-      })
+      });
 
 
     }
@@ -264,30 +260,31 @@ export class AddCourseimageComponent implements OnInit {
   }
 
   viewDetails(element: any) {
-    this.submitbtn = false
-    this.updatebtn = false
-    this.displaycontent = true
+    this.submitbtn=false
+    this.updatebtn=false
+    this.displaycontent=true
     this.addmediaform.setValue({
 
 
-      courses1: '',
+      courses1:'',
 
-      imagetitle: '',
+      imagetitle:'',
       mediafile: '',
       paragraph: ''
     })
 
   }
   editdetails(element: any) {
-    this.submitbtn = false
-    this.updatebtn = true
-    this.displaycontent = true
+    this.submitbtn=false
+    this.updatebtn=true
+    this.displaycontent=true
+    this.imageID=element.imageId
     this.addmediaform.setValue({
 
 
-      courses1: '',
+      courses1:'',
 
-      imagetitle: '',
+      imagetitle:'',
       mediafile: '',
       paragraph: ''
     })
@@ -298,45 +295,75 @@ export class AddCourseimageComponent implements OnInit {
       duration: 2 * 1000,
     });
   }
-  saveData() {
-    this.updatebtn = false
-    this.submitbtn = true
-    let data = {
-      message: 'Data updated Successfully'
-    }
-    this.openSnackBar(data)
+  saveData(){
+    this.updatebtn=false
+    this.submitbtn=true
+    this.addmediaform.value.mediafile = this.filedata || ''
+
+    let body={
+      "imageId": this.imageID,
+      "courseId": {
+          "coursesId":  this.addmediaform.value.courses1
+      },
+      "imageTitle":  this.addmediaform.value.imagetitle,
+      "uploadFile":  this.addmediaform.value.mediafile,
+      "description":  this.addmediaform.value.paragraph,
+      "createdBy": null,
+      "createdDate": null,
+      "updateBy": null,
+      "updateDate": null,
+      "isActive": "Y"
+  }
+    this.service.postcourseimagesave(body).subscribe({
+      next: (response) => {
+        this.courseList = response;
+        this.addmediaform.reset()
+        this.openSnackBar(response)
+        this.getAllData()
+        console.log(this.courseList);
+
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
   }
 
   deletedetails(id: any) {
 
-    // const body = {
-    //   "coursesId": id
-    // }
+    const body = {
+      "imageId": id
+  }
 
-    // const dialogref = this.dialog.open(DialogPopupComponent, {
-    //   data: {
-    //     title: "Delete Confirmation",
-    //     message: "Are You Sure You Want To Delete this Course ?"
-    //   },
-    //   width: "30%"
-    // })
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this Course ?"
+      },
+      width: "30%"
+    })
 
-    // dialogref.afterClosed().subscribe(data => {
-    //   if (data) {
-    //     this.AddCourseService.deletecourse(body).subscribe({
-    //       next: (response) => {
-    //         this.openSnackBar(response)
-    //         this.addCourseForm.reset()
-    //         this.getdata()
-    //       },
-    //       error: (error) => {
-    //         console.error(error.message);
-    //       }
-    //     })
-    //     return
-    //   }
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.service.postcourseimagedelete(body).subscribe({
+          next: (response) => {
+            this.courseList = response;
+            this.addmediaform.reset()
+            this.openSnackBar(response)
+            this.getAllData()
+            console.log(this.courseList);
+    
+    
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        });
+        return
+      }
 
-    // })
+    })
 
 
 

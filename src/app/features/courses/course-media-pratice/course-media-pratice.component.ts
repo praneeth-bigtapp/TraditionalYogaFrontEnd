@@ -347,6 +347,11 @@ this.addmediaform .setValue({
 })
 
   }
+  compareselect(obj1: any, obj2: any) {
+    
+    
+    return obj1 && obj2 && obj1 === obj2
+  }
   editdetails(element: any) {
     this.mediaId=element.mediaId
     this.addbtns=true
