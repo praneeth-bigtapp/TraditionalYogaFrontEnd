@@ -35,8 +35,8 @@ export class AddCourseimageComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
   pageno: number = 1
-updatebtn=false
-submitbtn=true
+  updatebtn = false
+  submitbtn = true
   title = ''
   keyword = ''
   description = ''
@@ -57,7 +57,7 @@ submitbtn=true
 
   displaycontent: boolean = false
   courseform!: FormGroup;
-  courseList:any
+  courseList: any
 
   onpaginatechange(event: any) {
     if (event.pageIndex === 0) {
@@ -78,27 +78,7 @@ submitbtn=true
   ) {
 
 
-    this.service.getcoursemedia().subscribe({
-      next: (response) => {
-        console.log(response);
-        this.data = response
-
-        this.dataSource = new MatTableDataSource<any>(this.data)
-        this.filterData.gridData = this.data;
-        this.filterData.dataSource = this.dataSource;
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.filterData.sort = this.sort;
-        for (let col of this.filterData.filterColumnNames) {
-          col.Value = '';
-        }
-
-      },
-      error: (error) => {
-        console.error(error.message);
-
-      }
-    })
+   
 
     this.filterData = {
       filterColumnNames: this.displayedColumns.map((ele: any) => ({ "Key": ele, "Value": "" })),
@@ -116,15 +96,41 @@ submitbtn=true
 
   }
 
+  getdata()
+  {
+    this.service.getcourseimage().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.data = response
+        
+
+        this.dataSource = new MatTableDataSource<any>(this.data)
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
+  }
+
   ngOnInit(): void {
     this.getcourseslist()
-    this.courseform = this.formbuilder.group({courses: [null, Validators.compose([Validators.required])],})
+    this.courseform = this.formbuilder.group({ courses: [null, Validators.compose([Validators.required])], })
     this.addmediaform = this.formbuilder.group({
 
 
-      courses1:[null, Validators.compose([Validators.required])],
+      courses1: [null, Validators.compose([Validators.required])],
 
-      imagetitle:[null, Validators.compose([Validators.required])],
+      imagetitle: [null, Validators.compose([Validators.required])],
       mediafile: [null, Validators.compose([])],
       paragraph: [null, Validators.compose([Validators.required])],
     })
@@ -166,15 +172,15 @@ submitbtn=true
 
   //   this.gobutton()
   // }
-  cancelbt(){
+  cancelbt() {
     this.displaycontent = false
     this.addmediaform.reset()
-    this.updatebtn=false
-    this.submitbtn=true
+    this.updatebtn = false
+    this.submitbtn = true
 
   }
   gobutton() {
-    
+
 
     this.displaycontent = true
     this.categoryerror = false
@@ -184,7 +190,7 @@ submitbtn=true
   }
 
   onfilechange(event: any) {
-   
+
 
     this.filedata = event.target.files[0].name
   }
@@ -201,7 +207,7 @@ submitbtn=true
   }
   addmedia() {
 
-    
+
 
     this.paragraphchange()
 
@@ -210,11 +216,15 @@ submitbtn=true
 
     if (this.addmediaform.valid) {
 
-      this.addmediaform.value.mediafile = this.filedata
-      this.addmediaform.value.videofile = this.filedata1
+      this.addmediaform.value.mediafile = this.filedata || ""
+      this.addmediaform.value.videofile = this.filedata1 || ""
 
-      this.addmediaform.value.socfile = this.filedata2
+      this.addmediaform.value.socfile = this.filedata2 || ""
 
+      if (this.updatebtn) {
+        this.saveData()
+        return
+      }
 
       const body = {
 
@@ -254,30 +264,30 @@ submitbtn=true
   }
 
   viewDetails(element: any) {
-    this.submitbtn=false
-    this.updatebtn=false
-    this.displaycontent=true
+    this.submitbtn = false
+    this.updatebtn = false
+    this.displaycontent = true
     this.addmediaform.setValue({
 
 
-      courses1:'',
+      courses1: '',
 
-      imagetitle:'',
+      imagetitle: '',
       mediafile: '',
       paragraph: ''
     })
 
   }
   editdetails(element: any) {
-    this.submitbtn=false
-    this.updatebtn=true
-    this.displaycontent=true
+    this.submitbtn = false
+    this.updatebtn = true
+    this.displaycontent = true
     this.addmediaform.setValue({
 
 
-      courses1:'',
+      courses1: '',
 
-      imagetitle:'',
+      imagetitle: '',
       mediafile: '',
       paragraph: ''
     })
@@ -288,11 +298,11 @@ submitbtn=true
       duration: 2 * 1000,
     });
   }
-  saveData(){
-    this.updatebtn=false
-    this.submitbtn=true
-    let data={
-      message:'Data updated Successfully'
+  saveData() {
+    this.updatebtn = false
+    this.submitbtn = true
+    let data = {
+      message: 'Data updated Successfully'
     }
     this.openSnackBar(data)
   }

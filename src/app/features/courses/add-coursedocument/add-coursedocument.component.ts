@@ -70,7 +70,7 @@ export class AddCoursedocumentComponent implements OnInit {
   }
 
 
-  displayedColumns = ['id', 'title', 'description', 'buttons']
+  displayedColumns = ['id', 'documentTitle', 'description', 'buttons']
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
