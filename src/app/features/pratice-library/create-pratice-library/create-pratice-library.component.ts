@@ -177,8 +177,8 @@ export class CreatePraticeLibraryComponent implements OnInit {
       videoduration: element.duration,
       vidoemetakeywords: element.metaKeyword,
     });
-    // if (element.subcategory)
-    // this.issubcategory = true
+    if (element.subCategoryId)
+      this.issubcategory = true
 
     this.issubmit = false
     this.displaycontent = true
@@ -235,8 +235,8 @@ export class CreatePraticeLibraryComponent implements OnInit {
       vidoemetakeywords: element.metaKeyword,
     });
 
-    // if (element.subcategory)
-    //   this.issubcategory = true
+    if (element.subCategoryId)
+      this.issubcategory = true
 
     this.iseditable = true
     this.issubmit = true
@@ -256,12 +256,9 @@ export class CreatePraticeLibraryComponent implements OnInit {
   }
 
   addmedia() {
-
-    console.log(this.addmediaform.get("subcategory").hasValidator(Validators.required));
-
     if (this.addmediaform.valid) {
 
-      const { praticelibraryId, category, videolink, videotitle, videodescription, videoduration, vidoemetakeywords } = this.addmediaform.value
+      const { praticelibraryId, category, subcategory, videolink, videotitle, videodescription, videoduration, vidoemetakeywords } = this.addmediaform.value
 
 
       const body = {
