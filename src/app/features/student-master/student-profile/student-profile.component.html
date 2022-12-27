@@ -837,9 +837,12 @@
                                                                     {{course.categoryName | titlecase}}
                                                                 </mat-option>
                                                             </mat-select>
-                                                            <mat-error *ngIf="AddVolunteerForm.controls['category'].hasError('required')">
-                                                                Category is to be selected
+                                                            <div class="error-message"
+                                                            *ngIf=" AddVolunteerForm.controls['category'].touched">
+                                                            <mat-error [hidden]=" !AddVolunteerForm.get('category')?.hasError('required')  ">
+                                                                Catogory is mandatory
                                                             </mat-error>
+                                                        </div>
                                                         </mat-form-field>
                                                     </div>
                                                     <div class="col-md-4">
@@ -852,9 +855,13 @@
                                                                     {{course.coursesName}}
                                                                 </mat-option>
                                                             </mat-select>
-                                                            <mat-error *ngIf="AddVolunteerForm.controls['Courses'].hasError('required')">
+                                                            <div class="error-message"
+                                                            *ngIf=" AddVolunteerForm.controls['Courses'].touched">
+                                                            <mat-error [hidden]=" !AddVolunteerForm.get('Courses')?.hasError('required')  ">
                                                                 Courses is to be selected
                                                             </mat-error>
+                                                        </div>
+                                                            
                                                         </mat-form-field>
                                                     </div>
                                                 </div>
@@ -863,18 +870,26 @@
                                                         <label>Start Date</label>
                                                         <mat-form-field appearance="outline">
                                                         <input matInput type="date"  formControlName="startDate" placeholder="select Date"required>
-                                                        <mat-error *ngIf="AddVolunteerForm.controls['startDate'].hasError('required')">
+                                                     
+                                                        <div class="error-message"
+                                                        *ngIf=" AddVolunteerForm.controls['startDate'].touched">
+                                                        <mat-error [hidden]=" !AddVolunteerForm.get('startDate')?.hasError('required')  ">
                                                             date is to be selected
                                                         </mat-error>
+                                                    </div>
                                                     </mat-form-field>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label>End Date</label>
                                                         <mat-form-field appearance="outline">
                                                         <input matInput type="date"  formControlName="endDate" placeholder="select Date"required>
-                                                        <mat-error *ngIf="AddVolunteerForm.controls['endDate'].hasError('required')">
+                                                       
+                                                        <div class="error-message"
+                                                        *ngIf=" AddVolunteerForm.controls['endDate'].touched">
+                                                        <mat-error [hidden]=" !AddVolunteerForm.get('endDate')?.hasError('required')  ">
                                                             date is to be selected
                                                         </mat-error>
+                                                    </div>
                                                     </mat-form-field>
                                                     </div>
                         

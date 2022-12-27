@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -341,7 +342,7 @@ this.addmediaform .setValue({
   videofile: '',
   courses1: element.courseId.coursesId,
   practiceTime:element.praticeTime,
-  practiceDate:element.praticeDate,
+  practiceDate:formatDate(element.praticeDate, "yyyy-MM-dd", 'en'),
   Instructions:element.instruction, 
  
 })
@@ -369,7 +370,7 @@ this.addmediaform .setValue({
       videofile: '',
       courses1: element.courseId.coursesId,
       practiceTime:element.praticeTime,
-      practiceDate:element.praticeDate,
+      practiceDate:formatDate(element.praticeDate, "yyyy-MM-dd", 'en'),
       Instructions:element.instruction, 
      
     })

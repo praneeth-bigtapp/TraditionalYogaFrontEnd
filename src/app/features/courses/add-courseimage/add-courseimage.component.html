@@ -33,7 +33,7 @@
                             </mat-form-field>
                             <div *ngIf="addmediaform.controls['courses1'].touched">
                                 <mat-error [hidden]=" !addmediaform.get('courses1')?.hasError('required')  ">
-                                    Select the course
+                                     Course is mandatory
                                 </mat-error>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                 <div class="error-message"
                                 *ngIf="addmediaform.controls['paragraph'].invalid && (addmediaform.controls['paragraph'].dirty || addmediaform.controls['paragraph'].touched)">
                                 <mat-error [hidden]=" !addmediaform.get('paragraph')?.hasError('required')  ">
-                                    Title is mandatory
+                                    Description is mandatory
                                 </mat-error>
                             </div>
     
@@ -134,7 +134,7 @@
 
                     </mat-form-field>
                     <div class="error-message"
-                        *ngIf="courseform.controls['courses'].invalid && (courseform.controls['courses'].dirty || courseform.controls['courses'].touched)">
+                        *ngIf=" courseform.controls['courses'].touched">
                         <mat-error [hidden]=" !courseform.get('courses')?.hasError('required')  ">
                             Course is mandatory
                         </mat-error>

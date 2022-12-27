@@ -320,6 +320,7 @@ submitbtn=true
     this.service.postcourseimagesave(body).subscribe({
       next: (response) => {
         this.courseList = response;
+        this.updatebtn=false
         this.addmediaform.reset()
         this.openSnackBar(response)
         this.getAllData()
