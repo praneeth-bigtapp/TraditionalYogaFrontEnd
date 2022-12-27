@@ -15,8 +15,8 @@
 
 
     <div class="card mt-5" *ngIf="displaycontent">
-        <div class="card-header text-white bg-secondary">
-            Add testimonials
+        <div class="card-header text-white bg-secondary"*ngIf="issubmit">
+            {{iseditable ? "Update testimonial" :"Add Testimonial" }}
         </div>
 
         <form class=" card-body bg-white " [formGroup]="testimonial" (ngSubmit)="addTestdata()">
@@ -74,15 +74,21 @@
                         </mat-error>
                     </div>
                 </div>
-
-
-
-            </div>
-            <div class="row float-right">
-                <div class="col-md-12 ">
+                <div class="col-md-6">
+                    <label>Date Of Add</label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <!-- <mat-label>End date</mat-label> -->
+                        <input matInput formControlName="Date" type="date">
+                        <mat-error [hidden]=" !testimonial.get('Date')?.hasError('required')  ">
+                            Date is mandatory
+                        </mat-error>
+                    </mat-form-field>
+                   
+                </div>
+                <div class="col-md-6 pt-3 ">
                     <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2"
                         *ngIf="issubmit">
-                        {{iseditable ? "Update" :"Upload Testimonial" }}
+                        {{iseditable ? "Update" :"Add Testimonial" }}
                     </button>
                     <button class="btn btn-outline-secondary btn-rounded d-inline-block m-2" (click)="reseteditable()">
                         Cancel
@@ -90,7 +96,10 @@
 
                 </div>
 
+
+
             </div>
+            
 
         </form>
 

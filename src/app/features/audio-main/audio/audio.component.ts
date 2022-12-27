@@ -52,7 +52,7 @@ export class AudioComponent implements OnInit {
   constructor(private formbuilder: FormBuilder, private audio: AudioService, private _snackBar: MatSnackBar, private dialog: MatDialog,) {
     this.Audiomanagement = this.formbuilder.group({
       course: [null, Validators.compose([Validators.required])],
-      courseid: [null],
+      // courseid: [null],
       Id: [null],
       category: [null, Validators.compose([Validators.required])],
       audiocategoryid: [null],
@@ -79,6 +79,7 @@ export class AudioComponent implements OnInit {
     };
     this.audio.getcourse().subscribe({
       next: (response) => {
+        console.log(response)
 
         this.courses = response
 
@@ -169,20 +170,25 @@ export class AudioComponent implements OnInit {
     return obj1 && obj2 && obj1 === obj2
   }
   coursecompare(obj1: any, obj2: any) {
+  
+
+    
    
     console.log({ obj1, obj2 });
 
-    return obj1 && obj2 && obj1 === obj2
+    return obj1 && obj2 && obj1 === obj2.coursesName
+ 
   }
   viewdetails(element: any) {
     this.displaycontent = true
     this.issubmit = false
+    console.log("hi ")
     console.log(element);
 
     this.Audiomanagement.setValue({
       audiocategoryid: element.audioCategoryId,
 
-      courseid: element.courseId,
+      // courseid: element.coursesId,
       course: element.courseId,
       Id: element.id,
       category: element.audioCategoryId.audioCategoryId,
@@ -209,7 +215,7 @@ export class AudioComponent implements OnInit {
     this.Audiomanagement.setValue({
       audiocategoryid: element.audioCategoryId,
 
-      courseid: element.courseId,
+      // courseid: element.courseId,
       course: element.courseId,
       Id: element.id,
       category: element.audioCategoryId.audioCategoryId,
@@ -320,7 +326,7 @@ export class AudioComponent implements OnInit {
     const body = {
 
       // "courseId": this.courseId,
-      "courseId": this.Audiomanagement.value.course,
+      "courseId": this.Audiomanagement.value.courseId,
       "audioCategoryId": {
         "audioCategoryId": Number(this.Audiomanagement.value.category)
 
@@ -348,7 +354,7 @@ export class AudioComponent implements OnInit {
       const body = {
         "id": this.Audiomanagement.value.Id,
         // "courseId": this.courseId,
-        "courseId": this.Audiomanagement.value.course,
+        "courseId": this.Audiomanagement.value.courseId,
         "audioCategoryId": {
           "audioCategoryId":
             Number(this.Audiomanagement.value.category),

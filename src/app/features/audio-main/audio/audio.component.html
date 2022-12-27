@@ -22,7 +22,7 @@
     <form [formGroup]="Audiomanagement" (ngSubmit)=" addAudiocategory()" class=" card bg-white mt-3"
         *ngIf="displaycontent">
 
-        <h3 class="card-header text-white card bg-secondary">Add Audio</h3>
+        <h3 class="card-header text-white card bg-secondary">{{iseditable ? "Update Audio" :"Add Audio" }}</h3>
 
 
         <div class="row d-flex m-2">
