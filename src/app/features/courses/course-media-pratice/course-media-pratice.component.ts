@@ -74,7 +74,7 @@ export class CourseMediaPraticeComponent implements OnInit {
   }
 
 
-  displayedColumns = ['id', 'title', 'description', 'PracticeDate','PracticeTime', 'duration', 'metaKeyword', 'buttons']
+  displayedColumns = ['id', 'videoTitle', 'description', 'praticeDate','praticeTime', 'createdDate', 'metaKeyword', 'buttons']
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
@@ -270,26 +270,34 @@ export class CourseMediaPraticeComponent implements OnInit {
 
       this.addmediaform.value.socfile = this.filedata2
 
+      let date=new Date()
+      // let date2=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
 
       const body = {
-
-        "uploadMediaFile": this.addmediaform.value.mediafile,
-
+       
+        "courseId": {
+            "coursesId": 2
+            
+        },
+        "praticeDate":this.addmediaform.value.practiceDate ,
+        "praticeTime":this.addmediaform.value.practiceTime,
         "videoLink": this.addmediaform.value.videolink,
-
-        "title": this.addmediaform.value.videotitle,
-
-        "description": this.addmediaform.value.videodescription,
-
-        "duration": this.toHoursAndMinutes(Number(this.addmediaform.value.videoduration)),
-
+        "videoTitle": this.addmediaform.value.videotitle,
+        "durationVideo": this.addmediaform.value.videoduration,
         "metaKeyword": this.addmediaform.value.vidoemetakeywords,
-
-      }
+        "fileUpload": this.addmediaform.value.videofile,
+        "description":this.addmediaform.value.videodescription,
+        "instruction": this.addmediaform.value.Instructions,
+        "createdBy": null,
+        "createdDate": date,
+        "updateBy": null,
+        "updateDate": null,
+        "isActive": "Y"
+    }
 
       console.log(body);
 
-      this.service.postcoursemedia(body).subscribe({
+      this.service.postcoursemediaAdd(body).subscribe({
         next: (response) => {
           this.addmediaform.reset()
           this.openSnackBar(response)
@@ -313,17 +321,20 @@ this.updatebtn=false
 this.submitbtn=false
 this.addbtns=false
 this.displaycontent=true
+console.log(element);
+let date=new Date(element.practiceDate)
+let date2=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
 this.addmediaform .setValue({
-  videolink: '',
-  videotitle: '',
-  videodescription: '',
-  videoduration: '',
-  vidoemetakeywords:'',
+  videolink: element.videoLink,
+  videotitle: element.videoTitle,
+  videodescription: element.description,
+  videoduration:element.durationVideo,
+  vidoemetakeywords:element.metaKeyword,
   videofile: '',
-  courses1: '',
-  practiceTime:'',
-  practiceDate:'',
-  Instructions:'', 
+  courses1: element.courseId.coursesName,
+  practiceTime:element.praticeTime,
+  practiceDate:date2,
+  Instructions:element.instruction, 
  
 })
 
@@ -333,17 +344,19 @@ this.addmediaform .setValue({
     this.updatebtn=true
     this.submitbtn=false
     this.displaycontent=true
+    let date=new Date(element.practiceDate)
+let date2=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
     this.addmediaform .setValue({
-      videolink: '',
-      videotitle: '',
-      videodescription: '',
-      videoduration: '',
-      vidoemetakeywords:'',
+      videolink: element.videoLink,
+      videotitle: element.videoTitle,
+      videodescription: element.description,
+      videoduration:element.durationVideo,
+      vidoemetakeywords:element.metaKeyword,
       videofile: '',
-      courses1: '',
-      practiceTime:'',
-      practiceDate:'',
-      Instructions:'', 
+      courses1: element.courseId.coursesName,
+      practiceTime:element.praticeTime,
+      practiceDate:date2,
+      Instructions:element.instruction, 
      
     })
 

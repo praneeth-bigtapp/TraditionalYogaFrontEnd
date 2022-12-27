@@ -400,7 +400,15 @@ this.donationAPI(data)
         this.volunterData = response;
         this.volunterData = this.volunterData.reverse();
 
-        this.dataSource = new MatTableDataSource(this.volunterData);
+        this.dataSource3 = new MatTableDataSource<any>(this.volunterData)
+        this.filterData3.gridData3 = this.volunterData;
+        this.filterData3.dataSource3 = this.dataSource3;
+        this.dataSource3.paginator3 = this.paginator3;
+        this.dataSource3.sort3 = this.sort3;
+        this.filterData3.sort3 = this.sort3;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
 
       },
       error: (error) => {

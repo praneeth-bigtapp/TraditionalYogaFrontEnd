@@ -13,7 +13,25 @@ export class CoursesService extends BaseHttp {
 
   getAllcoursesURL = 'courseList/getAll?operation=coursesList'
 
-  getcoursemediaURL = "course/getAll?operation=courseMediaPractice"
+  getcoursemediaURL ='courseList/getAll?operation=praticeMedia'
+  postcoursemedaiAddURL='courseList/praticeMedia?operation=add'
+  postcoursemediaSaveURL='courseList/praticeMedia?operation=save'
+  postcoursemediaDeleteURL='courseList/praticeMedia?operation=delete'
+
+  
+  getcourseImageURL ='courseList/getAll?operation=praticeImageMedia'
+  postcourseImageAddURL='courseList/praticeImageMedia?operation=add'
+  postcourseImageSaveURL='courseList/praticeImageMedia?operation=save'
+  postcourseImageDeleteURL='courseList/praticeImageMedia?operation=delete'
+
+  getcoursedocURL ='courseList/getAll?operation=praticeDocumentMedia'
+  postcoursedocAddURL='courseList/praticedocumentMedia?operation=add'
+  postcoursedocSaveURL='courseList/praticedocumentMedia?operation=save'
+  postcoursedocDeleteURL='courseList/praticedocumentMedia?operation=delete'
+
+
+
+
 
   postcoursemediaURL = "course/addCourseMediaPractice"
 
@@ -42,12 +60,49 @@ export class CoursesService extends BaseHttp {
     return this.get<any>(this.getAllcoursesURL);
 
   }
-  getcoursemedia() {
-
-    return this.get<any>(this.getcoursemediaURL);
-
-  }
+ 
   postcoursemedia(body: any) {
     return this.post(this.postcoursemediaURL, body)
   }
+  getcoursemedia() {
+    return this.get<any>(this.getcoursemediaURL);
+  }
+  postcoursemediaAdd(body: any) {
+    return this.post(this.postcoursemedaiAddURL, body)
+  }
+  postcoursemediasave(body: any) {
+    return this.post(this.postcoursemediaSaveURL, body)
+  }
+  postcoursemediadelete(body: any) {
+    return this.post(this.postcoursemediaDeleteURL, body)
+  }
+
+
+  getcourseimage() {
+    return this.get<any>(this.getcourseImageURL);
+  }
+  postcourseimageAdd(body: any) {
+    return this.post(this.postcourseImageAddURL, body)
+  }
+  postcourseimagesave(body: any) {
+    return this.post(this.postcourseImageSaveURL, body)
+  }
+  postcourseimagedelete(body: any) {
+    return this.post(this.postcourseImageDeleteURL, body)
+  }
+
+  getcoursedoc() {
+    return this.get<any>(this.getcoursedocURL);
+  }
+  postcoursedocAdd(body: any) {
+    return this.post(this.postcoursedocAddURL, body)
+  }
+  postcoursedocsave(body: any) {
+    return this.post(this.postcoursedocSaveURL, body)
+  }
+  postcoursedocdelete(body: any) {
+    return this.post(this.postcoursedocDeleteURL, body)
+  }
+
+
 }
