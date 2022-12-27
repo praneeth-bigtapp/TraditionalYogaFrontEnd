@@ -187,7 +187,7 @@
                         <input type="text" (keyup)="updatePagination('courseId')"
                             [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.taskName | titlecase}} </td>
+                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.taskName | titlecase}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="createDate">
@@ -212,7 +212,7 @@
                         <input type="text" (keyup)="updatePagination('Country')"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"><a
+                    <td mat-cell class="text-left" *matCellDef="let element"><a
                             class="text-decoration-underline text-primary" target="_blank" rel=”noreferrer”
                             [href]="element.mediafile">Video</a> </td>
                 </ng-container>
@@ -225,7 +225,7 @@
                         <input type="text" (keyup)="updatePagination('State')"
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.dueDate |date:'dd-MM-YYY'}}
+                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.dueDate |date:'dd-MM-YYY'}}
                     </td>
                 </ng-container>
 

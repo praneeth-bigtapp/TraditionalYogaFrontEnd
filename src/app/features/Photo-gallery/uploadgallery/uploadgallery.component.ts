@@ -12,7 +12,6 @@ export class UploadgalleryComponent implements OnInit {
 
   filelist: any = []
 
-  formdata = new FormData()
   albumlist: any
   album: any
 
@@ -24,9 +23,7 @@ export class UploadgalleryComponent implements OnInit {
 
     this.service.getAll().subscribe({
       next: (response) => {
-        console.log(response);
         this.albumlist = response
-
       },
       error: (error) => {
         console.error(error.message);
@@ -93,11 +90,13 @@ export class UploadgalleryComponent implements OnInit {
   }
 
   uploadimage() {
+
+    const formdata = new FormData()
     const files = this.filelist.map((ele: any) => ele.file)
     console.log(files);
 
     const body = {
-
+      
     }
     this.service.getuploadimages(body).subscribe({
       next: (response) => {

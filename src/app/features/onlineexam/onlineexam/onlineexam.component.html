@@ -164,7 +164,7 @@
                         <input type="text" (keyup)="updatePagination('category')"
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let element"> {{element.nameofTest}} </td>
+                    <td mat-cell *matCellDef="let element" class="text-left"> {{element.nameofTest}} </td>
                 </ng-container>
                 <ng-container matColumnDef="courseId">
                     <th mat-header-cell *matHeaderCellDef scope="col">
@@ -174,7 +174,7 @@
                         <input type="text" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let element"> {{element.courseId.coursesName}} </td>
+                    <td mat-cell *matCellDef="let element" class="text-left"> {{element.courseId.coursesName}} </td>
                 </ng-container>
                 <ng-container matColumnDef="levelId">
                     <th mat-header-cell *matHeaderCellDef scope="col">
@@ -194,7 +194,8 @@
                         <input type="text" (keyup)="updatePagination('startDate')"
                             [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let element"> {{element.testId.testname | titlecase}} </td>
+                    <td mat-cell *matCellDef="let element" class="text-left"> {{element.testId.testname | titlecase}}
+                    </td>
                 </ng-container>
                 <ng-container matColumnDef="Action">
                     <th mat-header-cell *matHeaderCellDef style="width: 150px;" scope="col">
