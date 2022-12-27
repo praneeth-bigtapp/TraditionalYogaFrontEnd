@@ -89,7 +89,7 @@ export class UploadgalleryComponent implements OnInit {
 
   }
 
-  uploadimage() {
+  uploadImage() {
 
     const formdata = new FormData()
     const files = this.filelist.map((ele: any) => ele.file)
