@@ -55,6 +55,7 @@ export class TestimonialsComponent implements OnInit {
 
     this.testimonial = this.formbuilder.group({
       id: [null],
+      Date:[null, Validators.compose([Validators.required])],
       Content: [null, Validators.compose([Validators.required])],
       name: [null, Validators.compose([Validators.required])],
       link: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
@@ -128,6 +129,7 @@ export class TestimonialsComponent implements OnInit {
   viewdetails(element: any) {
     this.testimonial.setValue({
       id: element.testimonalId,
+      Date:"",
       Content: element.content,
       name: element.givenByName,
       link: element.videoLink,
@@ -139,6 +141,7 @@ export class TestimonialsComponent implements OnInit {
   editdetails(element: any) {
     this.testimonial.setValue({
       id: element.testimonalId,
+      Date:"",
       Content: element.content,
       name: element.givenByName,
       link: element.videoLink,

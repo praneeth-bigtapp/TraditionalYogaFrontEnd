@@ -199,7 +199,8 @@ export class BannersComponent implements OnInit {
       isactive:element.isActive,
       Id:element.bannerId,
       coursetitle: element.courseTitle,
-      coursebannerimage: element.imagePath,
+      // coursebannerimage: element.imagePath,
+      coursebannerimage:"",
       bannername:element.bannerName,
 
       fromdate: formatDate(element.fromDate, "yyyy-MM-dd", 'en'),
@@ -219,9 +220,11 @@ export class BannersComponent implements OnInit {
       updateby:element.updateBy,
       updatedate:element.updateDate,
       isactive:element.isActive,
+   
       Id:element.bannerId,
       coursetitle: element.courseTitle,
-      coursebannerimage: element.imagePath,
+      // coursebannerimage: element.imagePath,
+      coursebannerimage:"",
 
       bannername:element.bannerName,
       fromdate: formatDate(element.fromDate, "yyyy-MM-dd", 'en'),
@@ -251,9 +254,10 @@ export class BannersComponent implements OnInit {
 
     const body = {
     
-      "bannerName":"",
+      "bannerName":this.coursebanner.value. bannername,
       "courseTitle": this.coursebanner.value.coursetitle,
       "imagePath": this.coursebanner.value.coursebannerimage,
+      
 
       "fromDate": formatDate(this.coursebanner.value.fromdate,"yyyy-MM-dd", 'en'),
       "toDate":formatDate (this.coursebanner.value.todate,"yyyy-MM-dd", 'en'),
@@ -264,17 +268,10 @@ export class BannersComponent implements OnInit {
         //editable
         // const name = this.data.filter((ele: any) => ele.content.content === Content)[0].givenByName.description
   const body={
-    // "bannerId":  "",
-    // "bannerName": this.coursebanner.value.coursename,
-    // "courseTitle": this.coursebanner.value.coursetitle,
-    // "imagePath":  this.coursebanner.value.coursebannerimage,
-    // "fromDate":  formatDate(this.coursebanner.value.fromdate,"yyyy-MM-dd", 'en'),
-    // "toDate": formatDate (this.coursebanner.value.todate,"yyyy-MM-dd", 'en'),
-    // "description":  this.coursebanner.value.description,
-    // "categoryId": 1
-    //
-    "bannerId": this.coursebanner.value,
-    "bannerName": this.coursebanner.value.coursename,
+   
+    "bannerId": this.coursebanner.value.Id,
+ 
+    "bannerName":this.coursebanner.value. bannername,
     "courseTitle":  this.coursebanner.value.coursetitle,
     "imagePath":this.coursebanner.value.coursebannerimage,
     "fromDate": formatDate(this.coursebanner.value.fromdate,"yyyy-MM-dd", 'en'),
@@ -287,12 +284,7 @@ export class BannersComponent implements OnInit {
     "updateBy":  this.coursebanner.value.updateby,
     "updateDate":  this.coursebanner.value.updatedate,
     "isActive":  this.coursebanner.value.isactive,
-    // dateofadd:element.dateOfAdd,
-    // createdby:element.createdBy,
-    // createddate:element.createdDate,
-    // updateby:element.updateBy,
-    // updatedate:element.updateDate,
-    // isactive:element.isActive,
+
   }
   
         console.log(body);
