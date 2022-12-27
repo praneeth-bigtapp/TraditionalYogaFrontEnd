@@ -198,8 +198,8 @@
                         <input type="text" (keyup)="updatePagination('Region')"
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element">
-                        {{element.dueDate | date:'dd-MM-YYY'}}
+                    <td mat-cell class="text-left" *matCellDef="let element">
+                        {{element.dateOfAssigement | date:'dd-MMM-YYY'}}
                     </td>
                 </ng-container>
 
@@ -225,7 +225,7 @@
                         <input type="text" (keyup)="updatePagination('State')"
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.dueDate |date:'dd-MM-YYY'}}
+                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.dueDate |date:'dd-MMM-YYY'}}
                     </td>
                 </ng-container>
 

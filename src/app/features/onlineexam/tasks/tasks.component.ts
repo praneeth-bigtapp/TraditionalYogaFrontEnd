@@ -169,6 +169,7 @@ export class TasksComponent implements OnInit {
       description: element.description,
       mediafile: null,
       duedate: formatDate(element.dueDate, "yyyy-MM-dd", "en"),
+      assignmentdate: formatDate(element.dateOfAssigement, "yyyy-MM-dd", "en")
 
     });
     this.displayform = true
@@ -217,6 +218,8 @@ export class TasksComponent implements OnInit {
       description: element.description,
       mediafile: null,
       duedate: formatDate(element.dueDate, "yyyy-MM-dd", "en"),
+      assignmentdate: formatDate(element.dateOfAssigement, "yyyy-MM-dd", "en")
+
 
     });
     this.isedit = true
@@ -238,10 +241,10 @@ export class TasksComponent implements OnInit {
     if (this.taskform.invalid)
       return this.taskform.markAllAsTouched()
 
-    this.taskform.value.mediafile = this.filedata
+    this.taskform.value.mediafile = this.filedata || ""
 
 
-    const { taskid, name, description, mediafile, duedate } = this.taskform.value
+    const { taskid, assignmentdate, name, description, mediafile, duedate } = this.taskform.value
     console.log({ taskid, name, description, mediafile, duedate });
 
 
@@ -252,13 +255,17 @@ export class TasksComponent implements OnInit {
       },
       "description": description,
       "mediafile": mediafile,
-      "dueDate": duedate
+      "dueDate": duedate,
+      "dateOfAssigement": assignmentdate,
+      "createdBy": null,
+      "createDate": null,
+      "updateBy": null,
+      "updateDate": null,
+      "isActive": "Y",
     }
 
     if (this.isedit) {
-
       //editable
-
       const body = {
         "taskId": taskid,
         "taskName": name,
@@ -267,10 +274,15 @@ export class TasksComponent implements OnInit {
         },
         "description": description,
         "mediafile": mediafile,
-        "dueDate": duedate
+        "dueDate": duedate,
+        "dateOfAssigement": assignmentdate,
+        "createdBy": null,
+        "createDate": null,
+        "updateBy": null,
+        "updateDate": null,
+        "isActive": "Y",
       }
 
-      console.log(body);
 
       this.service.updatetask(body).subscribe({
         next: (response) => {
