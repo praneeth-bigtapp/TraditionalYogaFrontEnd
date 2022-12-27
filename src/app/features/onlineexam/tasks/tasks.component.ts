@@ -20,6 +20,8 @@ export class TasksComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
+  pageno: number = 1
+
   selection = new SelectionModel<any>(true, []);
   selectedmember!: any
   taskform!: FormGroup
@@ -32,7 +34,7 @@ export class TasksComponent implements OnInit {
   filterData: any;
   gridData = [];
   dataSource: any;
-  displayedColumns: string[] = ['taskName', "createDate", "type", "dueDate", "action"];
+  displayedColumns: string[] = ['sno', 'taskName', "dateOfAssigement", "type", "dueDate", "action"];
 
   isedit: boolean = false
   data!: any
@@ -98,6 +100,16 @@ export class TasksComponent implements OnInit {
     this._snackbar.open(data.message, 'Close', {
       duration: 2 * 1000,
     });
+  }
+
+
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
   }
 
   gettask(course: string) {
