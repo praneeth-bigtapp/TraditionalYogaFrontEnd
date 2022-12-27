@@ -14,7 +14,7 @@ export class GalleryService extends BaseHttp {
   FullURL = 'webSite/getAll?operation=photoGallery'
 
 
-  uploadimagesURL = ""
+  uploadImagesUrl = "upload/photoGallery"
 
   getAll() {
     return this.get(this.FullURL)
@@ -35,7 +35,7 @@ export class GalleryService extends BaseHttp {
     return this.post(this.deleteURL, body)
   }
 
-  getuploadimages(body: any) {
-    return this.post(this.uploadimagesURL, body)
+  getUploadImages(body: any) {
+    return this.postImg(this.uploadImagesUrl, body)
   }
 }

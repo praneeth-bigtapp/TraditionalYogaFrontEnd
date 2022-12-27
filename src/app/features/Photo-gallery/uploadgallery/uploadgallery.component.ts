@@ -91,23 +91,21 @@ export class UploadgalleryComponent implements OnInit {
 
   uploadImage() {
 
-    const formdata = new FormData()
-    const files = this.filelist.map((ele: any) => ele.file)
+    const formData = new FormData();
+    const files = this.filelist.map((ele: any) => ele.file);
     console.log(files);
+    formData.append('picture', files);
 
-    const body = {
-      
-    }
-    this.service.getuploadimages(body).subscribe({
+    this.service.getUploadImages(formData).subscribe({
       next: (response) => {
-        this.openSnackBar(response)
-        this.filelist.length = 0
+        this.openSnackBar(response);
+        this.filelist.length = 0;
       },
       error: (error) => {
-        console.error(error.message);
+        console.error(error);
 
       }
-    })
+    });
 
   }
 
