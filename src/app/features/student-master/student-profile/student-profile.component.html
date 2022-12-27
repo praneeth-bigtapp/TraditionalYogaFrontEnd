@@ -595,7 +595,7 @@
                                                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
                                                   [filter]="filterData" />
                                               </th>
-                                              <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.date |date:'dd-MM-YYYY'}} </td>
+                                              <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.date |date:'dd-MMM-YYYY'}} </td>
                                             </ng-container>
                                       
                                       
@@ -760,7 +760,7 @@
                                                   </label>
                                                   <input type="text" (keyup)="updatePagination2()" [(ngModel)]="filterData2.filterColumnNames[1].Value" 
                                                   [filter]="filterData" /></th>
-                                                <td mat-cell *matCellDef="let element"> {{element.date | date:'dd-MM-YYYY'}} </td>
+                                                <td mat-cell *matCellDef="let element"> {{element.date | date:'dd-MMM-YYYY'}} </td>
                                             </ng-container>
 
                                             <!-- Weight Column -->
@@ -964,7 +964,7 @@
                                                     <input type="text" (keyup)="updatePagination3()" [(ngModel)]="filterData3.filterColumnNames[3].Value"
                                                       [filter]="filterData3" />
                                                   </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.startDate | date:'dd-MM-YYYY'}} </td>
+                                                <td mat-cell *matCellDef="let element"> {{element.startDate | date:'dd-MMM-YYYY'}} </td>
                                             </ng-container>
 
                                             <!-- Symbol Column -->
@@ -976,7 +976,7 @@
                                                     <input type="text" (keyup)="updatePagination3()" [(ngModel)]="filterData3.filterColumnNames[4].Value"
                                                       [filter]="filterData3" />
                                                   </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.endDate | date:'dd-MM-YYYY'}} </td>
+                                                <td mat-cell *matCellDef="let element"> {{element.endDate | date:'dd-MMM-YYYY'}} </td>
                                             </ng-container>
 
                                             <!-- Symbol Column -->

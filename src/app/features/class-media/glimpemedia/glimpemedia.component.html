@@ -134,7 +134,7 @@
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.date | date:'dd-MM-YYYY'}}
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.date | date:'dd-MMM-YYYY'}}
                     </td>
                 </ng-container>
 
