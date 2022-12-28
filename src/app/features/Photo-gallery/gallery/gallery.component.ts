@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { GalleryService } from '../service/gallery.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
@@ -186,6 +187,19 @@ export class GalleryComponent implements OnInit {
       "photoGalleryId": element.photoGalleryId
       
       }
+
+      const dialogref = this.dialog.open(DialogPopupComponent, {
+        data: {
+          title: "Delete Confirmation",
+          message: "Are You Sure You Want To Delete this library ?"
+        },
+        width: "30%",
+        height:"25%"
+      })
+  
+      dialogref.afterClosed().subscribe(data => {
+        if (data) {
+         
     this.service.DeleteLit(body).subscribe({
       next: (response) => {
         this.openSnackBar(response)
@@ -196,6 +210,12 @@ export class GalleryComponent implements OnInit {
         console.error(error.message);
       }
     })
+          return
+        }
+  
+      })
+
+
 
   }
   album() {
