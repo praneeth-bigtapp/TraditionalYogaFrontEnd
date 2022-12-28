@@ -349,7 +349,8 @@ export class StudentenrollmentComponent implements OnInit {
           title: "Email not Verified",
           message: "Email not Verified"
         },
-        width: "30%"
+        width: "30%",
+        height:"25%"
       })
 
       dialogref.afterClosed().subscribe(data => {

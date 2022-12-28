@@ -220,7 +220,8 @@ saveList() {
         title: "Delete Confirmation",
         message: "Are You Sure You Want To UnBlack the user ?"
       },
-      width: "30%"
+      width: "30%",
+      height:"25%"
     })
 
     dialogref.afterClosed().subscribe(data => {

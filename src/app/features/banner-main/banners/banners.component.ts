@@ -333,7 +333,8 @@ console.log(body);
         title: "Delete Confirmation",
         message: "Are You Sure You Want To Banners ?"
       },
-      width: "30%"
+      width: "30%",
+      height:"25%"
     })
 
     dialogref.afterClosed().subscribe((Id: any) => {

@@ -243,7 +243,8 @@ export class AudioComponent implements OnInit {
         title: "Delete Confirmation",
         message: "Are You Sure You Want To testimonial ?"
       },
-      width: "30%"
+      width: "30%",
+      height:"25%"
     })
 
     dialogref.afterClosed().subscribe((Id: any) => {

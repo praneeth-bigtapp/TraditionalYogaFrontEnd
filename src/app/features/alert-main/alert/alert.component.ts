@@ -194,7 +194,8 @@ export class AlertComponent implements OnInit {
         title: "Delete Confirmation",
         message: "Are You Sure You Want To Delete this Alert ?"
       },
-      width: "30%"
+      width: "30%",
+      height:"25%"
     })
 
     dialogref.afterClosed().subscribe(data => {
