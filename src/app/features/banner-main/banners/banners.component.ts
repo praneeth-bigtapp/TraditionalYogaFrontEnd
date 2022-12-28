@@ -254,7 +254,7 @@ export class BannersComponent implements OnInit {
 
     const body = {
     
-      "bannerName":this.coursebanner.value. bannername,
+      "bannerName":"",
       "courseTitle": this.coursebanner.value.coursetitle,
       "imagePath": this.coursebanner.value.coursebannerimage,
       

@@ -118,6 +118,7 @@ export class AudioComponent implements OnInit {
       next: (response: any) => {
         this.AllaudioCategory = response
         this.AllaudioCategory = this.AllaudioCategory.reverse()
+        console.log(response);
         for (let AllaudioCategory of this.AllaudioCategory) {
           AllaudioCategory.check = false;
           this.dataSource = new MatTableDataSource<any>(this.AllaudioCategory)
@@ -184,6 +185,7 @@ export class AudioComponent implements OnInit {
     this.issubmit = false
     console.log("hi ")
     console.log(element);
+    
 
     this.Audiomanagement.setValue({
       audiocategoryid: element.audioCategoryId,
@@ -326,7 +328,7 @@ export class AudioComponent implements OnInit {
     const body = {
 
       // "courseId": this.courseId,
-      "courseId": this.Audiomanagement.value.courseId,
+      "courseId": this.Audiomanagement.value.course,
       "audioCategoryId": {
         "audioCategoryId": Number(this.Audiomanagement.value.category)
 
@@ -354,12 +356,14 @@ export class AudioComponent implements OnInit {
       const body = {
         "id": this.Audiomanagement.value.Id,
         // "courseId": this.courseId,
-        "courseId": this.Audiomanagement.value.courseId,
+        "courseId": this.Audiomanagement.value.course,
         "audioCategoryId": {
           "audioCategoryId":
             Number(this.Audiomanagement.value.category),
+          
         },
         "uploadCategory": this.Audiomanagement.value.category,
+       
         "audioType": {
           "audioType": this.Audiomanagement.value.upload,
 
@@ -397,6 +401,7 @@ export class AudioComponent implements OnInit {
     this.audio.audiopost(body).subscribe({
       next: (response) => {
         this.Audiomanagement.reset()
+        console.log(response)
 
         this.getaudiocategory()
 
