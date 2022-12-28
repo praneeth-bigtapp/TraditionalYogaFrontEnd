@@ -164,6 +164,8 @@ export class CourseMediaPraticeComponent implements OnInit {
       },
       
       width: "80%",
+      height: "200px !important",
+      
      
       
     })

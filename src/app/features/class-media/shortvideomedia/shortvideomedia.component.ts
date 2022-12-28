@@ -283,7 +283,7 @@ export class ShortvideomediaComponent implements OnInit {
         message: "Are You Sure You Want To Delete this media ?"
       },
       width: "30%",
-      height: "25%"
+      // height: "25%"
     })
 
     dialogref.afterClosed().subscribe(data => {

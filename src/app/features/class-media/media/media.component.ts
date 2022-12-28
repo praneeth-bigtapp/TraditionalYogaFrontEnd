@@ -1,4 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
+import { formatDate } from '@angular/common';
+import { ElementSchemaRegistry } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -28,7 +30,7 @@ export class MediaComponent implements OnInit {
   displayform: boolean = false
   courselist!: any
   categorylist!: any
-  displayedColumns: string[] = ['classMediaId', 'date', 'typeOfClass', "noOfMediaFiles", "Action"];
+  displayedColumns: string[] = ['classMediaId', 'classDate', 'title', "classLink",'coursesName', "Action"];
   dataSource: any;
   disableSelect = new FormControl(false);
   dataForm!: FormGroup
@@ -178,6 +180,7 @@ export class MediaComponent implements OnInit {
     this.services.getALLMediadetails().subscribe({
       next: (response) => {
         this.data = response;
+        this.data=this.data.reverse()
         console.log(this.data);
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
@@ -228,14 +231,17 @@ export class MediaComponent implements OnInit {
 
 
     if (this.iseditable) {
-      const body = {
-        courseMediaId: courseMediaId,
-        courseId: course,
-        courseLink: videolink,
-        date: date,
-        title: title,
-        description: description
-      }
+     
+      const body =  {
+        "liveClassId": this.videoform.value.courseMediaId,
+        "coursesId": {
+            "coursesId":this.videoform.value.course
+        },
+        "classLink": this.videoform.value.videolink,
+        "classDate": this.videoform.value.date,
+        "title": this.videoform.value.title,
+        "description": this.videoform.value.description
+    }
       this.services.postupdatemedia(body).subscribe({
         next: (response) => {
   
@@ -252,13 +258,16 @@ export class MediaComponent implements OnInit {
       return 
     }
 
-    const body = {
-      courseId: course,
-      courseLink: videolink,
-      date: date,
-      title: title,
-      description: description
-    }
+    const body =  {
+      
+      "coursesId": {
+          "coursesId":this.videoform.value.course
+      },
+      "classLink": this.videoform.value.videolink,
+      "classDate": this.videoform.value.date,
+      "title": this.videoform.value.title,
+      "description": this.videoform.value.description
+  }
 
     this.services.postaddmedia(body).subscribe({
       next: (response) => {
@@ -288,13 +297,13 @@ export class MediaComponent implements OnInit {
 
     if (courseslist) {
 
-      filterData = filterData.filter((ele: any) => ele.courseId.courseId === courseslist)
+      filterData = filterData.filter((ele: any) => ele.coursesId.coursesId === courseslist)
     }
 
-    if (date) {
-      filterData = filterData.filter((ele: any) => ele.date === date)
+    // if (date) {
+    //   filterData = filterData.filter((ele: any) => ele.classDate === date)
 
-    }
+    // }
 
     this.dataSource = new MatTableDataSource<any>(filterData)
     this.filterData.gridData = filterData;
@@ -313,18 +322,24 @@ export class MediaComponent implements OnInit {
   }
 
   viewDetails(element: any) {
+    this.gobutton()
     this.iseditable=false
     this.submitbtn=false
     this.videoform.setValue({
-      courseMediaId: '',
-      course:'',
+      courseMediaId: element.liveClassId,
+      course:element.coursesId.coursesId,
 
-      videolink: '',
-      date: '',
-      title: '',
-      description: '',
+      videolink: element.classLink,
+      date: formatDate(element.classDate, "yyyy-MM-dd", 'en'),
+      title: element.title,
+      description: element.description,
 
     })
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
   }
   editdetails(element: any) {
     this.gobutton()
@@ -332,22 +347,27 @@ export class MediaComponent implements OnInit {
     this.submitbtn=false
 
     this.videoform.setValue({
-      courseMediaId: '',
-      course:'',
+      courseMediaId: element.liveClassId,
+      course:element.coursesId.coursesId,
 
-      videolink: '',
-      date: '',
-      title: '',
-      description: '',
+      videolink: element.classLink,
+      date: formatDate(element.classDate, "yyyy-MM-dd", 'en'),
+      title: element.title,
+      description: element.description,
 
     })
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
   }
   deletedetails(id: any) {
 
     console.log(id);
 
     const body = {
-      "classMediaId": id
+      "liveClassId": id
     }
 
     const dialogref = this.dialog.open(DialogPopupComponent, {
