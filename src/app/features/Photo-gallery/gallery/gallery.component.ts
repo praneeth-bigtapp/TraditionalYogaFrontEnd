@@ -113,7 +113,7 @@ export class GalleryComponent implements OnInit {
  return true
   }
   viewdetails(element: any) {
-    alert('hi')
+    // alert('hi')
     this.displaycontent=true
     this.submitbth=false
     this.updatebtn=false

@@ -31,8 +31,7 @@
 
             <div class="col-md-3 d-flex pt-2 ">
                 <mat-form-field appearance="outline">
-                    <mat-select [(ngModel)]="courseId" (selectionChange)="coursevalue()" formControlName="course"
-                        [compareWith]="coursecompare">
+                    <mat-select (selectionChange)="coursevalue()" formControlName="course">
                         <mat-option *ngFor="let element of courses" [value]="element.coursesId">{{element.coursesName}}
                         </mat-option>
                     </mat-select>
