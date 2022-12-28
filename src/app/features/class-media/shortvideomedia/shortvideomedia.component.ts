@@ -205,7 +205,7 @@ export class ShortvideomediaComponent implements OnInit {
 
 
   getalldata() {
-    this.services.getMediadetails().subscribe({
+    this.services.getALLshortvideos().subscribe({
       next: (response) => {
         this.data = response;
         console.log(this.data);
@@ -337,7 +337,7 @@ export class ShortvideomediaComponent implements OnInit {
 
     dialogref.afterClosed().subscribe(data => {
       if (data) {
-        this.services.deleteshortvideo(body).subscribe({
+        this.services.postdeleteshortvideo(body).subscribe({
           next: (response) => {
             this.openSnackBar(response)
             this.getalldata()
@@ -383,7 +383,7 @@ export class ShortvideomediaComponent implements OnInit {
         "classDate": date,
         "duration": duration
       }
-      this.services.updateshortvideo(body).subscribe({
+      this.services.postupdateshortvideo(body).subscribe({
         next: (response) => {
 
           this.shortvideoform.reset()
@@ -415,7 +415,7 @@ export class ShortvideomediaComponent implements OnInit {
     }
 
 
-    this.services.postshortvideo(body).subscribe({
+    this.services.postaddshortvideo(body).subscribe({
       next: (response) => {
 
         this.shortvideoform.reset()

@@ -116,7 +116,7 @@ export class GlimpemediaComponent implements OnInit {
     })
     this.getallcourse()
 
-    services.getcoursemediacategory().subscribe({
+    services.getALLGlimps().subscribe({
       next: (response) => {
 
         this.categorylist = response
@@ -245,7 +245,7 @@ export class GlimpemediaComponent implements OnInit {
 
     dialogref.afterClosed().subscribe(data => {
       if (data) {
-        this.services.deleteglimpse(body).subscribe({
+        this.services.postdeleteGlimps(body).subscribe({
           next: (response) => {
             this.openSnackBar(response)
             this.getalldata()
@@ -282,7 +282,7 @@ export class GlimpemediaComponent implements OnInit {
         "fileName": file
 
       }
-      this.services.updateglimpse(body).subscribe({
+      this.services.postupdateGlimps(body).subscribe({
         next: (response) => {
 
           this.glimpseform.reset()
@@ -303,7 +303,7 @@ export class GlimpemediaComponent implements OnInit {
       "fileName": file
     }
 
-    this.services.postglimpsevideo(body).subscribe({
+    this.services.postaddGlimps(body).subscribe({
       next: (response) => {
 
         this.glimpseform.reset()

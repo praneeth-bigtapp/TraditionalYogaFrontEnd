@@ -175,7 +175,7 @@ export class MediaComponent implements OnInit {
     }
   }
   getalldata() {
-    this.services.getMediadetails().subscribe({
+    this.services.getALLMediadetails().subscribe({
       next: (response) => {
         this.data = response;
         console.log(this.data);
@@ -236,6 +236,20 @@ export class MediaComponent implements OnInit {
         title: title,
         description: description
       }
+      this.services.postupdatemedia(body).subscribe({
+        next: (response) => {
+  
+          this.videoform.reset()
+  
+          this.openSnackBar(response)
+          this.getalldata()
+        },
+        error: (error) => {
+          console.error(error.message);
+  
+        }
+      })
+      return 
     }
 
     const body = {
@@ -246,7 +260,7 @@ export class MediaComponent implements OnInit {
       description: description
     }
 
-    this.services.postvideo(body).subscribe({
+    this.services.postaddmedia(body).subscribe({
       next: (response) => {
 
         this.videoform.reset()
@@ -346,7 +360,7 @@ export class MediaComponent implements OnInit {
 
     dialogref.afterClosed().subscribe(data => {
       if (data) {
-        this.services.deleteclassmedia(body).subscribe({
+        this.services.postdeletemedia(body).subscribe({
           next: (response) => {
             this.openSnackBar(response)
             this.getalldata()
