@@ -120,7 +120,7 @@
               [filter]="filterData" />
           </th>
 
-          <td mat-cell *matCellDef="let element" class="col-2  text-center ">{{element.galleryName}}
+          <td mat-cell *matCellDef="let element" class="col-2  text-left ">{{element.galleryName}}
 
           </td>
         </ng-container>
@@ -132,7 +132,7 @@
             <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
               [filter]="filterData" class="mx-2" />
           </th>
-          <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted"> {{element.createdDate | date:'dd-MMM-YYYY'}}
+          <td mat-cell *matCellDef="let element" class="col-2 px-2 text-left text-muted"> {{element.createdDate | date:'dd-MMM-YYYY'}}
           </td>
         </ng-container>
 
@@ -142,7 +142,7 @@
             <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
               [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
           </th>
-          <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center py-2"> {{element.galleryName}} </td>
+          <td mat-cell *matCellDef="let element" class="col-2 text-left py-2"> {{element.galleryName}} </td>
         </ng-container>
 
         <ng-container matColumnDef="numberofphotosadded">
@@ -167,7 +167,7 @@
                                 (click)="ChangeActive(element)"
                                 [matTooltip]="element.active"></mat-slide-toggle>
               <!-- <p>Disable</p> -->
-              <i class="fa-solid fa-eye" (click)="viewdetails(element)" matTooltip="View Course Activity"
+              <i class="fa-solid fa fa-eye" (click)="viewdetails(element)" matTooltip="View Course Activity"
                 matTooltip="View"></i>
 
               <span matTooltip="Edit" (click)="editbtn(element)">
