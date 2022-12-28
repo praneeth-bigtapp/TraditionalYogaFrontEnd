@@ -370,8 +370,9 @@
                             <input type="file" class="border" id="file" formControlName="photo" accept=" */*"
                                 (change)="photoupload($event)" required="true" />
                             <mat-error *ngIf="photoerror">Photo is mandatory</mat-error>
+                            <mat-error *ngIf="photosizeerror">Invalid Photo Size</mat-error>
                         </div>
-                        <div class="mx-auto" *ngIf="photo">
+                        <div class="mx-auto" *ngIf=" photo &&  !photosizeerror">
                             <img [src]="photourl" class="img-fluid mx-auto w-50" alt="passportphoto" />
                         </div>
                     </div>

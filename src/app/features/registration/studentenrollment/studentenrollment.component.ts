@@ -37,6 +37,7 @@ export class StudentenrollmentComponent implements OnInit {
   otp: any
   otperror: boolean = false
   isemailvalid: boolean = false
+  photosizeerror: boolean = false
 
 
   constructor(
@@ -164,6 +165,15 @@ export class StudentenrollmentComponent implements OnInit {
 
   }
 
+  // convertmmtopixel(value: any) {
+  //   return Number(value) * 3.7795275591
+  // }
+
+  convertPixelstoMM(value: any) {
+    return Number(value) * 0.2645833333
+
+  }
+
   getIPAddress() {
 
   }
@@ -223,28 +233,53 @@ export class StudentenrollmentComponent implements OnInit {
   }
 
 
+
+
   photoupload(event: any) {
+
     this.photoerror = this.detailsinformation.value.photo === null ? true : false
     this.photo = event.target.files[0]
+    const mm = 0.2645833333
     const reader = new FileReader();
+    let self = this
     reader.readAsDataURL(this.photo);
     reader.onload = (_event) => {
       const image = new Image()
       image.src = reader.result as string
-      this.photourl = reader.result
       image.onload = function (e) {
         const { path } = Object(e)
         const [img] = path
         // in px
-        const width = img.width
-        const height = img.height
-        console.log({ width, height });
+        const width = Math.round(img.width * mm)
+        const height = Math.round(img.height * mm)
+        console.log({ width, height })
+        self.checksizeconstranit(width, height, reader.result)
+
 
 
       };
 
     }
   }
+
+  checksizeconstranit(width: any, height: any, url: any) {
+    const [prefferedwidth, preferredheight] = [51, 51]
+
+    if (width <= prefferedwidth && height <= preferredheight) {
+      console.log("it fits");
+      this.photosizeerror = false
+      this.photourl = url
+
+    }
+    else {
+      console.log("it not fits");
+      this.photosizeerror = true
+      this.detailsinformation.get('photo')?.reset();
+
+
+    }
+  }
+
   termsandcondition() {
 
     const dialogref = this.dialog.open(DialogPopupComponent, {
@@ -314,13 +349,13 @@ export class StudentenrollmentComponent implements OnInit {
 
   detailedsubmit() {
     this.photoerror = this.detailsinformation.value.photo === null ? true : false
-    this.formdetails.value.photo = this.photo
+    this.photosizeerror = false
 
-    console.log(this.detailsinformation.value);
 
     if (this.detailsinformation.invalid)
       return this.detailsinformation.markAllAsTouched()
 
+    this.formdetails.value.photo = this.photo.name
 
     const body = {}
 
