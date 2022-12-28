@@ -662,6 +662,9 @@ width: calc(100% - 150px) !important;
 .fa-trash-alt {
     color: red;
 }
+.move-top{
+    z-index: 1;
+}
 
 .fa-pencil-alt {
     color: #616161;
