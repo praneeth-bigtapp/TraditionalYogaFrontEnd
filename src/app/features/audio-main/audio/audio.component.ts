@@ -171,21 +171,18 @@ export class AudioComponent implements OnInit {
     return obj1 && obj2 && obj1 === obj2
   }
   coursecompare(obj1: any, obj2: any) {
-  
 
-    
-   
     console.log({ obj1, obj2 });
 
-    return obj1 && obj2 && obj1 === obj2.coursesName
- 
+    return obj1 && obj2 && obj1 === obj2
+
   }
   viewdetails(element: any) {
     this.displaycontent = true
     this.issubmit = false
     console.log("hi ")
     console.log(element);
-    
+
 
     this.Audiomanagement.setValue({
       audiocategoryid: element.audioCategoryId,
@@ -360,10 +357,10 @@ export class AudioComponent implements OnInit {
         "audioCategoryId": {
           "audioCategoryId":
             Number(this.Audiomanagement.value.category),
-          
+
         },
         "uploadCategory": this.Audiomanagement.value.category,
-       
+
         "audioType": {
           "audioType": this.Audiomanagement.value.upload,
 

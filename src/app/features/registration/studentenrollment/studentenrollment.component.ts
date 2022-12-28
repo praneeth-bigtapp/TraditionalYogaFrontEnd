@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -6,6 +6,7 @@ import { Observable, startWith, map } from 'rxjs';
 import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 import { RegistrationService } from '../service/registration.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-studentenrollment',
@@ -45,6 +46,9 @@ export class StudentenrollmentComponent implements OnInit {
     private service: RegistrationService,
     private _snackBar: MatSnackBar,
     private dialog: MatDialog,
+    private http: HttpClient,
+    private zone: NgZone
+
 
   ) {
     this.formdetails = this.formbuilder.group({
@@ -68,6 +72,7 @@ export class StudentenrollmentComponent implements OnInit {
       termscondition: [null, Validators.compose([Validators.required])],
 
     })
+
 
 
     this.detailsinformation = this.formbuilder.group({
@@ -174,8 +179,34 @@ export class StudentenrollmentComponent implements OnInit {
 
   }
 
-  getIPAddress() {
 
+  private ipRegex = new RegExp(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/);
+  getRTCPeerConnection() {
+    return window.RTCPeerConnection
+  }
+  private determineLocalIp() {
+    const RTCPeerConnections = this.getRTCPeerConnection();
+
+    const pc = new RTCPeerConnection({ iceServers: [] });
+    pc.createDataChannel('');
+    pc.createOffer().then(pc.setLocalDescription.bind(pc));
+
+    pc.onicecandidate = (ice) => {
+      this.zone.run(() => {
+        if (!ice || !ice.candidate || !ice.candidate.candidate) {
+          return;
+        }
+
+        const localIp = ice.candidate.candidate;
+        console.log(localIp)
+        pc.onicecandidate = () => { };
+        pc.close();
+      });
+    };
+  }
+
+  getIPAddress() {
+   this.determineLocalIp()
   }
   openSnackBar(data: any) {
     this._snackBar.open(data.message, 'Close', {

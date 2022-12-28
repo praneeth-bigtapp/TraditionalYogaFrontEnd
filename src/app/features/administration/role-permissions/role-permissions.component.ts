@@ -138,7 +138,7 @@ export class RolePermissionsComponent implements OnInit {
 
     if (this.AddRolePermissionForm.invalid)
       return this.AddRolePermissionForm.markAllAsTouched()
-      
+
     const data = this.AddRolePermissionForm.value.roleName;
 
     this.rolePermissionsService.getRolePermissionsByRoleId(data).subscribe({
@@ -185,6 +185,7 @@ export class RolePermissionsComponent implements OnInit {
       response[i].editMode = false;
       RolePermissionsData.push(response[i]);
     }
+
     this.RolePermissionsList = RolePermissionsData;
     this.filterData.gridData = RolePermissionsData;
     this.dataSource = new MatTableDataSource(RolePermissionsData);

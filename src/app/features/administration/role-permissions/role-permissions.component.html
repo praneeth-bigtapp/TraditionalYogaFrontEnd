@@ -90,7 +90,7 @@
                         <input type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let element"> {{element.moduleName}} </td>
+                    <td mat-cell *matCellDef="let element" class="text-left"> {{element.module.moduleName}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="subMenuName">
@@ -101,7 +101,7 @@
                         <input type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let element"> {{element.subModuleName}} </td>
+                    <td mat-cell *matCellDef="let element" class="text-left"> {{element.subModule.subModuleName}} </td>
                 </ng-container>
 
                 <!-- <ng-container matColumnDef="permissionName">
@@ -125,7 +125,8 @@
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell *matCellDef="let element">
-                        <section *ngIf="!element.editMode">{{element.permissionName | uppercase}}</section>
+                        <section *ngIf="!element.editMode" class="text-left">{{element.permission.permissionName |
+                            uppercase}}</section>
                         <!-- <mat-select formControlName="RolePermissionForm.controls['permission']" *ngIf="element.editMode"> -->
                         <mat-select [(ngModel)]="RolePermissionValue" *ngIf="element.editMode">
                             <!-- <mat-select *ngIf="element.editMode"> -->

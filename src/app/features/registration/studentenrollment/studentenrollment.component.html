@@ -368,7 +368,7 @@
                         <label>Passport Photo <small>(51 x 51 mm)</small></label>
                         <div class="col px-0">
                             <input type="file" class="border" id="file" formControlName="photo" accept=" */*"
-                                (change)="photoupload($event)" required="true" />
+                                (change)="photoupload($event)" required="false" />
                             <mat-error *ngIf="photoerror">Photo is mandatory</mat-error>
                             <mat-error *ngIf="photosizeerror">Invalid Photo Size</mat-error>
                         </div>
