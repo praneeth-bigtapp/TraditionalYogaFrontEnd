@@ -10,12 +10,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { EnrollmentformComponent } from './enrollmentForm/enrollmentform.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { StudentenrollmentComponent } from './studentenrollment/studentenrollment.component';
 
 
 @NgModule({
   declarations: [
-    EnrollmentformComponent,
+    StudentenrollmentComponent,
   ],
   imports: [
     CommonModule,
@@ -29,8 +30,9 @@ import { EnrollmentformComponent } from './enrollmentForm/enrollmentform.compone
     MatRadioModule,
     MatAutocompleteModule,
     MatSnackBarModule,
-    MatAutocompleteModule
-    
+    MatAutocompleteModule,
+    MatDialogModule,
+
 
 
   ]
