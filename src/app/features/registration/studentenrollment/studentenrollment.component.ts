@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable, startWith,map } from 'rxjs';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 import { RegistrationService } from '../service/registration.service';
-import { catchError, map, Observable, startWith } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-enrollmentform',
-  templateUrl: './enrollmentform.component.html',
-  styleUrls: ['./enrollmentform.component.css']
+  selector: 'app-studentenrollment',
+  templateUrl: './studentenrollment.component.html',
+  styleUrls: ['./studentenrollment.component.css']
 })
-export class EnrollmentformComponent implements OnInit {
+export class StudentenrollmentComponent implements OnInit {
 
   iseditable: boolean = false
   formdetails!: FormGroup
@@ -45,7 +44,6 @@ export class EnrollmentformComponent implements OnInit {
     private service: RegistrationService,
     private _snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private http: HttpClient,
 
   ) {
     this.formdetails = this.formbuilder.group({

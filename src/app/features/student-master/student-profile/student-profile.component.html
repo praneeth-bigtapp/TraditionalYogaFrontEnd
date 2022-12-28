@@ -317,17 +317,20 @@
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
                                                     <mat-radio-group aria-label="Select an option" class="d-inline-block" >
-                                                        <mat-radio-button value="1" (click)=" changestatus('Active')">Active </mat-radio-button> &nbsp; &nbsp;
+                                                        <mat-radio-button value="1" (click)=" changestatus(studentProfile,1,'Active')" [checked]="studentProfile.statusId==1?true:false">Active </mat-radio-button> &nbsp; &nbsp;
                                                         &nbsp;
-                                                        <mat-radio-button value="2" (click)=" changestatus('Mentor Removed')">Mentor Removed </mat-radio-button>
+                                                        <mat-radio-button value="2" (click)=" changestatus(studentProfile,2,'Mentor Removed')" [checked]="studentProfile.statusId==2?true:false">Mentor Removed </mat-radio-button>
                                                         &nbsp; &nbsp; &nbsp;
-                                                        <mat-radio-button value="3" (click)=" changestatus('Withdrawn')">Withdrawn </mat-radio-button> &nbsp;
+                                                        <mat-radio-button value="3" (click)=" changestatus(studentProfile,3,'Withdrawn')"[checked]="studentProfile.statusId==3?true:false" >Withdrawn </mat-radio-button> &nbsp;
                                                         &nbsp; &nbsp;
-                                                        <mat-radio-button value="4" (click)=" changestatus('System removed')">System removed </mat-radio-button>
+                                                        <mat-radio-button value="4" (click)=" changestatus(studentProfile,4,'System removed')"[checked]="studentProfile.statusId==4?true:false" >System removed </mat-radio-button>
                                                         &nbsp; &nbsp; &nbsp;
-                                                        <mat-radio-button value="5" (click)=" changestatus('Reprovisioned (Only for admin & chief mentor)')">Reprovisioned (Only for admin & chief
-                                                            mentor)</mat-radio-button> &nbsp; &nbsp; &nbsp;
+                                                        <mat-radio-button value="5" (click)=" changestatus(studentProfile,5,'Reprovisioned (Only for admin & chief mentor)')" [checked]="studentProfile.statusId==5?true:false">Reprovisioned (Only for admin & chief mentor)</mat-radio-button> &nbsp; &nbsp; &nbsp;
                                                     </mat-radio-group>
+                                                    <!-- <mat-radio-group aria-label="Select an option" class="d-inline-block" >
+                                                        <mat-radio-button  class="me-2" (click)=" changestatus(studentProfile,index.statusId,index.statusName)" *ngFor="let index of allstatus" [checked]="studentProfile.statusId===index.statusId">{{index.statusName}} </mat-radio-button>
+                                                       
+                                                    </mat-radio-group> -->
                                                 </div>
                                             </div>
 
@@ -1089,13 +1092,8 @@
                                                    [filter]="filterData4" />
                                                </th>
                                             <td mat-cell *matCellDef="let element">
-                                                ({{element.CourseName}})
-                                                {{element.CourseDiscription}}
-                                                <br>
-                                                <b>
-                                                    {{element.CourseStartDate | date }} -
-                                                    {{element.CourseEndDate | date }}
-                                                </b>
+                                                ({{element.courseId.coursesName}})
+                                                
                                             </td>
                                         </ng-container>
 
@@ -1107,7 +1105,7 @@
                                                  <input type="text" (keyup)="updatePagination4()" [(ngModel)]="filterData4.filterColumnNames[0].Value"
                                                    [filter]="filterData4" />
                                                </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.AdmissionsStatus}} </td>
+                                            <td mat-cell *matCellDef="let element"> {{element.admissionsStatus}} </td>
                                         </ng-container>
 
                                         <ng-container matColumnDef="CompletionStatus">
@@ -1118,7 +1116,7 @@
                                                  <input type="text" (keyup)="updatePagination4()" [(ngModel)]="filterData4.filterColumnNames[0].Value"
                                                    [filter]="filterData4" />
                                                </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.CompletionStatus}} </td>
+                                            <td mat-cell *matCellDef="let element"> {{element.completionStatus}} </td>
                                         </ng-container>
 
                                         <tr mat-header-row *matHeaderRowDef="coursesProfileColumns"></tr>

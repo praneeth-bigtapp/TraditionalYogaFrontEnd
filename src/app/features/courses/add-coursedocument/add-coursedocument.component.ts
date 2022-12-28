@@ -272,6 +272,11 @@ export class AddCoursedocumentComponent implements OnInit {
       docfile: null,
       mediadescription: element.description,
     })
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+});
 
   }
   editdetails(element: any) {
@@ -287,6 +292,11 @@ export class AddCoursedocumentComponent implements OnInit {
     this.updatebtn = true
     this.displaycontent = true
     console.log(this.updatebtn);
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+});
 
 
   }

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
@@ -64,14 +65,14 @@ export class StudentProfileComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator4!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort4!: MatSort;
   gridData4 = [];
-  filterData4:any
+  filterData4: any
   gridData2 = [];
-  filterData2:any
+  filterData2: any
   gridData3 = [];
-  filterData3:any
+  filterData3: any
   volunteerForm = false
   filterData: any;
- 
+
   gridData = [];
   purchaseform = false
   searchStudentForm!: FormGroup;
@@ -85,7 +86,7 @@ export class StudentProfileComponent implements OnInit {
   donationsData: any;
   ePurchasesdata: any;
   volunterData: any;
-  catogeriesList:any
+  catogeriesList: any
 
   studentProfile: any;
   studentSelectStatus: Boolean = false;
@@ -103,10 +104,10 @@ export class StudentProfileComponent implements OnInit {
   practiceLibData = PARTICES_LIBARY;
   pageno: number = 1
   donations: any;
-  
+  allstatus: any
   dataSource2: any;
-  dataSource3:any
-  dataSource4:any
+  dataSource3: any
+  dataSource4: any
 
   onpaginatechange(event: any) {
     if (event.pageIndex === 0) {
@@ -120,13 +121,29 @@ export class StudentProfileComponent implements OnInit {
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
     private studentService: StudentService,
-    
-  ) { }
+    private _snackBar: MatSnackBar,
+
+  ) {
+
+    this.studentService.getALLstudentstatus().subscribe({
+      next: (response) => {
+        this.allstatus = response;
+
+        console.log("statusall");
+
+        console.log(this.allstatus);
+
+      },
+      error: (error) => {
+
+      }
+    });
+  }
 
 
   ngOnInit(): void {
     this.onselectCourse()
-    
+
     this.searchStudentForm = this.formBuilder.group({
       course: [null, Validators.compose([Validators.required])],
       studentId: [null, Validators.compose([Validators.required])]
@@ -185,7 +202,7 @@ export class StudentProfileComponent implements OnInit {
     for (let col of this.filterData4.filterColumnNames) {
       col.Value = '';
     }
-   
+
 
     this.filterData = {
       filterColumnNames: this.donationsColumns.map(ele => ({ "Key": ele, "Value": "" })),
@@ -195,31 +212,31 @@ export class StudentProfileComponent implements OnInit {
       sort: this.sort
     };
     this.dataSource = new MatTableDataSource<any>(this.donations)
-        this.filterData.gridData = this.donations;
-        this.filterData.dataSource = this.dataSource;
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.filterData.sort = this.sort;
-        for (let col of this.filterData.filterColumnNames) {
-          col.Value = '';
-        }
+    this.filterData.gridData = this.donations;
+    this.filterData.dataSource = this.dataSource;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.filterData.sort = this.sort;
+    for (let col of this.filterData.filterColumnNames) {
+      col.Value = '';
+    }
 
-        this.filterData3 = {
-          filterColumnNames: this.volunterColumns.map(ele => ({ "Key": ele, "Value": "" })),
-          gridData3: this.gridData3,
-          dataSource3: this.dataSource3,
-          paginator3: this.paginator3,
-          sort3: this.sort3
-        };
-        this.dataSource3 = new MatTableDataSource<any>(this.volunterData)
-            this.filterData3.gridData3 = this.volunterData;
-            this.filterData3.dataSource3 = this.dataSource3;
-            this.dataSource3.paginator3 = this.paginator3;
-            this.dataSource3.sort3 = this.sort3;
-            this.filterData3.sort3 = this.sort3;
-            for (let col of this.filterData.filterColumnNames) {
-              col.Value = '';
-            }
+    this.filterData3 = {
+      filterColumnNames: this.volunterColumns.map(ele => ({ "Key": ele, "Value": "" })),
+      gridData3: this.gridData3,
+      dataSource3: this.dataSource3,
+      paginator3: this.paginator3,
+      sort3: this.sort3
+    };
+    this.dataSource3 = new MatTableDataSource<any>(this.volunterData)
+    this.filterData3.gridData3 = this.volunterData;
+    this.filterData3.dataSource3 = this.dataSource3;
+    this.dataSource3.paginator3 = this.paginator3;
+    this.dataSource3.sort3 = this.sort3;
+    this.filterData3.sort3 = this.sort3;
+    for (let col of this.filterData.filterColumnNames) {
+      col.Value = '';
+    }
 
 
     this.getStudentList();
@@ -236,7 +253,7 @@ export class StudentProfileComponent implements OnInit {
     this.filterData.dataSource.sort = this.sort
 
   }
-  
+
   updatePagination4() {
     this.filterData4.dataSource4.paginator4 = this.paginator4;
     this.filterData4.dataSource4.sort4 = this.sort4
@@ -272,7 +289,7 @@ export class StudentProfileComponent implements OnInit {
 
         console.log(response);
         this.catogeriesList = response;
-        
+
       },
       error: (error) => {
 
@@ -286,15 +303,15 @@ export class StudentProfileComponent implements OnInit {
   onaddpurchase() {
     this.purchaseform = true
   }
-  donationAPI(id:any) {
+  donationAPI(id: any) {
     this.studentService.getDonationById(id).subscribe({
       next: (response) => {
         this.donations = response;
         this.donations = this.donations.reverse()
         console.log("donations");
-        
+
         console.log(this.donations);
-        
+
         this.dataSource = new MatTableDataSource<any>(this.donations)
         this.filterData.gridData = this.donations;
         this.filterData.dataSource = this.dataSource;
@@ -302,6 +319,30 @@ export class StudentProfileComponent implements OnInit {
         this.dataSource.sort = this.sort;
         this.filterData.sort = this.sort;
         for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+      },
+      error: (error) => {
+
+      }
+    });
+  }
+  courseProfileAPI(id: any) {
+    this.studentService.getCourseProfileById(id).subscribe({
+      next: (response) => {
+        this.coursesProfileData = response;
+        this.coursesProfileData = this.coursesProfileData.reverse()
+        console.log("course table");
+
+        console.log(this.coursesProfileData);
+
+        this.dataSource4 = new MatTableDataSource<any>(this.coursesProfileData)
+        this.filterData4.gridData4 = this.coursesProfileData;
+        this.filterData4.dataSource4 = this.dataSource4;
+        this.dataSource2.paginator4 = this.paginator4;
+        this.dataSource2.sort4 = this.sort4;
+        this.filterData2.sort4 = this.sort4;
+        for (let col of this.filterData4.filterColumnNames) {
           col.Value = '';
         }
       },
@@ -338,10 +379,11 @@ export class StudentProfileComponent implements OnInit {
 
       }
     });
-    const body={
-      "Id":data.studentId
+    const body = {
+      "Id": data.studentId
     }
-this.donationAPI(data)
+    this.donationAPI(data)
+    this.courseProfileAPI(data)
 
 
     console.log("Enterning Select Donation List");
@@ -397,7 +439,7 @@ this.donationAPI(data)
     this.studentService.getVolunteerById(data).subscribe({
       next: (response) => {
         console.log('volunteer table');
-        
+
         console.log(response);
         this.volunterData = response;
         this.volunterData = this.volunterData.reverse();
@@ -418,35 +460,49 @@ this.donationAPI(data)
       }
     });
   }
+  // checkstatus(id1: any, id2: any) {
+  //   console.log(id1 === id2)
+  //   return id1 === id2
+  // }
 
-  changestatus(msg:any){
+  changestatus(element: any, id: any, name: any) {
     const dialogref = this.dialog.open(DialogPopupComponent, {
       data: {
         title: "Status Confirmation",
-        message: "Are You Sure You Want To Change the Statust to "+msg+" ?"
+        message: "Are You Sure You Want To Change the Statust to " + name + " ?"
       },
       width: "30%"
     })
+    let body = {
+      "studentId": element.studentId,
+      "statusId": id
+    }
 
     dialogref.afterClosed().subscribe(data => {
-      // if (data) 
-      // {
-      //   this.AddCourseService.deletecourse(body).subscribe({
-      //     next: (response) => {
-      //       this.openSnackBar(response)
-      //       this.addCourseForm.reset()
-      //       this.getdata()
-      //     },
-      //     error: (error) => {
-      //       console.error(error.message);
-      //     }
-      //   })
-      //   return
-      // }
+      if (data) {
+        console.log(body);
+
+        this.studentService.poststudentstatusById(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+
+
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
 
     })
 
 
+  }
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
   }
 
   onPurchaseSubmit() {
@@ -480,24 +536,23 @@ this.donationAPI(data)
 
   onVolunteerSubmit() {
 
-    if(this.AddVolunteerForm.invalid)
-    {
+    if (this.AddVolunteerForm.invalid) {
       return this.AddVolunteerForm.markAllAsTouched()
     }
-    const data = 
+    const data =
     {
       "studentId": this.studentProfile.studentId,
       "categoryName": {
-          "volunteeringCategoryId": this.AddVolunteerForm.value.category
+        "volunteeringCategoryId": this.AddVolunteerForm.value.category
       },
       "courseId": {
-          "coursesId": this.AddVolunteerForm.value.Courses
+        "coursesId": this.AddVolunteerForm.value.Courses
       },
-      "startDate":this.AddVolunteerForm.value.startDate,
+      "startDate": this.AddVolunteerForm.value.startDate,
       "endDate": this.AddVolunteerForm.value.endDate,
       "servedAs": this.AddVolunteerForm.value.servedAs,
       "noOfMembers": this.AddVolunteerForm.value.members
-  }
+    }
 
     this.studentService.addVolunteerById(data).subscribe({
       next: (response) => {

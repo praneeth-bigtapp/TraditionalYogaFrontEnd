@@ -184,13 +184,18 @@ saveList() {
     })
     this.blackbtn=false
     this.updatebtn=true
-
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+});
 
   }
   onupdate(){
     this.blackbtn=true
     this.updatebtn=false
     this.blacklistForm.reset()
+    
   }
   oncancel(){
     this.blacklistForm.reset()
