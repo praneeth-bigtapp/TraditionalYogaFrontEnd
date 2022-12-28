@@ -141,7 +141,7 @@
             </ng-container>
 
             <ng-container matColumnDef="bannerName">
-                <th mat-header-cell class="col-md-2" *matHeaderCellDef >
+                <th mat-header-cell class="col-md-2 " *matHeaderCellDef >
                     <div class="">
                         <label mat-sort-header class=""> Banner Name</label>
                         <input matInput type="text" (keyup)="updatePagination()"
@@ -152,7 +152,7 @@
 
 
                 </th>
-                <td class=" col-md-2" *matCellDef="let element">
+                <td class=" col-md-2 text-start" *matCellDef="let element">
                     <div >
                         <div> {{element.bannerName}} </div>
                     </div>
@@ -170,7 +170,7 @@
                     </div>
 
                 </th>
-                <td mat-cell class="col-md-2 " *matCellDef="let element" >
+                <td mat-cell class="col-md-2  text-start " *matCellDef="let element" >
                     <!-- {{element.GivenBy || "admin"}} -->
                 </td>
             </ng-container>
@@ -184,7 +184,7 @@
                              />
                     </div>
                 </th>
-                <td mat-cell class="col-md-2" *matCellDef="let element">
+                <td mat-cell class="col-md-2  text-start" *matCellDef="let element">
                     {{element.dateOfAdd}}
                 </td>
             </ng-container>
@@ -197,7 +197,7 @@
                              />
                     </div>
                 </th>
-                <td mat-cell class="col-md-2" *matCellDef="let element">
+                <td mat-cell class="col-md-2  text-start" *matCellDef="let element">
                     Published
                 </td>
             </ng-container>

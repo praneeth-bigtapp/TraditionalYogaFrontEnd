@@ -31,8 +31,8 @@
 
             <div class="col-md-3 d-flex pt-2 ">
                 <mat-form-field appearance="outline">
-                    <mat-select (selectionChange)="coursevalue()" formControlName="course">
-                        <mat-option *ngFor="let element of courses" [value]="element.coursesId">{{element.coursesName}}
+                    <mat-select (selectionChange)="coursevalue()" formControlName="course" [disabled]="iseditable">
+                        <mat-option *ngFor="let element of courses" [value]="element.coursesId" >{{element.coursesName}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -243,30 +243,30 @@
                         [filter]="filterData" />
                 </th>
 
-                <td mat-cell *matCellDef="let element" class="col-2  text-center ">{{element.audioTitle}}
+                <td mat-cell *matCellDef="let element" class="col-2  text-start ">{{element.audioTitle}}
 
                 </td>
             </ng-container>
 
 
             <ng-container matColumnDef="uploadCategory">
-                <th mat-header-cell *matHeaderCellDef class="col-2 text-center"><label mat-sort-header>Category</label>
+                <th mat-header-cell *matHeaderCellDef class="col-md-3 text-center"><label mat-sort-header>Category</label>
                     <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
                         [filter]="filterData" class="mx-2" />
                 </th>
-                <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted">
+                <td mat-cell *matCellDef="let element" class="col-md-3 px-2 text-start text-muted">
                     {{element.audioCategoryId.audioName}}
                 </td>
             </ng-container>
 
 
             <ng-container matColumnDef="audioCategoryId">
-                <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>File
+                <th mat-header-cell *matHeaderCellDef class="col-md-2 text-center"> <label mat-sort-header>File
                         Type</label>
                     <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
-                        [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
+                        [filter]="filterData"  class="mx-2" />
                 </th>
-                <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center py-2">
+                <td mat-cell *matCellDef="let element" class="col-md-2 px-2 text-start py-2">
                     {{element.audioType.audioName}} </td>
             </ng-container>
 
@@ -274,7 +274,7 @@
                 <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>Duration
                     </label>
                     <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[4].Value"
-                        [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
+                        [filter]="filterData"  class="mx-2" />
                 </th>
                 <td mat-cell *matCellDef="let element" class="col-2 text-center py-2"> {{element.audioDuration}} </td>
             </ng-container>
@@ -285,7 +285,7 @@
                     <input type="text" (keyup)="updatePagination()" [filter]="filterData" class="mx-2"
                         disabled="true" />
                 </th>
-                <td mat-cell *matCellDef="let element" class="col text-center py-2">
+                <td mat-cell *matCellDef="let element" class="col text-start py-2">
                     <div class="d-flex flex-wrap justify-content-evenly align-items-center">
 
 
