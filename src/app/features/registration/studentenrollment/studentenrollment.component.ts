@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable, startWith,map } from 'rxjs';
+import { Observable, startWith, map } from 'rxjs';
 import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 import { RegistrationService } from '../service/registration.service';
@@ -225,12 +225,25 @@ export class StudentenrollmentComponent implements OnInit {
 
   photoupload(event: any) {
     this.photoerror = this.detailsinformation.value.photo === null ? true : false
-    this.photo = event.target.files[0].name
-    // const reader = new FileReader();
-    // reader.readAsDataURL(this.photo);
-    // reader.onload = (_event) => {
-    //   this.photourl = reader.result
-    // }
+    this.photo = event.target.files[0]
+    const reader = new FileReader();
+    reader.readAsDataURL(this.photo);
+    reader.onload = (_event) => {
+      const image = new Image()
+      image.src = reader.result as string
+      this.photourl = reader.result
+      image.onload = function (e) {
+        const { path } = Object(e)
+        const [img] = path
+        // in px
+        const width = img.width
+        const height = img.height
+        console.log({ width, height });
+
+
+      };
+
+    }
   }
   termsandcondition() {
 

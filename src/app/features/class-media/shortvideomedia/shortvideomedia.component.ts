@@ -19,7 +19,7 @@ export class ShortvideomediaComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   displaycontent: boolean = false
   pageno: number = 1
-  submitbtn=true
+  submitbtn = true
   isothers: boolean = false
   displayedColumns: string[] = ['classMediaId', 'title', 'course', "classdate", 'category', 'videolink', "duration", "Action"];
   shortvideoform!: any
@@ -33,6 +33,9 @@ export class ShortvideomediaComponent implements OnInit {
   categorylist: any;
   issubmit: boolean = true
   courses: any
+  subcategorylist!: any
+  praticecategory!: any
+  issubcategory: boolean = false
 
   tabledata: any = [{
     "classMediaId": 1,
@@ -107,6 +110,8 @@ export class ShortvideomediaComponent implements OnInit {
     }
     this.shortvideoform = this.formbuilder.group({
       courseMediaId: [null],
+      subcategory: [null],
+
       course: [null, Validators.compose([Validators.required])],
       videolink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
       date: [null, Validators.compose([Validators.required])],
@@ -128,6 +133,27 @@ export class ShortvideomediaComponent implements OnInit {
 
       }
     })
+
+    this.services.getcategory().subscribe({
+      next: (response) => {
+
+        this.praticecategory = response
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
+    this.services.getsubcategory().subscribe({
+      next: (response) => {
+
+        this.subcategorylist = response
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
     // this.getalldata()
 
     this.dataSource = new MatTableDataSource<any>(this.tabledata)
@@ -157,6 +183,26 @@ export class ShortvideomediaComponent implements OnInit {
     });
 
   }
+
+  categorychange(event: any) {
+
+
+    if (event.value === 12) {
+      this.issubcategory = true
+      this.shortvideoform.get('subcategory').addValidators(Validators.required);
+      this.shortvideoform.controls.subcategory.status = "INVALID"
+      return
+    }
+    this.shortvideoform.get('subcategory').removeValidators(Validators.required);
+    this.shortvideoform.controls.subcategory.status = "VALID"
+    this.shortvideoform.controls['subcategory'].setErrors({ 'required': false });
+    this.shortvideoform.get('subcategory').reset();
+
+
+    this.issubcategory = false
+
+  }
+
 
   getalldata() {
     this.services.getMediadetails().subscribe({
@@ -223,10 +269,23 @@ export class ShortvideomediaComponent implements OnInit {
       date: null,
       duration: null,
       category: null,
+      subcategory: null,
       title: null,
       description: null,
     })
-  
+    if (element.subCategoryId) {
+      this.issubcategory = true
+      this.shortvideoform.get('subcategory').removeValidators(Validators.required);
+      this.shortvideoform.controls.subcategory.status = "VALID"
+      this.shortvideoform.controls['subcategory'].setErrors({ 'required': false });
+    }
+
+
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
 
   }
   editdetails(element: any) {
@@ -240,13 +299,23 @@ export class ShortvideomediaComponent implements OnInit {
       date: null,
       duration: null,
       category: null,
+      subcategory: null,
       title: null,
       description: null,
     })
-    
-    
 
+    if (element.subCategoryId) {
+      this.issubcategory = true
+      this.shortvideoform.get('subcategory').removeValidators(Validators.required);
+      this.shortvideoform.controls.subcategory.status = "VALID"
+      this.shortvideoform.controls['subcategory'].setErrors({ 'required': false });
+    }
 
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
   deletedetails(id: any) {
 
@@ -293,7 +362,7 @@ export class ShortvideomediaComponent implements OnInit {
       return this.shortvideoform.markAllAsTouched()
 
 
-    const { courses, courseMediaId, videolink, date, duration, category, title, description } = this.shortvideoform.value
+    const { courses, courseMediaId, videolink, date, duration, category, subcategory, title, description } = this.shortvideoform.value
 
 
     if (this.iseditable) {

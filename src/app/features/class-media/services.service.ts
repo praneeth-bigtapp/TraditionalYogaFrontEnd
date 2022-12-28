@@ -9,6 +9,9 @@ export class ServicesService extends BaseHttp {
 
   getAllcoursesURL = 'courseList/getAll?operation=coursesList'
 
+  getcategoryURL = "libary/getAllLibary?operation=categoryLibary"
+  getsubcategoryURL = "libary/getAllLibary?operation=subCategory"
+
   getcoursemediacategoryURL = "course/getAll?operation=courseMediaCategory"
   // postvideoURL = "course/addCourseMedia?type=video"
   // postshortvideoURL = "course/addCourseMedia?type=shortVideo"
@@ -34,6 +37,14 @@ export class ServicesService extends BaseHttp {
 
   getMediadetails() {
     return this.get(this.getAllMediaURL)
+  }
+
+  getcategory() {
+    return this.get(this.getcategoryURL)
+  }
+
+  getsubcategory() {
+    return this.get(this.getsubcategoryURL)
   }
   getcoursesdetails() {
     return this.get(this.getAllcoursesURL)

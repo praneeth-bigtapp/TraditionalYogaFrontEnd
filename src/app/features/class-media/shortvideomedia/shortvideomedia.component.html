@@ -36,9 +36,8 @@
                         <label>Pratice library category</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <mat-select formControlName="category">
-                                    <mat-option *ngFor="let category of categorylist"
-                                        [value]="category.courseMediaCategoryId">
+                                <mat-select formControlName="category" (selectionChange)="categorychange($event)">
+                                    <mat-option *ngFor="let category of praticecategory" [value]="category.categoryId">
                                         {{category.categoryName | titlecase}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -48,6 +47,28 @@
                                     Category is mandatory
                                 </mat-error>
 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" *ngIf="issubcategory">
+                        <div class="row align-items-center ">
+                            <label>SubCategory</label>
+                            <div class="col">
+                                <mat-form-field appearance="outline">
+                                    <mat-select formControlName="subcategory" [disabled]="iseditable">
+                                        <mat-option *ngFor="let category of subcategorylist"
+                                            [value]="category.subCategoryId">
+                                            {{category.subCategoryName}}</mat-option>
+                                    </mat-select>
+
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="shortvideoform.controls['subcategory'].invalid && (shortvideoform.controls['subcategory'].dirty || shortvideoform.controls['subcategory'].touched)">
+                                    <mat-error [hidden]=" !shortvideoform.get('subcategory')?.hasError('required')  ">
+                                        Subcategory is mandatory
+                                    </mat-error>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -144,14 +165,16 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class=" d-flex flex-row justify-content-end  ">
-                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block   " *ngIf="submitbtn">
+                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block   "
+                        *ngIf="submitbtn">
                         Add
                     </button>
-                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block   "*ngIf="iseditable">
-                       Update
+                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block   "
+                        *ngIf="iseditable">
+                        Update
                     </button>
                     <button type="button" (click)="reseteditable()"
                         class="btn btn-outline-secondary btn-rounded d-inline-block    ">
