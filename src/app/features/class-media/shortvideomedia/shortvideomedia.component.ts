@@ -321,9 +321,11 @@ export class ShortvideomediaComponent implements OnInit {
 
     console.log(id);
 
-    const body = {
-      "courseMediaId": 1
+    const body =
+    {
+      "shortVideoId": id
     }
+
 
     const dialogref = this.dialog.open(DialogPopupComponent, {
       data: {
@@ -367,13 +369,19 @@ export class ShortvideomediaComponent implements OnInit {
 
     if (this.iseditable) {
       const body = {
-        "courseMediaId": courseMediaId,
-        "courseLink": videolink,
-        "date": date,
-        "duration": this.convertH2M(duration),
+        "shortVideoId": courseMediaId,
+        "coursesId": {
+          "coursesId": courses
+        },
+        "praticeLibaryId": {
+          "categoryId": category
+        },
+        "subCategoryId": subcategory,
+        "videoLink": videolink,
         "title": title,
-        "categoryId": category,
-        "description": description
+        "description": description,
+        "classDate": date,
+        "duration": duration
       }
       this.services.updateshortvideo(body).subscribe({
         next: (response) => {
@@ -387,17 +395,23 @@ export class ShortvideomediaComponent implements OnInit {
 
         }
       })
+      return
 
     }
 
     const body = {
-      "courseLink": videolink,
-      "courseId": this.data.course,
-      "date": date,
-      "duration": this.convertH2M(duration),
+      "coursesId": {
+        "coursesId": courses
+      },
+      "praticeLibaryId": {
+        "categoryId": category
+      },
+      "subCategoryId": subcategory,
+      "videoLink": videolink,
       "title": title,
-      "catgoryId": category,
-      "description": description
+      "description": description,
+      "classDate": date,
+      "duration": duration
     }
 
 
