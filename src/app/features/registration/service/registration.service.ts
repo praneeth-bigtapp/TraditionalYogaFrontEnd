@@ -14,8 +14,8 @@ export class RegistrationService extends BaseHttp {
   genderURL = "student/getAll?operation=gender"
 
 
-  postenrollmentURL = ""
-  postdetailsenrollmentURL = ""
+  postenrollmentURL = "register/enroll"
+  postdetailsenrollmentURL = "register/enrollDetailed"
 
 
 

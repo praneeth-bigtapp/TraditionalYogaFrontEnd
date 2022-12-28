@@ -33,11 +33,11 @@ export class StudentenrollmentComponent implements OnInit {
   isfriendname: boolean = false
   iseduationother: boolean = false
   isIndia: boolean = false
-  isemailverified: boolean = false
-  isemailsended: boolean = false
+  isemailverified: boolean = true
+  isemailsended: boolean = true
   otp: any
   otperror: boolean = false
-  isemailvalid: boolean = false
+  isemailvalid: boolean = true
   photosizeerror: boolean = false
 
 
@@ -65,7 +65,7 @@ export class StudentenrollmentComponent implements OnInit {
       houseno: [null, Validators.compose([Validators.pattern(InputvalidationService.inputvalidation.isnumbers)])],
       street: [null, Validators.compose([])],
       town: [null, Validators.compose([])],
-      state: [null, Validators.compose([])],
+      state: [null],
       country: [null, Validators.compose([])],
       pincode: [null, Validators.compose([Validators.pattern(InputvalidationService.inputvalidation.isnumbers)])],
       refferal: [null, Validators.compose([Validators.required])],
@@ -206,7 +206,7 @@ export class StudentenrollmentComponent implements OnInit {
   }
 
   getIPAddress() {
-   this.determineLocalIp()
+    this.determineLocalIp()
   }
   openSnackBar(data: any) {
     this._snackBar.open(data.message, 'Close', {
@@ -221,17 +221,7 @@ export class StudentenrollmentComponent implements OnInit {
     const value = event?.option?.value || event?.target?.value
 
     this.isIndia = value.toLowerCase() === "india"
-    console.log(this.isIndia);
-
-    if (this.isIndia) {
-      this.formdetails.get('state')?.addValidators(Validators.required);
-      // this.formdetails.controls.state.status = "INVALID"
-      return
-    }
-    this.formdetails.get('state')?.removeValidators(Validators.required);
-    // this.formdetails.controls.state.status = "VALID"
-
-    return
+    console.log(this.isIndia)
 
   }
 
@@ -350,7 +340,7 @@ export class StudentenrollmentComponent implements OnInit {
           message: "Email not Verified"
         },
         width: "30%",
-        height:"25%"
+        height: "25%"
       })
 
       dialogref.afterClosed().subscribe(data => {
@@ -360,16 +350,35 @@ export class StudentenrollmentComponent implements OnInit {
     if (this.formdetails.invalid)
       return this.formdetails.markAllAsTouched()
 
-    const { name, email, mobile, mothertounge, isenglishspoken, dateofbirth, gender, houseno, street, town, state, country, pincode } = this.formdetails.value
-    // console.log({ name, email, mobile, mothertounge, isenglishspoken, dateofbirth, gender, houseno, street, town, state, country, pincode });
+    const { firstname, middlename, lastname, refferal, termscondition, email, mobile, mothertounge, isenglishspoken, dateofbirth, gender, houseno, street, town, state, country, pincode } = this.formdetails.value
 
-
-    const body = {}
-
-
+    const body = {
+      "firstName": firstname,
+      "middleName": middlename,
+      "lastName": lastname,
+      "emailId": email,
+      "mobileNumber": mobile,
+      "dateOfBirth": dateofbirth,
+      "genderId": {
+        "genderId": gender
+      },
+      "houseNumber": houseno,
+      "street": street,
+      "townCity": town,
+      "country": country,
+      "state": state,
+      "pinCode": pincode,
+      "motherTongue": mothertounge,
+      "englishCommunicate": isenglishspoken ? "Y" : "N",
+      "aboutUsId": {
+        "aboutUsId": refferal
+      },
+      "termsCondition": termscondition ? "Y" : "N"
+    }
     this.service.postenrollment(body).subscribe({
       next: (response) => {
         this.openSnackBar(response)
+        this.formdetails.reset()
       },
       error: (error) => {
         console.error(error.message);
@@ -387,14 +396,40 @@ export class StudentenrollmentComponent implements OnInit {
     if (this.detailsinformation.invalid)
       return this.detailsinformation.markAllAsTouched()
 
-    this.formdetails.value.photo = this.photo.name
 
-    const body = {}
+    const { job, workinghours, educationdetails, prideinqualification, martialstatus, familydetails, familymemberconsent, familycooperation, friendparticipation, friendname, pastyogapratice, hobbies, isdedicated, familyfullname, familyrelationship, familycontactno, whythiscourse } = this.detailsinformation.value
+
+    const body = {
+      "registrationId": 1,
+      "passportPhoto": this.photo.name,
+      "professionId": {
+        "professionId": 1
+      },
+      "professionWorkingHours": workinghours,
+      "educationalId": {
+        "qualificationId": educationdetails
+      },
+      "prideQualification": prideinqualification,
+      "martialStatus": martialstatus,
+      "familyDetails": familydetails,
+      "consentFamily": familymemberconsent ? "Y" : "N",
+      "resistanceFamily": "N",
+      "participatingFamily": "N",
+      "pastPractice": pastyogapratice,
+      "hobbies": hobbies,
+      "hobbiesAside": isdedicated,
+      "referenceName": familyfullname,
+      "referenceRelationship": familyrelationship,
+      "referenceMobile": familycontactno,
+      "courseBriefly": whythiscourse
+    }
 
 
     this.service.postenrollment(body).subscribe({
       next: (response) => {
         this.openSnackBar(response)
+        this.detailsinformation.reset()
+
       },
       error: (error) => {
         console.error(error.message);
