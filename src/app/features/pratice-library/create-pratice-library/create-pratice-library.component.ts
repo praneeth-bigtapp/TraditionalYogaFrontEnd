@@ -143,6 +143,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
   }
 
   categorychange(event: any) {
+    console.log(this.addmediaform.controls.subcategory.errors);
 
     if (event.value === 12) {
       this.issubcategory = true
@@ -152,8 +153,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
     }
     this.addmediaform.get('subcategory').removeValidators(Validators.required);
     this.addmediaform.controls.subcategory.status = "VALID"
-    console.log(this.addmediaform.get("subcategory").hasValidator(Validators.required));
-
+    this.addmediaform.controls.subcategory.errors = null
 
     this.issubcategory = false
 
@@ -168,19 +168,30 @@ export class CreatePraticeLibraryComponent implements OnInit {
   }
 
   viewdetails(element: any) {
+    console.log(element);
+    this.issubcategory = false
+    console.log(element.subCategoryId !== null ? element.subCategoryId.subCategoryId : null);
+    this.addmediaform.get('subcategory').removeValidators(Validators.required);
+    this.addmediaform.controls.subcategory.status = "VALID"
+    this.addmediaform.controls.subcategory.errors = null
+
     this.addmediaform.setValue({
       praticelibraryId: element.praticeLibaryId,
-      category: element.categoryId,
-      subcategory: null,
-
+      category: element.libraryCategoryId.categoryId,
       videolink: element.videoLink,
+      subcategory: element.subCategoryId !== null ? element.subCategoryId.subCategoryId : null,
       videotitle: element.title,
       videodescription: element.message,
       videoduration: element.duration,
       vidoemetakeywords: element.metaKeyword,
     });
-    if (element.subCategoryId)
+
+    if (element.subCategoryId) {
       this.issubcategory = true
+      this.addmediaform.get('subcategory').removeValidators(Validators.required);
+      this.addmediaform.controls.subcategory.status = "VALID"
+      this.addmediaform.controls.subcategory.errors = null
+    }
 
     this.issubmit = false
     this.displaycontent = true
@@ -225,20 +236,30 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
   }
   editdetails(element: any) {
+    console.log(element);
+    this.issubcategory = false
+    console.log(element.subCategoryId !== null ? element.subCategoryId.subCategoryId : null);
+    this.addmediaform.get('subcategory').removeValidators(Validators.required);
+    this.addmediaform.controls.subcategory.status = "VALID"
+    this.addmediaform.controls.subcategory.errors = null
 
     this.addmediaform.setValue({
       praticelibraryId: element.praticeLibaryId,
-      category: element.categoryId,
+      category: element.libraryCategoryId.categoryId,
       videolink: element.videoLink,
-      subcategory: null,
+      subcategory: element.subCategoryId !== null ? element.subCategoryId.subCategoryId : null,
       videotitle: element.title,
       videodescription: element.message,
       videoduration: element.duration,
       vidoemetakeywords: element.metaKeyword,
     });
 
-    if (element.subCategoryId)
+    if (element.subCategoryId) {
       this.issubcategory = true
+      this.addmediaform.get('subcategory').removeValidators(Validators.required);
+      this.addmediaform.controls.subcategory.status = "VALID"
+      this.addmediaform.controls.subcategory.errors = null
+    }
 
     this.iseditable = true
     this.issubmit = true
@@ -258,12 +279,18 @@ export class CreatePraticeLibraryComponent implements OnInit {
   }
 
   addmedia() {
+    console.log(this.addmediaform.controls.subcategory.errors);
+
     if (this.addmediaform.valid) {
 
       const { praticelibraryId, category, subcategory, videolink, videotitle, videodescription, videoduration, vidoemetakeywords } = this.addmediaform.value
 
 
       const body = {
+        "libraryCategoryId": {
+          "categoryId": category
+        },
+        "subCategoryId": subcategory || null,
         "videoLink": videolink,
         "duration": videoduration,
         "title": videotitle,
@@ -275,7 +302,10 @@ export class CreatePraticeLibraryComponent implements OnInit {
       if (this.iseditable) {
         const body = {
           "praticeLibaryId": praticelibraryId,
-          "categoryId": category,
+          "libraryCategoryId": {
+            "categoryId": category
+          },
+          "subCategoryId": subcategory || null,
           "videoLink": videolink,
           "duration": videoduration,
           "title": videotitle,

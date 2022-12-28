@@ -62,9 +62,9 @@ export class DonationviewdetailsComponent implements OnInit {
 
         const { amountDonated, modeOfPayment, date } = this.apidata
 
-        const { donarId, donarName, address, email, contactNumber, indianCitizen, countryId, taxBenefits, identityProof, identityNumber, donationAmount, stripeCreditCard, cardName, message } = this.apidata.donarId
+        const { donarId, donarName, address, email, contactNumber, indianCitizen, countryId, registerMember, taxBenefits, identityProof, identityNumber, donationAmount, stripeCreditCard, cardName, message } = this.apidata.donarId
         console.log(this.apidata);
-        
+
         this.details.amount = donationAmount || "NIL"
         this.details.donorname = donarName || "NIL"
         this.details.address = address || "NIL"
@@ -74,7 +74,7 @@ export class DonationviewdetailsComponent implements OnInit {
         this.details.taxbenefits = this.fullform(taxBenefits) || "NIL"
         this.details.identityproof = identityProof || "NIL"
         this.details.identitynumber = identityNumber || "NIL"
-        this.details.isregisteredmember = '' || "NIL"
+        this.details.isregisteredmember = registerMember || "NIL"
         this.details.country = countryId.countryName || "NIL"
         this.details.modeofpayment = modeOfPayment || "NIL"
         this.details.cardname = cardName || "NIL"
