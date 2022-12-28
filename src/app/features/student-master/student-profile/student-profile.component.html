@@ -598,7 +598,7 @@
                                                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
                                                   [filter]="filterData" />
                                               </th>
-                                              <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.date |date:'dd-MM-YYYY'}} </td>
+                                              <td mat-cell *matCellDef="let element" class="col-2 text-left"> {{element.date |date:'dd-MM-YYYY'}} </td>
                                             </ng-container>
                                       
                                       
@@ -610,7 +610,7 @@
                                                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
                                                   [filter]="filterData" />
                                               </th>
-                                              <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.description}} </td>
+                                              <td mat-cell *matCellDef="let element" class="col-2 text-left"> {{element.description}} </td>
                                             </ng-container>
                                       
                                       
@@ -622,7 +622,7 @@
                                                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
                                                   [filter]="filterData" />
                                               </th>
-                                              <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.modeOfPayment}} </td>
+                                              <td mat-cell *matCellDef="let element" class="col-2 text-left"> {{element.modeOfPayment}} </td>
                                             </ng-container>
                                             <!-- <ng-container matColumnDef="currency">
                                               <th mat-header-cell *matHeaderCellDef class="col-1 text-center">  <label mat-sort-header>
@@ -763,7 +763,7 @@
                                                   </label>
                                                   <input type="text" (keyup)="updatePagination2()" [(ngModel)]="filterData2.filterColumnNames[1].Value" 
                                                   [filter]="filterData" /></th>
-                                                <td mat-cell *matCellDef="let element"> {{element.date | date:'dd-MM-YYYY'}} </td>
+                                                <td mat-cell *matCellDef="let element" class="text-left"> {{element.date | date:'dd-MM-YYYY'}} </td>
                                             </ng-container>
 
                                             <!-- Weight Column -->
@@ -774,7 +774,7 @@
                                                   <input type="text" (keyup)="updatePagination2()" [(ngModel)]="filterData2.filterColumnNames[2].Value" 
                                                   [filter]="filterData"  />
                                                 </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.purchaseAmount}}
+                                                <td mat-cell *matCellDef="let element" > {{element.purchaseAmount}}
                                                 </td>
                                             </ng-container>
 
@@ -786,7 +786,7 @@
                                                       </label> 
                                                       <input type="text" (keyup)="updatePagination2()" [(ngModel)]="filterData2.filterColumnNames[3].Value"
                                                   [filter]="filterData"  />  </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.productPurchase}}
+                                                <td mat-cell *matCellDef="let element" class="text-left"> {{element.productPurchase}}
                                                 </td>
                                             </ng-container>
 
@@ -972,7 +972,7 @@
                                                     <input type="text" (keyup)="updatePagination3()" [(ngModel)]="filterData3.filterColumnNames[1].Value"
                                                       [filter]="filterData3" />
                                                   </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.categoryName.categoryName}} </td>
+                                                <td mat-cell *matCellDef="let element" class="text-left"> {{element.categoryName.categoryName}} </td>
                                             </ng-container>
 
                                             <!-- Weight Column -->
@@ -984,7 +984,7 @@
                                                     <input type="text" (keyup)="updatePagination3()" [(ngModel)]="filterData3.filterColumnNames[2].Value"
                                                       [filter]="filterData3" />
                                                   </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.courseId.coursesName}} </td>
+                                                <td mat-cell *matCellDef="let element" class="text-left"> {{element.courseId.coursesName}} </td>
                                             </ng-container>
 
                                             <!-- Symbol Column -->
@@ -996,7 +996,7 @@
                                                     <input type="text" (keyup)="updatePagination3()" [(ngModel)]="filterData3.filterColumnNames[3].Value"
                                                       [filter]="filterData3" />
                                                   </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.startDate | date:'dd-MM-YYYY'}} </td>
+                                                <td mat-cell *matCellDef="let element" class="text-left"> {{element.startDate | date:'dd-MM-YYYY'}} </td>
                                             </ng-container>
 
                                             <!-- Symbol Column -->
@@ -1008,19 +1008,19 @@
                                                     <input type="text" (keyup)="updatePagination3()" [(ngModel)]="filterData3.filterColumnNames[4].Value"
                                                       [filter]="filterData3" />
                                                   </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.endDate | date:'dd-MM-YYYY'}} </td>
+                                                <td mat-cell *matCellDef="let element" class="text-left"> {{element.endDate | date:'dd-MM-YYYY'}} </td>
                                             </ng-container>
 
                                             <!-- Symbol Column -->
                                             <ng-container matColumnDef="SeervedAs">
                                                 <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
-                                                    SeervedAs
+                                                    ServedAs
                                                     </label>
                                           
                                                     <input type="text" (keyup)="updatePagination3()" [(ngModel)]="filterData3.filterColumnNames[5].Value"
                                                       [filter]="filterData3" />
                                                   </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.servedAs}} </td>
+                                                <td mat-cell *matCellDef="let element" class="text-left"> {{element.servedAs}} </td>
                                             </ng-container>
 
                                             <!-- Symbol Column -->
@@ -1032,7 +1032,7 @@
                                                     <input type="text" (keyup)="updatePagination3()" [(ngModel)]="filterData3.filterColumnNames[6].Value"
                                                       [filter]="filterData3" />
                                                   </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.noOfMembers}} </td>
+                                                <td mat-cell *matCellDef="let element" > {{element.noOfMembers}} </td>
                                             </ng-container>
 
                                             <tr mat-header-row *matHeaderRowDef="volunterColumns"></tr>
@@ -1091,7 +1091,7 @@
                                                  <input type="text" (keyup)="updatePagination4()" [(ngModel)]="filterData4.filterColumnNames[0].Value"
                                                    [filter]="filterData4" />
                                                </th>
-                                            <td mat-cell *matCellDef="let element">
+                                            <td mat-cell *matCellDef="let element" class="text-left">
                                                 ({{element.courseId.coursesName}})
                                                 
                                             </td>
@@ -1105,7 +1105,7 @@
                                                  <input type="text" (keyup)="updatePagination4()" [(ngModel)]="filterData4.filterColumnNames[0].Value"
                                                    [filter]="filterData4" />
                                                </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.admissionsStatus}} </td>
+                                            <td mat-cell *matCellDef="let element" class="text-left"> {{element.admissionsStatus}} </td>
                                         </ng-container>
 
                                         <ng-container matColumnDef="CompletionStatus">
@@ -1116,7 +1116,7 @@
                                                  <input type="text" (keyup)="updatePagination4()" [(ngModel)]="filterData4.filterColumnNames[0].Value"
                                                    [filter]="filterData4" />
                                                </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.completionStatus}} </td>
+                                            <td mat-cell *matCellDef="let element" class="text-left"> {{element.completionStatus}} </td>
                                         </ng-container>
 
                                         <tr mat-header-row *matHeaderRowDef="coursesProfileColumns"></tr>
