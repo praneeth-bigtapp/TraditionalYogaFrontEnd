@@ -271,9 +271,6 @@ export class ShortvideomediaComponent implements OnInit {
     });
   }
   deletedetails(id: any) {
-
-    console.log(id);
-
     const body =
     {
       "shortVideoId": id
@@ -330,9 +327,7 @@ export class ShortvideomediaComponent implements OnInit {
         "praticeLibaryId": {
           "categoryId": category
         },
-        "subCategoryId": {
-          "subCategoryId": subcategory
-        },
+        "subCategoryId": subcategory,
         "videoLink": videolink,
         "title": title,
         "description": description,
@@ -346,6 +341,9 @@ export class ShortvideomediaComponent implements OnInit {
 
           this.openSnackBar(response)
           this.getalldata()
+          this.shortvideoform.get('subcategory').removeValidators(Validators.required);
+          this.shortvideoform.controls.subcategory.status = "VALID"
+          this.shortvideoform.controls['subcategory'].setErrors({ 'required': false });
         },
         error: (error) => {
           console.error(error.message);
@@ -383,7 +381,9 @@ export class ShortvideomediaComponent implements OnInit {
 
         this.openSnackBar(response)
         this.getalldata()
-
+        this.shortvideoform.get('subcategory').removeValidators(Validators.required);
+        this.shortvideoform.controls.subcategory.status = "VALID"
+        this.shortvideoform.controls['subcategory'].setErrors({ 'required': false });
 
       },
       error: (error) => {
