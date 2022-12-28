@@ -739,7 +739,8 @@ width: calc(100% - 150px) !important;
 .table thead th {
     vertical-align: text-top;
 }
-.mat-datagrid td.mat-cell svg, .mat-datagrid td.mat-cell svg { color: #7e929f !important;}
+.mat-datagrid td.mat-cell svg, .mat-datagrid td.mat-cell .fa,
+.mat-datagrid td.mat-cell .fa-solid { color: #7e929f !important;}
 
 
 /* Popup code */
