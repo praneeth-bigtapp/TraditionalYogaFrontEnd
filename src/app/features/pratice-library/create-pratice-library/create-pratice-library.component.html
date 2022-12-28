@@ -2,7 +2,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#/createpraticelibrary">Practice library</a></li>
+            <li class="breadcrumb-item"><a href="#/createpraticelibrary">Resources</a></li>
 
             <li class="breadcrumb-item active" aria-current="page">Practice library</li>
         </ol>
@@ -196,10 +196,11 @@
     </div>
 
     <div class="card ">
-        <div class="card-header text-white bg-secondary">
-            Practice library
-        </div>
+        
         <div class="card-body bg-transparent px-0 py-2">
+            <div class="card-header text-white bg-secondary">
+                Practice library
+            </div>
             <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
                 aria-label="users">
                 <ng-container matColumnDef="praticeLibaryId">
