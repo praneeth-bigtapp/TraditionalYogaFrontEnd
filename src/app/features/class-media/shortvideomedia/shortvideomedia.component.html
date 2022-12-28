@@ -19,7 +19,7 @@
                     <div class="col-md-3">
                         <label>Course</label>
                         <mat-form-field appearance="outline">
-                            <mat-select formControlName="course">
+                            <mat-select formControlName="course" [disabled]="iseditable">
                                 <mat-option *ngFor="let course of courses" [value]="course.coursesId">
                                     {{course.coursesName}}</mat-option>
                             </mat-select>
@@ -36,7 +36,8 @@
                         <label>Pratice library category</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <mat-select formControlName="category" (selectionChange)="categorychange($event)">
+                                <mat-select formControlName="category" (selectionChange)="categorychange($event)"
+                                    [disabled]="iseditable">
                                     <mat-option *ngFor="let category of praticecategory" [value]="category.categoryId">
                                         {{category.categoryName | titlecase}}</mat-option>
                                 </mat-select>
@@ -73,7 +74,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <label>Video link</label>
                         <div class="col px-0">
                             <mat-form-field class="example-full-width" appearance="outline" id="field">
@@ -91,7 +92,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label>Title</label>
                         <div class="col px-0">
                             <mat-form-field class="example-full-width" appearance="outline" id="field">
@@ -191,7 +192,7 @@
         <div class="card-body bg-transparent px-0 py-0">
             <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
                 aria-label="users">
-                <ng-container matColumnDef="classMediaId">
+                <ng-container matColumnDef="shortVideoId">
                     <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
                         <label mat-sort-header>
                             S.No
@@ -213,7 +214,7 @@
                     <td mat-cell class="text-left" *matCellDef="let element"> {{element.title | titlecase}}
                     </td>
                 </ng-container>
-                <ng-container matColumnDef="course">
+                <ng-container matColumnDef="coursesId">
 
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
@@ -222,10 +223,10 @@
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.course}}
+                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.coursesId.coursesName}}
                     </td>
                 </ng-container>
-                <ng-container matColumnDef="classdate">
+                <ng-container matColumnDef="classDate">
 
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
@@ -234,10 +235,10 @@
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.classdate}}
+                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.classDate}}
                     </td>
                 </ng-container>
-                <ng-container matColumnDef="category">
+                <ng-container matColumnDef="praticeLibaryId">
 
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
@@ -246,7 +247,8 @@
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.category | titlecase }}
+                    <td mat-cell class="text-left" *matCellDef="let element">
+                        {{element.praticeLibaryId.categoryName | titlecase }}
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="videolink">
@@ -258,7 +260,7 @@
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-left" *matCellDef="let element"> <a href={{element.videolink}}
+                    <td mat-cell class="text-left" *matCellDef="let element"> <a href={{element.videoLink}}
                             class="text-primary "><u>Open</u></a>
                     </td>
                 </ng-container>
@@ -273,7 +275,7 @@
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.duration}}
+                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.duration}}
                     </td>
                 </ng-container>
 

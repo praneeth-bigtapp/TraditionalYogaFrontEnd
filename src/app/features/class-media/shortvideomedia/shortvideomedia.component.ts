@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -21,7 +22,7 @@ export class ShortvideomediaComponent implements OnInit {
   pageno: number = 1
   submitbtn = true
   isothers: boolean = false
-  displayedColumns: string[] = ['classMediaId', 'title', 'course', "classdate", 'category', 'videolink', "duration", "Action"];
+  displayedColumns: string[] = ['shortVideoId', 'title', 'coursesId', "classDate", 'praticeLibaryId', 'videolink', "duration", "Action"];
   shortvideoform!: any
   filterData: any;
   categoryerror: boolean = false
@@ -37,59 +38,7 @@ export class ShortvideomediaComponent implements OnInit {
   praticecategory!: any
   issubcategory: boolean = false
 
-  tabledata: any = [{
-    "classMediaId": 1,
-    "title": "Yoga",
-    "category": "student",
-    "videolink": "www.google.com",
-    "classdate": "23-12-2022",
-    "duration": 25,
-    "course": "RYO 355",
-
-  },
-  {
-    "classMediaId": 2,
-    "title": "Testing",
-    "category": "student",
-    "videolink": "www.google.com",
-    "classdate": "25-12-2022",
-    "duration": 30,
-    "course": "Meditation",
-
-  },
-
-  {
-    "classMediaId": 3,
-    "title": "RYO Short Video",
-    "category": "resources",
-    "videolink": "www.google.com",
-    "classdate": "25-12-2022",
-    "duration": 30,
-    "course": "Short Meditation",
-
-  },
-
-  {
-    "classMediaId": 4,
-    "title": "RYO Short Video",
-    "category": "pratice library",
-    "videolink": "www.google.com",
-    "classdate": "28-12-2022",
-    "duration": 15,
-    "course": "RYO 500",
-
-  },
-  {
-    "classMediaId": 5,
-    "title": "Short Meditation Short Video",
-    "category": "pratice library",
-    "videolink": "www.google.com",
-    "classdate": "29-12-2022",
-    "duration": 15,
-    "course": "RYO 50",
-
-  },
-  ]
+  tabledata: any
 
   constructor(
     private formbuilder: FormBuilder,
@@ -154,7 +103,7 @@ export class ShortvideomediaComponent implements OnInit {
         console.error(error.message);
       }
     });
-    // this.getalldata()
+    this.getalldata()
 
     this.dataSource = new MatTableDataSource<any>(this.tabledata)
     this.filterData.gridData = this.tabledata;
@@ -264,14 +213,15 @@ export class ShortvideomediaComponent implements OnInit {
     this.submitbtn = false
     this.displaycontent = true
     this.shortvideoform.setValue({
-      courseMediaId: null,
-      videolink: null,
-      date: null,
-      duration: null,
-      category: null,
-      subcategory: null,
-      title: null,
-      description: null,
+      courseMediaId: element.shortVideoId,
+      videolink: element.videoLink,
+      date: formatDate(element.classDate, "yyyy-MM-dd", "en"),
+      duration: element.duration,
+      category: element.praticeLibaryId.categoryId,
+      subcategory: element.subCategoryId !== null ? element.subCategoryId.subCategoryId : null,
+      title: element.title,
+      description: element.description,
+      course: element.coursesId.coursesId
     })
     if (element.subCategoryId) {
       this.issubcategory = true
@@ -294,14 +244,15 @@ export class ShortvideomediaComponent implements OnInit {
     this.displaycontent = true
 
     this.shortvideoform.setValue({
-      courseMediaId: null,
-      videolink: null,
-      date: null,
-      duration: null,
-      category: null,
-      subcategory: null,
-      title: null,
-      description: null,
+      courseMediaId: element.shortVideoId,
+      videolink: element.videoLink,
+      date: formatDate(element.classDate, "yyyy-MM-dd", "en"),
+      duration: element.duration,
+      category: element.praticeLibaryId.categoryId,
+      subcategory: element.subCategoryId !== null ? element.subCategoryId.subCategoryId : null,
+      title: element.title,
+      description: element.description,
+      course: element.coursesId.coursesId
     })
 
     if (element.subCategoryId) {
@@ -364,14 +315,14 @@ export class ShortvideomediaComponent implements OnInit {
       return this.shortvideoform.markAllAsTouched()
 
 
-    const { courses, courseMediaId, videolink, date, duration, category, subcategory, title, description } = this.shortvideoform.value
+    const { course, courseMediaId, videolink, date, duration, category, subcategory, title, description } = this.shortvideoform.value
 
 
     if (this.iseditable) {
       const body = {
         "shortVideoId": courseMediaId,
         "coursesId": {
-          "coursesId": courses
+          "coursesId": course
         },
         "praticeLibaryId": {
           "categoryId": category
@@ -389,6 +340,7 @@ export class ShortvideomediaComponent implements OnInit {
           this.shortvideoform.reset()
 
           this.openSnackBar(response)
+          this.getalldata()
         },
         error: (error) => {
           console.error(error.message);
@@ -401,7 +353,7 @@ export class ShortvideomediaComponent implements OnInit {
 
     const body = {
       "coursesId": {
-        "coursesId": courses
+        "coursesId": course
       },
       "praticeLibaryId": {
         "categoryId": category
@@ -414,6 +366,9 @@ export class ShortvideomediaComponent implements OnInit {
       "duration": duration
     }
 
+    console.log(body);
+
+
 
     this.services.postaddshortvideo(body).subscribe({
       next: (response) => {
@@ -421,6 +376,7 @@ export class ShortvideomediaComponent implements OnInit {
         this.shortvideoform.reset()
 
         this.openSnackBar(response)
+        this.getalldata()
 
 
       },
