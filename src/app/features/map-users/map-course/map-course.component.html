@@ -19,27 +19,28 @@
 <div class="map" *ngIf="displaycontent">
 
 
- 
+    <div class="card bg-white ">
+        <div class="card-header text-white bg-secondary">Search Users</div>
    
-    <h5 class="card-header text-white bg-secondary">Search Users</h5>
-    <div class="card bg-white pl-4">
-    
+    <!-- <h5 class="card-header text-white bg-secondary"></h5> -->
+   
+<!--     
         <div class="col-sm-7 d-flex ">
          
                 <button class="btn btn-outline-secondary btn-rounded d-inline-block m-2">Search Filter</button>
                 <mat-form-field class="example-full-width pt-2" appearance="outline"id="field">
                
 
-                    <!-- <mat-label>Search Suspicious user</mat-label> -->
+                  
                     <input type="search" matInput>
     
                 </mat-form-field>
 
 
-            </div><hr>
+            </div><hr> -->
 
 
-            <form class="" [formGroup]="Mapusers">
+            <form class="card-body bg-white" [formGroup]="Mapusers">
       
         <div class="row g-3 d-flex">
             <div class="col-md-4 ">
@@ -242,6 +243,7 @@
             </mat-form-field>
         </div>
     </div> -->
+    <div class="card">
 
     <h5 class="card-header text-white bg-secondary">Map Users to Course</h5>
     <table mat-table [dataSource]="filterData.dataSource"class="mat-elevation-z8 mat-datagrid w-100 " aria-label="subMenu" matSort>
@@ -395,6 +397,7 @@
     </table>
     <mat-paginator class="card-body" [pageSizeOptions]="[10,20,50,100]" showFirstLastButtons="" aria-label="Select page">
     </mat-paginator>
+</div>
    
 
     <div class="row">
