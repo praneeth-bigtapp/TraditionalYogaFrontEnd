@@ -210,7 +210,7 @@
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.title | titlecase}}
+                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.title | titlecase}}
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="course">
@@ -222,7 +222,7 @@
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.course}}
+                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.course}}
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="classdate">
@@ -234,7 +234,7 @@
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.classdate}}
+                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.classdate}}
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="category">
@@ -246,7 +246,7 @@
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.category | titlecase }}
+                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.category | titlecase }}
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="videolink">
@@ -258,7 +258,7 @@
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> <a href={{element.videolink}}
+                    <td mat-cell class="text-left" *matCellDef="let element"> <a href={{element.videolink}}
                             class="text-primary "><u>Open</u></a>
                     </td>
                 </ng-container>

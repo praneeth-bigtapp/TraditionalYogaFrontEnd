@@ -237,7 +237,7 @@
                         <input type="text" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.date | date:'dd-MMM-YYYY'}}
+                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.date | date:'dd-MMM-YYYY'}}
                     </td>
                 </ng-container>
 
@@ -250,7 +250,7 @@
                         <input type="text" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.typeOfClass | titlecase}}
+                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.typeOfClass | titlecase}}
                     </td>
                 </ng-container>
 

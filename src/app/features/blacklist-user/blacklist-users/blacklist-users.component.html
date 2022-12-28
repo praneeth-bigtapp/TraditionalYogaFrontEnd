@@ -80,21 +80,21 @@
         <th mat-header-cell *matHeaderCellDef class="col-2"> <label mat-sort-header>Date of Blacklist</label>
           <input type="text" (keyup)="updatePagination()"
           [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" /></th>
-        <td mat-cell *matCellDef="let element" class="col-2"> {{element.date | date:'dd-MMM-YYYY'}} </td>
+        <td mat-cell *matCellDef="let element" class="col-2 text-left"> {{element.date | date:'dd-MMM-YYYY'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="blacklistUserEmail" class="col-3">
         <th mat-header-cell *matHeaderCellDef class="col-3"> <label mat-sort-header>Email ID</label>
           <input type="text" (keyup)="updatePagination()"
           [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" /> </th>
-        <td mat-cell *matCellDef="let element" class="col-3"> {{element.blacklistUserEmail}} </td>
+        <td mat-cell *matCellDef="let element" class="col-3 text-left"> {{element.blacklistUserEmail}} </td>
       </ng-container>
 
       <ng-container matColumnDef="comments" >
         <th mat-header-cell *matHeaderCellDef class="col-4"><label mat-sort-header> Comments</label>
           <input type="text" (keyup)="updatePagination()"
           [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" /></th>
-        <td mat-cell *matCellDef="let element" class="col-4"> {{element.comments}} </td>
+        <td mat-cell *matCellDef="let element" class="col-4 text-left"> {{element.comments}} </td>
       </ng-container>
 
 
