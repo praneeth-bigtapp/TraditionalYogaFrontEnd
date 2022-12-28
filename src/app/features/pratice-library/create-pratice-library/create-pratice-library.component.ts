@@ -153,7 +153,9 @@ export class CreatePraticeLibraryComponent implements OnInit {
     }
     this.addmediaform.get('subcategory').removeValidators(Validators.required);
     this.addmediaform.controls.subcategory.status = "VALID"
-    this.addmediaform.controls.subcategory.errors = null
+    this.addmediaform.controls['subcategory'].setErrors({ 'required': false });
+    this.addmediaform.get('subcategory').reset();
+
 
     this.issubcategory = false
 
@@ -168,7 +170,6 @@ export class CreatePraticeLibraryComponent implements OnInit {
   }
 
   viewdetails(element: any) {
-    console.log(element);
     this.issubcategory = false
     console.log(element.subCategoryId !== null ? element.subCategoryId.subCategoryId : null);
     this.addmediaform.get('subcategory').removeValidators(Validators.required);
@@ -190,7 +191,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
       this.issubcategory = true
       this.addmediaform.get('subcategory').removeValidators(Validators.required);
       this.addmediaform.controls.subcategory.status = "VALID"
-      this.addmediaform.controls.subcategory.errors = null
+      this.addmediaform.controls['subcategory'].setErrors({ 'required': false });
     }
 
     this.issubmit = false
@@ -258,7 +259,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
       this.issubcategory = true
       this.addmediaform.get('subcategory').removeValidators(Validators.required);
       this.addmediaform.controls.subcategory.status = "VALID"
-      this.addmediaform.controls.subcategory.errors = null
+      this.addmediaform.controls['subcategory'].setErrors({ 'required': false });
     }
 
     this.iseditable = true
@@ -279,7 +280,10 @@ export class CreatePraticeLibraryComponent implements OnInit {
   }
 
   addmedia() {
-    console.log(this.addmediaform.controls.subcategory.errors);
+    console.log([...new Set(Object.values(this.addmediaform.controls).map((ele: any) => ele.valid))]);
+
+
+
 
     if (this.addmediaform.valid) {
 
@@ -332,7 +336,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
 
       this.service.postLibrary(body)?.subscribe({
         next: (response) => {
-          this.addmediaform.reset()
+          // this.addmediaform.reset()
           this.openSnackBar({ message: "Library Created" })
           this.getdata()
         },
