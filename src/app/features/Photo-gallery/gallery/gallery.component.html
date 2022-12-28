@@ -8,27 +8,28 @@
     </ol>
   </nav>
 
-  <div class="row ">
-    <div class="col-7">
+ 
+    <!-- <div class="col-7">
 
-    </div>
-    <div class="col-5 d-flex justify-content-end">
-      <button type="button" class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark "
+    </div> -->
+    <div class="col-md-12 d-flex justify-content-end">
+      <button type="button" class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark m-2"
         (click)="album() " *ngIf="!displaycontent">
         <span>Create Album</span>
       </button>
 
       <button type="button" (click)="addphoto()"
-        class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark " (click)="addAlbum() ">
+        class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark m-2 " (click)="addAlbum() ">
         <span>Add Photo</span>
       </button>
 
 
     </div>
-  </div>
+ 
 
-  <div class="" *ngIf="displaycontent">
-    <div class="card-header text-white bg-secondary mt-2">
+
+  <div class="card mt-5 " *ngIf="displaycontent">
+    <div class="card-header text-white bg-secondary ">
       Create Album
     </div>
     <form class="card bg-white  p-3" [formGroup]="createalbum" (submit)="addAlbum()">
@@ -104,14 +105,14 @@
   </div>
 
 
-  <div class="card mt-2">
-    <div class="card-header text-white bg-secondary">
+  <div class="card ">
+    <div class="card-header text-white bg-secondary table-responsive">
       Photo Album
     </div>
 
-    <div class="rounded mat-elevation-z8 table-responsive">
+    <!-- <div class="rounded mat-elevation-z8 table-responsive"> -->
 
-      <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
+      <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100 "
         aria-label="users">
 
         <ng-container matColumnDef="GalaryName">
@@ -188,9 +189,9 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
       </table>
-      <div class="col bg-white">
-        <mat-paginator [pageSizeOptions]="[ 10,25, 50, 100]" aria-label="Select page"></mat-paginator>
-      </div>
+      
+        <mat-paginator class="card-body" [pageSizeOptions]="[ 10,25, 50, 100]" aria-label="Select page"></mat-paginator>
+      
     </div>
   </div>
 
@@ -198,4 +199,4 @@
 
 
 
-</div>
+<!-- </div> -->
