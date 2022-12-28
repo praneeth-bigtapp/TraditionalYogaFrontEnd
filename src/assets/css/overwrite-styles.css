@@ -549,6 +549,8 @@ app-login {
 
 .mat-dialog-container {
     min-width: 300px !important;
+    overflow-y: auto;
+    height: 600px !important;
     position: relative;
 }
 

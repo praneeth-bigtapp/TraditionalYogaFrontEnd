@@ -1,3 +1,4 @@
+import { AutofillMonitor } from '@angular/cdk/text-field';
 import { formatDate } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { TimeoutError } from 'rxjs';
 import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
 import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 import { AddCoursedocumentComponent } from '../add-coursedocument/add-coursedocument.component';
@@ -160,8 +162,10 @@ export class CourseMediaPraticeComponent implements OnInit {
       data: {
         // course: this.coursename
       },
+      
       width: "80%",
-      // overflow: 'scroll';
+     
+      
     })
 
     dialogref.afterClosed().subscribe(data => {
