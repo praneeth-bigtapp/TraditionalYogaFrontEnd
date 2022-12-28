@@ -280,7 +280,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
   }
 
   addmedia() {
-    console.log([...new Set(Object.values(this.addmediaform.controls).map((ele: any) => ele.valid))]);
+    // console.log([...new Set(Object.values(this.addmediaform.controls).map((ele: any) => ele.valid))]);
 
 
 
@@ -349,7 +349,7 @@ export class CreatePraticeLibraryComponent implements OnInit {
     }
     else {
       this.addmediaform.markAllAsTouched()
-      console.log(this.addmediaform.controls.subcategory.status);
+      // console.log(this.addmediaform.controls.subcategory.status);
 
 
     }
