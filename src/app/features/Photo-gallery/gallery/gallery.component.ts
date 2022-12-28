@@ -126,6 +126,11 @@ export class GalleryComponent implements OnInit {
       todate: element.toDate,
 
     });
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+});
    
   }
   editbtn(element:any){
@@ -142,6 +147,11 @@ export class GalleryComponent implements OnInit {
       todate: element.toDate,
 
     });
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+});
   }
   editdetails() {
     this.updatebtn=false

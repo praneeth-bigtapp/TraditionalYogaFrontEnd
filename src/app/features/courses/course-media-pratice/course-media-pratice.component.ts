@@ -346,6 +346,11 @@ this.addmediaform .setValue({
   Instructions:element.instruction, 
  
 })
+window.scroll({ 
+  top: 0, 
+  left: 0, 
+  behavior: 'smooth' 
+});
 
   }
   compareselect(obj1: any, obj2: any) {
@@ -374,6 +379,11 @@ this.addmediaform .setValue({
       Instructions:element.instruction, 
      
     })
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+});
    
 
   }

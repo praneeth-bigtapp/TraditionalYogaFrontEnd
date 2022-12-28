@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
@@ -103,7 +104,7 @@ export class StudentProfileComponent implements OnInit {
   practiceLibData = PARTICES_LIBARY;
   pageno: number = 1
   donations: any;
-  
+  allstatus:any
   dataSource2: any;
   dataSource3:any
   dataSource4:any
@@ -120,8 +121,24 @@ export class StudentProfileComponent implements OnInit {
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
     private studentService: StudentService,
+    private _snackBar: MatSnackBar,
     
-  ) { }
+  ) { 
+
+    this.studentService.getALLstudentstatus().subscribe({
+      next: (response) => {
+        this.allstatus = response;
+       
+        console.log("statusall");
+        
+        console.log(this.allstatus);
+    
+      },
+      error: (error) => {
+
+      }
+    });
+  }
 
 
   ngOnInit(): void {
@@ -310,6 +327,30 @@ export class StudentProfileComponent implements OnInit {
       }
     });
   }
+  courseProfileAPI(id:any) {
+    this.studentService.getCourseProfileById(id).subscribe({
+      next: (response) => {
+        this.coursesProfileData = response;
+        this.coursesProfileData = this.coursesProfileData.reverse()
+        console.log("course table");
+        
+        console.log(this.coursesProfileData);
+        
+        this.dataSource4 = new MatTableDataSource<any>(this.coursesProfileData)
+        this.filterData4.gridData4 = this.coursesProfileData;
+        this.filterData4.dataSource4 = this.dataSource4;
+        this.dataSource2.paginator4 = this.paginator4;
+        this.dataSource2.sort4 = this.sort4;
+        this.filterData2.sort4 = this.sort4;
+        for (let col of this.filterData4.filterColumnNames) {
+          col.Value = '';
+        }
+      },
+      error: (error) => {
+
+      }
+    });
+  }
   onselectCourse() {
     console.log("Enterning Select Course List");
     this.studentService.getCourses().subscribe({
@@ -342,6 +383,7 @@ export class StudentProfileComponent implements OnInit {
       "Id":data.studentId
     }
 this.donationAPI(data)
+this.courseProfileAPI(data)
 
 
     console.log("Enterning Select Donation List");
@@ -419,34 +461,45 @@ this.donationAPI(data)
     });
   }
 
-  changestatus(msg:any){
+  changestatus(element:any,id:any,name:any){
     const dialogref = this.dialog.open(DialogPopupComponent, {
       data: {
         title: "Status Confirmation",
-        message: "Are You Sure You Want To Change the Statust to "+msg+" ?"
+        message: "Are You Sure You Want To Change the Statust to "+name+" ?"
       },
       width: "30%"
     })
+    let body={
+      "studentId": element.studentId,
+      "statusId": id
+  }
 
     dialogref.afterClosed().subscribe(data => {
-      // if (data) 
-      // {
-      //   this.AddCourseService.deletecourse(body).subscribe({
-      //     next: (response) => {
-      //       this.openSnackBar(response)
-      //       this.addCourseForm.reset()
-      //       this.getdata()
-      //     },
-      //     error: (error) => {
-      //       console.error(error.message);
-      //     }
-      //   })
-      //   return
-      // }
+      if (data) 
+      {
+        console.log(body);
+        
+        this.studentService.poststudentstatusById(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            
+           
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
 
     })
 
 
+  }
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
   }
 
   onPurchaseSubmit() {

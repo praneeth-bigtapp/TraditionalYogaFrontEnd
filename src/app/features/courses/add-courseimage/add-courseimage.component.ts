@@ -275,6 +275,11 @@ submitbtn=true
       mediafile: '',
       paragraph: element.description
     })
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+});
 
   }
   editdetails(element: any) {
@@ -291,6 +296,11 @@ submitbtn=true
       mediafile: '',
       paragraph: element.description
     })
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+});
 
   }
   openSnackBar(data: any) {
