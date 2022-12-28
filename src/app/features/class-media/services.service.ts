@@ -20,21 +20,31 @@ export class ServicesService extends BaseHttp {
   updateclassmediaURL='libary/liveClass?operation=update'
 
 
+  getlanguageURL='libary/language?operation=add'
+  languageURL='libary/getAllLibary?operation=language'
 
+  
 
   getshortvideoURL = "libary/getAllLibary?operation=shortVideo"
   addshortvideoURL = "libary/shortVideo?operation=add"
   updateshortvideoURL = "libary/shortVideo?operation=update"
   deleteshortvideoURL = "libary/shortVideo?operation=delete"
 
-  getglimpseURL = ""
-  postglimpseURL = "course/courseMedia?operation=add&type=glimpses"
-  updateglimpseURL = "course/courseMedia?operation=save&type=glimpses"
-  deleteglimpseURL = "course/courseMedia?operation=delete&type=glimpses"
+  getglimpseURL = "libary/getAllLibary?operation=glimpses"
+  postglimpseURL = "libary/glimpses?operation=add"
+  updateglimpseURL = "libary/glimpses?operation=update"
+  deleteglimpseURL = "libary/glimpses?operation=delete"
 
- 
+  postaddlanguages(data: any) {
+    return this.post<any>(this.getlanguageURL, data);
+  }
+
   getcoursemediacategory(){
     return this.get(this.getcoursemediacategoryURL)
+  }
+
+  getlanguages(){
+    return this.get(this.languageURL)
   }
   getcategory() {
     return this.get(this.getcategoryURL)

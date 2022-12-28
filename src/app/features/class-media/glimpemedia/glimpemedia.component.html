@@ -14,9 +14,9 @@
 
         </div>
         <div class="card-body  bg-white py-2" *ngIf="displaycontent">
-            <form [formGroup]="glimpseform" (ngSubmit)="glimpseformsubmit()">
+            <form [formGroup]="glimpseform" >
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label>Course</label>
                         <mat-form-field appearance="outline">
                             <mat-select formControlName="course">
@@ -26,13 +26,13 @@
 
                         </mat-form-field>
                         <div class="error-message"
-                            *ngIf="glimpseform.controls['course'].invalid && (glimpseform.controls['course'].dirty || glimpseform.controls['course'].touched)">
-                            <mat-error [hidden]=" !glimpseform.get('course')?.hasError('required')  ">
-                                Course is mandatory
-                            </mat-error>
+                        *ngIf="glimpseform.controls['course'].invalid && (glimpseform.controls['course'].dirty || glimpseform.controls['course'].touched)">
+                        <mat-error [hidden]=" !glimpseform.get('course')?.hasError('required')  ">
+                            Course is mandatory
+                        </mat-error>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label>Class Date</label>
                         <div class="col px-0">
                             <mat-form-field class="example-full-width" appearance="outline">
@@ -46,27 +46,30 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label>Upload File</label>
                         <div class="col px-0">
                             <input type="file" class="border" id="file" (change)="filechange($event)"
-                                formControlName="file" accept=" image/*" required="true" />
-                            <mat-error *ngIf="filerror">File is mandatory</mat-error>
+                                formControlName="file" accept=" image/*" />
+                            
 
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    
+                    
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
                         <div class="row">
                             <label>Language</label>
                             <div class="col">
                                 <mat-form-field appearance="outline">
-                                    <input type="text" aria-label="Country" matInput formControlName="language"
-                                        [matAutocomplete]="language">
-                                    <mat-autocomplete autoActiveFirstOption #language="matAutocomplete">
-                                        <mat-option *ngFor="let country of languagefilter |async " [value]="country">
-                                            {{country}}
-                                        </mat-option>
-                                    </mat-autocomplete>
+                                 
+                                        <mat-select formControlName="language" >
+                                            <mat-option *ngFor="let language of languagelist" [value]="language.languageId" (onSelectionChange)="swapothers(language.languageName)">
+                                                {{language.languageName}}</mat-option>
+                                        </mat-select>
+                                    
                                 </mat-form-field>
                                 <div class="error-message"
                                     *ngIf="glimpseform.controls['language'].invalid && (glimpseform.controls['language'].dirty || glimpseform.controls['language'].touched)">
@@ -79,13 +82,26 @@
                         </div>
 
                     </div>
+                    <div class="col-md-4" *ngIf="otherslan">
+                        <label>Others</label>
+                        <mat-form-field appearance="outline">
+                            <input matInput formControlName="Others" type="text" value=""/>
+
+                        </mat-form-field>
+                        <div class="error-message"
+                            *ngIf="glimpseform.controls['Others'].invalid && (glimpseform.controls['Others'].dirty || glimpseform.controls['Others'].touched)">
+                            <mat-error [hidden]=" !glimpseform.get('Others')?.hasError('required')  ">
+                                Course is mandatory
+                            </mat-error>
+                        </div>
+                    </div>
                     
                 </div>
                 <div class=" d-flex flex-row justify-content-end  ">
-                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block   " *ngIf="issubmit">
+                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block   " *ngIf="issubmit" (click)="glimpseformsubmit()">
                         Add
                     </button>
-                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block   "*ngIf="iseditable">
+                    <button (click)="onsave()" class="btn btn-outline-secondary btn-rounded d-inline-block   "*ngIf="iseditable">
                        Update
                     </button>
                     <button type="button" (click)="reseteditable()"
@@ -113,7 +129,7 @@
                     </th>
                     <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
                 </ng-container>
-                <ng-container matColumnDef="course">
+                <ng-container matColumnDef="coursesId">
 
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
@@ -122,47 +138,36 @@
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.course}}
+                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.coursesId.coursesName}}
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="date">
 
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
-                            Class Date
+                             Date
                         </label>
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.date | date:'dd-MMM-YYYY'}}
+                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.date  | date:'dd-MMM-YYYY'}}
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="glimpse">
+                <ng-container matColumnDef="languageName">
 
-                    <th mat-header-cell *matHeaderCellDef scope="col">
-                        <label mat-sort-header>
-                            Glimpse
-                        </label>
-                        <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
-                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
-                    </th>
-                    <td mat-cell class="text-left" *matCellDef="let element"> <a href={{element.glimpse}}
-                            class="text-primary "><u>Open</u></a>
-                    </td>
-
-                </ng-container>
-
-                <ng-container matColumnDef="language">
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
                             Language
                         </label>
-                        <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseDuration')"
-                            [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
+                        <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
+                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.language | titlecase}} </td>
+                    <td mat-cell class="text-left" *matCellDef="let element">{{element.language.languageName}}</td>
+
                 </ng-container>
+
+               
 
                 <ng-container matColumnDef="Action">
                     <th mat-header-cell *matHeaderCellDef scope="col">
@@ -183,7 +188,7 @@
                                     <i class="fas fa-pencil-alt mx-4" aria-hidden="true"></i>
                                 </span>
                                 <span matTooltip="Delete" style="cursor: pointer;"
-                                    (click)="deletedetails(element.classMediaId)">
+                                    (click)="deletedetails(element.glimpsesId)">
                                     <i class="far fa-trash-alt" aria-hidden="true"></i>
                                 </span>
 
