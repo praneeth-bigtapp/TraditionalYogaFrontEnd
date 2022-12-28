@@ -328,7 +328,7 @@
                                                         <mat-radio-button value="5" (click)=" changestatus(studentProfile,5)" [checked]="studentProfile.statusId==5?true:false">Reprovisioned (Only for admin & chief mentor)</mat-radio-button> &nbsp; &nbsp; &nbsp;
                                                     </mat-radio-group> -->
                                                     <mat-radio-group aria-label="Select an option" class="d-inline-block" >
-                                                        <mat-radio-button value="1" class="me-2" (click)=" changestatus(studentProfile,index.statusId,index.statusName)" *ngFor="let index of allstatus" [checked]="studentProfile.statusId===index.statusId?true:false">{{index.statusName}} </mat-radio-button>
+                                                        <mat-radio-button  class="me-2" (click)=" changestatus(studentProfile,index.statusId,index.statusName)" *ngFor="let index of allstatus" [checked]="studentProfile.statusId===index.statusId">{{index.statusName}} </mat-radio-button>
                                                        
                                                     </mat-radio-group>
                                                 </div>
