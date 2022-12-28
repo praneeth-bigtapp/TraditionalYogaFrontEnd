@@ -733,7 +733,8 @@ width: calc(100% - 150px) !important;
 
 .ty-tabs .nav-tabs .nav-link:hover,
 .ty-tabs .nav-tabs .nav-link.active {
-    background: #ead6d5;
+    background: #2c3e50;
+    color: white;
     border-radius: 0px;
 }
 
