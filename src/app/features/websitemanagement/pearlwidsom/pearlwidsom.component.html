@@ -130,7 +130,7 @@
         <div class="card-header text-white bg-secondary">
             Pearls of wisdom
         </div>
-        <div class="card-body bg-transparent px-0 py-2">
+        <div class="card-body bg-transparent px-0 py-0">
             <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
                 aria-label="users">
                 <ng-container matColumnDef="quoteId">
@@ -150,7 +150,7 @@
                         <label mat-sort-header>
                             Title
                         </label>
-                        <input type="text" (keyup)="updatePagination('videoLink')"
+                        <input type="text" class="text-left" (keyup)="updatePagination('videoLink')"
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell *matCellDef="let element">{{element.quoteTitle | titlecase}}</td>
@@ -162,7 +162,7 @@
                         <label mat-sort-header>
                             Quote
                         </label>
-                        <input type="text" (keyup)="updatePagination('duration')"
+                        <input type="text" class="text-left" (keyup)="updatePagination('duration')"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell *matCellDef="let element" class="col-3 text-justify"> {{element.quote}}</td>
@@ -173,7 +173,7 @@
                         <label mat-sort-header>
                             Date
                         </label>
-                        <input type="text" (keyup)="updatePagination('title')"
+                        <input type="text" class="text-left" (keyup)="updatePagination('title')"
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell *matCellDef="let element"> {{element.quoteDate | date:'dd-MMM-YYYY'}} </td>
@@ -183,7 +183,7 @@
                         <label mat-sort-header>
                             Type
                         </label>
-                        <input type="text" (keyup)="updatePagination('message')"
+                        <input type="text" class="text-left" (keyup)="updatePagination('message')"
                             [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell *matCellDef="let element"> {{element.quoteType }} </td>

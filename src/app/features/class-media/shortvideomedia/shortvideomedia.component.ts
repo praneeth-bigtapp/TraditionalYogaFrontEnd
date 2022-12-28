@@ -158,6 +158,7 @@ export class ShortvideomediaComponent implements OnInit {
       next: (response) => {
         this.data = response;
         console.log(this.data);
+        this.data = this.data.reverse()
 
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
@@ -198,6 +199,7 @@ export class ShortvideomediaComponent implements OnInit {
   }
   gobutton() {
     this.displaycontent = true
+    this.submitbtn = true
   }
 
   reseteditable() {
@@ -283,7 +285,8 @@ export class ShortvideomediaComponent implements OnInit {
         title: "Delete Confirmation",
         message: "Are You Sure You Want To Delete this media ?"
       },
-      width: "30%"
+      width: "30%",
+      height: "25%"
     })
 
     dialogref.afterClosed().subscribe(data => {
@@ -327,7 +330,9 @@ export class ShortvideomediaComponent implements OnInit {
         "praticeLibaryId": {
           "categoryId": category
         },
-        "subCategoryId": subcategory,
+        "subCategoryId": {
+          "subCategoryId": subcategory
+        },
         "videoLink": videolink,
         "title": title,
         "description": description,
@@ -365,6 +370,7 @@ export class ShortvideomediaComponent implements OnInit {
       "classDate": date,
       "duration": duration
     }
+
 
     console.log(body);
 

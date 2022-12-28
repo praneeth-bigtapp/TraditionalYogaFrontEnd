@@ -216,14 +216,14 @@
                 </ng-container>
                 <ng-container matColumnDef="coursesId">
 
-                    <th mat-header-cell *matHeaderCellDef scope="col">
+                    <th mat-header-cell *matHeaderCellDef scope="col-2">
                         <label mat-sort-header>
                             Course
                         </label>
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.coursesId.coursesName}}
+                    <td mat-cell class="text-left col-2" *matCellDef="let element"> {{element.coursesId.coursesName}}
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="classDate">
@@ -270,7 +270,7 @@
 
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
-                            Duration <small>(mins)</small>
+                            Duration <small>(hours:mins)</small>
                         </label>
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
