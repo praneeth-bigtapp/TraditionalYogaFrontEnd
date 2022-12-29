@@ -122,7 +122,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./features/registration/registration.module').then((m) => m.RegistrationModule)
+      import('./studentmodule/registration/registration.module').then((m) => m.RegistrationModule)
   },
 
   {
