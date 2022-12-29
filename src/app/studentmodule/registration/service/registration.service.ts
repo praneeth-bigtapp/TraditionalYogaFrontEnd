@@ -6,40 +6,50 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 })
 export class RegistrationService extends BaseHttp {
 
-  getcountryURL = "webSite/getAll?operation=country"
-  getindiastatesURL = ""
+  getCountryUrl = "webSite/getAll?operation=country"
+  getIndiaStatesUrl = ""
+  getAboutUsUrl = "register/getAll?operation=aboutus"
+  getQualificationUrl = "student/getAll?operation=qualification"
+  getProfessionsUrl = "student/getAll?operation=professions"
+  getMaritalStatusUrl = "register/getAll?operation=maritalStatus"
+  getGenderUrl = "student/getAll?operation=gender"
+  postEnrollmentUrl = "register/enroll"
+  postDetailsEnrollmentUrl = "register/enrollDetailed"
 
-  getaboutusURL = "register/getAll?operation=aboutus"
-  getqualificationURL = "student/getAll?operation=qualification"
-  genderURL = "student/getAll?operation=gender"
-
-
-  postenrollmentURL = "register/enroll"
-  postdetailsenrollmentURL = "register/enrollDetailed"
-
-
-
-  getgender() {
-    return this.get(this.genderURL)
-  }
-  getqualification() {
-    return this.get(this.getqualificationURL)
-  }
-  getcountry() {
-    return this.get(this.getcountryURL)
-  }
-  getindiastates() {
-    return this.get(this.getindiastatesURL)
+  getGender() {
+    return this.get(this.getGenderUrl);
   }
 
-  getaboutus() {
-    return this.get(this.getaboutusURL)
+  getQualification() {
+    return this.get(this.getQualificationUrl);
   }
 
-  postenrollment(body: any) {
-    return this.login(this.postenrollmentURL, body)
+  getProfessions() {
+    return this.get(this.getProfessionsUrl);
   }
-  postdetailsenrollment(body: any) {
-    return this.post(this.postdetailsenrollmentURL, body)
+
+  getMaritalStatus() {
+    return this.get(this.getMaritalStatusUrl);
   }
+
+  getCountry() {
+    return this.get(this.getCountryUrl);
+  }
+
+  getIndiaStates() {
+    return this.get(this.getIndiaStatesUrl);
+  }
+
+  getAboutUs() {
+    return this.get(this.getAboutUsUrl);
+  }
+
+  postEnrollment(body: any) {
+    return this.login(this.postEnrollmentUrl, body);
+  }
+
+  postDetailsEnrollment(body: any) {
+    return this.post(this.postDetailsEnrollmentUrl, body);
+  }
+  
 }

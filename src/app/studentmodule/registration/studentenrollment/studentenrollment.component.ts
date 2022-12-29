@@ -83,7 +83,7 @@ export class StudentenrollmentComponent implements OnInit {
 
     // this.refferallist = ["I am old student", "Friends and family", "Facebook", "Instagram", "Youtube", "TV Media", "Others"]
     this.martialstatus = ["Single", "Married"]
-    this.service.getcountry().subscribe({
+    this.service.getCountry().subscribe({
       next: (response) => {
 
         this.countryList = response
@@ -95,7 +95,7 @@ export class StudentenrollmentComponent implements OnInit {
 
       }
     })
-    this.service.getgender().subscribe({
+    this.service.getGender().subscribe({
       next: (response) => {
 
         this.genderlist = response
@@ -106,7 +106,7 @@ export class StudentenrollmentComponent implements OnInit {
 
       }
     })
-    this.service.getaboutus().subscribe({
+    this.service.getAboutUs().subscribe({
       next: (response) => {
         this.refferallist = response
       },
@@ -114,7 +114,7 @@ export class StudentenrollmentComponent implements OnInit {
         console.error(error.message);
       }
     })
-    this.service.getqualification().subscribe({
+    this.service.getQualification().subscribe({
       next: (response) => {
         this.eduationallist = response
 
@@ -374,7 +374,7 @@ export class StudentenrollmentComponent implements OnInit {
       },
       "termsCondition": termscondition ? "Y" : "N"
     }
-    this.service.postenrollment(body).subscribe({
+    this.service.postEnrollment(body).subscribe({
       next: (response) => {
         this.openSnackBar(response)
         this.formdetails.reset()

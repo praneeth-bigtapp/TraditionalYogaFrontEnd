@@ -6,29 +6,39 @@
             Detailed Information
         </div>
         <div class="card-body bg-white py-2 text-justify">
-            <form [formGroup]="detailsinformation" (ngSubmit)="detailedsubmit()">
+            <form [formGroup]="detailsEnrollForm" (ngSubmit)="detailedsubmit()">
                 <div class="row align-items-center">
                     <div class="col-md-4">
                         <label>Passport Photo <small>(51 x 51 mm)</small></label>
                         <div class="col px-0">
                             <input type="file" class="border" id="file" formControlName="photo" accept=" */*"
                                 (change)="photoupload($event)" required="false" />
-                            <mat-error *ngIf="photoerror">Photo is mandatory</mat-error>
-                            <mat-error *ngIf="photosizeerror">Invalid Photo Size</mat-error>
+                            <mat-error *ngIf="photoError">Photo is mandatory</mat-error>
+                            <mat-error *ngIf="photoSizeError">Invalid Photo Size</mat-error>
                         </div>
-                        <div class="mx-auto" *ngIf=" photo &&  !photosizeerror">
-                            <img [src]="photourl" class="img-fluid mx-auto w-50" alt="passportphoto" />
+                        <div class="mx-auto" *ngIf=" photo &&  !photoSizeError">
+                            <img [src]="photoUrl" class="img-fluid mx-auto w-50" alt="passportphoto" />
                         </div>
                     </div>
                     <div class="col-md-4">
                         <label>Profession</label>
                         <div class="col px-0">
-                            <mat-form-field appearance="outline">
+                            <!-- <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" formControlName="job">
+                            </mat-form-field> -->
+                            <mat-form-field appearance="outline">
+                                <mat-select formControlName="job">
+                                    <mat-option *ngFor="let profession of professionsList"
+                                        [value]="profession.professionId">
+                                        {{profession.professionName}}
+                                    </mat-option>
+                                </mat-select>
                             </mat-form-field>
+
+
                             <div class="error-message"
-                                *ngIf="detailsinformation.controls['job'].invalid && (detailsinformation.controls['job'].dirty || detailsinformation.controls['job'].touched)">
-                                <mat-error [hidden]=" !detailsinformation.get('job')?.hasError('required')  ">
+                                *ngIf="detailsEnrollForm.controls['job'].invalid && (detailsEnrollForm.controls['job'].dirty || detailsEnrollForm.controls['job'].touched)">
+                                <mat-error [hidden]=" !detailsEnrollForm.get('job')?.hasError('required')  ">
                                     Profession is mandatory
                                 </mat-error>
 
@@ -44,11 +54,11 @@
                                 <input matInput autocomplete="off" formControlName="workinghours">
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="detailsinformation.controls['workinghours'].invalid && (detailsinformation.controls['workinghours'].dirty || detailsinformation.controls['workinghours'].touched)">
-                                <mat-error [hidden]=" !detailsinformation.get('workinghours')?.hasError('required')  ">
+                                *ngIf="detailsEnrollForm.controls['workinghours'].invalid && (detailsEnrollForm.controls['workinghours'].dirty || detailsEnrollForm.controls['workinghours'].touched)">
+                                <mat-error [hidden]=" !detailsEnrollForm.get('workinghours')?.hasError('required')  ">
                                     Working hours is mandatory
                                 </mat-error>
-                                <mat-error [hidden]=" !detailsinformation.get('workinghours')?.hasError('pattern')  ">
+                                <mat-error [hidden]=" !detailsEnrollForm.get('workinghours')?.hasError('pattern')  ">
                                     Invalid hours
                                 </mat-error>
 
@@ -62,16 +72,17 @@
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <mat-select formControlName="educationdetails"
-                                    (selectionChange)="educationchange($event)">
-                                    <mat-option *ngFor="let food of eduationallist" [value]="food.qualificationId">
-                                        {{food.qualificationName}}
+                                    (selectionChange)="educationChange($event)">
+                                    <mat-option *ngFor="let eduational of eduationalList"
+                                        [value]="eduational.qualificationId">
+                                        {{eduational.qualificationName}}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="detailsinformation.controls['educationdetails'].invalid && (detailsinformation.controls['educationdetails'].dirty || detailsinformation.controls['educationdetails'].touched)">
+                                *ngIf="detailsEnrollForm.controls['educationdetails'].invalid && (detailsEnrollForm.controls['educationdetails'].dirty || detailsEnrollForm.controls['educationdetails'].touched)">
                                 <mat-error
-                                    [hidden]=" !detailsinformation.get('educationdetails')?.hasError('required')  ">
+                                    [hidden]=" !detailsEnrollForm.get('educationdetails')?.hasError('required')  ">
                                     Educational Details is mandatory
                                 </mat-error>
 
@@ -79,16 +90,16 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4" *ngIf="iseduationother">
+                    <div class="col-md-4" *ngIf="isEduationOther">
                         <label>Other educational details</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" formControlName="othereducationdetails">
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="detailsinformation.controls['othereducationdetails'].invalid && (detailsinformation.controls['othereducationdetails'].dirty || detailsinformation.controls['othereducationdetails'].touched)">
+                                *ngIf="detailsEnrollForm.controls['othereducationdetails'].invalid && (detailsEnrollForm.controls['othereducationdetails'].dirty || detailsEnrollForm.controls['othereducationdetails'].touched)">
                                 <mat-error
-                                    [hidden]=" !detailsinformation.get('othereducationdetails')?.hasError('required')  ">
+                                    [hidden]=" !detailsEnrollForm.get('othereducationdetails')?.hasError('required')  ">
                                     Other Educational Details is mandatory
                                 </mat-error>
                             </div>
@@ -104,9 +115,9 @@
                                     </textarea>
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="detailsinformation.controls['prideinqualification'].invalid && (detailsinformation.controls['prideinqualification'].dirty || detailsinformation.controls['prideinqualification'].touched)">
+                                *ngIf="detailsEnrollForm.controls['prideinqualification'].invalid && (detailsEnrollForm.controls['prideinqualification'].dirty || detailsEnrollForm.controls['prideinqualification'].touched)">
                                 <mat-error
-                                    [hidden]=" !detailsinformation.get('prideinqualification')?.hasError('required')  ">
+                                    [hidden]=" !detailsEnrollForm.get('prideinqualification')?.hasError('required')  ">
                                     Field is mandatory
                                 </mat-error>
                             </div>
@@ -114,15 +125,15 @@
                     </div>
 
                     <div class="col-md-4">
-                        <label>Martial status</label>
+                        <label>Marital Status</label>
                         <div class="col px-0">
-                            <mat-radio-group formControlName="matrialstatus" aria-label="Select an option">
-                                <mat-radio-button class=" mt-md-2 mr-md-4" *ngFor="let gender of martialstatus"
-                                    [value]="gender">{{gender}}</mat-radio-button>
+                            <mat-radio-group formControlName="maritalStatus" aria-label="Select an option">
+                                <mat-radio-button class=" mt-md-2 mr-md-4" *ngFor="let gender of maritalStatus"
+                                    [value]="gender.maritalStatusId">{{gender.maritalStatusName}}</mat-radio-button>
                             </mat-radio-group>
                             <div class="error-message"
-                                *ngIf="detailsinformation.controls['matrialstatus'].invalid && (detailsinformation.controls['matrialstatus'].dirty || detailsinformation.controls['matrialstatus'].touched)">
-                                <mat-error [hidden]=" !detailsinformation.get('matrialstatus')?.hasError('required')  ">
+                                *ngIf="detailsEnrollForm.controls['maritalStatus'].invalid && (detailsEnrollForm.controls['maritalStatus'].dirty || detailsEnrollForm.controls['matrialstatus'].touched)">
+                                <mat-error [hidden]=" !detailsEnrollForm.get('maritalStatus')?.hasError('required')  ">
                                     Martial status is mandatory
                                 </mat-error>
                             </div>
@@ -136,8 +147,8 @@
                                 <input matInput autocomplete="off" formControlName="familydetails">
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="detailsinformation.controls['familydetails'].invalid && (detailsinformation.controls['familydetails'].dirty || detailsinformation.controls['familydetails'].touched)">
-                                <mat-error [hidden]=" !detailsinformation.get('familydetails')?.hasError('required')  ">
+                                *ngIf="detailsEnrollForm.controls['familydetails'].invalid && (detailsEnrollForm.controls['familydetails'].dirty || detailsEnrollForm.controls['familydetails'].touched)">
+                                <mat-error [hidden]=" !detailsEnrollForm.get('familydetails')?.hasError('required')  ">
                                     Family Details is mandatory
                                 </mat-error>
                             </div>
@@ -153,9 +164,9 @@
 
                             </mat-radio-group>
                             <div class="error-message"
-                                *ngIf="detailsinformation.controls['familymemberconsent'].invalid && (detailsinformation.controls['familymemberconsent'].dirty || detailsinformation.controls['familymemberconsent'].touched)">
+                                *ngIf="detailsEnrollForm.controls['familymemberconsent'].invalid && (detailsEnrollForm.controls['familymemberconsent'].dirty || detailsEnrollForm.controls['familymemberconsent'].touched)">
                                 <mat-error
-                                    [hidden]=" !detailsinformation.get('familymemberconsent')?.hasError('required')  ">
+                                    [hidden]=" !detailsEnrollForm.get('familymemberconsent')?.hasError('required')  ">
                                     Field is mandatory
                                 </mat-error>
                             </div>
@@ -173,9 +184,9 @@
 
                             </mat-radio-group>
                             <div class="error-message"
-                                *ngIf="detailsinformation.controls['familycooperation'].invalid && (detailsinformation.controls['familycooperation'].dirty || detailsinformation.controls['familycooperation'].touched)">
+                                *ngIf="detailsEnrollForm.controls['familycooperation'].invalid && (detailsEnrollForm.controls['familycooperation'].dirty || detailsEnrollForm.controls['familycooperation'].touched)">
                                 <mat-error
-                                    [hidden]=" !detailsinformation.get('familycooperation')?.hasError('required')  ">
+                                    [hidden]=" !detailsEnrollForm.get('familycooperation')?.hasError('required')  ">
                                     Field is mandatory
                                 </mat-error>
                             </div>
@@ -192,24 +203,24 @@
 
                             </mat-radio-group>
                             <div class="error-message"
-                                *ngIf="detailsinformation.controls['friendparticipation'].invalid && (detailsinformation.controls['friendparticipation'].dirty || detailsinformation.controls['friendparticipation'].touched)">
+                                *ngIf="detailsEnrollForm.controls['friendparticipation'].invalid && (detailsEnrollForm.controls['friendparticipation'].dirty || detailsEnrollForm.controls['friendparticipation'].touched)">
                                 <mat-error
-                                    [hidden]=" !detailsinformation.get('friendparticipation')?.hasError('required')  ">
+                                    [hidden]=" !detailsEnrollForm.get('friendparticipation')?.hasError('required')  ">
                                     Field is mandatory
                                 </mat-error>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-4" *ngIf="isfriendname">
+                    <div class="col-md-4" *ngIf="isFriendName">
                         <label>Friend Name</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" formControlName="friendname">
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="detailsinformation.controls['friendname'].invalid && (detailsinformation.controls['friendname'].dirty || detailsinformation.controls['friendname'].touched)">
-                                <mat-error [hidden]=" !detailsinformation.get('friendname')?.hasError('required')  ">
+                                *ngIf="detailsEnrollForm.controls['friendname'].invalid && (detailsEnrollForm.controls['friendname'].dirty || detailsEnrollForm.controls['friendname'].touched)">
+                                <mat-error [hidden]=" !detailsEnrollForm.get('friendname')?.hasError('required')  ">
                                     Friend Name is mandatory
                                 </mat-error>
                             </div>
@@ -225,9 +236,9 @@
                                 </textarea>
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="detailsinformation.controls['pastyogapratice'].invalid && (detailsinformation.controls['pastyogapratice'].dirty || detailsinformation.controls['pastyogapratice'].touched)">
+                                *ngIf="detailsEnrollForm.controls['pastyogapratice'].invalid && (detailsEnrollForm.controls['pastyogapratice'].dirty || detailsEnrollForm.controls['pastyogapratice'].touched)">
                                 <mat-error
-                                    [hidden]=" !detailsinformation.get('pastyogapratice')?.hasError('required')  ">
+                                    [hidden]=" !detailsEnrollForm.get('pastyogapratice')?.hasError('required')  ">
                                     Field is mandatory
                                 </mat-error>
                             </div>
@@ -242,8 +253,8 @@
 
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="detailsinformation.controls['hobbies'].invalid && (detailsinformation.controls['hobbies'].dirty || detailsinformation.controls['hobbies'].touched)">
-                                <mat-error [hidden]=" !detailsinformation.get('hobbies')?.hasError('required')  ">
+                                *ngIf="detailsEnrollForm.controls['hobbies'].invalid && (detailsEnrollForm.controls['hobbies'].dirty || detailsEnrollForm.controls['hobbies'].touched)">
+                                <mat-error [hidden]=" !detailsEnrollForm.get('hobbies')?.hasError('required')  ">
                                     Hobbies is mandatory
                                 </mat-error>
                             </div>
@@ -261,8 +272,8 @@
 
                             </mat-radio-group>
                             <div class="error-message"
-                                *ngIf="detailsinformation.controls['isdedicated'].invalid && (detailsinformation.controls['isdedicated'].dirty || detailsinformation.controls['isdedicated'].touched)">
-                                <mat-error [hidden]=" !detailsinformation.get('isdedicated')?.hasError('required')  ">
+                                *ngIf="detailsEnrollForm.controls['isdedicated'].invalid && (detailsEnrollForm.controls['isdedicated'].dirty || detailsEnrollForm.controls['isdedicated'].touched)">
+                                <mat-error [hidden]=" !detailsEnrollForm.get('isdedicated')?.hasError('required')  ">
                                     Field is mandatory
                                 </mat-error>
                             </div>
@@ -275,9 +286,8 @@
                                 <input matInput autocomplete="off" formControlName="familyfullname">
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="detailsinformation.controls['familyfullname'].invalid && (detailsinformation.controls['familyfullname'].dirty || detailsinformation.controls['familyfullname'].touched)">
-                                <mat-error
-                                    [hidden]=" !detailsinformation.get('familyfullname')?.hasError('required')  ">
+                                *ngIf="detailsEnrollForm.controls['familyfullname'].invalid && (detailsEnrollForm.controls['familyfullname'].dirty || detailsEnrollForm.controls['familyfullname'].touched)">
+                                <mat-error [hidden]=" !detailsEnrollForm.get('familyfullname')?.hasError('required')  ">
                                     Reference Name is mandatory
                                 </mat-error>
                             </div>
@@ -291,9 +301,9 @@
                                 <input matInput autocomplete="off" formControlName="familyrelationship">
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="detailsinformation.controls['familyrelationship'].invalid && (detailsinformation.controls['familyrelationship'].dirty || detailsinformation.controls['familyrelationship'].touched)">
+                                *ngIf="detailsEnrollForm.controls['familyrelationship'].invalid && (detailsEnrollForm.controls['familyrelationship'].dirty || detailsEnrollForm.controls['familyrelationship'].touched)">
                                 <mat-error
-                                    [hidden]=" !detailsinformation.get('familyrelationship')?.hasError('required')  ">
+                                    [hidden]=" !detailsEnrollForm.get('familyrelationship')?.hasError('required')  ">
                                     Reference Realtionship is mandatory
                                 </mat-error>
                             </div>
@@ -307,13 +317,12 @@
                                 <input matInput autocomplete="off" formControlName="familycontactno">
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="detailsinformation.controls['familycontactno'].invalid && (detailsinformation.controls['familycontactno'].dirty || detailsinformation.controls['familycontactno'].touched)">
+                                *ngIf="detailsEnrollForm.controls['familycontactno'].invalid && (detailsEnrollForm.controls['familycontactno'].dirty || detailsEnrollForm.controls['familycontactno'].touched)">
                                 <mat-error
-                                    [hidden]=" !detailsinformation.get('familycontactno')?.hasError('required')  ">
+                                    [hidden]=" !detailsEnrollForm.get('familycontactno')?.hasError('required')  ">
                                     Reference Realtionship is mandatory
                                 </mat-error>
-                                <mat-error
-                                    [hidden]=" !detailsinformation.get('familycontactno')?.hasError('pattern')  ">
+                                <mat-error [hidden]=" !detailsEnrollForm.get('familycontactno')?.hasError('pattern')  ">
                                     Invalid Mobile Number
                                 </mat-error>
                             </div>
@@ -329,8 +338,8 @@
                                 </textarea>
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="detailsinformation.controls['whythiscourse'].invalid && (detailsinformation.controls['whythiscourse'].dirty || detailsinformation.controls['whythiscourse'].touched)">
-                                <mat-error [hidden]=" !detailsinformation.get('whythiscourse')?.hasError('required')  ">
+                                *ngIf="detailsEnrollForm.controls['whythiscourse'].invalid && (detailsEnrollForm.controls['whythiscourse'].dirty || detailsEnrollForm.controls['whythiscourse'].touched)">
+                                <mat-error [hidden]=" !detailsEnrollForm.get('whythiscourse')?.hasError('required')  ">
                                     Field is mandatory
                                 </mat-error>
                             </div>

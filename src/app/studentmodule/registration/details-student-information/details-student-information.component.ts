@@ -1,5 +1,5 @@
 import { Component, NgZone, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
@@ -12,36 +12,36 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./details-student-information.component.css']
 })
 export class DetailsStudentInformationComponent implements OnInit {
-  detailsinformation: any;
-  photoerror: boolean = false;
+  detailsEnrollForm!: FormGroup;
+  photoError: boolean = false;
   photo: any;
-  photosizeerror: boolean = false;
-  photourl: any;
-  iseduationother: boolean = false;
-  isfriendname: any;
-  martialstatus: string[];
-  eduationallist: any
+  photoSizeError: boolean = false;
+  photoUrl: any;
+  isEduationOther: boolean = false;
+  isFriendName: any;
+  maritalStatus: any;
+  eduationalList: any;
+  professionsList: any;
 
 
   constructor(
-    private formbuilder: FormBuilder,
-    private service: RegistrationService,
+    private formBuilder: FormBuilder,
+    private registrationService: RegistrationService,
     private _snackBar: MatSnackBar,
     private dialog: MatDialog,
     private http: HttpClient,
     private zone: NgZone
-  ) {
+  ) { }
 
-    this.martialstatus = ["Single", "Married"]
-
-    this.detailsinformation = this.formbuilder.group({
+  ngOnInit(): void {
+    this.detailsEnrollForm = this.formBuilder.group({
       photo: [null, Validators.compose([])],
       job: [null, Validators.compose([])],
       workinghours: [null, Validators.compose([Validators.pattern(InputvalidationService.inputvalidation.isnumbers)])],
       educationdetails: [null, Validators.compose([])],
       othereducationdetails: [null],
       prideinqualification: [null, Validators.compose([])],
-      matrialstatus: [null, Validators.compose([])],
+      maritalStatus: [null, Validators.compose([])],
       familydetails: [null, Validators.compose([])],
       familymemberconsent: [null, Validators.compose([])],
       familycooperation: [null, Validators.compose([])],
@@ -52,24 +52,65 @@ export class DetailsStudentInformationComponent implements OnInit {
       isdedicated: [null, Validators.compose([])],
       familyfullname: [null, Validators.compose([])],
       familyrelationship: [null, Validators.compose([])],
-      familycontactno: [null, Validators.compose([, Validators.pattern(InputvalidationService.inputvalidation.mobile)])],
+      familycontactno: [null, Validators.compose([Validators.pattern(InputvalidationService.inputvalidation.mobile)])],
       whythiscourse: [null, Validators.compose([])],
-    })
-    this.service.getqualification().subscribe({
-      next: (response) => {
-        this.eduationallist = response
+    });
 
+    this.getQualification();
+    this.getProfession();
+    this.getMaritalStatus();
+    // this.maritalStatus = ["Single", "Married"];
+  }
+
+  getQualification() {
+    this.registrationService.getQualification().subscribe({
+      next: (response) => {
+        this.eduationalList = response;
+        const othersData = {
+          "qualificationId": -1,
+          "qualificationName": "others"
+        };
+        this.eduationalList.push(othersData);
       },
       error: (error) => {
-        console.error(error.message);
-        this.eduationallist = ["dummy", "other"]
+        let data = error.error;
+        console.error(data);
+        const othersData = {
+          "qualificationId": -1,
+          "qualificationName": "others"
+        };
+        this.eduationalList = [];
+        this.eduationalList.push(othersData);
 
       }
-    })
+    });
   }
 
-  ngOnInit(): void {
+  getProfession() {
+    this.registrationService.getProfessions().subscribe({
+      next: (response) => {
+        this.professionsList = response;
+      },
+      error: (error) => {
+        let data = error.error;
+        console.error(data);
+      }
+    });
   }
+
+  getMaritalStatus() {
+    this.registrationService.getMaritalStatus().subscribe({
+      next: (response) => {
+        this.maritalStatus = response;
+        console.log(this.maritalStatus);
+      },
+      error: (error) => {
+        let data = error.error;
+        console.error(data);
+      }
+    });
+  }
+
   openSnackBar(data: any) {
     this._snackBar.open(data.message, 'Close', {
       duration: 2 * 1000,
@@ -77,7 +118,7 @@ export class DetailsStudentInformationComponent implements OnInit {
   }
   photoupload(event: any) {
 
-    this.photoerror = this.detailsinformation.value.photo === null ? true : false
+    this.photoError = this.detailsEnrollForm.value.photo === null ? true : false
     this.photo = event.target.files[0]
     const mm = 0.2645833333
     const reader = new FileReader();
@@ -94,11 +135,7 @@ export class DetailsStudentInformationComponent implements OnInit {
         const height = Math.round(img.height * mm)
         console.log({ width, height })
         self.checksizeconstranit(width, height, reader.result)
-
-
-
       };
-
     }
   }
 
@@ -107,80 +144,76 @@ export class DetailsStudentInformationComponent implements OnInit {
 
     if (width <= prefferedwidth && height <= preferredheight) {
       console.log("it fits");
-      this.photosizeerror = false
-      this.photourl = url
+      this.photoSizeError = false
+      this.photoUrl = url
 
     }
     else {
       console.log("it not fits");
-      this.photosizeerror = true
-      this.detailsinformation.get('photo')?.reset();
-
-
+      this.photoSizeError = true
+      this.detailsEnrollForm.get('photo')?.reset();
     }
   }
 
-  educationchange(event: any) {
+  educationChange(event: any) {
     console.log(event.value);
-    this.iseduationother = false
-    if (event.value === 6) {
-      this.iseduationother = true
+    this.isEduationOther = false
+    if (event.value === -1) {
+      this.isEduationOther = true
       return
     }
   }
   isfriendjoin(event: any) {
-    this.isfriendname = event.value
+    this.isFriendName = event.value
   }
   detailedsubmit() {
     // this.photoerror = this.detailsinformation.value.photo === null ? true : false
-    this.photosizeerror = false
+    this.photoSizeError = false
 
+    if (this.detailsEnrollForm.invalid) {
+      return this.detailsEnrollForm.markAllAsTouched();
+    } else {
+      // console.log(this.detailsEnrollForm.value);
+      const body = {
+        "registrationId": 2,
+        "passportPhoto": this.detailsEnrollForm.value.photo,
+        "professionId": {
+          "professionId": this.detailsEnrollForm.value.job
+        },
+        "professionWorkingHours": this.detailsEnrollForm.value.workinghours,
+        "educationalId": {
+          "qualificationId": this.detailsEnrollForm.value.educationdetails
+        },
+        "otherEducationalName": this.detailsEnrollForm.value.othereducationdetails,
+        "prideQualification": this.detailsEnrollForm.value.prideinqualification,
+        "maritalStatus": {
+          "maritalStatusId": this.detailsEnrollForm.value.maritalStatus
+        },
+        "familyDetails": this.detailsEnrollForm.value.familydetails,
+        "consentFamily": this.detailsEnrollForm.value.familymemberconsent ? "Y" : "N",
+        "resistanceFamily": this.detailsEnrollForm.value.familycooperation ? "Y" : "N",
+        "participatingFamily": this.detailsEnrollForm.value.friendparticipation ? "Y" : "N",
+        "participateName": this.detailsEnrollForm.value.friendparticipation ? this.detailsEnrollForm.value.friendname : null,
+        "pastPractice": this.detailsEnrollForm.value.pastyogapratice,
+        "hobbies": this.detailsEnrollForm.value.hobbies,
+        "hobbiesAside": this.detailsEnrollForm.value.isdedicated ? "Y" : "N",
+        "referenceName": this.detailsEnrollForm.value.familyfullname,
+        "referenceRelationship": this.detailsEnrollForm.value.familyrelationship,
+        "referenceMobile": this.detailsEnrollForm.value.familycontactno,
+        "courseBriefly": this.detailsEnrollForm.value.whythiscourse
+      };
+      // console.log(body);
 
-    if (this.detailsinformation.invalid)
-      return this.detailsinformation.markAllAsTouched()
-
-    const { job, workinghours, educationdetails, prideinqualification, martialstatus, familydetails, familymemberconsent, familycooperation, friendparticipation, friendname, pastyogapratice, hobbies, isdedicated, familyfullname, familyrelationship, familycontactno, whythiscourse } = this.detailsinformation.value
-
-    const body = {
-      "registrationId": 1,
-      "passportPhoto": this.photo?.name,
-      "professionId": {
-        "professionId": 1
-        // need correction on this property
-      },
-      "professionWorkingHours": workinghours,
-      "educationalId": {
-        "qualificationId": educationdetails
-      },
-      "prideQualification": prideinqualification,
-      "martialStatus": martialstatus,
-      "familyDetails": familydetails,
-      "consentFamily": familymemberconsent ? "Y" : "N",
-      "resistanceFamily": familycooperation,
-      "participatingFamily": friendparticipation ? "Y" : "N",
-      // friend name is missing
-      "pastPractice": pastyogapratice,
-      "hobbies": hobbies,
-      "hobbiesAside": isdedicated,
-      "referenceName": familyfullname,
-      "referenceRelationship": familyrelationship,
-      "referenceMobile": familycontactno,
-      "courseBriefly": whythiscourse
+      this.registrationService.postDetailsEnrollment(body).subscribe({
+        next: (response) => {
+          this.openSnackBar(response)
+          this.detailsEnrollForm.reset()
+        },
+        error: (error) => {
+          console.error(error.error);
+        }
+      });
     }
-
-
-    this.service.postdetailsenrollment(body).subscribe({
-      next: (response) => {
-        this.openSnackBar(response)
-        this.detailsinformation.reset()
-
-      },
-      error: (error) => {
-        console.error(error.message);
-
-      }
-    })
-
   }
 
 }
