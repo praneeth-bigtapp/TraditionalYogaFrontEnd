@@ -7,6 +7,8 @@ import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.c
 import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 import { RegistrationService } from '../service/registration.service';
 import { HttpClient } from '@angular/common/http';
+import { Route, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-studentenrollment',
@@ -47,7 +49,8 @@ export class StudentenrollmentComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private dialog: MatDialog,
     private http: HttpClient,
-    private zone: NgZone
+    private zone: NgZone,
+    private router: Router,
 
 
   ) {
@@ -195,6 +198,9 @@ export class StudentenrollmentComponent implements OnInit {
   compareselect(obj1: any, obj2: any) {
     return obj1 && obj2 && obj1.categoriesId === obj2
   }
+  cancelform() {
+    this.router.navigate(['login'])
+  }
 
   countrychange(event: any) {
     const value = event?.option?.value || event?.target?.value
@@ -203,6 +209,7 @@ export class StudentenrollmentComponent implements OnInit {
     console.log(this.isIndia)
 
   }
+
 
 
   emailchange() {

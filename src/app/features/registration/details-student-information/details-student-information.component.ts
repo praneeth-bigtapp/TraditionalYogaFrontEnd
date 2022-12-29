@@ -121,11 +121,12 @@ export class DetailsStudentInformationComponent implements OnInit {
   }
 
   educationchange(event: any) {
-    if (event.value === "other") {
+    console.log(event.value);
+    this.iseduationother = false
+    if (event.value === 6) {
       this.iseduationother = true
       return
     }
-    this.iseduationother = false
   }
   isfriendjoin(event: any) {
     this.isfriendname = event.value
@@ -156,7 +157,7 @@ export class DetailsStudentInformationComponent implements OnInit {
       "familyDetails": familydetails,
       "consentFamily": familymemberconsent ? "Y" : "N",
       "resistanceFamily": familycooperation,
-      "participatingFamily": familyrelationship ? "Y" : "N",
+      "participatingFamily": friendparticipation ? "Y" : "N",
       // friend name is missing
       "pastPractice": pastyogapratice,
       "hobbies": hobbies,
@@ -168,7 +169,7 @@ export class DetailsStudentInformationComponent implements OnInit {
     }
 
 
-    this.service.postenrollment(body).subscribe({
+    this.service.postdetailsenrollment(body).subscribe({
       next: (response) => {
         this.openSnackBar(response)
         this.detailsinformation.reset()

@@ -37,7 +37,7 @@ export class RegistrationService extends BaseHttp {
   }
 
   postenrollment(body: any) {
-    return this.post(this.postenrollmentURL, body)
+    return this.login(this.postenrollmentURL, body)
   }
   postdetailsenrollment(body: any) {
     return this.post(this.postdetailsenrollmentURL, body)

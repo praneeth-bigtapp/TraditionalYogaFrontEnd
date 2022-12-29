@@ -10,6 +10,18 @@
 
         <button type="button" class="btn btn-outline-secondary btn-rounded" (click)="onAddRole()"> Add Role </button>
     </div> -->
+    <div class="row align-items-center">
+        <div class="col-md-5">
+            <div class="signup-image col-md-5 mt-5 order-1">
+                <figure>
+                    <img src="assets/images/Traditional-yoga-new-logo.png " alt="sing up image " width="75% ">
+                </figure>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <h1 class="d-inline-block pt-2  font-weight-normal moderrat-font text-white"> Traditional Yoga </h1>
+        </div>
+    </div>
     <div class="card border-light">
         <div class="card-header text-white bg-secondary">
             <!-- {{iseditable ? "Update":"Add"}} Enrollment -->
@@ -346,7 +358,8 @@
                         <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block mt-4">
                             {{iseditable ? "Update" :"Register" }}
                         </button>
-                        <button type="reset" class="btn btn-outline-secondary btn-rounded d-inline-block mt-4 ">
+                        <button type="reset" (click)="cancelform()"
+                            class="btn btn-outline-secondary btn-rounded d-inline-block mt-4 ">
                             Cancel
                         </button>
                     </div>

@@ -221,7 +221,7 @@ export class LoginComponent implements OnInit {
   }
 
   onRegister() {
-    this.router.navigateByUrl("register");
+    this.router.navigateByUrl("studentEnrollment");
   }
 
 }

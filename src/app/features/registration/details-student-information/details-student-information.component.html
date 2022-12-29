@@ -188,7 +188,7 @@
                             <mat-radio-group formControlName="friendparticipation" (change)="isfriendjoin($event)"
                                 aria-label="Select an option">
                                 <mat-radio-button [value]="true" class=" mt-md-2 mr-md-4">Yes</mat-radio-button>
-                                <mat-radio-button [value]=false class=" mt-md-2 mr-md-4">No</mat-radio-button>
+                                <mat-radio-button [value]="false" class=" mt-md-2 mr-md-4">No</mat-radio-button>
 
                             </mat-radio-group>
                             <div class="error-message"
@@ -257,7 +257,7 @@
                         <div class="col px-0">
                             <mat-radio-group formControlName="isdedicated" aria-label="Select an option">
                                 <mat-radio-button [value]="true" class=" mt-md-2 mr-md-4">Yes</mat-radio-button>
-                                <mat-radio-button [value]=false class=" mt-md-2 mr-md-4">No</mat-radio-button>
+                                <mat-radio-button [value]="false" class=" mt-md-2 mr-md-4">No</mat-radio-button>
 
                             </mat-radio-group>
                             <div class="error-message"
