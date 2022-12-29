@@ -24,7 +24,7 @@ export class GlimpemediaComponent implements OnInit {
   displaycontent: boolean = true
   pageno: number = 1
   isothers: boolean = false
-  displayedColumns: string[] = ['classMediaId', 'coursesId', 'date',  "languageName", "Action"];
+  displayedColumns: string[] = ['classMediaId', 'coursesId', 'date', "languageName", "Action"];
   shortvideoform!: any
   filterData: any;
   categoryerror: boolean = false
@@ -39,10 +39,10 @@ export class GlimpemediaComponent implements OnInit {
   glimpsefile: any;
   // languagelist = { aa: "Afar", ab: "Abkhazian", af: "Afrikaans", am: "Amharic", ar: "Arabic", "ar-ae": "Arabic (U.A.E.)", "ar-bh": "Arabic (Bahrain)", "ar-dz": "Arabic (Algeria)", "ar-eg": "Arabic (Egypt)", "ar-iq": "Arabic (Iraq)", "ar-jo": "Arabic (Jordan)", "ar-kw": "Arabic (Kuwait)", "ar-lb": "Arabic (Lebanon)", "ar-ly": "Arabic (libya)", "ar-ma": "Arabic (Morocco)", "ar-om": "Arabic (Oman)", "ar-qa": "Arabic (Qatar)", "ar-sa": "Arabic (Saudi Arabia)", "ar-sy": "Arabic (Syria)", "ar-tn": "Arabic (Tunisia)", "ar-ye": "Arabic (Yemen)", as: "Assamese", ay: "Aymara", az: "Azeri", ba: "Bashkir", be: "Belarusian", bg: "Bulgarian", bh: "Bihari", bi: "Bislama", bn: "Bengali", bo: "Tibetan", br: "Breton", ca: "Catalan", co: "Corsican", cs: "Czech", cy: "Welsh", da: "Danish", de: "German", "de-at": "German (Austria)", "de-ch": "German (Switzerland)", "de-li": "German (Liechtenstein)", "de-lu": "German (Luxembourg)", div: "Divehi", dz: "Bhutani", el: "Greek", en: "English", "en-au": "English (Australia)", "en-bz": "English (Belize)", "en-ca": "English (Canada)", "en-gb": "English (United Kingdom)", "en-ie": "English (Ireland)", "en-jm": "English (Jamaica)", "en-nz": "English (New Zealand)", "en-ph": "English (Philippines)", "en-tt": "English (Trinidad)", "en-us": "English (United States)", "en-za": "English (South Africa)", "en-zw": "English (Zimbabwe)", eo: "Esperanto", es: "Spanish", "es-ar": "Spanish (Argentina)", "es-bo": "Spanish (Bolivia)", "es-cl": "Spanish (Chile)", "es-co": "Spanish (Colombia)", "es-cr": "Spanish (Costa Rica)", "es-do": "Spanish (Dominican Republic)", "es-ec": "Spanish (Ecuador)", "es-es": "Spanish (Espa\xf1a)", "es-gt": "Spanish (Guatemala)", "es-hn": "Spanish (Honduras)", "es-mx": "Spanish (Mexico)", "es-ni": "Spanish (Nicaragua)", "es-pa": "Spanish (Panama)", "es-pe": "Spanish (Peru)", "es-pr": "Spanish (Puerto Rico)", "es-py": "Spanish (Paraguay)", "es-sv": "Spanish (El Salvador)", "es-us": "Spanish (United States)", "es-uy": "Spanish (Uruguay)", "es-ve": "Spanish (Venezuela)", et: "Estonian", eu: "Basque", fa: "Farsi", fi: "Finnish", fj: "Fiji", fo: "Faeroese", fr: "French", "fr-be": "French (Belgium)", "fr-ca": "French (Canada)", "fr-ch": "French (Switzerland)", "fr-lu": "French (Luxembourg)", "fr-mc": "French (Monaco)", fy: "Frisian", ga: "Irish", gd: "Gaelic", gl: "Galician", gn: "Guarani", gu: "Gujarati", ha: "Hausa", he: "Hebrew", hi: "Hindi", hr: "Croatian", hu: "Hungarian", hy: "Armenian", ia: "Interlingua", id: "Indonesian", ie: "Interlingue", ik: "Inupiak", in: "Indonesian", is: "Icelandic", it: "Italian", "it-ch": "Italian (Switzerland)", iw: "Hebrew", ja: "Japanese", ji: "Yiddish", jw: "Javanese", ka: "Georgian", kk: "Kazakh", kl: "Greenlandic", km: "Cambodian", kn: "Kannada", ko: "Korean", kok: "Konkani", ks: "Kashmiri", ku: "Kurdish", ky: "Kirghiz", kz: "Kyrgyz", la: "Latin", ln: "Lingala", lo: "Laothian", ls: "Slovenian", lt: "Lithuanian", lv: "Latvian", mg: "Malagasy", mi: "Maori", mk: "FYRO Macedonian", ml: "Malayalam", mn: "Mongolian", mo: "Moldavian", mr: "Marathi", ms: "Malay", mt: "Maltese", my: "Burmese", na: "Nauru", "nb-no": "Norwegian (Bokmal)", ne: "Nepali (India)", nl: "Dutch", "nl-be": "Dutch (Belgium)", "nn-no": "Norwegian", no: "Norwegian (Bokmal)", oc: "Occitan", om: "(Afan)/Oromoor/Oriya", or: "Oriya", pa: "Punjabi", pl: "Polish", ps: "Pashto/Pushto", pt: "Portuguese", "pt-br": "Portuguese (Brazil)", qu: "Quechua", rm: "Rhaeto-Romanic", rn: "Kirundi", ro: "Romanian", "ro-md": "Romanian (Moldova)", ru: "Russian", "ru-md": "Russian (Moldova)", rw: "Kinyarwanda", sa: "Sanskrit", sb: "Sorbian", sd: "Sindhi", sg: "Sangro", sh: "Serbo-Croatian", si: "Singhalese", sk: "Slovak", sl: "Slovenian", sm: "Samoan", sn: "Shona", so: "Somali", sq: "Albanian", sr: "Serbian", ss: "Siswati", st: "Sesotho", su: "Sundanese", sv: "Swedish", "sv-fi": "Swedish (Finland)", sw: "Swahili", sx: "Sutu", syr: "Syriac", ta: "Tamil", te: "Telugu", tg: "Tajik", th: "Thai", ti: "Tigrinya", tk: "Turkmen", tl: "Tagalog", tn: "Tswana", to: "Tonga", tr: "Turkish", ts: "Tsonga", tt: "Tatar", tw: "Twi", uk: "Ukrainian", ur: "Urdu", us: "English", uz: "Uzbek", vi: "Vietnamese", vo: "Volapuk", wo: "Wolof", xh: "Xhosa", yi: "Yiddish", yo: "Yoruba", zh: "Chinese", "zh-cn": "Chinese (China)", "zh-hk": "Chinese (Hong Kong SAR)", "zh-mo": "Chinese (Macau SAR)", "zh-sg": "Chinese (Singapore)", "zh-tw": "Chinese (Taiwan)", zu: "Zulu" }
   courses: any
-  languagelist :any
+  languagelist: any
   languagefilter !: Observable<any>
-  otherslan=false
-  tabledata :any
+  otherslan = false
+  tabledata: any
 
   constructor(
     private formbuilder: FormBuilder,
@@ -73,24 +73,28 @@ export class GlimpemediaComponent implements OnInit {
     })
     this.getallcourse()
 
-    
-   
+
+
   }
 
   ngOnInit(): void {
-this.ALLlanguages()
-this.getalldata()
-  
+    this.ALLlanguages()
+    this.getalldata()
+
   }
-swapothers(value:any){
-  if(value=='Others'){
-    this.otherslan=true
-   
-  }else{
-    this.otherslan=false
+  swapothers(event: any) {
+
+    if (event.value === 50) {
+      this.otherslan = true
+
+      return
+
+    }
+    this.otherslan = false
+
+
+
   }
-  
-}
   getallcourse() {
     this.services.getcoursesdetails().subscribe({
       next: (response) => {
@@ -104,18 +108,18 @@ swapothers(value:any){
     });
 
   }
-  ALLlanguages(){
+  ALLlanguages() {
     this.services.getlanguages().subscribe({
       next: (response) => {
-  
+
         this.languagelist = response
         console.log(response);
-        
-  
+
+
       },
       error: (error) => {
         console.error(error.message);
-  
+
       }
     })
   }
@@ -126,20 +130,20 @@ swapothers(value:any){
       next: (response) => {
 
         this.tabledata = response
-        this.tabledata=this.tabledata.reverse()
+        this.tabledata = this.tabledata.reverse()
         console.log('ALLdata');
-        
+
         console.log(response);
         this.dataSource = new MatTableDataSource<any>(this.tabledata)
-    this.filterData.gridData = this.tabledata;
-    this.filterData.dataSource = this.dataSource;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.filterData.sort = this.sort;
-    for (let col of this.filterData.filterColumnNames) {
-      col.Value = '';
-    }
-        
+        this.filterData.gridData = this.tabledata;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+
 
       },
       error: (error) => {
@@ -147,7 +151,7 @@ swapothers(value:any){
 
       }
     })
-    
+
   }
   updatePagination(col: any) {
 
@@ -160,11 +164,11 @@ swapothers(value:any){
       duration: 2 * 1000,
     });
   }
-  Addlanguages(){
-    let body={
-  
+  Addlanguages() {
+    let body = {
+
       "languageName": "Others"
-  }
+    }
     this.services.postaddlanguages(body).subscribe({
       next: (response) => {
         this.openSnackBar(response)
@@ -178,7 +182,7 @@ swapothers(value:any){
   }
 
 
-  
+
 
   onpaginatechange(event: any) {
     if (event.pageIndex === 0) {
@@ -206,13 +210,13 @@ swapothers(value:any){
     this.displaycontent = true
 
     this.glimpseform.setValue({
-      courseMediaId:element.glimpsesId,
+      courseMediaId: element.glimpsesId,
       course: element.coursesId.coursesId,
 
       date: formatDate(element.date, "yyyy-MM-dd", 'en'),
       file: '',
       language: element.language.languageId,
-      Others:null
+      Others: null
 
 
     })
@@ -222,13 +226,13 @@ swapothers(value:any){
     this.issubmit = false
     this.displaycontent = true
     this.glimpseform.setValue({
-      courseMediaId:element.glimpsesId,
+      courseMediaId: element.glimpsesId,
       course: element.coursesId.coursesId,
 
       date: formatDate(element.date, "yyyy-MM-dd", 'en'),
       file: '',
       language: element.language.languageId,
-      Others:null
+      Others: null
 
 
     })
@@ -247,13 +251,13 @@ swapothers(value:any){
         message: "Are You Sure You Want To Delete this media ?"
       },
       width: "30%",
-      height:"25%"
+      height: "25%"
     })
 
     dialogref.afterClosed().subscribe(data => {
       if (data) {
         console.log((body));
-        
+
         this.services.postdeleteGlimps(body).subscribe({
           next: (response) => {
             this.openSnackBar(response)
@@ -274,73 +278,56 @@ swapothers(value:any){
     this.glimpsefile = event.target.files[0].name
   }
   glimpseformsubmit() {
-  
-    
-    // if(this.glimpseform.value.language!=50){
-    //   this.glimpseform.value.Others='nnn'
-    //   console.log(this.glimpseform.value);
-      
-    // }
-    // alert(this.glimpseform.value.language)
-    // alert(this.glimpseform.invalid)
-    if (this.glimpseform.invalid)
-      {return this.glimpseform.markAllAsTouched()}
 
-    
+    if (this.glimpseform.invalid) { return this.glimpseform.markAllAsTouched() }
 
 
-    this.glimpseform.value.file = this.glimpsefile ||''
 
-
-    
-    
+    this.glimpseform.value.file = this.glimpsefile || ''
 
     let body;
-    if(this.glimpseform.value.language===50){
+    if (this.glimpseform.value.language === 50) {
       body = {
-  
+
         "coursesId": {
-            "coursesId": this.glimpseform.value.course 
+          "coursesId": this.glimpseform.value.course
         },
         "date": this.glimpseform.value.date,
         "fileUpload": this.glimpseform.value.file,
         "language": {
-            "languageId": this.glimpseform.value.others
+          "languageId": this.glimpseform.value.Others
         }
-    }
-    let newbody={
-  
-      "languageName": this.glimpseform.value.others
-  }
-  this.services.postaddlanguages(newbody).subscribe({
-    next: (response) => {
-
-      
-
-      this.openSnackBar(response)
-
-
-    },
-    error: (error) => {
-      console.error(error.message);
-
-    }
-  })
-    
-  }
-  else{
-    body = {
-  
-      "coursesId": {
-          "coursesId": this.glimpseform.value.course 
-      },
-      "date": this.glimpseform.value.date,
-      "fileUpload": this.glimpseform.value.file,
-      "language": {
-          "languageId": this.glimpseform.value.language
       }
-  }
-}
+      console.log(body);
+
+      let newbody = {
+
+        "languageName": this.glimpseform.value.Others
+      }
+      this.services.postaddlanguages(newbody).subscribe({
+        next: (response) => {
+          this.openSnackBar(response)
+        },
+        error: (error) => {
+          console.error(error.message);
+
+        }
+      })
+
+    }
+    else {
+      body = {
+
+        "coursesId": {
+          "coursesId": this.glimpseform.value.course
+        },
+        "date": this.glimpseform.value.date,
+        "fileUpload": this.glimpseform.value.file,
+        "language": {
+          "languageId": this.glimpseform.value.language
+        }
+      }
+    }
 
     this.services.postaddGlimps(body).subscribe({
       next: (response) => {
@@ -361,69 +348,33 @@ swapothers(value:any){
 
   }
 
-  onsave(){
-    
+  onsave() {
 
-      let body;
-      if(this.glimpseform.value.language===50)
-      {
-        body = {
-          "glimpsesId":this.glimpseform.value.courseMediaId,
-          "coursesId": {
-              "coursesId": this.glimpseform.value.course 
-          },
-          "date": this.glimpseform.value.date,
-          "fileUpload": this.glimpseform.value.file,
-          "language": {
-              "languageId": this.glimpseform.value.others
-          }
-      }
-      let newbody={
-    
-        "languageName": this.glimpseform.value.others
-    }
-    this.services.postaddlanguages(newbody).subscribe({
-      next: (response) => {
-  
-        
-  
-        this.openSnackBar(response)
-  
-  
-      },
-      error: (error) => {
-        console.error(error.message);
-  
-      }
-    })
-      
-    }
-    else
-    {
+
+    let body;
+    if (this.glimpseform.value.language === 50) {
       body = {
-        "glimpsesId":this.glimpseform.value.courseMediaId,
+        "glimpsesId": this.glimpseform.value.courseMediaId,
         "coursesId": {
-          "coursesId": this.glimpseform.value.course 
-      },
-      "date": this.glimpseform.value.date,
-      "fileUpload": this.glimpseform.value.file,
-      "language": {
-          "languageId": this.glimpseform.value.language
+          "coursesId": this.glimpseform.value.course
+        },
+        "date": this.glimpseform.value.date,
+        "fileUpload": this.glimpseform.value.file,
+        "language": {
+          "languageId": this.glimpseform.value.others
+        }
       }
+      let newbody = {
 
+        "languageName": this.glimpseform.value.others
       }
-      
-    }
-    console.log('update');
-    console.log(body);
-      
-      this.services.postupdateGlimps(body).subscribe({
+      this.services.postaddlanguages(newbody).subscribe({
         next: (response) => {
 
-          this.glimpseform.reset()
+
 
           this.openSnackBar(response)
-        this.getalldata()
+
 
         },
         error: (error) => {
@@ -432,12 +383,45 @@ swapothers(value:any){
         }
       })
 
-    
-    
+    }
+    else {
+      body = {
+        "glimpsesId": this.glimpseform.value.courseMediaId,
+        "coursesId": {
+          "coursesId": this.glimpseform.value.course
+        },
+        "date": this.glimpseform.value.date,
+        "fileUpload": this.glimpseform.value.file,
+        "language": {
+          "languageId": this.glimpseform.value.language
+        }
+      }
 
-    
+    }
+    console.log('update');
+    console.log(body);
+
+    this.services.postupdateGlimps(body).subscribe({
+      next: (response) => {
+
+        this.glimpseform.reset()
+
+        this.openSnackBar(response)
+        this.getalldata()
+
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
+
+
+
+
+
   }
 
 
-  
+
 }

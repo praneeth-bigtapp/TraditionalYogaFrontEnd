@@ -14,22 +14,22 @@
 
         </div>
         <div class="card-body  bg-white py-2" *ngIf="displaycontent">
-            <form [formGroup]="glimpseform" >
+            <form [formGroup]="glimpseform">
                 <div class="row">
                     <div class="col-md-4">
                         <label>Course</label>
                         <mat-form-field appearance="outline">
-                            <mat-select formControlName="course">
+                            <mat-select formControlName="course" [disabled]="iseditable">
                                 <mat-option *ngFor="let course1 of courses" [value]="course1.coursesId">
                                     {{course1.coursesName}}</mat-option>
                             </mat-select>
 
                         </mat-form-field>
                         <div class="error-message"
-                        *ngIf="glimpseform.controls['course'].invalid && (glimpseform.controls['course'].dirty || glimpseform.controls['course'].touched)">
-                        <mat-error [hidden]=" !glimpseform.get('course')?.hasError('required')  ">
-                            Course is mandatory
-                        </mat-error>
+                            *ngIf="glimpseform.controls['course'].invalid && (glimpseform.controls['course'].dirty || glimpseform.controls['course'].touched)">
+                            <mat-error [hidden]=" !glimpseform.get('course')?.hasError('required')  ">
+                                Course is mandatory
+                            </mat-error>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -51,12 +51,12 @@
                         <div class="col px-0">
                             <input type="file" class="border" id="file" (change)="filechange($event)"
                                 formControlName="file" accept=" image/*" />
-                            
+
 
                         </div>
                     </div>
-                    
-                    
+
+
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-4">
@@ -64,12 +64,12 @@
                             <label>Language</label>
                             <div class="col">
                                 <mat-form-field appearance="outline">
-                                 
-                                        <mat-select formControlName="language" >
-                                            <mat-option *ngFor="let language of languagelist" [value]="language.languageId" (onSelectionChange)="swapothers(language.languageName)">
-                                                {{language.languageName}}</mat-option>
-                                        </mat-select>
-                                    
+
+                                    <mat-select formControlName="language" [disabled]="iseditable" (selectionChange)="swapothers($event)">
+                                        <mat-option *ngFor="let language of languagelist" [value]="language.languageId">
+                                            {{language.languageName}}</mat-option>
+                                    </mat-select>
+
                                 </mat-form-field>
                                 <div class="error-message"
                                     *ngIf="glimpseform.controls['language'].invalid && (glimpseform.controls['language'].dirty || glimpseform.controls['language'].touched)">
@@ -85,24 +85,26 @@
                     <div class="col-md-4" *ngIf="otherslan">
                         <label>Others</label>
                         <mat-form-field appearance="outline">
-                            <input matInput formControlName="Others" type="text" value=""/>
+                            <input matInput formControlName="Others" type="text" value="" [required]="otherslan" />
 
                         </mat-form-field>
                         <div class="error-message"
                             *ngIf="glimpseform.controls['Others'].invalid && (glimpseform.controls['Others'].dirty || glimpseform.controls['Others'].touched)">
                             <mat-error [hidden]=" !glimpseform.get('Others')?.hasError('required')  ">
-                                Course is mandatory
+                                Others is mandatory
                             </mat-error>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class=" d-flex flex-row justify-content-end  ">
-                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block   " *ngIf="issubmit" (click)="glimpseformsubmit()">
+                    <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block   "
+                        *ngIf="issubmit" (click)="glimpseformsubmit()">
                         Add
                     </button>
-                    <button (click)="onsave()" class="btn btn-outline-secondary btn-rounded d-inline-block   "*ngIf="iseditable">
-                       Update
+                    <button (click)="onsave()" class="btn btn-outline-secondary btn-rounded d-inline-block   "
+                        *ngIf="iseditable">
+                        Update
                     </button>
                     <button type="button" (click)="reseteditable()"
                         class="btn btn-outline-secondary btn-rounded d-inline-block    ">
@@ -145,12 +147,12 @@
 
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
-                             Date
+                            Date
                         </label>
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.date  | date:'dd-MMM-YYYY'}}
+                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.date | date:'dd-MMM-YYYY'}}
                     </td>
                 </ng-container>
 
@@ -167,7 +169,7 @@
 
                 </ng-container>
 
-               
+
 
                 <ng-container matColumnDef="Action">
                     <th mat-header-cell *matHeaderCellDef scope="col">
