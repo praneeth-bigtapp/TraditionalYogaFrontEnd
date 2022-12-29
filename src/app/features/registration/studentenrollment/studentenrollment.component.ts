@@ -33,11 +33,11 @@ export class StudentenrollmentComponent implements OnInit {
   isfriendname: boolean = false
   iseduationother: boolean = false
   isIndia: boolean = false
-  isemailverified: boolean = true
-  isemailsended: boolean = true
+  isemailverified: boolean = false
+  isemailsended: boolean = false
   otp: any
   otperror: boolean = false
-  isemailvalid: boolean = true
+  isemailvalid: boolean = false
   photosizeerror: boolean = false
 
 
@@ -210,14 +210,32 @@ export class StudentenrollmentComponent implements OnInit {
   }
   sendemail() {
 
+    const timeout = 1000
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Email not Verified",
+        message: "OTP has been mailed"
+      },
+      width: "30%",
+      height: "25%"
+    })
+
+    dialogref.afterOpened().subscribe(_ => {
+      setTimeout(() => {
+        dialogref.close();
+      }, timeout)
+    })
+
+    dialogref.afterClosed().subscribe(data => {
+      return
+    })
+
+    //if(isemailsended)
     this.otperror = false
     this.isemailsended = true
     this.isemailverified = false
-
-
   }
-
-  verifyemail() {
+  verifyotp() {
 
 
     if (this.otp?.length === 0 || !InputvalidationService.inputvalidation.isnumbers.test(this.otp)) {
@@ -225,8 +243,6 @@ export class StudentenrollmentComponent implements OnInit {
       return
     }
 
-
-    console.log(this.otp);
     this.otperror = false
     this.isemailsended = false
     this.isemailverified = true
@@ -302,7 +318,7 @@ export class StudentenrollmentComponent implements OnInit {
 
 
   enrollmentsubmit() {
-
+    const timeout = 1000
     if (!this.isemailverified) {
       const dialogref = this.dialog.open(DialogPopupComponent, {
         data: {
@@ -311,6 +327,12 @@ export class StudentenrollmentComponent implements OnInit {
         },
         width: "30%",
         height: "25%"
+      })
+
+      dialogref.afterOpened().subscribe(_ => {
+        setTimeout(() => {
+          dialogref.close();
+        }, timeout)
       })
 
       dialogref.afterClosed().subscribe(data => {
@@ -358,6 +380,6 @@ export class StudentenrollmentComponent implements OnInit {
   }
 
 
-  
+
 
 }

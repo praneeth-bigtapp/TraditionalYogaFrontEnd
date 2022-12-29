@@ -131,19 +131,18 @@ export class DetailsStudentInformationComponent implements OnInit {
     this.isfriendname = event.value
   }
   detailedsubmit() {
-    this.photoerror = this.detailsinformation.value.photo === null ? true : false
+    // this.photoerror = this.detailsinformation.value.photo === null ? true : false
     this.photosizeerror = false
 
 
     if (this.detailsinformation.invalid)
       return this.detailsinformation.markAllAsTouched()
 
-
     const { job, workinghours, educationdetails, prideinqualification, martialstatus, familydetails, familymemberconsent, familycooperation, friendparticipation, friendname, pastyogapratice, hobbies, isdedicated, familyfullname, familyrelationship, familycontactno, whythiscourse } = this.detailsinformation.value
 
     const body = {
       "registrationId": 1,
-      "passportPhoto": this.photo.name,
+      "passportPhoto": this.photo?.name,
       "professionId": {
         "professionId": 1
         // need correction on this property
