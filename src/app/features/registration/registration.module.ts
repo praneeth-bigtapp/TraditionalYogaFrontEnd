@@ -12,11 +12,13 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentenrollmentComponent } from './studentenrollment/studentenrollment.component';
+import { DetailsStudentInformationComponent } from './details-student-information/details-student-information.component';
 
 
 @NgModule({
   declarations: [
     StudentenrollmentComponent,
+    DetailsStudentInformationComponent,
   ],
   imports: [
     CommonModule,

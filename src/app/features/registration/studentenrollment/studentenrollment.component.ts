@@ -57,7 +57,7 @@ export class StudentenrollmentComponent implements OnInit {
       lastname: [null, Validators.compose([Validators.required])],
       // name: [null, Validators.compose([Validators.required])],
       email: [null, Validators.compose([Validators.required, Validators.email])],
-      mobile: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.mobile)])],
+      mobile: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.phonenumber)])],
       mothertounge: [null, Validators.compose([Validators.required])],
       isenglishspoken: [null, Validators.compose([Validators.required])],
       dateofbirth: [null, Validators.compose([Validators.required])],
@@ -75,27 +75,6 @@ export class StudentenrollmentComponent implements OnInit {
 
 
 
-    this.detailsinformation = this.formbuilder.group({
-      photo: [null, Validators.compose([])],
-      job: [null, Validators.compose([])],
-      workinghours: [null, Validators.compose([Validators.pattern(InputvalidationService.inputvalidation.isnumbers)])],
-      educationdetails: [null, Validators.compose([])],
-      othereducationdetails: [null],
-      prideinqualification: [null, Validators.compose([])],
-      matrialstatus: [null, Validators.compose([])],
-      familydetails: [null, Validators.compose([])],
-      familymemberconsent: [null, Validators.compose([])],
-      familycooperation: [null, Validators.compose([])],
-      friendparticipation: [null, Validators.compose([])],
-      friendname: [null],
-      pastyogapratice: [null, Validators.compose([])],
-      hobbies: [null, Validators.compose([])],
-      isdedicated: [null, Validators.compose([])],
-      familyfullname: [null, Validators.compose([])],
-      familyrelationship: [null, Validators.compose([])],
-      familycontactno: [null, Validators.compose([, Validators.pattern(InputvalidationService.inputvalidation.mobile)])],
-      whythiscourse: [null, Validators.compose([])],
-    })
     this.getIPAddress()
 
 
@@ -321,16 +300,7 @@ export class StudentenrollmentComponent implements OnInit {
 
   }
 
-  educationchange(event: any) {
-    if (event.value === "other") {
-      this.iseduationother = true
-      return
-    }
-    this.iseduationother = false
-  }
-  isfriendjoin(event: any) {
-    this.isfriendname = event.value
-  }
+
   enrollmentsubmit() {
 
     if (!this.isemailverified) {
@@ -388,55 +358,6 @@ export class StudentenrollmentComponent implements OnInit {
   }
 
 
-  detailedsubmit() {
-    this.photoerror = this.detailsinformation.value.photo === null ? true : false
-    this.photosizeerror = false
-
-
-    if (this.detailsinformation.invalid)
-      return this.detailsinformation.markAllAsTouched()
-
-
-    const { job, workinghours, educationdetails, prideinqualification, martialstatus, familydetails, familymemberconsent, familycooperation, friendparticipation, friendname, pastyogapratice, hobbies, isdedicated, familyfullname, familyrelationship, familycontactno, whythiscourse } = this.detailsinformation.value
-
-    const body = {
-      "registrationId": 1,
-      "passportPhoto": this.photo.name,
-      "professionId": {
-        "professionId": 1
-      },
-      "professionWorkingHours": workinghours,
-      "educationalId": {
-        "qualificationId": educationdetails
-      },
-      "prideQualification": prideinqualification,
-      "martialStatus": martialstatus,
-      "familyDetails": familydetails,
-      "consentFamily": familymemberconsent ? "Y" : "N",
-      "resistanceFamily": "N",
-      "participatingFamily": "N",
-      "pastPractice": pastyogapratice,
-      "hobbies": hobbies,
-      "hobbiesAside": isdedicated,
-      "referenceName": familyfullname,
-      "referenceRelationship": familyrelationship,
-      "referenceMobile": familycontactno,
-      "courseBriefly": whythiscourse
-    }
-
-
-    this.service.postenrollment(body).subscribe({
-      next: (response) => {
-        this.openSnackBar(response)
-        this.detailsinformation.reset()
-
-      },
-      error: (error) => {
-        console.error(error.message);
-
-      }
-    })
-
-  }
+  
 
 }
