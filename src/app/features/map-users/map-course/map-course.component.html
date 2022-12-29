@@ -2,17 +2,17 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item"><a href="#/addpages">Website Management</a></li>
+          <li class="breadcrumb-item"><a href="#/addpages">User Management</a></li>
           <li class="breadcrumb-item active" aria-current="page">mapusers</li>
         </ol>
       </nav>
-    <div class="row justify-content-end" style="margin-left:900px ;">
+    <!-- <div class="row justify-content-end" style="margin-left:900px ;"> -->
 
     
-    <div class=" justify-content-end">
+    <div class=" col-md-12 d-flex justify-content-end m-2">
         <button class="btn btn-outline-secondary btn-rounded d-inline-block" (click)="   mapCourse() " *ngIf="!displaycontent">Search Users</button>
     </div>
-</div><br>
+<!-- </div><br> -->
 
            
        
@@ -270,7 +270,7 @@
 
         <!-- Name Column -->
         <ng-container matColumnDef="image">
-            <th mat-header-cell class="col-md-1" *matHeaderCellDef > 
+            <th mat-header-cell class="col-md-1 " *matHeaderCellDef > 
                 <div class="row">
                     <label mat-sort-header class=""> Image</label>
                    <input matInput type="text" (keyup)="updatePagination()" 
@@ -286,56 +286,56 @@
 
         <!-- Weight Column -->
         <ng-container matColumnDef="name">
-            <th mat-header-cell class="col-md-2" *matHeaderCellDef>
-                <div class="row">
+            <th mat-header-cell class="col-md-2 " *matHeaderCellDef>
+                <div class="row text-center">
                     <label mat-sort-header class="">  Name</label>
                    <input matInput type="text" (keyup)="updatePagination()" 
                    [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="  filterData"    />
                </div>
             </th>
-            <td mat-cell class="col-md-2" *matCellDef="let element"> {{element.name}} </td>
+            <td mat-cell class="col-md-2 text-start" *matCellDef="let element"> {{element.name}} </td>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="emailId">
-            <th mat-header-cell class="col-md-3" *matHeaderCellDef >
+            <th mat-header-cell class="col-md-3 " *matHeaderCellDef >
                 <div class="row">
-                    <label mat-sort-header class=""> Email id</label>
+                    <label mat-sort-header class="text-start"> Email id</label>
                    <input matInput type="text" (keyup)="updatePagination()" 
                    [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="  filterData"   />
                </div>
             </th>
-            <td class="col-md-3" *matCellDef="let element">
+            <td class="col-md-3 text-start" *matCellDef="let element">
                 {{element.emailId}} </td>
 
         </ng-container>
         <ng-container matColumnDef="country">
-            <th mat-header-cell class="col-md-2" *matHeaderCellDef >
+            <th mat-header-cell class="col-md-2 " *matHeaderCellDef >
                 <div class="row">
-                    <label mat-sort-header  class=""> Country</label>
+                    <label mat-sort-header  class="text-start"> Country</label>
                    <input matInput type="text" (keyup)="updatePagination()" 
                    [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="  filterData"   />
                </div>
             </th>
-            <td class="col-md-2" *matCellDef="let element">
+            <td class="col-md-2 text-start" *matCellDef="let element">
                 {{element.country}} </td>
 
         </ng-container>
         <ng-container matColumnDef="Gender">
-            <th mat-header-cell class="col-md-1" *matHeaderCellDef >
+            <th mat-header-cell class="col-md-1 " *matHeaderCellDef >
                 <div class="row">
                     <label mat-sort-header class="text-start">Gender</label>
                    <input matInput type="text" (keyup)="updatePagination()" 
                    [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="  filterData"    />
                </div>
             </th>
-            <td mat-cell class="col-md-1" *matCellDef="let element">
+            <td mat-cell class="col-md-1 text-start" *matCellDef="let element">
                 {{element.Gender}}
             </td>
 
         </ng-container>
         <ng-container matColumnDef="usersince">
-            <th mat-header-cell class="col-md-3" *matHeaderCellDef >
+            <th mat-header-cell class="col-md-3 " *matHeaderCellDef >
                 <div class="row">
                     <label mat-sort-header class="text-start">User since</label>
                    <input matInput type="text" (keyup)="updatePagination()" 
@@ -348,21 +348,21 @@
 
         </ng-container>
         <ng-container matColumnDef="status">
-            <th mat-header-cell class="col" *matHeaderCellDef >
+            <th mat-header-cell class="col " *matHeaderCellDef >
                 <div class="row">
                     <label mat-sort-header  class="text-start">status</label>
                    <input matInput type="text" (keyup)="updatePagination()" 
                    [(ngModel)]="filterData.filterColumnNames[7].Value" [filter]="  filterData"    />
                </div>
             </th>
-            <td mat-cell class="col" *matCellDef="let element">
+            <td mat-cell class="col text-start" *matCellDef="let element">
                 Activate
             </td>
 
         </ng-container>
         <ng-container matColumnDef="view">
             <th mat-header-cell class="col" *matHeaderCellDef >
-                <label mat-sort-header>Actions</label>
+                <label mat-sort-header class=" text-start">Actions</label>
                 <input matInput type="text" (keyup)="updatePagination()" 
                 [(ngModel)]="filterData.filterColumnNames[8].Value" [filter]="  filterData" disabled   /></th>
             <td mat-cell class="col" *matCellDef="let element">

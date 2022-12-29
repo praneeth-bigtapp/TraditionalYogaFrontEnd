@@ -42,6 +42,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { CoursesModule } from './features/courses/courses.module';
 import { BlacklistUserModule } from './features/blacklist-user/blacklist-user.module';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { PastCourseComponent } from './studentmodule/pastcourse/past-course/past-course.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     ViewDataComponent,
     DndDirective,
     DialogComponent,
+   
 
   ],
   imports: [
@@ -72,6 +74,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
     // StudentMasterModule,
     DashboardModule,
+  
     BlacklistUserModule,
     BannerModule,
     CoursesModule,
