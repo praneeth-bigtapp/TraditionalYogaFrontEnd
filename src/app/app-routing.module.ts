@@ -128,6 +128,12 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
+      import('./studentmodule/student-dashboard/student-dashboard.module').then((m) => m.StudentDashboardModule)
+  },
+
+  {
+    path: '',
+    loadChildren: () =>
       import('./features/testimonials/testimonials.module').then((m) => m.TestimonialsModule)
   },
 

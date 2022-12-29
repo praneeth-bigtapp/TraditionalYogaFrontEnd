@@ -1,0 +1,110 @@
+<div class="ConfigurationTypes_textpadding">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/studentDashboard">Student Management</a></li>
+            <li class="breadcrumb-item active" aria-current="page">DashBoard</li>
+        </ol>
+    </nav>
+    <div class="card bg-secondary">
+        <div class="card-header text-white bg-secondary">
+            Dashboard
+        </div>
+        <div class="card-body bg-white py-2">
+            <div class="col-md-4">
+                <label>Course</label>
+                <mat-form-field appearance="outline">
+                    <mat-select [(ngModel)]="course" (selectionChange)="onCourseChange()">
+                        <mat-option *ngFor="let course of courseList" [value]="course.coursesId">
+                            {{course.coursesName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+
+    <div class="card bg-secondary">
+        <div class="card-header text-white bg-secondary">
+            Mentor Details
+        </div>
+        <div class="card-body bg-white py-2">
+
+            <div class="row  justify-content-between   ">
+                <!-- Mentor Details -->
+                <div class="col-md-4    border border-secondary rounded p-3">
+                    <h6 class=" border-bottom mb-2 ">Your Mentor details</h6>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="mb-2">
+                                <i class="fa fa-user text-muted "></i>
+                                <small>R. Nageswararaoo</small>
+                            </div>
+
+                            <div class="  ">
+                                <i class="fa-solid fa-phone-volume text-muted mr-2"></i>
+                                <small>+91 123456790</small>
+                            </div>
+                        </div>
+                        <div class="col-md-5 text-center">
+                            <i class="fa  fa-user-check text-muted fs-5"></i>
+                            <p>Change of mentor</p>
+                        </div>
+                        <div class="col">
+                            <mat-checkbox class="example-margin" (change)="changeMentor($event)"></mat-checkbox>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graditude Message -->
+                <div class="col-md-3  border border-secondary rounded p-3">
+                    <h6 class=" border-bottom mb-2 ">Your day to Submit Gratitude Message</h6>
+                    <div class="row ps-5">
+                        <ul class="">
+                            <li>Monday</li>
+                        </ul>
+                    </div>
+                    <br />
+                </div>
+
+                <!-- Mentor Details -->
+                <div class="col-md-4 border border-secondary rounded p-3">
+                    <h6 class=" border-bottom mb-2 ">Your Chief mentor details</h6>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="mb-2">
+                                <i class="fa fa-user text-muted "></i>
+                                <small>R. Nageswararaoo</small>
+                            </div>
+
+                            <div class="  ">
+                                <i class="fa-solid fa-phone-volume text-muted mr-2"></i>
+                                <small>+91 123456790</small>
+                            </div>
+                        </div>
+                        <div class="col-md-5 text-center">
+                            <i class="fa  fa-user-check text-muted fs-5"></i>
+                            <p>Change of Chief mentor</p>
+                        </div>
+                        <div class="col">
+                            <mat-checkbox class="example-margin" (change)="changeChiefMentor($event)"></mat-checkbox>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="card bg-secondary">
+        <div class="card-header text-white bg-secondary">
+            Performance
+        </div>
+        <div class="card-body bg-white py-2">
+
+        </div>
+    </div>
+</div>
