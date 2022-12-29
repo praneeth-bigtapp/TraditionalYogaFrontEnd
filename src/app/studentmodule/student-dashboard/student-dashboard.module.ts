@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatOptionModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -25,6 +26,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     FormsModule,
     ReactiveFormsModule,
     MatCheckboxModule,
+    MatTableModule,
+     
   ]
 })
 export class StudentDashboardModule { }
