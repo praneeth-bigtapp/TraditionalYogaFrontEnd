@@ -1,0 +1,35 @@
+<form [formGroup]="otpForm" (ngSubmit)="onSubmit()">
+    <!-- <label for="otp">Enter OTP:</label>
+    <input type="text" id="otp" formControlName="otp">
+    <button type="submit" [disabled]="otpForm.invalid">Verify OTP</button> -->
+    <div class="col-md-10">
+        <label>OTP</label>
+        <div class="col px-0">
+            <mat-form-field appearance="outline">
+                <input matInput type="number"  autocomplete="off" formControlName="otp" min="1" max="5" required>
+                <!-- <mat-error *ngFor="let validation of validation_messages.email_id">
+                    <span *ngIf="LoginForm.get('email')?.hasError(validation.type)">
+                        {{ validation.message}}
+                    </span>
+                </mat-error> -->
+            </mat-form-field>
+            <div class="error-message"
+                *ngIf="otpForm.controls['otp'].invalid && (otpForm.controls['otp'].dirty || otpForm.controls['otp'].touched)">
+                <mat-error *ngIf="otpForm.controls['otp'].hasError('required')">
+                    Invalid OTP.
+                </mat-error>
+                <!-- <mat-error *ngIf="otpForm.controls['otp'].hasError('minLength')">
+                    Min Length.
+                </mat-error>
+                <mat-error *ngIf="otpForm.controls['otp'].hasError('maxLength')">
+                    Max Length.
+                </mat-error> -->
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 pl-0">
+        <button type="submit" class="btn btn-outline-secondary btn-rounded btn-go d-inline-block mt-3 ">
+            Verify
+        </button>
+    </div>
+</form>

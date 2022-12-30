@@ -1,11 +1,5 @@
 <div class="ConfigurationTypes_textpadding">
-    <!-- <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#/administration/roles">Admin Management</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Role</li>
-        </ol>
-    </nav> -->
+
     <!-- <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
 
         <button type="button" class="btn btn-outline-secondary btn-rounded" (click)="onAddRole()"> Add Role </button>
@@ -23,23 +17,30 @@
         </div>
     </div>
     <div class="card border-light">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
+                <li class="breadcrumb-item"><a href="/login">Login Page</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Enrollment</li>
+            </ol>
+        </nav>
         <div class="card-header text-white bg-secondary">
-            <!-- {{iseditable ? "Update":"Add"}} Enrollment -->
+            <!-- {{isEditable ? "Update":"Add"}} Enrollment -->
             Enrollment
         </div>
         <div class="card-body bg-white py-2">
-            <form [formGroup]="formdetails" (ngSubmit)="enrollmentsubmit()">
+            <form [formGroup]="enrollForm" (ngSubmit)="enrollmentSubmit()">
 
-                <div class="row text-align-center">
+                <div class="row text-align-center pb-1">
                     <div class="col-md-4">
                         <label>First name</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" formControlName="firstname" required>
+                                <input matInput autocomplete="off" formControlName="firstName" required>
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="formdetails.controls['firstname'].invalid && (formdetails.controls['firstname'].dirty || formdetails.controls['firstname'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('firstname')?.hasError('required')  ">
+                                *ngIf="enrollForm.controls['firstName'].invalid && (enrollForm.controls['firstName'].dirty || enrollForm.controls['firstName'].touched)">
+                                <mat-error [hidden]=" !enrollForm.get('firstName')?.hasError('required')  ">
                                     First name is mandatory
                                 </mat-error>
                             </div>
@@ -49,11 +50,11 @@
                         <label>Middle name</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" formControlName="middlename">
+                                <input matInput autocomplete="off" formControlName="middleName">
                             </mat-form-field>
                             <!-- <div class="error-message"
-                                *ngIf="formdetails.controls['middlename'].invalid && (formdetails.controls['middlename'].dirty || formdetails.controls['middlename'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('middlename')?.hasError('required')  ">
+                                *ngIf="enrollForm.controls['middleName'].invalid && (enrollForm.controls['middleName'].dirty || enrollForm.controls['middleName'].touched)">
+                                <mat-error [hidden]=" !enrollForm.get('middleName')?.hasError('required')  ">
                                     Middle name is mandatory
                                 </mat-error>
                             </div> -->
@@ -63,60 +64,67 @@
                         <label>Last name</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" formControlName="lastname" required>
+                                <input matInput autocomplete="off" formControlName="lastName" required>
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="formdetails.controls['lastname'].invalid && (formdetails.controls['lastname'].dirty || formdetails.controls['lastname'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('lastname')?.hasError('required')  ">
+                                *ngIf="enrollForm.controls['lastName'].invalid && (enrollForm.controls['lastName'].dirty || enrollForm.controls['lastName'].touched)">
+                                <mat-error [hidden]=" !enrollForm.get('lastName')?.hasError('required')  ">
                                     Last name is mandatory
                                 </mat-error>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-4  row align-items-center    ">
-                        <div class="col-md-10">
-                            <label>Email Id <span *ngIf="isemailverified" class="text-success fw-bolder"> -
-                                    Verified</span> </label>
+                </div>
+                <div class="row text-align-center pb-1">
+                    <div class="col-md-4">
+                        <!-- <div class="">
+                            <label>Email Id*
+                                <span *ngIf="isemailverified" class="text-success fw-bolder"> - Verified</span>
+                            </label>
                             <div class="col px-0">
                                 <mat-form-field appearance="outline">
                                     <input matInput autocomplete="off" (keyup)="emailchange()" formControlName="email"
                                         required>
                                 </mat-form-field>
                                 <div class="error-message"
-                                    *ngIf="formdetails.controls['email'].invalid && (formdetails.controls['email'].dirty || formdetails.controls['email'].touched)">
-                                    <mat-error [hidden]=" !formdetails.get('email')?.hasError('required')  ">
+                                    *ngIf="enrollForm.controls['email'].invalid && (enrollForm.controls['email'].dirty || enrollForm.controls['email'].touched)">
+                                    <mat-error [hidden]=" !enrollForm.get('email')?.hasError('required')  ">
                                         Email is mandatory
                                     </mat-error>
-                                    <mat-error [hidden]=" !formdetails.get('email')?.hasError('email')  ">
+                                    <mat-error [hidden]=" !enrollForm.get('email')?.hasError('email')  ">
                                         Invalid Email
                                     </mat-error>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-2   pl-0" *ngIf="isemailvalid">
-                            <button type="button" (click)="sendemail()"
-                                class="btn btn-outline-secondary btn-rounded btn-go d-inline-block mt-3 ">
-                                Verify
-                            </button>
-                        </div>
-                        <div class="col-md-10" *ngIf="isemailsended">
-                            <label>OTP</label>
-                            <div class="col px-0">
-                                <mat-form-field appearance="outline">
-                                    <input matInput autocomplete="off" [(ngModel)]="otp"
-                                        [ngModelOptions]="{standalone: true}" required>
-                                </mat-form-field>
-                                <mat-error *ngIf="otperror">Invalid OTP</mat-error>
+                        </div> -->
+                        <div class="row">
+                            <div [ngClass]="isEmailValid? 'col-md-10':''">
+                                <label>Email Id*
+                                    <span *ngIf="isEmailVerified" class="text-success fw-bolder"> - Verified</span>
+                                </label>
+                                <div class="col px-0">
+                                    <mat-form-field appearance="outline">
+                                        <input matInput autocomplete="off" (keyup)="emailChange()" formControlName="email"
+                                            required>
+                                    </mat-form-field>
+                                    <div class="error-message"
+                                        *ngIf="enrollForm.controls['email'].invalid && (enrollForm.controls['email'].dirty || enrollForm.controls['email'].touched)">
+                                        <mat-error [hidden]=" !enrollForm.get('email')?.hasError('required')  ">
+                                            Email is mandatory
+                                        </mat-error>
+                                        <mat-error [hidden]=" !enrollForm.get('email')?.hasError('email')  ">
+                                            Invalid Email
+                                        </mat-error>
+                                    </div>
+                                </div>
+                            </div>
+                            <div [ngClass]="isEmailValid? 'col-md-2 px-0 mt-2':''" *ngIf="isEmailValid">
+                                <button type="button" (click)="verifyEmail()"
+                                    class="btn btn-outline-secondary btn-rounded btn-go d-inline-block mt-3 ">
+                                    Verify
+                                </button>
                             </div>
                         </div>
-                        <div class="col-md-2 pl-0" *ngIf="isemailsended">
-                            <button type="button" (click)="verifyotp()"
-                                class="btn btn-outline-secondary btn-rounded btn-go d-inline-block mt-3 ">
-                                Verify
-                            </button>
-                        </div>
-
                     </div>
 
                     <div class="col-md-4">
@@ -127,11 +135,11 @@
                                     formControlName="mobile" required>
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="formdetails.controls['mobile'].invalid && (formdetails.controls['mobile'].dirty || formdetails.controls['mobile'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('mobile')?.hasError('required')  ">
+                                *ngIf="enrollForm.controls['mobile'].invalid && (enrollForm.controls['mobile'].dirty || enrollForm.controls['mobile'].touched)">
+                                <mat-error [hidden]=" !enrollForm.get('mobile')?.hasError('required')  ">
                                     Mobile is mandatory
                                 </mat-error>
-                                <mat-error [hidden]=" !formdetails.get('mobile')?.hasError('pattern')  ">
+                                <mat-error [hidden]=" !enrollForm.get('mobile')?.hasError('pattern')  ">
                                     Invalid Mobile
                                 </mat-error>
                             </div>
@@ -142,28 +150,30 @@
                         <label>Date of Birth</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <input matInput type="date" autocomplete="off" formControlName="dateofbirth" required>
+                                <input matInput type="date" autocomplete="off" formControlName="dateOfBirth" required>
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="formdetails.controls['dateofbirth'].invalid && (formdetails.controls['dateofbirth'].dirty || formdetails.controls['dateofbirth'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('dateofbirth')?.hasError('required')  ">
+                                *ngIf="enrollForm.controls['dateOfBirth'].invalid && (enrollForm.controls['dateOfBirth'].dirty || enrollForm.controls['dateOfBirth'].touched)">
+                                <mat-error [hidden]=" !enrollForm.get('dateOfBirth')?.hasError('required')  ">
                                     Date of Birth is mandatory
                                 </mat-error>
                             </div>
                         </div>
                     </div>
 
+                </div>
+                <div class="row text-align-center pb-1">
                     <div class="col-md-4">
                         <label>Gender</label>
                         <div class="col px-0">
                             <mat-radio-group formControlName="gender" aria-label="Select an option">
-                                <mat-radio-button class=" mt-md-2 mr-md-4" *ngFor="let gender of genderlist"
+                                <mat-radio-button class=" mt-md-2 mr-md-4" *ngFor="let gender of genderList"
                                     [value]="gender.genderId">{{gender.genderName}}</mat-radio-button>
 
                             </mat-radio-group>
                             <div class="error-message"
-                                *ngIf="formdetails.controls['gender'].invalid && (formdetails.controls['gender'].dirty || formdetails.controls['gender'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('gender')?.hasError('required')  ">
+                                *ngIf="enrollForm.controls['gender'].invalid && (enrollForm.controls['gender'].dirty || enrollForm.controls['gender'].touched)">
+                                <mat-error [hidden]=" !enrollForm.get('gender')?.hasError('required')  ">
                                     Gender is mandatory
                                 </mat-error>
                             </div>
@@ -174,14 +184,14 @@
                         <label>House Number</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" formControlName="houseno">
+                                <input matInput autocomplete="off" formControlName="houseNo">
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="formdetails.controls['houseno'].invalid && (formdetails.controls['houseno'].dirty || formdetails.controls['houseno'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('houseno')?.hasError('required')  ">
+                                *ngIf="enrollForm.controls['houseNo'].invalid && (enrollForm.controls['houseNo'].dirty || enrollForm.controls['houseNo'].touched)">
+                                <mat-error [hidden]=" !enrollForm.get('houseNo')?.hasError('required')  ">
                                     House No is mandatory
                                 </mat-error>
-                                <mat-error [hidden]=" !formdetails.get('houseno')?.hasError('pattern')  ">
+                                <mat-error [hidden]=" !enrollForm.get('houseNo')?.hasError('pattern')  ">
                                     Invalid House number
                                 </mat-error>
                             </div>
@@ -194,14 +204,15 @@
                                 <input matInput autocomplete="off" formControlName="street">
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="formdetails.controls['street'].invalid && (formdetails.controls['street'].dirty || formdetails.controls['street'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('street')?.hasError('required')  ">
+                                *ngIf="enrollForm.controls['street'].invalid && (enrollForm.controls['street'].dirty || enrollForm.controls['street'].touched)">
+                                <mat-error [hidden]=" !enrollForm.get('street')?.hasError('required')  ">
                                     Street is mandatory
                                 </mat-error>
                             </div>
                         </div>
                     </div>
-
+                </div>
+                <div class="row text-align-center pb-1">
                     <div class="col-md-4">
                         <label>Town/City</label>
                         <div class="col px-0">
@@ -209,8 +220,8 @@
                                 <input matInput autocomplete="off" formControlName="town">
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="formdetails.controls['town'].invalid && (formdetails.controls['town'].dirty || formdetails.controls['town'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('town')?.hasError('required')  ">
+                                *ngIf="enrollForm.controls['town'].invalid && (enrollForm.controls['town'].dirty || enrollForm.controls['town'].touched)">
+                                <mat-error [hidden]=" !enrollForm.get('town')?.hasError('required')  ">
                                     Town/City is mandatory
                                 </mat-error>
                             </div>
@@ -221,17 +232,17 @@
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <input type="text" aria-label="Country" matInput formControlName="country"
-                                    (change)="countrychange($event)" [matAutocomplete]="country">
+                                    (change)="countryChange($event)" [matAutocomplete]="country">
                                 <mat-autocomplete autoActiveFirstOption #country="matAutocomplete"
-                                    (optionSelected)="countrychange($event)">
-                                    <mat-option *ngFor="let country of countryfilter |async " [value]="country">
+                                    (optionSelected)="countryChange($event)">
+                                    <mat-option *ngFor="let country of countryFilter |async " [value]="country">
                                         {{country}}
                                     </mat-option>
                                 </mat-autocomplete>
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="formdetails.controls['country'].invalid && (formdetails.controls['country'].dirty || formdetails.controls['country'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('country')?.hasError('required')  ">
+                                *ngIf="enrollForm.controls['country'].invalid && (enrollForm.controls['country'].dirty || enrollForm.controls['country'].touched)">
+                                <mat-error [hidden]=" !enrollForm.get('country')?.hasError('required')  ">
                                     Country is mandatory
                                 </mat-error>
                             </div>
@@ -247,22 +258,23 @@
 
                             <mat-form-field appearance="outline" *ngIf="isIndia">
                                 <input type="text" aria-label="Country" matInput formControlName="state"
-                                    (change)="countrychange($event)" [matAutocomplete]="state">
+                                    (change)="countryChange($event)" [matAutocomplete]="state">
                                 <mat-autocomplete autoActiveFirstOption #state="matAutocomplete">
-                                    <mat-option *ngFor="let country of statefilter |async " [value]="country">
+                                    <mat-option *ngFor="let country of stateFilter |async " [value]="country">
                                         {{country}}
                                     </mat-option>
                                 </mat-autocomplete>
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="formdetails.controls['state'].invalid && (formdetails.controls['state'].dirty || formdetails.controls['state'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('state')?.hasError('required')  ">
+                                *ngIf="enrollForm.controls['state'].invalid && (enrollForm.controls['state'].dirty || enrollForm.controls['state'].touched)">
+                                <mat-error [hidden]=" !enrollForm.get('state')?.hasError('required')  ">
                                     State is mandatory
                                 </mat-error>
                             </div>
                         </div>
                     </div>
-
+                </div>
+                <div class="row text-align-center pb-1">
                     <div class="col-md-4">
                         <label>Pin code</label>
                         <div class="col px-0">
@@ -270,11 +282,11 @@
                                 <input matInput autocomplete="off" formControlName="pincode" required>
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="formdetails.controls['pincode'].invalid && (formdetails.controls['pincode'].dirty || formdetails.controls['pincode'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('pincode')?.hasError('required')  ">
+                                *ngIf="enrollForm.controls['pincode'].invalid && (enrollForm.controls['pincode'].dirty || enrollForm.controls['pincode'].touched)">
+                                <mat-error [hidden]=" !enrollForm.get('pincode')?.hasError('required')  ">
                                     Pincode is mandatory
                                 </mat-error>
-                                <mat-error [hidden]=" !formdetails.get('pincode')?.hasError('pattern')  ">
+                                <mat-error [hidden]=" !enrollForm.get('pincode')?.hasError('pattern')  ">
                                     Invalid Pincode
                                 </mat-error>
                             </div>
@@ -285,11 +297,11 @@
                         <label>Mother Tongue</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" formControlName="mothertounge" required>
+                                <input matInput autocomplete="off" formControlName="motherTounge" required>
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="formdetails.controls['mothertounge'].invalid && (formdetails.controls['mothertounge'].dirty || formdetails.controls['mothertounge'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('mothertounge')?.hasError('required')  ">
+                                *ngIf="enrollForm.controls['motherTounge'].invalid && (enrollForm.controls['motherTounge'].dirty || enrollForm.controls['motherTounge'].touched)">
+                                <mat-error [hidden]=" !enrollForm.get('motherTounge')?.hasError('required')  ">
                                     Mother Tongue is mandatory
                                 </mat-error>
 
@@ -300,34 +312,37 @@
                     <div class="col-md-4">
                         <label>Can you communicate in English?</label>
                         <div class="col px-0">
-                            <mat-radio-group formControlName="isenglishspoken" aria-label="Select an option">
+                            <mat-radio-group formControlName="isEnglishSpoken" aria-label="Select an option">
                                 <mat-radio-button [value]="true" class=" mt-md-2 mr-md-4">Yes</mat-radio-button>
                                 <mat-radio-button [value]="false" class=" mt-md-2 mr-md-4">No</mat-radio-button>
 
                             </mat-radio-group>
                             <div class="error-message"
-                                *ngIf="formdetails.controls['isenglishspoken'].invalid && (formdetails.controls['isenglishspoken'].dirty || formdetails.controls['isenglishspoken'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('isenglishspoken')?.hasError('required')  ">
+                                *ngIf="enrollForm.controls['isEnglishSpoken'].invalid && (enrollForm.controls['isEnglishSpoken'].dirty || enrollForm.controls['isEnglishSpoken'].touched)">
+                                <mat-error [hidden]=" !enrollForm.get('isEnglishSpoken')?.hasError('required')  ">
                                     Field is mandatory
                                 </mat-error>
                             </div>
                         </div>
                     </div>
+
+                </div>
+                <div class="row text-align-center pb-1">
                     <div class="col-md-4">
                         <label>How did you hear about us?</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <mat-select formControlName="refferal" [compareWith]="compareselect"
-                                    [disabled]="iseditable">
-                                    <mat-option *ngFor="let category of refferallist" [value]="category.aboutUsId"
+                                <mat-select formControlName="refferal" [compareWith]="compareSelect"
+                                    [disabled]="isEditable">
+                                    <mat-option *ngFor="let category of refferalList" [value]="category.aboutUsId"
                                         aria-placeholder="Select Course Category">
                                         {{category.aboutusName | titlecase}}</mat-option>
                                 </mat-select>
 
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="formdetails.controls['refferal'].invalid && (formdetails.controls['refferal'].dirty || formdetails.controls['refferal'].touched)">
-                                <mat-error [hidden]=" !formdetails.get('refferal')?.hasError('required')  ">
+                                *ngIf="enrollForm.controls['refferal'].invalid && (enrollForm.controls['refferal'].dirty || enrollForm.controls['refferal'].touched)">
+                                <mat-error [hidden]=" !enrollForm.get('refferal')?.hasError('required')  ">
                                     Refferal is mandatory
                                 </mat-error>
                             </div>
@@ -337,18 +352,18 @@
                         <div class="col-md-8">
                             <label>&nbsp;</label>
                             <div class="col">
-                                <mat-checkbox class="example-margin" formControlName="termscondition">Terms and
+                                <mat-checkbox class="example-margin" formControlName="termsCondition">Terms and
                                     Condition</mat-checkbox>
                                 <div class="error-message"
-                                    *ngIf="formdetails.controls['termscondition'].invalid && (formdetails.controls['termscondition'].dirty || formdetails.controls['termscondition'].touched)">
-                                    <mat-error [hidden]=" !formdetails.get('termscondition')?.hasError('required')  ">
+                                    *ngIf="enrollForm.controls['termsCondition'].invalid && (enrollForm.controls['termsCondition'].dirty || enrollForm.controls['termsCondition'].touched)">
+                                    <mat-error [hidden]=" !enrollForm.get('termsCondition')?.hasError('required')  ">
                                         Terms and condition is mandatory
                                     </mat-error>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 ">
-                            <button type="button" (click)="termsandcondition()"
+                            <button type="button" (click)="termsCondition()"
                                 class="btn btn-outline-secondary btn-rounded btn-go d-inline-block mt-4 ">
                                 View
                             </button>
@@ -356,9 +371,9 @@
                     </div>
                     <div class=" col d-flex flex-row flex-wrap justify-content-end">
                         <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block mt-4">
-                            {{iseditable ? "Update" :"Register" }}
+                            {{isEditable ? "Update" :"Register" }}
                         </button>
-                        <button type="reset" (click)="cancelform()"
+                        <button type="reset" (click)="onCancel()"
                             class="btn btn-outline-secondary btn-rounded d-inline-block mt-4 ">
                             Cancel
                         </button>

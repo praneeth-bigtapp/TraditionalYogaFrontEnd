@@ -15,6 +15,8 @@ export class RegistrationService extends BaseHttp {
   getGenderUrl = "student/getAll?operation=gender"
   postEnrollmentUrl = "register/enroll"
   postDetailsEnrollmentUrl = "register/enrollDetailed"
+  postVerifyEmailUrl = "register/verifyEmail"
+  postOtpUrl = "register/opt"
 
   getGender() {
     return this.get(this.getGenderUrl);
@@ -50,6 +52,14 @@ export class RegistrationService extends BaseHttp {
 
   postDetailsEnrollment(body: any) {
     return this.post(this.postDetailsEnrollmentUrl, body);
+  }
+
+  postVerifyEmail(body: any) {
+    return this.login(this.postVerifyEmailUrl, body);
+  }
+
+  postOtp(body: any) {
+    return this.login(this.postOtpUrl, body);
   }
   
 }

@@ -19,6 +19,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NotificationComponent } from './notification/notification.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
+import { OtpComponent } from './otp/otp.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
     FilterDirective,
     InvalidRecordsComponent,
     UploadFileComponent,
-    NotificationComponent
+    NotificationComponent,
+    OtpComponent
   ],
   imports: [
     CommonModule,
