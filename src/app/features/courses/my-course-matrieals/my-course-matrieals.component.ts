@@ -130,8 +130,6 @@ export class MyCourseMatriealsComponent implements OnInit {
   getcoursecatogery() {
     this.service.getcategorymaterial().subscribe({
       next: (response) => {
-        console.log(response);
-
         this.catogeries = response;
         const othersData = {
           "materialCategoryId": -1,
@@ -153,7 +151,6 @@ export class MyCourseMatriealsComponent implements OnInit {
         // this.catogeries = response;
         this.data = response
         this.data = this.data.reverse()
-        console.log(response);
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
         this.filterData.dataSource = this.dataSource;
@@ -175,7 +172,6 @@ export class MyCourseMatriealsComponent implements OnInit {
 
 
   editdetails(element: any) {
-    console.log(element);
 
     this.FormDeatils.setValue({
       coursematerialID: element.courseMaterialId,
@@ -250,7 +246,7 @@ export class MyCourseMatriealsComponent implements OnInit {
 
     const { coursematerialID, courses, others, catogery, addMedia, upload, videoLink, message, coursetitle } = this.FormDeatils.value
 
-    console.log({ coursematerialID, courses, others, catogery, addMedia, upload, videoLink, message, coursetitle });
+    // console.log({ coursematerialID, courses, others, catogery, addMedia, upload, videoLink, message, coursetitle });
 
     if (this.iseditable) {
       const body =

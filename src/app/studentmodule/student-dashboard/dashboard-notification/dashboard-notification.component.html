@@ -1,0 +1,85 @@
+<div class="popup">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="">{{data.title | titlecase}}
+                <span class="float-right" (click)="dialogRef.close(false)"> <i class="far fa-times-circle"
+                        aria-hidden="true"></i> </span>
+            </h3>
+        </div>
+        <div class="content-style ">
+            <!-- Notification -->
+            <p class="text-justify" *ngIf="data.isnotification">{{data.message}}</p>
+            <div class="" *ngIf="data.iscertificate">
+                <br />
+                <h6 class="text-center">Do you wish to opt for {{data.course}} certificate ?</h6>
+                <div style="text-align: center">
+                    <button mat-button class="btn btn-outline-secondary btn-rounded d-inline-block m-2 " type="button"
+                        ng-transclude="" (click)="dialogRef.close(true)"><span class="ng-scope">
+                            Yes</span></button> &nbsp;
+                    <button mat-button class="btn btn-outline-secondary btn-rounded d-inline-block m-2" type="button"
+                        ng-transclude="" (click)="dialogRef.close(false)"><span class="ng-scope">No</span></button>
+                </div>
+                <p>Last date for opting {{data.lastdate | date:"mediumDate"}}</p>
+                <hr />
+                <h6>The criteria</h6>
+                <p>It is a long established fact that a reader will be distracted by the readable content of a page when
+                    looking</p>
+            </div>
+
+            <!-- Gurudakshina -->
+            <div class="" *ngIf="data.isgurudakshina">
+                <br />
+                <div class="d-flex flex-wrap justify-content-center align-items-center ">
+                    <button class="btn btn-outline-secondary btn-rounded d-inline-block mx-2      "
+                        (click)="paymentNow()">
+                        <h6>Pay Now</h6>
+                    </button>
+                    <button class="btn btn-outline-secondary btn-rounded d-inline-block mx-2     "
+                        (click)="expressInability()">
+                        <h6>Express Inability</h6>
+                    </button>
+                </div>
+                <br />
+                <p class="text-center">Last date for payment : {{data.paymentLastDate | date:"mediumDate"}}</p>
+                <hr />
+                <h6>Reason for not able to pay</h6>
+                <mat-form-field appearance="outline">
+                    <textarea matInput rows="5" [(ngModel)]="reasonForNotPaying"> </textarea>
+                </mat-form-field>
+                <span class="mat-error" *ngIf="reasonError">Reason is mandatory</span>
+
+                <button class="btn btn-outline-secondary btn-rounded d-inline-block mx-2  float-md-right"
+                    (click)="submitReasonNotAbleToPay()">
+                    Submit
+                </button>
+            </div>
+
+            <!-- Volunterring -->
+            <div class="" *ngIf="data.isvolunterring">
+                <br />
+                <h6 class="text-center">Are you interested in Volunteering ?</h6>
+                <br />
+                <div style="text-align: center">
+                    <mat-radio-group aria-label="" [(ngModel)]="isvolunterring">
+                        <mat-radio-button class="mr-2" [value]="true">Yes</mat-radio-button>
+                        <mat-radio-button [value]="false">No</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+
+                <p >What motivated you to do Volunteering</p>
+                <mat-form-field appearance="outline">
+                    <textarea matInput rows="5" [(ngModel)]="reasonForVolunteer"> </textarea>
+                </mat-form-field>
+
+                <button class="btn btn-outline-secondary btn-rounded d-inline-block mx-2  float-md-right"
+                    (click)="submitVounteer()">
+                    Submit
+                </button>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
