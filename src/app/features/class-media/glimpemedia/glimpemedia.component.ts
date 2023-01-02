@@ -207,18 +207,21 @@ export class GlimpemediaComponent implements OnInit {
   }
 
   editdetails(element: any) {
-    this.isEditable = true;
-    this.isSubmit = false;
-    this.displayContent = true;
+
+    console.log(element.language.languageId);
 
     this.glimpseForm.setValue({
       courseMediaId: element.glimpsesId,
       course: element.coursesId.coursesId,
       date: formatDate(element.date, "yyyy-MM-dd", 'en'),
-      file: '',
+      file: null,
       language: element.language.languageId,
       Others: null
     });
+    this.isEditable = true;
+    this.isSubmit = false;
+    this.displayContent = true;
+    this.othersLang = false
   }
 
   deletedetails(id: any) {
@@ -266,16 +269,21 @@ export class GlimpemediaComponent implements OnInit {
     let body;
 
     if (this.glimpseForm.value.language === -1) {
-      body = {
+      body =
+      {
+
         "coursesId": {
           "coursesId": this.glimpseForm.value.course
         },
         "date": this.glimpseForm.value.date,
         "fileUpload": this.glimpseForm.value.file,
         "language": {
-          "languageId": this.glimpseForm.value.Others
-        }
-      };
+          "languageId": this.glimpseForm.value.language
+        },
+        "otherLangauge": this.glimpseForm.value.Others
+
+      }
+
       console.log(body);
 
       let newbody = {
@@ -293,6 +301,7 @@ export class GlimpemediaComponent implements OnInit {
 
     } else {
       body = {
+
         "coursesId": {
           "coursesId": this.glimpseForm.value.course
         },
@@ -300,8 +309,10 @@ export class GlimpemediaComponent implements OnInit {
         "fileUpload": this.glimpseForm.value.file,
         "language": {
           "languageId": this.glimpseForm.value.language
-        }
-      };
+        },
+        "otherLangauge": this.glimpseForm.value.Others
+
+      }
     }
 
     this.services.postaddGlimps(body).subscribe({
@@ -344,6 +355,7 @@ export class GlimpemediaComponent implements OnInit {
     } else {
       body = {
         "glimpsesId": this.glimpseForm.value.courseMediaId,
+
         "coursesId": {
           "coursesId": this.glimpseForm.value.course
         },
@@ -351,7 +363,8 @@ export class GlimpemediaComponent implements OnInit {
         "fileUpload": this.glimpseForm.value.file,
         "language": {
           "languageId": this.glimpseForm.value.language
-        }
+        },
+        "otherLangauge": this.glimpseForm.value.Others
       };
     }
     console.log('update');
