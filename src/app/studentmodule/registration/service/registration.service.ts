@@ -6,44 +6,44 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 })
 export class RegistrationService extends BaseHttp {
 
-  getCountryUrl = "webSite/getAll?operation=country"
+  getCountryUrl = "register/getAll?operation=country"
   getIndiaStatesUrl = ""
   getAboutUsUrl = "register/getAll?operation=aboutus"
   getQualificationUrl = "student/getAll?operation=qualification"
   getProfessionsUrl = "student/getAll?operation=professions"
   getMaritalStatusUrl = "register/getAll?operation=maritalStatus"
-  getGenderUrl = "student/getAll?operation=gender"
+  getGenderUrl = "register/getAll?operation=gender"
   postEnrollmentUrl = "register/enroll"
   postDetailsEnrollmentUrl = "register/enrollDetailed"
   postVerifyEmailUrl = "register/verifyEmail"
   postOtpUrl = "register/opt"
 
   getGender() {
-    return this.get(this.getGenderUrl);
+    return this.getRole(this.getGenderUrl);
   }
 
   getQualification() {
-    return this.get(this.getQualificationUrl);
+    return this.getRole(this.getQualificationUrl);
   }
 
   getProfessions() {
-    return this.get(this.getProfessionsUrl);
+    return this.getRole(this.getProfessionsUrl);
   }
 
   getMaritalStatus() {
-    return this.get(this.getMaritalStatusUrl);
+    return this.getRole(this.getMaritalStatusUrl);
   }
 
   getCountry() {
-    return this.get(this.getCountryUrl);
+    return this.getRole(this.getCountryUrl);
   }
 
   getIndiaStates() {
-    return this.get(this.getIndiaStatesUrl);
+    return this.getRole(this.getIndiaStatesUrl);
   }
 
   getAboutUs() {
-    return this.get(this.getAboutUsUrl);
+    return this.getRole(this.getAboutUsUrl);
   }
 
   postEnrollment(body: any) {

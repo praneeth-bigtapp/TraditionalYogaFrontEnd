@@ -65,7 +65,7 @@ export class StudentenrollmentComponent implements OnInit {
       state: [null],
       country: [null, Validators.compose([])],
       pincode: [null, Validators.compose([Validators.pattern(InputvalidationService.inputvalidation.isnumbers)])],
-      refferal: [null, Validators.compose([Validators.required])],
+      refferal: [{ value: null, disabled: this.isEditable}, Validators.compose([Validators.required])],
       termsCondition: [null, Validators.compose([Validators.required])],
     });
 
@@ -98,6 +98,7 @@ export class StudentenrollmentComponent implements OnInit {
     this.regService.getAboutUs().subscribe({
       next: (response) => {
         this.refferalList = response;
+        console.log(this.refferalList);
       },
       error: (error) => {
         // console.error(error);

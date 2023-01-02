@@ -104,8 +104,8 @@
                                 </label>
                                 <div class="col px-0">
                                     <mat-form-field appearance="outline">
-                                        <input matInput autocomplete="off" (keyup)="emailChange()" formControlName="email"
-                                            required>
+                                        <input matInput autocomplete="off" (keyup)="emailChange()"
+                                            formControlName="email" required>
                                     </mat-form-field>
                                     <div class="error-message"
                                         *ngIf="enrollForm.controls['email'].invalid && (enrollForm.controls['email'].dirty || enrollForm.controls['email'].touched)">
@@ -332,8 +332,7 @@
                         <label>How did you hear about us?</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
-                                <mat-select formControlName="refferal" [compareWith]="compareSelect"
-                                    [disabled]="isEditable">
+                                <mat-select formControlName="refferal" [compareWith]="compareSelect">
                                     <mat-option *ngFor="let category of refferalList" [value]="category.aboutUsId"
                                         aria-placeholder="Select Course Category">
                                         {{category.aboutusName | titlecase}}</mat-option>
