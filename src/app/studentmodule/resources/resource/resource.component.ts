@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ResourcesService } from '../resources.service';
 
 @Component({
@@ -11,8 +12,11 @@ export class ResourceComponent implements OnInit {
   audioCategoryList: any
   practiceLibraryList: any
   dharansCategoryList: any
+  dummydate = new Date()
+  audioValue: any
   constructor(
-    private service: ResourcesService
+    private service: ResourcesService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +38,21 @@ export class ResourceComponent implements OnInit {
         this.dharansCategoryList = response
       }
     })
+  }
+
+  practiceLibraryDetails(data: any) {
+
+  }
+
+  openScriptures() {
+
+  }
+  openGlimpses() {
+
+  }
+
+  openAudioSliders() {
+
   }
 
 }
