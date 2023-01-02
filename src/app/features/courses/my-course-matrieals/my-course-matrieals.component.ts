@@ -314,6 +314,7 @@ export class MyCourseMatriealsComponent implements OnInit {
         this.openSnackBar(response)
         this.FormDeatils.reset()
         this.getdata()
+        this.getcoursecatogery()
       },
       error: (error) => {
         console.error(error);
