@@ -21,8 +21,8 @@
                             <h6>Audio Library - Dharanas </h6>
                         </div>
                         <hr />
-                        <div class="row align-items-center">
-                            <div class="col">
+                        <div class="row align-items-center ">
+                            <div class="col ">
                                 <mat-form-field appearance="outline" class="fld">
                                     <input matInput [(ngModel)]="audioValue" (ngModelChange)="audioChangeEvent()"
                                         placeholder="Search Audio Library">
@@ -34,6 +34,20 @@
                                     (click)="openAudioSliders()"></i>
                             </div>
                         </div>
+                        <br />
+                        <!-- Audio List -->
+                        <div class="row">
+                            <div class="col-md mb-2 ">
+                                <mat-checkbox (change)="audioCheckboxChange($event,1)"
+                                    class="border p-3 border-secondary rounded" labelPosition="before">
+                                    <div class="d-flex flex-row flex-wrap align-items-center">
+                                        <mat-icon>volume_up</mat-icon>&nbsp;
+                                        <p>Filename.mp4 </p>
+                                    </div>
+                                </mat-checkbox>
+                            </div>
+
+                        </div>
 
                     </div>
                     <hr />
@@ -41,28 +55,30 @@
                     <div class="">
                         <div class="d-flex flex-row flex-wrap align-items-center     ">
                             <mat-icon>volume_up</mat-icon>&nbsp;
-                            <h6>Practice library >> {{"Salutations"}} </h6>
+                            <h6>Practice library >> {{currentPracticeLibrary}} </h6>
                         </div>
                         <div class="row align-items-center">
                             <div class="col">
                                 <mat-form-field appearance="outline" class="fld">
                                     <input matInput [(ngModel)]="practiceLibraryValue"
-                                        (ngModelChange)="changepracticeLibrary()" placeholder="Search Audio Library">
+                                        (ngModelChange)="changepracticeLibrary()" placeholder="Search practice Library">
                                     <mat-icon matPrefix class="my-icon">search</mat-icon>
                                 </mat-form-field>
                             </div>
-                            <div class="col-md-1">
-                                <i class="fa-solid fa-sliders btn btn-outline-secondary"
-                                    (click)="openAudioSliders()"></i>
-                            </div>
                         </div>
+                        <br />
+                        <!-- Practice library list -->
+                        <div class="row">
+                            <div class="col-md mb-2 border-bottom py-3  ">
+                                <a href="" target="_blank" rel="noopener noreferrer"
+                                    class="d-flex flex-row flex-wrap align-items-center" (click)="playLibrary()">
+                                    <i class="fa-brands fa-youtube fs-5"></i>&nbsp;&nbsp;&nbsp;
+                                    <p>Filename.mp4 </p>
+                                </a>
+                            </div>
 
+                        </div>
                     </div>
-
-
-
-
-
 
                 </div>
 
@@ -81,7 +97,7 @@
                     </mat-expansion-panel>
 
                     <!-- Pratice Library DropDown Session -->
-                    <mat-expansion-panel>
+                    <mat-expansion-panel expanded="true">
                         <mat-expansion-panel-header class="bg-secondary ">
                             <mat-panel-title class="text-white">
                                 <div class="d-flex flex-row flex-wrap align-items-center     ">
@@ -102,11 +118,11 @@
                         <hr />
                         <h4 class="px-0">Special classification Dharanas</h4>
                         <div class="row p-2">
-                            <div class="col-md-4" (click)="practiceLibraryDetails(library)"
+                            <div class="col-md-6 btn" (click)="practiceLibraryDetails(library)"
                                 *ngFor="let library of dharansCategoryList">
                                 <img src="https://traditionalyoga.s3.us-west-2.amazonaws.com/wp-content/uploads/2022/09/28065643/Guru.webp"
                                     class="img-fluid" alt="Responsive image">
-                                <h6 class="text-center">{{library.subCategoryName | titlecase}}</h6>
+                                <h6 class="text-left">{{library.subCategoryName | titlecase}}</h6>
                             </div>
                         </div>
 

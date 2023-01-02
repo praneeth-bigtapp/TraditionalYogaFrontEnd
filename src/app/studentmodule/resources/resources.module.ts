@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatInputModule,
     MatIconModule,
     MatExpansionModule,
+    MatSelectModule,
+    MatCheckboxModule
   ]
 })
 export class ResourcesModule { }

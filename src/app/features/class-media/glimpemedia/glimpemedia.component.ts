@@ -22,7 +22,7 @@ export class GlimpemediaComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
-  displayContent: boolean = true;
+  displayContent: boolean = false;
   pageNo: number = 1;
   // isOthers: boolean = false;
   displayedColumns: string[] = ['classMediaId', 'coursesId', 'date', "languageName", "Action"];

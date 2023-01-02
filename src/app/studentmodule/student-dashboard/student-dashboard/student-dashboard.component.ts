@@ -233,6 +233,7 @@ export class StudentDashboardComponent implements OnInit {
 
   }
   viewAllNotification() {
+    this.router.navigate(["StudentNotification"])
 
   }
   viewAllGratitude() {

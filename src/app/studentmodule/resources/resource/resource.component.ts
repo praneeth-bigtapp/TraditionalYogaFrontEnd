@@ -15,6 +15,8 @@ export class ResourceComponent implements OnInit {
   dummydate = new Date()
   audioValue: any
   practiceLibraryValue: any
+  localAudioList: any = []
+  currentPracticeLibrary: string = "Salutations"
   constructor(
     private service: ResourcesService,
     private dialog: MatDialog
@@ -42,7 +44,7 @@ export class ResourceComponent implements OnInit {
   }
 
   practiceLibraryDetails(data: any) {
-
+    this.currentPracticeLibrary = data.categoryName || data.subCategoryName
   }
 
   openScriptures() {
@@ -60,6 +62,22 @@ export class ResourceComponent implements OnInit {
 
   }
   changepracticeLibrary() {
+
+  }
+
+  audioCheckboxChange(event: any, value: any) {
+    console.log(event.checked);
+
+    this.localAudioList = this.localAudioList.filter((ele: any) => ele === value)
+
+    if (event.checked) {
+      this.localAudioList.push(value)
+      return
+    }
+
+
+  }
+  playLibrary() {
 
   }
 }
