@@ -13,6 +13,7 @@ export class DashboardNotificationComponent implements OnInit {
   reasonError: boolean = false
   isvolunterring: boolean = true
   reasonForVolunteer: string = ""
+  islater: boolean = false
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -39,15 +40,25 @@ export class DashboardNotificationComponent implements OnInit {
       return
     }
 
-    this.dialogRef.close(this.reasonForNotPaying)
+    this.dialogRef.close({
+      reason: this.reasonForNotPaying, islater: this.islater
+    })
 
+  }
+  submitLater() {
+    this.islater = true
+    this.dialogRef.close({
+      islater: this.islater
+    })
   }
 
   submitVounteer() {
 
     this.dialogRef.close({
       reason: this.reasonForVolunteer,
-      isvolunteer: this.isvolunterring
+      isvolunteer: this.isvolunterring,
+      islater: this.islater
+
     })
   }
 

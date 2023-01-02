@@ -14,6 +14,7 @@ export class ResourceComponent implements OnInit {
   dharansCategoryList: any
   dummydate = new Date()
   audioValue: any
+  practiceLibraryValue: any
   constructor(
     private service: ResourcesService,
     private dialog: MatDialog
@@ -55,4 +56,10 @@ export class ResourceComponent implements OnInit {
 
   }
 
+  audioChangeEvent() {
+
+  }
+  changepracticeLibrary() {
+
+  }
 }

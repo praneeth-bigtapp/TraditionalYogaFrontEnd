@@ -18,12 +18,17 @@
                             Yes</span></button> &nbsp;
                     <button mat-button class="btn btn-outline-secondary btn-rounded d-inline-block m-2" type="button"
                         ng-transclude="" (click)="dialogRef.close(false)"><span class="ng-scope">No</span></button>
+
                 </div>
                 <p>Last date for opting {{data.lastdate | date:"mediumDate"}}</p>
                 <hr />
                 <h6>The criteria</h6>
                 <p>It is a long established fact that a reader will be distracted by the readable content of a page when
                     looking</p>
+                <button class="btn btn-outline-secondary btn-rounded d-inline-block mx-2  float-md-right"
+                    (click)="submitLater()">
+                    Later
+                </button>
             </div>
 
             <!-- Gurudakshina -->
@@ -47,11 +52,15 @@
                     <textarea matInput rows="5" [(ngModel)]="reasonForNotPaying"> </textarea>
                 </mat-form-field>
                 <span class="mat-error" *ngIf="reasonError">Reason is mandatory</span>
-
+                <button class="btn btn-outline-secondary btn-rounded d-inline-block mx-2  float-md-right"
+                    (click)="submitLater()">
+                    Later
+                </button>
                 <button class="btn btn-outline-secondary btn-rounded d-inline-block mx-2  float-md-right"
                     (click)="submitReasonNotAbleToPay()">
                     Submit
                 </button>
+
             </div>
 
             <!-- Volunterring -->
@@ -67,15 +76,19 @@
                 </div>
 
 
-                <p >What motivated you to do Volunteering</p>
+                <p>What motivated you to do Volunteering</p>
                 <mat-form-field appearance="outline">
                     <textarea matInput rows="5" [(ngModel)]="reasonForVolunteer"> </textarea>
                 </mat-form-field>
-
+                <button class="btn btn-outline-secondary btn-rounded d-inline-block mx-2  float-md-right"
+                    (click)="submitLater()">
+                    Later
+                </button>
                 <button class="btn btn-outline-secondary btn-rounded d-inline-block mx-2  float-md-right"
                     (click)="submitVounteer()">
                     Submit
                 </button>
+
             </div>
 
 

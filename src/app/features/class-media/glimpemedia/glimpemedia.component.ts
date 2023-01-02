@@ -162,6 +162,7 @@ export class GlimpemediaComponent implements OnInit {
       next: (response) => {
         this.openSnackBar(response);
         this.getAllData();
+        this.AllLanguages()
       },
       error: (error) => {
         console.error(error.message);
@@ -247,6 +248,7 @@ export class GlimpemediaComponent implements OnInit {
           next: (response) => {
             this.openSnackBar(response);
             this.getAllData();
+
           },
           error: (error) => {
             console.error(error.message);
