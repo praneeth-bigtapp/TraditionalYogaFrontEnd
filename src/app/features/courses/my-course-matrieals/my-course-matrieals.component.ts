@@ -52,6 +52,7 @@ export class MyCourseMatriealsComponent implements OnInit {
 
 
     this.FormDeatils = this.formbuilder.group({
+      coursematerialID: [null],
       courses: [null, Validators.compose([Validators.required])],
       others: [null, Validators.compose([Validators.required])],
       catogery: [null, Validators.compose([Validators.required])],
@@ -179,7 +180,22 @@ export class MyCourseMatriealsComponent implements OnInit {
     this.displayform = true
     this.issubmit = true
   }
-  deletedetails(element: any) {
+  deletedetails(id: any) {
+
+    const body = {
+      "courseMaterialId": id
+    }
+    this.service.deleteCourseMaterial(body).subscribe({
+      next: (response) => {
+        this.openSnackBar(response)
+        this.FormDeatils.reset()
+      },
+      error: (error) => {
+        console.error(error);
+
+      }
+    })
+
 
   }
   ngAfterViewInit() {
@@ -201,11 +217,29 @@ export class MyCourseMatriealsComponent implements OnInit {
 
     this.FormDeatils.value.addMedia = this.filedata
 
-    const { courses, others, category, addMedia, upload, videoLink, message, coursetitle } = this.FormDeatils.value
+    const { coursematerialID, courses, others, category, addMedia, upload, videoLink, message, coursetitle } = this.FormDeatils.value
 
-    console.log({ courses, others, category, addMedia, upload, videoLink, message, coursetitle });
+    console.log({ coursematerialID, courses, others, category, addMedia, upload, videoLink, message, coursetitle });
 
     if (this.iseditable) {
+      const body =
+      {
+        "courseMaterialId": coursematerialID,
+        "coursesId": {
+          "coursesId": courses
+        },
+        "materialCategoryId": {
+          "materialCategoryId": category
+        },
+        "mediaId": {
+          "mediaId": addMedia
+        },
+        "courseMaterialTitle": coursetitle,
+        "videoLink": videoLink,
+        "fileUpload": this.filedata,
+        "message": message
+      }
+
 
       //editable
       return
@@ -213,32 +247,32 @@ export class MyCourseMatriealsComponent implements OnInit {
 
     const body = {
       "coursesId": {
-        "coursesId": 3,
-        "categorieId": {
-          "categoriesId": 3
-        }
-
+        "coursesId": courses
       },
-      "addCategory": "Testing purpose-2",
-      "addDescription": "testing ",
       "materialCategoryId": {
-        "materialCategoryId": 2
-
+        "materialCategoryId": category
       },
       "mediaId": {
-        "mediaId": 2
+        "mediaId": addMedia
       },
-      "videoLink": "https://www.youtube.com/watch?v=18PCf6aq5wI&list=RDMM18PCf6aq5wI&start_radio=1",
-      "fileUpload": "",
-      "message": "Tetsing-2"
-
-
+      "courseMaterialTitle": coursetitle,
+      "videoLink": videoLink,
+      "fileUpload": this.filedata,
+      "message": message
     }
 
-    if (this.filerror == false) {
-      this.openSnackBar('Data Added Successfully')
-      this.FormDeatils.reset()
-    }
+    this.service.postCourseMaterial(body).subscribe({
+      next: (response) => {
+        this.openSnackBar(response)
+        this.FormDeatils.reset()
+      },
+      error: (error) => {
+        console.error(error);
+
+      }
+    })
+
+
   }
   onfilechange(event: any) {
     this.filerror = this.FormDeatils.value.upload === null ? true : false

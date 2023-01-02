@@ -18,33 +18,16 @@ export class StudentDashboardComponent implements OnInit {
   filterData: any;
   dataSource: any;
   data: any
+  mentorDetails: any
+  performanceData: any
+  gratitudeMessages: any
+  notifications: any
+
 
   constructor(
     private service: StudentDashboardService,
     private router: Router,
   ) {
-
-    this.filterData = {
-      filterColumnNames: this.displayedColumns.map((ele: any) => ({ "Key": ele, "Value": "" })),
-      gridData: this.gridData,
-      dataSource: this.dataSource,
-      // paginator: this.paginator,
-      // sort: this.sort
-    };
-    this.service.getallcourses().subscribe({
-      next: (response) => {
-        this.courseList = response
-
-      },
-
-      error: (error) => {
-        console.error(error.message);
-
-      }
-    })
-
-    this.getperformancedata()
-
   }
 
   getperformancedata() {
@@ -94,10 +77,31 @@ export class StudentDashboardComponent implements OnInit {
 
 
   ngOnInit() {
+    this.filterData = {
+      filterColumnNames: this.displayedColumns.map((ele: any) => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      // paginator: this.paginator,
+      // sort: this.sort
+    };
+    this.service.getallcourses().subscribe({
+      next: (response) => {
+        this.courseList = response
+
+      },
+
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
+
+    this.getperformancedata()
   }
 
   onCourseChange() {
     console.log(this.course);
+    this.data = ""
   }
 
   changeMentor(event: any) {

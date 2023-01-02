@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseDetailsComponent implements OnInit {
 
-  constructor() { }
+
+  date: any = new Date()
+  constructor(
+  ) { }
 
   ngOnInit(): void {
   }

@@ -6,51 +6,47 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CoursesService extends BaseHttp {
- 
+
   // getURL = 'student/getAll?operation=course';
 
 
 
   getAllcoursesURL = 'courseList/getAll?operation=coursesList'
 
-  getcoursemediaURL ='courseList/getAll?operation=praticeMedia'
-  postcoursemedaiAddURL='courseList/praticeMedia?operation=add'
-  postcoursemediaSaveURL='courseList/praticeMedia?operation=save'
-  postcoursemediaDeleteURL='courseList/praticeMedia?operation=delete'
-
-  
-  getcourseImageURL ='courseList/getAll?operation=praticeImageMedia'
-  postcourseImageAddURL='courseList/praticeImageMedia?operation=add'
-  postcourseImageSaveURL='courseList/praticeImageMedia?operation=save'
-  postcourseImageDeleteURL='courseList/praticeImageMedia?operation=delete'
-
-  getcoursedocURL ='courseList/getAll?operation=praticeDocumentMedia'
-  postcoursedocAddURL='courseList/praticedocumentMedia?operation=add'
-  postcoursedocSaveURL='courseList/praticedocumentMedia?operation=save'
-  postcoursedocDeleteURL='courseList/praticedocumentMedia?operation=delete'
+  getcoursemediaURL = 'courseList/getAll?operation=praticeMedia'
+  postcoursemedaiAddURL = 'courseList/praticeMedia?operation=add'
+  postcoursemediaSaveURL = 'courseList/praticeMedia?operation=save'
+  postcoursemediaDeleteURL = 'courseList/praticeMedia?operation=delete'
 
 
+  getcourseImageURL = 'courseList/getAll?operation=praticeImageMedia'
+  postcourseImageAddURL = 'courseList/praticeImageMedia?operation=add'
+  postcourseImageSaveURL = 'courseList/praticeImageMedia?operation=save'
+  postcourseImageDeleteURL = 'courseList/praticeImageMedia?operation=delete'
 
-
+  getcoursedocURL = 'courseList/getAll?operation=praticeDocumentMedia'
+  postcoursedocAddURL = 'courseList/praticedocumentMedia?operation=add'
+  postcoursedocSaveURL = 'courseList/praticedocumentMedia?operation=save'
+  postcoursedocDeleteURL = 'courseList/praticedocumentMedia?operation=delete'
 
   postcoursemediaURL = "course/addCourseMediaPractice"
 
-  getALLmediatypeURL='courseList/getAll?operation=mediaType'
+  getALLmediatypeURL = 'courseList/getAll?operation=mediaType'
 
-  getALLcategorymaterialsURL='courseList/getAll?operation=materialCategory'
+  getALLcategorymaterialsURL = 'courseList/getAll?operation=materialCategory'
 
-  getAllcoursematerialURL='courseList/getAll?operation=coursematerial'
+  getAllcoursematerialURL = 'courseList/getAll?operation=coursematerial'
 
-  getcoursematerials(){
+  getcoursematerials() {
     return this.get<any>(this.getAllcoursematerialURL);
 
   }
 
-  getmediatype(){
+  getmediatype() {
     return this.get<any>(this.getALLmediatypeURL);
 
   }
-  getcategorymaterial(){
+  getcategorymaterial() {
     return this.get<any>(this.getALLcategorymaterialsURL);
 
   }
@@ -60,7 +56,7 @@ export class CoursesService extends BaseHttp {
     return this.get<any>(this.getAllcoursesURL);
 
   }
- 
+
   postcoursemedia(body: any) {
     return this.post(this.postcoursemediaURL, body)
   }
@@ -104,5 +100,27 @@ export class CoursesService extends BaseHttp {
     return this.post(this.postcoursedocDeleteURL, body)
   }
 
+
+  // Course Media
+  getCourseMaterialURL = "courseList/getAll?operation=coursematerial"
+  postCourseMaterialURL = "courseList/addMaterial?operation=add"
+  updateCourseMaterialURL = "courseList/addMaterial?operation=add"
+  deleteCourseMaterialURL = "courseList/addMaterial?operation=add"
+
+  getCourseMaterial() {
+    return this.get(this.getCourseMaterialURL)
+  }
+
+  postCourseMaterial(body: any) {
+    return this.post(this.postCourseMaterialURL, body)
+  }
+
+  updateCourseMaterial(body: any) {
+    return this.post(this.updateCourseMaterialURL, body)
+  }
+
+  deleteCourseMaterial(body: any) {
+    return this.post(this.deleteCourseMaterialURL, body)
+  }
 
 }
