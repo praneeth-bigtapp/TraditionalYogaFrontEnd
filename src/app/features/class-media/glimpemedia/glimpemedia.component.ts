@@ -182,6 +182,7 @@ export class GlimpemediaComponent implements OnInit {
 
   gobutton() {
     this.displayContent = true;
+    this.AllLanguages()
   }
 
   reseteditable() {
@@ -219,6 +220,7 @@ export class GlimpemediaComponent implements OnInit {
       language: element.language.languageId,
       Others: null
     });
+    this.languageList = this.languageList.filter((ele: any) => ele.languageId !== -1)
     this.isEditable = true;
     this.isSubmit = false;
     this.displayContent = true;
@@ -270,7 +272,7 @@ export class GlimpemediaComponent implements OnInit {
     this.glimpseForm.value.file = this.glimpseFile || '';
     let body;
 
-    if (this.glimpseForm.value.language === -1) {
+    if (this.glimpseForm.value.language === -1 && this.isEditable === false) {
       body =
       {
 

@@ -63,7 +63,7 @@
                             <div class="col">
                                 <mat-form-field appearance="outline">
 
-                                    <mat-select formControlName="language" [disabled]="isEditable"
+                                    <mat-select formControlName="language" 
                                         (selectionChange)="swapothers($event)">
                                         <mat-option *ngFor="let language of languageList" [value]="language.languageId">
                                             {{language.languageName}}</mat-option>

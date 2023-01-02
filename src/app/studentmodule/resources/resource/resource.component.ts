@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ResourcesService } from '../resources.service';
+import { SortingresourcesComponent } from '../sortingresources/sortingresources.component';
 
 @Component({
   selector: 'app-resource',
@@ -41,6 +42,7 @@ export class ResourceComponent implements OnInit {
         this.dharansCategoryList = response
       }
     })
+    this.openAudioSliders()
   }
 
   practiceLibraryDetails(data: any) {
@@ -55,7 +57,22 @@ export class ResourceComponent implements OnInit {
   }
 
   openAudioSliders() {
+    const dialogref = this.dialog.open(SortingresourcesComponent, {
+      data: {
+        title: "Sorting"
+      },
+      width: "50%",
+      height: "50%",
+      position: {
+        top: "2%"
+      }
+    })
 
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+      }
+
+    })
   }
 
   audioChangeEvent() {

@@ -1,0 +1,29 @@
+<div class="popup">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="">{{data.title | titlecase}}
+                <span class="float-right" (click)="dialogRef.close(false)"> <i class="far fa-times-circle"
+                        aria-hidden="true"></i> </span>
+            </h3>
+        </div>
+        <br />
+        <div class="content-style px-0 ">
+            <div class="row align-items-center">
+                <div class="col-md-4 ">
+                    <p>Sort by time range</p>
+                </div>
+                <div class="col-md">
+                    <div class="example-label-container">
+
+                        <label class="example-value-label">{{sortingValues.fromTime}}</label>
+                        <label class="example-value-label">{{sortingValues.toTime}}</label>
+                    </div>
+                    <mat-slider class="example-margin" [disabled]="false" [max]="24" [min]="0" [step]="1">
+                        <input matSliderThumb [(ngModel)]="sortingValues.fromTime">
+                    </mat-slider>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,11 +9,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { SortingresourcesComponent } from './sortingresources/sortingresources.component';
+import {MatSliderModule} from '@angular/material/slider';
 
 
 @NgModule({
   declarations: [
-    ResourceComponent
+    ResourceComponent,
+    SortingresourcesComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +27,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatIconModule,
     MatExpansionModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSliderModule,
   ]
 })
 export class ResourcesModule { }
