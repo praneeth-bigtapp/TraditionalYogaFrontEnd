@@ -20,7 +20,16 @@ const routes: Routes = [
     loadChildren: () =>
       import('./studentmodule/notification/notification.module').then((m) => m.NotificationModule)
   },
-
+  {
+    path: '',
+    loadChildren: () =>
+      import('./studentmodule/view-task/view-task.module').then((m) => m.ViewTaskModule)
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./studentmodule/gratitudemessage/gratitudemessage.module').then((m) => m.GratitudemessageModule)
+  },
   {
     path: '',
     loadChildren: () =>
