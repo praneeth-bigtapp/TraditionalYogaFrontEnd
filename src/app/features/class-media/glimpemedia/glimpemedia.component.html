@@ -3,31 +3,31 @@
 
 
     <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
-        <button type="button" (click)="gobutton()" *ngIf="!displaycontent"
+        <button type="button" (click)="gobutton()" *ngIf="!displayContent"
             class="btn btn-outline-secondary btn-rounded d-inline-block ">
             Add Glimpse
         </button>
     </div>
-    <div class="card  bg-secondary" *ngIf="displaycontent">
+    <div class="card  bg-secondary" *ngIf="displayContent">
         <div class="card-header text-white bg-secondary">
-            {{iseditable ? "Update" :issubmit?"Add":'' }} Glimpse
+            {{isEditable ? "Update" :isSubmit?"Add":'' }} Glimpse
 
         </div>
-        <div class="card-body  bg-white py-2" *ngIf="displaycontent">
-            <form [formGroup]="glimpseform">
+        <div class="card-body  bg-white py-2" *ngIf="displayContent">
+            <form [formGroup]="glimpseForm">
                 <div class="row">
                     <div class="col-md-4">
                         <label>Course</label>
                         <mat-form-field appearance="outline">
-                            <mat-select formControlName="course" [disabled]="iseditable">
+                            <mat-select formControlName="course" [disabled]="isEditable">
                                 <mat-option *ngFor="let course1 of courses" [value]="course1.coursesId">
                                     {{course1.coursesName}}</mat-option>
                             </mat-select>
 
                         </mat-form-field>
                         <div class="error-message"
-                            *ngIf="glimpseform.controls['course'].invalid && (glimpseform.controls['course'].dirty || glimpseform.controls['course'].touched)">
-                            <mat-error [hidden]=" !glimpseform.get('course')?.hasError('required')  ">
+                            *ngIf="glimpseForm.controls['course'].invalid && (glimpseForm.controls['course'].dirty || glimpseForm.controls['course'].touched)">
+                            <mat-error [hidden]=" !glimpseForm.get('course')?.hasError('required')  ">
                                 Course is mandatory
                             </mat-error>
                         </div>
@@ -39,8 +39,8 @@
                                 <input matInput formControlName="date" type="date">
                             </mat-form-field>
                             <div class="error-message"
-                                *ngIf="glimpseform.controls['date'].invalid && (glimpseform.controls['date'].dirty || glimpseform.controls['date'].touched)">
-                                <mat-error [hidden]=" !glimpseform.get('date')?.hasError('required')  ">
+                                *ngIf="glimpseForm.controls['date'].invalid && (glimpseForm.controls['date'].dirty || glimpseForm.controls['date'].touched)">
+                                <mat-error [hidden]=" !glimpseForm.get('date')?.hasError('required')  ">
                                     Date is mandatory
                                 </mat-error>
                             </div>
@@ -51,8 +51,6 @@
                         <div class="col px-0">
                             <input type="file" class="border" id="file" (change)="filechange($event)"
                                 formControlName="file" accept=" image/*" />
-
-
                         </div>
                     </div>
 
@@ -65,15 +63,16 @@
                             <div class="col">
                                 <mat-form-field appearance="outline">
 
-                                    <mat-select formControlName="language" [disabled]="iseditable" (selectionChange)="swapothers($event)">
-                                        <mat-option *ngFor="let language of languagelist" [value]="language.languageId">
+                                    <mat-select formControlName="language" [disabled]="isEditable"
+                                        (selectionChange)="swapothers($event)">
+                                        <mat-option *ngFor="let language of languageList" [value]="language.languageId">
                                             {{language.languageName}}</mat-option>
                                     </mat-select>
 
                                 </mat-form-field>
                                 <div class="error-message"
-                                    *ngIf="glimpseform.controls['language'].invalid && (glimpseform.controls['language'].dirty || glimpseform.controls['language'].touched)">
-                                    <mat-error [hidden]=" !glimpseform.get('language')?.hasError('required')  ">
+                                    *ngIf="glimpseForm.controls['language'].invalid && (glimpseForm.controls['language'].dirty || glimpseForm.controls['language'].touched)">
+                                    <mat-error [hidden]=" !glimpseForm.get('language')?.hasError('required')  ">
                                         Language is mandatory
                                     </mat-error>
                                 </div>
@@ -82,15 +81,15 @@
                         </div>
 
                     </div>
-                    <div class="col-md-4" *ngIf="otherslan">
+                    <div class="col-md-4" *ngIf="othersLang">
                         <label>Others</label>
                         <mat-form-field appearance="outline">
-                            <input matInput formControlName="Others" type="text" value="" [required]="otherslan" />
+                            <input matInput formControlName="Others" type="text" value="" [required]="othersLang" />
 
                         </mat-form-field>
                         <div class="error-message"
-                            *ngIf="glimpseform.controls['Others'].invalid && (glimpseform.controls['Others'].dirty || glimpseform.controls['Others'].touched)">
-                            <mat-error [hidden]=" !glimpseform.get('Others')?.hasError('required')  ">
+                            *ngIf="glimpseForm.controls['Others'].invalid && (glimpseForm.controls['Others'].dirty || glimpseForm.controls['Others'].touched)">
+                            <mat-error [hidden]=" !glimpseForm.get('Others')?.hasError('required')  ">
                                 Others is mandatory
                             </mat-error>
                         </div>
@@ -99,11 +98,11 @@
                 </div>
                 <div class=" d-flex flex-row justify-content-end  ">
                     <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block   "
-                        *ngIf="issubmit" (click)="glimpseformsubmit()">
+                        *ngIf="isSubmit" (click)="glimpseformsubmit()">
                         Add
                     </button>
                     <button (click)="onsave()" class="btn btn-outline-secondary btn-rounded d-inline-block   "
-                        *ngIf="iseditable">
+                        *ngIf="isEditable">
                         Update
                     </button>
                     <button type="button" (click)="reseteditable()"
@@ -129,7 +128,7 @@
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseId')"
                             [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" disabled="true" />
                     </th>
-                    <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
+                    <td mat-cell *matCellDef="let i=index"> {{pageNo +i }} </td>
                 </ng-container>
                 <ng-container matColumnDef="coursesId">
 
