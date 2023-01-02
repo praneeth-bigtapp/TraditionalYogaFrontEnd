@@ -80,4 +80,7 @@ export class ResourceComponent implements OnInit {
   playLibrary() {
 
   }
+  openAudioCategory(data: any) {
+
+  }
 }

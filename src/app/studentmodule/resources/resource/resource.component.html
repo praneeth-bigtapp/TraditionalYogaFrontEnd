@@ -92,8 +92,18 @@
                                     <h6>Audio Library - Dharanas </h6>
                                 </div>
                             </mat-panel-title>
-
                         </mat-expansion-panel-header>
+                        <div class="row align-items-center p-2">
+                            <div class="col-md-12  text-justify" *ngFor="let audiocategory of audioCategoryList"
+                                (click)="openAudioCategory(audiocategory)">
+                                <div class="d-flex flex-row align-items-center     ">
+                                    <mat-icon>volume_up</mat-icon>&nbsp;
+                                    <p>{{audiocategory.audioName}} </p>
+                                </div>
+                                <hr />
+                            </div>
+
+                        </div>
                     </mat-expansion-panel>
 
                     <!-- Pratice Library DropDown Session -->
