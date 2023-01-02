@@ -49,8 +49,8 @@
                             <mat-form-field class="pe-4" appearance="outline">
 
 
-                                <mat-select matNativeControl formControlName="catogery" (selectionChange)="newOthers()"
-                                    [disabled]="iseditable" [(ngModel)]="othervalue">
+                                <mat-select matNativeControl formControlName="catogery"
+                                    (selectionChange)="newOthers($event)" [disabled]="iseditable">
                                     <mat-option *ngFor="let item of catogeries" [value]="item.materialCategoryId">
                                         {{item.categoryName}}
                                     </mat-option>
@@ -68,7 +68,7 @@
                             <label>Others Category</label>
                             <mat-form-field class="pe-4" appearance="outline">
 
-                                <input matInput formControlName="others" type="text" />
+                                <input matInput formControlName="others" type="text" [required]="newcatogeries" />
 
                             </mat-form-field>
                             <div class="error-message"
@@ -140,8 +140,11 @@
                             </mat-form-field>
                             <div class="error-message"
                                 *ngIf="FormDeatils.controls['videoLink'].invalid && (FormDeatils.controls['videoLink'].dirty || FormDeatils.controls['videoLink'].touched)">
-                                <mat-error [hidden]=" !FormDeatils.get('courses')?.hasError('required')  ">
+                                <mat-error [hidden]=" !FormDeatils.get('videoLink')?.hasError('required')  ">
                                     Link is mandatory
+                                </mat-error>
+                                <mat-error [hidden]=" !FormDeatils.get('videoLink')?.hasError('pattern')  ">
+                                    Invalid link
                                 </mat-error>
                             </div>
                         </div>
@@ -200,59 +203,56 @@
             <table mat-table matSort [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid "
                 aria-label="users">
 
-                <ng-container matColumnDef="S_No">
+                <ng-container matColumnDef="courseMaterialId">
                     <th mat-header-cell *matHeaderCellDef class="col-2 text-center pb-3"> <label
                             mat-sort-header>S.No</label>
                         <input matInput type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" disabled="true"
                             style="border-style: solid;border-radius: 5px;width: 90%;" />
                     </th>
-                    <!-- <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col">
-        <label mat-sort-header>
-            S.No
-        </label>
-        <input type="text" (keyup)="updatePagination('courseId')"
-            [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
-    </th> -->
+
                     <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
                 </ng-container>
 
 
-                <ng-container matColumnDef="title">
+                <ng-container matColumnDef="courseMaterialTitle">
                     <th mat-header-cell *matHeaderCellDef class="col-3 text-center pb-3"><label
                             mat-sort-header>Title</label>
                         <input matInput type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData"
                             style="border-style: solid;border-radius: 5px;width: 90%;" class="mx-2" />
                     </th>
-                    <td mat-cell *matCellDef="let element" class="col-3 px-2 text-center"> {{element.title}} </td>
+                    <td mat-cell *matCellDef="let element" class="col-3 px-2 text-center">
+                        {{element.courseMaterialTitle}} </td>
                 </ng-container>
 
 
-                <ng-container matColumnDef="date">
+                <ng-container matColumnDef="createdDate">
                     <th mat-header-cell *matHeaderCellDef class="col-3 text-center pb-3"> <label
                             mat-sort-header>Date</label>
                         <input matInput type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData"
                             style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
                     </th>
-                    <td mat-cell *matCellDef="let element" class="col-3 px-2 text-center"> {{element.date}} </td>
+                    <td mat-cell *matCellDef="let element" class="col-3 px-2 text-center"> {{element.createdDate |
+                        date:"dd-MMM-YYYY"}} </td>
                 </ng-container>
 
 
-                <ng-container matColumnDef="mtype">
+                <ng-container matColumnDef="mediaId">
                     <th mat-header-cell *matHeaderCellDef class=" text-center col-2 pb-3"> <label mat-sort-header> Media
                             type</label>
                         <input matInput type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData"
                             style="border-style: solid;border-radius: 5px;width: 90%;" class="mx-2" />
                     </th>
-                    <td mat-cell *matCellDef="let element" class="text-center col-2 px-2"> {{element.mtype}} </td>
+                    <td mat-cell *matCellDef="let element" class="text-left col-2 px-2"> {{element.mediaId.mediaType}}
+                    </td>
                 </ng-container>
 
 
 
-                <ng-container matColumnDef="Details">
+                <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef class=" text-center col-2 pb-3"> <label mat-sort-header>
                             Action</label>
                         <input matInput type="text" (keyup)="updatePagination()" disabled="true"
@@ -260,7 +260,7 @@
                     </th>
 
                     <td mat-cell *matCellDef="let element" class="text-center col-2 my-4  ">
-                        <i class="fa-solid fa-eye " (click)="viewDetails(element.S_No)"
+                        <i class="fa-solid fa-eye " (click)="viewDetails(element.courseMaterialId)"
                             matTooltip="View Course Activity" matTooltip="View"></i>
                         <span matTooltip="Edit" (click)="editdetails(element)">
                             <i class="fas fa-pencil-alt mx-4 " aria-hidden="true"></i>

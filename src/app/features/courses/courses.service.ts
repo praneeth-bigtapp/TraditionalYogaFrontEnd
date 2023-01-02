@@ -104,8 +104,8 @@ export class CoursesService extends BaseHttp {
   // Course Media
   getCourseMaterialURL = "courseList/getAll?operation=coursematerial"
   postCourseMaterialURL = "courseList/addMaterial?operation=add"
-  updateCourseMaterialURL = "courseList/addMaterial?operation=add"
-  deleteCourseMaterialURL = "courseList/addMaterial?operation=add"
+  updateCourseMaterialURL = "courseList/addMaterial?operation=save"
+  deleteCourseMaterialURL = "courseList/addMaterial?operation=delete"
 
   getCourseMaterial() {
     return this.get(this.getCourseMaterialURL)

@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
+import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
 import { CoursesService } from '../courses.service';
 
 @Component({
@@ -33,32 +36,28 @@ export class MyCourseMatriealsComponent implements OnInit {
   filedata!: any
   tablevalues: any
   newcatogeries = false
-  data = [{ 'S_No': '1', 'title': 'Traditional Yoga', 'date': '2022-22-12', "mtype": "images" },
-  { 'S_No': '2', 'title': 'Traditional Yoga1', 'date': '2022-22-10', "mtype": "images2" },
-  { 'S_No': '3', 'title': 'Traditional Yoga2', 'date': '2022-22-12', "mtype": "images3" },
-  { 'S_No': '4', 'title': 'Traditional Yoga3', 'date': '2022-22-2', "mtype": "images4" },
-  { 'S_No': '5', 'title': 'Traditional Yoga4', 'date': '2022-22-1', "mtype": "images" }]
+  data!: any
   dataSource: any;
-  displayedColumns: string[] = ['S_No', 'title', 'date', "mtype", "Details"];
+  displayedColumns: string[] = ['courseMaterialId', 'courseMaterialTitle', 'createdDate', "mediaId", "action"];
 
-  constructor(private formbuilder: FormBuilder, private service: CoursesService, private _snackBar: MatSnackBar, private router: Router) { }
+  constructor(private formbuilder: FormBuilder, private service: CoursesService, private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getcourseslist()
     this.getmedias()
     this.getcoursecatogery()
-    this.getcoursedetails()
-
+    // this.getcoursedetails()
+    this.getdata()
 
 
     this.FormDeatils = this.formbuilder.group({
       coursematerialID: [null],
       courses: [null, Validators.compose([Validators.required])],
-      others: [null, Validators.compose([Validators.required])],
+      others: [null],
       catogery: [null, Validators.compose([Validators.required])],
       addMedia: [null, Validators.compose([Validators.required])],
       upload: [null],
-      videoLink: [null, Validators.compose([Validators.required])],
+      videoLink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
       message: [null, Validators.compose([Validators.required])],
       coursetitle: [null, Validators.compose([Validators.required])],
 
@@ -71,7 +70,7 @@ export class MyCourseMatriealsComponent implements OnInit {
       paginator: this.paginator,
       sort: this.sort
     }
-    this.data.map(ele => ele.date).sort()
+
     this.dataSource = new MatTableDataSource<any>(this.data)
     this.filterData.gridData = this.data;
     this.filterData.dataSource = this.dataSource;
@@ -84,8 +83,8 @@ export class MyCourseMatriealsComponent implements OnInit {
 
 
   }
-  newOthers() {
-    if (this.othervalue == '4') {
+  newOthers(event: any) {
+    if (event.value == '-1') {
       this.newcatogeries = true
 
     }
@@ -102,26 +101,11 @@ export class MyCourseMatriealsComponent implements OnInit {
     return
   }
 
-  getcoursedetails() {
-    this.service.getcoursematerials().subscribe({
-      next: (response) => {
-        this.tablevalues = response;
 
-        console.log(this.tablevalues);
-
-
-      },
-      error: (error) => {
-        console.error(error.message);
-      }
-    });
-  }
   getcourseslist() {
     this.service.getCourse().subscribe({
       next: (response) => {
         this.courses = response;
-
-        console.log(this.courses);
 
 
       },
@@ -136,8 +120,6 @@ export class MyCourseMatriealsComponent implements OnInit {
       next: (response) => {
         this.media = response;
 
-        console.log(this.media);
-
 
       },
       error: (error) => {
@@ -148,9 +130,39 @@ export class MyCourseMatriealsComponent implements OnInit {
   getcoursecatogery() {
     this.service.getcategorymaterial().subscribe({
       next: (response) => {
-        this.catogeries = response;
+        console.log(response);
 
-        console.log(this.catogeries);
+        this.catogeries = response;
+        const othersData = {
+          "materialCategoryId": -1,
+          "categoryName": "others"
+        };
+        this.catogeries.push(othersData);
+
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
+  }
+
+  getdata() {
+    this.service.getCourseMaterial().subscribe({
+      next: (response) => {
+        // this.catogeries = response;
+        this.data = response
+        this.data = this.data.reverse()
+        console.log(response);
+        this.dataSource = new MatTableDataSource<any>(this.data)
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
 
 
       },
@@ -163,38 +175,57 @@ export class MyCourseMatriealsComponent implements OnInit {
 
 
   editdetails(element: any) {
-
     console.log(element);
 
-    // this.FormDeatils.setValue({
-    //   courses: ,
-    //   others:,
-    //   catogery: ,
-    //   addMedia: ,
-    //   upload: ,
-    //   videoLink:,
-    //   message: ,
-    //   coursetitle:,
-    // });
+    this.FormDeatils.setValue({
+      coursematerialID: element.courseMaterialId,
+      courses: element.coursesId.coursesId,
+      others: null,
+      catogery: element.materialCategoryId.materialCategoryId,
+      addMedia: element.mediaId.mediaId,
+      upload: null,
+      videoLink: element.videoLink,
+      message: element.message,
+      coursetitle: element.courseMaterialTitle,
+    });
+    this.newcatogeries = false
     this.iseditable = true
     this.displayform = true
     this.issubmit = true
+
   }
+
   deletedetails(id: any) {
 
     const body = {
       "courseMaterialId": id
     }
-    this.service.deleteCourseMaterial(body).subscribe({
-      next: (response) => {
-        this.openSnackBar(response)
-        this.FormDeatils.reset()
-      },
-      error: (error) => {
-        console.error(error);
 
-      }
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this material ?"
+      },
+      width: "30%",
+      height: "25%"
     })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.service.deleteCourseMaterial(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.getdata()
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
+
+    })
+
 
 
   }
@@ -209,17 +240,17 @@ export class MyCourseMatriealsComponent implements OnInit {
   }
   onsubmit() {
     this.onfilechange(null)
-    console.log(this.FormDeatils.value);
+
 
 
     if (this.FormDeatils.invalid)
       return this.FormDeatils.markAllAsTouched()
 
-    this.FormDeatils.value.addMedia = this.filedata
 
-    const { coursematerialID, courses, others, category, addMedia, upload, videoLink, message, coursetitle } = this.FormDeatils.value
 
-    console.log({ coursematerialID, courses, others, category, addMedia, upload, videoLink, message, coursetitle });
+    const { coursematerialID, courses, others, catogery, addMedia, upload, videoLink, message, coursetitle } = this.FormDeatils.value
+
+    console.log({ coursematerialID, courses, others, catogery, addMedia, upload, videoLink, message, coursetitle });
 
     if (this.iseditable) {
       const body =
@@ -229,8 +260,9 @@ export class MyCourseMatriealsComponent implements OnInit {
           "coursesId": courses
         },
         "materialCategoryId": {
-          "materialCategoryId": category
+          "materialCategoryId": catogery
         },
+        "otherCategoryName": others,
         "mediaId": {
           "mediaId": addMedia
         },
@@ -239,7 +271,17 @@ export class MyCourseMatriealsComponent implements OnInit {
         "fileUpload": this.filedata,
         "message": message
       }
+      this.service.updateCourseMaterial(body).subscribe({
+        next: (response) => {
+          this.openSnackBar(response)
+          this.FormDeatils.reset()
+          this.getdata()
+        },
+        error: (error) => {
+          console.error(error);
 
+        }
+      })
 
       //editable
       return
@@ -248,23 +290,29 @@ export class MyCourseMatriealsComponent implements OnInit {
     const body = {
       "coursesId": {
         "coursesId": courses
+
       },
       "materialCategoryId": {
-        "materialCategoryId": category
+        "materialCategoryId": catogery
+
       },
+      "otherCategoryName": others || "",
       "mediaId": {
         "mediaId": addMedia
+
       },
       "courseMaterialTitle": coursetitle,
       "videoLink": videoLink,
       "fileUpload": this.filedata,
       "message": message
+
     }
 
     this.service.postCourseMaterial(body).subscribe({
       next: (response) => {
         this.openSnackBar(response)
         this.FormDeatils.reset()
+        this.getdata()
       },
       error: (error) => {
         console.error(error);

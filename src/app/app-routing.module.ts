@@ -21,7 +21,12 @@ const routes: Routes = [
       import('./studentmodule/notification/notification.module').then((m) => m.NotificationModule)
   },
 
- 
+  {
+    path: '',
+    loadChildren: () =>
+      import('./studentmodule/resources/resources.module').then((m) => m.ResourcesModule)
+  },
+
   {
     path: '',
     loadChildren: () =>
