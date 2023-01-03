@@ -24,6 +24,7 @@ export class BannersComponent implements OnInit {
   gridData: any;
   data!: any;
   checks = false;
+  pageno: number = 1
   // headerbannerform!: FormGroup
   coursebanner!: FormGroup
   filerror!: boolean
@@ -124,6 +125,14 @@ export class BannersComponent implements OnInit {
       isactive:[null]
    
     })
+  }
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
   }
 
 
