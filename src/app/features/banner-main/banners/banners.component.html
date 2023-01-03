@@ -158,7 +158,7 @@
                   <th mat-header-cell *matHeaderCellDef class="col-4"><label mat-sort-header> date Of Add</label>
                     <input type="text" (keyup)="updatePagination()"
                     [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" /></th>
-                  <td mat-cell *matCellDef="let element" class="col-4 text-left"> {{element.dateOfAdd}} </td>
+                  <td mat-cell *matCellDef="let element" class="col-4 text-center"> {{element.dateOfAdd}} </td>
                 </ng-container>
           
           
@@ -193,7 +193,7 @@
                         <span matTooltip="Edit" (click)="editdetails(element)"> <i class="fas fa-pencil-alt" aria-hidden="true"></i> </span>
                         <span matTooltip="Delete" style="cursor: pointer;" class="mx-2" (click)=" deletedetails(element.bannerId)"> <i  class="far fa-trash-alt"
                             aria-hidden="true"></i> </span>
-                        <span matTooltip="Draft" style="cursor: pointer;"> <i class="fa-solid fa-file-pen fa-lg"></i> </span>
+                        
                         </div>
                       </td>
                   
