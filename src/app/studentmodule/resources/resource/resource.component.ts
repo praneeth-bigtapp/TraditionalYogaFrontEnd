@@ -62,7 +62,7 @@ export class ResourceComponent implements OnInit {
         title: "Sorting"
       },
       width: "50%",
-      height: "50%",
+      height: "70%",
       position: {
         top: "2%"
       }

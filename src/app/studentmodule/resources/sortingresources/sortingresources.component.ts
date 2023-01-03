@@ -17,7 +17,8 @@ export class SortingresourcesComponent implements OnInit {
     toDate: null,
     description: null,
     selectMutliple: null,
-    type: null
+    type: null,
+    limitedHour: 0
 
   }
 
@@ -30,10 +31,9 @@ export class SortingresourcesComponent implements OnInit {
   }
 
 
-  timeChange(event: any) {
-    console.log(event);
-    console.log(this.sortingValues.fromDate);
-    
-
+  detectSortingChanges()
+  {
+    console.log(this.sortingValues );
+     
   }
 }
