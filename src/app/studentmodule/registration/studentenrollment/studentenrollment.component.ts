@@ -34,6 +34,7 @@ export class StudentenrollmentComponent implements OnInit {
   otpData: any;
   otp: any;
   otpError: boolean = false;
+  isloading: boolean = false
 
   constructor(
     private formbuilder: FormBuilder,
@@ -63,15 +64,11 @@ export class StudentenrollmentComponent implements OnInit {
       street: [null, Validators.compose([])],
       town: [null, Validators.compose([])],
       state: [null],
-      country: [null, Validators.compose([])],
+      country: [null, Validators.compose([Validators.required])],
       pincode: [null, Validators.compose([Validators.pattern(InputvalidationService.inputvalidation.isnumbers)])],
-      refferal: [{ value: null, disabled: this.isEditable}, Validators.compose([Validators.required])],
+      refferal: [{ value: null, disabled: this.isEditable }, Validators.compose([Validators.required])],
       termsCondition: [null, Validators.compose([Validators.required])],
     });
-
-    // this.getIPAddress();
-    // this.refferallist = ["I am old student", "Friends and family", "Facebook", "Instagram", "Youtube", "TV Media", "Others"]
-    // this.martialStatus = ["Single", "Married"]
 
     // 1. Country
     this.regService.getCountry().subscribe({
@@ -190,6 +187,7 @@ export class StudentenrollmentComponent implements OnInit {
   }
 
   verifyEmail() {
+    this.isloading = true
     const data = {
       "emailId": this.enrollForm.value.email
     }
@@ -198,6 +196,7 @@ export class StudentenrollmentComponent implements OnInit {
       next: (response) => {
         console.log(response);
         this.otpData = response;
+        this.isloading = false
         this.openOtpDial(this.otpData.otp);
       },
       error: (error) => {
@@ -209,27 +208,24 @@ export class StudentenrollmentComponent implements OnInit {
     let emailDialogRef = this.dialog.open(OtpComponent, {
       data: {
         emailId: this.enrollForm.value.email,
-        otp: val
+        otp: val,
+        title: "Traditional Yoga - OTP Verification",
+        isotp: true
       },
       width: "50%",
-      height: "40%"
+      height: "38%"
     });
 
-    // emailDialogRef.afterOpened().subscribe(_ => {
-    //   setTimeout(() => {
-    //     emailDialogRef.close();
-    //   }, timeout)
-    // });
 
     emailDialogRef.afterClosed().subscribe(data => {
-      console.log("After OTP Dialog popup close");
-      console.log(data);
+
       if (data.otpStatus == true) {
         console.log("Email id is verified");
         this.otpError = false;
         this.isEmailSended = true;
         this.isEmailVerified = true;
         this.isEmailValid = false;
+        this.emailVerifiedDialog()
       } else {
         console.log("Email id is not verified");
         this.otpError = true;
@@ -239,6 +235,44 @@ export class StudentenrollmentComponent implements OnInit {
     });
 
     //if(isemailsended);
+  }
+
+  emailVerifiedDialog() {
+    let emailVerifiedRef = this.dialog.open(OtpComponent, {
+      data: {
+        emailId: this.enrollForm.value.email,
+        title: "Traditional Yoga - Email Verification",
+        isemailverified: true
+      },
+      width: "50%",
+      height: "30%"
+    });
+
+    emailVerifiedRef.afterClosed().subscribe(data => {
+      if (data) {
+
+      }
+    })
+  }
+
+
+  sucessDialog() {
+    let successDialogRef = this.dialog.open(OtpComponent, {
+      data: {
+        emailId: this.enrollForm.value.email,
+        title: "Traditional Yoga - User Registration",
+        isRegisterSuccess: true
+      },
+      width: "50%",
+      height: "30%"
+    });
+
+    successDialogRef.afterClosed().subscribe(data => {
+
+      this.router.navigate(['login'])
+
+    })
+
   }
 
   verifyotp() {
@@ -353,10 +387,14 @@ export class StudentenrollmentComponent implements OnInit {
           },
           "termsCondition": this.enrollForm.value.termsCondition ? "Y" : "N"
         }
+        this.isloading = true
         this.regService.postEnrollment(body).subscribe({
           next: (response) => {
-            this.openSnackBar(response)
+            // this.openSnackBar(response)
             this.enrollForm.reset()
+            this.isloading = false
+            this.sucessDialog()
+
           },
           error: (error) => {
             // console.error(error);

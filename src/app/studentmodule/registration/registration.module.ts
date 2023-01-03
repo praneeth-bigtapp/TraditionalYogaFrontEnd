@@ -13,6 +13,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentenrollmentComponent } from './studentenrollment/studentenrollment.component';
 import { DetailsStudentInformationComponent } from './details-student-information/details-student-information.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { DetailsStudentInformationComponent } from './details-student-informatio
     MatSnackBarModule,
     MatAutocompleteModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
 
 
 

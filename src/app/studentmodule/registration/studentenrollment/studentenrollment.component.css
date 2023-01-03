@@ -1,0 +1,13 @@
+.loading-spinner {
+    position: absolute;
+    opacity: 1;
+    width: 95vw;
+    overflow: hidden;
+    height: 100%;
+    z-index: 2;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: .5;
+}

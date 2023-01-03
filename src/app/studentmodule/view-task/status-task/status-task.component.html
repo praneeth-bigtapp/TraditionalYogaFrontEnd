@@ -1,0 +1,241 @@
+<div class="ConfigurationTypes_textpadding">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/studentDashboard">Student Management</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Status of My Tasks & Certification</li>
+        </ol>
+    </nav>
+
+    <div class="card ">
+        <div class="card-header text-white bg-secondary">
+            Status of My Tasks & Certification
+        </div>
+        <div class="bg-transparent py-0">
+            <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
+                aria-label="users">
+
+                <ng-container matColumnDef="sno">
+                    <th mat-header-cell *matHeaderCellDef scope="col-1">
+                        <label mat-sort-header>
+                            S.No
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseId')" disabled />
+                    </th>
+                    <td mat-cell *matCellDef="let i=index" class="col-1"> {{pageno +i }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="level">
+                    <th mat-header-cell *matHeaderCellDef scope="col-2">
+                        <label mat-sort-header>
+                            Test Level
+                        </label>
+                        <input type="text" (keyup)="updatePagination('courseId')"
+                            [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-left col-2" *matCellDef="let element"> {{element.level | titlecase}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="dateOfAssigement">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Assigned date
+                        </label>
+                        <input type="text" (keyup)="updatePagination('Region')"
+                            [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-left" *matCellDef="let element">
+                        {{element.dateOfAssigement | date:'dd-MMM-YYY'}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="duedate">
+
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Due date
+                        </label>
+                        <input type="text" (keyup)="updatePagination('Country')"
+                            [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-left" *matCellDef="let element">{{element.duedate | date:"dd-MMM-YYYY"}}
+                </ng-container>
+                <ng-container matColumnDef="submitteddate">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Submitted Date
+                        </label>
+                        <input type="text" (keyup)="updatePagination('State')"
+                            [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.submitteddate
+                        |date:'dd-MMM-YYY'}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="resubmitteddate">
+                    <th mat-header-cell *matHeaderCellDef scope="col">
+                        <label mat-sort-header>
+                            Resubmitted Date
+                        </label>
+                        <input type="text" (keyup)="updatePagination('State')"
+                            [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.resubmitteddate
+                        |date:'dd-MMM-YYY'}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef scope="col-1">
+                        <label mat-sort-header>
+                            Status
+                        </label>
+                        <input type="text" (keyup)="updatePagination('State')"
+                            [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="text-left col-1" *matCellDef="let element"> {{element.status | titlecase}}
+                    </td>
+                </ng-container>
+
+
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef scope="col-1">
+                        <label mat-sort-header>
+                            Actions
+                        </label>
+                        <input type="text" (keyup)="updatePagination('State')" disabled />
+                    </th>
+                    <td mat-cell class="text-center col-1" *matCellDef="let element">
+                        <div class="d-flex flex-wrap justify-content-evenly align-items-center">
+
+                            <i class="fa-solid fa-eye" (click)="viewdetails(element)" matTooltip="View Course Activity"
+                                matTooltip="View"></i>
+
+                            <!-- <span matTooltip="Edit" (click)="editdetails(element)">
+                            <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                        </span>
+                        <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.taskId)">
+                            <i class="far fa-trash-alt" aria-hidden="true"></i>
+                        </span> -->
+                        </div>
+                    </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator class="card-body" [pageSizeOptions]="[10,25, 50, 100,150,200]"
+                (page)="onpaginatechange($event)" aria-label="Select page">
+            </mat-paginator>
+        </div>
+    </div>
+
+
+    <div class="card bg-secondary ">
+        <div class="card-header text-white bg-secondary">
+            Status of Certificate & Gurudakshana
+        </div>
+        <div class="card-body bg-white py-2">
+            <div class="row  justify-content-between   ">
+                <!-- Status of certificate -->
+                <div class="col-md-6    border border-secondary rounded p-3">
+                    <h6 class=" border-bottom mb-2 ">Status of certificate</h6>
+                    <div class="row align-items-center ">
+                        <div class="col-md-2">
+                            <label>Level 1</label>
+                        </div>
+                        <div class="col-md-10">
+                            <mat-radio-group aria-label="Select an option" [(ngModel)]="certificateStatus.level1">
+                                <mat-radio-button class="mr-3" value="qualified">qualified</mat-radio-button>
+                                <mat-radio-button class="mr-3" value="notqualified">Not qualified</mat-radio-button>
+                                <mat-radio-button class="mr-3" value="conditionallyqualified">Conditionally
+                                    qualified</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row align-items-center">
+                        <div class="col-md-2">
+                            <label>Level 2</label>
+                        </div>
+                        <div class="col-md-10">
+                            <mat-radio-group aria-label="Select an option" [(ngModel)]="certificateStatus.level2">
+                                <mat-radio-button class="mr-3" value="qualified">qualified</mat-radio-button>
+                                <mat-radio-button class="mr-3" value="notqualified">Not qualified</mat-radio-button>
+                                <mat-radio-button class="mr-3" value="conditionallyqualified">Conditionally
+                                    qualified</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="row align-items-center">
+                        <div class="col-md-2">
+                            <label>Level 3</label>
+                        </div>
+                        <div class="col-md-10">
+                            <mat-radio-group aria-label="Select an option" [(ngModel)]="certificateStatus.level3">
+                                <mat-radio-button class="mr-3" value="qualified">qualified</mat-radio-button>
+                                <mat-radio-button class="mr-3" value="notqualified">Not qualified</mat-radio-button>
+                                <mat-radio-button class="mr-3" value="conditionallyqualified">Conditionally
+                                    qualified</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="row align-items-center">
+                        <div class="col-md-2">
+                            <label>Final</label>
+                        </div>
+                        <div class="col-md-10">
+                            <mat-radio-group aria-label="Select an option" [(ngModel)]="certificateStatus.final">
+                                <mat-radio-button class="mr-3" value="qualified">qualified</mat-radio-button>
+                                <mat-radio-button class="mr-3" value="notqualified">Not qualified</mat-radio-button>
+                                <mat-radio-button class="mr-3" value="conditionallyqualified">Conditionally
+                                    qualified</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <!-- Gurudakshana Details -->
+                <div class="col-md-5 border border-secondary rounded p-3">
+                    <h6 class=" border-bottom mb-2  ">Status of Gurudakshana</h6>
+
+                    <div class="row align-items-center     ">
+                        <div class="col-md-4 ">
+                            <!-- <div class="align-middle mt-5 h1 text-success text-center">Paid</div> -->
+                            <div class="align-middle mt-5 h2 text-success text-danger">Not Paid</div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <!-- paid -->
+                            <!-- <img class="img-fluid"
+                                src="https://stjoseph-stpiusx.com/wp-content/uploads/2021/08/paid-rubber-stamp-thank-you-5025785.png" /> -->
+                            <!-- not paid -->
+                            <!-- <img class="img-fluid"
+                                src="https://stjoseph-stpiusx.com/wp-content/uploads/2021/08/paid-rubber-stamp-thank-you-5025785.png" /> -->
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <br />
+            <div class="">
+                <button type="button" (click)="printCertificate()"
+                    class="btn btn-outline-secondary btn-rounded d-inline-block float-md-right ">
+                    Print Certificate
+                </button>
+            </div>
+        </div>
+    </div>

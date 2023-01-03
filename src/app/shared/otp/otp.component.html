@@ -1,35 +1,66 @@
-<form [formGroup]="otpForm" (ngSubmit)="onSubmit()">
-    <!-- <label for="otp">Enter OTP:</label>
-    <input type="text" id="otp" formControlName="otp">
-    <button type="submit" [disabled]="otpForm.invalid">Verify OTP</button> -->
-    <div class="col-md-10">
-        <label>OTP</label>
-        <div class="col px-0">
-            <mat-form-field appearance="outline">
-                <input matInput type="number"  autocomplete="off" formControlName="otp" min="1" max="5" required>
-                <!-- <mat-error *ngFor="let validation of validation_messages.email_id">
-                    <span *ngIf="LoginForm.get('email')?.hasError(validation.type)">
-                        {{ validation.message}}
-                    </span>
-                </mat-error> -->
-            </mat-form-field>
-            <div class="error-message"
-                *ngIf="otpForm.controls['otp'].invalid && (otpForm.controls['otp'].dirty || otpForm.controls['otp'].touched)">
-                <mat-error *ngIf="otpForm.controls['otp'].hasError('required')">
-                    Invalid OTP.
-                </mat-error>
-                <!-- <mat-error *ngIf="otpForm.controls['otp'].hasError('minLength')">
-                    Min Length.
-                </mat-error>
-                <mat-error *ngIf="otpForm.controls['otp'].hasError('maxLength')">
-                    Max Length.
-                </mat-error> -->
+<div class="popup">
+    <div class="card">
+        <div class="card-header ">
+            <h3 class="">{{data.title | titlecase}}
+                <span class="float-right" (click)="dialogRef.close(false)"> <i class="far fa-times-circle"
+                        aria-hidden="true"></i> </span>
+            </h3>
+        </div>
+        <br />
+        <div class="content-style " *ngIf="data?.isotp">
+            <label class="text-dark fw-bold text-center ">Your One Time Password(OTP) has been generated and was
+                sent to
+                your <u class="">{{data.emailId}}</u> .Please check your email and enter valid OTP.</label>
+            <br /><br />
+            <form [formGroup]="otpForm" (ngSubmit)="onSubmit()">
+                <div class="row  align-items-center">
+                    <div class="col-md-6 row">
+                        <label>OTP</label>
+                        <div class="col">
+                            <mat-form-field appearance="outline">
+                                <input matInput type="text" autocomplete="off" formControlName="otp" min="1" max="5"
+                                    required>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="otpForm.controls['otp'].invalid && (otpForm.controls['otp'].dirty || otpForm.controls['otp'].touched)">
+                                <mat-error *ngIf="otpForm.controls['otp'].hasError('required')">
+                                    OTP is mandatory.
+                                </mat-error>
+
+                                <mat-error *ngIf="otpForm.controls['otp'].hasError('pattern')">
+                                    Invalid OTP.
+                                </mat-error>
+                            </div>
+                            <mat-error> {{errorMessage}} </mat-error>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit"
+                            class="btn btn-outline-secondary btn-rounded btn-go d-inline-block mt-3  ">
+                            Verify
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="content-style " *ngIf="data?.isRegisterSuccess">
+            <h6 class=" text-center">User Registration is successfull. Login creditionals were sent to your registered mail Id.
+            </h6>
+            <br />
+            <div style="text-align: center">
+                <button mat-button class="btn btn-outline-secondary btn-rounded d-inline-block m-2 " type="button"
+                    ng-transclude="" (click)="dialogRef.close(true)">Ok</button>
+
+            </div>
+        </div>
+
+        <div class="content-style " *ngIf="data?.isemailverified">
+            <h6 class="text-center">Your email has been verified successfully.</h6>
+            <br/>
+            <div style="text-align: center">
+                <button mat-button class="btn btn-outline-secondary btn-rounded d-inline-block m-2 " type="button"
+                    ng-transclude="" (click)="dialogRef.close(true)">Ok</button>
             </div>
         </div>
     </div>
-    <div class="col-md-2 pl-0">
-        <button type="submit" class="btn btn-outline-secondary btn-rounded btn-go d-inline-block mt-3 ">
-            Verify
-        </button>
-    </div>
-</form>

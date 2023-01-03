@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RegistrationService } from 'src/app/studentmodule/registration/service/registration.service';
+import { InputvalidationService } from '../services/inputvalidation.service';
 
 @Component({
   selector: 'app-otp',
@@ -12,6 +13,7 @@ export class OtpComponent implements OnInit {
 
   otpForm !: FormGroup;
   otpStatus: Boolean = false;
+  errorMessage: string = ""
 
   constructor(
     public dialogRef: MatDialogRef<OtpComponent>,
@@ -27,8 +29,7 @@ export class OtpComponent implements OnInit {
         null,
         Validators.compose([
           Validators.required,
-          Validators.minLength(1),
-          Validators.maxLength(6),
+          Validators.pattern(InputvalidationService.inputvalidation.isnumbers)
         ]),
       ]
     });
@@ -36,10 +37,10 @@ export class OtpComponent implements OnInit {
 
   onSubmit() {
     console.log(this.data);
-    console.log(this.otpForm);
-    console.log(this.otpForm.controls['otp'].hasError('minLength'));
-    console.log(this.otpForm.controls['otp'].hasError('maxLength'));
 
+
+    if (this.otpForm.invalid)
+      return this.otpForm.markAllAsTouched()
     let generatedOtp = this.data.otp;
     let currentOtp = this.otpForm.value.otp;
 
@@ -56,6 +57,7 @@ export class OtpComponent implements OnInit {
       this.dialogRef.close(data);
     } else {
       console.log("invalid Otp");
+      this.errorMessage = "Invalid OTP"
     }
   }
 

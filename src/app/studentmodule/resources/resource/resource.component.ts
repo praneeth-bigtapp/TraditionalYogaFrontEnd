@@ -18,6 +18,9 @@ export class ResourceComponent implements OnInit {
   practiceLibraryValue: any
   localAudioList: any = []
   currentPracticeLibrary: string = "Salutations"
+  audioDOM: any
+  audioArrayIndex: number = 0
+  audioSrc = ""
   constructor(
     private service: ResourcesService,
     private dialog: MatDialog
@@ -42,7 +45,8 @@ export class ResourceComponent implements OnInit {
         this.dharansCategoryList = response
       }
     })
-    this.openAudioSliders()
+    // this.openAudioSliders()
+    this.audioDOM = document.getElementsByTagName('audio')[0]
   }
 
   practiceLibraryDetails(data: any) {
@@ -85,12 +89,16 @@ export class ResourceComponent implements OnInit {
   audioCheckboxChange(event: any, value: any) {
     console.log(event.checked);
 
-    this.localAudioList = this.localAudioList.filter((ele: any) => ele === value)
 
     if (event.checked) {
       this.localAudioList.push(value)
-      return
     }
+    else
+      this.localAudioList = this.localAudioList.filter((ele: any) => ele !== value)
+
+    // this.audioSrc = this.localAudioList[this.audioArrayIndex]
+
+
 
 
   }
@@ -98,6 +106,22 @@ export class ResourceComponent implements OnInit {
 
   }
   openAudioCategory(data: any) {
+
+  }
+  audioended() {
+    this.audioArrayIndex = this.audioArrayIndex + 1
+    this.audioSrc = this.localAudioList[this.audioArrayIndex]
+
+  }
+
+  audioplaying() {
+
+  }
+  audiopause() {
+
+  }
+  audioloaded() {
+    console.log("loaded");
 
   }
 }
