@@ -17,13 +17,15 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { ChangePasswordService } from './change-password/Service/change-password.service';
 import { RegisterComponent } from './register/register.component';
 import { BlankComponent } from './blank/blank.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     ChangePasswordComponent,
     RegisterComponent,
-    BlankComponent
+    BlankComponent,
+    ForgotpasswordComponent
   ],
   imports: [
     CommonModule,

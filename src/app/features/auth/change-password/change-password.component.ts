@@ -62,36 +62,54 @@ export class ChangePasswordComponent implements OnInit {
       }
     }
     this.dataStorageService.isUserLoggedIn = true;
+    // this.ChangePasswordForm = this.formBuilder.group({
+    //   oldpassword: ['', Validators.compose([Validators.required, Validators.maxLength(20)])],
+    //   newpassword: ['', Validators.compose([Validators.required, Validators.minLength(12), Validators.pattern(MyAppHttp.validation.password)])],
+    //   confirmpassword: ['', Validators.compose([Validators.required, Validators.maxLength(20)])],
+    // }
+    //   , { validator: MustMatch('newpassword', 'confirmpassword') }
+    // );
     this.ChangePasswordForm = this.formBuilder.group({
-      oldpassword: ['', Validators.compose([Validators.required, Validators.maxLength(20)])],
-      newpassword: ['', Validators.compose([Validators.required, Validators.minLength(12), Validators.pattern(MyAppHttp.validation.password)])],
-      confirmpassword: ['', Validators.compose([Validators.required, Validators.maxLength(20)])],
-    }
-      , { validator: MustMatch('newpassword', 'confirmpassword') }
-    );
+      oldpassword: [null, Validators.compose([Validators.required, Validators.maxLength(20)])],
+      newpassword: [null, Validators.compose([Validators.required, Validators.minLength(12), Validators.pattern(MyAppHttp.validation.password)])],
+      confirmpassword: [null, Validators.compose([Validators.required, Validators.maxLength(20)])],
+    })
+    console.log(this.loginData);
+    
   }
 
+  // clkChangePassword() {
+  //   let oldPassword: string = this.ChangePasswordForm.value.oldpassword;
+  //   let newPassword: string = this.ChangePasswordForm.value.newpassword;
+  //   let ConfirmPassword: string = this.ChangePasswordForm.value.confirmpassword;
+  //   if (this.ChangePasswordForm.invalid)
+  //     return this.ChangePasswordForm.markAllAsTouched()
+  //   if (newPassword != ConfirmPassword) {
+  //     return
+  //   }
+  //   alert(this.ChangePasswordForm.invalid)
+
+  //   this.changepasswordService.changepassword({
+  //     'oldPassword': btoa(oldPassword),
+  //     'newPassword': btoa(newPassword)
+  //   }).subscribe(res => {
+  //     this.ChangePasswordForm.reset();
+  //     if (res.statusCode == 200) {
+  //       this.headerService.UserLogout(this.loginData.userId).subscribe((response) => {
+  //         this.notifierService.showNotification('Success', res.message);
+  //         localStorage.clear();
+  //         this.dataStorageService.isUserLoggedIn = false;
+  //         this.router.navigateByUrl('/');
+  //       })
+  //     }
+  //   })
+  // }
+
   clkChangePassword() {
-    let oldPassword: string = this.ChangePasswordForm.value.oldpassword;
-    let newPassword: string = this.ChangePasswordForm.value.newpassword;
-    let ConfirmPassword: string = this.ChangePasswordForm.value.confirmpassword;
-    if (newPassword != ConfirmPassword) {
-      return
-    }
-    this.changepasswordService.changepassword({
-      'oldPassword': btoa(oldPassword),
-      'newPassword': btoa(newPassword)
-    }).subscribe(res => {
-      this.ChangePasswordForm.reset();
-      if (res.statusCode == 200) {
-        this.headerService.UserLogout(this.loginData.userId).subscribe((response) => {
-          this.notifierService.showNotification('Success', res.message);
-          localStorage.clear();
-          this.dataStorageService.isUserLoggedIn = false;
-          this.router.navigateByUrl('/');
-        })
-      }
-    })
+    console.log(this.ChangePasswordForm.valid);
+    
+    if (this.ChangePasswordForm.invalid)
+      return this.ChangePasswordForm.markAllAsTouched()
   }
 
   OldPassword() {
