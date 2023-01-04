@@ -64,8 +64,6 @@ export class ProfiletabComponent implements OnInit {
       }
     });
   }
-
-
   changestatus(element: any, id: any, name: any) {
     const dialogref = this.dialog.open(DialogPopupComponent, {
       data: {
