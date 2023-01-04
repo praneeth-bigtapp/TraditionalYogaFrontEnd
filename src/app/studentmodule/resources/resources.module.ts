@@ -12,6 +12,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { SortingresourcesComponent } from './sortingresources/sortingresources.component';
 import {MatSliderModule} from '@angular/material/slider';
 import { MatRadioModule } from '@angular/material/radio';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 
 
 @NgModule({
@@ -31,6 +33,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatCheckboxModule,
     MatSliderModule,
     MatRadioModule,
+    MatToolbarModule
   ]
 })
 export class ResourcesModule { }

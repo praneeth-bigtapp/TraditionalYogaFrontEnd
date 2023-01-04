@@ -12,11 +12,15 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { StatusTaskComponent } from './status-task/status-task.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 @NgModule({
   declarations: [
-    ViewtaskComponent
+    ViewtaskComponent,
+    StatusTaskComponent
   ],
   imports: [
     CommonModule,
@@ -29,8 +33,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
-   MatInputModule,
+    MatInputModule,
     MatFormFieldModule,
+    SharedModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatTooltipModule,
+    MatRadioModule,
   ]
 })
 export class ViewTaskModule { }

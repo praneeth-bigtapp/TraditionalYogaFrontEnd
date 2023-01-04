@@ -4,6 +4,10 @@
 
         <button type="button" class="btn btn-outline-secondary btn-rounded" (click)="onAddRole()"> Add Role </button>
     </div> -->
+    <div class="loading-spinner" *ngIf="isloading">
+        <mat-spinner  [mode]="'indeterminate'"></mat-spinner>
+
+    </div>
     <div class="row align-items-center">
         <div class="col-md-5">
             <div class="signup-image col-md-5 mt-5 order-1">

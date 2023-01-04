@@ -10,17 +10,16 @@
         <div class="content-style px-0 ">
             <div class="row align-items-center">
                 <div class="col-md-4 ">
-                    <p>Sort by time range</p>
+                    <p>Sort by time range <small>(24hr format)</small></p>
                 </div>
                 <div class="col-md">
-                    <div class="example-label-container">
+                    <div class="example-label-container d-flex flex-row  justify-content-between   ">
 
-                        <label class="example-value-label">{{sortingValues.fromTime}}</label>
-                        <label class="example-value-label">{{sortingValues.toTime}}</label>
+                        <label class="example-value-label"> Start Time : {{sortingValues.fromTime}}:00</label>
+                        <label class="example-value-label">End Time : {{sortingValues.toTime}}:00</label>
                     </div>
-                    <mat-slider min="200" max="500">
-                        <input value="300" matSliderStartThumb>
-                      </mat-slider>
+                    <input type="range" class="form-range border-0" step="1" min="0" max="24"  (change)="detectSortingChanges()" [(ngModel)]="sortingValues.fromTime" id="customRange1">
+                    <input type="range" class="form-range border-0" step="1" min="0" max="24"  (change)="detectSortingChanges()" [(ngModel)]="sortingValues.toTime" id="customRange1">
 
                 </div>
             </div>
@@ -32,14 +31,16 @@
                 <div class="col-md row">
                     <div class="col-md-6">
                         <label>From Date</label>
-                        <mat-form-field class="example-full-width"  appearance="outline">
-                            <input matInput [(ngModel)]="sortingValues.fromDate" (change)="detectSortingChanges()" type="date">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <input matInput [(ngModel)]="sortingValues.fromDate" (change)="detectSortingChanges()"
+                                type="date">
                         </mat-form-field>
                     </div>
                     <div class="col-md-6">
                         <label>To Date</label>
                         <mat-form-field class="example-full-width" appearance="outline">
-                            <input matInput [(ngModel)]="sortingValues.toDate" (change)="detectSortingChanges()" type="date">
+                            <input matInput [(ngModel)]="sortingValues.toDate" (change)="detectSortingChanges()"
+                                type="date">
                         </mat-form-field>
                     </div>
 
@@ -52,20 +53,23 @@
                 </div>
                 <div class="col-md">
                     <mat-form-field class="example-full-width" appearance="outline">
-                        <input matInput [(ngModel)]="sortingValues.description" (change)="detectSortingChanges()" type="text">
+                        <input matInput [(ngModel)]="sortingValues.description" (change)="detectSortingChanges()"
+                            type="text">
                     </mat-form-field>
                 </div>
             </div>
             <hr />
             <div class="row align-items-center">
-                <mat-radio-group aria-label="Select an option" [(ngModel)]="sortingValues.selectMutliple" (change)="detectSortingChanges()">
+                <mat-radio-group aria-label="Select an option" [(ngModel)]="sortingValues.selectMutliple"
+                    (change)="detectSortingChanges()">
                     <mat-radio-button [value]="true">Select Multiple</mat-radio-button>
                 </mat-radio-group>
             </div>
             <hr />
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <mat-radio-group aria-label="Select an option" [(ngModel)]="sortingValues.type" (change)="detectSortingChanges()">
+                    <mat-radio-group aria-label="Select an option" [(ngModel)]="sortingValues.type"
+                        (change)="detectSortingChanges()">
                         <mat-radio-button class="mr-5" value="playlist">Create playlist</mat-radio-button>
                         <mat-radio-button class="mr-5" value="allSelected">Play all selected</mat-radio-button>
                         <mat-radio-button class="mr-5" value="loop">Loop</mat-radio-button>
@@ -74,7 +78,8 @@
                 <div class="col-md-4">
                     <label>Limitted Hour</label>
                     <mat-form-field class="example-full-width" appearance="outline">
-                        <input matInput [(ngModel)]="sortingValues.limitedHour" (change)="detectSortingChanges()" type="number">
+                        <input matInput [(ngModel)]="sortingValues.limitedHour" (change)="detectSortingChanges()"
+                            type="number">
                     </mat-form-field>
                 </div>
             </div>

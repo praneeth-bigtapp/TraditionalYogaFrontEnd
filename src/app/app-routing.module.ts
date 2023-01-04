@@ -169,6 +169,11 @@ const routes: Routes = [
       import('./features/courses/courses.module').then((m) => m.CoursesModule)
   },
   {
+    path: '',
+    loadChildren: () =>
+      import('./mentormodule/viewstudent/viewstudent.module').then((m) => m.ViewstudentModule)
+  },
+  {
     path: 'dashboard',
     canActivate: [AuthGuard],
     loadChildren: () =>

@@ -38,7 +38,19 @@
                         <!-- Audio List -->
                         <div class="row">
                             <div class="col-md mb-2 ">
-                                <mat-checkbox (change)="audioCheckboxChange($event,1)"
+                                <mat-checkbox
+                                    (change)="audioCheckboxChange($event,'C:\\Users\\User\\Music\\audio1.mp3')"
+                                    class="border p-3 border-secondary rounded" labelPosition="before">
+                                    <div class="d-flex flex-row flex-wrap align-items-center">
+                                        <mat-icon>volume_up</mat-icon>&nbsp;
+                                        <p>Filename.mp4 </p>
+                                    </div>
+                                </mat-checkbox>
+                            </div>
+
+                            <div class="col-md mb-2 ">
+                                <mat-checkbox
+                                    (change)="audioCheckboxChange($event,'C:\\Users\\User\\Music\\audio2.mp3')"
                                     class="border p-3 border-secondary rounded" labelPosition="before">
                                     <div class="d-flex flex-row flex-wrap align-items-center">
                                         <mat-icon>volume_up</mat-icon>&nbsp;
@@ -48,6 +60,19 @@
                             </div>
 
                         </div>
+
+                        <!-- Audio Player -->
+                        <div class="" *ngIf="localAudioList.length >0">
+                            <marquee>{{audioSrc}}</marquee>
+                            <audio controls class="w-100" (load)="audioloaded()" (pause)="audiopause()"
+                                (play)="audioplaying()" (ended)="audioended()">
+                                <source [src]="audioSrc" type="audio/*">
+
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+
 
                     </div>
                     <hr />
@@ -94,7 +119,7 @@
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <div class="row align-items-center p-2">
-                            <div class="col-md-12  text-justify" *ngFor="let audiocategory of audioCategoryList"
+                            <div class="col-md-12  text-justify btn" *ngFor="let audiocategory of audioCategoryList"
                                 (click)="openAudioCategory(audiocategory)">
                                 <div class="d-flex flex-row align-items-center     ">
                                     <mat-icon>volume_up</mat-icon>&nbsp;
