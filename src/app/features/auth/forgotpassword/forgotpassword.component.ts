@@ -84,7 +84,7 @@ export class ForgotpasswordComponent implements OnInit {
     let successDialogRef = this.dialog.open(OtpComponent, {
       data: {
         emailId: this.email,
-        title: "Traditional Yoga - User Registration",
+        title: "Traditional Yoga - Change Password",
         isRegisterSuccess: true,
         message: "Your password has been changed successfully."
       },
