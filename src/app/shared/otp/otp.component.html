@@ -45,7 +45,7 @@
         </div>
 
         <div class="content-style " *ngIf="data?.isRegisterSuccess">
-            <h6 class=" text-center">User Registration is successfull. Login creditionals were sent to your registered mail Id.
+            <h6 class=" text-center">{{data?.message}}
             </h6>
             <br />
             <div style="text-align: center">
@@ -57,7 +57,7 @@
 
         <div class="content-style " *ngIf="data?.isemailverified">
             <h6 class="text-center">Your email has been verified successfully.</h6>
-            <br/>
+            <br />
             <div style="text-align: center">
                 <button mat-button class="btn btn-outline-secondary btn-rounded d-inline-block m-2 " type="button"
                     ng-transclude="" (click)="dialogRef.close(true)">Ok</button>

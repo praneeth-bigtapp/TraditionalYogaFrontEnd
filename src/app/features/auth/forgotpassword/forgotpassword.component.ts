@@ -80,6 +80,26 @@ export class ForgotpasswordComponent implements OnInit {
     });
   }
 
+  sucessDialog() {
+    let successDialogRef = this.dialog.open(OtpComponent, {
+      data: {
+        emailId: this.email,
+        title: "Traditional Yoga - User Registration",
+        isRegisterSuccess: true,
+        message: "Your password has been changed successfully."
+      },
+      width: "50%",
+      height: "30%"
+    });
+
+    successDialogRef.afterClosed().subscribe(data => {
+
+      this.router.navigate(['login'])
+
+    })
+
+  }
+
   openOtpDial(val: any) {
     let emailDialogRef = this.dialog.open(OtpComponent, {
       data: {
@@ -114,6 +134,7 @@ export class ForgotpasswordComponent implements OnInit {
         emailId: this.email,
         title: "Traditional Yoga - Email Verification",
         isemailverified: true
+
       },
       width: "50%",
       height: "30%"
@@ -147,7 +168,19 @@ export class ForgotpasswordComponent implements OnInit {
     const { email, password, confirmpassword } = this.formDetails.value
     console.log({ email, password, confirmpassword });
 
-    this.router.navigate(['login'])
+    const body = {
+
+    }
+
+    this.service.forgotPassword(body).subscribe({
+      next: (response) => {
+        this.sucessDialog()
+      },
+      error: (error) => {
+        console.error(error);
+
+      }
+    })
   }
 
   cancelBtn() {
