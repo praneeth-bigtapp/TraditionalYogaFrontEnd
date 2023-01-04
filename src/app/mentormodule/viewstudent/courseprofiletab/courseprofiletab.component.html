@@ -1,0 +1,56 @@
+<table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
+    aria-label="users">
+
+    <ng-container matColumnDef="SNo">
+        <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>
+                S.No
+            </label>
+
+            <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value"
+                [filter]="filterData" disabled="true" />
+        </th>
+        <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="courseId">
+        <th mat-header-cell *matHeaderCellDef class="col-3 text-center"> <label mat-sort-header>
+                Course Name
+            </label>
+
+            <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
+                [filter]="filterData" />
+        </th>
+        <td mat-cell *matCellDef="let element" class="text-left">
+            ({{element.courseId.coursesName}})
+
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="admissionsStatus">
+        <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
+                Admission Status
+            </label>
+
+            <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
+                [filter]="filterData" />
+        </th>
+        <td mat-cell *matCellDef="let element" class="text-left"> {{element.admissionsStatus}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="completionStatus">
+        <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
+                Completion Status
+            </label>
+
+            <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
+                [filter]="filterData" />
+        </th>
+        <td mat-cell *matCellDef="let element" class="text-left"> {{element.completionStatus}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="coursesProfileColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: coursesProfileColumns;"></tr>
+</table>
+<mat-paginator class="card-body" [pageSizeOptions]="[10,25, 50, 100,150,200]" (page)="onpaginatechange($event)"
+    aria-label="Select page">
+</mat-paginator>

@@ -1,0 +1,80 @@
+<div class="ConfigurationTypes_textpadding">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/mentorViewProfile">Mentor Management</a></li>
+
+            <li class="breadcrumb-item active" aria-current="page">View Student</li>
+        </ol>
+    </nav>
+    <!-- Select Student -->
+    <div class="card bg-secondary">
+        <div class="card-header bg-secondary text-white">
+            Student profile
+        </div>
+        <div class="card-body bg-white py-2">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label>Student</label>
+                    <mat-form-field appearance="outline">
+                        <mat-select [(ngModel)]="selectedStudent" (selectionChange)="onSelectStudent()"
+                            disableOptionCentering required>
+                            <mat-option *ngFor="let student of StudentList" [value]="student">
+                                {{student.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Tabs -->
+    <div class="student-profile ty-tabs" *ngIf="selectedStudent" style="background:#f5f5f5;">
+        <div class="card-header text-white bg-secondary">
+            Student Details
+        </div>
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item ">
+                <a class="nav-link active px-5  fw-bold" data-toggle="tab" href="#tabs-1" role="tab">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link px-4 fw-bold" data-toggle="tab" href="#tabs-2" role="tab">Performance Details</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link px-4 fw-bold" data-toggle="tab" href="#tabs-3" role="tab"> Donations </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link px-4 fw-bold" data-toggle="tab" href="#tabs-4" role="tab"> e-Purchase Information
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link px-4 fw-bold" data-toggle="tab" href="#tabs-5" role="tab"> Volenteering Details</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link px-4 fw-bold" data-toggle="tab" href="#tabs-6" role="tab"> Courses Profile </a>
+            </li>
+        </ul>
+
+        <div class="tab-content" style="background:#f5f5f5;">
+            <!-- Profile Tab -->
+            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                <app-profiletab [student]="selectedStudent"></app-profiletab>
+            </div>
+            <!-- Performance Tab -->
+            <div class="tab-pane" id="tabs-2" role="tabpanel">
+                <h1>Performance Details</h1>
+            </div>
+
+            <!-- Course Profile tab -->
+            <div class="tab-pane" id="tabs-6" role="tabpanel">
+                <app-courseprofiletab [student]="selectedStudent"></app-courseprofiletab>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Tab -->
+
+
+
+</div>

@@ -1,0 +1,293 @@
+<div class=" p-3">
+    <div class="row">
+        <div class="col-md-2">
+            <mat-card class=" border border-2" rows="4">
+                <p class="text-center text-secondary mb-2 fw-bold">Student Image</p>
+                <div class="profile-pic text-center rounded-circle bg-ty-profile">
+                    <!-- <img src="assets/images/user-profile.png" width="100"
+                        alt="user pic" /> -->
+                    <i class="fa-solid fa-user fa-8x " style="opacity: .2;font-size: 8em;"></i>
+                </div>
+            </mat-card>
+        </div>
+        <div class="col-md-10">
+            <div class="card ">
+                <!-- <div class="card-header text-white bg-secondary">
+                    View Course Material
+                </div> -->
+                <div class="card-body bg-white px-0 py-0">
+                    <div class=" ">
+                        <div class="row">
+                            <div class="col-md-4  border-right py-0     text-center">
+                                <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                    <div>
+                                        <p> <i class=" fa-solid fa-user me-4 "></i></p>
+                                    </div>
+                                    <div>
+                                        <p class=""> Student Id : </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-8  py-3  ps-4 my-auto">
+                                <h4>{{ studentProfile?.studentId}}</h4>
+                            </div>
+                        </div>
+
+                        <hr class="my-0" />
+                        <div class="row">
+                            <div class="col-md-4  border-right py-0     text-center">
+                                <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                    <div>
+                                        <p> <i class=" fa-solid fa-address-card me-4 "></i></p>
+                                    </div>
+                                    <div>
+                                        <p class=""> Name : </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-8  py-3  ps-4 my-auto">
+                                <h4>{{ studentProfile?.name | titlecase }}</h4>
+                            </div>
+                        </div>
+                        <hr class="my-0" />
+                        <div class="row">
+                            <div class="col-md-4  border-right py-0     text-center">
+                                <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                    <div>
+                                        <p> <i class=" fa-solid fa-envelope-open-text me-4 "></i></p>
+                                    </div>
+                                    <div>
+                                        <p class=""> Profession : </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-8  py-3  ps-4 my-auto">
+                                <h4>{{studentProfile?.profession }}</h4>
+                            </div>
+                        </div>
+
+                        <hr class="my-0" />
+                        <div class="row">
+                            <div class="col-md-4  border-right py-0     text-center">
+                                <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                    <div>
+                                        <p> <i class="fa-solid fa-book-open me-4"></i></p>
+                                    </div>
+                                    <div>
+                                        <p class=""> Educational details : </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-8  py-3  ps-4 my-auto">
+                                <h4>{{ studentProfile?.qualification}}</h4>
+                            </div>
+                        </div>
+
+
+                        <hr class="my-0" />
+                        <div class="row">
+                            <div class="col-md-4  border-right py-0     text-center">
+                                <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                    <div>
+                                        <p> <i class="fa-solid fa-transgender me-4"></i></p>
+                                    </div>
+                                    <div>
+                                        <p class=""> Gender : </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-8  py-3  ps-4 my-auto">
+                                <h4>{{ studentProfile?.gender }}</h4>
+                            </div>
+                        </div>
+
+                        <hr class="my-0" />
+                        <div class="row">
+                            <div class="col-md-4  border-right py-0     text-center">
+                                <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                    <div>
+                                        <p> <i class="fa-brands fa-pagelines me-4"></i></p>
+                                    </div>
+                                    <div>
+                                        <p class=""> Age : </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-8  py-3  ps-4 my-auto">
+                                <h4>{{ studentProfile?.age }}</h4>
+                            </div>
+                        </div>
+
+
+                        <hr class="my-0" />
+                        <div class="row">
+                            <div class="col-md-4  border-right py-0     text-center">
+                                <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                    <div>
+                                        <p><i class="fa-regular fa-mobile me-4"></i></p>
+                                    </div>
+                                    <div>
+                                        <p class=""> Mobile : </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-8  py-3  ps-4 my-auto">
+                                <h4>{{ studentProfile?.mobile }}</h4>
+                            </div>
+                        </div>
+
+                        <hr class="my-0" />
+                        <div class="row">
+                            <div class="col-md-4  border-right py-0     text-center">
+                                <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                    <div>
+                                        <p> <i class="fa-regular fa-address-book me-4"></i></p>
+                                    </div>
+                                    <div>
+                                        <p class=""> Address : </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-8  py-3  ps-4 my-auto">
+                                <h4>{{ studentProfile?.address }}</h4>
+                            </div>
+                        </div>
+
+                        <hr class="my-0" />
+                        <div class="row">
+                            <div class="col-md-4  border-right py-0     text-center">
+                                <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                    <div>
+                                        <p><i class="fa-solid fa-envelope me-4"></i></p>
+                                    </div>
+                                    <div>
+                                        <p class=""> Email id: </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-8  py-3  ps-4 my-auto">
+                                <h4>{{ studentProfile?.emailId }}</h4>
+                            </div>
+                        </div>
+
+
+                        <hr class="my-0" />
+                        <div class="row">
+                            <div class="col-md-4  border-right py-0     text-center">
+                                <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                    <div>
+                                        <p><i class="fa-solid fa-calendar-days me-4"></i></p>
+                                    </div>
+                                    <div>
+                                        <p class=""> Member registered on: </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-8  py-3  ps-4 my-auto">
+                                <h4>{{ studentProfile?.regesiterDate }}</h4>
+                            </div>
+                        </div>
+
+
+                        <hr class="my-0" />
+                        <div class="row">
+                            <div class="col-md-4  border-right py-0     text-center">
+                                <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                    <div>
+                                        <p><i class="fa-solid fa-map-pin me-4"></i></p>
+                                    </div>
+                                    <div>
+                                        <p class=""> Registered from IP address: </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-8  py-3  ps-4 my-auto">
+                                <h4>{{ studentProfile?.registedIpAddress }}</h4>
+                            </div>
+                        </div>
+
+                        <hr class="my-0" />
+                        <div class="row">
+                            <div class="col-md-4  border-right py-0     text-center">
+                                <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                    <div>
+                                        <p><i class="fa-solid fa-temperature-three-quarters me-4"></i></p>
+                                    </div>
+                                    <div>
+                                        <p class=""> Change status: </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-8  py-3  ps-4 my-auto">
+                                <mat-radio-group aria-label="Select an option" class="d-inline-block">
+                                    <mat-radio-button value="1" (click)=" changestatus(studentProfile,1,'Active')"
+                                        [checked]="studentProfile?.statusId==1">Active </mat-radio-button>
+                                    &nbsp; &nbsp;
+                                    &nbsp;
+                                    <mat-radio-button value="2"
+                                        (click)=" changestatus(studentProfile,2,'Mentor Removed')"
+                                        [checked]="studentProfile?.statusId==2">Mentor Removed
+                                    </mat-radio-button>
+                                    &nbsp; &nbsp; &nbsp;
+                                    <mat-radio-button value="3" (click)=" changestatus(studentProfile,3,'Withdrawn')"
+                                        [checked]="studentProfile?.statusId==3">Withdrawn </mat-radio-button>
+                                    &nbsp;
+                                    &nbsp; &nbsp;
+                                    <mat-radio-button value="4"
+                                        (click)=" changestatus(studentProfile,4,'System removed')"
+                                        [checked]="studentProfile?.statusId==4">System removed
+                                    </mat-radio-button>
+                                    &nbsp; &nbsp; &nbsp;
+
+                                    <mat-radio-button value="5"
+                                        (click)=" changestatus(studentProfile,5,'Reprovisioned (Only for admin & chief mentor)')"
+                                        [checked]="studentProfile?.statusId==5?true:false">Reprovisioned (Only for admin
+                                        & chief mentor)</mat-radio-button> &nbsp; &nbsp; &nbsp;
+                                </mat-radio-group>
+                                <!-- <mat-radio-group aria-label="Select an option" class="d-inline-block" >
+                                    <mat-radio-button  class="me-2" (click)=" changestatus(studentProfile?,index.statusId,index.statusName)" *ngFor="let index of statusList" [checked]="studentProfile?.statusId===index.statusId">{{index.statusName}} </mat-radio-button>
+                                </mat-radio-group> -->
+                            </div>
+                        </div>
+
+
+                        <hr class="my-0" />
+                        <div class="row">
+                            <div class="col-md-4  border-right py-0     text-center">
+                                <div class="d-flex flex-row   py-3  align-items-center px-4  ">
+                                    <div>
+                                        <p> <i class=" fa-solid fa-passport me-4  "></i></p>
+                                    </div>
+                                    <div>
+                                        <p class=""> Map to a course: </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-8  py-3  ps-4 my-auto">
+                                <h4>{{ studentProfile?.course.coursesName}}</h4>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
