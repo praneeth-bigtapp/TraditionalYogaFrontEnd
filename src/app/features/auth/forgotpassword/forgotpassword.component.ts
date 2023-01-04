@@ -72,4 +72,9 @@ export class ForgotpasswordComponent implements OnInit {
     this.router.navigate(['login'])
   }
 
+  cancelBtn()
+  {
+    this.router.navigate(['login'])
+  }
+
 }

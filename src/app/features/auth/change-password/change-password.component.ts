@@ -46,6 +46,7 @@ export class ChangePasswordComponent implements OnInit {
   errorMessage: any;
   Message: any;
   errorType: any;
+  ispasswordNotMatch: boolean = false;
 
   constructor(private changepasswordService: ChangePasswordService,
     private formBuilder: FormBuilder,
@@ -60,22 +61,18 @@ export class ChangePasswordComponent implements OnInit {
       if (data) {
         this.loginData = JSON.parse(data);
       }
+      this.dataStorageService.isUserLoggedIn = true;
     }
-    this.dataStorageService.isUserLoggedIn = true;
-    // this.ChangePasswordForm = this.formBuilder.group({
-    //   oldpassword: ['', Validators.compose([Validators.required, Validators.maxLength(20)])],
-    //   newpassword: ['', Validators.compose([Validators.required, Validators.minLength(12), Validators.pattern(MyAppHttp.validation.password)])],
-    //   confirmpassword: ['', Validators.compose([Validators.required, Validators.maxLength(20)])],
-    // }
-    //   , { validator: MustMatch('newpassword', 'confirmpassword') }
-    // );
+
     this.ChangePasswordForm = this.formBuilder.group({
       oldpassword: [null, Validators.compose([Validators.required, Validators.maxLength(20)])],
-      newpassword: [null, Validators.compose([Validators.required, Validators.minLength(12), Validators.pattern(MyAppHttp.validation.password)])],
+      newpassword: [null, Validators.compose([Validators.required, Validators.minLength(12),
+        // Validators.pattern(MyAppHttp.validation.password)
+      ])],
       confirmpassword: [null, Validators.compose([Validators.required, Validators.maxLength(20)])],
     })
     console.log(this.loginData);
-    
+
   }
 
   // clkChangePassword() {
@@ -104,12 +101,21 @@ export class ChangePasswordComponent implements OnInit {
   //     }
   //   })
   // }
+  confirmpasswordchange() {
+    this.ispasswordNotMatch = this.ChangePasswordForm.value.newpassword !== this.ChangePasswordForm.value.confirmpassword
 
+  }
   clkChangePassword() {
-    console.log(this.ChangePasswordForm.valid);
-    
+    this.ispasswordNotMatch = false
+
     if (this.ChangePasswordForm.invalid)
       return this.ChangePasswordForm.markAllAsTouched()
+    this.ispasswordNotMatch = this.ChangePasswordForm.value.newpassword !== this.ChangePasswordForm.value.confirmpassword
+
+    console.log(this.ChangePasswordForm.valid);
+
+    this.router.navigate(['login'])
+
   }
 
   OldPassword() {
@@ -134,5 +140,9 @@ export class ChangePasswordComponent implements OnInit {
     setTimeout(() => {
       this.errorMessage = false;
     }, MyAppHttp.notificationTimeOut);
+  }
+
+  cancelBtn() {
+    this.router.navigate(['login'])
   }
 }
