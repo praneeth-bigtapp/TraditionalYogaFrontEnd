@@ -5,8 +5,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, } from '@angular/material/table';
-import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
-import { BlacklistUsersService } from '../blacklist-users.service';
+import { BlacklistUsersService } from 'src/app/data/services/admin-module/user-management/blacklist-user/blacklist-users.service';
+import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
 
 
 @Component({

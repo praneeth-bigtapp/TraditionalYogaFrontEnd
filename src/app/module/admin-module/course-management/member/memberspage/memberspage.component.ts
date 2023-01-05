@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { MemberService } from '../services/member.service';
 import { map, Observable, startWith } from 'rxjs';
+import { MemberService } from 'src/app/data/services/admin-module/course-management/member/member.service';
 
 @Component({
   selector: 'app-memberspage',

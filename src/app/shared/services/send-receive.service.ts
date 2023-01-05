@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { DialogPopupComponent } from '../dialog-popup/dialog-popup.component';
 import { map } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { DialogPopupComponent } from '../components/dialog-popup/dialog-popup.component';
 
 @Injectable()
 export class SendReceiveService {

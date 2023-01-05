@@ -6,8 +6,8 @@ import { MatSnackBar, } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
-import { AlertService } from '../service/alertservoce.service';
+import { AlertService } from 'src/app/data/services/admin-module/website-management/alerts/alerts.service';
+import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
 
 @Component({
   selector: 'app-alert',

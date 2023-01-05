@@ -20,9 +20,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { RegioncreationComponent } from './regioncreation/regioncreation.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { RegioncreationComponent } from '../../course-management/region-management/regioncreation.component';
 
 @NgModule({
   declarations: [

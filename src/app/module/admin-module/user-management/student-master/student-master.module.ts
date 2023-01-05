@@ -17,21 +17,16 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { UserComponent } from '../administration/user/user.component';
-import { RolesComponent } from '../administration/roles/roles.component';
-import { RolePermissionsComponent } from '../administration/role-permissions/role-permissions.component';
-import { ModuleComponent } from '../administration/module/module.component';
-import { SubModuleComponent } from '../administration/sub-module/sub-module.component';
-import { StudentMasterRoutingModule } from './student-master-routing.module';
-import { UserService } from '../administration/user/service/user.service';
-import { RolesService } from '../administration/roles/service/roles.service';
-import { RolePermissionsService } from '../administration/role-permissions/service/role-permissions.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {MatRadioModule} from '@angular/material/radio';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { StudentMasterRoutingModule } from './student-master-routing.module';
+import { RolePermissionsService } from '../../admin-management/role-permissions/service/role-permissions.service';
+import { RolesService } from '../../admin-management/roles/service/roles.service';
+import { UserService } from '../../admin-management/user/service/user.service';
 
 
 

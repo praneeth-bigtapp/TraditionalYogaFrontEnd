@@ -3,10 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { log } from 'console';
-
 import { startWith,map, Observable } from 'rxjs';
-import { MappingRegionsToChiefMentorService } from '../services/mapping-regions-to-chief-mentor.service';
+import { MappingRegionsToChiefMentorService } from 'src/app/data/services/admin-module/course-management/region-management/region-management.service';
 
 @Component({
   selector: 'app-mapping-regions-to-chief-mentor',

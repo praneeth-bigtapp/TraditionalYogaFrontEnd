@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class CoursesService extends BaseHttp {
+export class CourseMediaService extends BaseHttp {
 
   // getURL = 'student/getAll?operation=course';
 

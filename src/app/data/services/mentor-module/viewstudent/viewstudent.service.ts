@@ -4,7 +4,8 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 @Injectable({
   providedIn: 'root'
 })
-export class StudentService extends BaseHttp {
+export class ViewstudentService extends BaseHttp {
+
   getStudentUrl = "student/getAll?operation=student";
   getCourseUrl = 'courseList/getAll?operation=coursesList';
   getStudentByIdUrl = "student/profile";
@@ -15,16 +16,16 @@ export class StudentService extends BaseHttp {
   addVolunteerByIdUrl = "student/volunteer/add";
   getCourseProfileByIdUrl = "student/courseProfile";
   getAlldonationsURL = "student/getAll?operation=donation";
-  getCatogeriesURL='student/getAll?operation=VolunteerCategory'
-  poststudentstatusURL='student/updateStatus'
-  getALlstatusstudentURL='student/getAll?operation=studentStatus'
-  
+  getCatogeriesURL = 'student/getAll?operation=VolunteerCategory'
+  poststudentstatusURL = 'student/updateStatus'
+  getALlstatusstudentURL = 'student/getAll?operation=studentStatus'
 
-  getdonations(){
+
+  getdonations() {
     return this.get<any>(this.getAlldonationsURL);
 
   }
-  getcatogeries(){
+  getcatogeries() {
     return this.get<any>(this.getCatogeriesURL);
 
   }
@@ -66,7 +67,7 @@ export class StudentService extends BaseHttp {
   poststudentstatusById(data: any) {
     return this.post<any>(this.poststudentstatusURL, data);
   }
-  getALLstudentstatus(){
+  getALLstudentstatus() {
     return this.get<any>(this.getALlstatusstudentURL);
 
   }

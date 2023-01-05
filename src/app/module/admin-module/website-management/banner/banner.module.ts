@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { BannerMainRoutingModule } from './banner-main-routing.module';
 import { BannersComponent } from './banners/banners.component';
 
 import {MatTableModule} from '@angular/material/table';
@@ -15,6 +14,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { BannerMainRoutingModule } from './banner-routing.module';
 
 
 @NgModule({

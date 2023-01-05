@@ -6,9 +6,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
-import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
-import { ServicesService } from '../services.service';
+import { ServicesService } from 'src/app/data/services/admin-module/course-management/class-media/class-media.service';
+import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
+import { InputvalidationService } from 'src/app/shared/services/input-validation.service';
 
 @Component({
   selector: 'app-shortvideomedia',

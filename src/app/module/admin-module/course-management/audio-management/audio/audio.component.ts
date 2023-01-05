@@ -3,10 +3,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
-import { AudioService } from '../audio.service';
 import { MatSnackBar, } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { AudioService } from 'src/app/data/services/admin-module/course-management/audio-management/audio-management.service';
+import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
 
 @Component({
   selector: 'app-audio',
@@ -244,7 +244,7 @@ export class AudioComponent implements OnInit {
         message: "Are You Sure You Want To testimonial ?"
       },
       width: "30%",
-      height:"25%"
+      height: "25%"
     })
 
     dialogref.afterClosed().subscribe((Id: any) => {

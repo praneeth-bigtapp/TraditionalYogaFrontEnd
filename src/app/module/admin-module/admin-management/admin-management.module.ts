@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AdministrationRoutingModule } from './administration-routing.module';
 import { UserComponent } from './user/user.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
@@ -23,8 +22,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ModuleComponent } from './module/module.component';
 import { SubModuleComponent } from './sub-module/sub-module.component';
-import { ParametersComponent } from './parameters/parameters.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ParametersComponent } from '../course-management/parameters/parameters.component';
+import { AdministrationRoutingModule } from './admin-management-routing.module';
 
 @NgModule({
   declarations: [

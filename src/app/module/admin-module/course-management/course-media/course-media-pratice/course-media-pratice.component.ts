@@ -1,4 +1,3 @@
-import { AutofillMonitor } from '@angular/cdk/text-field';
 import { formatDate } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,13 +8,11 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { Router } from '@angular/router';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { TimeoutError } from 'rxjs';
-import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
-import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
+import { CourseMediaService } from 'src/app/data/services/admin-module/course-management/course-media/course-media.service';
+import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
+import { InputvalidationService } from 'src/app/shared/services/input-validation.service';
 import { AddCoursedocumentComponent } from '../add-coursedocument/add-coursedocument.component';
 import { AddCourseimageComponent } from '../add-courseimage/add-courseimage.component';
-import { CoursesService } from '../courses.service';
 
 
 export interface CourseData {
@@ -43,9 +40,9 @@ export class CourseMediaPraticeComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
   pageno: number = 1
-  addbtns=false
-  updatebtn=false
-  submitbtn=true
+  addbtns = false
+  updatebtn = false
+  submitbtn = true
   title = ''
   keyword = ''
   description = ''
@@ -57,7 +54,7 @@ export class CourseMediaPraticeComponent implements OnInit {
   gridData = [];
   dataSource: any
   categoryerror: boolean = false
-  mediaId:any
+  mediaId: any
 
   addmediaform!: FormGroup
   data!: any
@@ -67,7 +64,7 @@ export class CourseMediaPraticeComponent implements OnInit {
 
   displaycontent: boolean = false
   courseform!: FormGroup;
-  courseList:any
+  courseList: any
 
   onpaginatechange(event: any) {
     if (event.pageIndex === 0) {
@@ -79,16 +76,16 @@ export class CourseMediaPraticeComponent implements OnInit {
   }
 
 
-  displayedColumns = ['id', 'videoTitle', 'description', 'praticeDate','praticeTime', 'createdDate', 'metaKeyword', 'buttons']
+  displayedColumns = ['id', 'videoTitle', 'description', 'praticeDate', 'praticeTime', 'createdDate', 'metaKeyword', 'buttons']
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
-    private service: CoursesService,
+    private service: CourseMediaService,
     private _snackBar: MatSnackBar, private dialog: MatDialog
   ) {
 
 
- 
+
 
     this.filterData = {
       filterColumnNames: this.displayedColumns.map((ele: any) => ({ "Key": ele, "Value": "" })),
@@ -109,8 +106,8 @@ export class CourseMediaPraticeComponent implements OnInit {
   ngOnInit(): void {
     this.getALLtabledata()
     this.getcourseslist()
-   
-    this.courseform = this.formbuilder.group({courses: [null, Validators.compose([Validators.required])],})
+
+    this.courseform = this.formbuilder.group({ courses: [null, Validators.compose([Validators.required])], })
     this.addmediaform = this.formbuilder.group({
 
 
@@ -121,21 +118,21 @@ export class CourseMediaPraticeComponent implements OnInit {
       vidoemetakeywords: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.keywordsvalidation)])],
       videofile: null,
       courses1: [null, Validators.compose([Validators.required])],
-      practiceTime:['05:00 PM', Validators.compose([Validators.required])],
-      practiceDate:[null, Validators.compose([Validators.required])],
-      Instructions:[null, Validators.compose([Validators.required])],
+      practiceTime: ['05:00 PM', Validators.compose([Validators.required])],
+      practiceDate: [null, Validators.compose([Validators.required])],
+      Instructions: [null, Validators.compose([Validators.required])],
 
-      
-     
+
+
     })
   }
 
-  getALLtabledata(){
+  getALLtabledata() {
     this.service.getcoursemedia().subscribe({
       next: (response) => {
         console.log(response);
         this.data = response
-        this.data=this.data.reverse()
+        this.data = this.data.reverse()
 
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
@@ -162,12 +159,12 @@ export class CourseMediaPraticeComponent implements OnInit {
       data: {
         // course: this.coursename
       },
-      
+
       width: "80%",
       height: "200px !important",
-      
-     
-      
+
+
+
     })
 
     dialogref.afterClosed().subscribe(data => {
@@ -234,15 +231,15 @@ export class CourseMediaPraticeComponent implements OnInit {
 
   //   this.gobutton()
   // }
-  cancelbt(){
+  cancelbt() {
     this.displaycontent = false
     this.addmediaform.reset()
-    this.updatebtn=false
-    this.submitbtn=true
+    this.updatebtn = false
+    this.submitbtn = true
 
   }
   gobutton() {
-    
+
 
     this.displaycontent = true
     this.categoryerror = false
@@ -252,11 +249,11 @@ export class CourseMediaPraticeComponent implements OnInit {
   }
 
   onfilechange(event: any) {
-   
+
 
     this.filedata = event.target.files[0].name
   }
- 
+
   viewmanage(data: any) {
     console.log(data);
 
@@ -268,8 +265,8 @@ export class CourseMediaPraticeComponent implements OnInit {
     return Number(`${hours}.${minutes}`)
   }
   addmedia() {
-    
-    
+
+
 
     this.paragraphchange()
 
@@ -277,36 +274,36 @@ export class CourseMediaPraticeComponent implements OnInit {
 
 
     if (this.addmediaform.valid) {
-      this.addbtns=true
+      this.addbtns = true
 
-      
+
       this.addmediaform.value.videofile = this.filedata1 || ''
 
-  
 
-      let date=new Date()
+
+      let date = new Date()
       // let date2=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
 
       const body = {
-       
+
         "courseId": {
-            "coursesId": this.addmediaform.value.courses1
-            
+          "coursesId": this.addmediaform.value.courses1
+
         },
-        "praticeDate":this.addmediaform.value.practiceDate ,
-        "praticeTime":this.addmediaform.value.practiceTime,
+        "praticeDate": this.addmediaform.value.practiceDate,
+        "praticeTime": this.addmediaform.value.practiceTime,
         "videoLink": this.addmediaform.value.videolink,
         "videoTitle": this.addmediaform.value.videotitle,
         "durationVideo": this.addmediaform.value.videoduration,
         "metaKeyword": this.addmediaform.value.vidoemetakeywords,
         "fileUpload": this.addmediaform.value.videofile,
-        "description":this.addmediaform.value.videodescription,
+        "description": this.addmediaform.value.videodescription,
         "instruction": this.addmediaform.value.Instructions,
         "createdBy": null,
         "updateBy": null,
         "updateDate": null,
         "isActive": "Y"
-    }
+      }
 
       console.log(body);
 
@@ -315,7 +312,7 @@ export class CourseMediaPraticeComponent implements OnInit {
           this.addmediaform.reset()
           this.openSnackBar(response)
           this.getALLtabledata()
-          
+
 
         },
         error: (error) => {
@@ -332,65 +329,65 @@ export class CourseMediaPraticeComponent implements OnInit {
   }
 
   viewDetails(element: any) {
-this.updatebtn=false
-this.submitbtn=false
-this.addbtns=false
-this.displaycontent=true
-console.log(element);
-// let date=new Date(element.practiceDate)
-// let date2=date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()
-this.addmediaform .setValue({
-  videolink: element.videoLink,
-  videotitle: element.videoTitle,
-  videodescription: element.description,
-  videoduration:element.durationVideo,
-  vidoemetakeywords:element.metaKeyword,
-  videofile: '',
-  courses1: element.courseId.coursesId,
-  practiceTime:element.praticeTime,
-  practiceDate:formatDate(element.praticeDate, "yyyy-MM-dd", 'en'),
-  Instructions:element.instruction, 
- 
-})
-window.scroll({ 
-  top: 0, 
-  left: 0, 
-  behavior: 'smooth' 
-});
-
-  }
-  compareselect(obj1: any, obj2: any) {
-    
-    
-    return obj1 && obj2 && obj1 === obj2
-  }
-  editdetails(element: any) {
-    this.mediaId=element.mediaId
-    this.addbtns=true
-    this.updatebtn=true
-    this.submitbtn=false
-    this.displaycontent=true
-//     let date=new Date(element.practiceDate)
-// let date2=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
-    this.addmediaform .setValue({
+    this.updatebtn = false
+    this.submitbtn = false
+    this.addbtns = false
+    this.displaycontent = true
+    console.log(element);
+    // let date=new Date(element.practiceDate)
+    // let date2=date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()
+    this.addmediaform.setValue({
       videolink: element.videoLink,
       videotitle: element.videoTitle,
       videodescription: element.description,
-      videoduration:element.durationVideo,
-      vidoemetakeywords:element.metaKeyword,
+      videoduration: element.durationVideo,
+      vidoemetakeywords: element.metaKeyword,
       videofile: '',
       courses1: element.courseId.coursesId,
-      practiceTime:element.praticeTime,
-      practiceDate:formatDate(element.praticeDate, "yyyy-MM-dd", 'en'),
-      Instructions:element.instruction, 
-     
+      practiceTime: element.praticeTime,
+      practiceDate: formatDate(element.praticeDate, "yyyy-MM-dd", 'en'),
+      Instructions: element.instruction,
+
     })
-    window.scroll({ 
-      top: 0, 
-      left: 0, 
-      behavior: 'smooth' 
-});
-   
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+
+  }
+  compareselect(obj1: any, obj2: any) {
+
+
+    return obj1 && obj2 && obj1 === obj2
+  }
+  editdetails(element: any) {
+    this.mediaId = element.mediaId
+    this.addbtns = true
+    this.updatebtn = true
+    this.submitbtn = false
+    this.displaycontent = true
+    //     let date=new Date(element.practiceDate)
+    // let date2=date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
+    this.addmediaform.setValue({
+      videolink: element.videoLink,
+      videotitle: element.videoTitle,
+      videodescription: element.description,
+      videoduration: element.durationVideo,
+      vidoemetakeywords: element.metaKeyword,
+      videofile: '',
+      courses1: element.courseId.coursesId,
+      practiceTime: element.praticeTime,
+      practiceDate: formatDate(element.praticeDate, "yyyy-MM-dd", 'en'),
+      Instructions: element.instruction,
+
+    })
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+
 
   }
   openSnackBar(data: any) {
@@ -399,45 +396,45 @@ window.scroll({
     });
   }
 
-  saveData(){
-    this.updatebtn=false
-    this.submitbtn=true
+  saveData() {
+    this.updatebtn = false
+    this.submitbtn = true
     this.addmediaform.value.videofile = this.filedata1 || ''
     const body = {
       "mediaId": this.mediaId,
       "courseId": {
-          "coursesId": this.addmediaform.value.courses1
-          
+        "coursesId": this.addmediaform.value.courses1
+
       },
-      "praticeDate":this.addmediaform.value.practiceDate ,
-      "praticeTime":this.addmediaform.value.practiceTime,
+      "praticeDate": this.addmediaform.value.practiceDate,
+      "praticeTime": this.addmediaform.value.practiceTime,
       "videoLink": this.addmediaform.value.videolink,
       "videoTitle": this.addmediaform.value.videotitle,
       "durationVideo": this.addmediaform.value.videoduration,
       "metaKeyword": this.addmediaform.value.vidoemetakeywords,
       "fileUpload": this.addmediaform.value.videofile,
-      "description":this.addmediaform.value.videodescription,
+      "description": this.addmediaform.value.videodescription,
       "instruction": this.addmediaform.value.Instructions,
       "createdBy": null,
       "createdDate": null,
       "updateBy": null,
       "updateDate": null,
       "isActive": "Y"
-  }
-  console.log(body);
-  
-  this.service.postcoursemediasave(body).subscribe({
-    next: (response) => {
-      this.addmediaform.reset()
-      this.openSnackBar(response)
-      this.getALLtabledata()
-      
-
-    },
-    error: (error) => {
-      console.error(error.message);
     }
-  })
+    console.log(body);
+
+    this.service.postcoursemediasave(body).subscribe({
+      next: (response) => {
+        this.addmediaform.reset()
+        this.openSnackBar(response)
+        this.getALLtabledata()
+
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    })
 
   }
 
@@ -445,7 +442,7 @@ window.scroll({
 
     const body = {
       "mediaId": id
-  }
+    }
 
     const dialogref = this.dialog.open(DialogPopupComponent, {
       data: {
@@ -453,7 +450,7 @@ window.scroll({
         message: "Are You Sure You Want To Delete this Course ?"
       },
       width: "30%",
-      height:"25%"
+      height: "25%"
     })
 
     dialogref.afterClosed().subscribe(data => {
@@ -463,8 +460,8 @@ window.scroll({
             this.addmediaform.reset()
             this.openSnackBar(response)
             this.getALLtabledata()
-            
-      
+
+
           },
           error: (error) => {
             console.error(error.message);

@@ -7,8 +7,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
-import { OnlineexamService } from '../service/onlineexam.service';
+import { OnlineexamService } from 'src/app/data/services/admin-module/course-management/online-exam/online-exam.service';
+import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
 
 @Component({
   selector: 'app-tasks',

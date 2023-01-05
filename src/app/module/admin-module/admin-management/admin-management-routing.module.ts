@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ParametersComponent } from '../course-management/parameters/parameters.component';
 import { ModuleComponent } from './module/module.component';
-import { ParametersComponent } from './parameters/parameters.component';
 import { RolePermissionsComponent } from './role-permissions/role-permissions.component';
 import { RolesComponent } from './roles/roles.component';
 import { SubModuleComponent } from './sub-module/sub-module.component';

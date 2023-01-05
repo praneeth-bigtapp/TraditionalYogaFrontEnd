@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DonationserviceService } from '../service/donationservice.service';
+import { DonationserviceService } from 'src/app/data/services/admin-module/donation-management/donation-management.service';
 
 @Component({
   selector: 'app-donationviewdetails',

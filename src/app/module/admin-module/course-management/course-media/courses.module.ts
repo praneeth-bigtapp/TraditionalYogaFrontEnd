@@ -9,7 +9,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { CourseMainComponent } from './course-main/course-main.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSortModule } from '@angular/material/sort';
@@ -19,20 +18,21 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CourseMediaPraticeComponent } from './course-media-pratice/course-media-pratice.component';
 import { MatSelectModule } from '@angular/material/select';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { MyCourseMatriealsComponent } from './my-course-matrieals/my-course-matrieals.component';
-import { ViewMycourseMatriealsComponent } from './view-mycourse-matrieals/view-mycourse-matrieals.component';
-import { AddCoursedocumentComponent } from './add-coursedocument/add-coursedocument.component';
+import { MyCourseMatriealsComponent } from '../course-material/my-course-matrieals/my-course-matrieals.component';
+import { ViewMycourseMatriealsComponent } from '../course-material/view-mycourse-matrieals/view-mycourse-matrieals.component';
 import { AddCourseimageComponent } from './add-courseimage/add-courseimage.component';
+import { AddCoursedocumentComponent } from './add-coursedocument/add-coursedocument.component';
 
 
 
 @NgModule({
   declarations: [
-    CourseMainComponent,
     CourseMediaPraticeComponent,
     MyCourseMatriealsComponent,
     ViewMycourseMatriealsComponent,
-   
+    AddCourseimageComponent,
+    AddCoursedocumentComponent
+
   ],
   imports: [
     CommonModule,
@@ -54,7 +54,7 @@ import { AddCourseimageComponent } from './add-courseimage/add-courseimage.compo
     MatSlideToggleModule,
     MatSelectModule,
     AngularEditorModule,
-  
+
 
 
   ]

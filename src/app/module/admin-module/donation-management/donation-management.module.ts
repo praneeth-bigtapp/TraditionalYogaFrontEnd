@@ -18,8 +18,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { DonationviewdetailsComponent } from './donationviewdetails/donationviewdetails.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { DonationviewdetailsComponent } from './donation-view-details/donationviewdetails.component';
 
 @NgModule({
   declarations: [

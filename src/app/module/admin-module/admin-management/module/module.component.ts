@@ -5,8 +5,8 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { data } from 'jquery';
-import { NotifierService } from 'src/app/notifier.service';
-import { SendReceiveService } from 'src/app/shared/services/sendReceive.service';
+import { NotifierService } from 'src/app/shared/services/notifier.service';
+import { SendReceiveService } from 'src/app/shared/services/send-receive.service';
 import { ModuleService } from './service/module.service';
 
 @Component({

@@ -6,9 +6,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
-import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
-import { CoursesService } from '../courses.service';
+import { CourseMediaService } from 'src/app/data/services/admin-module/course-management/course-media/course-media.service';
+import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
+import { InputvalidationService } from 'src/app/shared/services/input-validation.service';
 
 @Component({
   selector: 'app-my-course-matrieals',
@@ -40,7 +40,7 @@ export class MyCourseMatriealsComponent implements OnInit {
   dataSource: any;
   displayedColumns: string[] = ['courseMaterialId', 'courseMaterialTitle', 'createdDate', "mediaId", "action"];
 
-  constructor(private formbuilder: FormBuilder, private service: CoursesService, private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog) { }
+  constructor(private formbuilder: FormBuilder, private service: CourseMediaService, private _snackBar: MatSnackBar, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getcourseslist()

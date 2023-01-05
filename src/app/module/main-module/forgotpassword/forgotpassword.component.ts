@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { OtpComponent } from 'src/app/shared/otp/otp.component';
-import { MyAppHttp } from 'src/app/shared/services/myAppHttp.service';
+import { OtpComponent } from 'src/app/shared/components/otp/otp.component';
+import { MyAppHttp } from 'src/app/shared/services/my-app-http.service';
 import { AuthService } from '../auth.service';
 import { LoginService } from '../login/services/login.service';
 

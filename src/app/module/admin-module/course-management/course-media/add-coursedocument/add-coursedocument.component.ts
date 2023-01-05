@@ -7,10 +7,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { Router } from '@angular/router';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
-import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
-import { CoursesService } from '../courses.service';
+import { CourseMediaService } from 'src/app/data/services/admin-module/course-management/course-media/course-media.service';
+import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
 
 
 
@@ -74,7 +72,7 @@ export class AddCoursedocumentComponent implements OnInit {
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
-    private service: CoursesService,
+    private service: CourseMediaService,
     private _snackBar: MatSnackBar, private dialog: MatDialog
   ) {
 

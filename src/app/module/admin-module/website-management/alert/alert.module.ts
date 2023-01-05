@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AlertMainRoutingModule } from './alert-main-routing.module';
 import { AlertComponent } from './alert/alert.component';
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
@@ -15,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AlertMainRoutingModule } from './alert-routing.module';
 
 
 @NgModule({

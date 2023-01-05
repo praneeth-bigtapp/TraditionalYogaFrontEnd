@@ -3,12 +3,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { BannerviewService } from '../service/bannerview.service';
 import { Router } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
 import { formatDate } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
+import { BannerviewService } from 'src/app/data/services/admin-module/website-management/banner/banner.service';
+import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
 
 @Component({
   selector: 'app-banners',

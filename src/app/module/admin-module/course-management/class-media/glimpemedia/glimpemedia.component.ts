@@ -4,13 +4,13 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
-import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
-import { ServicesService } from '../services.service';
 import { ShortvideomediaComponent } from '../shortvideomedia/shortvideomedia.component';
 import { elementAt, map, Observable, startWith } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { table } from 'console';
 import { formatDate } from '@angular/common';
+import { ServicesService } from 'src/app/data/services/admin-module/course-management/class-media/class-media.service';
+import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
 
 @Component({
   selector: 'app-glimpemedia',

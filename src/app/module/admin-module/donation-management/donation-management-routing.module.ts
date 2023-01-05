@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DonationManagementComponent } from './donation-management/donation-management.component';
-import { DonationviewdetailsComponent } from './donationviewdetails/donationviewdetails.component';
+import { DonationviewdetailsComponent } from './donation-view-details/donationviewdetails.component';
 
 const routes: Routes = [
   { path: 'donationManagement', component: DonationManagementComponent },

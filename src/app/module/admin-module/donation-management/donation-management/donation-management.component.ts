@@ -4,13 +4,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { filter, map, startWith } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { DonationserviceService } from '../service/donationservice.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
-import { getLocaleMonthNames } from '@angular/common';
+import { DonationserviceService } from 'src/app/data/services/admin-module/donation-management/donation-management.service';
 
 @Component({
   selector: 'app-donation-management',
@@ -23,22 +19,22 @@ export class DonationManagementComponent implements OnInit {
   dateForm!: FormGroup
   filterData: any
   gridData: any
-date:any
-DonorName='Donar1'
-pan="ABCD2574"
+  date: any
+  DonorName = 'Donar1'
+  pan = "ABCD2574"
 
-pageno: number = 1
+  pageno: number = 1
 
-onpaginatechange(event: any) {
-  if (event.pageIndex === 0) {
-    this.pageno = 1
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
     return
   }
-  this.pageno = (event.pageIndex * event.pageSize) + 1
-  return
-}
   disableSelect = new FormControl(false);
-data:any
+  data: any
   // data: any = [{ 'S_No': '1', 'Date': '12-11-2022', 'DonorName': "ajith", "Country": "India", "Amountdonated": "10500", "currency": "$", "pan": "741APO52" },
   // { 'S_No': '1', 'Date': '11-1-2022', 'DonorName': "ajith", "Country": "India", "Amountdonated": "10500", "currency": "#", "pan": "741APO52" },
   // { 'S_No': '1', 'Date': '12-10-2022', 'DonorName': "ajith", "Country": "USA", "Amountdonated": "10000", "currency": "%", "pan": "741APO52" },
@@ -54,13 +50,13 @@ data:any
 
   total = 0;
   subtotal: number = 0
-  countryList:any
-   dataSource: any;
+  countryList: any
+  dataSource: any;
   region: any;
   constructor(private formbuilder: FormBuilder, private router: Router, private service: DonationserviceService, private _snackBar: MatSnackBar, private dialog: MatDialog) { }
-  
+
   ngOnInit(): void {
-   
+
     this.getallregions()
     this.getallData('')
     this.getallcountry()
@@ -73,7 +69,7 @@ data:any
 
 
     })
-   
+
     // this.dataSource = new MatTableDataSource<any>(this.data)
 
 
@@ -86,7 +82,7 @@ data:any
       total: this.total,
       sub: this.subtotal
     }
-    
+
 
 
 
@@ -113,26 +109,26 @@ data:any
 
 
   viewDetails(id: any) {
-   
-    this.router.navigate(["viewdonation",id]);
+
+    this.router.navigate(["viewdonation", id]);
     // this.getallData()
   }
-  getdate(){
-    let today=new Date()
+  getdate() {
+    let today = new Date()
 
-    this.date=today.getDate()+'-'+today.getMonth()+'-'+today.getFullYear()
+    this.date = today.getDate() + '-' + today.getMonth() + '-' + today.getFullYear()
     console.log(this.date);
-    
-  }
-  getallData(variable:any) {
 
-    if(variable!='full'){
+  }
+  getallData(variable: any) {
+
+    if (variable != 'full') {
       this.getdate()
     }
     this.service.getdonationdetails().subscribe({
       next: (response) => {
         this.data = response;
-        this.data=this.data.reverse()
+        this.data = this.data.reverse()
         this.dataSource = new MatTableDataSource<any>(this.data);
         console.log(this.data)
         this.total = this.sum(this.data.map((ele: any) => Number(ele.donarId.donationAmount)))
@@ -144,11 +140,11 @@ data:any
         this.filterData.sort = this.sort;
         this.filterData.total = this.total;
         this.filterData.sub = this.subtotal;
-    
+
         for (let col of this.filterData.filterColumnNames) {
           col.Value = '';
         }
-       
+
 
 
       },
@@ -159,10 +155,10 @@ data:any
   }
 
   sum(data: any) {
-    return data.reduce((previousValue: any, currentValue: any) => Number(previousValue) + Number(currentValue),0)
+    return data.reduce((previousValue: any, currentValue: any) => Number(previousValue) + Number(currentValue), 0)
   }
 
-  basicfilter(filtervalues:any){
+  basicfilter(filtervalues: any) {
     this.filterData.gridData = filtervalues;
     this.filterData.dataSource = this.dataSource;
     this.dataSource.paginator = this.paginator;
@@ -174,37 +170,36 @@ data:any
     this.filterData.dataSource.sub = this.subtotal
   }
 
-  
+
 
   manualcompare(event: any) {
-    let filterdata=  this.filterData.dataSource.filteredData && this.data
+    let filterdata = this.filterData.dataSource.filteredData && this.data
     let [symbol, value] = [event.target.value[0], event.target.value.slice(1, event.target.value.length)]
 
-    
-   
-    if(event.target.value[1]=='=')
-    {
-       [symbol, value] = [event.target.value.slice(0,2), event.target.value.slice(2, event.target.value.length)]
+
+
+    if (event.target.value[1] == '=') {
+      [symbol, value] = [event.target.value.slice(0, 2), event.target.value.slice(2, event.target.value.length)]
     }
-    
- console.log(symbol);
- console.log(value);
- 
-    
+
+    console.log(symbol);
+    console.log(value);
+
+
 
 
     if (event.target.value.length === 0) {
-      
+
       this.dataSource = new MatTableDataSource<any>(filterdata)
-     this.basicfilter(filterdata)
+      this.basicfilter(filterdata)
       this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.donarId.donationAmount)))
 
       return
     }
 
-    if (![">", "<","=",'<=',">=","=="].includes(symbol)) {
+    if (![">", "<", "=", '<=', ">=", "=="].includes(symbol)) {
 
-      
+
       filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) === Number(event.target.value))
       this.dataSource = new MatTableDataSource<any>(filterdata)
       this.basicfilter(filterdata)
@@ -214,9 +209,9 @@ data:any
       return
     }
 
-     if (symbol === "==") {
-      
-      
+    if (symbol === "==") {
+
+
       filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) == value)
     }
     else if (symbol === "=") {
@@ -230,15 +225,15 @@ data:any
       filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) <= value)
     }
     else if (symbol === "<") {
-      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) < value )
+      filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) < value)
     }
     else if (symbol === ">") {
-      
+
       filterdata = filterdata.filter((ele: any) => Number(ele.donarId.donationAmount) > value)
     }
-   
+
     console.log(filterdata);
-    
+
     this.dataSource = new MatTableDataSource<any>(filterdata)
     this.basicfilter(filterdata)
     this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.donarId.donationAmount)))
@@ -262,10 +257,10 @@ data:any
   getallcountry() {
     this.service.getcountrys().subscribe({
       next: (response) => {
-        this.countryList= response;
+        this.countryList = response;
         // this.dataSource = new MatTableDataSource<any>(this.data);
-        if(this.dateForm.value.regiondropdown!=null){
-          this.countryList=this.countryList.filter((ele:any)=>ele.regionId.regionId===this.dateForm.value.regiondropdown)
+        if (this.dateForm.value.regiondropdown != null) {
+          this.countryList = this.countryList.filter((ele: any) => ele.regionId.regionId === this.dateForm.value.regiondropdown)
         }
         console.log(this.countryList);
 
@@ -281,49 +276,49 @@ data:any
     // this.getallData('full')
 
     const fromdate = this.dateForm.value.fromdate
-    const region=this.dateForm.value.regiondropdown
-    const country=this.dateForm.value.countrydropdown
+    const region = this.dateForm.value.regiondropdown
+    const country = this.dateForm.value.countrydropdown
 
     const todate = this.dateForm.value.todate
     console.log(fromdate, todate)
     console.log(this.data)
     console.log(region);
-    let filters =this.data
-    if(fromdate !== null && todate !== null) {
-     filters = this.data.filter((ele: any) => new Date(ele.date) >= new Date(fromdate) && new Date(ele.date) <= new Date(todate))
+    let filters = this.data
+    if (fromdate !== null && todate !== null) {
+      filters = this.data.filter((ele: any) => new Date(ele.date) >= new Date(fromdate) && new Date(ele.date) <= new Date(todate))
     }
     console.log(filters)
     // if (fromdate !== null && todate !== null) {
-      if(region!==null){
-        filters=this.regionfilter(filters)
-      }
-      if(country!==null){
-        filters=this.countryfilter(filters)
-      }
-      this.dataSource = new MatTableDataSource<any>(filters)
-      this.basicfilter(filters)
-      this.filterData.dataSource.sort = this.sort;
-      this.filterData.dataSource.sub = this.subtotal
-      this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.donarId.donationAmount)))
+    if (region !== null) {
+      filters = this.regionfilter(filters)
+    }
+    if (country !== null) {
+      filters = this.countryfilter(filters)
+    }
+    this.dataSource = new MatTableDataSource<any>(filters)
+    this.basicfilter(filters)
+    this.filterData.dataSource.sort = this.sort;
+    this.filterData.dataSource.sub = this.subtotal
+    this.subtotal = this.sum(this.filterData.dataSource.filteredData.map((ele: any) => Number(ele.donarId.donationAmount)))
     // }
     this.updatePagination()
 
   }
-  regionfilter(element:any){
-    let reg=element.filter((ele:any)=>ele.donarId.countryId.regionId.regionId===this.dateForm.value.regiondropdown)
+  regionfilter(element: any) {
+    let reg = element.filter((ele: any) => ele.donarId.countryId.regionId.regionId === this.dateForm.value.regiondropdown)
     return reg
   }
-  countryfilter(element:any){
-    let reg=element.filter((ele:any)=>ele.donarId.countryId.countryName===this.dateForm.value.countrydropdown)
+  countryfilter(element: any) {
+    let reg = element.filter((ele: any) => ele.donarId.countryId.countryName === this.dateForm.value.countrydropdown)
     return reg
   }
-  
+
   openSnackBar(data: any) {
     this._snackBar.open(data.message, 'Close', {
       duration: 2 * 1000,
     });
   }
-  
+
   deletedetails(id: any) {
 
     // const body = {

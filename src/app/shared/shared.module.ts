@@ -7,7 +7,6 @@ import { InvalidRecordsComponent } from './components/invalid-records/invalid-re
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
-import { StaticDataUploadRoutingModule } from '../features/static-data-upload/static-data-upload-routing.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -41,7 +40,7 @@ import { NotificationComponent } from './components/notification/notification.co
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
-    StaticDataUploadRoutingModule,
+    // StaticDataUploadRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,

@@ -4,10 +4,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { WebsitemanagementService } from '../service/websitemanagement.service';
 import { formatDate } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
+import { WebsitemanagementService } from 'src/app/data/services/admin-module/website-management/pearl-widsom/pearl-widsom.service';
+import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
 
 @Component({
   selector: 'app-pearlwidsom',

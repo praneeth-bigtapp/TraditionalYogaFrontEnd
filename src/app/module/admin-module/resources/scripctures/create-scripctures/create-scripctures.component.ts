@@ -6,9 +6,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
-import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
-import { ScripcturesService } from '../service/scripctures.service';
+import { ScripcturesService } from 'src/app/data/services/admin-module/resources/scripctures/scripctures.service';
+import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
+import { InputvalidationService } from 'src/app/shared/services/input-validation.service';
 
 @Component({
   selector: 'app-create-scripctures',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ParametersService } from './service/parameters.service';
 import { MatSnackBar, } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { ParametersService } from 'src/app/data/services/admin-module/course-management/parameters/parameters.service';
 
 @Component({
   selector: 'app-parameters',

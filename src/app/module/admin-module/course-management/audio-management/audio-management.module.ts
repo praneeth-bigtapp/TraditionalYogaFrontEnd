@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AudioMainRoutingModule } from './audio-main-routing.module';
 import { AudioComponent } from './audio/audio.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
@@ -12,11 +11,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 
 import {MatButtonModule} from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BannerMainRoutingModule } from '../banner-main/banner-main-routing.module';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatSortModule } from '@angular/material/sort';
+import { AudioMainRoutingModule } from './audio-management-routing.module';
+import { BannerMainRoutingModule } from '../../website-management/banner/banner-routing.module';
 
 
 @NgModule({

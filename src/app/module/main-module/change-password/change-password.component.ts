@@ -4,12 +4,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HeaderService } from 'src/app/core/layout/header/service/header.service';
-import { MustMatch } from 'src/app/core/services/must-match.validator';
-import { NotifierService } from 'src/app/notifier.service';
-import { OtpComponent } from 'src/app/shared/otp/otp.component';
+import { OtpComponent } from 'src/app/shared/components/otp/otp.component';
 import { DataStorageService } from 'src/app/shared/services/data-storage.service';
-import { MyAppHttp } from 'src/app/shared/services/myAppHttp.service';
-import { SendReceiveService } from 'src/app/shared/services/sendReceive.service';
+import { MyAppHttp } from 'src/app/shared/services/my-app-http.service';
+import { NotifierService } from 'src/app/shared/services/notifier.service';
+import { SendReceiveService } from 'src/app/shared/services/send-receive.service';
 import { AuthService } from '../auth.service';
 import { ChangePasswordService } from './Service/change-password.service';
 

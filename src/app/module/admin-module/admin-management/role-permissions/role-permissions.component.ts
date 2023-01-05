@@ -2,14 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RolePermissionsService } from './service/role-permissions.service';
 import * as $ from 'jquery';
-import { LoginService } from '../../auth/login/services/login.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { SendReceiveService } from 'src/app/shared/services/sendReceive.service';
 import { ModuleService } from '../module/service/module.service';
 import { SubModuleService } from '../sub-module/service/sub-module.service';
 import { RolesService } from '../roles/service/roles.service';
+import { SendReceiveService } from 'src/app/shared/services/send-receive.service';
 
 @Component({
   selector: 'app-role-permissions',
