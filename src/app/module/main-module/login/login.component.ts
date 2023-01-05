@@ -170,7 +170,7 @@ export class LoginComponent implements OnInit {
           }
         }
       }
-      this.router.navigateByUrl("/dashboard");
+      this.router.navigateByUrl("/admin/dashboard");
     }
   }
 
