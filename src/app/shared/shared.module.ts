@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DialogPopupComponent } from './dialog-popup/dialog-popup.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { FilterDirective } from './directives/filter.directive';
@@ -16,10 +15,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { NotificationComponent } from './notification/notification.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
-import { OtpComponent } from './otp/otp.component';
+import { DialogPopupComponent } from './components/dialog-popup/dialog-popup.component';
+import { OtpComponent } from './components/otp/otp.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
   declarations: [
