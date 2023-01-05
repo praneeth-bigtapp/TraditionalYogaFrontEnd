@@ -203,6 +203,7 @@ const routes: Routes = [
   },
   {
     path: '',
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./mentormodule/viewstudent/viewstudent.module').then((m) => m.ViewstudentModule)
   },

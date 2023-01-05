@@ -261,7 +261,8 @@ export class StudentenrollmentComponent implements OnInit {
       data: {
         emailId: this.enrollForm.value.email,
         title: "Traditional Yoga - User Registration",
-        isRegisterSuccess: true
+        isRegisterSuccess: true,
+        message: "User Registration is successfull. Login creditionals were sent to your registered mail Id."
       },
       width: "50%",
       height: "30%"

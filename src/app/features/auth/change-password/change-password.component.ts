@@ -1,13 +1,16 @@
 import { NgStyle } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HeaderService } from 'src/app/core/layout/header/service/header.service';
 import { MustMatch } from 'src/app/core/services/must-match.validator';
 import { NotifierService } from 'src/app/notifier.service';
+import { OtpComponent } from 'src/app/shared/otp/otp.component';
 import { DataStorageService } from 'src/app/shared/services/data-storage.service';
 import { MyAppHttp } from 'src/app/shared/services/myAppHttp.service';
 import { SendReceiveService } from 'src/app/shared/services/sendReceive.service';
+import { AuthService } from '../auth.service';
 import { ChangePasswordService } from './Service/change-password.service';
 
 @Component({
@@ -53,6 +56,8 @@ export class ChangePasswordComponent implements OnInit {
     private dataStorageService: DataStorageService,
     public sendReceiveService: SendReceiveService,
     private headerService: HeaderService,
+    private service: AuthService,
+    private dialog: MatDialog,
     private router: Router, private notifierService: NotifierService) { }
 
   ngOnInit(): void {
@@ -105,6 +110,26 @@ export class ChangePasswordComponent implements OnInit {
     this.ispasswordNotMatch = this.ChangePasswordForm.value.newpassword !== this.ChangePasswordForm.value.confirmpassword
 
   }
+
+  sucessDialog() {
+    let successDialogRef = this.dialog.open(OtpComponent, {
+      data: {
+        emailId: null,
+        title: "Traditional Yoga - User Registration",
+        isRegisterSuccess: true,
+        message: "Your password has been changed successfully."
+      },
+      width: "50%",
+      height: "30%"
+    });
+
+    successDialogRef.afterClosed().subscribe(data => {
+
+      this.router.navigate(['login'])
+
+    })
+
+  }
   clkChangePassword() {
     this.ispasswordNotMatch = false
 
@@ -114,7 +139,20 @@ export class ChangePasswordComponent implements OnInit {
 
     console.log(this.ChangePasswordForm.valid);
 
-    this.router.navigate(['login'])
+    const body = {
+
+    }
+
+    this.service.changePassword(body).subscribe({
+      next: (response) => {
+        this.sucessDialog()
+      },
+      error: (error) => {
+        console.error(error);
+
+      }
+    })
+
 
   }
 

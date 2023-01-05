@@ -18,6 +18,7 @@ import { ChangePasswordService } from './change-password/Service/change-password
 import { RegisterComponent } from './register/register.component';
 import { BlankComponent } from './blank/blank.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
     ChangePasswordComponent,
     RegisterComponent,
     BlankComponent,
-    ForgotpasswordComponent
+    ForgotpasswordComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +43,7 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
     MatCheckboxModule,
     MatCardModule,
     ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   providers: [LoginService, ChangePasswordService]
 })
