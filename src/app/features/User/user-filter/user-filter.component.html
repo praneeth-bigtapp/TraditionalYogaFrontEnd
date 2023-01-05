@@ -1,0 +1,334 @@
+<div class="ConfigurationTypes_textpadding ">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="#/addpages">Website Management</a></li>
+          <li class="breadcrumb-item active" aria-current="userFilter"> User Report</li>
+        </ol>
+      </nav>
+      <div class="row ">
+        <div class="col-7">
+    
+        </div>
+        <div class="col-5 d-flex justify-content-end">
+          <button type="button"
+            class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark  " >
+            <span>Export Excel</span>
+          </button>   
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <div class="card-header text-white bg-secondary">
+          User Report
+        </div>
+        <div class="card-body bg-white">
+          <div class="bg-white" >
+
+            <div class="dashboard-reports" style="background:#f5f5f5;">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active fw-bolder" data-toggle="tab" href="#tabs-1" role="tab" >Search Filters</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bolder" data-toggle="tab" href="#tabs-2" role="tab">Find Suspicious users</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" style="background:#f5f5f5;">
+                    <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                        <div class="card bg-white pl-4 pr-5 " style="padding-top: 18px;">               
+                         <form class="" [formGroup]="UserFilter">                      
+                            <div class="row g-3 d-flex">
+                                <div class="col-md-4 ">
+                                    <label>Name</label>
+                                    <mat-form-field  appearance="outline" >                
+                                        <input type="text" formControlName="name" matInput>
+                                        <mat-error class="error-message"
+                                        [hidden]=" !UserFilter.get('name')?.hasError('required')  ">
+                                            name is<strong>required</strong>
+                                        </mat-error>         
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4 ">
+                                    <label>Email</label>
+                                    <mat-form-field  appearance="outline" >                
+                                        <input matInput formControlName="emailId">
+                                        <mat-error class="error-message"
+                                        [hidden]=" !UserFilter.get('emailId')?.hasError('required')  ">
+                                            mail is<strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4 ">
+                                    <label>Country</label>
+                                    <mat-form-field appearance="outline">                
+                                        <select matNativeControl formControlName="country">
+                                            <option value="India">India</option>
+                                            <option value="Australia">Australia</option>
+                                            <option value="Europe">Europe</option>
+                                            <option value="South America">South America</option>
+                                            <option value="UK">UK</option>
+                                        </select>
+                                  
+                                <mat-error class="error-message"
+                                [hidden]=" !UserFilter.get('country')?.hasError('required')  ">
+                                   country is<strong>required</strong>
+                                </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4 ">
+                                    <label>Mobile</label>
+                                    <mat-form-field appearance="outline">                
+                                        <input matInput formControlName="selectMob">
+                                        <mat-error class="error-message"
+                                        [hidden]=" !UserFilter.get('selectMob')?.hasError('required')  ">
+                                            Mobile<strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>                       
+                                <div class="col-md-4  ">
+                                    <label>Region</label>
+                                    <mat-form-field appearance="outline" >                
+                                        <select matNativeControl formControlName="selectRegion">
+                                            <option value="India">India</option>
+                                            <option value="Australia">Australia</option>
+                                            <option value="Europe">Europe</option>
+                                            <option value="South America">South America</option>
+                                            <option value="UK">UK</option>
+                                        </select>
+                                        <mat-error class="error-message"
+                                        [hidden]=" !UserFilter.get('selectRegion')?.hasError('required')  ">
+                                            Region<strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                    
+                                <div class="col-md-4 ">
+                                    <label>Age Form</label>
+                                    <mat-form-field appearance="outline">                
+                                        <select matNativeControl formControlName="agefrom">                             
+                                    </select>
+                                <mat-error class="error-message"
+                                [hidden]=" !UserFilter.get('agefrom')?.hasError('required')  ">
+                                    age<strong>required</strong>
+                                </mat-error>
+                                    </mat-form-field>
+                                </div>                
+                                <div class="col-md-4 ">
+                                    <label>Age To</label>
+                                    <mat-form-field appearance="outline">                
+                                       <select matNativeControl  formControlName="ageto">                             
+                                        </select>
+                                <mat-error class="error-message"
+                                [hidden]=" !UserFilter.get('ageto')?.hasError('required')  ">
+                                    age<strong>required</strong>
+                                </mat-error>
+                                    </mat-form-field>                              
+                                </div>
+                                <div class="col-md-4 ">
+                                    <label>Gender</label>
+                                    <mat-form-field appearance="outline">                
+                                        <select matNativeControl  formControlName="Gender">
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Others">Others</option>                                        
+                                        </select>
+                                  
+                                <mat-error class="error-message"
+                                [hidden]=" !UserFilter.get('Gender')?.hasError('required')  ">
+                                    age<strong>required</strong>
+                                </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Status</label>
+                                    <mat-form-field appearance="outline" >                
+                                        <select matNativeControl  formControlName="status">
+                                            <option value="Active">Active</option>
+                                            <option value="InActive">InActive</option>                                                                           
+                                        </select>
+                                        <mat-error class="error-message"
+                                        [hidden]=" !UserFilter.get('status')?.hasError('required')  ">
+                                            Status<strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>                      
+                                <div class="col-md-4 ">
+                                    <label>Course</label>
+                                    <mat-form-field appearance="outline">                
+                                    <select matNativeControl  formControlName="course">
+                                        <option value="Short Meditation">Short Meditation</option>
+                                        <option value="Traditional Meditation" disabled>Traditional Meditation</option>
+                                        <option value="Meditation teacher training course in 2021">Meditation teacher training course in 2021</option>                                    
+                                </select>                              
+                                <mat-error class="error-message"
+                                [hidden]=" !UserFilter.get('course')?.hasError('required')  ">
+                                    Status<strong>required</strong>
+                                </mat-error>
+                                    </mat-form-field>
+                                </div> 
+                                <div class="col-md-2">                       
+                                    <mat-radio-button class="example-radio-button" style="padding-top: 32px;" >
+                                        Mentors
+                                      </mat-radio-button>                  
+                                </div> 
+                                <div class="col-md-1">                       
+                                    <mat-radio-button class="example-radio-button" style="padding-top: 32px;" >
+                                        Senior Mentors
+                                      </mat-radio-button>                  
+                                </div>                                      
+                            </div>
+                            <div class="d-flex flex-row justify-content-end flex-wrap">
+                                <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
+                                    Search Users
+                                </button>
+                               
+                            </div>
+                                      
+                        </form>
+                    </div>     
+                    </div>
+                    <div class="tab-pane" id="tabs-2" role="tabpanel">
+                        <div class="card bg-white pl-4 pr-5 " style="padding-top: 18px;">               
+                            <form class="" [formGroup]="UserFilter">                      
+                               <div class="row g-3 d-flex">
+                                   <div class="col-md-4 ">
+                                    <mat-checkbox class = "example-margin"> 
+                                        <label>Registered from Same IP Address </label> 
+                                      </mat-checkbox>
+                                   </div>
+                                   <div class="col-md-4 ">
+                                    <mat-checkbox class = "example-margin"> 
+                                        <label>Matching Name</label> 
+                                      </mat-checkbox>
+                                   </div>
+                                   <div class="col-md-4 ">
+                                    <mat-checkbox class = "example-margin"> 
+                                        <label>Matching SurName</label> 
+                                      </mat-checkbox>
+                                   </div>
+                                   <div class="col-md-4 ">
+                                    <mat-checkbox class = "example-margin"> 
+                                        <label>Same Zip Code</label> 
+                                      </mat-checkbox>
+                                   </div>
+                                   <div class="col-md-4 ">
+                                    <mat-checkbox class = "example-margin"> 
+                                        <label>Same House Number</label> 
+                                      </mat-checkbox>
+                                   </div>                              
+                               </div>
+                             <div class="d-flex flex-row justify-content-end flex-wrap">
+                                   <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
+                                       Search Users
+                                   </button>
+                                  
+                               </div>
+                                         
+                           </form>
+                       </div>               
+                    </div>
+                </div>
+
+                <div class="rounded mat-elevation-z8 table-responsive">
+                    <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100" aria-label="users" >
+                  
+                        <ng-container matColumnDef="sno">
+                            <th mat-header-cell  *matHeaderCellDef class="col-md-1 text-center">                               
+                                 <label  mat-sort-header>Sno</label>
+                                <input type="text" (keyup)="updatePagination()"  [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData"/>
+                            </th>
+                            <td mat-cell *matCellDef="let element" class="col-md-1 text-center"> {{element.sno}}
+                
+                            </td>
+                        </ng-container>               
+                     
+                        <ng-container matColumnDef="image">
+                            <th mat-header-cell *matHeaderCellDef class="col-md-2 text-center"> 
+                                <label mat-sort-header> Image</label>
+                                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData"/>
+                            </th>
+                            <td  mat-cell *matCellDef="let element" class="col-md-2 text-center">                
+                                <i class="fa-solid fa-image"></i>                
+                            </td>
+                        </ng-container>
+                
+                      
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef  class="col-md-3 text-center">
+                                <label  mat-sort-header>  Name</label>
+                                   <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData"/>
+                            </th>
+                            <td mat-cell *matCellDef="let element" class="col-md-3 text-center"> {{element.name}} </td>
+                        </ng-container>
+                
+                       
+                        <ng-container matColumnDef="emailId">
+                            <th mat-header-cell class="col-md-2 text-center" *matHeaderCellDef >
+                                   <label mat-sort-header> Email id</label>
+                                   <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData"/>
+                            </th>
+                            <td mat-cell class="col-md-2 text-center" *matCellDef="let element">{{element.emailId}} </td>                
+                        </ng-container>
+                        <ng-container matColumnDef="country">
+                            <th mat-header-cell class="col-md-1 text-center" *matHeaderCellDef >
+                                   <label  mat-sort-header> Country</label>
+                                   <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData"/>
+                            </th>
+                            <td mat-cell class="col-md-1 text-center" *matCellDef="let element">{{element.country}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Gender">
+                            <th mat-header-cell class="col-md-1 text-center" *matHeaderCellDef>
+                                   <label  mat-sort-header>Gender</label>
+                                   <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="filterData"/>
+                            </th>
+                            <td mat-cell class="col-md-1 text-center" *matCellDef="let element">{{element.Gender}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="usersince">
+                            <th mat-header-cell class="col-md-3 text-center" *matHeaderCellDef >
+                                <div class="row">
+                                    <label  mat-sort-header>User since</label>
+                                   <input type="text" (keyup)="updatePagination()" 
+                                   [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData"/>
+                               </div>
+                            </th>
+                            <td mat-cell class="col-md-3 text-center" *matCellDef="let element">
+                                {{element.usersince}}
+                            </td>
+                
+                        </ng-container>
+                        <ng-container matColumnDef="status">
+                            <th mat-header-cell *matHeaderCellDef class="col text-center"><label mat-sort-header>Actions</label>
+                                <input type="text" (keyup)="updatePagination()" [filter]="filterData" class="mx-2" disabled="true" />
+                              </th>
+                            <td mat-cell *matCellDef="let element">
+                                <mat-slide-toggle [checked]="element.status == 'Y'? true : false"></mat-slide-toggle>
+                                <span matTooltip="view" (click)="viewdetails(element)"  ><i class="fa-solid fa-eye" aria-hidden="true"></i></span>
+                               </td>
+                        </ng-container>
+                       
+                       
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>   
+                    </table>  
+                </div>    
+        <div class="col bg-white">
+          <mat-paginator [pageSizeOptions]="[ 10,25, 50, 100]" aria-label="Select page"></mat-paginator>
+        </div>
+
+                
+
+                </div>
+           
+            
+          </div>
+          
+    
+        </div>
+      </div>
+      
+</div>
+
+
+

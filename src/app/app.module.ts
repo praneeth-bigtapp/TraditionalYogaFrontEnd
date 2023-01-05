@@ -43,6 +43,7 @@ import { CoursesModule } from './features/courses/courses.module';
 import { BlacklistUserModule } from './features/blacklist-user/blacklist-user.module';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { PastCourseComponent } from './studentmodule/courses/past-course/past-course.component';
+import { MentorDashBoardComponent } from './features/MentorDashboard/mentor-dash-board/mentor-dash-board.component';
 
 @NgModule({
   declarations: [
@@ -50,8 +51,6 @@ import { PastCourseComponent } from './studentmodule/courses/past-course/past-co
     ViewDataComponent,
     DndDirective,
     DialogComponent,
-   
-
   ],
   imports: [
     BrowserModule,

@@ -117,6 +117,39 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/Photo-gallery/photo-gallery.module').then((m) => m.PhotoGalleryModule)
   },
+   {
+    path: '',
+    loadChildren: () =>
+      import('./features/YourWatchhourse/watchHourse.module').then((m) => m.WatchHourseModule)
+  },
+
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/Video-gallery/video-gallery.module').then((m) => m.VideoGalleryModule)
+  },
+
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/MyCourseMaterial/mycourse.module').then((m) => m.MycourseMaterialModule)
+  },
+
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/RepliesGuruji/repliesguruji.module').then((m) => m.RepliesGurujiModule)
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/MentorDashboard/MentorDashboard.module').then((m) => m.MentorDashboardModule)
+  },
+   {
+    path: '',
+    loadChildren: () =>
+      import('./features/User/user.module').then((m) => m.UserFilterModule)
+  },
 
   {
     path: '',

@@ -1,0 +1,196 @@
+<div class="ConfigurationTypes_textpadding   ">
+    <!-- remove bg-light -->
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#/addpages">Website Management</a></li>
+        <li class="breadcrumb-item active" aria-current="gallery">Video Gallery</li>
+      </ol>
+    </nav>
+  
+    <div class="row ">
+      <div class="col-7">
+  
+      </div>
+      <div class="col-5 d-flex justify-content-end">
+        <button type="button" class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark "
+           *ngIf="!displaycontent" (click)="album() ">
+          <span>Create Album </span>
+        </button>
+  
+        <button type="button" (click)="addphoto()"
+          class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark  " >
+          <span>Add Videos</span>
+        </button>
+  
+  
+      </div>
+    </div>
+  
+    <div class="" *ngIf="displaycontent">
+      <h5 class="card-header text-white bg-secondary">Create Album </h5>
+      <form class="card bg-white  p-3" [formGroup]="createalbum">
+        <div class="row">
+          <div class="col-md-6"><label>Album Name</label>
+            <mat-form-field class="example-full-width" appearance="outline">
+  
+              <input matInput formControlName="GalaryName">
+            </mat-form-field>
+          </div>
+          <div class="col-md-12">
+            <label>Description</label>
+            <mat-form-field class="example-full-width" appearance="outline">
+  
+              <textarea matInput placeholder="Type your Description here..." formControlName="description"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <label>Event From Date</label>
+            <mat-form-field class="example-full-width" appearance="outline">
+  
+              <input matInput formControlName="dateofcreation" placeholder="Ex. Pizza" value="Sushi" type="date">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <label>Event To Date</label>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <input matInput formControlName="todate" placeholder="Ex. Pizza" value="Sushi" type="date">
+            </mat-form-field>
+          </div>
+          <!-- <div class="row justify-content-end">
+            <div class="col-md-12 ">
+              <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
+                Create Album
+              </button>
+              <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 "
+                (click)="reseteditable()">
+                cancel
+              </button>
+  
+            </div>
+          </div> -->
+  
+  
+  
+        </div>
+        <div class="d-flex flex-row flex-wrap justify-content-end" style="padding-top: 10px;">
+          
+          <button type="submit" *ngIf="issubmit"
+              class="btn btn-outline-secondary btn-rounded d-inline-block ">
+              {{iseditable ? "Update" :" Create Album " }}
+          </button>
+          <button type="button" (click)="reseteditable()"
+              class="btn btn-outline-secondary btn-rounded d-inline-block ">
+              Cancel
+          </button>
+      </div>
+      </form>
+    </div>
+  
+  
+    <div class="card mt-2">
+      <div class="card-header text-white bg-secondary">
+        Video Gallery
+      </div>
+  
+      <div class="rounded mat-elevation-z8 table-responsive">
+  
+        <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100"
+          aria-label="users">
+
+          <ng-container matColumnDef="SNo">
+            <th mat-header-cell *matHeaderCellDef class="col-1 text-center "> <label mat-sort-header>SNo</label>
+              <input type="text" (keyup)="updatePagination()" [filter]="filterData" />
+            </th>
+  
+            <td mat-cell *matCellDef="let element" class="col-1  text-center ">{{element.SNo}}
+  
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="GalaryName">
+            <th mat-header-cell *matHeaderCellDef class="col-3 text-center "> <label mat-sort-header>Album Name</label>
+              <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value"
+                [filter]="filterData" />
+            </th>
+  
+            <td mat-cell *matCellDef="let element" class="col-2  text-center ">{{element.GalaryName}}
+  
+            </td>
+          </ng-container>
+  
+  
+          <ng-container matColumnDef="dateofcreation">
+            <th mat-header-cell *matHeaderCellDef class="col-2 text-center"><label mat-sort-header>Date of
+                Creation</label>
+              <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
+                [filter]="filterData" class="mx-2" />
+            </th>
+            <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted"> {{element.dateofcreation}}
+            </td>
+          </ng-container>
+  
+  
+          <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>Name</label>
+              <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
+                [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
+            </th>
+            <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center py-2"> {{element.role}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="numberofvideosadded">
+            <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>Number of Videos Created
+              </label>
+              <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
+                [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
+            </th>
+            <td mat-cell *matCellDef="let element" class="col-2 text-center py-2"> {{element.numberofvideosadded}} </td>
+          </ng-container>
+  
+  
+          <ng-container matColumnDef="Actions">
+            <th mat-header-cell *matHeaderCellDef class="col text-center"><label mat-sort-header>Actions</label>
+              <input type="text" (keyup)="updatePagination()" [filter]="filterData" class="mx-2" disabled="true" />
+            </th>
+            <td mat-cell *matCellDef="let element" class="col text-center py-2">
+              <div class="d-flex flex-wrap justify-content-evenly align-items-center">
+  
+  
+                <mat-slide-toggle matTooltip="Visiblity" [checked]="IsActiveorNot(element.quoteId)"
+                  (change)="ChangeActive(element.quoteId)" [matTooltip]="element.isActive"></mat-slide-toggle>
+              
+                <i class="fa-solid fa-eye fs-5 text-info" (click)="viewdetails(element)" matTooltip="View Course Activity"
+                  matTooltip="View"></i>
+  
+                <span matTooltip="Edit" (click)="editdetails(element)">
+                  <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                </span>
+                <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.quoteId)">
+                  <i class="far fa-trash-alt" aria-hidden="true"></i>
+
+                
+                </span>
+              </div>
+            </td>
+          </ng-container>
+          <i class="fa-sharp fa-solid fa-floppy-disks"></i>
+  
+  
+  
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+        </table>
+        <div class="col bg-white">
+          <mat-paginator [pageSizeOptions]="[ 10,25, 50, 100]" aria-label="Select page"></mat-paginator>
+        </div>
+      </div>
+    </div>
+  
+  
+  
+  
+  
+  </div>

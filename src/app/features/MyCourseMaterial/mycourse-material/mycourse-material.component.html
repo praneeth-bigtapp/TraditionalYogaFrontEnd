@@ -1,0 +1,352 @@
+<div class="ConfigurationTypes_textpadding ">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="cousermaterial">mycoursematerial</li>
+        </ol>
+    </nav>
+    <br />
+    <div class="card  bg-secondary">
+        <div class="card-header text-white bg-secondary">
+            My Course Material
+
+        </div>
+        <div class="card-body bg-white  py-2">
+            <div class="row">
+                <div class=" ">
+                    <div class=" row  align-items-center">
+                        <label>Select Course</label>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <select matNativeControl formControlName="course">
+                                    <option value="India">Study</option>
+                                    <option value="Australia">India</option>
+                                    <option value="Europe">Europe</option>
+                                    <option value="South America">South America</option>
+                                    <option value="UK">UK</option>
+                                </select>
+                            </mat-form-field>
+                           
+                        </div>
+                        <div class="col-md-3">
+                            <!-- <button type="button" (click)="gobutton()"
+                                class="btn btn-outline-secondary btn-go btn-rounded d-inline-block m-2 border border-dark">
+                                Go
+                            </button> -->
+                            <button type="button" 
+                                class="btn btn-outline-secondary  btn-rounded d-inline-block m-2 border border-dark">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                  
+                </div>
+                <div class=" ">
+                    <div class=" row  align-items-center" style="margin-top: 12px;">
+                        <mat-accordion>
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">                           
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                 Technical / Scientific information
+                                </mat-panel-title>
+                               </mat-expansion-panel-header>
+                              
+                               <mat-accordion>
+                                <mat-expansion-panel (opened)="panelOpenState = true"
+                                (closed)="panelOpenState = false">                           
+                                  <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                      10/12/2022
+                                    </mat-panel-title>
+                                   </mat-expansion-panel-header>
+                                   <h6>Hormons and Enzynes</h6>
+                                   <div class="row " appearance="outline" >
+                                    <div class="col-md-2 text-center pt-2" >                         
+                                      <i class="fa-regular fa-file-pdf" style="font-size: 40px; color: chocolate;"></i>
+                                        <h6 style="padding: inherit;">Pdf Title</h6>                           
+                                    </div>
+                                    <div class="col-md-2 text-center pt-2" >                         
+                                      <i class="fa-solid fa-file" style="font-size: 40px; color:blue;"></i>
+                                      <h6 style="padding: inherit;">ImageTitle</h6>                           
+                                   </div>
+                                   <div class="col-md-2 text-center pt-2" >                         
+                                    <i class="fa-solid fa-file" style="font-size: 40px; color:cadetblue;"></i>
+                                    <h6 style="padding: inherit;">ImageTitle</h6>                           
+                                 </div>
+                                 <div class="col-md-2 text-center pt-2" >                         
+                                  <i class="fa-solid fa-file" style="font-size: 40px; color:cadetblue;"></i>
+                                  <h6 style="padding: inherit;">ImageTitle</h6>                           
+                               </div>    
+                               <div class="col-md-2 text-center pt-2" >                         
+                                <i class="fa-solid fa-file" style="font-size: 40px; color:cadetblue;"></i>
+                                <h6 style="padding: inherit;">ImageTitle</h6>                           
+                             </div>                                                     
+                                  </div>
+                                   </mat-expansion-panel>
+                                   <mat-expansion-panel (opened)="panelOpenState = true"
+                                   (closed)="panelOpenState = false">                           
+                                     <mat-expansion-panel-header>
+                                       <mat-panel-title>
+                                         11/12/2022
+                                       </mat-panel-title>
+                                      </mat-expansion-panel-header>
+                                      <h6>Hormons and Enzynes</h6>
+                                      <div class="row " appearance="outline" >
+                                        <div class="col-md-2 text-center pt-2" >                         
+                                          <i class="fa-regular fa-file-pdf" style="font-size: 40px; color: chocolate;"></i>
+                                            <h6 style="padding: inherit;">Pdf Title</h6>                           
+                                        </div>
+                                        <div class="col-md-2 text-center pt-2" >                         
+                                          <i class="fa-solid fa-file" style="font-size: 40px; color:blue;"></i>
+                                          <h6 style="padding: inherit;">ImageTitle</h6>                           
+                                       </div>                                                   
+                                      </div>
+                                      </mat-expansion-panel>
+                                      <mat-expansion-panel (opened)="panelOpenState = true"
+                                      (closed)="panelOpenState = false">                           
+                                        <mat-expansion-panel-header>
+                                          <mat-panel-title>
+                                            12/12/2022
+                                          </mat-panel-title>
+                                         </mat-expansion-panel-header>
+                                         <h6>Hormons and Enzynes</h6>
+                                         <div class="row " appearance="outline" >
+                                          <div class="col-md-2 text-center pt-2" >                         
+                                            <i class="fa-regular fa-file-pdf" style="font-size: 40px; color: chocolate;"></i>
+                                              <h6 style="padding: inherit;">Pdf Title</h6>                           
+                                          </div>
+                                          <div class="col-md-2 text-center pt-2" >                         
+                                            <i class="fa-solid fa-file" style="font-size: 40px; color:blue;"></i>
+                                            <h6 style="padding: inherit;">ImageTitle</h6>                           
+                                         </div>                                                    
+                                        </div>
+                                         </mat-expansion-panel>
+                                         <mat-expansion-panel (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">                           
+                                           <mat-expansion-panel-header>
+                                             <mat-panel-title>
+                                               13/12/2022
+                                             </mat-panel-title>
+                                            </mat-expansion-panel-header>
+                                            <h6>Hormons and Enzynes</h6>
+                                            <div class="row " appearance="outline" >
+                                              <div class="col-md-2 text-center pt-2" >                         
+                                                <i class="fa-regular fa-file-pdf" style="font-size: 40px; color: chocolate;"></i>
+                                                  <h6 style="padding: inherit;">Pdf Title</h6>                           
+                                              </div>
+                                              <div class="col-md-2 text-center pt-2" >                         
+                                                <i class="fa-solid fa-file" style="font-size: 40px; color:blue;"></i>
+                                                <h6 style="padding: inherit;">ImageTitle</h6>                           
+                                             </div>                                                      
+                                            </div>
+                                            </mat-expansion-panel>
+                               </mat-accordion>
+                             
+                            </mat-expansion-panel>
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                 (closed)="panelOpenState = false">
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  Festival/ Day specials
+                                </mat-panel-title>                              
+                              </mat-expansion-panel-header>
+                              <mat-accordion>
+                                <mat-expansion-panel (opened)="panelOpenState = true"
+                                (closed)="panelOpenState = false">                           
+                                  <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                      10/12/2022
+                                    </mat-panel-title>
+                                   </mat-expansion-panel-header>
+                                   <h6>Hariyali amavasya</h6>
+                                   <div class="row " appearance="outline" >
+                                    <div class="col-md-2 text-center pt-2" >                         
+                                      <i class="fa-regular fa-file-pdf" style="font-size: 40px; color: chocolate;"></i>
+                                        <h6 style="padding: inherit;">Pdf Title</h6>                           
+                                    </div>
+                                    <div class="col-md-2 text-center pt-2" >                         
+                                      <i class="fa-solid fa-file" style="font-size: 40px; color:blue;"></i>
+                                      <h6 style="padding: inherit;">ImageTitle</h6>                           
+                                   </div>
+                                   <div class="col-md-2 text-center pt-2" >                         
+                                    <i class="fa-solid fa-file" style="font-size: 40px; color:cadetblue;"></i>
+                                    <h6 style="padding: inherit;">ImageTitle</h6>                           
+                                 </div>
+                                 <div class="col-md-2 text-center pt-2" >                         
+                                  <i class="fa-solid fa-file" style="font-size: 40px; color:cadetblue;"></i>
+                                  <h6 style="padding: inherit;">ImageTitle</h6>                           
+                               </div>    
+                               <div class="col-md-2 text-center pt-2" >                         
+                                <i class="fa-solid fa-file" style="font-size: 40px; color:cadetblue;"></i>
+                                <h6 style="padding: inherit;">ImageTitle</h6>                           
+                             </div>    
+                            </div>
+                                   </mat-expansion-panel>
+                                   <mat-expansion-panel (opened)="panelOpenState = true"
+                                   (closed)="panelOpenState = false">                           
+                                     <mat-expansion-panel-header>
+                                       <mat-panel-title>
+                                         11/12/2022
+                                       </mat-panel-title>
+                                      </mat-expansion-panel-header>
+                                      <h6>Hariyali amavasya</h6>
+                                      <div class="row " appearance="outline" >
+                                        <div class="col-md-2 text-center pt-2" >                         
+                                          <i class="fa-regular fa-file-pdf" style="font-size: 40px; color: chocolate;"></i>
+                                            <h6 style="padding: inherit;">Pdf Title</h6>                           
+                                        </div>
+                                        <div class="col-md-2 text-center pt-2" >                         
+                                          <i class="fa-solid fa-file" style="font-size: 40px; color:blue;"></i>
+                                          <h6 style="padding: inherit;">ImageTitle</h6>                           
+                                       </div>                                                  
+                                      </div>
+                                      </mat-expansion-panel>
+                                      <mat-expansion-panel (opened)="panelOpenState = true"
+                                      (closed)="panelOpenState = false">                           
+                                        <mat-expansion-panel-header>
+                                          <mat-panel-title>
+                                            12/12/2022
+                                          </mat-panel-title>
+                                         </mat-expansion-panel-header>
+                                         <h6>Hariyali amavasya</h6>
+                                         <div class="row " appearance="outline" >
+                                          <div class="col-md-2 text-center pt-2" >                         
+                                            <i class="fa-regular fa-file-pdf" style="font-size: 40px; color: chocolate;"></i>
+                                              <h6 style="padding: inherit;">Pdf Title</h6>                           
+                                          </div>
+                                          <div class="col-md-2 text-center pt-2" >                         
+                                            <i class="fa-solid fa-file" style="font-size: 40px; color:blue;"></i>
+                                            <h6 style="padding: inherit;">ImageTitle</h6>                           
+                                         </div>                                                     
+                                        </div>
+                                         </mat-expansion-panel>
+                                         <mat-expansion-panel (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">                           
+                                           <mat-expansion-panel-header>
+                                             <mat-panel-title>
+                                               13/12/2022
+                                             </mat-panel-title>
+                                            </mat-expansion-panel-header>
+                                            <h6>Hariyali amavasya</h6>
+                                            <div class="row " appearance="outline" >
+                                              <div class="col-md-2 text-center pt-2" >                         
+                                                <i class="fa-regular fa-file-pdf" style="font-size: 40px; color: chocolate;"></i>
+                                                  <h6 style="padding: inherit;">Pdf Title</h6>                           
+                                              </div>
+                                              <div class="col-md-2 text-center pt-2" >                         
+                                                <i class="fa-solid fa-file" style="font-size: 40px; color:blue;"></i>
+                                                <h6 style="padding: inherit;">ImageTitle</h6>                           
+                                             </div>                                                     
+                                            </div>
+                                            </mat-expansion-panel>
+                               </mat-accordion>
+                            </mat-expansion-panel>
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                 (closed)="panelOpenState = false">
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  Others
+                                </mat-panel-title>                              
+                              </mat-expansion-panel-header>
+                              <mat-accordion>
+                                <mat-expansion-panel (opened)="panelOpenState = true"
+                                (closed)="panelOpenState = false">                           
+                                  <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                      10/12/2022
+                                    </mat-panel-title>
+                                   </mat-expansion-panel-header>
+                                   <h6>Hariyali amavasya</h6>
+                                   <div class="row " appearance="outline" >
+                                    <div class="col-md-2 text-center pt-2" >                         
+                                      <i class="fa-regular fa-file-pdf" style="font-size: 40px; color: chocolate;"></i>
+                                        <h6 style="padding: inherit;">Pdf Title</h6>                           
+                                    </div>
+                                    <div class="col-md-2 text-center pt-2" >                         
+                                      <i class="fa-solid fa-file" style="font-size: 40px; color:blue;"></i>
+                                      <h6 style="padding: inherit;">ImageTitle</h6>                           
+                                   </div>
+                                   <div class="col-md-2 text-center pt-2" >                         
+                                    <i class="fa-solid fa-file" style="font-size: 40px; color:cadetblue;"></i>
+                                    <h6 style="padding: inherit;">ImageTitle</h6>                           
+                                 </div>
+                                 <div class="col-md-2 text-center pt-2" >                         
+                                  <i class="fa-solid fa-file" style="font-size: 40px; color:cadetblue;"></i>
+                                  <h6 style="padding: inherit;">ImageTitle</h6>                           
+                               </div>    
+                               <div class="col-md-2 text-center pt-2" >                         
+                                <i class="fa-solid fa-file" style="font-size: 40px; color:cadetblue;"></i>
+                                <h6 style="padding: inherit;">ImageTitle</h6>                           
+                             </div>                                                      
+                                  </div>
+                                   </mat-expansion-panel>
+                                   <mat-expansion-panel (opened)="panelOpenState = true"
+                                   (closed)="panelOpenState = false">                           
+                                     <mat-expansion-panel-header>
+                                       <mat-panel-title>
+                                         11/12/2022
+                                       </mat-panel-title>
+                                      </mat-expansion-panel-header>
+                                      <h6>Hariyali amavasya</h6>
+                                      <div class="row " appearance="outline" >
+                                        <div class="col-md-2 text-center pt-2" >                         
+                                          <i class="fa-regular fa-file-pdf" style="font-size: 40px; color: chocolate;"></i>
+                                            <h6 style="padding: inherit;">Pdf Title</h6>                           
+                                        </div>
+                                        <div class="col-md-2 text-center pt-2" >                         
+                                          <i class="fa-solid fa-file" style="font-size: 40px; color:blue;"></i>
+                                          <h6 style="padding: inherit;">ImageTitle</h6>                           
+                                       </div>                                                      
+                                      </div>
+                                      </mat-expansion-panel>
+                                      <mat-expansion-panel (opened)="panelOpenState = true"
+                                      (closed)="panelOpenState = false">                           
+                                        <mat-expansion-panel-header>
+                                          <mat-panel-title>
+                                            12/12/2022
+                                          </mat-panel-title>
+                                         </mat-expansion-panel-header>
+                                         <h6>Hariyali amavasya</h6>
+                                         <div class="row " appearance="outline" >
+                                          <div class="col-md-2 text-center pt-2" >                         
+                                            <i class="fa-regular fa-file-pdf" style="font-size: 40px; color: chocolate;"></i>
+                                              <h6 style="padding: inherit;">Pdf Title</h6>                           
+                                          </div>
+                                          <div class="col-md-2 text-center pt-2" >                         
+                                            <i class="fa-solid fa-file" style="font-size: 40px; color:blue;"></i>
+                                            <h6 style="padding: inherit;">ImageTitle</h6>                           
+                                         </div>                                                     
+                                        </div>
+                                         </mat-expansion-panel>
+                                         <mat-expansion-panel (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">                           
+                                           <mat-expansion-panel-header>
+                                             <mat-panel-title>
+                                               13/12/2022
+                                             </mat-panel-title>
+                                            </mat-expansion-panel-header>
+                                            <h6>Hariyali amavasya</h6>
+                                            <div class="row " appearance="outline" >
+                                              <div class="col-md-2 text-center pt-2" >                         
+                                                <i class="fa-regular fa-file-pdf" style="font-size: 40px; color: chocolate;"></i>
+                                                  <h6 style="padding: inherit;">Pdf Title</h6>                           
+                                              </div>
+                                              <div class="col-md-2 text-center pt-2" >                         
+                                                <i class="fa-solid fa-file" style="font-size: 40px; color:blue;"></i>
+                                                <h6 style="padding: inherit;">ImageTitle</h6>                           
+                                             </div>                                                      
+                                            </div>
+                                            </mat-expansion-panel>
+                               </mat-accordion>
+                            </mat-expansion-panel>
+                          </mat-accordion>
+                     
+                        
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
