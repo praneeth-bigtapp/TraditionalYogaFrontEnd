@@ -129,7 +129,7 @@
                         <div class="col px-0">
                             <mat-radio-group formControlName="maritalStatus" aria-label="Select an option">
                                 <mat-radio-button class=" mt-md-2 mr-md-4" *ngFor="let gender of maritalStatus"
-                                    [value]="gender.maritalStatusId">{{gender.maritalStatusName}}</mat-radio-button>
+                                    [value]="gender.maritalStatusId">{{gender.maritalStatusName | titlecase}}</mat-radio-button>
                             </mat-radio-group>
                             <div class="error-message"
                                 *ngIf="detailsEnrollForm.controls['maritalStatus'].invalid && (detailsEnrollForm.controls['maritalStatus'].dirty || detailsEnrollForm.controls['matrialstatus'].touched)">

@@ -262,7 +262,7 @@
 
                             <mat-form-field appearance="outline" *ngIf="isIndia">
                                 <input type="text" aria-label="Country" matInput formControlName="state"
-                                    (change)="countryChange($event)" [matAutocomplete]="state">
+                                     [matAutocomplete]="state">
                                 <mat-autocomplete autoActiveFirstOption #state="matAutocomplete">
                                     <mat-option *ngFor="let country of stateFilter |async " [value]="country">
                                         {{country}}

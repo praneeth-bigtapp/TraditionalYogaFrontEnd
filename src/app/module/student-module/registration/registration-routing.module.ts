@@ -6,7 +6,11 @@ import { StudentenrollmentComponent } from './studentenrollment/studentenrollmen
 
 const routes: Routes = [
   { path: "studentEnrollment", component: StudentenrollmentComponent },
-  { path: "studentDetailsEnrollment", canActivate: [AuthGuard], component: DetailsStudentInformationComponent }
+  {
+    path: "studentDetailsEnrollment",
+    canActivate: [AuthGuard],
+    component: DetailsStudentInformationComponent
+  }
 ];
 
 @NgModule({

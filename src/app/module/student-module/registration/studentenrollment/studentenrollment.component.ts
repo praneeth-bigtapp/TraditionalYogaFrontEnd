@@ -37,6 +37,7 @@ export class StudentenrollmentComponent implements OnInit {
   otp: any;
   otpError: boolean = false;
   isloading: boolean = false
+  statelist: unknown;
 
   constructor(
     private formbuilder: FormBuilder,
@@ -104,16 +105,20 @@ export class StudentenrollmentComponent implements OnInit {
       }
     });
 
-    // this.regService.getindiastates().subscribe({
-    //   next: (response) => {
-    //     this.statelist = response
-    //     console.log(this.statelist);
+    // 4.state
+    this.regService.getIndiaStates().subscribe({
+      next: (response) => {
+        this.statelist = response
+        this.stateList = this.stateList.map((ele: any) => ele.statesName)
+        console.log(this.statelist);
 
-    //   },
-    // error: (error) => {
-    //   console.error(error);
-    //   }
-    // });
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+
+
 
     this.countryFilter = this.enrollForm.valueChanges.pipe(
       startWith(''),

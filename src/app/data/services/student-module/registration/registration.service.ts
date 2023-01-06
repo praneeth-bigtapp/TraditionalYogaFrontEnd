@@ -7,7 +7,7 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 export class RegistrationService extends BaseHttp {
 
   getCountryUrl = "register/getAll?operation=country"
-  getIndiaStatesUrl = ""
+  getIndiaStatesUrl = "webSite/getAll?operation=states"
   getAboutUsUrl = "register/getAll?operation=aboutus"
   getQualificationUrl = "student/getAll?operation=qualification"
   getProfessionsUrl = "student/getAll?operation=professions"
