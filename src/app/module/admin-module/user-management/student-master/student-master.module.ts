@@ -27,12 +27,24 @@ import { StudentMasterRoutingModule } from './student-master-routing.module';
 import { RolePermissionsService } from '../../admin-management/role-permissions/service/role-permissions.service';
 import { RolesService } from '../../admin-management/roles/service/roles.service';
 import { UserService } from '../../admin-management/user/service/user.service';
+import { CourseprofiletabComponent } from './courseprofiletab/courseprofiletab.component';
+import { DonationTabComponent } from './donation-tab/donation-tab.component';
+import { EpurchaseInformationComponent } from './epurchase-information/epurchase-information.component';
+import { PerformanceDetailsComponent } from './performance-details/performance-details.component';
+import { ProfiletabComponent } from './profiletab/profiletab.component';
+import { VolunteeringDetailsComponent } from './volunteering-details/volunteering-details.component';
 
 
 
 @NgModule({
   declarations: [
     StudentProfileComponent,
+    ProfiletabComponent,
+    CourseprofiletabComponent,
+    DonationTabComponent,
+    EpurchaseInformationComponent,
+    VolunteeringDetailsComponent,
+    PerformanceDetailsComponent
 
   ],
   imports: [
@@ -61,6 +73,7 @@ import { UserService } from '../../admin-management/user/service/user.service';
     MatDatepickerModule,
 
   ],
+  exports: [ProfiletabComponent, CourseprofiletabComponent, DonationTabComponent, EpurchaseInformationComponent, VolunteeringDetailsComponent, PerformanceDetailsComponent],
   providers: [UserService, RolesService, RolePermissionsService]
 })
 export class StudentMasterModule { }
