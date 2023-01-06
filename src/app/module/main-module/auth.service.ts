@@ -8,8 +8,8 @@ export class AuthService extends BaseHttp {
   postVerifyEmailUrl = "register/verifyEmail"
   postOtpUrl = "register/opt"
 
-  forgotPasswordURL = ""
-  changePasswordUrl = ""
+  forgotPasswordURL = "forgotPassword"
+  changePasswordUrl = "changePassword"
 
   postVerifyEmail(body: any) {
     return this.login(this.postVerifyEmailUrl, body);

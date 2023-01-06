@@ -165,11 +165,12 @@ export class ForgotpasswordComponent implements OnInit {
     if (this.ispasswordNotMatch)
       return
 
-    const { email, password, confirmpassword } = this.formDetails.value
-    console.log({ email, password, confirmpassword });
+    const { password, confirmpassword } = this.formDetails.value
+    console.log({ password, confirmpassword });
 
     const body = {
-
+      "userName": this.email,
+      "password": password
     }
 
     this.service.forgotPassword(body).subscribe({
