@@ -52,7 +52,6 @@ export class StudentenrollmentComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.languageList = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
 
     this.enrollForm = this.formbuilder.group({
@@ -131,6 +130,13 @@ export class StudentenrollmentComponent implements OnInit {
       },
       error: (error) => {
         console.error(error.message);
+        this.languageList = [{
+          languageName: "English"
+        },
+        {
+          languageName: "Tamil"
+        }
+        ]
       }
     });
 
@@ -190,6 +196,11 @@ export class StudentenrollmentComponent implements OnInit {
     this._snackBar.open(data.message, 'Close', {
       duration: 2 * 1000,
     });
+  }
+  languageChange()
+  {
+    console.log(this.enrollForm.value.onlyReadAndWriteLanguage );
+    
   }
 
   compareSelect(obj1: any, obj2: any) {
