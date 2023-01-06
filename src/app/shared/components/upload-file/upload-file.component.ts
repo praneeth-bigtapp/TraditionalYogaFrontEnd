@@ -1,16 +1,13 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { TableData } from 'src/app/shared/models/excel-data.model';
-import { MyAppHttp } from 'src/app/shared/services/myAppHttp.service';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { SendReceiveService } from 'src/app/shared/services/sendReceive.service';
 import { TableDataService } from '../../services/table-data.service';
 import { take } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
-import { ViewDataService } from 'src/app/features/view-data/service/view-data.service';
-
-
-import { NotifierService } from 'src/app/notifier.service';
+import { SendReceiveService } from '../../services/send-receive.service';
+import { MyAppHttp } from '../../services/my-app-http.service';
+import { NotifierService } from '../../services/notifier.service';
 
 type AOA = any[][];
 
@@ -54,10 +51,14 @@ export class UploadFileComponent implements OnInit {
   dateErrorMsg!: string;
   AlltablesList: any = [];
 
-  constructor(private tableDataService: TableDataService,
+  constructor(
+    private tableDataService: TableDataService,
     private formBuilder: FormBuilder,
-    public sendReceiveService: SendReceiveService, public datepipe: DatePipe
-    , private viewDataService: ViewDataService, private notifierService: NotifierService) { }
+    public sendReceiveService: SendReceiveService,
+    public datepipe: DatePipe,
+    // private viewDataService: ViewDataService,
+    private notifierService: NotifierService
+  ) { }
 
   ngOnInit(): void {
     this.tableUploadForm = this.formBuilder.group({
@@ -201,44 +202,44 @@ export class UploadFileComponent implements OnInit {
   }
 
   getForeignKeyTableData(pkTableDetails: any, fkTableDetails: any) {
-    this.viewDataService.getViewData(pkTableDetails).pipe(take(1)).subscribe(async (pkTableData) => {
-      this.currentTableData = pkTableData;
-      this.FKTableInfo = [];
-      for (let [i, table] of fkTableDetails.entries()) {
-        let fkTableData = await this.viewDataService.getViewDataFK(table);
-        let tempObj: any = {};
-        tempObj['tableId'] = table.tableId;
-        tempObj['tableName'] = table.tableName;
-        tempObj["data"] = fkTableData;
-        this.FKTableInfo.push(tempObj);
-        if (i == (fkTableDetails.length - 1)) {
-          this.validateExcelFile();
-        }
-      }
-    });
+    // this.viewDataService.getViewData(pkTableDetails).pipe(take(1)).subscribe(async (pkTableData) => {
+    //   this.currentTableData = pkTableData;
+    //   this.FKTableInfo = [];
+    //   for (let [i, table] of fkTableDetails.entries()) {
+    //     let fkTableData = await this.viewDataService.getViewDataFK(table);
+    //     let tempObj: any = {};
+    //     tempObj['tableId'] = table.tableId;
+    //     tempObj['tableName'] = table.tableName;
+    //     tempObj["data"] = fkTableData;
+    //     this.FKTableInfo.push(tempObj);
+    //     if (i == (fkTableDetails.length - 1)) {
+    //       this.validateExcelFile();
+    //     }
+    //   }
+    // });
   }
 
   getPrimaryKeyTableData(pkTableDetails: any) {
-    this.viewDataService.getViewData(pkTableDetails).pipe(take(1)).subscribe((pkTableData) => {
-      this.currentTableData = pkTableData;
-      this.validateExcelFile();
-    });
+    // this.viewDataService.getViewData(pkTableDetails).pipe(take(1)).subscribe((pkTableData) => {
+    //   this.currentTableData = pkTableData;
+    //   this.validateExcelFile();
+    // });
   }
 
   getNoPrimaryKeyTableData() {
-    let TableDetails = {
-      "tableId": this.tableUploadForm.value.tableId,
-      "tableName": this.tableName
-    }
-    this.sendReceiveService.confirmationDialog(MyAppHttp.ToasterMessage.PrimaryKeyNotSetup).subscribe((result) => {
-      console.log(result)
-      if (result) {
-        this.viewDataService.getViewData(TableDetails).pipe(take(1)).subscribe((TabData: any) => {
-          this.currentTableData = TabData;
-          this.validateExcelFile();
-        });
-      }
-    });
+    // let TableDetails = {
+    //   "tableId": this.tableUploadForm.value.tableId,
+    //   "tableName": this.tableName
+    // }
+    // this.sendReceiveService.confirmationDialog(MyAppHttp.ToasterMessage.PrimaryKeyNotSetup).subscribe((result) => {
+    //   console.log(result)
+    //   if (result) {
+    //     this.viewDataService.getViewData(TableDetails).pipe(take(1)).subscribe((TabData: any) => {
+    //       this.currentTableData = TabData;
+    //       this.validateExcelFile();
+    //     });
+    //   }
+    // });
   }
 
   validateExcelFile() {

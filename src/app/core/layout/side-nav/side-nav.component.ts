@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 // import { LengthPipe } from '@nglrx/pipes';
 import { browserRefresh } from 'src/app/app.component';
 import { DataStorageService } from 'src/app/shared/services/data-storage.service';
-import { SendReceiveService } from 'src/app/shared/services/sendReceive.service';
+import { SendReceiveService } from 'src/app/shared/services/send-receive.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -85,7 +85,7 @@ export class SideNavComponent implements OnInit {
     this.menuId = menu.subModuleId;
     console.log(this.menuId);
     localStorage.setItem("selectedSubModuleId", this.menuId)
-    // this.sendReceiveService.navigateToMenu(this.menuId);
+    this.sendReceiveService.navigateToMenu(this.menuId);
   }
 
   // subMenuIcon(menu: any) {
