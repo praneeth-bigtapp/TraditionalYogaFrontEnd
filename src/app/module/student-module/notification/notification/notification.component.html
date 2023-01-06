@@ -1,81 +1,82 @@
 <div class="ConfigurationTypes_textpadding ">
     
     
-    <div class="  card ">
-     <div class=" card-header text-white  bg-secondary">Notifications</div>
-     <div class="card-body bg-white">
+  <div class="  card ">
+   <div class=" card-header text-white  bg-secondary">Notifications</div>
+   <div class="card-body bg-white">
+      <mat-accordion>
+
+          <mat-expansion-panel (opened)="panelOpenState = true"
+                               (closed)="panelOpenState = false" class="">
+            <mat-expansion-panel-header  style="background-color: grey;">
+              <mat-panel-title class="text-white" >
+                Guidelines related to conduct of courses{{panelOpenState? 'open' : 'closed'}}
+              </mat-panel-title>
+            
+            </mat-expansion-panel-header>
+            <div >
+            <p> 11-08-2022</p>
+            <p>Description here</p><hr>
+            <p> 11-08-2022</p>
+            <p>Description here</p><hr>
+            <p> 11-08-2022</p>
+            <p>Description here</p><hr>
+            <p> 11-08-2022</p>
+            <p>Description here</p><hr>
+          </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <mat-accordion><br>
+
+          <mat-expansion-panel (opened)="panelOpenState = true"
+                               (closed)="panelOpenState = false" class="">
+            <mat-expansion-panel-header style="background-color: grey;">
+              <mat-panel-title class="text-white" >
+               Wishs from Guruji{{panelOpenState? 'open' : 'closed'}}
+              </mat-panel-title>
+            
+            </mat-expansion-panel-header>
+            <div >
+            <p> 11-08-2022</p>
+            <p>Description here</p><hr>
+            <p> 11-08-2022</p>
+            <p>Description here</p><hr>
+            <p> 11-08-2022</p>
+            <p>Description here</p><hr>
+            <p> 11-08-2022</p>
+            <p>Description here</p><hr>
+          </div>
+          </mat-expansion-panel>
+        </mat-accordion><br>
         <mat-accordion>
 
-            <mat-expansion-panel (opened)="panelOpenState = true"
-                                 (closed)="panelOpenState = false" class="">
-              <mat-expansion-panel-header class="bg-secondary">
-                <mat-panel-title class="text-white" >
-                  Guidelines related to conduct of courses{{panelOpenState? 'open' : 'closed'}}
-                </mat-panel-title>
-              
-              </mat-expansion-panel-header>
-              <div >
-              <p> 11-08-2022</p>
-              <p>Description here</p><hr>
-              <p> 11-08-2022</p>
-              <p>Description here</p><hr>
-              <p> 11-08-2022</p>
-              <p>Description here</p><hr>
-              <p> 11-08-2022</p>
-              <p>Description here</p><hr>
-            </div>
-            </mat-expansion-panel>
-          </mat-accordion>
-          <mat-accordion><br>
+          <mat-expansion-panel (opened)="panelOpenState = true"
+                               (closed)="panelOpenState = false" class="">
+            <mat-expansion-panel-header style="background-color: grey;">
+              <mat-panel-title class="text-white" >
+                General notifications{{panelOpenState? 'open' : 'closed'}}
+              </mat-panel-title>
+            
+            </mat-expansion-panel-header>
+            <div >
+            <p> 11-08-2022</p>
+            <p>Description here</p><hr>
+            <p> 11-08-2022</p>
+            <p>Description here</p><hr>
+            <p> 11-08-2022</p>
+            <p>Description here</p><hr>
+            <p> 11-08-2022</p>
+            <p>Description here</p><hr>
+          </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        
+        
 
-            <mat-expansion-panel (opened)="panelOpenState = true"
-                                 (closed)="panelOpenState = false" class="">
-              <mat-expansion-panel-header class="bg-secondary">
-                <mat-panel-title class="text-white" >
-                 Wishs from Guruji{{panelOpenState? 'open' : 'closed'}}
-                </mat-panel-title>
-              
-              </mat-expansion-panel-header>
-              <div >
-              <p> 11-08-2022</p>
-              <p>Description here</p><hr>
-              <p> 11-08-2022</p>
-              <p>Description here</p><hr>
-              <p> 11-08-2022</p>
-              <p>Description here</p><hr>
-              <p> 11-08-2022</p>
-              <p>Description here</p><hr>
-            </div>
-            </mat-expansion-panel>
-          </mat-accordion><br>
-          <mat-accordion>
-
-            <mat-expansion-panel (opened)="panelOpenState = true"
-                                 (closed)="panelOpenState = false" class="">
-              <mat-expansion-panel-header class="bg-secondary">
-                <mat-panel-title class="text-white" >
-                  General notifications{{panelOpenState? 'open' : 'closed'}}
-                </mat-panel-title>
-              
-              </mat-expansion-panel-header>
-              <div >
-              <p> 11-08-2022</p>
-              <p>Description here</p><hr>
-              <p> 11-08-2022</p>
-              <p>Description here</p><hr>
-              <p> 11-08-2022</p>
-              <p>Description here</p><hr>
-              <p> 11-08-2022</p>
-              <p>Description here</p><hr>
-            </div>
-            </mat-expansion-panel>
-          </mat-accordion>
-          
-          
-
-     </div>
-    </div>
+   </div>
+  </div>
 </div>
+
 
 
 

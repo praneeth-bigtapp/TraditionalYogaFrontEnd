@@ -2,8 +2,10 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators,FormGroup,  FormBuilder, } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MapuserService } from '../mapuser.service';
 
 @Component({
   selector: 'app-map-course',
@@ -11,15 +13,18 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./map-course.component.css']
 })
 export class MapCourseComponent implements OnInit {
-  data=[{"sno":"1","name":"Ajith R","emailId":" ajith98ra@gmail", "country":"india","Gender":"male","usersince":"2020","status":"","view":"","select":""},
-  {"sno":"1","name":"ajith K","emailId":" ajithk@gmail", "country":"india","Gender":"male","usersince":"2020","status":"","view":"","select":""},
-  {"sno":"1","name":"Karthi","emailId":"karthi@gmail", "country":"india","Gender":"male","usersince":"2020","status":"","view":"","select":""},
-  {"sno":"1","name":"Ajith","emailId":" ajith98ra@gmail", "country":"india","Gender":"male","usersince":"2020","status":"","view":"","select":""},
-  {"sno":"1","name":"ajith","emailId":" ajith98ra@gmail", "country":"india","Gender":"male","usersince":"2020","status":"","view":"","select":""},
+  data=[{ "registrationId":"1","sno":"1","name":"Ajith R","emailId":" ajith98ra@gmail", "country":"india","Gender":"male","usersince":"2020","status":"","view":"","select":""},
+  {"registrationId":"2","sno":"1","name":"ajith K","emailId":" ajithk@gmail", "country":"india","Gender":"male","usersince":"2020","status":"","view":"","select":""},
+  {"registrationId":"3","sno":"1","name":"Karthi","emailId":"karthi@gmail", "country":"india","Gender":"male","usersince":"2020","status":"","view":"","select":""},
+  {"registrationId":"4","sno":"1","name":"Ajith","emailId":" ajith98ra@gmail", "country":"india","Gender":"male","usersince":"2020","status":"","view":"","select":""},
+  {"registrationId":"5","sno":"1","name":"ajith","emailId":" ajith98ra@gmail", "country":"india","Gender":"male","usersince":"2020","status":"","view":"","select":""},
   ]
   displayedColumns: string[] = ['sno', 'image', 'name',"emailId","country","Gender","usersince","status", "view", "select"];
   dataSource :any;
   iseditable: boolean = false
+  registredId= null;
+  courseId:any;
+  
   disableSelect = new FormControl(false);
   // nameerror = new FormControl('', [Validators.required ]);
   // mailerror = new FormControl('', [Validators.required ]);
@@ -39,14 +44,24 @@ export class MapCourseComponent implements OnInit {
   gridData: any;
   displaycontent: boolean = false
   pageno:number=1
- 
+  courseID= null; 
+  courseIDOne= null; 
+  courseIDTwo= null; 
+  courseIDThree= null; 
+  courseIDFour= null; 
+  courseIDFive= null; 
+  courseIDSix= null;
+  courseIDSeven= null;  
+  courseIDEight= null; 
+ body:any;
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   
 
-  constructor( private formbuilder:FormBuilder) {
+  constructor( private formbuilder:FormBuilder, private service:MapuserService,private _snackBar: MatSnackBar,) {
     this.Mapusers = this.formbuilder.group({
       courseId: [null],
       nameerror: [null, Validators.compose([Validators.required])],
@@ -60,6 +75,18 @@ export class MapCourseComponent implements OnInit {
       status: [null, Validators.compose([Validators.required])],
       course: [null, Validators.compose([Validators.required])],
       gender: [null, Validators.compose([Validators.required])],
+    });
+
+    this.service.getcourse().subscribe({
+      next: (response) => {
+        console.log(response)
+
+        this.courseId = response
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
     });
    
   
@@ -120,12 +147,275 @@ export class MapCourseComponent implements OnInit {
     this.iseditable = false
     this.displaycontent = !this.displaycontent
   }
+  // getcourse(isSelected){
+
+  // }
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
+  }
+  getregistrationId(element:any){
+    this.registredId=element
+  }
+  getCourseId(element:any){
+    if(this.courseID== null)
+    {
+      this.courseID=element
+    }else if(this.courseIDOne ==null){
+      this.courseIDOne=element
+
+    }
+    else if(this.courseIDTwo ==null){
+      this.courseIDTwo=element
+
+    }
+    else if(this.courseIDThree ==null){
+      this.courseIDThree=element
+
+    }
+    else if(this.courseIDFour == null){
+      this.courseIDFour=element
+
+    }
+    else if(this.courseIDFive ==null){
+      this.courseIDFive=element
+
+    }
+    // else if(this.courseIDSix){
+    //   this.courseIDSix=element
+
+    // }
+    // else if(this.courseIDSeven){
+    //   this.courseIDSeven=element
+
+    // }
+    // else if(this.courseIDEight){
+    //   this.courseIDEight=element
+
+    // }
+    else{
+      return
+    }
+    
+    
+    
+   
+    
+    
+   
+   
+    
+    console.log(element)
+
+  }
+  mapuserCourse(){
+    if(this.registredId == null && this.courseID == null ){
+      console.log("select student and course")
+    }
+    else if(this.registredId== null){
+      console.log('select student')
+    }
+    else if( this.courseID == null){
+      console.log('select course')
+    }
+    else{
+      if(this.registredId !== null && this.courseID !== null && this.courseIDOne !== null && this.courseIDTwo !== null && this.courseIDThree !== null && this.courseIDFour !== null && this.courseIDFive
+        !== null)
+      {
+     //   this.body={
+     //     "studentId": {
+     //         "registrationId": this.registredId
+     //     },
+     //     "coursesId": {
+     //         "coursesId": this.courseID
+     //     }
+     // }
+    
+   
+     this.body={
+       "studentId": {
+           "registrationId": this.registredId
+       },
+       "coursesId": [
+          {
+               "coursesId": this.courseID
+           },
+           {
+               "coursesId": this.courseIDOne
+           },
+           {
+               "coursesId": this.courseIDTwo
+           },
+           {
+             "coursesId": this.courseIDThree
+         },
+         {
+           "coursesId": this.courseIDFour
+       },
+       {
+         "coursesId": this.courseIDFive
+     },
+   //   {
+   //     "coursesId": this.courseIDSix
+   // },
+   // {
+   //   "coursesId": this.courseIDSeven
+   // },
+   // {
+   //   "coursesId": this.courseIDEight
+   // }
+   
+       ]
+   }
+    
+      }
+      else if(this.registredId !== null && this.courseID !== null && this.courseIDOne !== null && this.courseIDTwo !== null && this.courseIDThree !== null && this.courseIDFour !== null ){
+       this.body={
+         "studentId": {
+             "registrationId": this.registredId
+         },
+         "coursesId": [
+            {
+                 "coursesId": this.courseID
+             },
+             {
+                 "coursesId": this.courseIDOne
+             },
+             {
+                 "coursesId": this.courseIDTwo
+             },
+             {
+               "coursesId": this.courseIDThree
+           },
+           {
+             "coursesId": this.courseIDFour
+         },
+        
+    
+     
+         ]
+     }
+   
+       }
+       else if(this.registredId !== null && this.courseID !== null && this.courseIDOne !== null && this.courseIDTwo !== null && this.courseIDThree !== null  ){
+         this.body={
+           "studentId": {
+               "registrationId": this.registredId
+           },
+           "coursesId": [
+              {
+                   "coursesId": this.courseID
+               },
+               {
+                   "coursesId": this.courseIDOne
+               },
+               {
+                   "coursesId": this.courseIDTwo
+               },
+               {
+                 "coursesId": this.courseIDThree
+             },
+         
+      
+       
+           ]
+       }
+     
+         }
+         else if(this.registredId !== null && this.courseID !== null && this.courseIDOne !== null && this.courseIDTwo !== null  ){
+           this.body={
+             "studentId": {
+                 "registrationId": this.registredId
+             },
+             "coursesId": [
+                {
+                     "coursesId": this.courseID
+                 },
+                 {
+                     "coursesId": this.courseIDOne
+                 },
+                 {
+                     "coursesId": this.courseIDTwo
+                 },
+                
+        
+         
+             ]
+         }
+       
+           }
+           else if(this.registredId !== null && this.courseID !== null && this.courseIDOne !== null ){
+             this.body={
+               "studentId": {
+                   "registrationId": this.registredId
+               },
+               "coursesId": [
+                  {
+                       "coursesId": this.courseID
+                   },
+                   {
+                       "coursesId": this.courseIDOne
+                   },
+                   
+                 
+          
+           
+               ]
+           }
+         
+             }
+             else if(this.registredId !== null && this.courseID !== null  ){
+               this.body={
+                 "studentId": {
+                     "registrationId": this.registredId
+                 },
+                 "coursesId": [
+                    {
+                         "coursesId": this.courseID
+                     },
+                     
+                
+            
+             
+                 ]
+             }
+           
+               }
+    }
+   
+  
+   
+    console.log(this.body)
+  this.service. postadcourse(this.body).subscribe({
+    next: (response) => {
+      console.log(response)
+      this.openSnackBar({ message: "Student Mapped to course Successfully" })
+    //  window.location.reload()
+      
+    },
+    error: (error) => {
+      console.error(error.message);
+
+    }
+  }) 
+   
+  }
   
 
 
 
  
 }
+
+
+
+// service
+
+
+
+
+
 
 
 

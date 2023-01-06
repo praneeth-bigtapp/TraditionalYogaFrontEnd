@@ -12,6 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatSelectModule} from '@angular/material/select';
+
 
 
 @NgModule({
@@ -22,6 +24,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     CommonModule,
     GratitudemessageRoutingModule,
     MatTableModule,
+    MatSelectModule,
     MatPaginatorModule,
     MatSortModule,
     SharedModule,

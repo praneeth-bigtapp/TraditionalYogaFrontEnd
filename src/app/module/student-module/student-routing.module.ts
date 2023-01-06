@@ -20,6 +20,13 @@ const routes: Routes = [
     path: '',
     canActivate: [AuthGuard],
     loadChildren: () =>
+      import('./writegratitude-message/writegratitude-message.module').then((m) => m.WritegratitudeMessageModule)
+  },
+  
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
       import('./gratitude-message/gratitudemessage.module').then((m) => m.GratitudemessageModule)
   },
   {

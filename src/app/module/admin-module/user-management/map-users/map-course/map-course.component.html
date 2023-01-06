@@ -385,7 +385,7 @@
                 [indeterminate]="selection.hasValue() && !isAllSelected()"></mat-checkbox><br><br></th>
             <td mat-cell class="col" *matCellDef="let element">
                 <mat-checkbox class="example-margin"(click)="$event.stopPropagation()" (change)="$event ? selection.toggle(element) : null"
-                [checked]="selection.isSelected(element)"></mat-checkbox>
+                [checked]="selection.isSelected(element)"  (change)="getregistrationId(element.registrationId )"></mat-checkbox>
             </td>
 
         </ng-container>
@@ -408,17 +408,20 @@
         </div>
     </div><br>
 
-    <form>
+    <form  (submit)="mapuserCourse()">
 
         <label for="inputEmail4" class="form-label">Courses</label>
         <div class="row">
-            <div class="col">
+            <div class="col-md-12 p-1 d-flex">
+                <mat-checkbox    *ngFor="let element of courseId"(click)=" getCourseId(element.coursesId)" class="example-margin p-1">{{element.coursesName | slice:0:9  }}</mat-checkbox>
+
+            </div>
+            <!-- <div class="col">
                 <mat-checkbox class="example-margin">RYIT500</mat-checkbox>
 
             </div>
             <div class="col">
                 <mat-checkbox class="example-margin">RYIT500</mat-checkbox>
-
             </div>
             <div class="col">
                 <mat-checkbox class="example-margin">RYIT500</mat-checkbox>
@@ -428,13 +431,10 @@
             </div>
             <div class="col">
                 <mat-checkbox class="example-margin">RYIT500</mat-checkbox>
-            </div>
-            <div class="col">
-                <mat-checkbox class="example-margin">RYIT500</mat-checkbox>
-            </div>
+            </div> -->
 
         </div><br>
-        <label for="inputEmail4" class="form-label">Category</label>
+        <!-- <label for="inputEmail4" class="form-label">Category</label>
         <div class="row">
             <div class="col">
                 <mat-checkbox class="example-margin">Test</mat-checkbox>
@@ -457,8 +457,8 @@
                 <mat-checkbox class="example-margin">Test</mat-checkbox>
             </div>
 
-        </div>
-        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
+        </div> -->
+        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 " >
             Map
          </button>
 
