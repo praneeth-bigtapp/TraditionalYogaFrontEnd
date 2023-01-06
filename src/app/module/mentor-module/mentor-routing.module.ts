@@ -18,6 +18,14 @@ const routes: Routes = [
     loadChildren: () =>
       import('./mentor-dash-board/MentorDashboard.module').then((m) => m.MentorDashboardModule)
 
+  },
+  {
+
+    path: '',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./gratitude-messages/gratitude-messages.module').then((m) => m.GratitudeMessagesModule)
+
   }
 ];
 

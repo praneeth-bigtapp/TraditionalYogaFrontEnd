@@ -170,7 +170,7 @@ export class ForgotpasswordComponent implements OnInit {
 
     const body = {
       "userName": this.email,
-      "password": password
+      "password": btoa(password)
     }
 
     this.service.forgotPassword(body).subscribe({
