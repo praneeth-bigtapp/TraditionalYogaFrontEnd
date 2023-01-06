@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ViewstudentService } from '../viewstudent.service';
+import { StudentService } from 'src/app/data/services/admin-module/user-management/student-master/student.service';
 
 @Component({
   selector: 'app-studentprofile',
@@ -9,13 +9,16 @@ import { ViewstudentService } from '../viewstudent.service';
 export class StudentprofileComponent implements OnInit {
   StudentList: any;
   selectedStudent: any
+  CourseList: any;
+  selectedCourse: any
 
   constructor(
-    private service: ViewstudentService
+    private service: StudentService
   ) { }
 
   ngOnInit(): void {
     this.getStudentList()
+    this.onselectCourse()
   }
 
 
@@ -32,7 +35,19 @@ export class StudentprofileComponent implements OnInit {
 
   }
 
+  onselectCourse() {
+    this.service.getCourses().subscribe({
+      next: (response) => {
+        this.CourseList = response;
+        console.log(this.CourseList)
+      },
+      error: (error) => {
+
+      }
+    });
+  }
+
   onSelectStudent() {
-   
+
   }
 }

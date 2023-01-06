@@ -472,7 +472,7 @@ export class StudentProfileComponent implements OnInit {
         message: "Are You Sure You Want To Change the Statust to " + name + " ?"
       },
       width: "30%",
-      height:"25%"
+      height: "25%"
     })
     let body = {
       "studentId": element.studentId,

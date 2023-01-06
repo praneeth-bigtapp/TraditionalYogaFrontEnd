@@ -1,21 +1,21 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { StudentService } from 'src/app/data/services/admin-module/user-management/student-master/student.service';
 
 @Component({
-  selector: 'app-courseprofiletab',
-  templateUrl: './courseprofiletab.component.html',
-  styleUrls: ['./courseprofiletab.component.css']
+  selector: 'app-donation-tab',
+  templateUrl: './donation-tab.component.html',
+  styleUrls: ['./donation-tab.component.css']
 })
-export class CourseprofiletabComponent implements OnInit {
+export class DonationTabComponent implements OnInit {
   @Input() student: any;
-  coursesProfileData: any;
+  donationData: any;
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   filterData: any;
-  coursesProfileColumns: string[] = ['SNo', 'courseId', 'admissionsStatus', 'completionStatus'];
+  donationsColumns: string[] = ['SNo', 'date', 'description', "modeOfPayment", "donationAmount"];
 
   gridData = [];
   dataSource!: MatTableDataSource<any>;
@@ -23,11 +23,12 @@ export class CourseprofiletabComponent implements OnInit {
 
   constructor(
     private service: StudentService
+
   ) { }
 
   ngOnInit(): void {
     this.filterData = {
-      filterColumnNames: this.coursesProfileColumns.map(ele => ({ "Key": ele, "Value": "" })),
+      filterColumnNames: this.donationsColumns.map(ele => ({ "Key": ele, "Value": "" })),
       gridData2: this.gridData,
       dataSource2: this.dataSource,
       paginator2: this.paginator,
@@ -36,7 +37,7 @@ export class CourseprofiletabComponent implements OnInit {
   }
 
   ngOnChanges() {
-    this.courseProfileAPI()
+    this.donationAPI()
   }
 
   onpaginatechange(event: any) {
@@ -63,19 +64,21 @@ export class CourseprofiletabComponent implements OnInit {
     this.filterData.dataSource.paginator = this.paginator;
     this.filterData.dataSource.sort = this.sort
   }
-  courseProfileAPI() {
+
+  donationAPI() {
     const body = {
-      "studentId": this.student && this.student.studentId,
-      "name": this.student && this.student.name
+      "studentId": this.student.studentId,
+      "name": this.student.name
     }
-    this.service.getCourseProfileById(body).subscribe({
+    this.service.getDonationById(body).subscribe({
       next: (response) => {
-        this.coursesProfileData = response;
-        this.coursesProfileData = this.coursesProfileData.reverse()
-        this.renderTableDate(this.coursesProfileData)
+        this.donationData = response;
+        this.donationData = this.donationData.reverse()
+        console.log(this.donationData);
+        this.renderTableDate(this.donationData)
+
       },
       error: (error) => {
-        console.error(error);
 
       }
     });

@@ -25,12 +25,23 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
+                <div class="col-md-3" *ngIf="selectedStudent">
+                    <label> Course</label>
+                    <mat-form-field appearance="outline">
+
+                        <mat-select [(ngModel)]="selectedCourse" required>
+                            <mat-option *ngFor="let course of CourseList" [value]="course.coursesId">
+                                {{course.coursesName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
             </div>
 
         </div>
     </div>
     <!-- Tabs -->
-    <div class="student-profile ty-tabs" *ngIf="selectedStudent" style="background:#f5f5f5;">
+    <div class="student-profile ty-tabs" *ngIf="selectedCourse" style="background:#f5f5f5;">
         <div class="card-header text-white bg-secondary">
             Student Details
         </div>
@@ -49,7 +60,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link px-4 fw-bold" data-toggle="tab" href="#tabs-5" role="tab"> Volenteering Details</a>
+                <a class="nav-link px-4 fw-bold" data-toggle="tab" href="#tabs-5" role="tab"> Volunteering Details</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link px-4 fw-bold" data-toggle="tab" href="#tabs-6" role="tab"> Courses Profile </a>
@@ -63,7 +74,23 @@
             </div>
             <!-- Performance Tab -->
             <div class="tab-pane" id="tabs-2" role="tabpanel">
-                <h1>Performance Details</h1>
+                <app-performance-details [student]="selectedStudent"></app-performance-details>
+
+            </div>
+
+            <!-- Donation  tab -->
+            <div class="tab-pane" id="tabs-3" role="tabpanel">
+                <app-donation-tab [student]="selectedStudent"></app-donation-tab>
+            </div>
+
+            <!-- ePurchase  tab -->
+            <div class="tab-pane" id="tabs-4" role="tabpanel">
+                <app-epurchase-information [student]="selectedStudent"></app-epurchase-information>
+            </div>
+
+            <!-- ePurchase  tab -->
+            <div class="tab-pane" id="tabs-5" role="tabpanel">
+                <app-volunteering-details [student]="selectedStudent"></app-volunteering-details>
             </div>
 
             <!-- Course Profile tab -->

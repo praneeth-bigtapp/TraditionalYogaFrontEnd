@@ -5,29 +5,31 @@ import { MatTableDataSource } from '@angular/material/table';
 import { StudentService } from 'src/app/data/services/admin-module/user-management/student-master/student.service';
 
 @Component({
-  selector: 'app-courseprofiletab',
-  templateUrl: './courseprofiletab.component.html',
-  styleUrls: ['./courseprofiletab.component.css']
+  selector: 'app-epurchase-information',
+  templateUrl: './epurchase-information.component.html',
+  styleUrls: ['./epurchase-information.component.css']
 })
-export class CourseprofiletabComponent implements OnInit {
+export class EpurchaseInformationComponent implements OnInit {
   @Input() student: any;
-  coursesProfileData: any;
+  donationData: any;
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   filterData: any;
-  coursesProfileColumns: string[] = ['SNo', 'courseId', 'admissionsStatus', 'completionStatus'];
+  ePurchasesColumns: string[] = ['SNo', 'date', 'purchaseAmount', 'productPurchase'];
 
   gridData = [];
   dataSource!: MatTableDataSource<any>;
   pageno: number = 1;
+  ePurchasesdata: any;
 
   constructor(
     private service: StudentService
+
   ) { }
 
   ngOnInit(): void {
     this.filterData = {
-      filterColumnNames: this.coursesProfileColumns.map(ele => ({ "Key": ele, "Value": "" })),
+      filterColumnNames: this.ePurchasesColumns.map(ele => ({ "Key": ele, "Value": "" })),
       gridData2: this.gridData,
       dataSource2: this.dataSource,
       paginator2: this.paginator,
@@ -36,7 +38,7 @@ export class CourseprofiletabComponent implements OnInit {
   }
 
   ngOnChanges() {
-    this.courseProfileAPI()
+    this.getPurchase()
   }
 
   onpaginatechange(event: any) {
@@ -47,7 +49,6 @@ export class CourseprofiletabComponent implements OnInit {
     this.pageno = (event.pageIndex * event.pageSize) + 1
     return
   }
-
   renderTableDate(data: any) {
     this.dataSource = new MatTableDataSource<any>(data)
     this.filterData.gridData = data;
@@ -63,16 +64,19 @@ export class CourseprofiletabComponent implements OnInit {
     this.filterData.dataSource.paginator = this.paginator;
     this.filterData.dataSource.sort = this.sort
   }
-  courseProfileAPI() {
-    const body = {
-      "studentId": this.student && this.student.studentId,
-      "name": this.student && this.student.name
+
+  getPurchase() {
+    const data = {
+      "studentId": this.student.studentId,
+      "name": this.student.name
     }
-    this.service.getCourseProfileById(body).subscribe({
+    this.service.getPurchaseById(data).subscribe({
       next: (response) => {
-        this.coursesProfileData = response;
-        this.coursesProfileData = this.coursesProfileData.reverse()
-        this.renderTableDate(this.coursesProfileData)
+
+        this.ePurchasesdata = response;
+        this.ePurchasesdata = this.ePurchasesdata.reverse()
+        this.renderTableDate(this.ePurchasesdata)
+
       },
       error: (error) => {
         console.error(error);
@@ -80,4 +84,6 @@ export class CourseprofiletabComponent implements OnInit {
       }
     });
   }
+
+
 }

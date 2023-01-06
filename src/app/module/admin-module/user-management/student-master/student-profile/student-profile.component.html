@@ -12,16 +12,15 @@
             <div class="card-header text-white bg-secondary mt-3">
                 Student
             </div>
-            
+
             <form class=" d-flex card-body bg-white mb-3" [formGroup]="searchStudentForm" (submit)="oncourseselect()">
-                
-              
+
+
                 <div class="col-md-3 mb-3">
                     <label>Student</label>
 
                     <mat-form-field appearance="outline">
-                        <mat-select  formControlName="studentId" disableOptionCentering
-                            required>
+                        <mat-select formControlName="studentId" disableOptionCentering required>
                             <mat-option *ngFor="let student of StudentList" [value]="student.studentId"
                                 (click)="onSelectStudent(student) ">
                                 {{student.name}}
@@ -32,14 +31,14 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                
-                
-                <div class="col-md-3" >
+
+
+                <div class="col-md-3">
                     <label> Course</label>
-                    <mat-form-field appearance="outline" >
-                        
-                        <mat-select formControlName="course" required  >
-                            <mat-option *ngFor="let course of CourseList" [value]="course.coursesId" >
+                    <mat-form-field appearance="outline">
+
+                        <mat-select formControlName="course" required>
+                            <mat-option *ngFor="let course of CourseList" [value]="course.coursesId">
                                 {{course.coursesName}}
                             </mat-option>
                         </mat-select>
@@ -49,10 +48,10 @@
                     </mat-form-field>
                 </div>
                 <div class="col-md-3">
-                    <button class="btn btn-outline-secondary btn-rounded d-inline-block mt-4" type="submit" >
+                    <button class="btn btn-outline-secondary btn-rounded d-inline-block mt-4" type="submit">
                         Submit</button>
                 </div>
-                
+
             </form>
         </div>
 
@@ -71,10 +70,12 @@
                     <a class="nav-link px-4 fw-bold" data-toggle="tab" href="#tabs-3" role="tab"> Donations </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-4 fw-bold" data-toggle="tab" href="#tabs-4" role="tab"> e-Purchase Information </a>
+                    <a class="nav-link px-4 fw-bold" data-toggle="tab" href="#tabs-4" role="tab"> e-Purchase Information
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-4 fw-bold" data-toggle="tab" href="#tabs-5" role="tab"> Volunteering Details</a>
+                    <a class="nav-link px-4 fw-bold" data-toggle="tab" href="#tabs-5" role="tab"> Volunteering
+                        Details</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link px-4 fw-bold" data-toggle="tab" href="#tabs-6" role="tab"> Courses Profile </a>
@@ -85,13 +86,13 @@
                 <div class="tab-pane active" id="tabs-1" role="tabpanel">
                     <div class=" p-3">
                         <div class="row">
-                            <div class="col-md-2" >
+                            <div class="col-md-2">
                                 <mat-card class=" border border-2" rows="4">
                                     <p class="text-center text-secondary mb-2 fw-bold">Student Image</p>
                                     <div class="profile-pic text-center rounded-circle bg-ty-profile">
                                         <!-- <img src="assets/images/user-profile.png" width="100"
                                             alt="user pic" /> -->
-                                            <i class="fa-solid fa-user fa-8x " style="opacity: .2;font-size: 8em;" ></i>
+                                        <i class="fa-solid fa-user fa-8x " style="opacity: .2;font-size: 8em;"></i>
                                     </div>
                                 </mat-card>
                             </div>
@@ -112,13 +113,13 @@
                                                             <p class=""> Student Id : </p>
                                                         </div>
                                                     </div>
-                            
+
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
                                                     <h4>{{ studentProfile.studentId}}</h4>
                                                 </div>
                                             </div>
-                            
+
                                             <hr class="my-0" />
                                             <div class="row">
                                                 <div class="col-md-4  border-right py-0     text-center">
@@ -130,7 +131,7 @@
                                                             <p class=""> Name : </p>
                                                         </div>
                                                     </div>
-                            
+
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
                                                     <h4>{{ studentProfile.name | titlecase }}</h4>
@@ -141,19 +142,20 @@
                                                 <div class="col-md-4  border-right py-0     text-center">
                                                     <div class="d-flex flex-row   py-3  align-items-center px-4  ">
                                                         <div>
-                                                            <p> <i class=" fa-solid fa-envelope-open-text me-4 "></i></p>
+                                                            <p> <i class=" fa-solid fa-envelope-open-text me-4 "></i>
+                                                            </p>
                                                         </div>
                                                         <div>
                                                             <p class=""> Profession : </p>
                                                         </div>
                                                     </div>
-                            
+
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
                                                     <h4>{{studentProfile.profession }}</h4>
                                                 </div>
                                             </div>
-                            
+
                                             <hr class="my-0" />
                                             <div class="row">
                                                 <div class="col-md-4  border-right py-0     text-center">
@@ -165,14 +167,14 @@
                                                             <p class=""> Educational details : </p>
                                                         </div>
                                                     </div>
-                            
+
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
                                                     <h4>{{ studentProfile.qualification}}</h4>
                                                 </div>
                                             </div>
-                            
-                            
+
+
                                             <hr class="my-0" />
                                             <div class="row">
                                                 <div class="col-md-4  border-right py-0     text-center">
@@ -184,13 +186,13 @@
                                                             <p class=""> Gender : </p>
                                                         </div>
                                                     </div>
-                            
+
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
                                                     <h4>{{ studentProfile.gender }}</h4>
                                                 </div>
                                             </div>
-                            
+
                                             <hr class="my-0" />
                                             <div class="row">
                                                 <div class="col-md-4  border-right py-0     text-center">
@@ -202,7 +204,7 @@
                                                             <p class=""> Age : </p>
                                                         </div>
                                                     </div>
-                            
+
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
                                                     <h4>{{ studentProfile.age }}</h4>
@@ -221,7 +223,7 @@
                                                             <p class=""> Mobile : </p>
                                                         </div>
                                                     </div>
-                            
+
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
                                                     <h4>{{ studentProfile.mobile }}</h4>
@@ -239,7 +241,7 @@
                                                             <p class=""> Address : </p>
                                                         </div>
                                                     </div>
-                            
+
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
                                                     <h4>{{ studentProfile.address }}</h4>
@@ -257,14 +259,14 @@
                                                             <p class=""> Email id: </p>
                                                         </div>
                                                     </div>
-                            
+
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
                                                     <h4>{{ studentProfile.emailId }}</h4>
                                                 </div>
                                             </div>
 
-                                            
+
                                             <hr class="my-0" />
                                             <div class="row">
                                                 <div class="col-md-4  border-right py-0     text-center">
@@ -276,14 +278,14 @@
                                                             <p class=""> Member registered on: </p>
                                                         </div>
                                                     </div>
-                            
+
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
                                                     <h4>{{ studentProfile.regesiterDate }}</h4>
                                                 </div>
                                             </div>
 
-                                            
+
                                             <hr class="my-0" />
                                             <div class="row">
                                                 <div class="col-md-4  border-right py-0     text-center">
@@ -295,7 +297,7 @@
                                                             <p class=""> Registered from IP address: </p>
                                                         </div>
                                                     </div>
-                            
+
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
                                                     <h4>{{ studentProfile.registedIpAddress }}</h4>
@@ -307,25 +309,44 @@
                                                 <div class="col-md-4  border-right py-0     text-center">
                                                     <div class="d-flex flex-row   py-3  align-items-center px-4  ">
                                                         <div>
-                                                            <p><i class="fa-solid fa-temperature-three-quarters me-4"></i></p>
+                                                            <p><i
+                                                                    class="fa-solid fa-temperature-three-quarters me-4"></i>
+                                                            </p>
                                                         </div>
                                                         <div>
                                                             <p class=""> Change status: </p>
                                                         </div>
                                                     </div>
-                            
+
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
-                                                    <mat-radio-group aria-label="Select an option" class="d-inline-block" >
-                                                        <mat-radio-button value="1" (click)=" changestatus(studentProfile,1,'Active')" [checked]="studentProfile.statusId==1?true:false">Active </mat-radio-button> &nbsp; &nbsp;
+                                                    <mat-radio-group aria-label="Select an option"
+                                                        class="d-inline-block">
+                                                        <mat-radio-button value="1"
+                                                            (click)=" changestatus(studentProfile,1,'Active')"
+                                                            [checked]="studentProfile.statusId==1?true:false">Active
+                                                        </mat-radio-button> &nbsp; &nbsp;
                                                         &nbsp;
-                                                        <mat-radio-button value="2" (click)=" changestatus(studentProfile,2,'Mentor Removed')" [checked]="studentProfile.statusId==2?true:false">Mentor Removed </mat-radio-button>
+                                                        <mat-radio-button value="2"
+                                                            (click)=" changestatus(studentProfile,2,'Mentor Removed')"
+                                                            [checked]="studentProfile.statusId==2?true:false">Mentor
+                                                            Removed </mat-radio-button>
                                                         &nbsp; &nbsp; &nbsp;
-                                                        <mat-radio-button value="3" (click)=" changestatus(studentProfile,3,'Withdrawn')"[checked]="studentProfile.statusId==3?true:false" >Withdrawn </mat-radio-button> &nbsp;
+                                                        <mat-radio-button value="3"
+                                                            (click)=" changestatus(studentProfile,3,'Withdrawn')"
+                                                            [checked]="studentProfile.statusId==3?true:false">Withdrawn
+                                                        </mat-radio-button> &nbsp;
                                                         &nbsp; &nbsp;
-                                                        <mat-radio-button value="4" (click)=" changestatus(studentProfile,4,'System removed')"[checked]="studentProfile.statusId==4?true:false" >System removed </mat-radio-button>
+                                                        <mat-radio-button value="4"
+                                                            (click)=" changestatus(studentProfile,4,'System removed')"
+                                                            [checked]="studentProfile.statusId==4?true:false">System
+                                                            removed </mat-radio-button>
                                                         &nbsp; &nbsp; &nbsp;
-                                                        <mat-radio-button value="5" (click)=" changestatus(studentProfile,5,'Reprovisioned (Only for admin & chief mentor)')" [checked]="studentProfile.statusId==5?true:false">Reprovisioned (Only for admin & chief mentor)</mat-radio-button> &nbsp; &nbsp; &nbsp;
+                                                        <mat-radio-button value="5"
+                                                            (click)=" changestatus(studentProfile,5,'Reprovisioned (Only for admin & chief mentor)')"
+                                                            [checked]="studentProfile.statusId==5?true:false">Reprovisioned
+                                                            (Only for admin & chief mentor)</mat-radio-button> &nbsp;
+                                                        &nbsp; &nbsp;
                                                     </mat-radio-group>
                                                     <!-- <mat-radio-group aria-label="Select an option" class="d-inline-block" >
                                                         <mat-radio-button  class="me-2" (click)=" changestatus(studentProfile,index.statusId,index.statusName)" *ngFor="let index of allstatus" [checked]="studentProfile.statusId===index.statusId">{{index.statusName}} </mat-radio-button>
@@ -346,7 +367,7 @@
                                                             <p class=""> Map to a course: </p>
                                                         </div>
                                                     </div>
-                            
+
                                                 </div>
                                                 <div class="col-md-8  py-3  ps-4 my-auto">
                                                     <h4>{{ studentProfile.course.coursesName}}</h4>
@@ -360,13 +381,13 @@
                                 </div>
                             </div>
 
-  
+
                         </div>
                     </div>
                 </div>
 
                 <div class="tab-pane" id="tabs-2" role="tabpanel">
-               
+
                     <div class="clearfix"></div>
 
                     <table class="table table-bordered" style="vertical-align:text-top">
@@ -554,7 +575,7 @@
                     </div>
                 </div>
 
-                <div class="tab-pane" id="tabs-3" role="tabpanel" >
+                <div class="tab-pane" id="tabs-3" role="tabpanel">
                     <div class=" p-3">
                         <div class="row">
                             <div class="col-md-2">
@@ -563,66 +584,77 @@
                                     <div class="profile-pic text-center rounded-circle bg-ty-profile">
                                         <!-- <img src="assets/images/user-profile.png" width="100"
                                             alt="user pic" /> -->
-                                            <i class="fa-solid fa-user fa-8x " style="opacity: .2;font-size: 8em;"></i>
+                                        <i class="fa-solid fa-user fa-8x " style="opacity: .2;font-size: 8em;"></i>
                                     </div>
                                 </mat-card>
                             </div>
                             <div class="col-md-10">
                                 <div class=" ">
-                                   
+
                                     <div class="">
                                         <div class="card-header text-white bg-secondary">
                                             Donations
-                                         </div>
-                                        <table mat-table matSort [dataSource]="filterData.dataSource" class="mat-elevation-z8 mat-datagrid w-100"
-                                        aria-label="users">
+                                        </div>
+                                        <table mat-table matSort [dataSource]="filterData.dataSource"
+                                            class="mat-elevation-z8 mat-datagrid w-100" aria-label="users">
 
 
                                             <ng-container matColumnDef="SNo">
-                                              <th mat-header-cell *matHeaderCellDef class="col-1"> <label mat-sort-header>
-                                                  S.No
-                                                </label>
-                                      
-                                                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value" disabled
-                                                  [filter]="filterData" disabled="true" />
-                                              </th>
-                                              <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
+                                                <th mat-header-cell *matHeaderCellDef class="col-1"> <label
+                                                        mat-sort-header>
+                                                        S.No
+                                                    </label>
+
+                                                    <input type="text" (keyup)="updatePagination()"
+                                                        [(ngModel)]="filterData.filterColumnNames[0].Value" disabled
+                                                        [filter]="filterData" disabled="true" />
+                                                </th>
+                                                <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
                                             </ng-container>
-                                      
-                                      
+
+
                                             <ng-container matColumnDef="date">
-                                              <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
-                                                  Date
-                                                </label>
-                                      
-                                                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
-                                                  [filter]="filterData" />
-                                              </th>
-                                              <td mat-cell *matCellDef="let element" class="col-2 text-left"> {{element.date |date:'dd-MM-YYYY'}} </td>
+                                                <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label
+                                                        mat-sort-header>
+                                                        Date
+                                                    </label>
+
+                                                    <input type="text" (keyup)="updatePagination()"
+                                                        [(ngModel)]="filterData.filterColumnNames[1].Value"
+                                                        [filter]="filterData" />
+                                                </th>
+                                                <td mat-cell *matCellDef="let element" class="col-2 text-left">
+                                                    {{element.date |date:'dd-MM-YYYY'}} </td>
                                             </ng-container>
-                                      
-                                      
+
+
                                             <ng-container matColumnDef="description">
-                                              <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
-                                                  Description
-                                                </label>
-                                      
-                                                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
-                                                  [filter]="filterData" />
-                                              </th>
-                                              <td mat-cell *matCellDef="let element" class="col-2 text-left"> {{element.description}} </td>
+                                                <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label
+                                                        mat-sort-header>
+                                                        Description
+                                                    </label>
+
+                                                    <input type="text" (keyup)="updatePagination()"
+                                                        [(ngModel)]="filterData.filterColumnNames[2].Value"
+                                                        [filter]="filterData" />
+                                                </th>
+                                                <td mat-cell *matCellDef="let element" class="col-2 text-left">
+                                                    {{element.description}} </td>
                                             </ng-container>
-                                      
-                                      
+
+
                                             <ng-container matColumnDef="modeOfPayment">
-                                              <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
-                                                Mode of Payment
-                                                </label>
-                                      
-                                                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
-                                                  [filter]="filterData" />
-                                              </th>
-                                              <td mat-cell *matCellDef="let element" class="col-2 text-left"> {{element.modeOfPayment}} </td>
+                                                <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label
+                                                        mat-sort-header>
+                                                        Mode of Payment
+                                                    </label>
+
+                                                    <input type="text" (keyup)="updatePagination()"
+                                                        [(ngModel)]="filterData.filterColumnNames[3].Value"
+                                                        [filter]="filterData" />
+                                                </th>
+                                                <td mat-cell *matCellDef="let element" class="col-2 text-left">
+                                                    {{element.modeOfPayment}} </td>
                                             </ng-container>
                                             <!-- <ng-container matColumnDef="currency">
                                               <th mat-header-cell *matHeaderCellDef class="col-1 text-center">  <label mat-sort-header>
@@ -633,32 +665,35 @@
                                                 [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" /></th>
                                               <td mat-cell *matCellDef="let element" class="col-1 text-center"> {{element.currency}} </td>
                                             </ng-container> -->
-                                      
+
                                             <ng-container matColumnDef="donationAmount">
-                                              <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
-                                                  Amount (Rs)
-                                                </label>
-                                                <!-- 
+                                                <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label
+                                                        mat-sort-header>
+                                                        Amount (Rs)
+                                                    </label>
+                                                    <!-- 
                                                 <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[4].Value"
                                                   [filter]="filterData" /> -->
-                                                <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[4].Value"
-                                                [filter]="filterData"  />
-                                              </th>
-                                              <td mat-cell *matCellDef="let element" class="col-2 text-center"> {{element.donarId.donationAmount}} </td>
+                                                    <input type="text" (keyup)="updatePagination()"
+                                                        [(ngModel)]="filterData.filterColumnNames[4].Value"
+                                                        [filter]="filterData" />
+                                                </th>
+                                                <td mat-cell *matCellDef="let element" class="col-2 text-center">
+                                                    {{element.donarId.donationAmount}} </td>
                                             </ng-container>
-                                           
-                                      
-                                      
-                                          
-                                      
+
+
+
+
+
                                             <tr mat-header-row *matHeaderRowDef="donationsColumns"></tr>
                                             <tr mat-row *matRowDef="let row; columns: donationsColumns;"></tr>
-                                          </table>
+                                        </table>
                                         <mat-paginator class="card-body" [pageSizeOptions]="[5,10,25, 50, 100,150,200]"
-                                                              (page)="onpaginatechange($event)" aria-label="Select page">
-                                                          </mat-paginator>
+                                            (page)="onpaginatechange($event)" aria-label="Select page">
+                                        </mat-paginator>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -674,7 +709,7 @@
                                     <div class="profile-pic text-center rounded-circle bg-ty-profile">
                                         <!-- <img src="assets/images/user-profile.png" width="100"
                                             alt="user pic" /> -->
-                                            <i class="fa-solid fa-user fa-8x " style="opacity: .2; font-size: 8em;"></i>
+                                        <i class="fa-solid fa-user fa-8x " style="opacity: .2; font-size: 8em;"></i>
                                     </div>
                                 </mat-card>
                             </div>
@@ -685,71 +720,78 @@
                                             <div class="btn btn-outline-secondary btn-rounded d-inline-block "
                                                *ngIf="!purchaseform" (click)="onaddpurchase()"> Add Purchases</div>
                                     </div> -->
-                                       
-                                        <div class="card-body" *ngIf="purchaseform">
-                                            <form [formGroup]="AddPurchaseForm" (ngSubmit)="onPurchaseSubmit()">
-                                                <div class="card-header text-white bg-secondary">
-                                                   Add Purchases
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <label>Date</label>
-                                                            <mat-form-field appearance="outline" class="">
-                                                                <input matInput type="date"  formControlName="date" placeholder="select Date"required>
-                                                                <mat-error *ngIf="AddPurchaseForm.controls['date'].hasError('required')">
-                                                                    date is to be selected
-                                                                </mat-error>
-                                                            </mat-form-field>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <label>Purchese Amount</label>
-                                                            <mat-form-field  appearance="outline" class="" id="field">
-                                                                
-                                                                <input matInput type="number" autocomplete="off" formControlName="purcheseAmount"
-                                                                    required>
-                                                                    <mat-error *ngIf="AddPurchaseForm.controls['purcheseAmount'].hasError('required')">
-                                                                        purcheseAmount is to be selected
-                                                                    </mat-error>
-                                                            </mat-form-field>
-                                                        </div>
+
+                                    <div class="card-body" *ngIf="purchaseform">
+                                        <form [formGroup]="AddPurchaseForm" (ngSubmit)="onPurchaseSubmit()">
+                                            <div class="card-header text-white bg-secondary">
+                                                Add Purchases
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label>Date</label>
+                                                        <mat-form-field appearance="outline" class="">
+                                                            <input matInput type="date" formControlName="date"
+                                                                placeholder="select Date" required>
+                                                            <mat-error
+                                                                *ngIf="AddPurchaseForm.controls['date'].hasError('required')">
+                                                                date is to be selected
+                                                            </mat-error>
+                                                        </mat-form-field>
                                                     </div>
-                            
-                                                    <div class="row">
-                                                        <div class="col-md-12 mt-3">
-                                                            <label>List of Products </label>
-                                                            <mat-form-field appearance="outline">
-                                                               
-                                                                <textarea matInput formControlName="purcheseList" required></textarea>
-                                                                <mat-error *ngIf="AddPurchaseForm.controls['purcheseList'].hasError('required')">
-                                                                    purcheseList is to be selected
-                                                                </mat-error>
-                                                            </mat-form-field>
-                                                        </div>
+                                                    <div class="col-md-6">
+                                                        <label>Purchese Amount</label>
+                                                        <mat-form-field appearance="outline" class="" id="field">
+
+                                                            <input matInput type="number" autocomplete="off"
+                                                                formControlName="purcheseAmount" required>
+                                                            <mat-error
+                                                                *ngIf="AddPurchaseForm.controls['purcheseAmount'].hasError('required')">
+                                                                purcheseAmount is to be selected
+                                                            </mat-error>
+                                                        </mat-form-field>
                                                     </div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-outline-secondary btn-rounded" 
-                                                        (click)="onPurchaseClose()">Close</button>
-                                                    <button type="submit" class="btn btn-outline-secondary btn-rounded">Save changes</button>
+
+                                                <div class="row">
+                                                    <div class="col-md-12 mt-3">
+                                                        <label>List of Products </label>
+                                                        <mat-form-field appearance="outline">
+
+                                                            <textarea matInput formControlName="purcheseList"
+                                                                required></textarea>
+                                                            <mat-error
+                                                                *ngIf="AddPurchaseForm.controls['purcheseList'].hasError('required')">
+                                                                purcheseList is to be selected
+                                                            </mat-error>
+                                                        </mat-form-field>
+                                                    </div>
                                                 </div>
-                                            </form>
-                                        </div>
-                                    
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-secondary btn-rounded"
+                                                    (click)="onPurchaseClose()">Close</button>
+                                                <button type="submit" class="btn btn-outline-secondary btn-rounded">Save
+                                                    changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+
                                     <div class=" ">
                                         <div class="card-header text-white bg-secondary">
                                             e-Purchases Information
-                                         </div>
+                                        </div>
                                         <table mat-table matSort [dataSource]="filterData2.dataSource2"
-                                        class="mat-elevation-z8 mat-datagrid w-100"   aria-label="users">
+                                            class="mat-elevation-z8 mat-datagrid w-100" aria-label="users">
 
                                             <!-- Position Column -->
                                             <ng-container matColumnDef="SNo">
-                                                <th mat-header-cell *matHeaderCellDef > <label mat-sort-header >
-                                                    S.No
-                                                  </label>
-                                                  <input type="text" (keyup)="updatePagination2()" [(ngModel)]="filterData2.filterColumnNames[0].Value" disabled
-                                                  [filter]="filterData" disabled="true" />
+                                                <th mat-header-cell *matHeaderCellDef> <label mat-sort-header>
+                                                        S.No
+                                                    </label>
+                                                    <input type="text" (keyup)="updatePagination2()"
+                                                        [(ngModel)]="filterData2.filterColumnNames[0].Value" disabled
+                                                        [filter]="filterData" disabled="true" />
                                                 </th>
                                                 <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
 
@@ -759,22 +801,26 @@
                                             <!-- Name Column -->
                                             <ng-container matColumnDef="date">
                                                 <th mat-header-cell *matHeaderCellDef><label mat-sort-header>
-                                                    Date
-                                                  </label>
-                                                  <input type="text" (keyup)="updatePagination2()" [(ngModel)]="filterData2.filterColumnNames[1].Value" 
-                                                  [filter]="filterData" /></th>
-                                                <td mat-cell *matCellDef="let element" class="text-left"> {{element.date | date:'dd-MM-YYYY'}} </td>
+                                                        Date
+                                                    </label>
+                                                    <input type="text" (keyup)="updatePagination2()"
+                                                        [(ngModel)]="filterData2.filterColumnNames[1].Value"
+                                                        [filter]="filterData" />
+                                                </th>
+                                                <td mat-cell *matCellDef="let element" class="text-left"> {{element.date
+                                                    | date:'dd-MM-YYYY'}} </td>
                                             </ng-container>
 
                                             <!-- Weight Column -->
                                             <ng-container matColumnDef="purchaseAmount">
                                                 <th mat-header-cell *matHeaderCellDef><label mat-sort-header>
-                                                    PurchasedAmount 
-                                                  </label> 
-                                                  <input type="text" (keyup)="updatePagination2()" [(ngModel)]="filterData2.filterColumnNames[2].Value" 
-                                                  [filter]="filterData"  />
+                                                        PurchasedAmount
+                                                    </label>
+                                                    <input type="text" (keyup)="updatePagination2()"
+                                                        [(ngModel)]="filterData2.filterColumnNames[2].Value"
+                                                        [filter]="filterData" />
                                                 </th>
-                                                <td mat-cell *matCellDef="let element" > {{element.purchaseAmount}}
+                                                <td mat-cell *matCellDef="let element"> {{element.purchaseAmount}}
                                                 </td>
                                             </ng-container>
 
@@ -783,10 +829,13 @@
                                                 <th mat-header-cell *matHeaderCellDef>
                                                     <label mat-sort-header>
                                                         ProductName
-                                                      </label> 
-                                                      <input type="text" (keyup)="updatePagination2()" [(ngModel)]="filterData2.filterColumnNames[3].Value"
-                                                  [filter]="filterData"  />  </th>
-                                                <td mat-cell *matCellDef="let element" class="text-left"> {{element.productPurchase}}
+                                                    </label>
+                                                    <input type="text" (keyup)="updatePagination2()"
+                                                        [(ngModel)]="filterData2.filterColumnNames[3].Value"
+                                                        [filter]="filterData" />
+                                                </th>
+                                                <td mat-cell *matCellDef="let element" class="text-left">
+                                                    {{element.productPurchase}}
                                                 </td>
                                             </ng-container>
 
@@ -794,8 +843,8 @@
                                             <tr mat-row *matRowDef="let row; columns: ePurchasesColumns;"></tr>
                                         </table>
                                         <mat-paginator class="card-body" [pageSizeOptions]="[5,10,25, 50, 100,150,200]"
-                                        (page)="onpaginatechange($event)" aria-label="Select page">
-                                    </mat-paginator>
+                                            (page)="onpaginatechange($event)" aria-label="Select page">
+                                        </mat-paginator>
                                     </div>
                                     <hr>
                                 </div>
@@ -813,19 +862,20 @@
                                     <div class="profile-pic text-center rounded-circle bg-ty-profile">
                                         <!-- <img src="assets/images/user-profile.png" width="100"
                                             alt="user pic" /> -->
-                                            <i class="fa-solid fa-user fa-8x " style="opacity: .2;font-size: 8em;"></i>
+                                        <i class="fa-solid fa-user fa-8x " style="opacity: .2;font-size: 8em;"></i>
                                     </div>
                                 </mat-card>
                             </div>
                             <div class="col-md-10">
                                 <div class="bg-white">
-                                   <span class="d-flex justify-content-end">
-                                            <div class="btn btn-outline-secondary btn-rounded d-inline-block"
-                                               (click)="onAddVolunteer()"  *ngIf="!volunteerForm"> Add Volunteer</div>
-                                        </span> 
-                                        
-                                    <div >
-                                        <form [formGroup]="AddVolunteerForm" (ngSubmit)="onVolunteerSubmit()" *ngIf="volunteerForm">
+                                    <span class="d-flex justify-content-end">
+                                        <div class="btn btn-outline-secondary btn-rounded d-inline-block"
+                                            (click)="onAddVolunteer()" *ngIf="!volunteerForm"> Add Volunteer</div>
+                                    </span>
+
+                                    <div>
+                                        <form [formGroup]="AddVolunteerForm" (ngSubmit)="onVolunteerSubmit()"
+                                            *ngIf="volunteerForm">
                                             <div class="card-header text-white bg-secondary myt-2">
                                                 Add Volunteer
                                             </div>
@@ -834,216 +884,246 @@
                                                     <div class="col-md-4">
                                                         <label>Catogory</label>
                                                         <mat-form-field appearance="outline">
-                                                           
+
                                                             <mat-select formControlName="category">
-                                                                <mat-option *ngFor="let course of catogeriesList" [value]="course.volunteeringCategoryId                                                             ">
+                                                                <mat-option *ngFor="let course of catogeriesList"
+                                                                    [value]="course.volunteeringCategoryId                                                             ">
                                                                     {{course.categoryName | titlecase}}
                                                                 </mat-option>
                                                             </mat-select>
-                                                          
+
                                                         </mat-form-field>
                                                         <div class="error-message"
-                                                        *ngIf=" AddVolunteerForm.controls['category'].invalid && ( AddVolunteerForm.controls['category'].dirty || AddVolunteerForm.controls['category'].touched)">
-                                                        <mat-error [hidden]=" !AddVolunteerForm.get('category')?.hasError('required')  ">
-                                                            Catogory is mandatory
-                                                        </mat-error>
-                                                    </div>
+                                                            *ngIf=" AddVolunteerForm.controls['category'].invalid && ( AddVolunteerForm.controls['category'].dirty || AddVolunteerForm.controls['category'].touched)">
+                                                            <mat-error
+                                                                [hidden]=" !AddVolunteerForm.get('category')?.hasError('required')  ">
+                                                                Catogory is mandatory
+                                                            </mat-error>
+                                                        </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label>Courses</label>
                                                         <mat-form-field appearance="outline">
-                                                          
+
                                                             <!-- <input matInput autocomplete="off" formControlName="Courses"> -->
                                                             <mat-select formControlName="Courses">
-                                                                <mat-option *ngFor="let course of CourseList" [value]="course.coursesId">
+                                                                <mat-option *ngFor="let course of CourseList"
+                                                                    [value]="course.coursesId">
                                                                     {{course.coursesName}}
                                                                 </mat-option>
                                                             </mat-select>
-                                                           
-                                                            
+
+
                                                         </mat-form-field>
                                                         <div class="error-message"
-                                                        *ngIf=" AddVolunteerForm.controls['Courses'].invalid && ( AddVolunteerForm.controls['Courses'].dirty || AddVolunteerForm.controls['Courses'].touched)">
-                                                        <mat-error [hidden]=" !AddVolunteerForm.get('Courses')?.hasError('required')  ">
-                                                            Courses is to be selected
-                                                        </mat-error>
-                                                    </div>
+                                                            *ngIf=" AddVolunteerForm.controls['Courses'].invalid && ( AddVolunteerForm.controls['Courses'].dirty || AddVolunteerForm.controls['Courses'].touched)">
+                                                            <mat-error
+                                                                [hidden]=" !AddVolunteerForm.get('Courses')?.hasError('required')  ">
+                                                                Courses is to be selected
+                                                            </mat-error>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-md-4">
                                                         <label>Start Date</label>
                                                         <mat-form-field appearance="outline">
-                                                        <input matInput type="date"  formControlName="startDate" placeholder="select Date"required>
-                                                     
-                                                       
-                                                    </mat-form-field>
-                                                    <div class="error-message"
-                                                    *ngIf=" AddVolunteerForm.controls['startDate'].invalid && ( AddVolunteerForm.controls['startDate'].dirty || AddVolunteerForm.controls['startDate'].touched)">
-                                                    <mat-error [hidden]=" !AddVolunteerForm.get('startDate')?.hasError('required')  ">
-                                                        date is to be selected
-                                                    </mat-error>
-                                                </div>
+                                                            <input matInput type="date" formControlName="startDate"
+                                                                placeholder="select Date" required>
+
+
+                                                        </mat-form-field>
+                                                        <div class="error-message"
+                                                            *ngIf=" AddVolunteerForm.controls['startDate'].invalid && ( AddVolunteerForm.controls['startDate'].dirty || AddVolunteerForm.controls['startDate'].touched)">
+                                                            <mat-error
+                                                                [hidden]=" !AddVolunteerForm.get('startDate')?.hasError('required')  ">
+                                                                date is to be selected
+                                                            </mat-error>
+                                                        </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label>End Date</label>
                                                         <mat-form-field appearance="outline">
-                                                        <input matInput type="date"  formControlName="endDate" placeholder="select Date"required>
-                                                   
-                                                    </mat-form-field>
-                                                    <div class="error-message"
-                                                    *ngIf=" AddVolunteerForm.controls['endDate'].invalid && ( AddVolunteerForm.controls['endDate'].dirty || AddVolunteerForm.controls['endDate'].touched)">
-                                                    <mat-error [hidden]=" !AddVolunteerForm.get('endDate')?.hasError('required')  ">
-                                                        date is to be selected
-                                                    </mat-error>
-                                                </div>
-                                                    </div>
-                        
-                                                    <div class="col-md-4">
-                                                        <label>No of Members Managed</label>
-                                                        
-                                                        <mat-form-field class="example-full-width" appearance="outline" id="field">
-                                                            <input type="number" matInput formControlName="members">
-                                                           
+                                                            <input matInput type="date" formControlName="endDate"
+                                                                placeholder="select Date" required>
+
                                                         </mat-form-field>
                                                         <div class="error-message"
-                                                    *ngIf="  AddVolunteerForm.controls['members'].invalid && ( AddVolunteerForm.controls['members'].dirty || AddVolunteerForm.controls['members'].touched)">
-                                                    <mat-error [hidden]=" !AddVolunteerForm.get('members')?.hasError('required')  ">
-                                                        Type the no of memebers
-                                                    </mat-error>
-                                                </div>
+                                                            *ngIf=" AddVolunteerForm.controls['endDate'].invalid && ( AddVolunteerForm.controls['endDate'].dirty || AddVolunteerForm.controls['endDate'].touched)">
+                                                            <mat-error
+                                                                [hidden]=" !AddVolunteerForm.get('endDate')?.hasError('required')  ">
+                                                                date is to be selected
+                                                            </mat-error>
+                                                        </div>
                                                     </div>
-                                                    
+
+                                                    <div class="col-md-4">
+                                                        <label>No of Members Managed</label>
+
+                                                        <mat-form-field class="example-full-width" appearance="outline"
+                                                            id="field">
+                                                            <input type="number" matInput formControlName="members">
+
+                                                        </mat-form-field>
+                                                        <div class="error-message"
+                                                            *ngIf="  AddVolunteerForm.controls['members'].invalid && ( AddVolunteerForm.controls['members'].dirty || AddVolunteerForm.controls['members'].touched)">
+                                                            <mat-error
+                                                                [hidden]=" !AddVolunteerForm.get('members')?.hasError('required')  ">
+                                                                Type the no of memebers
+                                                            </mat-error>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
-                        
+
                                                 <div class="row mb-3">
                                                     <div class="col-md-12">
                                                         <label> Served as </label>
 
                                                         <mat-form-field appearance="outline">
                                                             <textarea matInput formControlName="servedAs"></textarea>
-                                                          
+
                                                         </mat-form-field>
-                                                        
+
                                                     </div>
                                                     <div class="error-message"
-                                                    *ngIf=" AddVolunteerForm.controls['servedAs'].touched">
-                                                    <mat-error [hidden]=" !AddVolunteerForm.get('servedAs')?.hasError('required')  ">
-                                                        Please fill served As
-                                                    </mat-error>
-                                                </div>
+                                                        *ngIf=" AddVolunteerForm.controls['servedAs'].touched">
+                                                        <mat-error
+                                                            [hidden]=" !AddVolunteerForm.get('servedAs')?.hasError('required')  ">
+                                                            Please fill served As
+                                                        </mat-error>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="d-flex justify-content-end">
-                                                
-                                                <button type="submit" class="btn btn-outline-secondary btn-rounded">Add</button>
+
+                                                <button type="submit"
+                                                    class="btn btn-outline-secondary btn-rounded">Add</button>
                                                 <button type="button" class="btn btn-outline-secondary btn-rounded"
-                                                    data-dismiss="modal" (click)="onAddVolunteer()" >Close</button>
+                                                    data-dismiss="modal" (click)="onAddVolunteer()">Close</button>
                                             </div>
                                         </form>
                                     </div>
+                                </div>
+                                <div class="pt-4  pb-1">
+                                    <div class="card-header text-white bg-secondary">
+                                        Category of Volunteering
                                     </div>
-                                    <div class="pt-4  pb-1">
-                                        <div class="card-header text-white bg-secondary">
-                                            Category of Volunteering
-                                         </div>
-                                        <table mat-table [dataSource]="filterData3.dataSource3" matSort
-                                        class="mat-elevation-z8 mat-datagrid w-100"
-                                        aria-label="users">
+                                    <table mat-table [dataSource]="filterData3.dataSource3" matSort
+                                        class="mat-elevation-z8 mat-datagrid w-100" aria-label="users">
 
-                                            <!-- Position Column -->
-                                            <ng-container matColumnDef="SNo">
-                                                <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>
+                                        <!-- Position Column -->
+                                        <ng-container matColumnDef="SNo">
+                                            <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label
+                                                    mat-sort-header>
                                                     S.No
-                                                    </label>
-                                          
-                                                    <input type="text" (keyup)="updatePagination3()" [(ngModel)]="filterData3.filterColumnNames[0].Value"
-                                                      [filter]="filterData3" disabled="ture"/>
-                                                  </th>
-                                                <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
-                                            </ng-container>
+                                                </label>
 
-                                            <!-- Name Column -->
-                                            <ng-container matColumnDef="Category">
-                                                <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
+                                                <input type="text" (keyup)="updatePagination3()"
+                                                    [(ngModel)]="filterData3.filterColumnNames[0].Value"
+                                                    [filter]="filterData3" disabled="ture" />
+                                            </th>
+                                            <td mat-cell *matCellDef="let i=index"> {{pageno +i }} </td>
+                                        </ng-container>
+
+                                        <!-- Name Column -->
+                                        <ng-container matColumnDef="Category">
+                                            <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label
+                                                    mat-sort-header>
                                                     Category
-                                                    </label>
-                                          
-                                                    <input type="text" (keyup)="updatePagination3()" [(ngModel)]="filterData3.filterColumnNames[1].Value"
-                                                      [filter]="filterData3" />
-                                                  </th>
-                                                <td mat-cell *matCellDef="let element" class="text-left"> {{element.categoryName.categoryName}} </td>
-                                            </ng-container>
+                                                </label>
 
-                                            <!-- Weight Column -->
-                                            <ng-container matColumnDef="Courses">
-                                                <th mat-header-cell *matHeaderCellDef class="col-3 text-center"> <label mat-sort-header>
+                                                <input type="text" (keyup)="updatePagination3()"
+                                                    [(ngModel)]="filterData3.filterColumnNames[1].Value"
+                                                    [filter]="filterData3" />
+                                            </th>
+                                            <td mat-cell *matCellDef="let element" class="text-left">
+                                                {{element.categoryName.categoryName}} </td>
+                                        </ng-container>
+
+                                        <!-- Weight Column -->
+                                        <ng-container matColumnDef="Courses">
+                                            <th mat-header-cell *matHeaderCellDef class="col-3 text-center"> <label
+                                                    mat-sort-header>
                                                     Courses
-                                                    </label>
-                                          
-                                                    <input type="text" (keyup)="updatePagination3()" [(ngModel)]="filterData3.filterColumnNames[2].Value"
-                                                      [filter]="filterData3" />
-                                                  </th>
-                                                <td mat-cell *matCellDef="let element" class="text-left"> {{element.courseId.coursesName}} </td>
-                                            </ng-container>
+                                                </label>
 
-                                            <!-- Symbol Column -->
-                                            <ng-container matColumnDef="StartDate">
-                                                <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
+                                                <input type="text" (keyup)="updatePagination3()"
+                                                    [(ngModel)]="filterData3.filterColumnNames[2].Value"
+                                                    [filter]="filterData3" />
+                                            </th>
+                                            <td mat-cell *matCellDef="let element" class="text-left">
+                                                {{element.courseId.coursesName}} </td>
+                                        </ng-container>
+
+                                        <!-- Symbol Column -->
+                                        <ng-container matColumnDef="StartDate">
+                                            <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label
+                                                    mat-sort-header>
                                                     StartDate
-                                                    </label>
-                                          
-                                                    <input type="text" (keyup)="updatePagination3()" [(ngModel)]="filterData3.filterColumnNames[3].Value"
-                                                      [filter]="filterData3" />
-                                                  </th>
-                                                <td mat-cell *matCellDef="let element" class="text-left"> {{element.startDate | date:'dd-MM-YYYY'}} </td>
-                                            </ng-container>
+                                                </label>
 
-                                            <!-- Symbol Column -->
-                                            <ng-container matColumnDef="EndDate">
-                                                <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
+                                                <input type="text" (keyup)="updatePagination3()"
+                                                    [(ngModel)]="filterData3.filterColumnNames[3].Value"
+                                                    [filter]="filterData3" />
+                                            </th>
+                                            <td mat-cell *matCellDef="let element" class="text-left">
+                                                {{element.startDate | date:'dd-MM-YYYY'}} </td>
+                                        </ng-container>
+
+                                        <!-- Symbol Column -->
+                                        <ng-container matColumnDef="EndDate">
+                                            <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label
+                                                    mat-sort-header>
                                                     EndDate
-                                                    </label>
-                                          
-                                                    <input type="text" (keyup)="updatePagination3()" [(ngModel)]="filterData3.filterColumnNames[4].Value"
-                                                      [filter]="filterData3" />
-                                                  </th>
-                                                <td mat-cell *matCellDef="let element" class="text-left"> {{element.endDate | date:'dd-MM-YYYY'}} </td>
-                                            </ng-container>
+                                                </label>
 
-                                            <!-- Symbol Column -->
-                                            <ng-container matColumnDef="SeervedAs">
-                                                <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
+                                                <input type="text" (keyup)="updatePagination3()"
+                                                    [(ngModel)]="filterData3.filterColumnNames[4].Value"
+                                                    [filter]="filterData3" />
+                                            </th>
+                                            <td mat-cell *matCellDef="let element" class="text-left"> {{element.endDate
+                                                | date:'dd-MM-YYYY'}} </td>
+                                        </ng-container>
+
+                                        <!-- Symbol Column -->
+                                        <ng-container matColumnDef="SeervedAs">
+                                            <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label
+                                                    mat-sort-header>
                                                     ServedAs
-                                                    </label>
-                                          
-                                                    <input type="text" (keyup)="updatePagination3()" [(ngModel)]="filterData3.filterColumnNames[5].Value"
-                                                      [filter]="filterData3" />
-                                                  </th>
-                                                <td mat-cell *matCellDef="let element" class="text-left"> {{element.servedAs}} </td>
-                                            </ng-container>
+                                                </label>
 
-                                            <!-- Symbol Column -->
-                                            <ng-container matColumnDef="noMembers">
-                                                <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
+                                                <input type="text" (keyup)="updatePagination3()"
+                                                    [(ngModel)]="filterData3.filterColumnNames[5].Value"
+                                                    [filter]="filterData3" />
+                                            </th>
+                                            <td mat-cell *matCellDef="let element" class="text-left">
+                                                {{element.servedAs}} </td>
+                                        </ng-container>
+
+                                        <!-- Symbol Column -->
+                                        <ng-container matColumnDef="noMembers">
+                                            <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label
+                                                    mat-sort-header>
                                                     noMembers
-                                                    </label>
-                                          
-                                                    <input type="text" (keyup)="updatePagination3()" [(ngModel)]="filterData3.filterColumnNames[6].Value"
-                                                      [filter]="filterData3" />
-                                                  </th>
-                                                <td mat-cell *matCellDef="let element" > {{element.noOfMembers}} </td>
-                                            </ng-container>
+                                                </label>
 
-                                            <tr mat-header-row *matHeaderRowDef="volunterColumns"></tr>
-                                            <tr mat-row *matRowDef="let row; columns: volunterColumns;"></tr>
-                                        </table>
-                                        <mat-paginator class="card-body" [pageSizeOptions]="[5,10,25, 50, 100,150,200]"
+                                                <input type="text" (keyup)="updatePagination3()"
+                                                    [(ngModel)]="filterData3.filterColumnNames[6].Value"
+                                                    [filter]="filterData3" />
+                                            </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.noOfMembers}} </td>
+                                        </ng-container>
+
+                                        <tr mat-header-row *matHeaderRowDef="volunterColumns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: volunterColumns;"></tr>
+                                    </table>
+                                    <mat-paginator class="card-body" [pageSizeOptions]="[5,10,25, 50, 100,150,200]"
                                         (page)="onpaginatechange($event)" aria-label="Select page">
                                     </mat-paginator>
-                                    </div>
-                                    <hr>
-                                
+                                </div>
+                                <hr>
+
                             </div>
                         </div>
                     </div>
@@ -1058,73 +1138,82 @@
                                     <div class="profile-pic text-center rounded-circle bg-ty-profile">
                                         <!-- <img src="assets/images/user-profile.png" width="100"
                                             alt="user pic" /> -->
-                                            <i class="fa-solid fa-user fa-8x " style="opacity: .2;font-size: 8em;"></i>
+                                        <i class="fa-solid fa-user fa-8x " style="opacity: .2;font-size: 8em;"></i>
                                     </div>
                                 </mat-card>
                             </div>
                             <div class="col-md-10">
                                 <div class="">
-                                    
+
                                     <div class="card-header text-white bg-secondary">
                                         Courses Profile
-                                     </div>
+                                    </div>
                                     <table mat-table [dataSource]="filterData4.dataSource4" matSort
-                                    class="mat-elevation-z8 mat-datagrid w-100"
-                                    aria-label="users">
+                                        class="mat-elevation-z8 mat-datagrid w-100" aria-label="users">
 
                                         <ng-container matColumnDef="SNo">
-                                            <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>
-                                               S.No
+                                            <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label
+                                                    mat-sort-header>
+                                                    S.No
                                                 </label>
-                                      
-                                                <input type="text" (keyup)="updatePagination4()" [(ngModel)]="filterData4.filterColumnNames[0].Value"
-                                                  [filter]="filterData4" disabled="true"/>
-                                              </th>
+
+                                                <input type="text" (keyup)="updatePagination4()"
+                                                    [(ngModel)]="filterData4.filterColumnNames[0].Value"
+                                                    [filter]="filterData4" disabled="true" />
+                                            </th>
                                             <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
                                         </ng-container>
 
-                                        <ng-container matColumnDef="CourseName" >
-                                            <th mat-header-cell *matHeaderCellDef class="col-3 text-center"> <label mat-sort-header>
-                                                Course Name
-                                                 </label>
-                                       
-                                                 <input type="text" (keyup)="updatePagination4()" [(ngModel)]="filterData4.filterColumnNames[0].Value"
-                                                   [filter]="filterData4" />
-                                               </th>
+                                        <ng-container matColumnDef="CourseName">
+                                            <th mat-header-cell *matHeaderCellDef class="col-3 text-center"> <label
+                                                    mat-sort-header>
+                                                    Course Name
+                                                </label>
+
+                                                <input type="text" (keyup)="updatePagination4()"
+                                                    [(ngModel)]="filterData4.filterColumnNames[0].Value"
+                                                    [filter]="filterData4" />
+                                            </th>
                                             <td mat-cell *matCellDef="let element" class="text-left">
                                                 ({{element.courseId.coursesName}})
-                                                
+
                                             </td>
                                         </ng-container>
 
                                         <ng-container matColumnDef="AdmissionsStatus">
-                                            <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
-                                                Admission Status
-                                                 </label>
-                                       
-                                                 <input type="text" (keyup)="updatePagination4()" [(ngModel)]="filterData4.filterColumnNames[0].Value"
-                                                   [filter]="filterData4" />
-                                               </th>
-                                            <td mat-cell *matCellDef="let element" class="text-left"> {{element.admissionsStatus}} </td>
+                                            <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label
+                                                    mat-sort-header>
+                                                    Admission Status
+                                                </label>
+
+                                                <input type="text" (keyup)="updatePagination4()"
+                                                    [(ngModel)]="filterData4.filterColumnNames[0].Value"
+                                                    [filter]="filterData4" />
+                                            </th>
+                                            <td mat-cell *matCellDef="let element" class="text-left">
+                                                {{element.admissionsStatus}} </td>
                                         </ng-container>
 
                                         <ng-container matColumnDef="CompletionStatus">
-                                            <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>
-                                                Completion Status
-                                                 </label>
-                                       
-                                                 <input type="text" (keyup)="updatePagination4()" [(ngModel)]="filterData4.filterColumnNames[0].Value"
-                                                   [filter]="filterData4" />
-                                               </th>
-                                            <td mat-cell *matCellDef="let element" class="text-left"> {{element.completionStatus}} </td>
+                                            <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label
+                                                    mat-sort-header>
+                                                    Completion Status
+                                                </label>
+
+                                                <input type="text" (keyup)="updatePagination4()"
+                                                    [(ngModel)]="filterData4.filterColumnNames[0].Value"
+                                                    [filter]="filterData4" />
+                                            </th>
+                                            <td mat-cell *matCellDef="let element" class="text-left">
+                                                {{element.completionStatus}} </td>
                                         </ng-container>
 
                                         <tr mat-header-row *matHeaderRowDef="coursesProfileColumns"></tr>
                                         <tr mat-row *matRowDef="let row; columns: coursesProfileColumns;"></tr>
                                     </table>
                                     <mat-paginator class="card-body" [pageSizeOptions]="[5,10,25, 50, 100,150,200]"
-                                                              (page)="onpaginatechange($event)" aria-label="Select page">
-                                                          </mat-paginator>
+                                        (page)="onpaginatechange($event)" aria-label="Select page">
+                                    </mat-paginator>
                                 </div>
                             </div>
                         </div>

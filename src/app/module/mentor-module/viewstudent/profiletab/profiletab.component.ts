@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
-import { ViewstudentService } from '../viewstudent.service';
+import { StudentService } from 'src/app/data/services/admin-module/user-management/student-master/student.service';
+import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
 
 @Component({
   selector: 'app-profiletab',
@@ -15,7 +15,7 @@ export class ProfiletabComponent implements OnInit {
   studentProfile: any;
   statusList: any
   constructor(
-    private service: ViewstudentService,
+    private service: StudentService,
     private dialog: MatDialog,
     private _snackBar: MatSnackBar
 

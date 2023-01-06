@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StudentprofileComponent } from './studentprofile/studentprofile.component';
 
 const routes: Routes = [
-  { path: "mentorViewProfile", component: StudentprofileComponent }
+  { path: "studentViewProfile", component: StudentprofileComponent }
 ];
 
 @NgModule({

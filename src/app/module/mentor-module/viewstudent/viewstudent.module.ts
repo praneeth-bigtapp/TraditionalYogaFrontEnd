@@ -16,13 +16,21 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioButton, MatRadioModule } from '@angular/material/radio';
 import { CourseprofiletabComponent } from './courseprofiletab/courseprofiletab.component';
+import { DonationTabComponent } from './donation-tab/donation-tab.component';
+import { EpurchaseInformationComponent } from './epurchase-information/epurchase-information.component';
+import { VolunteeringDetailsComponent } from './volunteering-details/volunteering-details.component';
+import { PerformanceDetailsComponent } from './performance-details/performance-details.component';
 
 
 @NgModule({
   declarations: [
     StudentprofileComponent,
     ProfiletabComponent,
-    CourseprofiletabComponent
+    CourseprofiletabComponent,
+    DonationTabComponent,
+    EpurchaseInformationComponent,
+    VolunteeringDetailsComponent,
+    PerformanceDetailsComponent
   ],
   imports: [
     CommonModule,
