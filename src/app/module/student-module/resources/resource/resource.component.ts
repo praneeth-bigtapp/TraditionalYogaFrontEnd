@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ResourcesService } from '../resources.service';
+import { ResourcesService } from 'src/app/data/services/student-module/resources/resources.service';
 import { SortingresourcesComponent } from '../sortingresources/sortingresources.component';
 
 @Component({

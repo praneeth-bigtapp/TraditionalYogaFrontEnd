@@ -19,7 +19,6 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatRadioModule } from '@angular/material/radio';
-import { MyCourseMatriealsComponent } from '../courses/my-course-matrieals/my-course-matrieals.component';
 import { MyCourseMaterialRoutingModule } from './mycoursematerial.routing.module';
 import { MycourseMaterialComponent } from './mycourse-material/mycourse-material.component';
 import { MatExpansionModule } from '@angular/material/expansion';

@@ -110,7 +110,7 @@ export class DonationManagementComponent implements OnInit {
 
   viewDetails(id: any) {
 
-    this.router.navigate(["viewdonation", id]);
+    this.router.navigate(["admin/viewdonation", id]);
     // this.getallData()
   }
   getdate() {

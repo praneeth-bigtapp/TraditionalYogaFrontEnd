@@ -6,9 +6,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { GalleryService } from '../service/gallery.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
+import { GalleryService } from 'src/app/data/services/admin-module/website-management/photo-gallery/photo-gallery.service';
+import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
+
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',

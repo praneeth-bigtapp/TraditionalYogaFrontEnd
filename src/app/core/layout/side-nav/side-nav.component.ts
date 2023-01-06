@@ -85,7 +85,7 @@ export class SideNavComponent implements OnInit {
     this.menuId = menu.subModuleId;
     console.log(this.menuId);
     localStorage.setItem("selectedSubModuleId", this.menuId)
-    // this.sendReceiveService.navigateToMenu(this.menuId);
+    this.sendReceiveService.navigateToMenu(this.menuId);
   }
 
   // subMenuIcon(menu: any) {

@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { GalleryService } from '../service/gallery.service';
+import { GalleryService } from 'src/app/data/services/admin-module/website-management/photo-gallery/photo-gallery.service';
+ 
 @Component({
   selector: 'app-uploadgallery',
   templateUrl: './uploadgallery.component.html',

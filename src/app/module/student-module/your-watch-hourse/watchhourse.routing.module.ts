@@ -5,8 +5,8 @@ import { WatchHourseComponent } from './watch-hourse/watch-hourse.component';
 
 const routes: Routes = [
   { path: 'watchhourse', component: WatchHourseComponent }
-  
-  
+
+
 ];
 
 @NgModule({

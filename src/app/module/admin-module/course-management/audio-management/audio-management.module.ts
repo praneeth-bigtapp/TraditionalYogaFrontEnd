@@ -35,7 +35,6 @@ import { BannerMainRoutingModule } from '../../website-management/banner/banner-
     SharedModule,
     MatSortModule,
     ReactiveFormsModule,
-    BannerMainRoutingModule,
     MatTableModule,
     MatTooltipModule,
     MatPaginatorModule

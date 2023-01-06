@@ -27,9 +27,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
-   WatchHourseComponent
+    WatchHourseComponent
   ],
- 
+
   imports: [
     CommonModule,
     WatchhourRoutingModule,
@@ -47,7 +47,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatSnackBarModule,
     MatPaginatorModule,
     MatSortModule,
- 
+
     MatSlideToggleModule,
     MatTooltipModule,
     MatRadioModule,

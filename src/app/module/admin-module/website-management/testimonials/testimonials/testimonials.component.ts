@@ -8,9 +8,10 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
-import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
-import { TestimonialsService } from '../testimonials.service';
+import { TestimonialsService } from 'src/app/data/services/admin-module/website-management/testimonials/testimonials.service';
+import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
+import { InputvalidationService } from 'src/app/shared/services/input-validation.service';
+
 
 @Component({
   selector: 'app-testimonials',
@@ -55,7 +56,7 @@ export class TestimonialsComponent implements OnInit {
 
     this.testimonial = this.formbuilder.group({
       id: [null],
-      Date:[null, Validators.compose([Validators.required])],
+      Date: [null, Validators.compose([Validators.required])],
       Content: [null, Validators.compose([Validators.required])],
       name: [null, Validators.compose([Validators.required])],
       link: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
@@ -129,7 +130,7 @@ export class TestimonialsComponent implements OnInit {
   viewdetails(element: any) {
     this.testimonial.setValue({
       id: element.testimonalId,
-      Date:"",
+      Date: "",
       Content: element.content,
       name: element.givenByName,
       link: element.videoLink,
@@ -141,7 +142,7 @@ export class TestimonialsComponent implements OnInit {
   editdetails(element: any) {
     this.testimonial.setValue({
       id: element.testimonalId,
-      Date:"",
+      Date: "",
       Content: element.content,
       name: element.givenByName,
       link: element.videoLink,
@@ -165,7 +166,7 @@ export class TestimonialsComponent implements OnInit {
         message: "Are You Sure You Want To Delete this Audio ?"
       },
       width: "30%",
-      height:"25%"
+      height: "25%"
     })
 
     dialogref.afterClosed().subscribe((id: any) => {

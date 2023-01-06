@@ -19,8 +19,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-import {MatListModule} from '@angular/material/list';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatListModule } from '@angular/material/list';
+import { MatRadioModule } from '@angular/material/radio';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { StudentMasterRoutingModule } from './student-master-routing.module';
@@ -41,7 +41,7 @@ import { UserService } from '../../admin-management/user/service/user.service';
     MatSortModule,
     MatTableModule,
     MatSelectModule,
-    FormsModule, 
+    FormsModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,

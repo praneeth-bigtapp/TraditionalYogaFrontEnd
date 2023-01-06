@@ -70,117 +70,117 @@ export class SendReceiveService {
     }
   }
 
-  // navigateToMenu(subMenuId: any) {
-  //   if (subMenuId == 1) {
-  //     this.router.navigateByUrl("administration/roles");
-  //   }
-  //   else if (subMenuId == 2) {
-  //     this.router.navigateByUrl("administration/users");
-  //   }
-  //   else if (subMenuId == 3) {
-  //     this.router.navigateByUrl("administration/module");
-  //   }
-  //   else if (subMenuId == 4) {
-  //     this.router.navigateByUrl("administration/subModule");
-  //   }
-  //   else if (subMenuId == 5) {
-  //     this.router.navigateByUrl("administration/rolePermission");
-  //   }
-  //   else if (subMenuId == 6) {
-  //     this.router.navigateByUrl("dashboard");
-  //   }
-  //   else if (subMenuId == 9) {
-  //     this.router.navigateByUrl("addCourse");
-  //   }
-  //   else if (subMenuId == 10) {
-  //     this.router.navigateByUrl("studentMaster/studentProfile");
-  //   }
-  //   else if (subMenuId == 11) {
-  //     this.router.navigateByUrl("addpages");
-  //   }
-  //   else if (subMenuId == 12) {
-  //     this.router.navigateByUrl("gallery");
-  //   }
-  //   else if (subMenuId == 13) {
-  //     this.router.navigateByUrl("blank");
-  //   }
-  //   else if (subMenuId == 14) {
-  //     this.router.navigateByUrl("testimonials");
-  //   }
-  //   else if (subMenuId == 15) {
-  //     this.router.navigateByUrl("banners");
-  //   }
-  //   else if (subMenuId == 16) {
-  //     this.router.navigateByUrl("blacklistuser");
-  //   }
-  //   else if (subMenuId == 17) {
-  //     this.router.navigateByUrl("mapCourse");
-  //   }
-  //   else if (subMenuId == 18) {
-  //     this.router.navigateByUrl("administration/parameters");
-  //   }
-  //   else if (subMenuId == 19) {
-  //     this.router.navigateByUrl("memberspage");
-  //   }
-  //   else if (subMenuId == 20) {
-  //     this.router.navigateByUrl("media");
-  //   }
-  //   else if (subMenuId == 21) {
-  //     this.router.navigateByUrl("coursemediapracticessession");
-  //   }
-  //   else if (subMenuId == 22) {
-  //     this.router.navigateByUrl("audio");
-  //   }
-  //   else if (subMenuId == 23) {
-  //     this.router.navigateByUrl("tasks");
-  //   }
-  //   else if (subMenuId == 24) {
-  //     this.router.navigateByUrl("blank");
-  //   }
-  //   else if (subMenuId == 25) {
-  //     this.router.navigateByUrl("blank");
-  //   }
-  //   else if (subMenuId == 26) {
-  //     this.router.navigateByUrl("blank");
-  //   }
-  //   else if (subMenuId == 27) {
-  //     this.router.navigateByUrl("regioncreation");
-  //   }
-  //   else if (subMenuId == 28) {
-  //     this.router.navigateByUrl("alert");
-  //   }
-  //   else if (subMenuId == 29) {
-  //     this.router.navigateByUrl("createpraticelibrary");
-  //   }
-  //   else if (subMenuId == 30) {
-  //     this.router.navigateByUrl("practiceLibrary");
-  //   }
-  //   else if (subMenuId == 31) {
-  //     this.router.navigateByUrl("donationManagement");
-  //   }
-  //   else if (subMenuId == 32) {
-  //     this.router.navigateByUrl("createscriptures");
-  //   }
-  //   else if (subMenuId == 33) {
-  //     this.router.navigateByUrl("hidemenuoption");
-  //   }
-  //   else if (subMenuId == 35) {
-  //     this.router.navigateByUrl("pearlofwidsom");
-  //   }
-  //   else if (subMenuId == 36) {
-  //     this.router.navigateByUrl("courseMatrieals");
-  //   }
-  //   else if (subMenuId == 37) {
-  //     this.router.navigateByUrl("onlineexam");
-  //   }
-  //   else if (subMenuId == 38) {
-  //     this.router.navigateByUrl("mappingregionstoCheifMentor");
-  //   }
-  //   else {
-  //     console.log(" Sub Menu is not Mapped ")
-  //     this.router.navigateByUrl("blank")
-  //   }
-  // }
+  navigateToMenu(subMenuId: any) {
+    if (subMenuId == 1) {
+      this.router.navigateByUrl("admin/roles");
+    }
+    else if (subMenuId == 2) {
+      this.router.navigateByUrl("admin/users");
+    }
+    else if (subMenuId == 3) {
+      this.router.navigateByUrl("admin/module");
+    }
+    else if (subMenuId == 4) {
+      this.router.navigateByUrl("admin/subModule");
+    }
+    else if (subMenuId == 5) {
+      this.router.navigateByUrl("admin/rolePermission");
+    }
+    else if (subMenuId == 6) {
+      this.router.navigateByUrl("dashboard");
+    }
+    else if (subMenuId == 9) {
+      this.router.navigateByUrl("admin/addCourse");
+    }
+    else if (subMenuId == 10) {
+      this.router.navigateByUrl("admin/studentProfile");
+    }
+    else if (subMenuId == 11) {
+      this.router.navigateByUrl("admin/addpages");
+    }
+    else if (subMenuId == 12) {
+      this.router.navigateByUrl("admin/gallery");
+    }
+    else if (subMenuId == 13) {
+      this.router.navigateByUrl("blank");
+    }
+    else if (subMenuId == 14) {
+      this.router.navigateByUrl("admin/testimonials");
+    }
+    else if (subMenuId == 15) {
+      this.router.navigateByUrl("admin/banners");
+    }
+    else if (subMenuId == 16) {
+      this.router.navigateByUrl("admin/blacklistuser");
+    }
+    else if (subMenuId == 17) {
+      this.router.navigateByUrl("admin/mapCourse");
+    }
+    else if (subMenuId == 18) {
+      this.router.navigateByUrl("admin/parameters");
+    }
+    else if (subMenuId == 19) {
+      this.router.navigateByUrl("admin/memberspage");
+    }
+    else if (subMenuId == 20) {
+      this.router.navigateByUrl("admin/media");
+    }
+    else if (subMenuId == 21) {
+      this.router.navigateByUrl("admin/coursemediapracticessession");
+    }
+    else if (subMenuId == 22) {
+      this.router.navigateByUrl("admin/audio");
+    }
+    else if (subMenuId == 23) {
+      this.router.navigateByUrl("admin/tasks");
+    }
+    else if (subMenuId == 24) {
+      this.router.navigateByUrl("blank");
+    }
+    else if (subMenuId == 25) {
+      this.router.navigateByUrl("admin/blank");
+    }
+    else if (subMenuId == 26) {
+      this.router.navigateByUrl("admin/blank");
+    }
+    else if (subMenuId == 27) {
+      this.router.navigateByUrl("admin/regioncreation");
+    }
+    else if (subMenuId == 28) {
+      this.router.navigateByUrl("admin/alert");
+    }
+    else if (subMenuId == 29) {
+      this.router.navigateByUrl("admin/createpraticelibrary");
+    }
+    else if (subMenuId == 30) {
+      this.router.navigateByUrl("admin/practiceLibrary");
+    }
+    else if (subMenuId == 31) {
+      this.router.navigateByUrl("admin/donationManagement");
+    }
+    else if (subMenuId == 32) {
+      this.router.navigateByUrl("admin/createscriptures");
+    }
+    else if (subMenuId == 33) {
+      this.router.navigateByUrl("admin/hidemenuoption");
+    }
+    else if (subMenuId == 35) {
+      this.router.navigateByUrl("admin/pearlofwidsom");
+    }
+    else if (subMenuId == 36) {
+      this.router.navigateByUrl("admin/courseMaterials");
+    }
+    else if (subMenuId == 37) {
+      this.router.navigateByUrl("admin/onlineexam");
+    }
+    else if (subMenuId == 38) {
+      this.router.navigateByUrl("admin/mappingregionstoCheifMentor");
+    }
+    else {
+      console.log(" Sub Menu is not Mapped ")
+      this.router.navigateByUrl("blank")
+    }
+  }
 
   getTemplatePermissions(actionId: any) {
     if (actionId == 1) {

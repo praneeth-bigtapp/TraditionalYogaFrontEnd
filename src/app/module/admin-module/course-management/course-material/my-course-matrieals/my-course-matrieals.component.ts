@@ -334,7 +334,7 @@ export class MyCourseMatriealsComponent implements OnInit {
   }
   viewDetails(id: any) {
 
-    this.router.navigate(["ViewMycourseMatrieals", id]);
+    this.router.navigate(["admin/ViewMycourseMatrieals", id]);
     // this.getallData()
   }
 

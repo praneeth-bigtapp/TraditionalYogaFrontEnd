@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { DashboardService } from 'src/app/features/dashboard/dashboard.service';
+import { StudentDashboardService } from 'src/app/data/services/student-module/student-dashboard/student-dashboard.service';
 import { DashboardNotificationComponent } from '../dashboard-notification/dashboard-notification.component';
-import { StudentDashboardService } from '../student-dashboard.service';
 
 @Component({
   selector: 'app-student-dashboard',

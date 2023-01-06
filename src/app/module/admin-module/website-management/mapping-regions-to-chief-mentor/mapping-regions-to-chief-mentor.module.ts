@@ -27,7 +27,6 @@ import { RegioncreationComponent } from '../../course-management/region-manageme
 @NgModule({
   declarations: [
     MappingRegionsToChiefMentorComponent,
-    RegioncreationComponent
   ],
   imports: [
     CommonModule,
