@@ -94,7 +94,7 @@ export class ForgotpasswordComponent implements OnInit {
 
     successDialogRef.afterClosed().subscribe(data => {
 
-      this.router.navigate(['student/login'])
+      this.router.navigate(['login'])
 
     })
 
