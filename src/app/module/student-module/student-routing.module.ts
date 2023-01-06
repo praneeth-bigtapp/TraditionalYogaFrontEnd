@@ -6,6 +6,12 @@ const routes: Routes = [
 
   {
     path: '',
+    loadChildren: () =>
+      import('./registration/registration.module').then((m) => m.RegistrationModule)
+  },
+
+  {
+    path: '',
     canActivate: [AuthGuard],
     loadChildren: () =>
       import('./courses/pastcourse.module').then((m) => m.PastcourseModule)

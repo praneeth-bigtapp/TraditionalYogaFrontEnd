@@ -2,9 +2,10 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
-import { RegistrationService } from '../service/registration.service';
+
 import { HttpClient } from '@angular/common/http';
+import { RegistrationService } from 'src/app/data/services/student-module/registration/registration.service';
+import { InputvalidationService } from 'src/app/shared/services/input-validation.service';
 
 @Component({
   selector: 'app-details-student-information',

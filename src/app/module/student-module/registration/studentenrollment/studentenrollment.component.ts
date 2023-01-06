@@ -3,12 +3,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, startWith, map } from 'rxjs';
-import { DialogPopupComponent } from 'src/app/shared/dialog-popup/dialog-popup.component';
-import { InputvalidationService } from 'src/app/shared/services/inputvalidation.service';
-import { RegistrationService } from '../service/registration.service';
+
 import { HttpClient } from '@angular/common/http';
 import { Route, Router } from '@angular/router';
-import { OtpComponent } from 'src/app/shared/otp/otp.component';
+import { RegistrationService } from 'src/app/data/services/student-module/registration/registration.service';
+import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
+import { OtpComponent } from 'src/app/shared/components/otp/otp.component';
+import { InputvalidationService } from 'src/app/shared/services/input-validation.service';
+
 
 
 @Component({
