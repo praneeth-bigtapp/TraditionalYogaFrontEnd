@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/core/services/auth/auth.service';
 import { MyCourseMatriealsComponent } from './course-management/course-material/my-course-matrieals/my-course-matrieals.component';
 import { ViewMycourseMatriealsComponent } from './course-management/course-material/view-mycourse-matrieals/view-mycourse-matrieals.component';
-import { OnlineexamComponent } from './course-management/online-exam/onlineexam.component';
-import { RegioncreationComponent } from './course-management/region-management/regioncreation.component';
 
 const routes: Routes = [
   {

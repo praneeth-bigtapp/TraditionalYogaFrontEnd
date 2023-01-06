@@ -5,7 +5,7 @@
         <button type="button" class="btn btn-outline-secondary btn-rounded" (click)="onAddRole()"> Add Role </button>
     </div> -->
     <div class="loading-spinner" *ngIf="isloading">
-        <mat-spinner  [mode]="'indeterminate'"></mat-spinner>
+        <mat-spinner [mode]="'indeterminate'"></mat-spinner>
 
     </div>
     <div class="row align-items-center">
@@ -132,7 +132,7 @@
                     </div>
 
                     <div class="col-md-4">
-                        <label>Mobile Number</label>
+                        <label>Mobile Number <small>(+091-1234567890)</small></label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" placeholder="+091-1234567890"
@@ -254,7 +254,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label>State</label>
+                        <label>State / Province</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline" *ngIf="!isIndia">
                                 <input matInput autocomplete="off" formControlName="state">
@@ -262,7 +262,7 @@
 
                             <mat-form-field appearance="outline" *ngIf="isIndia">
                                 <input type="text" aria-label="Country" matInput formControlName="state"
-                                     [matAutocomplete]="state">
+                                    [matAutocomplete]="state">
                                 <mat-autocomplete autoActiveFirstOption #state="matAutocomplete">
                                     <mat-option *ngFor="let country of stateFilter |async " [value]="country">
                                         {{country}}
@@ -280,7 +280,7 @@
                 </div>
                 <div class="row text-align-center pb-1">
                     <div class="col-md-4">
-                        <label>Pin code</label>
+                        <label>Pincode / Zipcode</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" formControlName="pincode" required>
@@ -313,6 +313,65 @@
                         </div>
                     </div>
 
+                    <div class="col-md-4">
+                        <label>Language <small>(only speak)</small></label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <mat-select formControlName="onlySpeakLanguage" multiple>
+                                    <mat-select-trigger>
+                                        {{languageList.value?.[0] || ''}}
+                                        <span *ngIf="(languageList.value?.length || 0) > 1"
+                                            class="example-additional-selection">
+                                            (+{{(languageList.value?.length || 0) - 1}} {{languageList.value?.length ===
+                                            2 ?
+                                            'other' : 'others'}})
+                                        </span>
+                                    </mat-select-trigger>
+                                    <mat-option *ngFor="let language of languageList"
+                                        [value]="language.languageName">{{language.languageName}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="enrollForm.controls['onlySpeakLanguage'].invalid && (enrollForm.controls['onlySpeakLanguage'].dirty || enrollForm.controls['onlySpeakLanguage'].touched)">
+                                <mat-error [hidden]=" !enrollForm.get('onlySpeakLanguage')?.hasError('required')  ">
+                                    Field is mandatory
+                                </mat-error>
+
+                            </div>
+                            <small *ngIf="enrollForm.value.onlySpeakLanguage">Selected
+                                language:{{enrollForm.value.onlySpeakLanguage}}</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Language <small>(speak/write/read)</small></label>
+                        <div class="col px-0">
+                            <mat-form-field appearance="outline">
+                                <mat-select formControlName="onlyReadAndWriteLanguage" multiple>
+                                    <mat-select-trigger>
+                                        {{languageList.value?.[0] || ''}}
+                                        <span *ngIf="(languageList.value?.length || 0) > 1"
+                                            class="example-additional-selection">
+                                            (+{{(languageList.value?.length || 0) - 1}} {{languageList.value?.length ===
+                                            2 ?
+                                            'other' : 'others'}})
+                                        </span>
+                                    </mat-select-trigger>
+                                    <mat-option *ngFor="let language of languageList"
+                                        [value]="language.languageName">{{language.languageName}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <div class="error-message"
+                                *ngIf="enrollForm.controls['onlySpeakLanguage'].invalid && (enrollForm.controls['onlySpeakLanguage'].dirty || enrollForm.controls['onlySpeakLanguage'].touched)">
+                                <mat-error [hidden]=" !enrollForm.get('onlySpeakLanguage')?.hasError('required')  ">
+                                    Field is mandatory
+                                </mat-error>
+
+                            </div>
+                            <small *ngIf="enrollForm.value.onlyReadAndWriteLanguage">Selected
+                                language:{{enrollForm.value.onlyReadAndWriteLanguage}}</small>
+                        </div>
+                    </div>
                     <div class="col-md-4">
                         <label>Can you communicate in English?</label>
                         <div class="col px-0">

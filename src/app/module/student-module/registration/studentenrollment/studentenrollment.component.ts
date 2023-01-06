@@ -38,6 +38,7 @@ export class StudentenrollmentComponent implements OnInit {
   otpError: boolean = false;
   isloading: boolean = false
   statelist: unknown;
+  languageList: any
 
   constructor(
     private formbuilder: FormBuilder,
@@ -51,6 +52,8 @@ export class StudentenrollmentComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.languageList = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+
 
     this.enrollForm = this.formbuilder.group({
       firstName: [null, Validators.compose([Validators.required])],
@@ -71,6 +74,9 @@ export class StudentenrollmentComponent implements OnInit {
       pincode: [null, Validators.compose([Validators.pattern(InputvalidationService.inputvalidation.isnumbers)])],
       refferal: [{ value: null, disabled: this.isEditable }, Validators.compose([Validators.required])],
       termsCondition: [null, Validators.compose([Validators.required])],
+      onlySpeakLanguage: [null],
+      onlyReadAndWriteLanguage: [null]
+
     });
 
     // 1. Country
@@ -117,6 +123,17 @@ export class StudentenrollmentComponent implements OnInit {
         console.error(error);
       }
     });
+
+    this.regService.getLanguages().subscribe({
+      next: (response) => {
+        this.languageList = response;
+        console.log(this.languageList);
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
+
 
 
 
@@ -192,6 +209,8 @@ export class StudentenrollmentComponent implements OnInit {
   emailChange() {
     this.isEmailValid = this.enrollForm.controls["email"].valid;
   }
+
+
 
   verifyEmail() {
     this.isloading = true
@@ -394,6 +413,8 @@ export class StudentenrollmentComponent implements OnInit {
             "aboutUsId": this.enrollForm.value.refferal
           },
           "termsCondition": this.enrollForm.value.termsCondition ? "Y" : "N"
+          //  : onlySpeakLanguage
+          // : onlyReadAndWriteLanguage
         }
         this.isloading = true
         this.regService.postEnrollment(body).subscribe({

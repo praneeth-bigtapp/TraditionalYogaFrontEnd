@@ -18,6 +18,11 @@ export class RegistrationService extends BaseHttp {
   postVerifyEmailUrl = "register/verifyEmail"
   postOtpUrl = "register/opt"
 
+  languageURL = 'libary/getAllLibary?operation=language'
+
+  getLanguages() {
+    return this.get(this.languageURL)
+  }
   getGender() {
     return this.getRole(this.getGenderUrl);
   }
@@ -61,5 +66,5 @@ export class RegistrationService extends BaseHttp {
   postOtp(body: any) {
     return this.login(this.postOtpUrl, body);
   }
-  
+
 }

@@ -1,12 +1,12 @@
 <div class="ConfigurationTypes_textpadding">
-    <div class="col-md-12 m-3">
+    <div class="col-md-12">
 
 
-        <span class="float-end mb-2">
-            <button type="button" class="btn btn-outline-secondary btn-rounded"
+        <span class=" w-100">
+            <button type="button" class="btn btn-outline-secondary btn-rounded float-md-end"
                 *ngIf="!isAddSubModuleForm && pagePermissions.Add" (click)="onAddSubMenu()"> Add Sub Menu </button>
         </span>
-        <div style="height:10px">
+        <div style="height:10px" *ngIf="errorMessage">
             <div *ngIf="errorMessage" [ngStyle]="{'color': errorType == 'Error' ? 'red':'green'}"
                 class="notificationMessage">{{Message}}</div>
         </div>
@@ -70,7 +70,7 @@
 
     <!-- </h3> -->
     <!-- <div class="clearfix card"></div> -->
-    
+
     <div class="card-header text-white bg-secondary">
         Sub Menu list
     </div>
@@ -135,5 +135,5 @@
     <mat-paginator class="card-body" [pageSizeOptions]="[10,25, 50, 100,150,200]" (page)="onpaginatechange($event)"
         aria-label="Select page">
     </mat-paginator>
-    
+
 </div>
