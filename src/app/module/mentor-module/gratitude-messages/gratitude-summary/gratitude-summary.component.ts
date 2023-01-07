@@ -2,6 +2,7 @@ import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { GratitudeMessagesService } from 'src/app/data/services/mentor-module/gratitude-messages/gratitude-messages.service';
 
 @Component({
@@ -14,10 +15,11 @@ export class GratitudeSummaryComponent implements OnInit {
   paginator!: MatPaginator;
   @ViewChild('otherpaginator', { static: true })
   public secondPaginator!: MatPaginator;
-  @ViewChildren(MatSort) sort = new QueryList<MatSort>();
+  @ViewChild(MatSort, { static: true }) sort!: MatSort;
+  @ViewChild(MatSort, { static: true }) secondsort!: MatSort;
 
 
-  reportDueDateColumns: string[] = ['SNo', 'duedate', 'studentActive', "gratitudeMessages",];
+  reportDueDateColumns: string[] = ['SNo', 'duedate', 'studentActive', "gratitudeMessages"];
   gridData = [];
   dataSource!: MatTableDataSource<any>;
   pageno: number = 1;
@@ -30,7 +32,8 @@ export class GratitudeSummaryComponent implements OnInit {
   otherreportDueDataTable: any
   otherreportDueData: any
   constructor(
-    private service: GratitudeMessagesService
+    private service: GratitudeMessagesService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -47,7 +50,7 @@ export class GratitudeSummaryComponent implements OnInit {
       gridData: this.othergridData,
       dataSource: this.otherdataSource,
       paginator: this.secondPaginator,
-      sort: this.sort
+      sort: this.secondsort
     };
     this.getDueDate()
     this.getOtherDueDate()
@@ -67,8 +70,8 @@ export class GratitudeSummaryComponent implements OnInit {
       this.reportDueDataTable.gridData = data;
       this.reportDueDataTable.dataSource = this.dataSource;
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort.toArray()[index];
-      this.reportDueDataTable.sort = this.sort.toArray()[index];
+      this.dataSource.sort = this.sort;
+      this.reportDueDataTable.sort = this.sort;
       for (let col of this.reportDueDataTable.filterColumnNames) {
         col.Value = '';
       }
@@ -81,8 +84,8 @@ export class GratitudeSummaryComponent implements OnInit {
       this.otherreportDueDataTable.gridData = data;
       this.otherreportDueDataTable.otherdataSource = this.otherdataSource;
       this.otherreportDueDataTable.paginator = this.secondPaginator;
-      this.otherreportDueDataTable.sort = this.sort.toArray()[index];
-      this.otherreportDueDataTable.sort = this.sort.toArray()[index];
+      this.otherreportDueDataTable.sort = this.secondsort
+      this.otherreportDueDataTable.sort = this.secondsort
       for (let col of this.otherreportDueDataTable.filterColumnNames) {
         col.Value = '';
       }
@@ -92,18 +95,18 @@ export class GratitudeSummaryComponent implements OnInit {
   updatePagination(index: number) {
     if (index === 0) {
       this.reportDueDataTable.dataSource.paginator = this.paginator;
-      this.reportDueDataTable.dataSource.sort = this.sort.toArray()[index]
+      this.reportDueDataTable.dataSource.sort = this.sort
       return
     }
     if (index === 1) {
       this.otherreportDueDataTable.dataSource.paginator = this.secondPaginator;
-      this.otherreportDueDataTable.dataSource.sort = this.sort.toArray()[index]
+      this.otherreportDueDataTable.dataSource.sort = this.secondsort
       return
     }
   }
-  ngAfterViewInit() {
-    this.updatePagination(1)
-  }
+  // ngAfterViewInit() {
+  //   this.updatePagination(1)
+  // }
 
   getDueDate() {
     this.reportDueData = [{
@@ -158,5 +161,33 @@ export class GratitudeSummaryComponent implements OnInit {
 
     ]
     this.renderTableDate(this.otherreportDueData, 1)
+  }
+
+  studentActive(id: any) {
+
+  }
+  gratitudeMessage(id: any) {
+
+  }
+  receivedMessage(id: any) {
+    this.router.navigate(["mentor/gratitudeUnreadMessages/", id])
+  }
+  forwardedMessage(id: any) {
+    this.router.navigate(["mentor/", id])
+  }
+  deniedMessage(id: any) {
+    this.router.navigate(["mentor/gratitudeInformed&Denied", id])
+  }
+  notSubmittedMessage(id: any) {
+    this.router.navigate([])
+  }
+  informedMessage(id: any) {
+    this.router.navigate(["mentor/gratitudeInformed&Denied", id])
+  }
+  otherForwarded(id: any) {
+    this.router.navigate([])
+  }
+  otherDenied(id: any) {
+    this.router.navigate([])
   }
 }

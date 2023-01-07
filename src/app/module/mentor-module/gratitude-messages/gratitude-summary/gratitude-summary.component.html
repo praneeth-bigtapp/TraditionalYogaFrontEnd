@@ -1,9 +1,9 @@
 <div class="ConfigurationTypes_textpadding">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#/mentor/mentordashboard">Mentor Management</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Resources</li>
+            <li class="breadcrumb-item"><span href="#">Home</span></li>
+            <li class="breadcrumb-item"><span href="#/mentor/mentordashboard">Mentor Management</span></li>
+            <li class="breadcrumb-item active" aria-current="page">Gratitude Messages summary</li>
         </ol>
     </nav>
 
@@ -41,7 +41,7 @@
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="studentActive">
-                        <th mat-header-cell *matHeaderCellDef scope="col-44">
+                        <th mat-header-cell *matHeaderCellDef scope="col-4">
                             <label mat-sort-header class="mb-md-2">
                                 No of students active as on date
                             </label>
@@ -49,10 +49,11 @@
                         </th>
                         <td mat-cell *matCellDef="let element" class="text-center col-4">
 
-                            <a href="" class="text-primary"><u>
-                                    {{element.studentActive | number}}</u></a>
+                            <span (click)="studentActive(element.sno)" class=" btn text-primary"><u>
+                                    {{element.studentActive | number}}</u></span>
                         </td>
                     </ng-container>
+
 
 
                     <ng-container matColumnDef="gratitudeMessages">
@@ -83,26 +84,30 @@
                         <td mat-cell *matCellDef="let element">
                             <div class="row text-center align-items-center ">
                                 <div class="col-md-2  ">
-                                    <a href="" class="text-primary"><u> {{element.gratitudeMessages.received |
-                                            number}}</u></a>
+                                    <span (click)="receivedMessage(element.sno)" class="btn text-primary"><u>
+                                            {{element.gratitudeMessages.received |
+                                            number}}</u></span>
                                 </div>
                                 <div class="col-md-3  ">
-                                    <a href="" class="text-primary"><u> {{element.gratitudeMessages.forwarded |
-                                            number}}</u></a>
+                                    <span (click)="forwardedMessage(element.sno)" class=" btn text-primary"><u>
+                                            {{element.gratitudeMessages.forwarded |
+                                            number}}</u></span>
                                 </div>
                                 <div class="col-md-2  ">
-                                    <a href="" class="text-primary"><u> {{element.gratitudeMessages.denied |
-                                            number}}</u></a>
+                                    <span (click)="deniedMessage(element.sno)" class=" btn text-primary"><u>
+                                            {{element.gratitudeMessages.denied |
+                                            number}}</u></span>
 
                                 </div>
                                 <div class="col-md-2  ">
-                                    <a href="" class="text-primary"><u> {{element.gratitudeMessages.informed |
-                                            number}}</u></a>
+                                    <span (click)="informedMessage(element.sno)" class=" btn text-primary"><u>
+                                            {{element.gratitudeMessages.informed |
+                                            number}}</u></span>
 
                                 </div>
                                 <div class="col-md-3  ">
-                                    <a href="" class="text-primary"><u>
-                                            {{element.gratitudeMessages.notSubmitted}}</u></a>
+                                    <span (click)="notSubmittedMessage(element.sno)" class="btn text-primary"><u>
+                                            {{element.gratitudeMessages.notSubmitted}}</u></span>
 
                                 </div>
                             </div>
@@ -113,7 +118,7 @@
                     <tr mat-header-row *matHeaderRowDef="reportDueDateColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: reportDueDateColumns;"></tr>
                 </table>
-                <mat-paginator #dueDatepaginator  class="card-body" [pageSizeOptions]="[1,10,25, 50, 100,150,200]"
+                <mat-paginator #dueDatepaginator class="card-body" [pageSizeOptions]="[1,10,25, 50, 100,150,200]"
                     (page)="onpaginatechange($event)" aria-label="Select page">
                 </mat-paginator>
             </div>
@@ -147,7 +152,7 @@
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="gratitudeMessageReceived">
-                        <th mat-header-cell *matHeaderCellDef scope="col-44">
+                        <th mat-header-cell *matHeaderCellDef scope="col-4">
                             <label mat-sort-header class="mb-md-2">
                                 Number of Gratitude messages received
                             </label>
@@ -155,8 +160,8 @@
                         </th>
                         <td mat-cell *matCellDef="let element" class="text-center col-4">
 
-                            <a href="" class="text-primary"><u>
-                                    {{element.gratitudeMessageReceived | number}}</u></a>
+                            <span (click)="gratitudeMessage(element.sno)" class="btn text-primary"><u>
+                                    {{element.gratitudeMessageReceived | number}}</u></span>
                         </td>
                     </ng-container>
 
@@ -181,17 +186,19 @@
                         </th>
                         <td mat-cell *matCellDef="let element">
                             <div class="row text-center align-items-center ">
-                              
+
                                 <div class="col-md-6  ">
-                                    <a href="" class="text-primary"><u> {{element.gratitudeMessages.forwarded |
-                                            number}}</u></a>
+                                    <span (click)="otherForwarded(element.sno)" class=" btn text-primary"><u>
+                                            {{element.gratitudeMessages.forwarded |
+                                            number}}</u></span>
                                 </div>
                                 <div class="col-md-6  ">
-                                    <a href="" class="text-primary"><u> {{element.gratitudeMessages.denied |
-                                            number}}</u></a>
+                                    <span (click)="otherDenied(element.sno)" class=" btn text-primary"><u>
+                                            {{element.gratitudeMessages.denied |
+                                            number}}</u></span>
 
                                 </div>
-                              
+
                             </div>
                         </td>
                     </ng-container>
@@ -200,7 +207,7 @@
                     <tr mat-header-row *matHeaderRowDef="otherDueDateColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: otherDueDateColumns;"></tr>
                 </table>
-                <mat-paginator #otherpaginator  class="card-body" [pageSizeOptions]="[1,10,25, 50, 100,150,200]"
+                <mat-paginator #otherpaginator class="card-body" [pageSizeOptions]="[1,10,25, 50, 100,150,200]"
                     (page)="onpaginatechange($event)" aria-label="Select page">
                 </mat-paginator>
             </div>
