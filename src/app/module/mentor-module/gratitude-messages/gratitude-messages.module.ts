@@ -14,13 +14,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { GratitudeMessageInformedDeniedComponent } from './gratitude-message-informed-denied/gratitude-message-informed-denied.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { GratitudeMessageExclusiveComponent } from './gratitude-message-exclusive/gratitude-message-exclusive.component';
+import { GratitudeReceivedOtherDayComponent } from './gratitude-received-other-day/gratitude-received-other-day.component';
 
 
 @NgModule({
   declarations: [
     GratitudeSummaryComponent,
     GratitudeUnreadMessagesComponent,
-    GratitudeMessageInformedDeniedComponent
+    GratitudeMessageInformedDeniedComponent,
+    GratitudeMessageExclusiveComponent,
+    GratitudeReceivedOtherDayComponent
   ],
   imports: [
     CommonModule,
