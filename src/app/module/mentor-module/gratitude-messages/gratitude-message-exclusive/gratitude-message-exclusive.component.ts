@@ -144,4 +144,11 @@ export class GratitudeMessageExclusiveComponent implements OnInit {
     this.router.navigate(['mentor/gratitudeSummary'])
   }
 
+  downloadAttachment(element: any) {
+
+  }
+  forwardMessage() {
+
+  }
+
 }

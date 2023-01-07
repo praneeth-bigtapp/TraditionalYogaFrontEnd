@@ -42,7 +42,7 @@
                 aria-label="users">
                 <ng-container matColumnDef="SNo">
                     <th mat-header-cell *matHeaderCellDef style="width: 30px;" scope="col-1">
-                        <label mat-sort-header class="mb-md-2">
+                        <label mat-sort-header >
                             S.No
                         </label>
                         <input type="text" (keyup)="updatePagination()"
@@ -54,7 +54,7 @@
                 </ng-container>
                 <ng-container matColumnDef="dateTime">
                     <th mat-header-cell *matHeaderCellDef scope="col-2">
-                        <label mat-sort-header class="mb-md-2">
+                        <label mat-sort-header >
                             Date & Time
                         </label>
                         <input type="text" (keyup)="updatePagination()"
@@ -66,27 +66,27 @@
                 </ng-container>
                 <ng-container matColumnDef="studentName">
                     <th mat-header-cell *matHeaderCellDef scope="col-2">
-                        <label mat-sort-header class="mb-md-2">
+                        <label mat-sort-header >
                             Student Name
                         </label>
                         <input type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell *matCellDef="let element" class="text-center col-2">
+                    <td mat-cell *matCellDef="let element" class="text-left col-2">
                         {{element.studentName | titlecase}}
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="studenID">
+                <ng-container matColumnDef="studentId">
                     <th mat-header-cell *matHeaderCellDef scope="col-2">
-                        <label mat-sort-header class="mb-md-2">
-                            Student Name
+                        <label mat-sort-header >
+                            Student ID
                         </label>
                         <input type="text" (keyup)="updatePagination()"
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell *matCellDef="let element" class="text-center col-2">
-                        #{{element.studentID}}
+                        #{{element.studentId}}
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="message">
@@ -98,7 +98,7 @@
                             [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
                     </th>
                     <td mat-cell *matCellDef="let element" class="text-left">
-                        <p>Seeking Excuses/informed</p>
+
                         <span class="border text-justify text-wrap p-1">
                             {{element.message}}
                         </span>
@@ -114,7 +114,8 @@
                     </th>
                     <td mat-cell *matCellDef="let element">
                         <div class="d-flex flex-wrap justify-content-evenly align-items-center">
-                            <i class="fa-solid fa-file-image fs-5" matTooltip="File"></i>
+                            <i class="fa-solid fa-file-image fs-5" (click)="downloadAttachment(element)"
+                                matTooltip="File"></i>
                             <!-- <span matTooltip="Edit" (click)="editdetails(element)">
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                             </span>
@@ -133,6 +134,13 @@
             <mat-paginator #dueDatepaginator class="card-body" [pageSizeOptions]="[25, 50, 100,150,200]"
                 (page)="onpaginatechange($event)" aria-label="Select page">
             </mat-paginator>
+        </div>
+        <br />
+        <div class="d-flex flex-row  justify-content-center align-items-center  ">
+            <button type="button" (click)="forwardMessage()"
+                class="btn btn-outline-secondary btn-rounded d-inline-block  ">
+                Forward
+            </button>
         </div>
     </div>
 </div>
