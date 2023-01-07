@@ -16,6 +16,14 @@ const routes: Routes = [
     path: '',
     canActivate: [AuthGuard],
     loadChildren: () =>
+      import('./list-of-volunteer/list-of-volunteer.module').then((m) => m.ListOfVolunteerModule)
+
+  },
+  {
+
+    path: '',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
       import('./mentor-dash-board/MentorDashboard.module').then((m) => m.MentorDashboardModule)
 
   },
