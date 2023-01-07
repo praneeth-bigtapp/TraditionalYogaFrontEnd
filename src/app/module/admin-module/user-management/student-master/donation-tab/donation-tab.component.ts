@@ -29,10 +29,10 @@ export class DonationTabComponent implements OnInit {
   ngOnInit(): void {
     this.filterData = {
       filterColumnNames: this.donationsColumns.map(ele => ({ "Key": ele, "Value": "" })),
-      gridData2: this.gridData,
-      dataSource2: this.dataSource,
-      paginator2: this.paginator,
-      sort2: this.sort
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
     };
   }
 
