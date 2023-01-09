@@ -210,7 +210,7 @@ data:any;
     const dialogref = this.dialog.open(DialogPopupComponent, {
       data: {
         title: "Delete Confirmation",
-        message: "Are You Sure You Want To Delete this Audio ?"
+        message: "Are You Sure You Want To Delete this video ?"
       },
       width: "30%",
       height: "25%"
