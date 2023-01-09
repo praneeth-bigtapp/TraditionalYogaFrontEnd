@@ -20,6 +20,8 @@ export class ForgotpasswordComponent implements OnInit {
   email: string = ""
   isloading: boolean = false
   otpData: any
+  successMessage: any
+  errorMessage: any
 
   constructor(
     private router: Router,
@@ -170,16 +172,26 @@ export class ForgotpasswordComponent implements OnInit {
 
     const body = {
       "userName": this.email,
-      "password": btoa(password)
+      "password": btoa(password) || btoa("123")
     }
 
     this.service.forgotPassword(body).subscribe({
       next: (response) => {
+        this.successMessage = response
+        if (this.successMessage.statusCode === 406) {
+          this.errorMessage = "Email ID doesn't exists.Kindly check your registered mail ID."
+          return
+        }
         this.sucessDialog()
       },
       error: (error) => {
         console.error(error);
+        if (error.error.statusCode === 406) {
+          this.errorMessage = "Email ID doesn't exists.Kindly check your registered mail ID."
+          console.log(this.errorMessage);
 
+          return
+        }
       }
     })
   }

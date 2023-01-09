@@ -17,9 +17,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
 import { UserRoutingModule } from './user-routing.module';
 import { UserFilterComponent } from './user-filter/user-filter.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { SuspiciousUsersComponent } from './suspicious-users/suspicious-users.component';
 @NgModule({
   declarations: [
-    UserFilterComponent
+    UserFilterComponent,
+    SuspiciousUsersComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +43,7 @@ import { UserFilterComponent } from './user-filter/user-filter.component';
     SharedModule,
     MatTooltipModule,
     MatIconModule,
+    MatAutocompleteModule,
   ]
 })
 export class UserFilterModule { }

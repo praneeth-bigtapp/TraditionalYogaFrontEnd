@@ -129,7 +129,7 @@ export class StudentenrollmentComponent implements OnInit {
         console.log(this.languageList);
       },
       error: (error) => {
-        console.error(error.message);
+        console.error(error);
         this.languageList = [{
           languageName: "English"
         },

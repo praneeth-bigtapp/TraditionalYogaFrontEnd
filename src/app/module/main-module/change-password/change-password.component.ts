@@ -49,6 +49,8 @@ export class ChangePasswordComponent implements OnInit {
   Message: any;
   errorType: any;
   ispasswordNotMatch: boolean = false;
+  errorMessageString!: any
+
 
   constructor(private changepasswordService: ChangePasswordService,
     private formBuilder: FormBuilder,
@@ -138,21 +140,28 @@ export class ChangePasswordComponent implements OnInit {
 
     console.log(this.ChangePasswordForm.valid);
 
-    const body = {
+    // const body = {
+    //   "userName": "sumukesh.a@bigtappanalytics.net",
+    //   "password": btoa(this.ChangePasswordForm.value.newpassword)
+    // }
 
-    }
 
-    
 
-    this.service.changePassword(body).subscribe({
-      next: (response) => {
-        this.sucessDialog()
-      },
-      error: (error) => {
-        console.error(error);
+    // this.service.changePassword(body).subscribe({
+    //   next: (response) => {
+    //     this.sucessDialog()
+    //   },
+    //   error: (error) => {
+    //     console.error(error);
+    // if (error.error.statusCode === 406) {
+    //   this.errorMessageString = "Email ID doesn't exists.Kindly check your registered mail ID."
+    //   console.log(this.errorMessageString);
 
-      }
-    })
+    //   return
+    // }
+
+    //   }
+    // })
 
 
   }
