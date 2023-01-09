@@ -29,34 +29,35 @@
 
   <div class="" *ngIf="displaycontent">
     <h5 class="card-header text-white bg-secondary">Create Album </h5>
-    <form class="card bg-white  p-3" [formGroup]="createalbum">
+    <form class="card bg-white  p-3" [formGroup]="createalbum" (ngSubmit)="createAlbumSubmit()">
       <div class="row">
-        <div class="col-md-6"><label>Album Name</label>
+        <div class="col-md-4"><label>Album Name</label>
           <mat-form-field class="example-full-width" appearance="outline">
 
             <input matInput formControlName="GalaryName">
           </mat-form-field>
         </div>
-        <div class="col-md-12">
-          <label>Description</label>
-          <mat-form-field class="example-full-width" appearance="outline">
-
-            <textarea matInput placeholder="Type your Description here..." formControlName="description"></textarea>
-          </mat-form-field>
-        </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label>Event From Date</label>
           <mat-form-field class="example-full-width" appearance="outline">
 
             <input matInput formControlName="dateofcreation" placeholder="Ex. Pizza" value="Sushi" type="date">
           </mat-form-field>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label>Event To Date</label>
           <mat-form-field class="example-full-width" appearance="outline">
             <input matInput formControlName="todate" placeholder="Ex. Pizza" value="Sushi" type="date">
           </mat-form-field>
         </div>
+        <div class="col-md-12">
+          <label>Description</label>
+          <mat-form-field class="example-full-width" appearance="outline">
+
+            <textarea matInput formControlName="description"></textarea>
+          </mat-form-field>
+        </div>
+
         <!-- <div class="row justify-content-end">
             <div class="col-md-12 ">
               <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2">
@@ -158,7 +159,7 @@
 
 
               <mat-slide-toggle matTooltip="Visiblity" [checked]="IsActiveorNot(element.quoteId)"
-                (change)="ChangeActive(element.quoteId)" [matTooltip]="element.isActive"></mat-slide-toggle>
+                (toggleChange)="ChangeActive(element)" [matTooltip]="element.isActive"></mat-slide-toggle>
 
               <i class="fa-solid fa-eye fs-5 text-info" (click)="viewdetails(element)" matTooltip="View Course Activity"
                 matTooltip="View"></i>

@@ -11,6 +11,8 @@ export class VideoGalleryService extends BaseHttp {
   updateAlbumUrl = ""
   deleteAlbumUrl = ""
 
+  toggleAlbumUrl = ""
+
   addVideoAlbumUrl = "courseList/mapVideos?operation=add"
   updateVideoAlbumUrl = "courseList/mapVideos?operation=update"
   deleteVideoAlbumUrl = "courseList/mapVideos?operation=delete"
@@ -28,6 +30,9 @@ export class VideoGalleryService extends BaseHttp {
   }
   deleteAlbum(body: any) {
     return this.post(this.deleteAlbumUrl, body)
+  }
+  toggleAlbum(body: any) {
+    return this.post(this.toggleAlbumUrl, body)
   }
   getVideoAlbum() {
     return this.get(this.getVideoAlbumUrl)

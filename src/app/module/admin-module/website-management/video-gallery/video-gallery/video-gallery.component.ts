@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -26,43 +27,8 @@ export class VideoGalleryComponent implements OnInit {
   filerror!: boolean
   filerror2: boolean = false
 
-  data = [
-    {
-      "GalaryName": "RYT 200 Course photos",
-      "dateofcreation": new Date(),
-      "role": "Admin",
-      "numberofvideosadded": 18,
-      "SNo": "1",
-      "isvisible": false
-    },
-    {
-      "GalaryName": "RYT 800Course photos",
-      "dateofcreation": new Date(),
-      "role": "Student",
-      "numberofvideosadded": 108,
-      "SNo": "2",
-      "isvisible": true
-    },
-    {
-      "GalaryName": "RYT 800Course photos",
-      "dateofcreation": new Date(),
-      "role": "Student",
-      "numberofvideosadded": 10,
-      "SNo": "3",
-      "isvisible": true
-    },
-    {
-      "GalaryName": "RYT 800Course photos",
-      "dateofcreation": new Date(),
-      "role": "Student",
-      "numberofvideosadded": 108,
-      "SNo": "4",
-      "isvisible": true
-    }
+  data!: any
 
-
-
-  ]
   displayedColumns: string[] = ["SNo", "GalaryName", "dateofcreation", "role", "numberofvideosadded", "Actions"];
 
   dataSource: any;
@@ -70,9 +36,10 @@ export class VideoGalleryComponent implements OnInit {
   constructor(public dialog: MatDialog,
     public router: Router,
     private service: VideoGalleryService,
+    private _snackBar: MatSnackBar,
     private formbuilder: FormBuilder) {
     this.createalbum = this.formbuilder.group({
-
+      albumId: [null],
       GalaryName: [null, Validators.compose([Validators.required])],
       description: [null, Validators.compose([Validators.required])],
       dateofcreation: [null, Validators.compose([Validators.required])],
@@ -83,7 +50,6 @@ export class VideoGalleryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<any>(this.data)
     this.filterData = {
       filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
       gridData: this.gridData,
@@ -91,9 +57,13 @@ export class VideoGalleryComponent implements OnInit {
       paginator: this.paginator,
       sort: this.sort
     };
+    this.getAlbumData()
+  }
 
+  renderTableData(data: any) {
+    this.dataSource = new MatTableDataSource<any>(data)
 
-    this.filterData.gridData = this.data;
+    this.filterData.gridData = data;
     this.filterData.dataSource = this.dataSource;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -101,7 +71,6 @@ export class VideoGalleryComponent implements OnInit {
     for (let col of this.filterData.filterColumnNames) {
       col.Value = '';
     }
-
   }
 
   ngAfterViewInit() {
@@ -117,6 +86,12 @@ export class VideoGalleryComponent implements OnInit {
 
   }
 
+  openSnackBar(data: any) {
+    this._snackBar.open(data.message, 'Close', {
+      duration: 2 * 1000,
+    });
+
+  }
   onpaginatechange(event: any) {
     if (event.pageIndex === 0) {
       this.pageno = 1
@@ -129,7 +104,76 @@ export class VideoGalleryComponent implements OnInit {
     this.displaycontent = !this.displaycontent
   }
 
+  getAlbumData() {
+
+
+    this.service.getAlbum().subscribe({
+      next: (response) => {
+        this.data = response
+        this.data = this.data.reverse()
+
+        this.renderTableData(this.data)
+      },
+      error: (error) => {
+        console.error(error);
+        this.data = [
+          {
+            "GalaryName": "RYT 200 Course photos",
+            "dateofcreation": new Date(),
+            "role": "Admin",
+            "numberofvideosadded": 18,
+            "SNo": "1",
+            "isvisible": false
+          },
+          {
+            "GalaryName": "RYT 800Course photos",
+            "dateofcreation": new Date(),
+            "role": "Student",
+            "numberofvideosadded": 108,
+            "SNo": "2",
+            "isvisible": true
+          },
+          {
+            "GalaryName": "RYT 800Course photos",
+            "dateofcreation": new Date(),
+            "role": "Student",
+            "numberofvideosadded": 10,
+            "SNo": "3",
+            "isvisible": true
+          },
+          {
+            "GalaryName": "RYT 800Course photos",
+            "dateofcreation": new Date(),
+            "role": "Student",
+            "numberofvideosadded": 108,
+            "SNo": "4",
+            "isvisible": true
+          }
+        ]
+        this.renderTableData(this.data)
+
+      }
+    })
+  }
+
   ChangeActive(element: any) {
+    const yes = ["Yes", "Y", "yes", "y"]
+    const no = ["No", "N", "no", "n"]
+    
+    const body = {
+
+    }
+
+    this.service.toggleAlbum(body).subscribe({
+      next: (response) => {
+        this.openSnackBar(response)
+        this.getAlbumData()
+      },
+      error: (error) => {
+        console.error(error);
+
+      }
+    })
 
   }
   IsActiveorNot(element: any) {
@@ -142,8 +186,12 @@ export class VideoGalleryComponent implements OnInit {
   viewdetails(element: any) {
     this.createalbum.patchValue({
 
-      GalaryName: element.GalaryName,
-      dateofcreation: element.dateofcreation,
+      albumId: [null],
+      GalaryName: null,
+      description: null,
+      dateofcreation: null,
+      // duration: ,
+      todate: null,
 
     })
     this.issubmit = false
@@ -153,8 +201,12 @@ export class VideoGalleryComponent implements OnInit {
 
     this.createalbum.patchValue({
 
-      GalaryName: element.GalaryName,
-      dateofcreation: element.dateofcreation,
+      albumId: [null],
+      GalaryName: null,
+      description: null,
+      dateofcreation: null,
+      // duration: ,
+      todate: null,
 
     })
     this.iseditable = true
@@ -163,7 +215,20 @@ export class VideoGalleryComponent implements OnInit {
 
   }
   deletedetails(element: any) {
+    const body = {
 
+    }
+    this.service.deleteAlbum(body).subscribe({
+      next: (response) => {
+        this.openSnackBar(response)
+        this.getAlbumData()
+      },
+      error: (error) => {
+        console.error(error);
+
+      }
+    })
+    return
   }
 
   addphoto() {
@@ -176,6 +241,51 @@ export class VideoGalleryComponent implements OnInit {
     this.displaycontent = !this.displaycontent
     this.issubmit = true
     this.filerror2 = false
+  }
+
+  createAlbumSubmit() {
+    if (this.createalbum.invalid)
+      return this.createalbum.markAllAsTouched()
+
+    const { GalaryName, description, dateofcreation, todate } = this.createalbum.value
+
+    if (this.iseditable) {
+      const body = {
+
+      }
+      this.service.updateAlbum(body).subscribe({
+        next: (response) => {
+          this.createalbum.reset()
+          this.openSnackBar(response)
+          this.getAlbumData()
+        },
+        error: (error) => {
+          console.error(error);
+
+        }
+      })
+      return
+    }
+
+
+
+    const body = {
+
+    }
+
+    this.service.addVideoAlbum(body).subscribe({
+      next: (response) => {
+        this.createalbum.reset()
+        this.openSnackBar(response)
+        this.getAlbumData()
+      },
+      error: (error) => {
+        console.error(error);
+
+      }
+    })
+
+
   }
 
 
