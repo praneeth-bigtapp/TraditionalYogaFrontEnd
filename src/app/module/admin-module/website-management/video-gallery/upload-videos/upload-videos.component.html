@@ -28,7 +28,29 @@
 
     <form class="card bg-white  p-3" [formGroup]="uploadVideo" (ngSubmit)="uploadVideoSubmit()">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-3">
+          <div class=" align-items-center  ">
+            <label>Album</label>
+
+            <div class="col px-0">
+              <mat-form-field appearance="outline">
+                <mat-select formControlName="album" [compareWith]="compareselect" [disabled]="iseditable">
+
+                  <mat-option *ngFor="let category of albumList" [value]="category">
+                    {{category.categoriesName}}</mat-option>
+                </mat-select>
+
+              </mat-form-field>
+              <div class="error-message"
+                *ngIf="uploadVideo.controls['album'].invalid && (uploadVideo.controls['album'].dirty || uploadVideo.controls['album'].touched)">
+                <mat-error [hidden]=" !uploadVideo.get('album')?.hasError('required')  ">
+                  Album is mandatory
+                </mat-error>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
           <label>Title</label>
           <mat-form-field class="example-full-width" appearance="outline">
 
@@ -41,10 +63,10 @@
             </mat-error>
           </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-3">
           <label>Video Link</label>
           <mat-form-field class="example-full-width" appearance="outline">
-            <textarea matInput formControlName="videoLink" required></textarea>
+            <input matInput formControlName="videoLink" required>
           </mat-form-field>
           <div class="error-message"
             *ngIf="uploadVideo.controls['videoLink'].invalid && (uploadVideo.controls['videoLink'].dirty || uploadVideo.controls['videoLink'].touched)">
@@ -56,7 +78,9 @@
             </mat-error>
           </div>
         </div>
-        <div class="col-md-6" style="padding-top: 15px;">
+        <div class="col-md-3">
+          <label>&nbsp;</label><br />
+
           <mat-radio-group formControlName="isVisible" aria-label="Select an option">
             <mat-radio-button value="visible" class="example-radio-button"> Visible </mat-radio-button>
             <mat-radio-button value="invisible" class="example-radio-button" style="padding-left: 14px;">Invisible

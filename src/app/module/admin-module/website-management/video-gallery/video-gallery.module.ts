@@ -23,14 +23,15 @@ import { VideoGalleryComponent } from './video-gallery/video-gallery.component';
 import { UploadVideosComponent } from './upload-videos/upload-videos.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { VideoGalleryRoutingModule } from './video-gallery.routing.module';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
   declarations: [
-   VideoGalleryComponent,
-   UploadVideosComponent
+    VideoGalleryComponent,
+    UploadVideosComponent
   ],
- 
+
   imports: [
     CommonModule,
     VideoGalleryRoutingModule,
@@ -50,7 +51,8 @@ import { VideoGalleryRoutingModule } from './video-gallery.routing.module';
     MatSlideToggleModule,
     MatTooltipModule,
     MatRadioModule,
-    
+    MatSelectModule,
+
   ]
 })
 export class VideoGalleryModule { }

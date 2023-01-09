@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { VideoGalleryService } from 'src/app/data/services/admin-module/website-management/video-gallery/video-gallery.service';
 import { InputvalidationService } from 'src/app/shared/services/input-validation.service';
 
 @Component({
@@ -27,6 +28,7 @@ export class UploadVideosComponent implements OnInit {
   issubmit: boolean = true
   iseditable: boolean = false
   videoError: boolean = false
+  albumList: any
 
   data = [
     {
@@ -71,10 +73,12 @@ export class UploadVideosComponent implements OnInit {
 
   constructor(
     public router: Router,
-    private formbuilder: FormBuilder
+    private formbuilder: FormBuilder,
+    private service: VideoGalleryService,
   ) {
     this.uploadVideo = this.formbuilder.group({
-
+      videoId: [null],
+      album: [null, Validators.compose([Validators.required])],
       Title: [null, Validators.compose([Validators.required])],
       videoLink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
       isVisible: [null, Validators.compose([Validators.required])]
@@ -102,6 +106,9 @@ export class UploadVideosComponent implements OnInit {
       col.Value = '';
     }
 
+  }
+  compareselect(obj1: any, obj2: any) {
+    return obj1 && obj2 && obj1 === obj2
   }
 
   ngAfterViewInit() {
