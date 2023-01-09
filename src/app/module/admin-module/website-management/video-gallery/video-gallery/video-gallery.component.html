@@ -3,7 +3,7 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#/addpages">Website Management</a></li>
+      <li class="breadcrumb-item"><a href="#/admin/addpages">Website Management</a></li>
       <li class="breadcrumb-item active" aria-current="gallery">Video Gallery</li>
     </ol>
   </nav>
@@ -28,14 +28,19 @@
   </div>
 
   <div class="" *ngIf="displaycontent">
-    <h5 class="card-header text-white bg-secondary">Create Album </h5>
+    <h5 class="card-header text-white bg-secondary">{{iseditable ? "Update" :"Add" }} Album </h5>
     <form class="card bg-white  p-3" [formGroup]="createalbum" (ngSubmit)="createAlbumSubmit()">
       <div class="row">
         <div class="col-md-4"><label>Album Name</label>
           <mat-form-field class="example-full-width" appearance="outline">
-
             <input matInput formControlName="GalaryName">
           </mat-form-field>
+          <div class="error-message"
+            *ngIf="createalbum.controls['GalaryName'].invalid && (createalbum.controls['GalaryName'].dirty || createalbum.controls['GalaryName'].touched)">
+            <mat-error [hidden]=" !createalbum.get('GalaryName')?.hasError('required')  ">
+              Name is mandatory
+            </mat-error>
+          </div>
         </div>
         <div class="col-md-4">
           <label>Event From Date</label>
@@ -43,19 +48,36 @@
 
             <input matInput formControlName="dateofcreation" placeholder="Ex. Pizza" value="Sushi" type="date">
           </mat-form-field>
+          <div class="error-message"
+            *ngIf="createalbum.controls['dateofcreation'].invalid && (createalbum.controls['dateofcreation'].dirty || createalbum.controls['dateofcreation'].touched)">
+            <mat-error [hidden]=" !createalbum.get('dateofcreation')?.hasError('required')  ">
+              Date is mandatory
+            </mat-error>
+          </div>
         </div>
         <div class="col-md-4">
           <label>Event To Date</label>
           <mat-form-field class="example-full-width" appearance="outline">
             <input matInput formControlName="todate" placeholder="Ex. Pizza" value="Sushi" type="date">
           </mat-form-field>
+          <div class="error-message"
+            *ngIf="createalbum.controls['todate'].invalid && (createalbum.controls['todate'].dirty || createalbum.controls['todate'].touched)">
+            <mat-error [hidden]=" !createalbum.get('todate')?.hasError('required')  ">
+              Date is mandatory
+            </mat-error>
+          </div>
         </div>
         <div class="col-md-12">
           <label>Description</label>
           <mat-form-field class="example-full-width" appearance="outline">
-
             <textarea matInput formControlName="description"></textarea>
           </mat-form-field>
+          <div class="error-message"
+            *ngIf="createalbum.controls['description'].invalid && (createalbum.controls['description'].dirty || createalbum.controls['description'].touched)">
+            <mat-error [hidden]=" !createalbum.get('description')?.hasError('required')  ">
+              Description is mandatory
+            </mat-error>
+          </div>
         </div>
 
         <!-- <div class="row justify-content-end">

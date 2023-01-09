@@ -93,7 +93,7 @@ export class GalleryComponent implements OnInit {
   }
 
   addphoto() {
-    this.router.navigate(["uploadGallery"])
+    this.router.navigate(["admin/uploadGallery"])
    
 
   }

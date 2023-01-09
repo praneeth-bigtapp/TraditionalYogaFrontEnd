@@ -3,7 +3,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#/addpages">Website Management</a></li>
+            <li class="breadcrumb-item"><a href="#/admin/addpages">Website Management</a></li>
             <li class="breadcrumb-item"><a href="#/gallery">Photo Album</a></li>
 
             <li class="breadcrumb-item active" aria-current="page">Upload image to album</li>
@@ -35,7 +35,7 @@
                     <div class="col-md-4">
                         <label>Album</label>
                         <mat-form-field appearance="outline">
-                            <mat-select (selectionChange)="albumChange()" formControlName="album" >
+                            <mat-select (selectionChange)="albumChange()" formControlName="album">
                                 <mat-option *ngFor="let album of albumList" [value]="album.photoGalleryId">
                                     {{album.galleryName | titlecase}}</mat-option>
                             </mat-select>
@@ -52,8 +52,8 @@
 
                 <div id="upload py-0">
                     <div class="drag-riles border-none " appDnd (fileDropped)="onFileChange($event)">
-                        <input type="file" #fileDropRef id="fileDropRef" formControlName="photoGallery" (change)="onFileChange($event)"
-                            accept="images/*" multiple />
+                        <input type="file" #fileDropRef id="fileDropRef" formControlName="photoGallery"
+                            (change)="onFileChange($event)" accept="images/*" multiple />
                         <img src="assets/images/UploadImg.jpeg" alt="Upload Image" width="80" height="64">
                         <h3>Drag and drop image here</h3>
                         <h3>or</h3>
@@ -84,8 +84,8 @@
                         </div>
                         <br />
                         <mat-card-content>
-                            <textarea class="border w-100 p-2" (change)="detectchange()" formControlName="fileDescription"
-                                rows="3" placeholder="Description"></textarea>
+                            <textarea class="border w-100 p-2" (change)="detectchange()"
+                                formControlName="fileDescription" rows="3" placeholder="Description"></textarea>
                         </mat-card-content>
                         <mat-card-actions>
                         </mat-card-actions>

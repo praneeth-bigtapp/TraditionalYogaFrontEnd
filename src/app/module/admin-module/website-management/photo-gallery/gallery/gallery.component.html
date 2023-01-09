@@ -3,102 +3,104 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#/addpages">Website Management</a></li>
+      <li class="breadcrumb-item"><a href="#/admin/addpages">Website Management</a></li>
       <li class="breadcrumb-item active" aria-current="gallery">Photo Album</li>
     </ol>
   </nav>
 
- 
-    <!-- <div class="col-7">
+
+  <!-- <div class="col-7">
 
     </div> -->
-    <div class="col-md-12 d-flex justify-content-end">
-      <button type="button" class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark m-2"
-        (click)="album() " *ngIf="!displaycontent">
-        <span>Create Album</span>
-      </button>
+  <div class="col-md-12 d-flex justify-content-end">
+    <button type="button" class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark m-2"
+      (click)="album() " *ngIf="!displaycontent">
+      <span>Create Album</span>
+    </button>
 
-      <button type="button" (click)="addphoto()"
-        class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark m-2 " (click)="addAlbum() ">
-        <span>Add Photo</span>
-      </button>
+    <button type="button" (click)="addphoto()"
+      class="btn  btn-outline-secondary btn-rounded d-inline-block border border-dark m-2 ">
+      <span>Add Photo</span>
+    </button>
 
 
-    </div>
- 
+  </div>
+
 
 
   <div class="card mt-2 " *ngIf="displaycontent">
     <div class="card-header text-white bg-secondary ">
-      Create Album
+      {{iseditable ?"Update":"Add"}} Album
     </div>
     <form class="card bg-white  p-3" [formGroup]="createalbum" (submit)="addAlbum()">
       <div class="row">
-        <div class="col-md-6"><label>Album Name</label>
+        <div class="col-md-4"><label>Album Name</label>
           <mat-form-field class="example-full-width" appearance="outline">
 
             <input matInput formControlName="albumname">
           </mat-form-field>
           <div class="error-message"
-                                    *ngIf="createalbum.controls['albumname'].invalid && (createalbum.controls['albumname'].dirty || createalbum.controls['albumname'].touched)">
-                                    <mat-error [hidden]=" !createalbum.get('albumname')?.hasError('required')  ">
-                                        Category is mandatory
-                                    </mat-error>
-                                </div>
+            *ngIf="createalbum.controls['albumname'].invalid && (createalbum.controls['albumname'].dirty || createalbum.controls['albumname'].touched)">
+            <mat-error [hidden]=" !createalbum.get('albumname')?.hasError('required')  ">
+              Album is mandatory
+            </mat-error>
+          </div>
         </div>
-        <div class="col-md-12">
-          <label>Description</label>
-          <mat-form-field class="example-full-width" appearance="outline">
-
-            <textarea matInput placeholder="Type your Description here..." formControlName="description"></textarea>
-          </mat-form-field>
-          <div class="error-message"
-          *ngIf="createalbum.controls['description'].invalid && (createalbum.controls['description'].dirty || createalbum.controls['description'].touched)">
-          <mat-error [hidden]=" !createalbum.get('description')?.hasError('required')  ">
-              Description is mandatory
-          </mat-error>
-      </div>
-        </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label>Event From Date</label>
           <mat-form-field class="example-full-width" appearance="outline">
 
             <input matInput formControlName="fromdate" placeholder="Ex. Pizza" value="Sushi" type="date">
           </mat-form-field>
           <div class="error-message"
-          *ngIf="createalbum.controls['fromdate'].invalid && (createalbum.controls['fromdate'].dirty || createalbum.controls['fromdate'].touched)">
-          <mat-error [hidden]=" !createalbum.get('fromdate')?.hasError('required')  ">
+            *ngIf="createalbum.controls['fromdate'].invalid && (createalbum.controls['fromdate'].dirty || createalbum.controls['fromdate'].touched)">
+            <mat-error [hidden]=" !createalbum.get('fromdate')?.hasError('required')  ">
               Date is mandatory
-          </mat-error>
-      </div>
+            </mat-error>
+          </div>
         </div>
-        <div class="col-md-6">
+
+        <div class="col-md-4">
           <label>Event To Date</label>
           <mat-form-field class="example-full-width" appearance="outline">
             <input matInput formControlName="todate" placeholder="Ex. Pizza" value="Sushi" type="date">
           </mat-form-field>
           <div class="error-message"
-          *ngIf="createalbum.controls['todate'].invalid && (createalbum.controls['todate'].dirty || createalbum.controls['todate'].touched)">
-          <mat-error [hidden]=" !createalbum.get('todate')?.hasError('required')  ">
+            *ngIf="createalbum.controls['todate'].invalid && (createalbum.controls['todate'].dirty || createalbum.controls['todate'].touched)">
+            <mat-error [hidden]=" !createalbum.get('todate')?.hasError('required')  ">
               Date is mandatory
-          </mat-error>
-      </div>
+            </mat-error>
+          </div>
         </div>
-       
+        <div class="col-md-12">
+          <label>Description</label>
+          <mat-form-field class="example-full-width" appearance="outline">
+
+            <textarea matInput formControlName="description"></textarea>
+          </mat-form-field>
+          <div class="error-message"
+            *ngIf="createalbum.controls['description'].invalid && (createalbum.controls['description'].dirty || createalbum.controls['description'].touched)">
+            <mat-error [hidden]=" !createalbum.get('description')?.hasError('required')  ">
+              Description is mandatory
+            </mat-error>
+          </div>
+        </div>
+
+
 
       </div>
       <div class="d-flex justify-content-end">
-       
-          <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2" *ngIf="submitbth">
-            Create Album
-          </button>
-          <button  (click)="editdetails()" class="btn btn-outline-secondary btn-rounded d-inline-block m-2" *ngIf="updatebtn">
-            Udate
-          </button>
-          <button  class="btn btn-outline-secondary btn-rounded d-inline-block m-2 "
-            (click)="reseteditable()">
-            Cancel
-          </button>
+
+        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2" *ngIf="submitbth">
+          Create
+        </button>
+        <button (click)="editdetails()" class="btn btn-outline-secondary btn-rounded d-inline-block m-2"
+          *ngIf="updatebtn">
+          Update
+        </button>
+        <button class="btn btn-outline-secondary btn-rounded d-inline-block m-2 " (click)="reseteditable()">
+          Cancel
+        </button>
 
       </div>
     </form>
@@ -112,88 +114,88 @@
 
     <!-- <div class="rounded mat-elevation-z8 table-responsive"> -->
 
-      <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100 "
-        aria-label="users">
+    <table mat-table [dataSource]="filterData.dataSource" matSort class="mat-elevation-z8 mat-datagrid w-100 "
+      aria-label="users">
 
-        <ng-container matColumnDef="GalaryName">
-          <th mat-header-cell *matHeaderCellDef class="col-2 text-center "> <label mat-sort-header>Album Name</label>
-            <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value"
-              [filter]="filterData" />
-          </th>
+      <ng-container matColumnDef="GalaryName">
+        <th mat-header-cell *matHeaderCellDef class="col-2 text-center "> <label mat-sort-header>Album Name</label>
+          <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value"
+            [filter]="filterData" />
+        </th>
 
-          <td mat-cell *matCellDef="let element" class="col-2  text-left ">{{element.galleryName}}
+        <td mat-cell *matCellDef="let element" class="col-2  text-left ">{{element.galleryName}}
 
-          </td>
-        </ng-container>
-
-
-        <ng-container matColumnDef="dateofcreation">
-          <th mat-header-cell *matHeaderCellDef class="col-2 text-center"><label mat-sort-header>Date of
-              Creation</label>
-            <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
-              [filter]="filterData" class="mx-2" />
-          </th>
-          <td mat-cell *matCellDef="let element" class="col-2 px-2 text-left text-muted"> {{element.createdDate | date:'dd-MMM-YYYY'}}
-          </td>
-        </ng-container>
+        </td>
+      </ng-container>
 
 
-        <ng-container matColumnDef="role">
-          <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>Name</label>
-            <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
-              [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
-          </th>
-          <td mat-cell *matCellDef="let element" class="col-2 text-left py-2"> {{element.galleryName}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="numberofphotosadded">
-          <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>Number of Photos
-            </label>
-            <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
-              [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
-          </th>
-          <td mat-cell *matCellDef="let element" class="col-2 text-center py-2"> {{element.noOfPhoto}} </td>
-        </ng-container>
+      <ng-container matColumnDef="dateofcreation">
+        <th mat-header-cell *matHeaderCellDef class="col-2 text-center"><label mat-sort-header>Date of
+            Creation</label>
+          <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
+            [filter]="filterData" class="mx-2" />
+        </th>
+        <td mat-cell *matCellDef="let element" class="col-2 px-2 text-left text-muted"> {{element.createdDate |
+          date:'dd-MMM-YYYY'}}
+        </td>
+      </ng-container>
 
 
-        <ng-container matColumnDef="Actions">
-          <th mat-header-cell *matHeaderCellDef class="col text-center"><label mat-sort-header>Actions</label>
-            <input type="text" (keyup)="updatePagination()" [filter]="filterData" class="mx-2" disabled="true" />
-          </th>
-          <td mat-cell *matCellDef="let element" class="col text-center py-2">
-            <div class="d-flex flex-wrap justify-content-evenly align-items-center">
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>Name</label>
+          <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
+            [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
+        </th>
+        <td mat-cell *matCellDef="let element" class="col-2 text-left py-2"> {{element.galleryName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="numberofphotosadded">
+        <th mat-header-cell *matHeaderCellDef class="col-2 text-center"> <label mat-sort-header>Number of Photos
+          </label>
+          <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
+            [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
+        </th>
+        <td mat-cell *matCellDef="let element" class="col-2 text-center py-2"> {{element.noOfPhoto}} </td>
+      </ng-container>
 
 
-              <mat-slide-toggle [checked]="IsActiveorNot(element.photoGalleryId)"
-                                (click)="ChangeActive(element)"
-                                [matTooltip]="element.active"></mat-slide-toggle>
-              <!-- <p>Disable</p> -->
-              <i class="fa-solid fa-eye" (click)="viewdetails(element)" matTooltip="View Course Activity"
-                matTooltip="View"></i>
-
-              <span matTooltip="Edit" (click)="editbtn(element)">
-                <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-              </span>
-              <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element)">
-                <i class="far fa-trash-alt" aria-hidden="true"></i>
-              </span>
-            </div>
-          </td>
-        </ng-container>
-        <i class="fa-sharp fa-solid fa-floppy-disks"></i>
+      <ng-container matColumnDef="Actions">
+        <th mat-header-cell *matHeaderCellDef class="col text-center"><label mat-sort-header>Actions</label>
+          <input type="text" (keyup)="updatePagination()" [filter]="filterData" class="mx-2" disabled="true" />
+        </th>
+        <td mat-cell *matCellDef="let element" class="col text-center py-2">
+          <div class="d-flex flex-wrap justify-content-evenly align-items-center">
 
 
+            <mat-slide-toggle [checked]="IsActiveorNot(element.photoGalleryId)" (click)="ChangeActive(element)"
+              [matTooltip]="element.active"></mat-slide-toggle>
+            <!-- <p>Disable</p> -->
+            <i class="fa-solid fa-eye" (click)="viewdetails(element)" matTooltip="View Course Activity"
+              matTooltip="View"></i>
+
+            <span matTooltip="Edit" (click)="editbtn(element)">
+              <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+            </span>
+            <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element)">
+              <i class="far fa-trash-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        </td>
+      </ng-container>
+      <i class="fa-sharp fa-solid fa-floppy-disks"></i>
 
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-      </table>
-      
-        <mat-paginator class="card-body" [pageSizeOptions]="[ 10,25, 50, 100]" aria-label="Select page"></mat-paginator>
-      
-    </div>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+
+    <mat-paginator class="card-body" [pageSizeOptions]="[ 10,25, 50, 100]" aria-label="Select page"></mat-paginator>
+
   </div>
+</div>
 
 
 

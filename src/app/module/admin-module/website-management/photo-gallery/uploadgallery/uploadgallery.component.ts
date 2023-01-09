@@ -108,7 +108,7 @@ export class UploadgalleryComponent implements OnInit {
   }
 
   manageGallery() {
-    this.router.navigate(["gallery"]);
+    this.router.navigate(["admin/gallery"]);
   }
 
   addGallery() {

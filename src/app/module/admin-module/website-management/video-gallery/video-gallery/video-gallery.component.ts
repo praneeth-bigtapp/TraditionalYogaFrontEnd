@@ -159,7 +159,7 @@ export class VideoGalleryComponent implements OnInit {
   ChangeActive(element: any) {
     const yes = ["Yes", "Y", "yes", "y"]
     const no = ["No", "N", "no", "n"]
-    
+
     const body = {
 
     }
@@ -251,7 +251,11 @@ export class VideoGalleryComponent implements OnInit {
 
     if (this.iseditable) {
       const body = {
-
+        // :albumId
+        "albumName": GalaryName,
+        "eventFromDate": dateofcreation,
+        "eventToDate": todate,
+        "description": description
       }
       this.service.updateAlbum(body).subscribe({
         next: (response) => {
@@ -267,13 +271,14 @@ export class VideoGalleryComponent implements OnInit {
       return
     }
 
-
-
     const body = {
-
+      "albumName": GalaryName,
+      "eventFromDate": dateofcreation,
+      "eventToDate": todate,
+      "description": description
     }
 
-    this.service.addVideoAlbum(body).subscribe({
+    this.service.createAlbum(body).subscribe({
       next: (response) => {
         this.createalbum.reset()
         this.openSnackBar(response)
