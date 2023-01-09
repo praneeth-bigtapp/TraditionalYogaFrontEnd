@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { VideoGalleryService } from 'src/app/data/services/admin-module/website-management/video-gallery/video-gallery.service';
+import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
 import { InputvalidationService } from 'src/app/shared/services/input-validation.service';
 
 @Component({
@@ -17,7 +19,7 @@ export class UploadVideosComponent implements OnInit {
   uploadVideo!: FormGroup
 
   filelist: any = []
-
+  pageno: number = 1
   formdata = new FormData()
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
@@ -29,44 +31,45 @@ export class UploadVideosComponent implements OnInit {
   iseditable: boolean = false
   videoError: boolean = false
   albumList: any
+  audioId:any;
+data:any;
+  // data = [
+  //   {
+  //     "GalaryName": "RYT 200 Course photos",
+  //     "dateofcreation": "21-07-2022",
+  //     "role": "Admin",
+  //     "numberofvideosadded": 18,
+  //     "SNo": "1",
+  //     "isvisible": false
+  //   },
+  //   {
+  //     "GalaryName": "RYT 800Course photos",
+  //     "dateofcreation": "22-07-2022",
+  //     "role": "Student",
+  //     "numberofvideosadded": 108,
+  //     "SNo": "2",
+  //     "isvisible": true
+  //   },
+  //   {
+  //     "GalaryName": "RYT 800Course photos",
+  //     "dateofcreation": "22-07-2022",
+  //     "role": "Student",
+  //     "numberofvideosadded": 10,
+  //     "SNo": "3",
+  //     "isvisible": true
+  //   },
+  //   {
+  //     "GalaryName": "RYT 800Course photos",
+  //     "dateofcreation": "22-07-2022",
+  //     "role": "Student",
+  //     "numberofvideosadded": 108,
+  //     "SNo": "4",
+  //     "isvisible": true
+  //   }
 
-  data = [
-    {
-      "GalaryName": "RYT 200 Course photos",
-      "dateofcreation": "21-07-2022",
-      "role": "Admin",
-      "numberofvideosadded": 18,
-      "SNo": "1",
-      "isvisible": false
-    },
-    {
-      "GalaryName": "RYT 800Course photos",
-      "dateofcreation": "22-07-2022",
-      "role": "Student",
-      "numberofvideosadded": 108,
-      "SNo": "2",
-      "isvisible": true
-    },
-    {
-      "GalaryName": "RYT 800Course photos",
-      "dateofcreation": "22-07-2022",
-      "role": "Student",
-      "numberofvideosadded": 10,
-      "SNo": "3",
-      "isvisible": true
-    },
-    {
-      "GalaryName": "RYT 800Course photos",
-      "dateofcreation": "22-07-2022",
-      "role": "Student",
-      "numberofvideosadded": 108,
-      "SNo": "4",
-      "isvisible": true
-    }
 
 
-
-  ]
+  // ]
   displayedColumns: string[] = ["SNo", "GalaryName", "dateofcreation", "role", "numberofvideosadded", "Actions"];
 
   dataSource: any;
@@ -75,9 +78,11 @@ export class UploadVideosComponent implements OnInit {
     public router: Router,
     private formbuilder: FormBuilder,
     private service: VideoGalleryService,
+    private dialog: MatDialog
   ) {
     this.uploadVideo = this.formbuilder.group({
       videoId: [null],
+     
       album: [null, Validators.compose([Validators.required])],
       Title: [null, Validators.compose([Validators.required])],
       videoLink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
@@ -87,25 +92,57 @@ export class UploadVideosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<any>(this.data)
-    this.filterData = {
-      filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
-      gridData: this.gridData,
-      dataSource: this.dataSource,
-      paginator: this.paginator,
-      sort: this.sort
-    };
+    // this.dataSource = new MatTableDataSource<any>(this.data)
+    // this.filterData = {
+    //   filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
+    //   gridData: this.gridData,
+    //   dataSource: this.dataSource,
+    //   paginator: this.paginator,
+    //   sort: this.sort
+    // };
 
 
-    this.filterData.gridData = this.data;
-    this.filterData.dataSource = this.dataSource;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.filterData.sort = this.sort;
-    for (let col of this.filterData.filterColumnNames) {
-      col.Value = '';
-    }
+    // this.filterData.gridData = this.data;
+    // this.filterData.dataSource = this.dataSource;
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+    // this.filterData.sort = this.sort;
+    // for (let col of this.filterData.filterColumnNames) {
+    //   col.Value = '';
+    // }
+    this.getvideo()
 
+  }
+
+  getvideo() {
+    this.service. getAlbum().subscribe({
+      next: (response) => {
+        this.data = response
+        for (let data of this.data) {
+          data.check = false;
+        }
+        console.log(this.data);
+        this.data = this.data.reverse()
+
+        this.dataSource = new MatTableDataSource<any>(this.data)
+        this.filterData = {
+          filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
+          gridData: this.gridData,
+          dataSource: this.dataSource,
+          paginator: this.paginator,
+          sort: this.sort
+        }; 
+
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+      }
+    });
   }
   compareselect(obj1: any, obj2: any) {
     return obj1 && obj2 && obj1 === obj2
@@ -150,10 +187,15 @@ export class UploadVideosComponent implements OnInit {
   }
   editdetails(element: any) {
 
-    this.createalbum.patchValue({
+    this.uploadVideo.patchValue({
 
-      GalaryName: element.GalaryName,
-      dateofcreation: element.dateofcreation,
+      // GalaryName: element.GalaryName,
+      // dateofcreation: element.dateofcreation,
+      videoId:element.videoId,
+      album:Number(element.album.albumId),
+      Title:element.videoTitle,
+      videoLink:element.videoLink,
+      isVisible:element.visable
 
     })
     this.iseditable = true
@@ -161,10 +203,35 @@ export class UploadVideosComponent implements OnInit {
     this.issubmit = true
 
   }
-  deletedetails(id: any) {
+  deletedetails(videoId: any) {
     const body = {
-      "videoId": id
+      "videoId":videoId
     }
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this Audio ?"
+      },
+      width: "30%",
+      height: "25%"
+    })
+
+    dialogref.afterClosed().subscribe((videoId: any) => {
+      if (videoId) {
+        this.service.deleteVideoAlbum(body).subscribe({
+          next: (response) => {
+            this.getvideo()
+           
+           
+          },
+          error: (error) => {
+            console.error(error.message);
+          }
+        })
+        return
+      }
+
+    })
   }
 
   reseteditable() {
@@ -212,14 +279,63 @@ export class UploadVideosComponent implements OnInit {
     this.videoError = this.filelist.length === 0
     if (this.uploadVideo.invalid)
       return this.uploadVideo.markAllAsTouched()
+      const body = {
+      
+    
+        "album": {
+            "albumId":Number(this.uploadVideo.value.album),
+        },
+        "videoTitle":this.uploadVideo.value.Title,
+        "videoLink":this.uploadVideo.value.videoLink,
+        "visable":this.uploadVideo.value.isVisible
+    
+    }
 
     if (this.iseditable) {
 
-      const body = {}
+      const body = {
+        "videoId": this.uploadVideo.value.videoId,
+       
+        "album": {
+          "albumId":Number(this.uploadVideo.value.album),
+      },
+      "videoTitle":this.uploadVideo.value.Title,
+      "videoLink":this.uploadVideo.value.videoLink,
+      "visable":this.uploadVideo.value.isVisible
+        }
+      
+      this.service.updateVideoAlbum(body).subscribe({
+        next: (response) => {
+          console.log(response);
+         
+          // this.uploadVideo.reset()
+  
+          this.getvideo()
+  
+        },
+        error: (error) => {
+          console.error(error.message);
+  
+        }
+      })
       return
     }
 
-    const body = {}
+   
+    this.service.addVideoAlbum(body).subscribe({
+      next: (response) => {
+        console.log(response);
+       
+        // this.uploadVideo.reset()
+
+        this.getvideo()
+
+      },
+      error: (error) => {
+        console.error(error.message);
+
+      }
+    })
 
 
 
@@ -227,3 +343,4 @@ export class UploadVideosComponent implements OnInit {
 
 
 }
+

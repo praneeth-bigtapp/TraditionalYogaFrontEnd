@@ -3,7 +3,7 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#/admin/addpages">Website Management</a></li>
+      <li class="breadcrumb-item"><a href="#/addpages">Website Management</a></li>
       <li class="breadcrumb-item"><a href="#/admin/videogallery">Video Gallery</a></li>
 
       <li class="breadcrumb-item active" aria-current="page">Upload video to album</li>
@@ -34,10 +34,10 @@
 
             <div class="col px-0">
               <mat-form-field appearance="outline">
-                <mat-select formControlName="album" [compareWith]="compareselect" [disabled]="iseditable">
+                <mat-select formControlName="album" [compareWith]="compareselect">
 
-                  <mat-option *ngFor="let category of albumList" [value]="category">
-                    {{category.categoriesName}}</mat-option>
+                  <mat-option *ngFor="let category of data" [value]="category.album.albumId">
+                    {{category.album.albumName}}</mat-option>
                 </mat-select>
 
               </mat-form-field>
@@ -82,8 +82,8 @@
           <label>&nbsp;</label><br />
 
           <mat-radio-group formControlName="isVisible" aria-label="Select an option">
-            <mat-radio-button value="visible" class="example-radio-button"> Visible </mat-radio-button>
-            <mat-radio-button value="invisible" class="example-radio-button" style="padding-left: 14px;">Invisible
+            <mat-radio-button value="yes" class="example-radio-button"> Visible </mat-radio-button>
+            <mat-radio-button value="no" class="example-radio-button" style="padding-left: 14px;">Invisible
             </mat-radio-button>
           </mat-radio-group>
           <div class="error-message"
@@ -143,7 +143,7 @@
             <input type="text" (keyup)="updatePagination()" [filter]="filterData" />
           </th>
 
-          <td mat-cell *matCellDef="let element" class="col-1  text-center ">{{element.SNo}}
+          <td mat-cell *matCellDef="let i=index" class="col-1  text-center ">{{pageno +i }}
 
           </td>
         </ng-container>
@@ -154,7 +154,7 @@
               [filter]="filterData" />
           </th>
 
-          <td mat-cell *matCellDef="let element" class="col-2  text-center ">{{element.GalaryName}}
+          <td mat-cell *matCellDef="let element" class="col-2  text-center ">{{element.album.albumName}}
 
           </td>
         </ng-container>
@@ -166,7 +166,7 @@
             <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
               [filter]="filterData" class="mx-2" />
           </th>
-          <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted"> {{element.dateofcreation}}
+          <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center text-muted"> {{element.createdDate}}
           </td>
         </ng-container>
 
@@ -176,7 +176,7 @@
             <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
               [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
           </th>
-          <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center py-2"> {{element.role}} </td>
+          <td mat-cell *matCellDef="let element" class="col-2 px-2 text-center py-2"> {{element.videoTitle}} </td>
         </ng-container>
 
         <ng-container matColumnDef="numberofvideosadded">
@@ -186,7 +186,7 @@
             <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
               [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
           </th>
-          <td mat-cell *matCellDef="let element" class="col-2 text-center py-2"> {{element.numberofvideosadded}} </td>
+          <td mat-cell *matCellDef="let element" class="col-2 text-center py-2">  </td>
         </ng-container>
 
 
@@ -207,7 +207,7 @@
               <span matTooltip="Edit" (click)="editdetails(element)">
                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
               </span>
-              <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.quoteId)">
+              <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.videoId)">
                 <i class="far fa-trash-alt" aria-hidden="true"></i>
 
 
