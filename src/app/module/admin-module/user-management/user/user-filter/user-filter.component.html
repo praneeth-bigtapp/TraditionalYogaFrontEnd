@@ -177,7 +177,7 @@
                                     <div class="d-flex flex-row justify-content-end flex-wrap">
                                         <button type="submit" *ngIf="issubmit"
                                             class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
-                                            Search Users
+                                            Submit
                                         </button>
                                         <button type="button" (click)="cancelView()" *ngIf="!issubmit"
                                             class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
@@ -213,7 +213,10 @@
                                                 [filter]="filterData" />
                                         </th>
                                         <td mat-cell *matCellDef="let element" class="col-md-2 text-center">
-                                            <i class="fa-solid fa-image"></i>
+                                            <div class="w-50">
+                                                <img src="https://traditionalyoga.co.in/wp-content/uploads/2018/07/ty.jpg"
+                                                    class="img-fluid" alt="userimage" />
+                                            </div>
                                         </td>
                                     </ng-container>
 
@@ -285,8 +288,8 @@
                                                 [filter]="filterData" disabled="true" />
                                         </th>
                                         <td mat-cell *matCellDef="let element">
-                                            <mat-slide-toggle
-                                                [checked]="element.status == 'Y'? true : false"></mat-slide-toggle>
+                                            <mat-slide-toggle (toggleChange)="toggleUsers(element)"
+                                                [checked]="IsActiveorNot(element)"></mat-slide-toggle>
                                             <span matTooltip="view" (click)="viewdetails(element)"><i
                                                     class="fa-solid fa-eye" aria-hidden="true"></i></span>
                                         </td>

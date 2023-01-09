@@ -17,12 +17,8 @@ import { RegistrationService } from 'src/app/data/services/student-module/regist
   styleUrls: ['./user-filter.component.css']
 })
 export class UserFilterComponent implements OnInit {
-  data = [{ "sno": "1", "name": "Anji", "emailId": "anji@gmail", "country": "india", "Gender": "male", "usersince": "2020", "status": "" },
-  { "sno": "2", "name": "Praneeth", "emailId": "praneeth@gmail", "country": "Austrilia", "Gender": "male", "usersince": "2020", "status": "" },
-  { "sno": "3", "name": "Sumukesh", "emailId": "sumukesh@gmail", "country": "india", "Gender": "male", "usersince": "2020", "status": "" },
-  { "sno": "4", "name": "Shekar", "emailId": "shekar@gmail", "country": "india", "Gender": "male", "usersince": "2020", "status": "" },
-  { "sno": "5", "name": "Nikhil", "emailId": "nikhil@gmail", "country": "india", "Gender": "male", "usersince": "2020", "status": "" },
-  ]
+
+  data!: any
   displayedColumns: string[] = ['sno', 'image', 'name', "emailId", "country", "Gender", "usersince", "status",];
   pageno: number = 1
   dataSource: any;
@@ -92,9 +88,7 @@ export class UserFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<any>(this.data)
-    // this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+
     this.filterData = {
       filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
       gridData: this.gridData,
@@ -102,21 +96,12 @@ export class UserFilterComponent implements OnInit {
       paginator: this.paginator,
       sort: this.sort
     }
-    this.dataSource = new MatTableDataSource<any>(this.data)
-    this.filterData.gridData = this.data;
-    this.filterData.dataSource = this.dataSource;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.filterData.sort = this.sort;
-    for (let col of this.filterData.filterColumnNames) {
-      col.Value = '';
-    }
+    this.getUsersData()
 
     this.otherService.getcountry().subscribe({
       next: (response) => {
 
         this.countryList = response
-        console.log(this.countryList);
 
         this.countryfilter = this.UserFilter.valueChanges.pipe(
           startWith(''),
@@ -132,7 +117,6 @@ export class UserFilterComponent implements OnInit {
       next: (response) => {
 
         this.regionList = response
-        console.log(this.regionList);
 
 
         this.regionfilter = this.UserFilter.valueChanges.pipe(
@@ -168,11 +152,26 @@ export class UserFilterComponent implements OnInit {
     })
 
   }
-  ngAfterViewInit() {
-    this.filterData.dataSource.paginator = this.paginator;
 
+  getUsersData() {
+    this.service.getUsers().subscribe({
+      next: (response) => {
+
+      },
+      error: (error) => {
+        console.error(error);
+        this.data = [{ "sno": "1", "name": "Anji", "emailId": "anji@gmail", "country": "india", "Gender": "male", "usersince": "2020", "status": "" },
+        { "sno": "2", "name": "Praneeth", "emailId": "praneeth@gmail", "country": "Austrilia", "Gender": "male", "usersince": "2020", "status": "" },
+        { "sno": "3", "name": "Sumukesh", "emailId": "sumukesh@gmail", "country": "india", "Gender": "male", "usersince": "2020", "status": "" },
+        { "sno": "4", "name": "Shekar", "emailId": "shekar@gmail", "country": "india", "Gender": "male", "usersince": "2020", "status": "" },
+        { "sno": "5", "name": "Nikhil", "emailId": "nikhil@gmail", "country": "india", "Gender": "male", "usersince": "2020", "status": "" },
+        ]
+        this.renderTableDate(this.data)
+
+      }
+    })
   }
- 
+
 
   onpaginatechange(event: any) {
     if (event.pageIndex === 0) {
@@ -206,9 +205,45 @@ export class UserFilterComponent implements OnInit {
       emailId: element.emailId
     });
 
- 
+
   }
 
+  renderTableDate(data: any) {
+    this.dataSource = new MatTableDataSource<any>(data)
+    this.filterData.gridData = data;
+    this.filterData.dataSource = this.dataSource;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.filterData.sort = this.sort;
+    for (let col of this.filterData.filterColumnNames) {
+      col.Value = '';
+    }
+  }
+  IsActiveorNot(element: any) {
+    const yes = ["Yes", "Y", "yes", "y"]
+    const no = ["No", "N", "no", "n"]
+
+
+    return yes.includes(element)
+  };
+
+  toggleUsers(element: any) {
+    console.log(element);
+
+    const body = {}
+
+    this.service.toggleUsers(body).subscribe({
+      next: (response) => {
+        this.openSnackBar(response)
+        this.getUsersData()
+      },
+      error: (error) => {
+        console.error(error);
+
+      }
+    })
+
+  }
   userSearch() {
     console.log(this.UserFilter.value);
     const body = {
