@@ -161,12 +161,10 @@ export class UploadVideosComponent implements OnInit {
     this.issubmit = true
 
   }
-  deletedetails(element: any) {
-    this.createalbum.patchValue({
-
-      GalaryName: element.GalaryName,
-
-    })
+  deletedetails(id: any) {
+    const body = {
+      "videoId": id
+    }
   }
 
   reseteditable() {
@@ -214,6 +212,17 @@ export class UploadVideosComponent implements OnInit {
     this.videoError = this.filelist.length === 0
     if (this.uploadVideo.invalid)
       return this.uploadVideo.markAllAsTouched()
+
+    if (this.iseditable) {
+
+      const body = {}
+      return
+    }
+
+    const body = {}
+
+
+
   }
 
 

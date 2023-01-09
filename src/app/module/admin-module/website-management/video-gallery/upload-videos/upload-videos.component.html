@@ -23,7 +23,7 @@
   <br />
   <div class="card" style="margin-bottom: -8px;">
     <div class="card-header text-white bg-secondary">
-      Add Video
+      {{iseditable ? "Update" :"Add " }} Video
     </div>
 
     <form class="card bg-white  p-3" [formGroup]="uploadVideo" (ngSubmit)="uploadVideoSubmit()">
@@ -125,7 +125,7 @@
 
       <div class="w-100  d-flex flex-row justify-content-end flex-wrap">
         <button type="submit" class="  btn btn-outline-secondary btn-rounded d-inline-block m-2">
-          Upload Video
+          {{iseditable ? "Update" :"Add " }} Video
         </button>
       </div>
 
