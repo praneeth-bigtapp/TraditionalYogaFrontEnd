@@ -18,10 +18,11 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { VideoGalleryRoutingModule } from './Video-gallery.routing.module';
+
 import { VideoGalleryComponent } from './video-gallery/video-gallery.component';
 import { UploadVideosComponent } from './upload-videos/upload-videos.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { VideoGalleryRoutingModule } from './video-gallery.routing.module';
 
 
 @NgModule({

@@ -102,7 +102,7 @@ export class SendReceiveService {
       this.router.navigateByUrl("admin/gallery");
     }
     else if (subMenuId == 13) {
-      this.router.navigateByUrl("blank");
+      this.router.navigateByUrl("admin/videogallery");
     }
     else if (subMenuId == 14) {
       this.router.navigateByUrl("admin/testimonials");

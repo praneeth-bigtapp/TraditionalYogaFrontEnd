@@ -6,8 +6,8 @@ import { VideoGalleryComponent } from './video-gallery/video-gallery.component';
 
 const routes: Routes = [
   { path: 'videogallery', component: VideoGalleryComponent },
-  {path: 'uploadVideos' , component: UploadVideosComponent}
-  
+  { path: 'uploadVideos', component: UploadVideosComponent }
+
 ];
 
 @NgModule({

@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { InputvalidationService } from 'src/app/shared/services/input-validation.service';
 
 @Component({
   selector: 'app-upload-videos',
@@ -25,11 +26,10 @@ export class UploadVideosComponent implements OnInit {
   displaycontent: boolean = false
   issubmit: boolean = true
   iseditable: boolean = false
-  filerror!: boolean
-  filerror2: boolean = false
+  videoError: boolean = false
 
   data = [
-    {     
+    {
       "GalaryName": "RYT 200 Course photos",
       "dateofcreation": "21-07-2022",
       "role": "Admin",
@@ -65,7 +65,7 @@ export class UploadVideosComponent implements OnInit {
 
 
   ]
-  displayedColumns: string[] = ["SNo","GalaryName", "dateofcreation", "role", "numberofvideosadded", "Actions"];
+  displayedColumns: string[] = ["SNo", "GalaryName", "dateofcreation", "role", "numberofvideosadded", "Actions"];
 
   dataSource: any;
 
@@ -76,11 +76,11 @@ export class UploadVideosComponent implements OnInit {
     this.uploadVideo = this.formbuilder.group({
 
       Title: [null, Validators.compose([Validators.required])],
-      videoLink: [null, Validators.compose([Validators.required])],
-      
+      videoLink: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.videolink)])],
+      isVisible: [null, Validators.compose([Validators.required])]
 
     });
-   }
+  }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<any>(this.data)
@@ -101,7 +101,7 @@ export class UploadVideosComponent implements OnInit {
     for (let col of this.filterData.filterColumnNames) {
       col.Value = '';
     }
-    
+
   }
 
   ngAfterViewInit() {
@@ -125,13 +125,17 @@ export class UploadVideosComponent implements OnInit {
 
   }
   IsActiveorNot(element: any) {
-    return true
-  }
+    const yes = ["Yes", "Y", "yes", "y"]
+    const no = ["No", "N", "no", "n"]
+
+
+    return yes.includes(element)
+  };
   viewdetails(element: any) {
     this.createalbum.patchValue({
 
       GalaryName: element.GalaryName,
-      dateofcreation:element.dateofcreation,
+      dateofcreation: element.dateofcreation,
 
     })
     this.issubmit = false
@@ -142,7 +146,7 @@ export class UploadVideosComponent implements OnInit {
     this.createalbum.patchValue({
 
       GalaryName: element.GalaryName,
-      dateofcreation:element.dateofcreation,
+      dateofcreation: element.dateofcreation,
 
     })
     this.iseditable = true
@@ -158,16 +162,12 @@ export class UploadVideosComponent implements OnInit {
     })
   }
 
-  addphoto() {
-    this.router.navigate(["uploadVideos"])
-  }
-
   reseteditable() {
     this.createalbum.reset()
     this.iseditable = false
     this.displaycontent = !this.displaycontent
     this.issubmit = true
-    this.filerror2 = false
+    this.videoError = false
   }
 
   onFileChange(event: any): void {
@@ -195,22 +195,18 @@ export class UploadVideosComponent implements OnInit {
   }
 
   manageGallery() {
-    this.router.navigate(["videogallery"]);
+    this.router.navigate(["admin/videogallery"]);
   }
 
   detectchange() {
     // console.log(this.filelist);
   }
-  removeimage(name: any) {
 
-    this.filelist = this.filelist.filter((ele: any) => ele.name !== name)
 
-  }
-
-  uploadimage() {
-    const files = this.filelist.map((ele: any) => ele.file)
-    console.log(files);
-
+  uploadVideoSubmit() {
+    this.videoError = this.filelist.length === 0
+    if (this.uploadVideo.invalid)
+      return this.uploadVideo.markAllAsTouched()
   }
 
 

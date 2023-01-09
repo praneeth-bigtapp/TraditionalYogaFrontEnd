@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { EALREADY } from 'constants';
+import { VideoGalleryService } from 'src/app/data/services/admin-module/website-management/video-gallery/video-gallery.service';
 
 @Component({
   selector: 'app-video-gallery',
@@ -16,6 +17,7 @@ export class VideoGalleryComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   filterData: any
+  pageno: number = 1
   gridData: any;
   createalbum!: FormGroup
   displaycontent: boolean = false
@@ -25,9 +27,9 @@ export class VideoGalleryComponent implements OnInit {
   filerror2: boolean = false
 
   data = [
-    {     
+    {
       "GalaryName": "RYT 200 Course photos",
-      "dateofcreation": "21-07-2022",
+      "dateofcreation": new Date(),
       "role": "Admin",
       "numberofvideosadded": 18,
       "SNo": "1",
@@ -35,7 +37,7 @@ export class VideoGalleryComponent implements OnInit {
     },
     {
       "GalaryName": "RYT 800Course photos",
-      "dateofcreation": "22-07-2022",
+      "dateofcreation": new Date(),
       "role": "Student",
       "numberofvideosadded": 108,
       "SNo": "2",
@@ -43,7 +45,7 @@ export class VideoGalleryComponent implements OnInit {
     },
     {
       "GalaryName": "RYT 800Course photos",
-      "dateofcreation": "22-07-2022",
+      "dateofcreation": new Date(),
       "role": "Student",
       "numberofvideosadded": 10,
       "SNo": "3",
@@ -51,7 +53,7 @@ export class VideoGalleryComponent implements OnInit {
     },
     {
       "GalaryName": "RYT 800Course photos",
-      "dateofcreation": "22-07-2022",
+      "dateofcreation": new Date(),
       "role": "Student",
       "numberofvideosadded": 108,
       "SNo": "4",
@@ -61,23 +63,24 @@ export class VideoGalleryComponent implements OnInit {
 
 
   ]
-  displayedColumns: string[] = ["SNo","GalaryName", "dateofcreation", "role", "numberofvideosadded", "Actions"];
+  displayedColumns: string[] = ["SNo", "GalaryName", "dateofcreation", "role", "numberofvideosadded", "Actions"];
 
   dataSource: any;
 
   constructor(public dialog: MatDialog,
     public router: Router,
-    private formbuilder: FormBuilder) { 
-      this.createalbum = this.formbuilder.group({
+    private service: VideoGalleryService,
+    private formbuilder: FormBuilder) {
+    this.createalbum = this.formbuilder.group({
 
-        GalaryName: [null, Validators.compose([Validators.required])],
-        description: [null, Validators.compose([Validators.required])],
-        dateofcreation: [null, Validators.compose([Validators.required])],
-        // duration: [null, Validators.compose([Validators.required])],
-        todate: [null, Validators.compose([Validators.required])],
-  
-      });
-    }
+      GalaryName: [null, Validators.compose([Validators.required])],
+      description: [null, Validators.compose([Validators.required])],
+      dateofcreation: [null, Validators.compose([Validators.required])],
+      // duration: [null, Validators.compose([Validators.required])],
+      todate: [null, Validators.compose([Validators.required])],
+
+    });
+  }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<any>(this.data)
@@ -98,7 +101,7 @@ export class VideoGalleryComponent implements OnInit {
     for (let col of this.filterData.filterColumnNames) {
       col.Value = '';
     }
-    
+
   }
 
   ngAfterViewInit() {
@@ -114,6 +117,14 @@ export class VideoGalleryComponent implements OnInit {
 
   }
 
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
+  }
   album() {
     this.displaycontent = !this.displaycontent
   }
@@ -122,13 +133,17 @@ export class VideoGalleryComponent implements OnInit {
 
   }
   IsActiveorNot(element: any) {
-    return true
-  }
+    const yes = ["Yes", "Y", "yes", "y"]
+    const no = ["No", "N", "no", "n"]
+
+
+    return yes.includes(element)
+  };
   viewdetails(element: any) {
     this.createalbum.patchValue({
 
       GalaryName: element.GalaryName,
-      dateofcreation:element.dateofcreation,
+      dateofcreation: element.dateofcreation,
 
     })
     this.issubmit = false
@@ -139,7 +154,7 @@ export class VideoGalleryComponent implements OnInit {
     this.createalbum.patchValue({
 
       GalaryName: element.GalaryName,
-      dateofcreation:element.dateofcreation,
+      dateofcreation: element.dateofcreation,
 
     })
     this.iseditable = true
@@ -148,15 +163,11 @@ export class VideoGalleryComponent implements OnInit {
 
   }
   deletedetails(element: any) {
-    this.createalbum.patchValue({
 
-      GalaryName: element.GalaryName,
-
-    })
   }
 
   addphoto() {
-    this.router.navigate(["uploadVideos"])
+    this.router.navigate(["admin/uploadVideos"])
   }
 
   reseteditable() {
