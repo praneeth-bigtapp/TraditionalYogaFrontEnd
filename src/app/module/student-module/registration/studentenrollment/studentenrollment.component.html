@@ -132,12 +132,31 @@
                     </div>
 
                     <div class="col-md-4">
-                        <label>Mobile Number <small>(+091-1234567890)</small></label>
-                        <div class="col px-0">
-                            <mat-form-field appearance="outline">
-                                <input matInput autocomplete="off" placeholder="+091-1234567890"
-                                    formControlName="mobile" required>
-                            </mat-form-field>
+                        <label>Mobile Number</label>
+                        <div class="col row px-0">
+                            <div class="col-md-3">
+                                <mat-form-field appearance="outline">
+                                    <mat-select formControlName="countryCode" [compareWith]="compareSelect">
+                                        <mat-option *ngFor="let code of dialcodeList" [value]="code"
+                                            aria-placeholder="Select Course Category">
+                                            {{code}}</mat-option>
+                                    </mat-select>
+
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-9">
+                                <mat-form-field appearance="outline">
+                                    <input matInput autocomplete="off" placeholder="1234567890" formControlName="mobile"
+                                        required>
+                                </mat-form-field>
+                            </div>
+                            <div class="error-message"
+                                *ngIf="enrollForm.controls['countryCode'].invalid && (enrollForm.controls['countryCode'].dirty || enrollForm.controls['countryCode'].touched)">
+                                <mat-error [hidden]=" !enrollForm.get('countryCode')?.hasError('required')  ">
+                                    Country Code is mandatory
+                                </mat-error>
+
+                            </div>
                             <div class="error-message"
                                 *ngIf="enrollForm.controls['mobile'].invalid && (enrollForm.controls['mobile'].dirty || enrollForm.controls['mobile'].touched)">
                                 <mat-error [hidden]=" !enrollForm.get('mobile')?.hasError('required')  ">

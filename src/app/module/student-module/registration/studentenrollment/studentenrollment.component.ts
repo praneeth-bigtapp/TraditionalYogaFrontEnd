@@ -39,6 +39,7 @@ export class StudentenrollmentComponent implements OnInit {
   isloading: boolean = false
   statelist: unknown;
   languageList: any
+  dialcodeList: any
 
   constructor(
     private formbuilder: FormBuilder,
@@ -60,6 +61,8 @@ export class StudentenrollmentComponent implements OnInit {
       lastName: [null, Validators.compose([Validators.required])],
       // name: [null, Validators.compose([Validators.required])],
       email: [null, Validators.compose([Validators.required, Validators.email])],
+      countryCode: [null, Validators.compose([Validators.required])],
+
       mobile: [null, Validators.compose([Validators.required, Validators.pattern(InputvalidationService.inputvalidation.phonenumber)])],
       motherTounge: [null, Validators.compose([Validators.required])],
       isEnglishSpoken: [null, Validators.compose([Validators.required])],
@@ -82,6 +85,10 @@ export class StudentenrollmentComponent implements OnInit {
     this.regService.getCountry().subscribe({
       next: (response) => {
         this.countryList = response;
+
+        this.dialcodeList = this.countryList.map((ele: any) => ele.dialCode).filter(Boolean)
+        console.log(this.dialcodeList);
+
         this.countryList = this.countryList.map((ele: any) => ele.countryName);
       },
       error: (error) => {
@@ -197,10 +204,9 @@ export class StudentenrollmentComponent implements OnInit {
       duration: 2 * 1000,
     });
   }
-  languageChange()
-  {
-    console.log(this.enrollForm.value.onlyReadAndWriteLanguage );
-    
+  languageChange() {
+    console.log(this.enrollForm.value.onlyReadAndWriteLanguage);
+
   }
 
   compareSelect(obj1: any, obj2: any) {
@@ -407,7 +413,7 @@ export class StudentenrollmentComponent implements OnInit {
           "middleName": this.enrollForm.value.middleName,
           "lastName": this.enrollForm.value.lastName,
           "emailId": this.enrollForm.value.email,
-          "mobileNumber": this.enrollForm.value.mobile,
+          "mobileNumber": this.enrollForm.value.countryCode + this.enrollForm.value.mobile,
           "dateOfBirth": this.enrollForm.value.dateOfBirth,
           "genderId": {
             "genderId": this.enrollForm.value.gender
