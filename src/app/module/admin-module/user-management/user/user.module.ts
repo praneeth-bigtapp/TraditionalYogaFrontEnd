@@ -14,7 +14,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { UserRoutingModule } from './user-routing.module';
 import { UserFilterComponent } from './user-filter/user-filter.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -44,6 +44,7 @@ import { SuspiciousUsersComponent } from './suspicious-users/suspicious-users.co
     MatTooltipModule,
     MatIconModule,
     MatAutocompleteModule,
-  ]
+  ],
+  exports: [SuspiciousUsersComponent]
 })
 export class UserFilterModule { }

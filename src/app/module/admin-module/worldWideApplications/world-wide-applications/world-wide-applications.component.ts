@@ -11,6 +11,7 @@ import { MappingRegionsToChiefMentorService } from 'src/app/data/services/admin-
 import { UserFilterService } from 'src/app/data/services/admin-module/user-management/user/user-filter/user-filter.service';
 import { RegistrationService } from 'src/app/data/services/student-module/registration/registration.service';
 import { startWith, map, Observable } from 'rxjs';
+import { InputvalidationService } from 'src/app/shared/services/input-validation.service';
 
 
 @Component({
@@ -88,7 +89,6 @@ export class WorldWideApplicationsComponent implements OnInit {
 
 
   constructor(private formbuilder: FormBuilder, private dialog: MatDialog,
-    private service: UserFilterService,
     private otherService: MappingRegionsToChiefMentorService,
     private regService: RegistrationService,
     private _snackBar: MatSnackBar,
@@ -97,10 +97,10 @@ export class WorldWideApplicationsComponent implements OnInit {
     this.UserFilter = this.formbuilder.group({
       courseId: [null],
       nameerror: [null,],
-      mailerror: [null,],
+      mailerror: [null, Validators.compose([Validators.email])],
       country: [null,],
       // duration: [null, ],
-      selectMob: [null,],
+      selectMob: [null, Validators.compose([Validators.pattern(InputvalidationService.inputvalidation.phonenumber)])],
       selectRegion: [null,],
       agefrom: [null,],
       ageto: [null,],
@@ -110,7 +110,8 @@ export class WorldWideApplicationsComponent implements OnInit {
       cheifmentoruserid: [null,],
       studentuserid: [null,],
       mentoruserid: [null,],
-      ChiefMentor: []
+      ChiefMentor: [],
+      Profession: [null,]
     });
 
     this.mentorfield = this.formbuilder.group({
@@ -126,9 +127,7 @@ export class WorldWideApplicationsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.dataSource = new MatTableDataSource<any>(this.data)
-    // this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+
     this.filterData = {
       filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
       gridData: this.gridData,
@@ -136,15 +135,7 @@ export class WorldWideApplicationsComponent implements OnInit {
       paginator: this.paginator,
       sort: this.sort
     }
-    this.dataSource = new MatTableDataSource<any>(this.data)
-    this.filterData.gridData = this.data;
-    this.filterData.dataSource = this.dataSource;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.filterData.sort = this.sort;
-    for (let col of this.filterData.filterColumnNames) {
-      col.Value = '';
-    }
+    this.renderTableDate(this.data)
 
 
     this.otherService.getcountry().subscribe({
@@ -192,6 +183,8 @@ export class WorldWideApplicationsComponent implements OnInit {
     this.regService.getProfessions().subscribe({
       next: (response) => {
         this.professionsList = response
+        console.log(this.professionsList);
+
       },
       error: (err) => {
         console.error(err);
@@ -224,14 +217,21 @@ export class WorldWideApplicationsComponent implements OnInit {
 
   }
 
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.filterData.dataSource.data.length;
 
-  showOptions(eve: any) {
-    debugger
-    this.Count = this.dataSource.data.length;
+    return numSelected === numRows;
   }
-  mapCourse() {
-    this.displaycontent = !this.displaycontent
+
+  masterToggle() {
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.filterData.dataSource.data.forEach((row: any) => this.selection.select(row));
+
   }
+
+
 
   onpaginatechange(event: any) {
     if (event.pageIndex === 0) {
@@ -250,6 +250,13 @@ export class WorldWideApplicationsComponent implements OnInit {
       duration: 2 * 1000,
     });
   }
+  IsActiveorNot(element: any) {
+    const yes = ["Yes", "Y", "yes", "y"]
+    const no = ["No", "N", "no", "n"]
+
+
+    return yes.includes(element)
+  };
   renderTableDate(data: any) {
     this.dataSource = new MatTableDataSource<any>(data)
     this.filterData.gridData = data;
@@ -263,7 +270,6 @@ export class WorldWideApplicationsComponent implements OnInit {
   }
 
   go(id: any) {
-    debugger;
     const dialogRef = this.dialog.open(id);
 
     dialogRef.afterClosed().subscribe(result => {
@@ -271,7 +277,6 @@ export class WorldWideApplicationsComponent implements OnInit {
     });
   }
   MentorSelected(values: any) {
-    debugger
     console.log("MentorValue : " + values);
     if (values == 'Australia') {
       this.isDisableChief = false;
@@ -280,6 +285,14 @@ export class WorldWideApplicationsComponent implements OnInit {
       this.isDisableMentor = false;
       this.isDisableChief = true
     }
+  }
+
+  searchUser() {
+
+  }
+
+  changementorfield() {
+
   }
 
 

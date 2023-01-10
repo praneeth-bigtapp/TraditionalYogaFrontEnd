@@ -19,6 +19,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { WorldWideApplicationsComponent } from './world-wide-applications/world-wide-applications.component';
 import { WorldWideRoutingModule } from './worldWideApplication-routing.module';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { UserFilterModule } from '../user-management/user/user.module';
 @NgModule({
   declarations: [
     WorldWideApplicationsComponent
@@ -43,6 +44,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatTooltipModule,
     MatIconModule,
     MatAutocompleteModule,
+    UserFilterModule,
+    MatSortModule,
   ]
 })
 export class WorldWideApplicationsmodule { }
