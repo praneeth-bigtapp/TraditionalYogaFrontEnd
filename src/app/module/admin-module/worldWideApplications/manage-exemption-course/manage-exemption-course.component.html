@@ -1,0 +1,75 @@
+<div class="ConfigurationTypes_textpadding">
+    <!-- remove bg-light -->
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#/admin/worldWide">World Wide Applications</a></li>
+
+            <li class="breadcrumb-item active" aria-current="page">Task Assignment</li>
+        </ol>
+    </nav>
+    <!-- 
+    <div class="d-flex mb-2 flex-wrap  justify-content-end align-items-center">
+        <div class="">
+            <button type="button" (click)="createtask()" *ngIf="displaycontent  !displayform"
+                class="btn btn-outline-secondary btn-rounded d-inline-block mb-md-3 ">
+                Add Task
+            </button>
+        </div>
+    </div> -->
+    <br />
+    <div class="card  bg-secondary">
+        <div class="card-header text-white bg-secondary">
+            Manage Exemptions
+        </div>
+
+        <div class="card-body bg-white  py-2">
+
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <label>Course</label>
+
+                    <mat-form-field appearance="outline">
+                        <mat-select [(ngModel)]="course">
+                            <mat-option *ngFor="let course of courseList" [value]="course.coursesId">
+                                {{course.coursesName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <hr *ngIf="course" />
+            <ng-container *ngIf="course">
+                <div class="row align-items-center w-100" *ngFor="let exemption of manageExemption">
+                    <div class="col-md-5 text-justify">
+                        {{exemption.text}}
+                    </div>
+                    <div class="col-md-1">
+                        :
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <input matInput type="text" (change)="submitManageExemption()"
+                                [(ngModel)]="exemption.value" />
+                        </mat-form-field>
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <mat-slide-toggle matTooltip="Visiblity" [checked]="exemption.isEnable"
+                            (change)="changeExemptionStatus(exemption)"
+                            [matTooltip]="exemption.isEnable ? 'Enable' : 'Disable' "></mat-slide-toggle>
+                        <label>{{exemption.isEnable ? 'Enable' : 'Disable'}}</label>
+                    </div>
+                </div>
+            </ng-container>
+
+
+            <!-- <button type="button" (click)="submitManageExemption()"
+                class="btn btn-outline-secondary btn-rounded d-inline-block m-2 float-md-right ">
+                Submit
+            </button> -->
+        </div>
+    </div>
+
+</div>

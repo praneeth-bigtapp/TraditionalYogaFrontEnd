@@ -20,9 +20,11 @@ import { WorldWideApplicationsComponent } from './world-wide-applications/world-
 import { WorldWideRoutingModule } from './worldWideApplication-routing.module';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { UserFilterModule } from '../user-management/user/user.module';
+import { ManageExemptionCourseComponent } from './manage-exemption-course/manage-exemption-course.component';
 @NgModule({
   declarations: [
-    WorldWideApplicationsComponent
+    WorldWideApplicationsComponent,
+    ManageExemptionCourseComponent
   ],
   imports: [
     CommonModule,

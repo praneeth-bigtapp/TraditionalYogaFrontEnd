@@ -457,6 +457,9 @@ export class WorldWideApplicationsComponent implements OnInit {
 
   changeExemptionStatus(element: any) {
     element.isEnable = !element.isEnable
+    console.log(element);
+
+    this.submitManageExemption()
   }
 
   submitManageExemption() {
