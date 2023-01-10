@@ -281,7 +281,7 @@
                     </div>
                   </div>
                   <div class="row g-3 d-flex">
-                    <div class="col-lg-3 col-md-3 butn"><button (click)="go(dialogId)" type="submit"
+                    <div class="col-lg-3 col-md-3 butn"><button (click)="go(dialogId,null)" type="submit"
                         class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
                         Manage exemption
                       </button></div>
@@ -314,62 +314,54 @@
 
 
                 <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef class="col-md-3 text-center">
+                  <th mat-header-cell *matHeaderCellDef class="col-md-2 ">
                     <label mat-sort-header> Name</label>
                     <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
                       [filter]="filterData" />
                   </th>
-                  <td mat-cell *matCellDef="let element" class="col-md-3 text-center"> {{element.name}} </td>
+                  <td mat-cell *matCellDef="let element" class="col-md-2 text-left"> {{element.name}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="MentorName">
-                  <th mat-header-cell class="col-md-3 text-center" *matHeaderCellDef>
-                    <div class="row">
-                      <label mat-sort-header>Mentor Name</label>
-                      <input type="text" (keyup)="updatePagination()"
-                        [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
-                    </div>
+                  <th mat-header-cell class="col-md-2 " *matHeaderCellDef>
+                    <label mat-sort-header>Mentor</label>
+                    <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
+                      [filter]="filterData" />
                   </th>
-                  <td mat-cell class="col-md-3 text-center" *matCellDef="let element">
+                  <td mat-cell class="col-md-2 text-left" *matCellDef="let element">
                     {{element.MentorName}}
                   </td>
 
                 </ng-container>
                 <ng-container matColumnDef="ChiefMentorName">
-                  <th mat-header-cell class="col-md-3 text-center" *matHeaderCellDef>
-                    <div class="row">
-                      <label mat-sort-header>Chief Mentor Name</label>
-                      <input type="text" (keyup)="updatePagination()"
-                        [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
-                    </div>
+                  <th mat-header-cell class="col-md-2 " *matHeaderCellDef>
+                    <label mat-sort-header>Chief Mentor</label>
+                    <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
+                      [filter]="filterData" />
                   </th>
-                  <td mat-cell class="col-md-3 text-center" *matCellDef="let element">
+                  <td mat-cell class="col-md-2 text-left" *matCellDef="let element">
                     {{element.ChiefMentorName}}
                   </td>
 
                 </ng-container>
                 <ng-container matColumnDef="Region">
-                  <th mat-header-cell class="col-md-3 text-center" *matHeaderCellDef>
-                    <div class="row">
-                      <label mat-sort-header>Region</label>
-                      <input type="text" (keyup)="updatePagination()"
-                        [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
-                    </div>
+                  <th mat-header-cell class="col-md-2" *matHeaderCellDef>
+                    <label mat-sort-header>Region</label>
+                    <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[4].Value"
+                      [filter]="filterData" />
                   </th>
-                  <td mat-cell class="col-md-3 text-center" *matCellDef="let element">
+                  <td mat-cell class="col-md-2 text-left" *matCellDef="let element">
                     {{element.Region}}
                   </td>
 
                 </ng-container>
                 <ng-container matColumnDef="CurrentStatus">
-                  <th mat-header-cell class="col-md-3 text-center" *matHeaderCellDef>
-                    <div class="row">
-                      <label mat-sort-header>Current Status</label>
-                      <input type="text" (keyup)="updatePagination()"
-                        [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="filterData" />
-                    </div>
+                  <th mat-header-cell class="col-md-2 " *matHeaderCellDef>
+                    <label mat-sort-header>Current Status</label>
+                    <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[5].Value"
+                      [filter]="filterData" />
                   </th>
-                  <td mat-cell class="col-md-3 text-center" *matCellDef="let element">
+                  <td mat-cell class="col-md-2 text-left" *matCellDef="let element">
                     {{element.CurrentStatus}}
                   </td>
 
@@ -380,9 +372,10 @@
                     <input type="text" (keyup)="updatePagination()" disabled />
                   </th>
                   <td mat-cell *matCellDef="let element">
-                    <mat-slide-toggle [checked]="IsActiveorNot(element.status)"></mat-slide-toggle>
-                    <span (click)="go(view)" matTooltip="Edit" style="cursor: pointer;"><i class="fa-solid fa-eye"
-                        aria-hidden="true"></i></span>
+                    <mat-slide-toggle [checked]="IsActiveorNot(element.status)" matTooltip="Active/Deactive"
+                      (toggleChange)="changeToggle(element)"></mat-slide-toggle>
+                    <span (click)="go(view,element)" matTooltip="View" style="cursor: pointer;"><i
+                        class="fa-solid fa-eye" aria-hidden="true"></i></span>
                   </td>
                 </ng-container>
 
@@ -558,102 +551,39 @@
 
 <ng-template #view>
 
-  <div class="card mt-5 ">
-    <div class="card-header text-white bg-secondary popHead ">
-      User Details
-    </div>
+  <div class="popup">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="">{{"User Details"| titlecase}}
+          <!-- <span> <i class="far fa-times-circle" aria-hidden="true"></i> </span> -->
+        </h3>
+      </div>
+      <div class="content-style p-2">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>Name</strong>
+            <p>{{studentDetails.name}}</p>
+          </div>
+          <div class="col-md-3">
+            <strong>Mentor</strong>
+            <p>{{studentDetails.MentorName}}</p>
+          </div>
+          <div class="col-md-3">
+            <strong>Chief Mentor</strong>
+            <p>{{studentDetails.ChiefMentorName}}</p>
+          </div>
+          <div class="col-md-3">
+            <strong>Country</strong>
+            <p>{{studentDetails.Region}}</p>
+          </div>
 
-    <hr>
-    <div class="row">
-      <!-- <div class="col-lg-3 col-md-3">
-        <label>S No</label>
-        <mat-form-field appearance="outline">
-         <input type="text" formControlName="nameerror" matInput value="1"> 
-              </mat-form-field>
-     
-
-      </div> -->
-      <div class="col-lg-3 col-md-3"><label>Name</label>
-        <mat-form-field appearance="outline">
-          <input type="text" formControlName="nameerror" matInput value="Jenette">
-        </mat-form-field>
+        </div>
       </div>
-      <div class="col-lg-3 col-md-3"><label>Student Id</label>
-        <mat-form-field appearance="outline">
-          <input type="text" formControlName="nameerror" matInput value="user11235">
-        </mat-form-field>
+      <div style="text-align: right;">
+        <!-- <button class="btn btn-sm btn-outline-secondary btn-rounded d-inline-block m-2"
+          (click)="snackBarRef.dismiss()"><strong>Ok</strong></button> -->
       </div>
-      <div class="col-lg-3 col-md-3"><label>Gender</label>
-        <mat-form-field appearance="outline">
-          <input type="text" formControlName="nameerror" matInput value="Female">
-        </mat-form-field>
-      </div>
-
-      <div class="col-lg-3 col-md-3"><label>Age</label>
-        <mat-form-field appearance="outline">
-          <input type="text" formControlName="nameerror" matInput value="40">
-        </mat-form-field>
-      </div>
-      <div class="col-lg-3 col-md-3"><label>Profession
-        </label>
-        <mat-form-field appearance="outline">
-          <input type="text" formControlName="nameerror" matInput value="Doctor">
-        </mat-form-field>
-      </div>
-      <div class="col-lg-3 col-md-3"><label>Mentor Name </label>
-        <mat-form-field appearance="outline">
-          <input type="text" formControlName="nameerror" matInput value="8055">
-        </mat-form-field>
-      </div>
-      <div class="col-lg-3 col-md-3"><label>Chief Mentor Name
-        </label>
-        <mat-form-field appearance="outline">
-          <input type="text" formControlName="nameerror" matInput value="8055">
-        </mat-form-field>
-      </div>
-
-
-      <div class="col-lg-3 col-md-3"><label>Region</label>
-        <mat-form-field appearance="outline">
-          <input type="text" formControlName="nameerror" matInput value="India">
-        </mat-form-field>
-      </div>
-
-      <div class="col-lg-3 col-md-3"><label>CurrentStatus </label>
-        <mat-form-field appearance="outline">
-          <input type="text" formControlName="nameerror" matInput value="Active">
-        </mat-form-field>
-      </div>
-      <div class="col-lg-3 col-md-3"><label>PerformanceRating</label>
-        <mat-form-field appearance="outline">
-          <input type="text" formControlName="nameerror" matInput value="good">
-        </mat-form-field>
-      </div>
-
-      <div class="col-lg-6 col-md-6"><label>Data wise mentor interaction report</label>
-        <mat-form-field appearance="outline">
-          <input type="text" formControlName="nameerror" matInput value="view comment">
-        </mat-form-field>
-      </div>
-      <div class="col-lg-3 col-md-3"><label>ViewApplication
-        </label>
-        <br>
-        <a target="_blank" href="http://localhost:4200/#/studentEnrollment">View</a>
-
-
-      </div>
-      <hr>
-      <br>
-      <div class="col-lg-9 col-md-9"> </div>
-
-      <div class="col-lg-3 col-md-3">
-        <!-- <button type="submit" class="btn btn-outline-secondary mt-3  btn-rounded d-inline-block "> Submit
-  </button> -->
-        <a class="btn btn-outline-secondary mt-3 btn-rounded d-inline-block"
-          href="http://localhost:4200/#/worldWide">Cancel</a>
-      </div>
-
-
     </div>
   </div>
+
 </ng-template>

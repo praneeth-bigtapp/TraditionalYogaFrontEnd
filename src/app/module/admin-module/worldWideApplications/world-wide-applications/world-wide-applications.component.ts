@@ -12,6 +12,7 @@ import { UserFilterService } from 'src/app/data/services/admin-module/user-manag
 import { RegistrationService } from 'src/app/data/services/student-module/registration/registration.service';
 import { startWith, map, Observable } from 'rxjs';
 import { InputvalidationService } from 'src/app/shared/services/input-validation.service';
+import { WorldWideApplicationService } from 'src/app/data/services/admin-module/word-wide-application/world-wide-application.service';
 
 
 @Component({
@@ -79,6 +80,7 @@ export class WorldWideApplicationsComponent implements OnInit {
   pageno: number = 1;
   professionsList: any;
   languageList: any;
+  studentDetails: any;
 
 
 
@@ -92,6 +94,7 @@ export class WorldWideApplicationsComponent implements OnInit {
     private otherService: MappingRegionsToChiefMentorService,
     private regService: RegistrationService,
     private _snackBar: MatSnackBar,
+    private service: WorldWideApplicationService,
 
     private courseService: AddCourseService) {
     this.UserFilter = this.formbuilder.group({
@@ -269,8 +272,14 @@ export class WorldWideApplicationsComponent implements OnInit {
     }
   }
 
-  go(id: any) {
-    const dialogRef = this.dialog.open(id);
+  go(id: any, element: any) {
+    const dialogRef = this.dialog.open(id,
+      {
+        width: "80%",
+        height: "50%"
+      });
+
+    this.studentDetails = element
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -285,6 +294,10 @@ export class WorldWideApplicationsComponent implements OnInit {
       this.isDisableMentor = false;
       this.isDisableChief = true
     }
+  }
+
+  changeToggle(element: any) {
+
   }
 
   searchUser() {
