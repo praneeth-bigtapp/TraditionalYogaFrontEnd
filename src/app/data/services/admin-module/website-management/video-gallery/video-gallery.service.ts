@@ -7,11 +7,13 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 export class VideoGalleryService extends BaseHttp {
 
   createAlbumUrl = "course/createAlbum?operation=add"
-  getAlbumUrl = ""
-  updateAlbumUrl = ""
-  deleteAlbumUrl = ""
+  getAlbumUrl = "course/getAll?operation=createAlbum"
+  updateAlbumUrl = "course/createAlbum?operation=save"
+  deleteAlbumUrl = "course/createAlbum?operation=delete"
 
-  toggleAlbumUrl = ""
+  activeAlbumUrl = "course/createAlbum?operation=active"
+  deactiveAlbumUrl = "course/createAlbum?operation=deactive"
+
 
   addVideoAlbumUrl = "courseList/mapVideos?operation=add"
   updateVideoAlbumUrl = "courseList/mapVideos?operation=update"
@@ -31,8 +33,11 @@ export class VideoGalleryService extends BaseHttp {
   deleteAlbum(body: any) {
     return this.post(this.deleteAlbumUrl, body)
   }
-  toggleAlbum(body: any) {
-    return this.post(this.toggleAlbumUrl, body)
+  activeAlbum(body: any) {
+    return this.post(this.activeAlbumUrl, body)
+  }
+  deactiveAlbum(body: any) {
+    return this.post(this.deactiveAlbumUrl, body)
   }
   getVideoAlbum() {
     return this.get(this.getVideoAlbumUrl)

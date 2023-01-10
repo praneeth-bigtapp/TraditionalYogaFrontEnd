@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,6 +8,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { EALREADY } from 'constants';
+import { elementAt } from 'rxjs';
 import { VideoGalleryService } from 'src/app/data/services/admin-module/website-management/video-gallery/video-gallery.service';
 import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
 
@@ -30,7 +32,7 @@ export class VideoGalleryComponent implements OnInit {
 
   data!: any
 
-  displayedColumns: string[] = ["SNo", "GalaryName", "dateofcreation", "role", "numberofvideosadded", "Actions"];
+  displayedColumns: string[] = ["SNo", "albumName", "eventFromDate", "createdBy", "numberofvideosadded", "Actions"];
 
   dataSource: any;
 
@@ -114,41 +116,6 @@ export class VideoGalleryComponent implements OnInit {
       },
       error: (error) => {
         console.error(error);
-        this.data = [
-          {
-            "GalaryName": "RYT 200 Course photos",
-            "dateofcreation": new Date(),
-            "role": "Admin",
-            "numberofvideosadded": 18,
-            "SNo": "1",
-            "isvisible": false
-          },
-          {
-            "GalaryName": "RYT 800Course photos",
-            "dateofcreation": new Date(),
-            "role": "Student",
-            "numberofvideosadded": 108,
-            "SNo": "2",
-            "isvisible": true
-          },
-          {
-            "GalaryName": "RYT 800Course photos",
-            "dateofcreation": new Date(),
-            "role": "Student",
-            "numberofvideosadded": 10,
-            "SNo": "3",
-            "isvisible": true
-          },
-          {
-            "GalaryName": "RYT 800Course photos",
-            "dateofcreation": new Date(),
-            "role": "Student",
-            "numberofvideosadded": 108,
-            "SNo": "4",
-            "isvisible": true
-          }
-        ]
-        this.renderTableData(this.data)
 
       }
     })
@@ -159,10 +126,12 @@ export class VideoGalleryComponent implements OnInit {
     const no = ["No", "N", "no", "n"]
 
     const body = {
-
+      "albumId": element.albumId
     }
 
-    this.service.toggleAlbum(body).subscribe({
+
+
+    this.service.activeAlbum(body).subscribe({
       next: (response) => {
         this.openSnackBar(response)
         this.getAlbumData()
@@ -184,12 +153,12 @@ export class VideoGalleryComponent implements OnInit {
   viewdetails(element: any) {
     this.createalbum.patchValue({
 
-      albumId: [null],
-      GalaryName: null,
-      description: null,
-      dateofcreation: null,
+      albumId: element.albumId,
+      GalaryName: element.albumName,
+      description: element.description,
+      dateofcreation: formatDate(element.eventFromDate, "yyyy-MM-dd", 'en'),
       // duration: ,
-      todate: null,
+      todate: formatDate(element.eventToDate, "yyyy-MM-dd", 'en'),
 
     })
     this.issubmit = false
@@ -199,12 +168,12 @@ export class VideoGalleryComponent implements OnInit {
 
     this.createalbum.patchValue({
 
-      albumId: [null],
-      GalaryName: null,
-      description: null,
-      dateofcreation: null,
+      albumId: element.albumId,
+      GalaryName: element.albumName,
+      description: element.description,
+      dateofcreation: formatDate(element.eventFromDate, "yyyy-MM-dd", 'en'),
       // duration: ,
-      todate: null,
+      todate: formatDate(element.eventToDate, "yyyy-MM-dd", 'en'),
 
     })
     this.iseditable = true
@@ -212,10 +181,12 @@ export class VideoGalleryComponent implements OnInit {
     this.issubmit = true
 
   }
-  deletedetails(element: any) {
+  deletedetails(id: any) {
     const body = {
-
+      "albumId": id
     }
+
+
     const dialogref = this.dialog.open(DialogPopupComponent, {
       data: {
         title: "Delete Confirmation",
@@ -262,15 +233,17 @@ export class VideoGalleryComponent implements OnInit {
     if (this.createalbum.invalid)
       return this.createalbum.markAllAsTouched()
 
-    const { GalaryName, description, dateofcreation, todate } = this.createalbum.value
+    const { albumId, GalaryName, description, dateofcreation, todate } = this.createalbum.value
 
     if (this.iseditable) {
       const body = {
-        // :albumId
+        "albumId": albumId,
         "albumName": GalaryName,
         "eventFromDate": dateofcreation,
         "eventToDate": todate,
-        "description": description
+        "description": description,
+        "activeStatus": "Y"
+
       }
       this.service.updateAlbum(body).subscribe({
         next: (response) => {
@@ -290,8 +263,11 @@ export class VideoGalleryComponent implements OnInit {
       "albumName": GalaryName,
       "eventFromDate": dateofcreation,
       "eventToDate": todate,
-      "description": description
+      "description": description,
+      "activeStatus": "Y"
+
     }
+
 
     this.service.createAlbum(body).subscribe({
       next: (response) => {

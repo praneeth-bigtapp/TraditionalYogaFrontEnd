@@ -129,36 +129,36 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="GalaryName">
+        <ng-container matColumnDef="albumName">
           <th mat-header-cell *matHeaderCellDef class="col-2 text-center "> <label mat-sort-header>Album Name</label>
             <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[0].Value"
               [filter]="filterData" />
           </th>
 
-          <td mat-cell *matCellDef="let element" class="col-2  text-left ">{{element.GalaryName}}
+          <td mat-cell *matCellDef="let element" class="col-2  text-left ">{{element.albumName}}
 
           </td>
         </ng-container>
 
 
-        <ng-container matColumnDef="dateofcreation">
+        <ng-container matColumnDef="eventFromDate">
           <th mat-header-cell *matHeaderCellDef class="col-2 text-center"><label mat-sort-header>Date of
               Creation</label>
             <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[1].Value"
               [filter]="filterData" class="mx-2" />
           </th>
-          <td mat-cell *matCellDef="let element" class="col-2  text-left text-muted"> {{element.dateofcreation |
+          <td mat-cell *matCellDef="let element" class="col-2  text-left text-muted"> {{element.eventFromDate |
             date:"dd-MMM-YYYY"}}
           </td>
         </ng-container>
 
 
-        <ng-container matColumnDef="role">
+        <ng-container matColumnDef="createdBy">
           <th mat-header-cell *matHeaderCellDef class="col-1 text-center"> <label mat-sort-header>Name</label>
             <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[2].Value"
               [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
           </th>
-          <td mat-cell *matCellDef="let element" class="col-1  text-left"> {{element.role}} </td>
+          <td mat-cell *matCellDef="let element" class="col-1  text-left"> {{element.createdBy || "NIL"}} </td>
         </ng-container>
 
         <ng-container matColumnDef="numberofvideosadded">
@@ -168,7 +168,9 @@
             <input type="text" (keyup)="updatePagination()" [(ngModel)]="filterData.filterColumnNames[3].Value"
               [filter]="filterData" style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
           </th>
-          <td mat-cell *matCellDef="let element" class="col-2 text-center py-2"> {{element.numberofvideosadded}} </td>
+          <td mat-cell *matCellDef="let element" class="col-2 text-center py-2"> {{element.numberofvideosadded ||
+            "Nil"}}
+          </td>
         </ng-container>
 
 
@@ -180,7 +182,7 @@
             <div class="d-flex flex-wrap justify-content-evenly align-items-center">
 
 
-              <mat-slide-toggle matTooltip="Visiblity" [checked]="IsActiveorNot(element.quoteId)"
+              <mat-slide-toggle matTooltip="Visiblity" [checked]="IsActiveorNot(element.isActive)"
                 (toggleChange)="ChangeActive(element)" [matTooltip]="element.isActive"></mat-slide-toggle>
 
               <i class="fa-solid fa-eye fs-5 text-info" (click)="viewdetails(element)" matTooltip="View Course Activity"
@@ -189,7 +191,7 @@
               <span matTooltip="Edit" (click)="editdetails(element)">
                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
               </span>
-              <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.quoteId)">
+              <span matTooltip="Delete" style="cursor: pointer;" (click)="deletedetails(element.albumId)">
                 <i class="far fa-trash-alt" aria-hidden="true"></i>
 
 
