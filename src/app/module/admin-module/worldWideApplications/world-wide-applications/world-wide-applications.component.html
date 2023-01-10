@@ -58,13 +58,13 @@
                     <div class="col-md-3 ">
                       <label>Country</label>
                       <mat-form-field appearance="outline">
-                        <mat-select matNativeControl formControlName="country">
-                          <mat-option value="India">India</mat-option>
-                          <mat-option value="Australia">Australia</mat-option>
-                          <mat-option value="Europe">Europe</mat-option>
-                          <mat-option value="South America">South America</mat-option>
-                          <mat-option value="UK">UK</mat-option>
-                        </mat-select>
+                        <input type="text" aria-label="Country" matInput formControlName="country"
+                          [matAutocomplete]="country">
+                        <mat-autocomplete autoActiveFirstOption #country="matAutocomplete">
+                          <mat-option *ngFor="let country of countryfilter |async " [value]="country.countryName">
+                            {{country.countryName}}
+                          </mat-option>
+                        </mat-autocomplete>
                         <mat-error class="error-message" [hidden]=" !UserFilter.get('country')?.hasError('required')  ">
                           country is is mandatory
                         </mat-error>
@@ -83,13 +83,13 @@
                     <div class="col-md-3">
                       <label>Region</label>
                       <mat-form-field appearance="outline">
-                        <mat-select matNativeControl formControlName="selectRegion">
-                          <mat-option value="India">India</mat-option>
-                          <mat-option value="Australia">Australia</mat-option>
-                          <mat-option value="Europe">Europe</mat-option>
-                          <mat-option value="South America">South America</mat-option>
-                          <mat-option value="UK">UK</mat-option>
-                        </mat-select>
+                        <input type="text" aria-label="Country" matInput formControlName="selectRegion"
+                          [matAutocomplete]="region">
+                        <mat-autocomplete autoActiveFirstOption #region="matAutocomplete">
+                          <mat-option *ngFor="let region of regionfilter |async " [value]="region.regionName">
+                            {{region.regionName}}
+                          </mat-option>
+                        </mat-autocomplete>
                         <mat-error class="error-message"
                           [hidden]=" !UserFilter.get('selectRegion')?.hasError('required')  ">
                           Region is mandatory
@@ -100,8 +100,8 @@
                     <div class="col-md-3">
                       <label>Age Form</label>
                       <mat-form-field appearance="outline">
-                        <mat-select matNativeControl formControlName="agefrom">
-                        </mat-select>
+                        <input matInput formControlName="agefrom">
+
                         <mat-error class="error-message" [hidden]=" !UserFilter.get('agefrom')?.hasError('required')  ">
                           age is mandatory
                         </mat-error>
@@ -110,8 +110,8 @@
                     <div class="col-md-3">
                       <label>Age To</label>
                       <mat-form-field appearance="outline">
-                        <mat-select matNativeControl formControlName="ageto">
-                        </mat-select>
+                        <input matInput formControlName="ageto">
+
                         <mat-error class="error-message" [hidden]=" !UserFilter.get('ageto')?.hasError('required')  ">
                           age is mandatory
                         </mat-error>
@@ -119,17 +119,13 @@
                     </div>
                     <div class="col-md-3">
                       <label>Gender</label>
-                      <mat-form-field appearance="outline">
-                        <mat-select matNativeControl formControlName="gender">
-                          <mat-option value="Male">Male</mat-option>
-                          <mat-option value="Female">Female</mat-option>
-                          <mat-option value="Others">Others</mat-option>
-                        </mat-select>
-
-                        <mat-error class="error-message" [hidden]=" !UserFilter.get('gender')?.hasError('required')  ">
-                          age is mandatory
-                        </mat-error>
-                      </mat-form-field>
+                      <mat-radio-group formControlName="gender" aria-label="Select an option">
+                        <mat-radio-button class=" mt-md-2 mr-md-4" *ngFor="let gender of genderList"
+                          [value]="gender.genderId">{{gender.genderName}}</mat-radio-button>
+                      </mat-radio-group>
+                      <mat-error class="error-message" [hidden]=" !UserFilter.get('gender')?.hasError('required')  ">
+                        age is mandatory
+                      </mat-error>
                     </div>
                     <div class="col-md-3">
                       <label>Current Status</label>
@@ -147,20 +143,25 @@
                       <label>Profession</label>
                       <mat-form-field appearance="outline">
                         <mat-select matNativeControl formControlName="Profession">
-
+                          <mat-option *ngFor="let profession of professionsList" [value]="profession.professionId">
+                            {{profession.professionName}}
+                          </mat-option>
                         </mat-select>
                         <mat-error class="error-message"
                           [hidden]=" !UserFilter.get('language')?.hasError('required')  ">
-                          Language is mandatory
+                          Profession is mandatory
                         </mat-error>
                       </mat-form-field>
                     </div>
                     <div class="col-md-3">
                       <label>Language</label>
                       <mat-form-field appearance="outline">
-                        <mat-select matNativeControl formControlName="language">
 
+                        <mat-select formControlName="language">
+                          <mat-option *ngFor="let language of languageList" [value]="language.languageId">
+                            {{language.languageName}}</mat-option>
                         </mat-select>
+
                         <mat-error class="error-message"
                           [hidden]=" !UserFilter.get('language')?.hasError('required')  ">
                           Language is mandatory

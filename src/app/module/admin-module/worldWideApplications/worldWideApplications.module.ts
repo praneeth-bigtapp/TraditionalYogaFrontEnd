@@ -15,9 +15,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { WorldWideApplicationsComponent } from './world-wide-applications/world-wide-applications.component';
 import { WorldWideRoutingModule } from './worldWideApplication-routing.module';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 @NgModule({
   declarations: [
     WorldWideApplicationsComponent
@@ -41,6 +42,7 @@ import { WorldWideRoutingModule } from './worldWideApplication-routing.module';
     SharedModule,
     MatTooltipModule,
     MatIconModule,
+    MatAutocompleteModule,
   ]
 })
 export class WorldWideApplicationsmodule { }

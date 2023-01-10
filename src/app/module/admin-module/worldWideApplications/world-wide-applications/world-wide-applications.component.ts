@@ -10,7 +10,7 @@ import { AddCourseService } from 'src/app/data/services/admin-module/course-mana
 import { MappingRegionsToChiefMentorService } from 'src/app/data/services/admin-module/course-management/region-management/region-management.service';
 import { UserFilterService } from 'src/app/data/services/admin-module/user-management/user/user-filter/user-filter.service';
 import { RegistrationService } from 'src/app/data/services/student-module/registration/registration.service';
-import { startWith, map } from 'rxjs';
+import { startWith, map, Observable } from 'rxjs';
 
 
 @Component({
@@ -70,12 +70,14 @@ export class WorldWideApplicationsComponent implements OnInit {
     },
   ]
   countryList: any;
-  countryfilter: any;
+  countryfilter!: Observable<any>;
   regionList: any;
-  regionfilter: any;
+  regionfilter!: Observable<any>;
   genderList: any;
   courselist: any;
   pageno: number = 1;
+  professionsList: any;
+  languageList: any;
 
 
 
@@ -187,6 +189,15 @@ export class WorldWideApplicationsComponent implements OnInit {
         // console.error(error);
       }
     });
+    this.regService.getProfessions().subscribe({
+      next: (response) => {
+        this.professionsList = response
+      },
+      error: (err) => {
+        console.error(err);
+
+      },
+    })
     this.courseService.getCourse().subscribe({
       next: (response) => {
         this.courselist = response
@@ -197,6 +208,15 @@ export class WorldWideApplicationsComponent implements OnInit {
 
       }
     })
+    this.regService.getlanguages().subscribe({
+      next: (response) => {
+        this.languageList = response;
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
 
   }
   ngAfterViewInit() {
