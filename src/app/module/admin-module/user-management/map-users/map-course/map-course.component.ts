@@ -13,12 +13,7 @@ import { MapuserService } from '../mapuser.service';
   styleUrls: ['./map-course.component.css']
 })
 export class MapCourseComponent implements OnInit {
-  data=[{ "registrationId":"1","sno":"1","name":"Ajith R","emailId":" ajith98ra@gmail", "country":"india","Gender":"male","usersince":"2020","status":"","view":"","select":""},
-  {"registrationId":"2","sno":"1","name":"ajith K","emailId":" ajithk@gmail", "country":"india","Gender":"male","usersince":"2020","status":"","view":"","select":""},
-  {"registrationId":"3","sno":"1","name":"Karthi","emailId":"karthi@gmail", "country":"india","Gender":"male","usersince":"2020","status":"","view":"","select":""},
-  {"registrationId":"4","sno":"1","name":"Ajith","emailId":" ajith98ra@gmail", "country":"india","Gender":"male","usersince":"2020","status":"","view":"","select":""},
-  {"registrationId":"5","sno":"1","name":"ajith","emailId":" ajith98ra@gmail", "country":"india","Gender":"male","usersince":"2020","status":"","view":"","select":""},
-  ]
+  data:any
   displayedColumns: string[] = ['sno', 'image', 'name',"emailId","country","Gender","usersince","status", "view", "select"];
   dataSource :any;
   iseditable: boolean = false
@@ -76,6 +71,13 @@ export class MapCourseComponent implements OnInit {
       course: [null, Validators.compose([Validators.required])],
       gender: [null, Validators.compose([Validators.required])],
     });
+    this.filterData = {
+      filterColumnNames: this.displayedColumns.map((ele: any) => ({ "Key": ele, "Value": "" })),
+      gridData: this.gridData,
+      dataSource: this.dataSource,
+      paginator: this.paginator,
+      sort: this.sort
+    };
 
     this.service.getcourse().subscribe({
       next: (response) => {
@@ -88,31 +90,50 @@ export class MapCourseComponent implements OnInit {
         console.error(error.message);
       }
     });
+  
    
   
    
    }
 
+
+   getuserdata(){
+    this.service.getuser().subscribe({
+      next: (response) => {
+        console.log(response)
+
+        this.data = response
+        this.dataSource=new MatTableDataSource<any>(this.data)
+        // this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        // this.filterData = {
+        //   filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
+        //   gridData: this.gridData,
+        //   dataSource: this.dataSource,
+        //   paginator: this.paginator,
+        //   sort: this.sort
+        // }
+        // this.dataSource = new MatTableDataSource<any>(this.data)
+        this.filterData.gridData = this.data;
+        this.filterData.dataSource = this.dataSource;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.filterData.sort = this.sort;
+        for (let col of this.filterData.filterColumnNames) {
+          col.Value = '';
+        }
+
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
+
+   }
+
   ngOnInit(): void {
-    this.dataSource=new MatTableDataSource<any>(this.data)
-    // this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.filterData = {
-      filterColumnNames: this.displayedColumns.map(ele => ({ "Key": ele, "Value": "" })),
-      gridData: this.gridData,
-      dataSource: this.dataSource,
-      paginator: this.paginator,
-      sort: this.sort
-    }
-    this.dataSource = new MatTableDataSource<any>(this.data)
-    this.filterData.gridData = this.data;
-    this.filterData.dataSource = this.dataSource;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.filterData.sort = this.sort;
-    for (let col of this.filterData.filterColumnNames) {
-      col.Value = '';
-    }
+    this.  getuserdata()
+  
    
   
 
@@ -121,6 +142,7 @@ export class MapCourseComponent implements OnInit {
   }
   ngAfterViewInit() {
     this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
 
   }
   mapCourse(){
@@ -128,7 +150,9 @@ export class MapCourseComponent implements OnInit {
   }
   updatePagination() {
 
-    this.dataSource.paginator = this.paginator;
+    
+    this.filterData.dataSource.paginator = this.paginator;
+    this.filterData.dataSource.sort = this.sort;
   }
   
   isAllSelected() {
@@ -154,6 +178,14 @@ export class MapCourseComponent implements OnInit {
     this._snackBar.open(data.message, 'Close', {
       duration: 2 * 1000,
     });
+  }
+  onpaginatechange(event: any) {
+    if (event.pageIndex === 0) {
+      this.pageno = 1
+      return
+    }
+    this.pageno = (event.pageIndex * event.pageSize) + 1
+    return
   }
   getregistrationId(element:any){
     this.registredId=element
