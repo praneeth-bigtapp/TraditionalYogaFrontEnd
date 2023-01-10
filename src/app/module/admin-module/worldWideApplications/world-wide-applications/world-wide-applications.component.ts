@@ -234,8 +234,6 @@ export class WorldWideApplicationsComponent implements OnInit {
   }
 
   getStudentData() {
-
-
     this.service.getStudent().subscribe({
       next: (response) => {
         this.data = response
@@ -265,8 +263,21 @@ export class WorldWideApplicationsComponent implements OnInit {
           { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
         ]
         this.renderTableDate(this.data)
+      }
+    })
+  }
 
+  getExemptedStudentData() {
 
+    this.service.getExemptedStudent().subscribe({
+      next: (response) => {
+        this.data = response
+        this.data = this.data.reverse()
+        this.renderTableDate(this.data)
+
+      },
+      error: (error) => {
+        console.error(error);
       }
     })
   }
@@ -284,9 +295,6 @@ export class WorldWideApplicationsComponent implements OnInit {
       this.filterData.dataSource.data.forEach((row: any) => this.selection.select(row));
 
   }
-
-
-
   onpaginatechange(event: any) {
     if (event.pageIndex === 0) {
       this.pageno = 1
@@ -307,8 +315,6 @@ export class WorldWideApplicationsComponent implements OnInit {
   isEnableorNot(element: any) {
     const yes = ["Yes", "Y", "yes", "y"]
     const no = ["No", "N", "no", "n"]
-
-
     return yes.includes(element)
   };
   renderTableDate(data: any) {
@@ -352,11 +358,53 @@ export class WorldWideApplicationsComponent implements OnInit {
   }
 
   changeToggle(element: any) {
+    const body = {}
 
+    if (this.isEnableorNot(element)) {
+      // Already enable means
+
+      this.service.activeStudent(body).subscribe({
+        next: (response) => {
+          this.openSnackBar(response)
+          this.getStudentData()
+        },
+        error: (error) => {
+          console.log(error);
+
+        }
+      })
+      return
+    }
+
+    // Already disable means
+    this.service.deactiveStudent(body).subscribe({
+      next: (response) => {
+        this.openSnackBar(response)
+        this.getStudentData()
+      },
+      error: (error) => {
+        console.log(error);
+
+      }
+    })
   }
 
   searchUser() {
 
+    const body = {}
+
+    this.service.searchUsers(body).subscribe({
+      next: (response) => {
+        this.data = response
+        this.data = this.data.reverse()
+        this.renderTableDate(this.data)
+        this.openSnackBar({ message: "Sucessfully Filtered" })
+      },
+      error: (error) => {
+        console.log(error);
+
+      }
+    })
   }
 
   changeMentors() {
@@ -367,16 +415,41 @@ export class WorldWideApplicationsComponent implements OnInit {
       console.log(this.newChiefMentorName);
       console.log(this.selection.selected);
 
+      const body = {}
+
+      this.service.changeChiefMentor(body).subscribe({
+        next: (response) => {
+          this.openSnackBar(response)
+          this.getStudentData()
+        },
+        error: (error) => {
+          console.log(error);
+
+        }
+      })
+
       return
     }
 
 
-    if (this.isChangeMentor) {
-      // changing  mentor
-      console.log(this.newMentorName);
-      console.log(this.selection.selected);
-      return
-    }
+    // changing  mentor
+    console.log(this.newMentorName);
+    console.log(this.selection.selected);
+
+    const body = {}
+
+    this.service.changeMentor(body).subscribe({
+      next: (response) => {
+        this.openSnackBar(response)
+        this.getStudentData()
+      },
+      error: (error) => {
+        console.log(error);
+
+      }
+    })
+    return
+
 
 
 
@@ -388,6 +461,18 @@ export class WorldWideApplicationsComponent implements OnInit {
 
   submitManageExemption() {
     console.log(this.manageExemption);
+
+    const body = {}
+
+    this.service.manageExemptionStudent(body).subscribe({
+      next: (response) => {
+        this.openSnackBar(response)
+      },
+      error: (error) => {
+        console.log(error);
+
+      }
+    })
 
   }
 
