@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { EALREADY } from 'constants';
 import { VideoGalleryService } from 'src/app/data/services/admin-module/website-management/video-gallery/video-gallery.service';
+import { DialogPopupComponent } from 'src/app/shared/components/dialog-popup/dialog-popup.component';
 
 @Component({
   selector: 'app-video-gallery',
@@ -73,11 +74,7 @@ export class VideoGalleryComponent implements OnInit {
     }
   }
 
-  ngAfterViewInit() {
-    this.filterData.dataSource.paginator = this.paginator;
-    this.filterData.dataSource.sort = this.sort;
 
-  }
 
   updatePagination() {
 
@@ -111,6 +108,7 @@ export class VideoGalleryComponent implements OnInit {
       next: (response) => {
         this.data = response
         this.data = this.data.reverse()
+        console.log(this.data);
 
         this.renderTableData(this.data)
       },
@@ -218,16 +216,33 @@ export class VideoGalleryComponent implements OnInit {
     const body = {
 
     }
-    this.service.deleteAlbum(body).subscribe({
-      next: (response) => {
-        this.openSnackBar(response)
-        this.getAlbumData()
+    const dialogref = this.dialog.open(DialogPopupComponent, {
+      data: {
+        title: "Delete Confirmation",
+        message: "Are You Sure You Want To Delete this video album ?"
       },
-      error: (error) => {
-        console.error(error);
-
-      }
+      width: "35%",
+      height: "25%"
     })
+
+    dialogref.afterClosed().subscribe(data => {
+      if (data) {
+        this.service.deleteAlbum(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.getAlbumData()
+          },
+          error: (error) => {
+            console.error(error);
+
+          }
+        })
+        return
+      }
+
+    })
+
+
     return
   }
 

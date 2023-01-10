@@ -7,7 +7,7 @@ import { StudentenrollmentComponent } from './studentenrollment/studentenrollmen
 const routes: Routes = [
   { path: "studentEnrollment", component: StudentenrollmentComponent },
   {
-    path: "studentDetailsEnrollment",
+    path: "studentDetailsEnrollment/:id",
     canActivate: [AuthGuard],
     component: DetailsStudentInformationComponent
   }

@@ -7,7 +7,7 @@ import { BaseHttp } from 'src/app/core/services/baseHttp.service';
 export class VideoGalleryService extends BaseHttp {
 
   createAlbumUrl = "course/createAlbum?operation=add"
-  getAlbumUrl = "courseList/getAll?operation=videoAlbum"
+  getAlbumUrl = ""
   updateAlbumUrl = ""
   deleteAlbumUrl = ""
 
