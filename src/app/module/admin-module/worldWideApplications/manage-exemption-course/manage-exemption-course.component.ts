@@ -32,38 +32,56 @@ export class ManageExemptionCourseComponent implements OnInit {
 
       }
     })
-    this.manageExemption = [
-      {
-        text: "Frequency to validate for every (Number of Days)",
-        value: null,
-        isEnable: false,
+  }
+
+  courseChange() {
+    this.getmanageExemption()
+  }
+
+  getmanageExemption() {
+    const body = {
+      // :course
+    }
+    this.service.getmanageExemptionCourse(body).subscribe({
+      next: (response) => {
+        this.manageExemption = response
       },
-      {
-        text: "Percentage of Minimum Screen time for Live classes",
-        value: null,
-        isEnable: false,
-      },
-      {
-        text: "Percentage of Minimum Screen time for course practice sessions",
-        value: null,
-        isEnable: false,
-      },
-      {
-        text: "Number of Gratitude messages to be sent & circulated",
-        value: null,
-        isEnable: false,
-      },
-      {
-        text: "Percentage of Tasks/Assignment to be submitted",
-        value: null,
-        isEnable: false,
-      },
-      {
-        text: "Percentage of Minimu, Screen time for short videos",
-        value: null,
-        isEnable: false,
+      error: (error) => {
+        console.error(error);
+        this.manageExemption = [
+          {
+            text: "Frequency to validate for every (Number of Days)",
+            value: null,
+            isEnable: false,
+          },
+          {
+            text: "Percentage of Minimum Screen time for Live classes",
+            value: null,
+            isEnable: false,
+          },
+          {
+            text: "Percentage of Minimum Screen time for course practice sessions",
+            value: null,
+            isEnable: false,
+          },
+          {
+            text: "Number of Gratitude messages to be sent & circulated",
+            value: null,
+            isEnable: false,
+          },
+          {
+            text: "Percentage of Tasks/Assignment to be submitted",
+            value: null,
+            isEnable: false,
+          },
+          {
+            text: "Percentage of Minimu, Screen time for short videos",
+            value: null,
+            isEnable: false,
+          }
+        ]
       }
-    ]
+    })
   }
 
   openSnackBar(data: any) {

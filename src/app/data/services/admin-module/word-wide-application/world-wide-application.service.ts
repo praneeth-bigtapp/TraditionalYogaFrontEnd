@@ -16,6 +16,8 @@ export class WorldWideApplicationService extends BaseHttp {
   activeStudentUrl = ""
   deactiveStudentUrl = ""
 
+  getmanageExemptionCourseUrl = ""
+
   getStudent() {
     return this.get(this.getStudentUrl)
   }
@@ -39,6 +41,10 @@ export class WorldWideApplicationService extends BaseHttp {
 
   manageExemptionCourse(body: any) {
     return this.post(this.manageExemptionCourseUrl, body)
+  }
+
+  getmanageExemptionCourse(body: any) {
+    return this.post(this.getmanageExemptionCourseUrl, body)
   }
 
   activeStudent(body: any) {

@@ -31,7 +31,7 @@
                     <label>Course</label>
 
                     <mat-form-field appearance="outline">
-                        <mat-select [(ngModel)]="course">
+                        <mat-select [(ngModel)]="course" (selectionChange)="courseChange()">
                             <mat-option *ngFor="let course of courseList" [value]="course.coursesId">
                                 {{course.coursesName}}</mat-option>
                         </mat-select>
@@ -58,13 +58,13 @@
                     <div class="col-md-2">
                         <mat-slide-toggle matTooltip="Visiblity" [checked]="exemption.isEnable"
                             (toggleChange)="changeExemptionStatus(exemption)"
-
-                            
                             [matTooltip]="exemption.isEnable ? 'Enable' : 'Disable' "></mat-slide-toggle>
                         <label>{{exemption.isEnable ? 'Enable' : 'Disable'}}</label>
                     </div>
                 </div>
+                <h1 class="text-danger text-center " *ngIf="!manageExemption">No Data Found</h1>
             </ng-container>
+
 
 
             <!-- <button type="button" (click)="submitManageExemption()"
