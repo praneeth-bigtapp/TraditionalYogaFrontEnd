@@ -6,7 +6,7 @@
             <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item"><a href="#/admin/worldWide">World Wide Applications</a></li>
 
-            <li class="breadcrumb-item active" aria-current="page">Task Assignment</li>
+            <li class="breadcrumb-item active" aria-current="page">Manage Exemptions</li>
         </ol>
     </nav>
     <!-- 
@@ -57,7 +57,9 @@
 
                     <div class="col-md-2">
                         <mat-slide-toggle matTooltip="Visiblity" [checked]="exemption.isEnable"
-                            (change)="changeExemptionStatus(exemption)"
+                            (toggleChange)="changeExemptionStatus(exemption)"
+
+                            
                             [matTooltip]="exemption.isEnable ? 'Enable' : 'Disable' "></mat-slide-toggle>
                         <label>{{exemption.isEnable ? 'Enable' : 'Disable'}}</label>
                     </div>

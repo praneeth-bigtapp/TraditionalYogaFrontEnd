@@ -79,6 +79,7 @@ export class ManageExemptionCourseComponent implements OnInit {
 
   changeExemptionStatus(element: any) {
     element.isEnable = !element.isEnable
+    this.submitManageExemption()
   }
 
   submitManageExemption() {
