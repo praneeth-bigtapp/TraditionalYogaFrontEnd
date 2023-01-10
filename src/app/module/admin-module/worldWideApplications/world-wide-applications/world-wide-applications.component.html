@@ -1,0 +1,739 @@
+<div class="ConfigurationTypes_textpadding ">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#/admin/addpages">Website Management</a></li>
+      <li class="breadcrumb-item active" aria-current="worldwideapplications"> World wide applications</li>
+    </ol>
+  </nav>
+  <div class="row ">
+    <div class="col-7">
+
+    </div>
+
+  </div>
+
+  <div class="card mt-3">
+    <div class="card-header text-white bg-secondary">
+      World wide applications
+    </div>
+    <div class="card-body bg-white">
+      <div class="bg-white">
+
+        <div class="dashboard-reports" style="background:#f5f5f5;">
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active fw-bolder" data-toggle="tab" href="#tabs-1" role="tab">Search Filters</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-bolder" data-toggle="tab" href="#tabs-2" role="tab">Find Suspicious users</a>
+            </li>
+          </ul>
+
+          <div class="tab-content" style="background:#f5f5f5;">
+            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+              <div class="card bg-white pl-4 pr-5 " style="padding-top: 18px;">
+                <form class="" [formGroup]="UserFilter">
+                  <div class="row g-3 d-flex">
+                    <div class="col-md-3 ">
+                      <label>Name</label>
+                      <mat-form-field appearance="outline">
+                        <input type="text" formControlName="nameerror" matInput>
+                        <mat-error class="error-message"
+                          [hidden]=" !UserFilter.get('nameerror')?.hasError('required')  ">
+                          name is is mandatory
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                      <label>Email</label>
+                      <mat-form-field appearance="outline">
+                        <input matInput formControlName="mailerror">
+                        <mat-error class="error-message"
+                          [hidden]=" !UserFilter.get('mailerror')?.hasError('required')  ">
+                          mail is is mandatory
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3 ">
+                      <label>Country</label>
+                      <mat-form-field appearance="outline">
+                        <mat-select matNativeControl formControlName="country">
+                          <mat-option value="India">India</mat-option>
+                          <mat-option value="Australia">Australia</mat-option>
+                          <mat-option value="Europe">Europe</mat-option>
+                          <mat-option value="South America">South America</mat-option>
+                          <mat-option value="UK">UK</mat-option>
+                        </mat-select>
+                        <mat-error class="error-message" [hidden]=" !UserFilter.get('country')?.hasError('required')  ">
+                          country is is mandatory
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3 ">
+                      <label>Mobile</label>
+                      <mat-form-field appearance="outline">
+                        <input matInput formControlName="selectMob">
+                        <mat-error class="error-message"
+                          [hidden]=" !UserFilter.get('selectMob')?.hasError('required')  ">
+                          Mobile is mandatory
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                      <label>Region</label>
+                      <mat-form-field appearance="outline">
+                        <mat-select matNativeControl formControlName="selectRegion">
+                          <mat-option value="India">India</mat-option>
+                          <mat-option value="Australia">Australia</mat-option>
+                          <mat-option value="Europe">Europe</mat-option>
+                          <mat-option value="South America">South America</mat-option>
+                          <mat-option value="UK">UK</mat-option>
+                        </mat-select>
+                        <mat-error class="error-message"
+                          [hidden]=" !UserFilter.get('selectRegion')?.hasError('required')  ">
+                          Region is mandatory
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3">
+                      <label>Age Form</label>
+                      <mat-form-field appearance="outline">
+                        <mat-select matNativeControl formControlName="agefrom">
+                        </mat-select>
+                        <mat-error class="error-message" [hidden]=" !UserFilter.get('agefrom')?.hasError('required')  ">
+                          age is mandatory
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                      <label>Age To</label>
+                      <mat-form-field appearance="outline">
+                        <mat-select matNativeControl formControlName="ageto">
+                        </mat-select>
+                        <mat-error class="error-message" [hidden]=" !UserFilter.get('ageto')?.hasError('required')  ">
+                          age is mandatory
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                      <label>Gender</label>
+                      <mat-form-field appearance="outline">
+                        <mat-select matNativeControl formControlName="gender">
+                          <mat-option value="Male">Male</mat-option>
+                          <mat-option value="Female">Female</mat-option>
+                          <mat-option value="Others">Others</mat-option>
+                        </mat-select>
+
+                        <mat-error class="error-message" [hidden]=" !UserFilter.get('gender')?.hasError('required')  ">
+                          age is mandatory
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                      <label>Current Status</label>
+                      <mat-form-field appearance="outline">
+                        <mat-select matNativeControl formControlName="status">
+                          <mat-option value="Active">Active</mat-option>
+                          <mat-option value="InActive">InActive</mat-option>
+                        </mat-select>
+                        <mat-error class="error-message" [hidden]=" !UserFilter.get('status')?.hasError('required')  ">
+                          Status is mandatory
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                      <label>Profession</label>
+                      <mat-form-field appearance="outline">
+                        <mat-select matNativeControl formControlName="Profession">
+
+                        </mat-select>
+                        <mat-error class="error-message"
+                          [hidden]=" !UserFilter.get('language')?.hasError('required')  ">
+                          Language is mandatory
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                      <label>Language</label>
+                      <mat-form-field appearance="outline">
+                        <mat-select matNativeControl formControlName="language">
+
+                        </mat-select>
+                        <mat-error class="error-message"
+                          [hidden]=" !UserFilter.get('language')?.hasError('required')  ">
+                          Language is mandatory
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                      <label>Chief mentor userid</label>
+                      <mat-form-field appearance="outline">
+                        <mat-select matNativeControl formControlName="cheifmentoruserid">
+
+                        </mat-select>
+                        <mat-error class="error-message"
+                          [hidden]=" !UserFilter.get('cheifmentoruserid')?.hasError('required')  ">
+                          Cheif Mentor User Id is mandatory
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                      <label>Mentor User id</label>
+                      <mat-form-field appearance="outline">
+                        <mat-select matNativeControl formControlName="mentoruserid">
+
+                        </mat-select>
+                        <mat-error class="error-message"
+                          [hidden]=" !UserFilter.get('mentoruserid')?.hasError('required')  ">
+                          Mentor User id is mandatory
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3">
+                      <label>Student user Id</label>
+                      <mat-form-field appearance="outline">
+                        <input type="text" formControlName="studentuserid" matInput>
+                        <mat-error class="error-message"
+                          [hidden]=" !UserFilter.get('studentuserid')?.hasError('required')  ">
+                          Student user id is mandatory
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3">
+                      <mat-checkbox class="example-margin show_User">Show Exempted users</mat-checkbox>
+                    </div>
+                    <div class="col-md-3 butn">
+                      <div class="d-flex flex-row justify-content-end flex-wrap">
+                        <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
+                          Search Users
+                        </button>
+
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="d-flex flex-row justify-content-end flex-wrap">
+                  </div>
+                </form>
+              </div>
+              <div class="card bg-white pl-4 pr-5 " style="padding-top: 18px;">
+                <form class="" [formGroup]="mentorfield">
+                  <div class="row g-3 d-flex">
+                    <div class="col-lg-3 col-md-3 ">
+                      <label>Change Mentor /CM</label>
+                      <mat-form-field appearance="outline">
+                        <mat-select matNativeControl formControlName="Menotr_CM"
+                          (ngModelChange)='MentorSelected($event)'>
+                          <mat-option value="India">Menotr</mat-option>
+                          <mat-option value="Australia">Chief Menotr</mat-option>
+
+                        </mat-select>
+
+                        <mat-error class="error-message" [hidden]=" !mentorfield.get('Menotr')?.hasError('required')  ">
+                          Mentor is is mandatory
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3 col-md-3">
+                      <label>Chief Mentor</label>
+                      <mat-form-field appearance="outline">
+                        <mat-select [disabled]="isDisableChief" matNativeControl formControlName="Chief_Mentor">
+                          <mat-option *ngFor="let chief of datavalue" [value]="chief.value">{{chief.name}}</mat-option>
+
+                        </mat-select>
+                        <mat-error class="error-message"
+                          [hidden]=" !mentorfield.get('Chief_Mentor')?.hasError('required')  ">
+                          Chief mentor is mandatory
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3">
+                      <label>Mentor</label>
+                      <mat-form-field appearance="outline">
+                        <mat-select matNativeControl formControlName="Mentor" [disabled]="isDisableMentor">
+                          <mat-option value="praveen">Praveen</mat-option>
+                          <mat-option value="srinadh">Srinadh
+                          </mat-option>
+                        </mat-select>
+                        <mat-error class="error-message" [hidden]=" !UserFilter.get('Mentor')?.hasError('required')  ">
+                          Mentor is mandatory
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3 col-md-3 butn">
+                      <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row g-3 d-flex">
+                    <div class="col-lg-3 col-md-3 butn"><button (click)="go(dialogId)" type="submit"
+                        class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
+                        Manage exemption
+                      </button></div>
+
+                  </div>
+
+
+
+
+
+
+                </form>
+              </div>
+
+              <div class="rounded mat-elevation-z8 table-responsive">
+                <!-- <button (click)="go(dialogId)" type="submit"
+                  class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
+                  Manage exemmpation
+                </button> -->
+                <table mat-table [dataSource]="filterData.dataSource" matSort
+                  class="mat-elevation-z8 mat-datagrid w-100" aria-label="users">
+
+                  <ng-container matColumnDef="sno">
+                    <th mat-header-cell *matHeaderCellDef class="col-md-1 text-center">
+                      <label mat-sort-header>Sno</label>
+                      <input type="text" (keyup)="updatePagination()"
+                        [(ngModel)]="filterData.filterColumnNames[0].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="col-md-1 text-center"> {{element.sno}}
+
+                    </td>
+                  </ng-container>
+
+
+
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef class="col-md-3 text-center">
+                      <label mat-sort-header> Name</label>
+                      <input type="text" (keyup)="updatePagination()"
+                        [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="col-md-3 text-center"> {{element.name}} </td>
+                  </ng-container>
+
+
+                  <!-- <ng-container matColumnDef="stdId">
+                    <th mat-header-cell class="col-md-2 text-center" *matHeaderCellDef>
+                      <label mat-sort-header> Student id</label>
+                      <input type="text" (keyup)="updatePagination()"
+                        [(ngModel)]="filterData.filterColumnNames[3].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="col-md-2 text-center" *matCellDef="let element">{{element.stdId}} </td>
+                  </ng-container> -->
+                  <!-- <ng-container matColumnDef="Gender">
+                    <th mat-header-cell class="col-md-1 text-center" *matHeaderCellDef>
+                      <label mat-sort-header> Gender</label>
+                      <input type="text" (keyup)="updatePagination()"
+                        [(ngModel)]="filterData.filterColumnNames[4].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="col-md-1 text-center" *matCellDef="let element">{{element.Gender}} </td>
+                  </ng-container> -->
+                  <!-- <ng-container matColumnDef="Age">
+                    <th mat-header-cell class="col-md-1 text-center" *matHeaderCellDef>
+                      <label mat-sort-header>Age</label>
+                      <input type="text" (keyup)="updatePagination()"
+                        [(ngModel)]="filterData.filterColumnNames[5].Value" [filter]="filterData" />
+                    </th>
+                    <td mat-cell class="col-md-1 text-center" *matCellDef="let element">{{element.Age}}</td>
+                  </ng-container> -->
+
+
+                  <!-- <ng-container matColumnDef="Profession">
+                    <th mat-header-cell class="col-md-3 text-center" *matHeaderCellDef>
+                      <div class="row">
+                        <label mat-sort-header>Profession</label>
+                        <input type="text" (keyup)="updatePagination()"
+                          [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
+                      </div>
+                    </th>
+                    <td mat-cell class="col-md-3 text-center" *matCellDef="let element">
+                      {{element.Profession}}
+                    </td>
+
+                  </ng-container> -->
+
+
+
+                  <ng-container matColumnDef="MentorName">
+                    <th mat-header-cell class="col-md-3 text-center" *matHeaderCellDef>
+                      <div class="row">
+                        <label mat-sort-header>Mentor Name</label>
+                        <input type="text" (keyup)="updatePagination()"
+                          [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
+                      </div>
+                    </th>
+                    <td mat-cell class="col-md-3 text-center" *matCellDef="let element">
+                      {{element.MentorName}}
+                    </td>
+
+                  </ng-container>
+                  <ng-container matColumnDef="ChiefMentorName">
+                    <th mat-header-cell class="col-md-3 text-center" *matHeaderCellDef>
+                      <div class="row">
+                        <label mat-sort-header>Chief Mentor Name</label>
+                        <input type="text" (keyup)="updatePagination()"
+                          [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
+                      </div>
+                    </th>
+                    <td mat-cell class="col-md-3 text-center" *matCellDef="let element">
+                      {{element.ChiefMentorName}}
+                    </td>
+
+                  </ng-container>
+                  <ng-container matColumnDef="Region">
+                    <th mat-header-cell class="col-md-3 text-center" *matHeaderCellDef>
+                      <div class="row">
+                        <label mat-sort-header>Region</label>
+                        <input type="text" (keyup)="updatePagination()"
+                          [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
+                      </div>
+                    </th>
+                    <td mat-cell class="col-md-3 text-center" *matCellDef="let element">
+                      {{element.Region}}
+                    </td>
+
+                  </ng-container>
+                  <!-- <ng-container matColumnDef="ViewApplication">
+                    <th mat-header-cell class="col-md-3 text-center" *matHeaderCellDef>
+                      <div class="row">
+                        <label mat-sort-header>View Application</label>
+                        <input type="text" (keyup)="updatePagination()"
+                          [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
+                      </div>
+                    </th>
+                  
+                    <td mat-cell class="col-md-3 text-center" *matCellDef="let element">
+                      <a mat-button routerLink="/studentEnrollment" target="_blank">{{element.ViewApplication}}</a>
+
+                                   </td>
+
+
+                  </ng-container> -->
+                  <ng-container matColumnDef="CurrentStatus">
+                    <th mat-header-cell class="col-md-3 text-center" *matHeaderCellDef>
+                      <div class="row">
+                        <label mat-sort-header>Current Status</label>
+                        <input type="text" (keyup)="updatePagination()"
+                          [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
+                      </div>
+                    </th>
+                    <td mat-cell class="col-md-3 text-center" *matCellDef="let element">
+                      {{element.CurrentStatus}}
+                    </td>
+
+                  </ng-container>
+                  <!-- <ng-container matColumnDef="PerformanceRating">
+                    <th mat-header-cell class="col-md-3 text-center" *matHeaderCellDef>
+                      <div class="row">
+                        <label mat-sort-header>Performance Rating</label>
+                        <input type="text" (keyup)="updatePagination()"
+                          [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
+                      </div>
+                    </th>
+                    <td mat-cell class="col-md-3 text-center" *matCellDef="let element">
+                      {{element.PerformanceRating}}
+                    </td>
+
+                  </ng-container> -->
+                  <!-- <ng-container matColumnDef="dWmir">
+                    <th mat-header-cell class="col-md-3 text-center" *matHeaderCellDef>
+                      <div class="row">
+                        <label mat-sort-header>Date wise mentor interaction report</label>
+                        <input type="text" (keyup)="updatePagination()"
+                          [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
+                      </div>
+                    </th>
+                    <td mat-cell class="col-md-3 text-center" *matCellDef="let element">
+                      {{element.dWmir}}
+                    </td>
+
+                  </ng-container> -->
+
+
+
+
+
+                  <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef class="col text-center"><label mat-sort-header>Actions</label>
+                      <input type="text" (keyup)="updatePagination()" [filter]="filterData" class="mx-2"
+                        disabled="true" />
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <mat-slide-toggle [checked]="element.status == 'Y'? true : false"></mat-slide-toggle>
+                      <span (click)="go(view)" matTooltip="Edit" style="cursor: pointer;"><i class="fa-solid fa-eye"
+                          aria-hidden="true"></i></span>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Check">
+                    <th mat-header-cell *matHeaderCellDef class="col text-center"><label mat-sort-header></label>
+                      <mat-checkbox (change)="showOptions($event)" style="margin-bottom:22px"></mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <mat-checkbox class="example-margin"></mat-checkbox>
+                    </td>
+                  </ng-container>
+
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+              </div>
+              <div class="col bg-white">
+                <mat-paginator [pageSizeOptions]="[ 10,25, 50, 100]" aria-label="Select page"></mat-paginator>
+              </div>
+            </div>
+            <div class="tab-pane" id="tabs-2" role="tabpanel">
+              <div class="card bg-white pl-4 pr-5 " style="padding-top: 18px;">
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<ng-template #dialogId>
+
+  <div class="card mt-5 ">
+    <div class="card-header text-white bg-secondary popHead ">
+      Manage Exemptions
+    </div>
+    <label>No of users selected : <b>{{Count}}</b></label>
+    <hr>
+    <div class="row">
+
+
+      <div class="col-lg-6 col-md-6"><label>Frequency to validate for every (Number of days)</label></div>
+      <div class="col-lg-1 col-md-1">:</div>
+      <!-- <div class="col-lg-3 col-md-3"> <mat-form-field class="" appearance="outline">
+      
+  <input matInput  placeholder="" type="text">
+  <mat-error *ngIf="dateForm.controls['fromdate'].hasError('required')">
+    From date is required
+  </mat-error>
+</mat-form-field></div> -->
+      <div class="col-lg-1 col-md-1">
+        <mat-slide-toggle></mat-slide-toggle>
+
+      </div>
+      <div class="col-lg-4 col-md-4"><label>Disable</label> </div>
+
+
+
+
+      <div class="col-lg-6 col-md-6"><label>Percentage of Minimum Screen time for Live Classes</label></div>
+      <div class="col-lg-1 col-md-1">:</div>
+      <!-- <div class="col-lg-3 col-md-3"> <mat-form-field class="" appearance="outline">
+      
+  <input matInput  placeholder="" type="text">
+  <mat-error *ngIf="dateForm.controls['fromdate'].hasError('required')">
+    From date is required
+  </mat-error>
+</mat-form-field></div> -->
+      <div class="col-lg-1 col-md-1">
+        <mat-slide-toggle></mat-slide-toggle>
+
+      </div>
+      <div class="col-lg-4 col-md-4"><label>Disable</label> </div>
+
+
+      <div class="col-lg-6 col-md-6"><label>Percentage of Minimum Screen time for course practice sessions</label></div>
+      <div class="col-lg-1 col-md-1">:</div>
+      <!-- <div class="col-lg-3 col-md-3"> <mat-form-field class="" appearance="outline">
+      
+  <input matInput  placeholder="" type="text">
+  <mat-error *ngIf="dateForm.controls['fromdate'].hasError('required')">
+    From date is required
+  </mat-error>
+</mat-form-field></div> -->
+      <div class="col-lg-1 col-md-1">
+        <mat-slide-toggle></mat-slide-toggle>
+
+      </div>
+      <div class="col-lg-4 col-md-4"><label>Disable</label> </div>
+
+      <div class="col-lg-6 col-md-6"><label>Number of Gratitude messages to be sent & circulated</label></div>
+      <div class="col-lg-1 col-md-1">:</div>
+      <!-- <div class="col-lg-3 col-md-3"> <mat-form-field class="" appearance="outline">
+      
+  <input matInput  placeholder="" type="text">
+  <mat-error *ngIf="dateForm.controls['fromdate'].hasError('required')">
+    From date is required
+  </mat-error>
+</mat-form-field></div> -->
+      <div class="col-lg-1 col-md-1">
+        <mat-slide-toggle></mat-slide-toggle>
+
+      </div>
+      <div class="col-lg-4 col-md-4"><label>Disable</label> </div>
+
+
+      <div class="col-lg-6 col-md-6"><label>Percentage of Tasks/Assignments to be submitted</label></div>
+      <div class="col-lg-1 col-md-1">:</div>
+      <!-- <div class="col-lg-3 col-md-3"> <mat-form-field class="" appearance="outline">
+      
+  <input matInput  placeholder="" type="text">
+  <mat-error *ngIf="dateForm.controls['fromdate'].hasError('required')">
+    From date is required
+  </mat-error>
+</mat-form-field></div> -->
+      <div class="col-lg-1 col-md-1">
+        <mat-slide-toggle></mat-slide-toggle>
+
+      </div>
+      <div class="col-lg-2 col-md-2"><label>Disable</label> </div>
+      <div class="col-lg-6 col-md-6"><label>Percentage of minimum screen time for short videos</label></div>
+      <div class="col-lg-1 col-md-1">:</div>
+      <!-- <div class="col-lg-3 col-md-3"> <mat-form-field class="" appearance="outline">
+      
+  <input matInput  placeholder="" type="text">
+  <mat-error *ngIf="dateForm.controls['fromdate'].hasError('required')">
+    From date is required
+  </mat-error>
+</mat-form-field></div> -->
+      <div class="col-lg-1 col-md-1">
+        <mat-slide-toggle></mat-slide-toggle>
+
+      </div>
+      <div class="col-lg-2 col-md-2"><label>Disable</label> </div>
+
+      <div class="col-lg-6 col-md-6"> Reason for the exemmpation</div>
+      <div class="col-lg-1 col-md-1">:</div>
+      <div class="col-lg-3 col-md-3">
+        <mat-form-field class="example-full-width" appearance="outline" id="field">
+
+          <textarea matInput formControlName="description"></textarea>
+
+        </mat-form-field>
+      </div>
+
+
+      <hr>
+      <br>
+      <div class="col-lg-9 col-md-9"> </div>
+
+      <div class="col-lg-3 col-md-3">
+        <button type="submit" class="btn btn-outline-secondary mt-3  btn-rounded d-inline-block "> Submit
+        </button>
+        <a style="float: right !important;" class="btn btn-outline-secondary mt-3 btn-rounded d-inline-block"
+          href="http://localhost:4200/#/worldWide">Cancel</a>
+      </div>
+
+
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #view>
+
+  <div class="card mt-5 ">
+    <div class="card-header text-white bg-secondary popHead ">
+      User Details
+    </div>
+
+    <hr>
+    <div class="row">
+      <!-- <div class="col-lg-3 col-md-3">
+        <label>S No</label>
+        <mat-form-field appearance="outline">
+         <input type="text" formControlName="nameerror" matInput value="1"> 
+              </mat-form-field>
+     
+
+      </div> -->
+      <div class="col-lg-3 col-md-3"><label>Name</label>
+        <mat-form-field appearance="outline">
+          <input type="text" formControlName="nameerror" matInput value="Jenette">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-3 col-md-3"><label>Student Id</label>
+        <mat-form-field appearance="outline">
+          <input type="text" formControlName="nameerror" matInput value="user11235">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-3 col-md-3"><label>Gender</label>
+        <mat-form-field appearance="outline">
+          <input type="text" formControlName="nameerror" matInput value="Female">
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-3 col-md-3"><label>Age</label>
+        <mat-form-field appearance="outline">
+          <input type="text" formControlName="nameerror" matInput value="40">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-3 col-md-3"><label>Profession
+        </label>
+        <mat-form-field appearance="outline">
+          <input type="text" formControlName="nameerror" matInput value="Doctor">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-3 col-md-3"><label>Mentor Name </label>
+        <mat-form-field appearance="outline">
+          <input type="text" formControlName="nameerror" matInput value="8055">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-3 col-md-3"><label>Chief Mentor Name
+        </label>
+        <mat-form-field appearance="outline">
+          <input type="text" formControlName="nameerror" matInput value="8055">
+        </mat-form-field>
+      </div>
+
+
+      <div class="col-lg-3 col-md-3"><label>Region</label>
+        <mat-form-field appearance="outline">
+          <input type="text" formControlName="nameerror" matInput value="India">
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-3 col-md-3"><label>CurrentStatus </label>
+        <mat-form-field appearance="outline">
+          <input type="text" formControlName="nameerror" matInput value="Active">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-3 col-md-3"><label>PerformanceRating</label>
+        <mat-form-field appearance="outline">
+          <input type="text" formControlName="nameerror" matInput value="good">
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-6 col-md-6"><label>Data wise mentor interaction report</label>
+        <mat-form-field appearance="outline">
+          <input type="text" formControlName="nameerror" matInput value="view comment">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-3 col-md-3"><label>ViewApplication
+        </label>
+        <br>
+        <a target="_blank" href="http://localhost:4200/#/studentEnrollment">View</a>
+
+
+      </div>
+      <hr>
+      <br>
+      <div class="col-lg-9 col-md-9"> </div>
+
+      <div class="col-lg-3 col-md-3">
+        <!-- <button type="submit" class="btn btn-outline-secondary mt-3  btn-rounded d-inline-block "> Submit
+  </button> -->
+        <a class="btn btn-outline-secondary mt-3 btn-rounded d-inline-block"
+          href="http://localhost:4200/#/worldWide">Cancel</a>
+      </div>
+
+
+    </div>
+  </div>
+</ng-template>

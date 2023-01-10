@@ -188,6 +188,14 @@ const routes: Routes = [
       import('./website-management/video-gallery/video-gallery.module').then((m) => m.VideoGalleryModule)
   },
 
+  // world wide
+  {
+    path: '',
+    canActivate:[AuthGuard],
+    loadChildren: () =>
+      import('./worldWideApplications/worldWideApplications.module').then((m) => m.WorldWideApplicationsmodule)
+  },
+
 
 
 ];
