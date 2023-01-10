@@ -372,7 +372,7 @@
                     <input type="text" (keyup)="updatePagination()" disabled />
                   </th>
                   <td mat-cell *matCellDef="let element">
-                    <mat-slide-toggle [checked]="IsActiveorNot(element.status)" matTooltip="Active/Deactive"
+                    <mat-slide-toggle [checked]="isEnableorNot(element.status)" matTooltip="Active/Deactive"
                       (toggleChange)="changeToggle(element)"></mat-slide-toggle>
                     <span (click)="go(view,element)" matTooltip="View" style="cursor: pointer;"><i
                         class="fa-solid fa-eye" aria-hidden="true"></i></span>
@@ -418,140 +418,56 @@
 </div>
 <ng-template #dialogId>
 
-  <div class="card mt-5 ">
-    <div class="card-header text-white bg-secondary popHead ">
-      Manage Exemptions
-    </div>
-    <label>No of users selected : <b>{{Count}}</b></label>
-    <hr>
-    <div class="row">
-
-
-      <div class="col-lg-6 col-md-6"><label>Frequency to validate for every (Number of days)</label></div>
-      <div class="col-lg-1 col-md-1">:</div>
-      <!-- <div class="col-lg-3 col-md-3"> <mat-form-field class="" appearance="outline">
-      
-  <input matInput  placeholder="" type="text">
-  <mat-error *ngIf="dateForm.controls['fromdate'].hasError('required')">
-    From date is required
-  </mat-error>
-</mat-form-field></div> -->
-      <div class="col-lg-1 col-md-1">
-        <mat-slide-toggle></mat-slide-toggle>
-
+  <div class=" popup">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="">{{"Manage Exemptions"| titlecase}}
+          <!-- <span> <i class="far fa-times-circle float-md-right" aria-hidden="true"></i> </span> -->
+        </h3>
       </div>
-      <div class="col-lg-4 col-md-4"><label>Disable</label> </div>
+      <div class="content-style px-3">
+        <label class="fs-4">No of users selected : <strong>{{this.selection.selected.length || 0}}</strong></label>
+        <hr />
+        <div class="row align-items-center w-100" *ngFor="let exemption of manageExemption">
+          <div class="col-md-5">
+            {{exemption.text}}
+          </div>
+          <div class="col-md-1">
+            :
+          </div>
+          <div class="col-md-3">
+            <mat-form-field appearance="outline">
+              <input matInput type="text" [(ngModel)]="exemption.value" />
+            </mat-form-field>
+          </div>
 
 
+          <div class="col-md-3">
+            <mat-slide-toggle matTooltip="Visiblity" [checked]="exemption.isEnable"
+              (toggleChange)="changeExemptionStatus(exemption)"
+              [matTooltip]="exemption.isEnable ? 'Enable' : 'Disable' "></mat-slide-toggle>
+            <label>{{exemption.isEnable ? 'Enable' : 'Disable'}}</label>
+          </div>
+        </div>
 
-
-      <div class="col-lg-6 col-md-6"><label>Percentage of Minimum Screen time for Live Classes</label></div>
-      <div class="col-lg-1 col-md-1">:</div>
-      <!-- <div class="col-lg-3 col-md-3"> <mat-form-field class="" appearance="outline">
-      
-  <input matInput  placeholder="" type="text">
-  <mat-error *ngIf="dateForm.controls['fromdate'].hasError('required')">
-    From date is required
-  </mat-error>
-</mat-form-field></div> -->
-      <div class="col-lg-1 col-md-1">
-        <mat-slide-toggle></mat-slide-toggle>
-
-      </div>
-      <div class="col-lg-4 col-md-4"><label>Disable</label> </div>
-
-
-      <div class="col-lg-6 col-md-6"><label>Percentage of Minimum Screen time for course practice sessions</label></div>
-      <div class="col-lg-1 col-md-1">:</div>
-      <!-- <div class="col-lg-3 col-md-3"> <mat-form-field class="" appearance="outline">
-      
-  <input matInput  placeholder="" type="text">
-  <mat-error *ngIf="dateForm.controls['fromdate'].hasError('required')">
-    From date is required
-  </mat-error>
-</mat-form-field></div> -->
-      <div class="col-lg-1 col-md-1">
-        <mat-slide-toggle></mat-slide-toggle>
-
-      </div>
-      <div class="col-lg-4 col-md-4"><label>Disable</label> </div>
-
-      <div class="col-lg-6 col-md-6"><label>Number of Gratitude messages to be sent & circulated</label></div>
-      <div class="col-lg-1 col-md-1">:</div>
-      <!-- <div class="col-lg-3 col-md-3"> <mat-form-field class="" appearance="outline">
-      
-  <input matInput  placeholder="" type="text">
-  <mat-error *ngIf="dateForm.controls['fromdate'].hasError('required')">
-    From date is required
-  </mat-error>
-</mat-form-field></div> -->
-      <div class="col-lg-1 col-md-1">
-        <mat-slide-toggle></mat-slide-toggle>
-
-      </div>
-      <div class="col-lg-4 col-md-4"><label>Disable</label> </div>
-
-
-      <div class="col-lg-6 col-md-6"><label>Percentage of Tasks/Assignments to be submitted</label></div>
-      <div class="col-lg-1 col-md-1">:</div>
-      <!-- <div class="col-lg-3 col-md-3"> <mat-form-field class="" appearance="outline">
-      
-  <input matInput  placeholder="" type="text">
-  <mat-error *ngIf="dateForm.controls['fromdate'].hasError('required')">
-    From date is required
-  </mat-error>
-</mat-form-field></div> -->
-      <div class="col-lg-1 col-md-1">
-        <mat-slide-toggle></mat-slide-toggle>
-
-      </div>
-      <div class="col-lg-2 col-md-2"><label>Disable</label> </div>
-      <div class="col-lg-6 col-md-6"><label>Percentage of minimum screen time for short videos</label></div>
-      <div class="col-lg-1 col-md-1">:</div>
-      <!-- <div class="col-lg-3 col-md-3"> <mat-form-field class="" appearance="outline">
-      
-  <input matInput  placeholder="" type="text">
-  <mat-error *ngIf="dateForm.controls['fromdate'].hasError('required')">
-    From date is required
-  </mat-error>
-</mat-form-field></div> -->
-      <div class="col-lg-1 col-md-1">
-        <mat-slide-toggle></mat-slide-toggle>
-
-      </div>
-      <div class="col-lg-2 col-md-2"><label>Disable</label> </div>
-
-      <div class="col-lg-6 col-md-6"> Reason for the exemmpation</div>
-      <div class="col-lg-1 col-md-1">:</div>
-      <div class="col-lg-3 col-md-3">
-        <mat-form-field class="example-full-width" appearance="outline" id="field">
-
-          <textarea matInput formControlName="description"></textarea>
-
-        </mat-form-field>
-      </div>
-
-
-      <hr>
-      <br>
-      <div class="col-lg-9 col-md-9"> </div>
-
-      <div class="col-lg-3 col-md-3">
-        <button type="submit" class="btn btn-outline-secondary mt-3  btn-rounded d-inline-block "> Submit
+        <button type="button" (click)="submitManageExemption()"
+          class="btn btn-outline-secondary btn-rounded d-inline-block m-2 float-md-right ">
+          Submit
         </button>
-        <a style="float: right !important;" class="btn btn-outline-secondary mt-3 btn-rounded d-inline-block"
-          href="http://localhost:4200/#/worldWide">Cancel</a>
       </div>
-
-
+      <div style="text-align: right;">
+        <!-- <button class="btn btn-sm btn-outline-secondary btn-rounded d-inline-block m-2"
+          (click)="snackBarRef.dismiss()"><strong>Ok</strong></button> -->
+      </div>
     </div>
   </div>
+
 </ng-template>
 
 
 <ng-template #view>
 
-  <div class="popup">
+  <div class=" popup">
     <div class="card">
       <div class="card-header">
         <h3 class="">{{"User Details"| titlecase}}

@@ -8,7 +8,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AddCourseService } from 'src/app/data/services/admin-module/course-management/course-main/course.service';
 import { MappingRegionsToChiefMentorService } from 'src/app/data/services/admin-module/course-management/region-management/region-management.service';
-import { UserFilterService } from 'src/app/data/services/admin-module/user-management/user/user-filter/user-filter.service';
 import { RegistrationService } from 'src/app/data/services/student-module/registration/registration.service';
 import { startWith, map, Observable } from 'rxjs';
 import { InputvalidationService } from 'src/app/shared/services/input-validation.service';
@@ -49,6 +48,7 @@ export class WorldWideApplicationsComponent implements OnInit {
   selection = new SelectionModel<any>(true, []);
   UserFilter!: FormGroup
   mentorfield!: FormGroup
+  manageExemption!: any
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -121,11 +121,40 @@ export class WorldWideApplicationsComponent implements OnInit {
       Menotr_CM: [null,],
       Chief_Mentor: [null,],
       Mentor: [null,],
-
-
     })
 
-
+    this.manageExemption = [
+      {
+        text: "Frequency to validate for every (Number of Days)",
+        value: null,
+        isEnable: false,
+      },
+      {
+        text: "Percentage of Minimum Screen time for Live classes",
+        value: null,
+        isEnable: false,
+      },
+      {
+        text: "Percentage of Minimum Screen time for course practice sessions",
+        value: null,
+        isEnable: false,
+      },
+      {
+        text: "Number of Gratitude messages to be sent & circulated",
+        value: null,
+        isEnable: false,
+      },
+      {
+        text: "Percentage of Tasks/Assignment to be submitted",
+        value: null,
+        isEnable: false,
+      },
+      {
+        text: "Percentage of Minimu, Screen time for short videos",
+        value: null,
+        isEnable: false,
+      }
+    ]
   }
 
   ngOnInit(): void {
@@ -253,7 +282,7 @@ export class WorldWideApplicationsComponent implements OnInit {
       duration: 2 * 1000,
     });
   }
-  IsActiveorNot(element: any) {
+  isEnableorNot(element: any) {
     const yes = ["Yes", "Y", "yes", "y"]
     const no = ["No", "N", "no", "n"]
 
@@ -276,7 +305,7 @@ export class WorldWideApplicationsComponent implements OnInit {
     const dialogRef = this.dialog.open(id,
       {
         width: "80%",
-        height: "50%"
+        height: element ? "50%" : "100%"
       });
 
     this.studentDetails = element
@@ -305,6 +334,15 @@ export class WorldWideApplicationsComponent implements OnInit {
   }
 
   changementorfield() {
+
+  }
+
+  changeExemptionStatus(element: any) {
+    element.isEnable = !element.isEnable
+  }
+
+  submitManageExemption() {
+    console.log(this.manageExemption);
 
   }
 
