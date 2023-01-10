@@ -749,6 +749,9 @@ width: calc(100% - 150px) !important;
 .mat-datagrid td.mat-cell svg, .mat-datagrid td.mat-cell .fa,
 .mat-datagrid td.mat-cell .fa-solid { color: #7e929f !important;}
 
+.mat-paginator-container .mat-form-field-appearance-legacy .mat-form-field-underline {
+    height: 0px !important;
+}
 
 /* Popup code */
 
@@ -813,6 +816,7 @@ input.mat-input-element {
 .mat-paginator-page-size .mat-select {
     height: 30px;
     border: 1px solid #989898;
+    border-radius: 10px;
 }
 .mat-paginator-page-size .mat-select-trigger {
     top: 7px;
