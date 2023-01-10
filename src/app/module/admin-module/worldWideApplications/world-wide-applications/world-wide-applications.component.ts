@@ -20,25 +20,7 @@ import { WorldWideApplicationService } from 'src/app/data/services/admin-module/
   styleUrls: ['./world-wide-applications.component.css']
 })
 export class WorldWideApplicationsComponent implements OnInit {
-  data = [
-    { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-    { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-    { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-    { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-    { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-    { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-    { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-    { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-    { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-    { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-    { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-    { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-    { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-    { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-    { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-    { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-    { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-  ]
+  data!: any
   displayedColumns: string[] = ['sno', 'name', "MentorName", "ChiefMentorName", "Region", "CurrentStatus", "status", "Check"];
 
   // displayedColumns: string[] = ['sno', 'name',"stdId","Gender","Age","Profession","MentorId", "ChiefMentorId","Region","ViewApplication", "CurrentStatus", "PerformanceRating", "dWmir","status","Check"];
@@ -58,8 +40,7 @@ export class WorldWideApplicationsComponent implements OnInit {
   gridData: any;
   Count: any;
   displaycontent: boolean = false;
-  isDisableChief: boolean = false;
-  isDisableMentor: boolean = false;
+  actionOption!: null
 
   datavalue = [
     {
@@ -81,6 +62,10 @@ export class WorldWideApplicationsComponent implements OnInit {
   professionsList: any;
   languageList: any;
   studentDetails: any;
+  isChangeMentor: boolean = false
+  isChangeChiefMentor: boolean = false
+  newMentorName!: any
+  newChiefMentorName!: any
 
 
 
@@ -118,9 +103,8 @@ export class WorldWideApplicationsComponent implements OnInit {
     });
 
     this.mentorfield = this.formbuilder.group({
-      Menotr_CM: [null,],
-      Chief_Mentor: [null,],
-      Mentor: [null,],
+      Chief_Mentor: [null, Validators.compose([Validators.required])],
+      Mentor: [null, Validators.compose([Validators.required])],
     })
 
     this.manageExemption = [
@@ -167,7 +151,7 @@ export class WorldWideApplicationsComponent implements OnInit {
       paginator: this.paginator,
       sort: this.sort
     }
-    this.renderTableDate(this.data)
+    this.getStudentData()
 
 
     this.otherService.getcountry().subscribe({
@@ -249,6 +233,44 @@ export class WorldWideApplicationsComponent implements OnInit {
 
   }
 
+  getStudentData() {
+
+
+    this.service.getStudent().subscribe({
+      next: (response) => {
+        this.data = response
+        this.data = this.data.reverse()
+        this.renderTableDate(this.data)
+
+      },
+      error: (error) => {
+        console.error(error);
+        this.data = [
+          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+        ]
+        this.renderTableDate(this.data)
+
+
+      }
+    })
+  }
+
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.filterData.dataSource.data.length;
@@ -314,15 +336,19 @@ export class WorldWideApplicationsComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
-  MentorSelected(values: any) {
-    console.log("MentorValue : " + values);
-    if (values == 'Australia') {
-      this.isDisableChief = false;
-      this.isDisableMentor = true;
-    } else if (values == 'India') {
-      this.isDisableMentor = false;
-      this.isDisableChief = true
+  changeAction(event: any) {
+    this.isChangeChiefMentor = false
+    this.isChangeMentor = false
+    if (event === "cheifmentor") {
+      this.isChangeChiefMentor = true
+      return
     }
+    if (event === "mentor") {
+      this.isChangeMentor = true
+      return
+    }
+
+
   }
 
   changeToggle(element: any) {
@@ -333,7 +359,26 @@ export class WorldWideApplicationsComponent implements OnInit {
 
   }
 
-  changementorfield() {
+  changeMentors() {
+
+
+    if (this.isChangeChiefMentor) {
+      // changing chief 
+      console.log(this.newChiefMentorName);
+      console.log(this.selection.selected);
+
+      return
+    }
+
+
+    if (this.isChangeMentor) {
+      // changing  mentor
+      console.log(this.newMentorName);
+      console.log(this.selection.selected);
+      return
+    }
+
+
 
   }
 
