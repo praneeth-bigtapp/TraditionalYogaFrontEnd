@@ -222,7 +222,7 @@
                             [(ngModel)]="filterData.filterColumnNames[1].Value" [filter]="filterData"
                             style="border-style: solid;border-radius: 5px;width: 90%;" class="mx-2" />
                     </th>
-                    <td mat-cell *matCellDef="let element" class="col-3 px-2 text-center">
+                    <td mat-cell *matCellDef="let element" class="col-3 px-2 text-left">
                         {{element.courseMaterialTitle}} </td>
                 </ng-container>
 
@@ -234,7 +234,7 @@
                             [(ngModel)]="filterData.filterColumnNames[2].Value" [filter]="filterData"
                             style="border-style: solid;border-radius: 5px;width: 95%;" class="mx-2" />
                     </th>
-                    <td mat-cell *matCellDef="let element" class="col-3 px-2 text-center"> {{element.createdDate |
+                    <td mat-cell *matCellDef="let element" class="col-3 px-2 text-left"> {{element.createdDate |
                         date:"dd-MMM-YYYY"}} </td>
                 </ng-container>
 

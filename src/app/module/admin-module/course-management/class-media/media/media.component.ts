@@ -24,13 +24,13 @@ export class MediaComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   selection = new SelectionModel<any>(true, []);
-  submitbtn=true
+  submitbtn = true
   pageno: number = 1
   isothers: boolean = false
   displayform: boolean = false
   courselist!: any
   categorylist!: any
-  displayedColumns: string[] = ['classMediaId', 'classDate', 'title', "classLink",'coursesName', "Action"];
+  displayedColumns: string[] = ['classMediaId', 'classDate', 'title', "classLink", 'coursesName', "Action"];
   dataSource: any;
   disableSelect = new FormControl(false);
   dataForm!: FormGroup
@@ -180,7 +180,7 @@ export class MediaComponent implements OnInit {
     this.services.getALLMediadetails().subscribe({
       next: (response) => {
         this.data = response;
-        this.data=this.data.reverse()
+        this.data = this.data.reverse()
         console.log(this.data);
         this.dataSource = new MatTableDataSource<any>(this.data)
         this.filterData.gridData = this.data;
@@ -231,43 +231,43 @@ export class MediaComponent implements OnInit {
 
 
     if (this.iseditable) {
-     
-      const body =  {
+
+      const body = {
         "liveClassId": this.videoform.value.courseMediaId,
         "coursesId": {
-            "coursesId":this.videoform.value.course
+          "coursesId": this.videoform.value.course
         },
         "classLink": this.videoform.value.videolink,
         "classDate": this.videoform.value.date,
         "title": this.videoform.value.title,
         "description": this.videoform.value.description
-    }
+      }
       this.services.postupdatemedia(body).subscribe({
         next: (response) => {
-  
+
           this.videoform.reset()
-  
+
           this.openSnackBar(response)
           this.getalldata()
         },
         error: (error) => {
           console.error(error.message);
-  
+
         }
       })
-      return 
+      return
     }
 
-    const body =  {
-      
+    const body = {
+
       "coursesId": {
-          "coursesId":this.videoform.value.course
+        "coursesId": this.videoform.value.course
       },
       "classLink": this.videoform.value.videolink,
       "classDate": this.videoform.value.date,
       "title": this.videoform.value.title,
       "description": this.videoform.value.description
-  }
+    }
 
     this.services.postaddmedia(body).subscribe({
       next: (response) => {
@@ -323,11 +323,11 @@ export class MediaComponent implements OnInit {
 
   viewDetails(element: any) {
     this.gobutton()
-    this.iseditable=false
-    this.submitbtn=false
+    this.iseditable = false
+    this.submitbtn = false
     this.videoform.setValue({
       courseMediaId: element.liveClassId,
-      course:element.coursesId.coursesId,
+      course: element.coursesId.coursesId,
 
       videolink: element.classLink,
       date: formatDate(element.classDate, "yyyy-MM-dd", 'en'),
@@ -335,20 +335,20 @@ export class MediaComponent implements OnInit {
       description: element.description,
 
     })
-    window.scroll({ 
-      top: 0, 
-      left: 0, 
-      behavior: 'smooth' 
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
     });
   }
   editdetails(element: any) {
     this.gobutton()
-    this.iseditable=true
-    this.submitbtn=false
+    this.iseditable = true
+    this.submitbtn = false
 
     this.videoform.setValue({
       courseMediaId: element.liveClassId,
-      course:element.coursesId.coursesId,
+      course: element.coursesId.coursesId,
 
       videolink: element.classLink,
       date: formatDate(element.classDate, "yyyy-MM-dd", 'en'),
@@ -356,10 +356,10 @@ export class MediaComponent implements OnInit {
       description: element.description,
 
     })
-    window.scroll({ 
-      top: 0, 
-      left: 0, 
-      behavior: 'smooth' 
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
     });
   }
   deletedetails(id: any) {
@@ -376,7 +376,7 @@ export class MediaComponent implements OnInit {
         message: "Are You Sure You Want To Delete this media ?"
       },
       width: "30%",
-      height:"25%"
+      height: "25%"
     })
 
     dialogref.afterClosed().subscribe(data => {

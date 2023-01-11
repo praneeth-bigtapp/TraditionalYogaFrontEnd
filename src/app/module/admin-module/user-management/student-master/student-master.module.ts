@@ -73,7 +73,7 @@ import { VolunteeringDetailsComponent } from './volunteering-details/volunteerin
     MatDatepickerModule,
 
   ],
-  exports: [ProfiletabComponent, CourseprofiletabComponent, DonationTabComponent, EpurchaseInformationComponent, VolunteeringDetailsComponent, PerformanceDetailsComponent],
+  exports: [StudentProfileComponent, ProfiletabComponent, CourseprofiletabComponent, DonationTabComponent, EpurchaseInformationComponent, VolunteeringDetailsComponent, PerformanceDetailsComponent],
   providers: [UserService, RolesService, RolePermissionsService]
 })
 export class StudentMasterModule { }

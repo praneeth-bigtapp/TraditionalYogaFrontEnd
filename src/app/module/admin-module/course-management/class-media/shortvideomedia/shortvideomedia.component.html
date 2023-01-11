@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <label>Pratice library category</label>
+                        <label>Pratice Library Category</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <mat-select formControlName="category" (selectionChange)="categorychange($event)"
@@ -107,30 +107,6 @@
                             </div>
                         </div>
                     </div>
-
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <label>Description</label>
-                        <div class="col px-0">
-                            <div class="col px-0">
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <textarea matInput rows="3" formControlName="description"></textarea>
-                                </mat-form-field>
-                                <div class="error-message"
-                                    *ngIf="shortvideoform.controls['description'].invalid && (shortvideoform.controls['description'].dirty || shortvideoform.controls['description'].touched)">
-                                    <mat-error [hidden]=" !shortvideoform.get('description')?.hasError('required')  ">
-                                        Description is mandatory
-                                    </mat-error>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row  align-items-center">
-
                     <div class="col-md-3">
                         <label>Class Date</label>
                         <div class="col px-0">
@@ -166,8 +142,28 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <label>Description</label>
+                        <div class="col px-0">
+                            <div class="col px-0">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <textarea matInput rows="3" formControlName="description"></textarea>
+                                </mat-form-field>
+                                <div class="error-message"
+                                    *ngIf="shortvideoform.controls['description'].invalid && (shortvideoform.controls['description'].dirty || shortvideoform.controls['description'].touched)">
+                                    <mat-error [hidden]=" !shortvideoform.get('description')?.hasError('required')  ">
+                                        Description is mandatory
+                                    </mat-error>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
                 <div class=" d-flex flex-row justify-content-end  ">
                     <button type="submit" class="btn btn-outline-secondary btn-rounded d-inline-block   "
                         *ngIf="submitbtn">
@@ -270,12 +266,12 @@
 
                     <th mat-header-cell *matHeaderCellDef scope="col">
                         <label mat-sort-header>
-                            Duration <small>(hours:mins)</small>
+                            Duration <small>(Hours:Mins)</small>
                         </label>
                         <input type="text" class="bg-light text-dark" (keyup)="updatePagination('courseName')"
                             [(ngModel)]="filterData.filterColumnNames[6].Value" [filter]="filterData" />
                     </th>
-                    <td mat-cell class="text-left" *matCellDef="let element"> {{element.duration}}
+                    <td mat-cell class="text-center" *matCellDef="let element"> {{element.duration}}
                     </td>
                 </ng-container>
 

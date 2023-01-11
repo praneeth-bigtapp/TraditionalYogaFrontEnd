@@ -11,7 +11,7 @@ export class StudentprofileComponent implements OnInit {
   selectedStudent: any
   CourseList: any;
   selectedCourse: any
-
+  displaycontent: boolean = false
   constructor(
     private service: StudentService
   ) { }
@@ -49,5 +49,8 @@ export class StudentprofileComponent implements OnInit {
 
   onSelectStudent() {
 
+  }
+  submit() {
+    this.displaycontent = true
   }
 }

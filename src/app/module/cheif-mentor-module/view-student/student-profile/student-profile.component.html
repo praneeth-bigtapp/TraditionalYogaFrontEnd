@@ -14,7 +14,7 @@
         </div>
         <div class="card-body bg-white py-2">
             <div class="row">
-                <div class="col-md-3 mb-3">
+                <div class="col-md-3">
                     <label>Student</label>
                     <mat-form-field appearance="outline">
                         <mat-select [(ngModel)]="selectedStudent" (selectionChange)="onSelectStudent()"
@@ -36,12 +36,17 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
+                <div class="col-md-3" *ngIf="selectedCourse">
+                    <button type="button" class="btn btn-outline-secondary btn-rounded mt-3" (click)="submit()"> Submit
+                    </button>
+
+                </div>
             </div>
 
         </div>
     </div>
     <!-- Tabs -->
-    <div class="student-profile ty-tabs" *ngIf="selectedCourse" style="background:#f5f5f5;">
+    <div class="student-profile ty-tabs" *ngIf="displaycontent" style="background:#f5f5f5;">
         <div class="card-header text-white bg-secondary">
             Student Details
         </div>
