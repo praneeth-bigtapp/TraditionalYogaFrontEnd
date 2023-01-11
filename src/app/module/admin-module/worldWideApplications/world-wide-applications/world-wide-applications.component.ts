@@ -41,17 +41,11 @@ export class WorldWideApplicationsComponent implements OnInit {
   Count: any;
   displaycontent: boolean = false;
   actionOption!: null
+  mentorList!: any
+  cheifMentorList!: any
+  userStatusList!: any
 
-  datavalue = [
-    {
-      name: "Ansari",
-      value: "1"
-    },
-    {
-      name: "Jagdish",
-      value: "2"
-    },
-  ]
+
   countryList: any;
   countryfilter!: Observable<any>;
   regionList: any;
@@ -227,6 +221,67 @@ export class WorldWideApplicationsComponent implements OnInit {
       }
     });
 
+    this.service.getChiefMentorList().subscribe({
+      next: (response) => {
+        this.cheifMentorList = response
+      },
+      error: (error) => {
+        console.error(error);
+        this.cheifMentorList = [
+          {
+            name: "Ansari",
+            value: "1"
+          },
+          {
+            name: "Jagdish",
+            value: "2"
+          },
+        ]
+
+      }
+    })
+
+    this.service.getMentorList().subscribe({
+      next: (response) => {
+        this.mentorList = response
+      },
+      error: (error) => {
+        console.error(error);
+        this.mentorList = [
+          {
+            name: "Ansari",
+            value: "1"
+          },
+          {
+            name: "Jagdish",
+            value: "2"
+          },
+        ]
+
+      }
+    })
+
+
+    this.service.userStatusList().subscribe({
+      next: (response) => {
+        this.userStatusList = response
+      },
+      error: (error) => {
+        console.error(error);
+        this.userStatusList = [
+          {
+            name: "Active",
+            value: "1"
+          },
+          {
+            name: "Inactive",
+            value: "2"
+          },
+        ]
+
+      }
+    })
+
   }
   ngAfterViewInit() {
     this.filterData.dataSource.paginator = this.paginator;
@@ -345,8 +400,11 @@ export class WorldWideApplicationsComponent implements OnInit {
   changeAction(event: any) {
     this.isChangeChiefMentor = false
     this.isChangeMentor = false
+    this.newChiefMentorName = null
+    this.newMentorName = null
     if (event === "cheifmentor") {
       this.isChangeChiefMentor = true
+
       return
     }
     if (event === "mentor") {
@@ -409,17 +467,45 @@ export class WorldWideApplicationsComponent implements OnInit {
 
   changeMentors() {
 
-    // const userIds=this.selection.selected.map()
+    const userIds = this.selection.selected.map((ele: any) => ele.sno)
+    console.log(userIds);
+
     if (this.isChangeChiefMentor) {
       // changing chief 
-      console.log(this.newChiefMentorName);
+      userIds.forEach((id, index) => {
+        const body = {
+          "studentId": id,
+          "chiefMentorId": this.newChiefMentorName
+        }
+        console.log({ body, index });
 
+        this.service.changeChiefMentor(body).subscribe({
+          next: (response) => {
+            this.openSnackBar(response)
+            this.getStudentData()
+          },
+          error: (error) => {
+            console.log(error);
+
+          }
+        })
+
+        if (index === userIds.length - 1)
+          this.openSnackBar({ message: "Successfully changed" })
+
+      })
+
+      return
+    }
+
+
+    // changing  mentor
+    userIds.forEach((id, index) => {
       const body = {
-        "studentId": null,
-        "chiefMentorId": this.newChiefMentorName
+        "studentId": id,
+        "mentorId": this.newMentorName
       }
-
-      this.service.changeChiefMentor(body).subscribe({
+      this.service.changeMentor(body).subscribe({
         next: (response) => {
           this.openSnackBar(response)
           this.getStudentData()
@@ -429,34 +515,10 @@ export class WorldWideApplicationsComponent implements OnInit {
 
         }
       })
-
-      return
-    }
-
-
-    // changing  mentor
-    console.log(this.newMentorName);
-
-    const body = {
-      "studentId": null,
-      "mentorId": this.newMentorName
-    }
-
-    this.service.changeMentor(body).subscribe({
-      next: (response) => {
-        this.openSnackBar(response)
-        this.getStudentData()
-      },
-      error: (error) => {
-        console.log(error);
-
-      }
+      if (index === userIds.length - 1)
+        this.openSnackBar({ message: "Successfully changed" })
     })
     return
-
-
-
-
   }
 
   changeExemptionStatus(element: any) {

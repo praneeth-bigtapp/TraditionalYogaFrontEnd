@@ -2,7 +2,7 @@ import { NgStyle } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from 'src/app/core/layout/header/service/header.service';
 import { OtpComponent } from 'src/app/shared/components/otp/otp.component';
 import { DataStorageService } from 'src/app/shared/services/data-storage.service';
@@ -50,6 +50,7 @@ export class ChangePasswordComponent implements OnInit {
   errorType: any;
   ispasswordNotMatch: boolean = false;
   errorMessageString!: any
+  email!: any
 
 
   constructor(private changepasswordService: ChangePasswordService,
@@ -59,6 +60,7 @@ export class ChangePasswordComponent implements OnInit {
     private headerService: HeaderService,
     private service: AuthService,
     private dialog: MatDialog,
+    private activateRoute: ActivatedRoute,
     private router: Router, private notifierService: NotifierService) { }
 
   ngOnInit(): void {
@@ -77,7 +79,9 @@ export class ChangePasswordComponent implements OnInit {
       ])],
       confirmpassword: [null, Validators.compose([Validators.required, Validators.maxLength(20)])],
     })
-    console.log(this.loginData);
+
+    this.email = this.activateRoute.snapshot.paramMap.get('id')
+
 
   }
 
@@ -141,7 +145,7 @@ export class ChangePasswordComponent implements OnInit {
     console.log(this.ChangePasswordForm.valid);
 
     // const body = {
-    //   "userName": "sumukesh.a@bigtappanalytics.net",
+    //   "userName": this.email,
     //   "password": btoa(this.ChangePasswordForm.value.newpassword)
     // }
 

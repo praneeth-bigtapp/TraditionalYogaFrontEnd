@@ -139,8 +139,9 @@
                       <label>Current Status</label>
                       <mat-form-field appearance="outline">
                         <mat-select matNativeControl formControlName="status">
-                          <mat-option value="Active">Active</mat-option>
-                          <mat-option value="InActive">InActive</mat-option>
+                          <mat-option *ngFor="let chief of userStatusList"
+                            [value]="chief.value">{{chief.name}}</mat-option>
+
                         </mat-select>
                         <mat-error class="error-message" [hidden]=" !UserFilter.get('status')?.hasError('required')  ">
                           Status is mandatory
@@ -246,7 +247,8 @@
                     <label>Chief Mentor</label>
                     <mat-form-field appearance="outline">
                       <mat-select matNativeControl [(ngModel)]="newChiefMentorName" [disabled]="isChangeMentor">
-                        <mat-option *ngFor="let chief of datavalue" [value]="chief.value">{{chief.name}}</mat-option>
+                        <mat-option *ngFor="let chief of cheifMentorList"
+                          [value]="chief.value">{{chief.name}}</mat-option>
 
                       </mat-select>
                       <mat-error class="error-message"
@@ -259,18 +261,17 @@
                     <label>Mentor</label>
                     <mat-form-field appearance="outline">
                       <mat-select matNativeControl [(ngModel)]="newMentorName" [disabled]="!isChangeMentor">
-                        <mat-option value="praveen">Praveen</mat-option>
-                        <mat-option value="srinadh">Srinadh
-                        </mat-option>
+                        <mat-option *ngFor="let chief of mentorList" [value]="chief.value">{{chief.name}}</mat-option>
+
                       </mat-select>
                       <mat-error class="error-message" [hidden]=" !UserFilter.get('Mentor')?.hasError('required')  ">
                         Mentor is mandatory
                       </mat-error>
                     </mat-form-field>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-4" *ngIf="newChiefMentorName ||newMentorName ">
                     <button type="button" (click)="changeMentors()"
-                      class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
+                      class="btn btn-outline-secondary btn-rounded d-inline-block m-2 mt-4 ">
                       Submit
                     </button>
                   </div>

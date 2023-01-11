@@ -87,7 +87,6 @@ export class StudentenrollmentComponent implements OnInit {
         this.countryList = response;
 
         this.dialcodeList = this.countryList.map((ele: any) => ele.dialCode).filter(Boolean)
-        console.log(this.dialcodeList);
 
         this.countryList = this.countryList.map((ele: any) => ele.countryName);
       },

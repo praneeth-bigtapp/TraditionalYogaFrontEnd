@@ -16,7 +16,23 @@ export class WorldWideApplicationService extends BaseHttp {
   activeStudentUrl = ""
   deactiveStudentUrl = ""
 
+  mentorListUrl = ""
+  chiefMentorListUrl = ""
+  userStatusListUrl = ""
+
   getmanageExemptionCourseUrl = ""
+
+  getMentorList() {
+    return this.get(this.mentorListUrl)
+  }
+
+  getChiefMentorList() {
+    return this.get(this.chiefMentorListUrl)
+  }
+
+  userStatusList() {
+    return this.get(this.userStatusListUrl)
+  }
 
   getStudent() {
     return this.get(this.getStudentUrl)

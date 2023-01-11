@@ -104,6 +104,9 @@ export class LoginComponent implements OnInit {
           if (response.response.statusCode == 200) {
             this.onSuccessfullLogin(response);
             this.router.navigateByUrl('admin/dashboard');
+            // Here conditions of whether user need to change password or not
+            // this.router.navigate(['changepassword', this.LoginForm.value.email])
+
           } else {
             this.errorFlag = true;
             this.authorizationMessage = response.message;
@@ -171,6 +174,8 @@ export class LoginComponent implements OnInit {
         }
       }
       this.router.navigateByUrl("/admin/dashboard");
+
+
     }
   }
 
@@ -189,7 +194,7 @@ export class LoginComponent implements OnInit {
         }
       }
     }
-    this.router.navigateByUrl("/dashboard");
+    this.router.navigateByUrl("admin/dashboard");
   }
 
   onSuccessfullLogin(response: any) {
@@ -211,6 +216,7 @@ export class LoginComponent implements OnInit {
           localStorage.clear();
           this.dataStorageService.isUserLoggedIn = false;
           this.router.navigateByUrl('/');
+
         });
         console.log(count)
         this.stopWatching();

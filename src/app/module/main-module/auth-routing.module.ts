@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'logout', component: LoginComponent },
-  { path: 'changepassword', component: ChangePasswordComponent },
+  { path: 'changepassword/:id', component: ChangePasswordComponent },
   { path: 'forgotPassword', component: ForgotpasswordComponent },
 
   { path: 'blank', component: BlankComponent },
