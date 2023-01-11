@@ -37,7 +37,7 @@
 
                 <div class="row text-align-center pb-1">
                     <div class="col-md-4">
-                        <label>First name</label>
+                        <label>First Name</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" formControlName="firstName" required>
@@ -45,13 +45,13 @@
                             <div class="error-message"
                                 *ngIf="enrollForm.controls['firstName'].invalid && (enrollForm.controls['firstName'].dirty || enrollForm.controls['firstName'].touched)">
                                 <mat-error [hidden]=" !enrollForm.get('firstName')?.hasError('required')  ">
-                                    First name is mandatory
+                                    First Name is mandatory
                                 </mat-error>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label>Middle name</label>
+                        <label>Middle Name</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" formControlName="middleName">
@@ -59,13 +59,13 @@
                             <!-- <div class="error-message"
                                 *ngIf="enrollForm.controls['middleName'].invalid && (enrollForm.controls['middleName'].dirty || enrollForm.controls['middleName'].touched)">
                                 <mat-error [hidden]=" !enrollForm.get('middleName')?.hasError('required')  ">
-                                    Middle name is mandatory
+                                    Middle Name is mandatory
                                 </mat-error>
                             </div> -->
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label>Last name</label>
+                        <label>Last Name</label>
                         <div class="col px-0">
                             <mat-form-field appearance="outline">
                                 <input matInput autocomplete="off" formControlName="lastName" required>
@@ -73,7 +73,7 @@
                             <div class="error-message"
                                 *ngIf="enrollForm.controls['lastName'].invalid && (enrollForm.controls['lastName'].dirty || enrollForm.controls['lastName'].touched)">
                                 <mat-error [hidden]=" !enrollForm.get('lastName')?.hasError('required')  ">
-                                    Last name is mandatory
+                                    Last Name is mandatory
                                 </mat-error>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                         </div> -->
                         <div class="row">
                             <div [ngClass]="isEmailValid? 'col-md-10':''">
-                                <label>Email Id*
+                                <label>Email Id
                                     <span *ngIf="isEmailVerified" class="text-success fw-bolder"> - Verified</span>
                                 </label>
                                 <div class="col px-0">
