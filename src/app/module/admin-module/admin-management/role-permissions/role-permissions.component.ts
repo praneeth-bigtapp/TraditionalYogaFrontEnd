@@ -262,15 +262,15 @@ export class RolePermissionsComponent implements OnInit {
     }
     let requestData = {
       "rolePermissionId": row.rolePermissionId,
-      "roleId": row.roleId,
-      "moduleId": row.moduleId,
-      "subModuleId": row.subModuleId,
+      "roleId": row.role.roleId,
+      "moduleId": row.module.moduleId,
+      "subModuleId": row.subModule.subModuleId,
       "permissionId": this.RolePermissionValue,
     };
     this.rolePermissionsService.saveRolepermission(requestData).subscribe({
       next: (response) => {
         this.AddRolePermissionForm.controls['roleName'].setValue(row.roleId);
-        this.getSelectedRole(row.roleId);
+        this.getSelectedRole(row.role.roleId);
       },
       error: (error) => {
         this.errorMessage = true;

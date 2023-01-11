@@ -5,22 +5,34 @@
                 <div class="col-md-4 col-sm-4">
                     <div class="user-profile pt-1">
                         <div class="btn-group">
-                            <div type="button" class="btn dropdown-toggle text-warning text-grey"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div type="button" class="btn dropdown-toggle text-warning text-grey" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
                                 <!-- <img src="assets/images/icon-login-orange.svg" alt="user icon" /> -->
 
-                                <span class="text-grey" style="line-height:0px; vertical-align: top;"> <img src="assets/images/login-icon.png" style="position:relative; top:7px" width="40"
+                                <span class="text-grey" style="line-height:0px; vertical-align: top;"> <img
+                                        src="assets/images/login-icon.png" style="position:relative; top:7px" width="40"
                                         alt="usericon" />
-                                   <span style="font-size:16px;"> {{loginData.userId}} </span> <br>
-                                    <span style="line-height:0px; margin-left: 20px;"> {{loginData.userRole}} </span> &nbsp;
+                                    <span style="font-size:16px;"> {{loginData.userId}} </span> <br>
+                                    <span style="line-height:0px; margin-left: 20px;"> {{loginData.userRole}} </span>
+                                    &nbsp;
                                 </span><br>
-                             
+
                             </div>
-                            
+
                             <div class="dropdown-menu">
-                                <button class="dropdown-item" type="button" [routerLink]="['/changepassword']">Change
-                                    Password</button>
+                                <button class="dropdown-item" type="button" [routerLink]="['/changepassword']">
+                                    Change Password
+                                </button>
+                                <button class="dropdown-item" type="button">
+                                    <span>Change Role</span>
+                                    <div type="button" class="btn dropdown-toggle text-warning text-grey" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false"> </div>
+                                </button>
                                 <button class="dropdown-item" type="button" (click)="onSignOut()">Sign out</button>
+
+                                <div class="dropdown-menu">
+                                    <button class="dropdown-item" type="button" (click)="onSignOut()">Sign out</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -28,16 +40,28 @@
 
 
 
-               <!--  <div class="col-md-5 col-sm-5 text-center">
+                <!--  <div class="col-md-5 col-sm-5 text-center">
                     <div class="text-center d-inline-block pt-2">
                         <h3 class="pb-0 mb-0"> Traditional Yoga </h3>
                     </div> 
                 </div>-->
 
+                <!-- <a *ngFor="let mi of menuItems;let i = index">
+                    <span class="dropdown-menu-container">
+                      <mat-icon mat-list-icon>{{ mi.icon }}</mat-icon>
+                      <span class="dropdown-menu-item">{{ mi.value }}</span>
+                    </span>
+                    <div class="submenu-container">
+                      <span *ngFor="let sub of mi.subMenu;let j = index" class="submenu-item"
+                        (click)="onClick($event, i, j)"> {{ sub.text }}</span> 
+                    </div>
+                  </a> -->
+
                 <div class="col-md-8 col-sm-8 mobile-text-center float-right text-right">
                     <a [routerLink]="['/masterDataCreation']" class="">
 
-                        <h3 class="d-inline-block pt-2 font-weight-normal moderrat-font text-white"> Traditional Yoga </h3> &nbsp; &nbsp;
+                        <h3 class="d-inline-block pt-2 font-weight-normal moderrat-font text-white"> Traditional Yoga
+                        </h3> &nbsp; &nbsp;
                         <img src="assets/images/Traditional-yoga-new-logo.png" class="logo-img" alt="logo" />
                     </a>
                 </div>
