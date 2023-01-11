@@ -131,7 +131,7 @@ export class VideoGalleryComponent implements OnInit {
 
 
     if (yes.includes(element.isActive)) {
-      this.service.activeAlbum(body).subscribe({
+      this.service.deactiveAlbum(body).subscribe({
         next: (response) => {
           this.openSnackBar(response)
           this.getAlbumData()
@@ -144,7 +144,7 @@ export class VideoGalleryComponent implements OnInit {
       return
     }
 
-    this.service.deactiveAlbum(body).subscribe({
+    this.service.activeAlbum(body).subscribe({
       next: (response) => {
         this.openSnackBar(response)
         this.getAlbumData()

@@ -409,13 +409,15 @@ export class WorldWideApplicationsComponent implements OnInit {
 
   changeMentors() {
 
-
+    // const userIds=this.selection.selected.map()
     if (this.isChangeChiefMentor) {
       // changing chief 
       console.log(this.newChiefMentorName);
-      console.log(this.selection.selected);
 
-      const body = {}
+      const body = {
+        "studentId": null,
+        "chiefMentorId": this.newChiefMentorName
+      }
 
       this.service.changeChiefMentor(body).subscribe({
         next: (response) => {
@@ -434,9 +436,11 @@ export class WorldWideApplicationsComponent implements OnInit {
 
     // changing  mentor
     console.log(this.newMentorName);
-    console.log(this.selection.selected);
 
-    const body = {}
+    const body = {
+      "studentId": null,
+      "mentorId": this.newMentorName
+    }
 
     this.service.changeMentor(body).subscribe({
       next: (response) => {
@@ -459,13 +463,23 @@ export class WorldWideApplicationsComponent implements OnInit {
     element.isEnable = !element.isEnable
     console.log(element);
 
-    this.submitManageExemption()
+    this.submitManageExemption(element)
   }
 
-  submitManageExemption() {
+  submitManageExemption(element: any) {
     console.log(this.manageExemption);
 
-    const body = {}
+    const body = {
+      "exceptionId": 1,
+      "registrationId": {
+        "registrationId": 1
+      },
+      "performanceId": {
+        "parametersId": 1
+      },
+      "exceptionStatus": "karthikeyan.d@bigtappanalytics.com",
+      "exceptionDesc": "S2FydGhpayExMjM0"
+    }
 
     this.service.manageExemptionStudent(body).subscribe({
       next: (response) => {

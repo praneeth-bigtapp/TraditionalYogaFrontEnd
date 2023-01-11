@@ -280,13 +280,20 @@
                             </mat-form-field>
 
                             <mat-form-field appearance="outline" *ngIf="isIndia">
-                                <input type="text" aria-label="Country" matInput formControlName="state"
+                                <!-- <input type="text" aria-label="Country" matInput formControlName="state"
                                     [matAutocomplete]="state">
                                 <mat-autocomplete autoActiveFirstOption #state="matAutocomplete">
                                     <mat-option *ngFor="let country of stateFilter |async " [value]="country">
                                         {{country}}
+                                    </mat-option> -->
+
+                                <!-- </mat-autocomplete> -->
+                                <mat-select formControlName="state">
+                                    <mat-option *ngFor="let state of stateList" [value]="state.statesName">
+                                        {{state.statesName | titlecase}}
+
                                     </mat-option>
-                                </mat-autocomplete>
+                                </mat-select>
                             </mat-form-field>
                             <div class="error-message"
                                 *ngIf="enrollForm.controls['state'].invalid && (enrollForm.controls['state'].dirty || enrollForm.controls['state'].touched)">

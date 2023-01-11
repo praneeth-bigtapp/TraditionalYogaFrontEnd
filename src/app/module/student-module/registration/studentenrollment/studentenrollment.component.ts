@@ -110,7 +110,6 @@ export class StudentenrollmentComponent implements OnInit {
     this.regService.getAboutUs().subscribe({
       next: (response) => {
         this.refferalList = response;
-        console.log(this.refferalList);
       },
       error: (error) => {
         // console.error(error);
@@ -120,9 +119,8 @@ export class StudentenrollmentComponent implements OnInit {
     // 4.state
     this.regService.getIndiaStates().subscribe({
       next: (response) => {
-        this.statelist = response
-        this.stateList = this.stateList.map((ele: any) => ele.statesName)
-        console.log(this.statelist);
+        this.stateList = response
+
 
       },
       error: (error) => {
@@ -157,7 +155,7 @@ export class StudentenrollmentComponent implements OnInit {
 
     this.stateFilter = this.enrollForm.valueChanges.pipe(
       startWith(''),
-      map(value => this.stateList?.filter((ele: any) => ele.toLowerCase().includes(value.state?.toLowerCase()))),
+      map(value => this.stateList?.filter((ele: any) => ele.toLowerCase().includes(value.statesName?.toLowerCase()))),
     )
 
   }

@@ -12,7 +12,7 @@ export class VideoGalleryService extends BaseHttp {
   deleteAlbumUrl = "course/createAlbum?operation=delete"
 
   activeAlbumUrl = "course/createAlbum?operation=active"
-  deactiveAlbumUrl = "course/createAlbum?operation=deactive"
+  deactiveAlbumUrl = "course/createAlbum?operation=invisable"
 
 
   addVideoAlbumUrl = "courseList/mapVideos?operation=add"

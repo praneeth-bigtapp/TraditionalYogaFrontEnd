@@ -8,10 +8,10 @@ export class WorldWideApplicationService extends BaseHttp {
 
   getStudentUrl = ""
   searchUsersUrl = ""
-  changeMentorUrl = ""
-  changeChiefMentorUrl = ""
+  changeMentorUrl = "student/worldWide?change=mentor"
+  changeChiefMentorUrl = "student/worldWide?change=chiefMentor"
   getExemptedStudentUrl = ''
-  manageExemptionStudentUrl = ""
+  manageExemptionStudentUrl = "student/manageException"
   manageExemptionCourseUrl = ""
   activeStudentUrl = ""
   deactiveStudentUrl = ""
