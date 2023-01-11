@@ -279,8 +279,7 @@
                 </div>
 
               </div>
-
-              <div class="">
+              <div class="" *ngIf="selection.selected.length">
                 <button type="button" (click)="go(dialogId,null)"
                   class="btn btn-outline-secondary btn-rounded d-inline-block m-2 ">
                   Manage Exemptions
@@ -428,7 +427,7 @@
           </div>
           <div class="col-md-3">
             <mat-form-field appearance="outline">
-              <input matInput type="text" [(ngModel)]="exemption.value" />
+              <input matInput type="text" (change)="submitManageExemption(exemption)" [(ngModel)]="exemption.value" />
             </mat-form-field>
           </div>
 

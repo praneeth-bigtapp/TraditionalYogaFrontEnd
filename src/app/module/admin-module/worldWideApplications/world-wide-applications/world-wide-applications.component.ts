@@ -103,26 +103,35 @@ export class WorldWideApplicationsComponent implements OnInit {
 
     this.manageExemption = [
       {
+        id: 1,
         text: "Frequency to validate for every (Number of Days)",
         value: null,
         isEnable: false,
       },
       {
+        id: 2,
+
         text: "Percentage of Minimum Screen time for Live classes",
         value: null,
         isEnable: false,
       },
       {
+        id: 3,
+
         text: "Percentage of Minimum Screen time for course practice sessions",
         value: null,
         isEnable: false,
       },
       {
+        id: 4,
+
         text: "Number of Gratitude messages to be sent & circulated",
         value: null,
         isEnable: false,
       },
       {
+        id: 5,
+
         text: "Percentage of Tasks/Assignment to be submitted",
         value: null,
         isEnable: false,
@@ -300,11 +309,11 @@ export class WorldWideApplicationsComponent implements OnInit {
         console.error(error);
         this.data = [
           { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
-          { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "2", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "3", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "4", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "5", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
+          { "sno": "6", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
           { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
           { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
           { "sno": "1", "name": "Jeannette", "MentorName": "Durga", "ChiefMentorName": "Jaya Sankar", "Region": "India", "CurrentStatus": "active", "status": "", "Check": "" },
@@ -529,30 +538,34 @@ export class WorldWideApplicationsComponent implements OnInit {
   }
 
   submitManageExemption(element: any) {
-    console.log(this.manageExemption);
 
-    const body = {
-      "exceptionId": 1,
-      "registrationId": {
-        "registrationId": 1
-      },
-      "performanceId": {
-        "parametersId": 1
-      },
-      "exceptionStatus": "karthikeyan.d@bigtappanalytics.com",
-      "exceptionDesc": "S2FydGhpayExMjM0"
-    }
+    const userIds = this.selection.selected.map((ele: any) => ele.sno)
 
-    this.service.manageExemptionStudent(body).subscribe({
-      next: (response) => {
-        this.openSnackBar(response)
-      },
-      error: (error) => {
-        console.log(error);
-
+    userIds.forEach((id, index) => {
+      const body = {
+        "exceptionId": 1,
+        "registrationId": {
+          "registrationId": Number(id)
+        },
+        "performanceId": {
+          "parametersId": Number(element.id)
+        },
+        "exceptionStatus": element.isEnable,
+        "exceptionDesc": element.value
       }
-    })
 
+      this.service.manageExemptionStudent(body).subscribe({
+        next: (response) => {
+          if (index === userIds.length)
+            this.openSnackBar(response)
+
+        },
+        error: (error) => {
+          console.log(error);
+
+        }
+      })
+    })
   }
 
 
