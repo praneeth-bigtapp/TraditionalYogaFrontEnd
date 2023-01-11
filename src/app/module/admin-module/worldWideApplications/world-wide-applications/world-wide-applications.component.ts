@@ -61,6 +61,8 @@ export class WorldWideApplicationsComponent implements OnInit {
   newMentorName!: any
   newChiefMentorName!: any
 
+  dialogRef!: any
+
 
 
   applyFilter(event: Event) {
@@ -394,7 +396,7 @@ export class WorldWideApplicationsComponent implements OnInit {
   }
 
   go(id: any, element: any) {
-    const dialogRef = this.dialog.open(id,
+    this.dialogRef = this.dialog.open(id,
       {
         width: "80%",
         height: element ? "50%" : "100%"
@@ -402,9 +404,13 @@ export class WorldWideApplicationsComponent implements OnInit {
 
     this.studentDetails = element
 
-    dialogRef.afterClosed().subscribe(result => {
+    this.dialogRef.afterClosed().subscribe((result: any) => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  closedialog() {
+    this.dialogRef.close()
   }
   changeAction(event: any) {
     this.isChangeChiefMentor = false
@@ -567,6 +573,8 @@ export class WorldWideApplicationsComponent implements OnInit {
       })
     })
   }
+
+
 
 
 }
