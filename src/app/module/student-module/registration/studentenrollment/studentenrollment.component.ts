@@ -131,22 +131,12 @@ export class StudentenrollmentComponent implements OnInit {
     this.regService.getLanguages().subscribe({
       next: (response) => {
         this.languageList = response;
-        console.log(this.languageList);
+        this.languageList = this.languageList.filter((ele: any) => ele.languageName !== "Others")
       },
       error: (error) => {
         console.error(error);
-        this.languageList = [{
-          languageName: "English"
-        },
-        {
-          languageName: "Tamil"
-        }
-        ]
       }
     });
-
-
-
 
     this.countryFilter = this.enrollForm.valueChanges.pipe(
       startWith(''),
