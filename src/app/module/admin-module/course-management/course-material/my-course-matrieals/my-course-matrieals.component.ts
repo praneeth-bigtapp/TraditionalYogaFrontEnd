@@ -332,9 +332,25 @@ export class MyCourseMatriealsComponent implements OnInit {
       duration: 2 * 1000,
     });
   }
-  viewDetails(id: any) {
+  viewDetails(element: any) {
 
-    this.router.navigate(["admin/ViewMycourseMatrieals", id]);
+    this.FormDeatils.setValue({
+      coursematerialID: element.courseMaterialId,
+      courses: element.coursesId.coursesId,
+      others: null,
+      catogery: element.materialCategoryId.materialCategoryId,
+      addMedia: element.mediaId.mediaId,
+      upload: null,
+      videoLink: element.videoLink,
+      message: element.message,
+      coursetitle: element.courseMaterialTitle,
+    });
+    this.newcatogeries = false
+    this.iseditable = false
+    this.displayform = true
+    this.issubmit = false
+
+    // this.router.navigate(["admin/ViewMycourseMatrieals", element.courseMaterialId]);
     // this.getallData()
   }
 

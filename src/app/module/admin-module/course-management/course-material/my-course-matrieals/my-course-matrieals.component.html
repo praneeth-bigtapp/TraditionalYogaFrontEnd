@@ -3,7 +3,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item"><a href="#/addCourse">Course Management</a></li>
-            <li class="breadcrumb-item active" aria-current="page"> Course Matrieals </li>
+            <li class="breadcrumb-item active" aria-current="page"> Course Materials </li>
         </ol>
     </nav>
 
@@ -17,7 +17,7 @@
 
     <div class="card mt-2" *ngIf="displayform">
         <div class="card-header text-white bg-secondary">
-            {{iseditable? "Update" :"Add"}} Course Matrieals
+            {{iseditable? "Update" :"Add"}} Course Materials
         </div>
         <div class="card-body bg-white">
 
@@ -260,7 +260,7 @@
                     </th>
 
                     <td mat-cell *matCellDef="let element" class="text-center col-2 my-4  ">
-                        <i class="fa-solid fa-eye " (click)="viewDetails(element.courseMaterialId)"
+                        <i class="fa-solid fa-eye " (click)="viewDetails(element)"
                             matTooltip="View Course Activity" matTooltip="View"></i>
                         <span matTooltip="Edit" (click)="editdetails(element)">
                             <i class="fas fa-pencil-alt mx-4 " aria-hidden="true"></i>
